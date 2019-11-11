@@ -366,6 +366,32 @@
             border-bottom:1px solid #E8E8E8;
             border-top:1px solid #E8E8E8;
         }
+
+        .notes {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 12px;
+            color: #595959;
+            margin-top: 15px;
+            margin-left: 30px;
+            width: 442px;
+            text-align: left;
+        }
+
+        .notes-label {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 22px;
+            letter-spacing: 0.05em;
+            color: #040405;
+            width: 108px;
+            height: 19.87px;
+            padding-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -423,6 +449,7 @@
             </div>
         </div>
         @include('app.pdf.estimate.partials.table')
+        @include('app.pdf.estimate.partials.notes')
     </div>
 </body>
 </html>

@@ -336,6 +336,30 @@
             color:rgba(0, 0, 0, 0.85);
         }
 
+        .notes {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 12px;
+            color: #595959;
+            margin-top: 15px;
+            margin-left: 30px;
+            width: 442px;
+            text-align: left;
+        }
+
+        .notes-label {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 22px;
+            letter-spacing: 0.05em;
+            color: #040405;
+            width: 108px;
+            height: 19.87px;
+            padding-bottom: 10px;
+        }
 
     </style>
 </head>
@@ -393,7 +417,10 @@
             </div>
             <div style="clear: both;"></div>
         </div>
-        @include('app.pdf.invoice.partials.table')
+        <div style="position:relative">
+            @include('app.pdf.invoice.partials.table')
+        </div>
+        @include('app.pdf.invoice.partials.notes')
     </div>
 </body>
 </html>

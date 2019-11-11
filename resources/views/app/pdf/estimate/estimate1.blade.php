@@ -72,6 +72,7 @@
         .wrapper {
            display: block;
            padding-top: 60px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -244,6 +245,8 @@
             margin-top: 35px;
             border-bottom: 1px solid #EAF1FB;
             padding: 0px 30px 0 30px;
+            page-break-before: avoid;
+            page-break-after: auto;
         }
 
         .table2 hr {
@@ -257,7 +260,7 @@
             padding: 5px;
         }
 
-        tr.main-table-header td {
+        tr.main-table-header th {
             border-bottom: 1px solid #EAF1FB;
             font-style: normal;
             font-weight: normal;
@@ -284,28 +287,33 @@
             padding-bottom: 8px;
         }
 
+        .padd2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
         .table3 {
-            border: 1px solid #EAF1FB;
             border-top: none;
-            padding-right: 30px;
             box-sizing: border-box;
-            width: 230px;
-            height: 100px;
-            position: absolute;
-            right: -25;
+            width: 630px;
+            page-break-inside: avoid;
+            page-break-before: auto;
+            page-break-after: auto;
+
         }
 
-        .text-per-item-table3 {
-            border: 1px solid #EAF1FB;
-            border-top: none;
-            padding-right: 30px;
-            box-sizing: border-box;
-            width: 260px;
-            /* height: 100px; */
-            position: absolute;
-            right: -25;
+        .total-border-left {
+            border: 1px solid #E8E8E8!important;
+            border-right: 0px !important;
+            padding-top: 0px;
+            padding:8px !important;
         }
+        .total-border-right {
+            border: 1px solid #E8E8E8!important;
+            border-left: 0px !important;
+            padding-top: 0px;
+            padding:8px !important;
 
+        }
         .inv-item {
             border-color: #d9d9d9;
         }
@@ -322,8 +330,6 @@
             margin-top:7px;
             color:rgba(0, 0, 0, 0.85);
         }
-
-
     </style>
 </head>
 <body>

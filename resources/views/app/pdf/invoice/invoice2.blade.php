@@ -74,6 +74,7 @@
         .wrapper {
            display: block;
            padding-top: 110px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -245,6 +246,8 @@
             margin-top: 200px;
             border-bottom: 1px solid #EAF1FB;
             padding: 0px 30px 0 30px;
+            page-break-before: avoid;
+            page-break-after: auto;
         }
 
         .table2 hr {
@@ -258,7 +261,7 @@
             padding: 5px;
         }
 
-        tr.main-table-header td {
+        tr.main-table-header th {
             border-bottom: 1px solid #EAF1FB;
             font-style: normal;
             font-weight: normal;
@@ -295,15 +298,19 @@
             padding-bottom: 8px;
         }
 
+        .padd2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
         .table3 {
             border: 1px solid #EAF1FB;
             border-top: none;
-            padding-right: 30px;
             box-sizing: border-box;
-            width: 230px;
-            height: 100px;
-            position: absolute;
-            right: -25;
+            width: 630px;
+            page-break-inside: avoid;
+            page-break-before: auto;
+            page-break-after: auto;
         }
 
         .text-per-item-table3 {

@@ -80,6 +80,7 @@
         .wrapper {
            display: block;
            padding-top: 110px;
+           padding-bottom: 60px;
         }
 
         .address {
@@ -233,7 +234,7 @@
         .main-table-header {
             border-bottom: 1px solid red;
         }
-        tr.main-table-header td {
+        tr.main-table-header th {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
@@ -249,6 +250,8 @@
             margin-top: 188px;
             border-bottom: 1px solid #EAF1FB;
             padding: 0px 30px 0 30px;
+            page-break-before: avoid;
+            page-break-after: auto;
         }
 
         .table2 hr {
@@ -284,26 +287,19 @@
             padding-bottom: 8px;
         }
 
-        .table3 {
-            border: 1px solid #EAF1FB;
-            border-top: none;
-            padding-right: 30px;
-            box-sizing: border-box;
-            width: 230px;
-            height: 100px;
-            position: absolute;
-            right: -25;
+        .padd2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
 
-        .text-per-item-table3 {
-            border: 1px solid #EAF1FB;
-            border-top: none;
-            padding-right: 30px;
+        .table3 {
+             border: 1px solid #EAF1FB;
+             border-top: none;
             box-sizing: border-box;
-            width: 260px;
-            /* height: 100px; */
-            position: absolute;
-            right: -25;
+            width: 630px;
+            page-break-inside: avoid;
+            page-break-before: auto;
+            page-break-after: auto;
         }
 
         td.estimate-total1 {

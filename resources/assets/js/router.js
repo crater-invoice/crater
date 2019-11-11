@@ -71,6 +71,7 @@ import Preferences from './views/settings/Preferences.vue'
 import UserProfile from './views/settings/UserProfile.vue'
 import TaxTypes from './views/settings/TaxTypes.vue'
 import ExpenseCategory from './views/settings/ExpenseCategory.vue'
+import MailConfig from './views/settings/MailConfig.vue'
 
 import Wizard from './views/wizard/Index.vue'
 
@@ -326,6 +327,11 @@ const routes = [
             path: 'expense-category',
             name: 'expense.category',
             component: ExpenseCategory
+          },
+          {
+            path: 'mail-configuration',
+            name: 'mailconfig',
+            component: MailConfig
           },
           {
             path: 'notifications',

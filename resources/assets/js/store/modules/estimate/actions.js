@@ -130,7 +130,7 @@ export const markAsRejected = ({ commit, dispatch, state }, data) => {
 
 export const markAsSent = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
-    window.axios.post(`/api/estimates/sent`, data).then((response) => {
+    window.axios.post(`/api/estimates/mark-as-sent`, data).then((response) => {
       // commit(types.UPDATE_INVOICE, response.data)
       resolve(response)
     }).catch((err) => {

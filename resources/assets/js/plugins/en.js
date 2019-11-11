@@ -678,6 +678,7 @@ export default {
     username: 'Username',
     next: 'Next',
     continue: 'Continue',
+    skip: 'Skip',
     database: {
       database: 'Site URL & Database',
       connection: 'Database Connection',

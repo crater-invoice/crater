@@ -314,7 +314,11 @@ export default {
   },
   created () {
     window.hub.$on('checkItems', this.validateItem)
-    window.hub.$on('newItem', this.onSelectItem)
+    window.hub.$on('newItem', (val) => {
+      if (this.item.item_id) {
+        this.onSelectItem(val)
+      }
+    })
   },
   methods: {
     updateTax (data) {

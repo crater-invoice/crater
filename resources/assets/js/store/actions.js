@@ -15,7 +15,7 @@ export default {
         commit('company/' + companyTypes.BOOTSTRAP_COMPANIES, response.data.companies)
         commit('taxType/' + taxTypeTypes.BOOTSTRAP_TAX_TYPES, response.data.taxTypes)
         commit('preferences/' + preferencesTypes.SET_MOMENT_DATE_FORMAT, response.data.moment_date_format)
-
+        commit('preferences/' + preferencesTypes.SET_LANGUAGE_FORMAT, response.data.default_language)
         commit(types.UPDATE_APP_LOADING_STATUS, true)
         resolve(response)
       }).catch((err) => {

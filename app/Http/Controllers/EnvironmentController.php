@@ -35,23 +35,19 @@ class EnvironmentController extends Controller
     {
         $results = $this->EnvironmentManager->saveDatabaseVariables($request);
 
-        try {
 
-            if(array_key_exists("success", $results)) {
-                Artisan::call('config:clear');
-                Artisan::call('migrate --seed');
-                Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);
+        if(array_key_exists("success", $results)) {
 
-                \Storage::disk('local')->put('database_created', 'database_created');
+            Artisan::call('config:clear');
+            Artisan::call('migrate --seed');
+            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);
 
-                Setting::setSetting('profile_complete', 3);
-            }
-            return response()->json($results);
-        } catch (Exception $e) {
-            return response()->json([
-                'error' => 'migrate_failed'
-            ]);
+            \Storage::disk('local')->put('database_created', 'database_created');
+
+            Setting::setSetting('profile_complete', 3);
         }
+
+        return response()->json($results);
     }
 
     /**

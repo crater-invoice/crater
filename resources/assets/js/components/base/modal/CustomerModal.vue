@@ -56,9 +56,9 @@
                     :options="currencies"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('customers.select_currency')"
                     label="name"
                     track-by="id"
-                    placeholder="select currency"
                   />
                 </div>
               </div>
@@ -130,9 +130,9 @@
                 <div class="col-sm-7">
                   <base-text-area
                     v-model="billing.address_street_1"
+                    :placeholder="$t('general.street_1')"
                     rows="2"
                     cols="50"
-                    placeholder="Street 1"
                     class="mb-1"
                     @input="$v.billing.address_street_1.$touch()"
                   />
@@ -142,9 +142,9 @@
 
                   <base-text-area
                     v-model="billing.address_street_2"
+                    :placeholder="$t('general.street_2')"
                     rows="2"
                     cols="50"
-                    placeholder="Street 2"
                     @input="$v.billing.address_street_2.$touch()"
                   />
 
@@ -162,10 +162,10 @@
                     :options="countryList"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('general.select_country')"
                     :allow-empty="false"
                     track-by="id"
                     label="name"
-                    placeholder="select country"
                   />
                 </div>
               </div>
@@ -178,10 +178,10 @@
                     :options="billingStates"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('general.select_state')"
                     :disabled="isDisabledBillingState"
                     track-by="id"
                     label="name"
-                    placeholder="select state"
                   />
                 </div>
               </div>
@@ -194,10 +194,10 @@
                     :options="billingCities"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('general.select_city')"
                     :disabled="isDisabledBillingCity"
                     track-by="id"
                     label="name"
-                    placeholder="select city"
                   />
                 </div>
               </div>
@@ -314,10 +314,10 @@
                     :options="shippingStates"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('general.select_state')"
                     :disabled="isDisabledShippingState"
                     track-by="id"
                     label="name"
-                    placeholder="select state"
                   />
                 </div>
               </div>
@@ -330,10 +330,10 @@
                     :options="shippingCities"
                     :searchable="true"
                     :show-labels="false"
+                    :placeholder="$t('general.select_city')"
                     :disabled="isDisabledShippingCity"
                     track-by="id"
                     label="name"
-                    placeholder="select city"
                   />
                 </div>
               </div>

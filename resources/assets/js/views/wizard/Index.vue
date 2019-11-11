@@ -5,9 +5,9 @@
         id="logo-crater"
         src="/assets/img/crater-logo.png"
         alt="Crater Logo"
+        class="logo-main"
         width="225"
         height="50"
-        class="logo"
       >
       <div class="indicator-line">
         <div class="center">

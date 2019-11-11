@@ -200,7 +200,7 @@ export default {
         this.loading = false
         return true
       } catch (e) {
-        window.toastr['error']('Somethig went wrong')
+        window.toastr['error']('Something went wrong')
       }
     }
   }

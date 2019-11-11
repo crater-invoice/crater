@@ -208,7 +208,7 @@ export default {
         this.loading = false
       } catch (e) {
         console.log(e)
-        window.toastr['error']('Somethig went wrong')
+        window.toastr['error']('Something went wrong')
       }
     }
   }

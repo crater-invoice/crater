@@ -17999,6 +17999,10 @@ fieldset[disabled] .multiselect {
   }
 }
 
+.wizard .logo-main {
+  height: 50px;
+}
+
 .wizard .wizard-card {
   padding: 30px;
   width: 100%;

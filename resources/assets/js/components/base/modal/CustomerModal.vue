@@ -1,0 +1,681 @@
+<template>
+  <div class="customer-modal">
+    <form action="" @submit.prevent="submitCustomerData">
+      <div class="card-body">
+        <!-- tab-1 -->
+        <tabs :options="{defaultTabHash: 'basic-home' }" class="tabs-simple">
+          <tab id="basic-home" name="Basic Info">
+            <div class="basic-info">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.display_name') }} <span class="required">*</span></label>
+                <div class="col-sm-7">
+                  <base-input
+                    ref="name"
+                    :invalid="$v.formData.name.$error"
+                    v-model.trim="formData.name"
+                    type="text"
+                    name="name"
+                    @input="$v.formData.name.$touch()"
+                  />
+                  <div v-if="$v.formData.name.$error">
+                    <span v-if="!$v.formData.name.required" class="text-danger">{{ $tc('validation.required') }}</span>
+                    <span v-if="!$v.formData.name.minLength" class="text-danger"> {{ $tc('validation.name_min_length', $v.formData.name.$params.minLength.min, { count: $v.formData.name.$params.minLength.min }) }} </span>
+                    <span v-if="!$v.formData.name.alpha" class="text-danger">{{ $tc('validation.characters_only') }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.primary_display_name') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="formData.contact_name"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('login.email') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    :invalid="$v.formData.email.$error"
+                    v-model.trim="formData.email"
+                    type="text"
+                    name="email"
+                    @input="$v.formData.email.$touch()"
+                  />
+                  <div v-if="$v.formData.email.$error">
+                    <span v-if="!$v.formData.email.email" class="text-danger"> {{ $t('validation.email_incorrect') }} </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $tc('settings.currencies.currency') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="currency"
+                    :options="currencies"
+                    :searchable="true"
+                    :show-labels="false"
+                    label="name"
+                    track-by="id"
+                    placeholder="select currency"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    :invalid="$v.formData.phone.$error"
+                    v-model.trim="formData.phone"
+                    type="text"
+                    name="phone"
+                    @input="$v.formData.phone.$touch()"
+                  />
+                  <div v-if="$v.formData.phone.$error">
+                    <span v-if="!$v.formData.phone.numeric" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.website') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="formData.website"
+                    :invalid="$v.formData.website.$error"
+                    type="url"
+                    @input="$v.formData.website.$touch()"
+                  />
+                  <div v-if="$v.formData.website.$error">
+                    <span v-if="!$v.formData.website.url" class="text-danger">{{ $tc('validation.invalid_url') }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </tab>
+
+          <!-- tab-2 -->
+          <tab id="basic-profile" name="Billing Address">
+            <div class="basic-info">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.name') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="billing.name"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    :invalid="$v.billing.phone.$error"
+                    v-model.trim="billing.phone"
+                    type="text"
+                    name="phone"
+                    @input="$v.billing.phone.$touch()"
+                  />
+                  <div v-if="$v.billing.phone.$error">
+                    <span v-if="!$v.billing.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.address') }}</label>
+                <div class="col-sm-7">
+                  <base-text-area
+                    v-model="billing.address_street_1"
+                    rows="2"
+                    cols="50"
+                    placeholder="Street 1"
+                    class="mb-1"
+                    @input="$v.billing.address_street_1.$touch()"
+                  />
+                  <div v-if="$v.billing.address_street_1.$error">
+                    <span v-if="!$v.billing.address_street_1.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  </div>
+
+                  <base-text-area
+                    v-model="billing.address_street_2"
+                    rows="2"
+                    cols="50"
+                    placeholder="Street 2"
+                    @input="$v.billing.address_street_2.$touch()"
+                  />
+
+                  <div v-if="$v.billing.address_street_2.$error">
+                    <span v-if="!$v.billing.address_street_2.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.country') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="billingCountry"
+                    :options="countryList"
+                    :searchable="true"
+                    :show-labels="false"
+                    :allow-empty="false"
+                    track-by="id"
+                    label="name"
+                    placeholder="select country"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.state') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="billingState"
+                    :options="billingStates"
+                    :searchable="true"
+                    :show-labels="false"
+                    :disabled="isDisabledBillingState"
+                    track-by="id"
+                    label="name"
+                    placeholder="select state"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.city') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="billingCity"
+                    :options="billingCities"
+                    :searchable="true"
+                    :show-labels="false"
+                    :disabled="isDisabledBillingCity"
+                    track-by="id"
+                    label="name"
+                    placeholder="select city"
+                  />
+                </div>
+              </div>
+
+              <!-- <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Zip Code</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="billing.zip"
+                    type="text"
+                  />
+                </div>
+              </div> -->
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.zip_code') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="billing.zip"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </tab>
+
+          <!-- tab-3 -->
+          <tab id="basic-message" name="Shipping Address">
+            <div class="basic-info">
+              <div class="form-group row ">
+                <div class="col-sm-12 copy-address-button">
+                  <base-button ref="sameAddress" icon="copy" class="mr-2 btn-sm" color="theme" @click="copyAddress(true)">
+                    {{ $t('customers.copy_billing_address') }}
+                  </base-button>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.name') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="shipping.name"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    :invalid="$v.shipping.phone.$error"
+                    v-model.trim="shipping.phone"
+                    type="text"
+                    name="phone"
+                    @input="$v.shipping.phone.$touch()"
+                  />
+                  <div v-if="$v.shipping.phone.$error">
+                    <span v-if="!$v.shipping.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.address') }}</label>
+                <div class="col-sm-7">
+                  <base-text-area
+                    v-model="shipping.address_street_1"
+                    rows="2"
+                    cols="50"
+                    placeholder="Street 1"
+                    class="mb-1"
+                    @input="$v.shipping.address_street_1.$touch()"
+                  />
+                  <div v-if="$v.shipping.address_street_1.$error">
+                    <span v-if="!$v.shipping.address_street_1.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  </div>
+
+                  <base-text-area
+                    v-model="shipping.address_street_2"
+                    rows="2"
+                    cols="50"
+                    placeholder="Street 2"
+                    @input="$v.shipping.address_street_2.$touch()"
+                  />
+                  <div v-if="$v.shipping.address_street_2.$error">
+                    <span v-if="!$v.shipping.address_street_2.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.country') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="shippingCountry"
+                    :options="countryList"
+                    :searchable="true"
+                    :show-labels="false"
+                    :allow-empty="false"
+                    track-by="id"
+                    label="name"
+                    placeholder="select country"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.state') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="shippingState"
+                    :options="shippingStates"
+                    :searchable="true"
+                    :show-labels="false"
+                    :disabled="isDisabledShippingState"
+                    track-by="id"
+                    label="name"
+                    placeholder="select state"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.city') }}</label>
+                <div class="col-sm-7">
+                  <base-select
+                    v-model="shippingCity"
+                    :options="shippingCities"
+                    :searchable="true"
+                    :show-labels="false"
+                    :disabled="isDisabledShippingCity"
+                    track-by="id"
+                    label="name"
+                    placeholder="select city"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{ $t('customers.zip_code') }}</label>
+                <div class="col-sm-7">
+                  <base-input
+                    v-model="shipping.zip"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+          </tab>
+        </tabs>
+      </div>
+      <div class="card-footer">
+        <base-button :outline="true" class="mr-3" color="theme" @click="cancelCustomer">
+          {{ $t('general.cancel') }}
+        </base-button>
+        <base-button
+          :loading="isLoading"
+          icon="save"
+          color="theme"
+          type="submit"
+        >
+          {{ $t('general.save') }}
+        </base-button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+import { Tabs, Tab } from 'vue-tabs-component'
+import MultiSelect from 'vue-multiselect'
+import { validationMixin } from 'vuelidate'
+import { mapActions, mapGetters } from 'vuex'
+import AddressStub from '../../../stub/address'
+const { required, minLength, email, numeric, alpha, url, maxLength } = require('vuelidate/lib/validators')
+
+export default {
+  components: {
+    'tabs': Tabs,
+    'tab': Tab,
+    MultiSelect
+  },
+  mixins: [validationMixin],
+  data () {
+    return {
+      isLoading: false,
+      countryList: [],
+      billingStates: [],
+      billingCities: [],
+      billingCountry: null,
+      billingState: null,
+      billingCity: null,
+      shippingStates: [],
+      shippingCities: [],
+      shippingCountry: null,
+      shippingState: null,
+      shippingCity: null,
+      isCopyFromBilling: false,
+      currencyList: [],
+      currency: '',
+      isDisabledBillingState: true,
+      isDisabledBillingCity: true,
+      isDisabledShippingState: true,
+      isDisabledShippingCity: true,
+      formData: {
+        id: null,
+        name: null,
+        currency_id: null,
+        phone: null,
+        website: null,
+        contact_name: null,
+        addresses: []
+      },
+      billing: {...AddressStub},
+      shipping: {...AddressStub}
+    }
+  },
+  validations: {
+    formData: {
+      name: {
+        required,
+        minLength: minLength(3),
+        alpha
+      },
+      email: {
+        email
+      },
+      phone: {
+        numeric
+      },
+      website: {
+        url
+      }
+    },
+    billing: {
+      phone: {
+        numeric
+      },
+      address_street_1: {
+        maxLength: maxLength(255)
+      },
+      address_street_2: {
+        maxLength: maxLength(255)
+      }
+    },
+    shipping: {
+      phone: {
+        numeric
+      },
+      address_street_1: {
+        maxLength: maxLength(255)
+      },
+      address_street_2: {
+        maxLength: maxLength(255)
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('currency', [
+      'defaultCurrency',
+      'currencies'
+    ])
+  },
+  watch: {
+    billingCountry () {
+      if (this.billingCountry) {
+        this.billing.country_id = this.billingCountry.id
+        this.isDisabledBillingState = false
+        this.fetchBillingStates(this.billingCountry.id)
+        this.billingState = null
+        this.billingCity = null
+        return true
+      }
+    },
+    billingState () {
+      if (this.billingState) {
+        this.billing.state_id = this.billingState.id
+        this.isDisabledBillingCity = false
+        this.fetchBillingCities(this.billingState.id)
+        this.billingCity = null
+        return true
+      }
+      this.billingCity = null
+      this.isDisabledBillingCity = true
+    },
+    billingCity () {
+      if (this.billingCity) {
+        this.billing.city_id = this.billingCity.id
+      }
+    },
+    shippingCountry () {
+      if (this.shippingCountry) {
+        this.shipping.country_id = this.shippingCountry.id
+        this.isDisabledShippingState = false
+        this.fetchShippingStates(this.shippingCountry.id)
+        if (this.isCopyFromBilling) {
+          return true
+        }
+        this.shippingState = null
+        this.shippingCity = null
+        return true
+      }
+    },
+    shippingState () {
+      if (this.shippingState) {
+        this.shipping.state_id = this.shippingState.id
+        this.isDisabledShippingCity = false
+        this.fetchShippingCities(this.shippingState.id)
+        if (this.isCopyFromBilling) {
+          this.isCopyFromBilling = false
+          return true
+        }
+        this.shippingCity = null
+        return true
+      }
+      this.shippingCity = null
+      this.isDisabledShippingCity = true
+    },
+    shippingCity () {
+      if (this.shippingCity) {
+        this.shipping.city_id = this.shippingCity.id
+      }
+    }
+  },
+  mounted () {
+    this.$refs.name.focus = true
+    this.currency = this.defaultCurrency
+    this.fetchCountry()
+  },
+  methods: {
+    ...mapActions('invoice', {
+      setInvoiceCustomer: 'selectCustomer'
+    }),
+    ...mapActions('estimate', {
+      setEstimateCustomer: 'selectCustomer'
+    }),
+    ...mapActions('customer', [
+      'fetchCustomer',
+      'addCustomer',
+      'updateCustomer'
+    ]),
+    ...mapActions('modal', [
+      'closeModal'
+    ]),
+    resetData () {
+      this.formData = {
+        name: null,
+        currency_id: null,
+        phone: null,
+        website: null,
+        contact_name: null,
+        addresses: []
+      }
+
+      this.billingStates = []
+      this.billingCities = []
+      this.billingCountry = null
+      this.billingState = null
+      this.billingCity = null
+      this.shippingStates = []
+      this.shippingCities = []
+      this.shippingCountry = null
+      this.shippingState = null
+      this.shippingCity = null
+
+      this.billing = {...AddressStub}
+      this.shipping = {...AddressStub}
+      this.$v.formData.$reset()
+    },
+    cancelCustomer () {
+      this.resetData()
+      this.closeModal()
+    },
+    copyAddress (val) {
+      if (val === true) {
+        this.isCopyFromBilling = true
+        this.shipping = {...this.billing, type: 'shipping'}
+        this.shippingCountry = this.billingCountry
+        this.shippingState = this.billingState
+        this.shippingCity = this.billingCity
+      } else {
+        this.shipping = {...AddressStub, type: 'shipping'}
+        this.shippingCountry = null
+        this.shippingState = null
+        this.shippingCity = null
+      }
+    },
+    async loadData () {
+      let response = await this.fetchCustomer()
+      this.currencyList = this.currencies
+      this.formData.currency_id = response.data.currency.id
+      return true
+    },
+    checkAddress () {
+      const isBillingEmpty = Object.values(this.billing).every(val => (val === null || val === ''))
+      const isShippingEmpty = Object.values(this.shipping).every(val => (val === null || val === ''))
+      if (isBillingEmpty === true && isBillingEmpty === true) {
+        this.formData.addresses = []
+        return true
+      }
+
+      if (isBillingEmpty === false && isShippingEmpty === false) {
+        this.formData.addresses = [{...this.billing, type: 'billing'}, {...this.shipping, type: 'shipping'}]
+        return true
+      }
+
+      if (isBillingEmpty === false) {
+        this.formData.addresses.push({...this.billing, type: 'billing'})
+        return true
+      }
+
+      this.formData.addresses = [{...this.shipping, type: 'shipping'}]
+      return true
+    },
+    async submitCustomerData () {
+      this.$v.formData.$touch()
+
+      if (this.$v.$invalid) {
+        return true
+      }
+
+      // this.checkAddress()
+      this.formData.addresses = [{...this.shipping, type: 'shipping'}, {...this.billing, type: 'billing'}]
+      this.isLoading = true
+
+      if (this.currency) {
+        this.formData.currency_id = this.currency.id
+      } else {
+        this.formData.currency_id = this.defaultCurrency.id
+      }
+      let response = await this.addCustomer(this.formData)
+      if (response.data) {
+        window.toastr['success'](this.$tc('customers.created_message'))
+        this.isLoading = false
+        if (this.$route.name === 'invoices.create') {
+          this.setInvoiceCustomer(response.data.customer.id)
+        }
+        if (this.$route.name === 'estimates.create') {
+          this.setEstimateCustomer(response.data.customer.id)
+        }
+        this.resetData()
+        this.closeModal()
+        return true
+      }
+      window.toastr['error'](response.data.error)
+    },
+    async fetchCountry () {
+      let res = await window.axios.get('/api/countries')
+      if (res) {
+        this.countryList = res.data.countries
+      }
+    },
+    async fetchBillingStates (id) {
+      let res = await window.axios.get(`/api/states/${id}`)
+      if (res) {
+        this.billingStates = res.data.states
+      }
+    },
+    async fetchBillingCities (id) {
+      let res = await window.axios.get(`/api/cities/${id}`)
+      if (res) {
+        this.billingCities = res.data.cities
+      }
+    },
+    async fetchShippingStates (id) {
+      let res = await window.axios.get(`/api/states/${id}`)
+      if (res) {
+        this.shippingStates = res.data.states
+      }
+    },
+    async fetchShippingCities (id) {
+      let res = await window.axios.get(`/api/cities/${id}`)
+      if (res) {
+        this.shippingCities = res.data.cities
+      }
+    }
+  }
+}
+</script>

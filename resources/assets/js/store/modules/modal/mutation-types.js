@@ -1,0 +1,8 @@
+export const SHOW_MODAL = 'SHOW_MODAL'
+export const SET_TITLE = 'SET_TITLE'
+export const SET_COMPONENT_NAME = 'SET_COMPONENT_NAME'
+export const HIDE_MODAL = 'HIDE_MODAL'
+export const SET_ID = 'SET_ID'
+export const SET_SIZE = 'SET_SIZE'
+export const SET_DATA = 'SET_DATA'
+export const RESET_DATA = 'RESET_DATA'

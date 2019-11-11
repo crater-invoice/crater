@@ -1,0 +1,21 @@
+.category-modal {
+
+    .card-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px 20px;
+    }
+
+    .col-form-label {
+        text-align: end;
+        padding-right: 0;
+        position: relative;
+    }
+
+    .required {
+        position: absolute;
+        right: -10px;
+        color: $ls-color-red;
+    }
+
+}

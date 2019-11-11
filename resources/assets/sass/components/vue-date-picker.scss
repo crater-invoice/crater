@@ -1,0 +1,19 @@
+.vdp-datepicker__calendar .cell {
+
+    &:not(.blank):not(.disabled)
+    {
+        &.day:hover,
+        &.month:hover,
+        &.year:hover {
+            border: 1px solid $ls-color-primary !important;
+        }
+    }
+    
+    &.selected {
+        background: $ls-color-primary !important;
+    }
+    
+    &.highlighted {
+        background:lighten($ls-color-primary,25%) !important;
+    }
+}

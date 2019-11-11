@@ -1,0 +1,194 @@
+// tabs.scss - Tabs & Accordians
+
+.tabs .tab-content {
+    margin-top: 1.2rem;
+}
+
+.tabs-default {
+
+    .nav-link.active {
+        background-color: $ls-color-secondary;
+        color: $ls-color-primary;
+
+        &:hover, &:active, &:focus {
+            background-color: $ls-color-secondary;
+            color: $ls-color-primary;
+        }
+    }
+
+    .nav-link:hover {
+        border: 1px solid $ls-color-secondary;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid $ls-color-secondary;
+    }
+}
+
+.tabs-primary {
+
+    .nav-link.active {
+        background-color: $brand-primary;
+        color: $white;
+
+        &:hover, &:active, &:focus {
+            background-color: $brand-primary;
+            color: $white;
+        }
+    }
+
+    .nav-link:hover {
+        border: 1px solid $brand-primary;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid $brand-primary;
+    }
+}
+
+.tabs-simple {
+
+    .nav-link {
+        border: 0;
+        background-color: transparent;
+        border-radius: 0;
+        color: $ls-color-black--light;
+
+        &:hover, &:active, &:focus {
+            border-bottom: 3px solid $ls-color-primary;
+            border-color: lighten($ls-color-primary, 30%);
+        }
+
+        &.active {
+            background-color: transparent;
+            border-bottom: 3px solid $ls-color-primary;
+            color: $ls-color-black;
+
+            &:hover, &:active, &:focus {
+                border-bottom: 3px solid $ls-color-primary;
+                border-color: $ls-color-primary;
+                color: $ls-color-black;
+            }
+        }
+    }
+
+}
+
+.tabs-vertical {
+
+    @include clearfix;
+
+    .nav-tabs {
+        float: left;
+        border-right: 1px solid $ls-color-secondary;
+        border-bottom: none;
+        overflow: hidden;
+        margin-right: 1.2rem;
+        display: block;
+
+        li {
+            float: none;
+            margin-right: -1px;
+            margin-bottom: 0;
+        }
+
+        li a {
+            margin-right: 0;
+            border-radius: 4px 0 0 4px;
+            margin-bottom: .2rem;
+            background-color: $white;
+            border-color: transparent;
+            border-right-color: $ls-color-secondary;
+
+            &:hover, &:active, &:focus {
+                background-color: $white;
+                border-color: $ls-color-secondary;
+            }
+
+            &.active {
+                background-color: $ls-color-secondary;
+                color: $ls-color-primary;
+
+                &:hover, &:active, &:focus {
+                    background-color: $ls-color-secondary;
+                    color: $ls-color-primary;
+                }
+            }
+        }
+    }
+
+    &.tabs-primary .nav-tabs {
+        border-right: 1px solid $brand-primary;
+
+        li a {
+            border-right-color: $brand-primary;
+
+            &:hover, &:active, &:focus {
+                background-color: $white;
+                border-color: $brand-primary;
+            }
+
+            &.active {
+                background-color: $brand-primary;
+                color: $white;
+
+                &:hover, &:active, &:focus {
+                    background-color: $brand-primary;
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    &.tabs-simple .nav-tabs {
+        border-right: 1px solid #ddd;
+
+        li {
+            margin: 0;
+        }
+
+        li a {
+            background: transparent;
+            border-right: 3px solid transparent;
+            border-radius: 0;
+
+            &.active {
+                border-bottom: 0;
+                color: $ls-color-black;
+                border-right: 3px solid $ls-color-primary;
+                background: transparent;
+            }
+
+            &:hover, &:active, &:focus {
+                background-color: transparent;
+                border-right: 3px solid $ls-color-primary;
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+.panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+
+    .panel-heading a {
+        text-decoration: none;
+    }
+
+    .panel-title {
+        display: block;
+        padding: 1rem 1.25rem;
+    }
+
+    .panel-content {
+        padding: 0 1.25rem;
+    }
+}
+
+.panel-group .panel + .panel {
+    margin-top: 10px;
+}

@@ -1,0 +1,73 @@
+<template>
+  <transition name="fade">
+    <div v-if="modalActive" class="base-modal" :class="'size-' + modalSize">
+      <div class="modal-body">
+        <div class="close-icon">
+          <font-awesome-icon class="mr-2" icon="times" @click="closeModal"/>
+        </div>
+        <div class="modal-header p-3">
+          <h5 class="modal-heading">{{ modalTitle }}</h5>
+        </div>
+        <component :is="component" />
+      </div>
+    </div>
+  </transition>
+</template>
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import TaxTypeModal from './TaxTypeModal'
+import ItemModal from './ItemModal'
+import EstimateTemplate from './EstimateTemplate'
+import InvoiceTemplate from './InvoiceTemplate'
+import CustomerModal from './CustomerModal'
+import CategoryModal from './CategoryModal'
+
+export default {
+  components: {
+    TaxTypeModal,
+    ItemModal,
+    EstimateTemplate,
+    InvoiceTemplate,
+    CustomerModal,
+    CategoryModal
+  },
+  data () {
+    return {
+      component: '',
+      hasFocus: false
+    }
+  },
+  computed: {
+    ...mapGetters('modal', [
+      'modalActive',
+      'modalTitle',
+      'componentName',
+      'modalSize',
+      'modalData'
+    ])
+  },
+  watch: {
+    componentName (component) {
+      if (!component) {
+        return
+      }
+
+      this.component = component
+    }
+  },
+  methods: {
+    ...mapActions('modal', [
+      'openModal',
+      'closeModal'
+    ])
+  }
+}
+</script>
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>

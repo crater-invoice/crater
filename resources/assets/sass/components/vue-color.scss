@@ -1,0 +1,47 @@
+// MATERIAL COLOR PICKER
+.vc-material {
+    width: 150px !important;
+    height: 130px !important;
+}
+
+.color-pickers-demo {
+    position: relative;
+    padding-top: 20px;
+}
+
+// Demo Div
+.demo-div {
+    position: absolute;
+    height: 15px;
+    width: 190px;
+    text-indent: -999px;
+    right: 0;
+    width: 100%;
+    top: -10px;
+    background: #194D33;
+    color: white;
+    border-radius: 3px;
+}
+
+// Photosop 
+@media only screen and (max-width: $small-breakpoint ) {
+    .vc-photoshop {
+        width: 100% !important;
+    }
+    .vc-chrome {
+        width: 100% !important;
+    }
+    .vc-compact { 
+        width: 100% !important;
+    }
+    .vc-slider { 
+        width: 100% !important;
+    }
+    .vc-swatches { 
+        width: 100% !important;
+    }
+    .vc-sketch {
+        width: 268px !important;
+    }
+}
+

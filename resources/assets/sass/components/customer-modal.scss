@@ -1,0 +1,36 @@
+.customer-modal {
+
+    .card-body {
+        padding-bottom: 4px;
+    }
+
+    .col-form-label {
+        text-align: end;
+        font-family: poppins, sans-serif;
+        padding-right: 0;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .required {
+        position: absolute;
+        color: $ls-color-red;
+        right: -10px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px 20px;
+
+        .btn-crater {
+            margin-left: 15px;
+        }
+    }
+
+    .copy-address-button {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+}

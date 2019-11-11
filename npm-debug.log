@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'watch' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.2
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle @~prewatch: @
+6 silly lifecycle @~prewatch: no script for prewatch, continuing
+7 info lifecycle @~watch: @
+8 verbose lifecycle @~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle @~watch: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\laragon2\www\crater-vue\node_modules\.bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\laragon2\bin\php\php-7.2.5-Win32-VC15-x86;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\laragon2\bin\yarn\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-10.0.1\bin;C:\Users\bytefury\AppData\Roaming\Composer\vendor\bin;C:\laragon\www\wp\node_modules\.bin;C:\laragon\www\Laravel\node_modules\webpack\bin;C:\Users\bytefury\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Users\bytefury\AppData\Local\Microsoft\WindowsApps;
+10 verbose lifecycle @~watch: CWD: C:\laragon2\www\crater-vue
+11 silly lifecycle @~watch: Args: [ '/d /s /c',
+11 silly lifecycle   'cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1020:11)
+12 verbose stack     at process.kill (internal/process.js:190:13)
+12 verbose stack     at process.listener (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:217:44)
+13 verbose cwd C:\laragon2\www\crater-vue
+14 error Windows_NT 10.0.17134
+15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "watch"
+16 error node v6.11.2
+17 error npm  v3.10.10
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

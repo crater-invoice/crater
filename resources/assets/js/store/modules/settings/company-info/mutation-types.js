@@ -1,0 +1,2 @@
+export const SET_COMPANY = 'SET_COMPANY'
+export const UPDATE_COMPANY = 'UPDATE_COMPANY'

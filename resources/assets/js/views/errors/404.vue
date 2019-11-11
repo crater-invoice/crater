@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12 text-sm-center">
         <h1>{{ $t('general.four_zero_four') }}</h1>
-        <h5>{{ $t('general.yot_got_lost') }}</h5>
+        <h5>{{ $t('general.you_got_lost') }}</h5>
         <router-link
           class="btn btn-lg bg-yellow text-white"
           to="/">

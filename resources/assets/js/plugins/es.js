@@ -56,7 +56,20 @@ export default {
     select_a_status: 'Selecciona un estado',
     select_a_tax: 'Selecciona un impuesto',
     search: 'Buscar',
-    are_you_sure: '¿Estás seguro?'
+    are_you_sure: '¿Estás seguro?',
+    list_is_empty: 'La lista esta vacía.',
+    no_tax_found: '¡No se encontraron impuestos!',
+    four_zero_four: '404',
+    you_got_lost: 'Whoops! ¡Te perdiste!',
+    go_home: 'Vete a casa',
+
+    setting_updated: 'Configuración actualizada con éxito',
+    select_state: 'Seleccione estado',
+    select_country: 'Seleccionar país',
+    select_city: 'Ciudad selecta',
+    street_1: 'Calle 1',
+    street_2: 'Calle # 2',
+    action_failed: 'Accion: Fallida'
   },
   dashboard: {
     select_year: 'Seleccione año',
@@ -104,6 +117,7 @@ export default {
   },
   customers: {
     title: 'Clientes',
+    add_customer: 'Agregar cliente',
     contacts_list: 'Lista de clientes',
     name: 'Nombre',
     display_name: 'Nombre para mostrar',
@@ -134,6 +148,7 @@ export default {
     shipping_address: 'Dirección de Envío',
     copy_billing_address: 'Copia de facturación',
     no_customers: '¡Aún no hay clientes!',
+    no_customers_found: 'No se encontraron clientes!',
     list_of_customers: 'Esta sección contendrá la lista de clientes.',
     primary_display_name: 'Nombre de visualización principal',
     select_state: 'Seleccione estado',
@@ -143,6 +158,7 @@ export default {
     street_1: 'Calle 1',
     street_2: 'Calle 2',
     select_a_customer: 'Selecciona un cliente',
+    type_or_click: 'Escriba o haga clic para seleccionar',
 
     confirm_delete: 'No podrá recuperar este cliente | No podrá recuperar estos clientes',
     created_message: 'Cliente creado con éxito',
@@ -205,6 +221,7 @@ export default {
     amount: 'Cantidad',
     action: 'Acción',
     notes: 'Notas',
+    tax: 'Impuesto',
     estimate_template: 'Plantilla de estimación',
     convert_to_invoice: 'Convertir a factura',
     mark_as_sent: 'Marcar como enviado',
@@ -578,8 +595,8 @@ export default {
       estimate_viewed_message: 'Estimación vista',
       please_enter_email: 'Por favor, introduzca su correo electrónico'
     },
-    sales_taxes: {
-      title: 'Impuestos de ventas',
+    tax_types: {
+      title: 'Tipos de impuestos',
       description: 'Puede agregar o eliminar impuestos a su gusto. Crater admite impuestos sobre artículos individuales, así como sobre la factura.',
       add_new_tax: 'Agregar nuevo impuesto',
       tax_settings: 'Configuraciones de impuestos',
@@ -659,7 +676,10 @@ export default {
     copyright_crater: 'Copyright @ Crater - 2019',
     super_simple_invoicing: 'Facturación super simple',
     for_freelancer: 'para autónomos y',
-    small_businesses: 'Pequeñas empresas '
+    small_businesses: 'Pequeñas empresas',
+    crater_help: 'Crater te ayuda a rastrear gastos, registrar pagos y generar hermosos',
+    invoices_and_estimates: 'facturas y presupuestos con capacidad para elegir múltiples plantillas.'
+
   },
   validation: {
     invalid_url: 'URL no válida (por ejemplo, http://www.crater.com)',
@@ -678,6 +698,14 @@ export default {
     qty_must_greater_than_zero: 'La cantidad debe ser mayor que cero.',
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',
-    payment_grater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.'
+    payment_greater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.',
+    quantity_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
+    price_maxlength: 'El precio no debe tener más de 10 caracteres.',
+    amount_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
+    description_maxlength: 'La descripción no debe tener más de 255 caracteres.',
+    maximum_options_error: 'Máximo de {max} opciones seleccionadas. Primero elimine una opción seleccionada para seleccionar otra.',
+    notes_maxlength: 'Las notas no deben tener más de 255 caracteres.',
+    address_maxlength: 'La dirección no debe tener más de 255 caracteres.',
+    ref_number_maxlength: 'El número de referencia no debe tener más de 10 caracteres.'
   }
 }

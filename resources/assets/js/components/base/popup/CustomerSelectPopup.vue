@@ -103,7 +103,7 @@ export default {
     },
     openCustomerModal () {
       this.openModal({
-        title: 'Add Customer',
+        title: this.$t('customers.add_customer'),
         componentName: 'CustomerModal',
         size: 'lg'
       })

@@ -4,7 +4,7 @@
       <div class="card-body">
         <!-- tab-1 -->
         <tabs :options="{defaultTabHash: 'basic-home' }" class="tabs-simple">
-          <tab id="basic-home" name="Basic Info">
+          <tab id="basic-home" :name="$t('customers.basic_info')">
             <div class="basic-info">
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">{{ $t('customers.display_name') }} <span class="required">*</span></label>
@@ -97,7 +97,7 @@
           </tab>
 
           <!-- tab-2 -->
-          <tab id="basic-profile" name="Billing Address">
+          <tab id="basic-profile" :name="$t('customers.billing_address')">
             <div class="basic-info">
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">{{ $t('customers.name') }}</label>
@@ -226,7 +226,7 @@
           </tab>
 
           <!-- tab-3 -->
-          <tab id="basic-message" name="Shipping Address">
+          <tab id="basic-message" :name="$t('customers.shipping_address')">
             <div class="basic-info">
               <div class="form-group row ">
                 <div class="col-sm-12 copy-address-button">
@@ -266,9 +266,9 @@
                 <div class="col-sm-7">
                   <base-text-area
                     v-model="shipping.address_street_1"
+                    :placeholder="$t('general.street_1')"
                     rows="2"
                     cols="50"
-                    placeholder="Street 1"
                     class="mb-1"
                     @input="$v.shipping.address_street_1.$touch()"
                   />
@@ -278,9 +278,9 @@
 
                   <base-text-area
                     v-model="shipping.address_street_2"
+                    :placeholder="$t('general.street_2')"
                     rows="2"
                     cols="50"
-                    placeholder="Street 2"
                     @input="$v.shipping.address_street_2.$touch()"
                   />
                   <div v-if="$v.shipping.address_street_2.$error">
@@ -299,9 +299,9 @@
                     :searchable="true"
                     :show-labels="false"
                     :allow-empty="false"
+                    :placeholder="$t('general.select_country')"
                     track-by="id"
                     label="name"
-                    placeholder="select country"
                   />
                 </div>
               </div>

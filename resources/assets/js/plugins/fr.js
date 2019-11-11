@@ -56,7 +56,20 @@ export default {
     select_a_status: 'Sélectionnez un statut',
     select_a_tax: 'Sélectionnez une taxe',
     search: 'Chercher',
-    are_you_sure: 'Êtes-vous sûr?'
+    are_you_sure: 'Êtes-vous sûr?',
+    list_is_empty: 'La liste est vide',
+    no_tax_found: 'Aucune taxe trouvée!',
+    four_zero_four: '404',
+    you_got_lost: 'Oups! Vous vous êtes perdus!',
+    go_home: 'Rentrer chez soi',
+
+    setting_updated: 'Réglage mis à jour avec succès',
+    select_state: "Sélectionnez l'état",
+    select_country: 'Choisissez le pays',
+    select_city: 'Sélectionnez une ville',
+    street_1: 'Rue 1',
+    street_2: 'Rue # 2',
+    action_failed: 'Action: échoué'
   },
   dashboard: {
     select_year: 'Sélectionnez lannée',
@@ -104,6 +117,7 @@ export default {
   },
   customers: {
     title: 'Les clients',
+    add_customer: 'Ajouter un client',
     contacts_list: 'Liste de clients',
     name: 'Nom',
     display_name: 'Afficher un nom',
@@ -134,6 +148,7 @@ export default {
     shipping_address: 'Adresse de livraison',
     copy_billing_address: 'Copier de la facturation',
     no_customers: 'Pas encore de clients!',
+    no_customers_found: 'Aucun client trouvé!',
     list_of_customers: 'Cette section contiendra la liste des clients.',
     primary_display_name: 'Nom daffichage principal',
     select_state: 'Sélectionnez létat',
@@ -143,6 +158,7 @@ export default {
     street_1: 'Rue 1',
     street_2: 'Rue 2',
     select_a_customer: 'Sélectionnez un client',
+    type_or_click: 'Tapez ou cliquez pour sélectionner',
 
     confirm_delete: 'Vous ne pourrez pas récupérer ce client | Vous ne pourrez pas récupérer ces clients',
     created_message: 'Client créé avec succès',
@@ -205,6 +221,7 @@ export default {
     amount: 'Montante',
     action: 'action',
     notes: 'Remarques',
+    tax: 'Impôt',
     estimate_template: 'Modèle destimation',
     convert_to_invoice: 'Convertir en facture',
     mark_as_sent: 'Marquer comme envoyé',
@@ -501,7 +518,7 @@ export default {
       company_information: 'Informations sur la société',
       preferences: 'Préférences',
       notifications: 'Les notifications',
-      sales_taxes: 'Taxes de vente',
+      tax_types: 'Types de taxe',
       expense_category: 'Catégories de dépenses'
     },
     title: 'Paramètres',
@@ -578,8 +595,8 @@ export default {
       estimate_viewed_message: 'Estimation vue',
       please_enter_email: 'S il vous plaît entrer email'
     },
-    sales_taxes: {
-      title: 'Taxes de vente',
+    tax_types: {
+      title: 'Types de taxe',
       description: 'Vous pouvez ajouter ou supprimer des taxes à votre guise. Crater prend en charge les taxes sur les articles individuels ainsi que sur la facture.',
       add_new_tax: 'Ajouter une nouvelle taxe',
       tax_settings: 'Paramètres de taxe',
@@ -659,7 +676,10 @@ export default {
     copyright_crater: 'Copyright @ Crater - 2019',
     super_simple_invoicing: 'Super Simple Facturation',
     for_freelancer: 'pour les pigistes et',
-    small_businesses: 'Petites entreprises '
+    small_businesses: 'Petites entreprises ',
+    crater_help: 'Crater vous aide à suivre vos dépenses, à enregistrer vos paiements et à générer de belles',
+    invoices_and_estimates: 'factures et devis avec possibilité de choisir plusieurs modèles.'
+
   },
   validation: {
     invalid_url: 'URL invalide (ex: http://www.crater.com)',
@@ -678,6 +698,14 @@ export default {
     qty_must_greater_than_zero: 'La quantité doit être supérieure à zéro.',
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',
-    payment_grater_than_due_amount: 'Le paiement entré est plus que le montant dû de cette facture.'
+    payment_greater_than_due_amount: 'Le paiement entré est plus que le montant dû de cette facture.',
+    quantity_maxlength: 'La quantité ne doit pas dépasser 10 caractères.',
+    price_maxlength: 'Le prix ne doit pas dépasser 10 caractères.',
+    amount_maxlength: 'Le montant ne doit pas dépasser 10 caractères.',
+    description_maxlength: 'La description ne doit pas dépasser 255 caractères.',
+    maximum_options_error: 'Maximum de {max} options sélectionnées. Commencez par supprimer une option sélectionnée pour en sélectionner une autre.',
+    notes_maxlength: 'Les notes ne doivent pas dépasser 255 caractères.',
+    address_maxlength: "L'adresse ne doit pas dépasser 255 caractères.",
+    ref_number_maxlength: 'Le numéro de référence ne doit pas dépasser 10 caractères'
   }
 }

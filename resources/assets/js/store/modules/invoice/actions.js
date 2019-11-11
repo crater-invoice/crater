@@ -78,8 +78,12 @@ export const addInvoice = ({ commit, dispatch, state }, data) => {
 export const deleteInvoice = ({ commit, dispatch, state }, id) => {
   return new Promise((resolve, reject) => {
     window.axios.delete(`/api/invoices/${id}`).then((response) => {
-      commit(types.DELETE_INVOICE, id)
-      resolve(response)
+      if (response.data.error) {
+        resolve(response)
+      } else {
+        commit(types.DELETE_INVOICE, id)
+        resolve(response)
+      }
     }).catch((err) => {
       reject(err)
     })

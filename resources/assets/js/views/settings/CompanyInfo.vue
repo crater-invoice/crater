@@ -116,13 +116,23 @@
             <base-text-area
               v-model="formData.address_street_1"
               :placeholder="$tc('general.street_1')"
+              :class="{'invalid': $v.formData.address_street_1.$error }"
               rows="2"
+              @input="$v.formData.address_street_1.$touch()"
             />
+            <div v-if="$v.formData.address_street_1.$error">
+              <span v-if="!$v.formData.address_street_1.maxLength" class="text-danger">{{ $tc('validation.address_maxlength') }}</span>
+            </div>
             <base-text-area
               v-model="formData.address_street_2"
-              :placeholder="$tc('general.street_1')"
+              :placeholder="$tc('general.street_2')"
+              :class="{'invalid': $v.formData.address_street_2.$error }"
               rows="2"
+              @input="$v.formData.address_street_2.$touch()"
             />
+            <div v-if="$v.formData.address_street_2.$error">
+              <span v-if="!$v.formData.address_street_2.maxLength" class="text-danger">{{ $tc('validation.address_maxlength') }}</span>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -148,7 +158,7 @@ import ImageBox from '../components/ImageBox.vue'
 import AvatarCropper from 'vue-avatar-cropper'
 import { validationMixin } from 'vuelidate'
 import { mapActions } from 'vuex'
-const { required, email, numeric } = require('vuelidate/lib/validators')
+const { required, email, numeric, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: { AvatarCropper, IconUpload, ImageBox },
@@ -251,6 +261,12 @@ export default {
       },
       phone: {
         numeric
+      },
+      address_street_1: {
+        maxLength: maxLength(255)
+      },
+      address_street_2: {
+        maxLength: maxLength(255)
       }
     }
   },

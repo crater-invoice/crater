@@ -31,11 +31,11 @@ import NotFoundPage from './views/errors/404.vue'
 import Dashboard from './views/dashboard/Dashboard.vue'
 
 // Customers
-import CustomerIndex from './views/customers/index.vue'
+import CustomerIndex from './views/customers/Index.vue'
 import CustomerCreate from './views/customers/Create.vue'
 
 // Items
-import ItemsIndex from './views/items/index.vue'
+import ItemsIndex from './views/items/Index.vue'
 import ItemCreate from './views/items/Create.vue'
 
 // Invoices

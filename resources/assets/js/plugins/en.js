@@ -549,6 +549,16 @@ export default {
       action: 'Action',
       add_currency: 'Add Currency'
     },
+    mail: {
+      host: 'Mail Host',
+      port: 'Mail Port',
+      driver: 'Mail Driver',
+      password: 'Mail Password',
+      username: 'Mail Username',
+      mail_config: 'Mail Configuration',
+      encryption: 'Mail Encryption',
+      mail_config_desc: 'Below details will be used to update the mail environment. Also you can change the details anytime after logging in.'
+    },
     pdf: {
       title: 'PDF Setting',
       footer_text: 'Footer Text',
@@ -680,6 +690,7 @@ export default {
     username: 'Username',
     next: 'Next',
     continue: 'Continue',
+    skip: 'Skip',
     database: {
       database: 'Site URL & Database',
       connection: 'Database Connection',
@@ -750,7 +761,9 @@ export default {
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
     quantity_maxlength: 'Quantity should not be greater than 10 digits.',
     price_maxlength: 'Price should not be greater than 10 digits.',
+    price_minvalue: 'Price should be greater than 0 digits',
     amount_maxlength: 'Amount should not be greater than 10 digits.',
+    amount_minvalue: 'Amount should be greater than 0 digits',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',

@@ -113,7 +113,11 @@
         <h3 class="page-title">{{ $t('settings.preferences.discount_setting') }}</h3>
         <div class="flex-box">
           <div class="left">
-            <base-switch v-model="discount_per_item" class="btn-switch" @change="setDiscount" />
+            <base-switch
+              v-model="discount_per_item"
+              class="btn-switch"
+              @change="setDiscount"
+            />
           </div>
           <div class="right ml-15">
             <p class="box-title">  {{ $t('settings.preferences.discount_per_item') }} </p>

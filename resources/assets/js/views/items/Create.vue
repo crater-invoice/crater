@@ -34,16 +34,16 @@
                 <label>{{ $t('items.price') }}</label><span class="text-danger"> *</span>
                 <div class="base-input">
                   <money
-                    :invalid="$v.formData.price.$error"
+                    :class="{'invalid' : $v.formData.price.$error}"
                     v-model="price"
                     v-bind="defaultCurrencyForInput"
                     class="input-field"
-                    @input="$v.formData.price.$touch()"
                   />
                 </div>
                 <div v-if="$v.formData.price.$error">
                   <span v-if="!$v.formData.price.required" class="text-danger">{{ $t('validation.required') }} </span>
                   <span v-if="!$v.formData.price.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
+                  <span v-if="!$v.formData.price.minValue" class="text-danger">{{ $t('validation.price_minvalue') }}</span>
                 </div>
               </div>
               <div class="form-group">
@@ -92,7 +92,8 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
-const { required, minLength, numeric, alpha, minValue, maxLength} = require('vuelidate/lib/validators')
+const { required, minLength, numeric, alpha, minValue, maxLength } = require('vuelidate/lib/validators')
+
 export default {
   mixins: {
     validationMixin

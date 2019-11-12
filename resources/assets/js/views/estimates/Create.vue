@@ -688,7 +688,7 @@ export default {
           isValid = false
         }
       })
-      if (this.$v.newEstimate.$invalid === false && isValid === true) {
+      if (!this.$v.selectedCustomer.$invalid && this.$v.newEstimate.$invalid === false && isValid === true) {
         return true
       }
       return false

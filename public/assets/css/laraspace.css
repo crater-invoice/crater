@@ -18173,6 +18173,7 @@ fieldset[disabled] .multiselect {
 
 .reports .report-view-button {
   display: none;
+  color: #fff;
 }
 
 .reports .report-fields-container {
@@ -18208,8 +18209,13 @@ fieldset[disabled] .multiselect {
     display: none;
   }
 
+  .reports .report-submit-button-container {
+    display: none;
+  }
+
   .reports .report-view-button {
     display: flex;
+    color: #fff !important;
     justify-content: center;
   }
 

@@ -745,6 +745,7 @@ export default {
     invalid_url: 'Invalid url (ex: http://www.crater.com)',
     required: 'Field is required',
     email_incorrect: 'Incorrect Email.',
+    email_already_taken: 'The email has already been taken.',
     email_does_not_exist: "User with given email doesn't exist",
     send_reset_link: 'Send Reset Link',
     not_yet: 'Not yet? Send it again',

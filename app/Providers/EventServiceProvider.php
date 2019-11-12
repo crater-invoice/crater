@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Laraspace\Events\SomeEvent' => [
-            'Laraspace\Listeners\EventListener',
+        'Laraspace\Events\UpdateFinished' => [
+            'Laraspace\Listeners\Updates\V10\Version101',
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

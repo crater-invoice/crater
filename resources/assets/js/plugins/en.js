@@ -228,6 +228,10 @@ export default {
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
     conversion_message: 'Conversion successful',
+    confirm_send_estimate: 'This estimate will be sent via email to the customer',
+    confirm_mark_as_sent: 'This estimate will be marked as sent',
+    confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
+    confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
     errors: {
       required: 'Field is required'
@@ -624,6 +628,7 @@ export default {
       created_message: 'Sales tax created successfully',
       updated_message: 'Sales tax updated successfully',
       deleted_message: 'Sales tax deleted successfully',
+      confirm_delete: 'You will not be able to recover this Tax Type',
       already_in_use: 'Tax is already in use'
     },
     expense_category: {
@@ -636,6 +641,7 @@ export default {
       created_message: 'Category created successfully',
       deleted_message: 'Expense category deleted successfully',
       updated_message: 'Expense category updated successfully',
+      confirm_delete: 'You will not be able to recover this Expense Category',
       already_in_use: 'Category is already in use'
     },
     preferences: {

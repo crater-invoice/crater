@@ -228,12 +228,15 @@ export default {
     estimate_template: 'Plantilla de estimación',
     convert_to_invoice: 'Convertir a factura',
     mark_as_sent: 'Marcar como enviado',
-    send_estimate: 'Enviar presupuesto',
     record_payment: 'Registro de pago',
     add_estimate: 'Agregar presupuesto',
     save_estimate: 'Guardar estimación',
     confirm_conversion: '¿Quiere convertir esta estimación en factura?',
     conversion_message: 'Conversión exitosa',
+    confirm_send_estimate: 'Esta estimación se enviará por correo electrónico al cliente',
+    confirm_mark_as_sent: 'Esta estimación se marcará como enviada',
+    confirm_mark_as_accepted: 'Esta estimación se marcará como Aceptada',
+    confirm_mark_as_rejected: 'Esta estimación se marcará como Rechazada',
     errors: {
       required: 'Se requiere campo'
     },
@@ -613,6 +616,7 @@ export default {
       created_message: 'Impuesto sobre las ventas creado con éxito',
       updated_message: 'Impuesto sobre ventas actualizado con éxito',
       deleted_message: 'Impuesto sobre las ventas eliminado con éxito',
+      confirm_delete: 'No podrá recuperar este tipo de impuesto',
       already_in_use: 'El impuesto ya está en uso.'
     },
     expense_category: {
@@ -625,6 +629,7 @@ export default {
       created_message: 'Categoría creada con éxito',
       deleted_message: 'Categoría de gastos eliminada correctamente',
       updated_message: 'Categoría de gastos actualizada con éxito',
+      confirm_delete: 'No podrá recuperar esta categoría de gastos',
       already_in_use: 'La categoría ya está en uso.'
     },
     preferences: {

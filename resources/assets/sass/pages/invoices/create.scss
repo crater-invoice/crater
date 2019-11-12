@@ -490,7 +490,7 @@
             font-weight: 300;
             font-size: 12px;
             padding-top: 2px;
-            padding-left: 10px;
+            // padding-left: 10px;
 
             textarea {
 
@@ -504,6 +504,7 @@
                 border: none;
                 resize: none;
                 width: 100%;
+                padding-left: 11px;
                 color: $ls-color-gray--very-dark;
             }
         }

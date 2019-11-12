@@ -14115,7 +14115,7 @@ fieldset[disabled] .multiselect {
   display: block;
   position: relative;
   width: 100%;
-  min-height: 45px;
+  min-height: 40px;
   text-align: left;
   color: #35495e;
 }
@@ -16411,13 +16411,13 @@ fieldset[disabled] .multiselect {
   font-weight: 300;
   font-size: 12px;
   padding-top: 2px;
-  padding-left: 10px;
 }
 
 .invoice-create-page .item-row .item-description textarea {
   border: none;
   resize: none;
   width: 100%;
+  padding-left: 11px;
   color: #595959;
 }
 

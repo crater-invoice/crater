@@ -224,6 +224,7 @@ export default {
     action: 'Acción',
     notes: 'Notas',
     tax: 'Impuesto',
+    send_estimate: 'Enviar presupuesto',
     estimate_template: 'Plantilla de estimación',
     convert_to_invoice: 'Convertir a factura',
     mark_as_sent: 'Marcar como enviado',

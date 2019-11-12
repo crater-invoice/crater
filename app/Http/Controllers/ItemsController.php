@@ -79,7 +79,7 @@ class ItemsController extends Controller
             foreach ($request->taxes as $tax) {
                 $item->taxes()->updateOrCreate(
                     ['tax_type_id' => $tax['tax_type_id']],
-                    ['amount' => $tax['amount'], 'percent' => $tax['percent'], 'percent' => $tax['name']]
+                    ['amount' => $tax['amount'], 'percent' => $tax['percent'], 'name' => $tax['name']]
                 );
             }
         }

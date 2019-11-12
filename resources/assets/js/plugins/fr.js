@@ -673,7 +673,7 @@ export default {
     state: 'Etat',
     city: 'Ville',
     address: 'Adresse',
-    street: 'Street1 '| 'Rue # 2',
+    street: 'Street1 ' | 'Rue # 2',
     phone: 'Téléphone',
     zip_code: 'Code postal',
     go_back: 'Retourner',
@@ -681,7 +681,52 @@ export default {
     language: 'La langue',
     time_zone: 'Fuseau horaire',
     fiscal_year: 'Année financière',
-    date_format: 'Format de date'
+    date_format: 'Format de date',
+    from_address: "De l'adresse",
+    username: "Nom d'utilisateur",
+    next: 'Suivant',
+    continue: 'Continuer',
+    database: {
+      database: 'URL du site et base de données',
+      connection: 'Connexion à la base de données',
+      host: 'Hôte de base de données',
+      port: 'Port de base de données',
+      password: 'Mot de passe de base de données',
+      app_url: 'Application URL',
+      username: "Nom d'utilisateur de la base de données",
+      db_name: 'Nom de la base de données',
+      desc: "Créez une base de données sur votre serveur et définissez les informations d'identification à l'aide du formulaire ci-dessous."
+    },
+    permissions: {
+      permissions: 'Les permissions',
+      permission_desc: "Vous trouverez ci-dessous la liste des autorisations de dossier requises pour le fonctionnement de l'application. Si la vérification des autorisations échoue, veillez à mettre à jour vos autorisations de dossier."
+    },
+    mail: {
+      host: 'Mail Host',
+      port: 'Port mail',
+      driver: 'Pilote de courrier',
+      password: 'Mot de passe mail',
+      username: "Mail Nom d'utilisateur",
+      mail_config: 'Configuration du courrier',
+      encryption: 'Chiffrement du courrier',
+      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
+    },
+    req: {
+      system_req: 'Configuration requise',
+      php_req_version: 'Php (version {version} nécessaire)',
+      check_req: 'Vérifier les exigences',
+      system_req_desc: 'Crater a quelques exigences de serveur. Assurez-vous que votre serveur dispose de la version PHP requise et de toutes les extensions mentionnées ci-dessous.'
+    },
+    errors: {
+      migrate_failed: 'Migration impossible',
+      database_variables_save_error: 'Impossible de se connecter à la base de données avec les valeurs fournies.',
+      mail_variables_save_error: 'La configuration du courrier électronique a échoué.',
+      connection_failed: 'La connexion à la base de données a échoué'
+    },
+    success: {
+      mail_variables_save_successfully: 'Email configuré avec succès',
+      database_variables_save_successfully: 'Base de données configurée avec succès.'
+    }
   },
   layout_login: {
     copyright_crater: 'Copyright @ Crater - 2019',
@@ -712,7 +757,9 @@ export default {
     payment_greater_than_due_amount: 'Le paiement entré est plus que le montant dû de cette facture.',
     quantity_maxlength: 'La quantité ne doit pas dépasser 10 chiffres.',
     price_maxlength: 'Le prix ne doit pas dépasser 10 chiffres.',
+    price_minvalue: 'Le prix doit être supérieur à 0 chiffre',
     amount_maxlength: 'Le montant ne doit pas dépasser 10 chiffres.',
+    amount_minvalue: 'Le montant doit être supérieur à 0 chiffre',
     description_maxlength: 'La description ne doit pas dépasser 255 caractères.',
     maximum_options_error: 'Maximum de {max} options sélectionnées. Commencez par supprimer une option sélectionnée pour en sélectionner une autre.',
     notes_maxlength: 'Les notes ne doivent pas dépasser 255 caractères.',

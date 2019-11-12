@@ -126,6 +126,7 @@ export default {
       this.$emit('search', val)
     },
     openItemModal () {
+      this.$emit('onSelectItem')
       this.openModal({
         'title': 'Add Item',
         'componentName': 'ItemModal'

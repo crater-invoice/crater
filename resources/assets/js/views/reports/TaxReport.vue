@@ -48,7 +48,7 @@
     </div>
     <div class="col-sm-8 reports-tab-container">
       <iframe :src="getReportUrl" class="reports-frame-style"/>
-      <a :href="getReportUrl" class="base-button btn btn-primary btn-lg report-view-button" target="_blank">
+      <a class="base-button btn btn-primary btn-lg report-view-button" @click="viewReportsPDF">
         <font-awesome-icon icon="file-pdf" class="vue-icon icon-left svg-inline--fa fa-download fa-w-16 mr-2" /> <span>{{ $t('reports.view_pdf') }}</span>
       </a>
     </div>
@@ -178,6 +178,11 @@ export default {
     },
     setRangeToCustom () {
       this.selectedRange = 'Custom'
+    },
+    async viewReportsPDF () {
+      let data = await this.getReports()
+      window.open(this.getReportUrl, '_blank')
+      return data
     },
     async getReports (isDownload = false) {
       this.$v.range.$touch()

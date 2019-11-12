@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class UpdateFinished
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
 
     public $alias;
 

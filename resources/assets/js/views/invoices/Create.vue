@@ -591,7 +591,7 @@ export default {
     },
     openTemplateModal () {
       this.openModal({
-        'title': 'Choose a template',
+        'title': this.$t('general.choose_template'),
         'componentName': 'InvoiceTemplate',
         'data': this.invoiceTemplates
       })

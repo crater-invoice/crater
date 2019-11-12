@@ -49,7 +49,8 @@ export default {
     all: 'Todas',
     select_all: 'Seleccionar todo',
     choose_file: 'Haga clic aquí para elegir un archivo.',
-    choose_template: 'Escoger',
+    choose_template: 'Elige una plantilla',
+    choose: 'Escoger',
     remove: 'Eliminar',
     powered_by: 'Energizado por',
     bytefury: 'Bytefury',
@@ -186,6 +187,7 @@ export default {
     list_of_items: 'Esta sección contendrá la lista de artículos.',
     select_a_unit: 'seleccione unidad',
 
+    item_attached_message: 'No se puede eliminar un elemento que ya está en uso.',
     confirm_delete: 'No podrá recuperar este artículo | No podrás recuperar estos elementos',
     created_message: 'Artículo creado con éxito',
     updated_message: 'Artículo actualizado con éxito',
@@ -225,6 +227,7 @@ export default {
     estimate_template: 'Plantilla de estimación',
     convert_to_invoice: 'Convertir a factura',
     mark_as_sent: 'Marcar como enviado',
+    send_estimate: 'Enviar presupuesto',
     record_payment: 'Registro de pago',
     add_estimate: 'Agregar presupuesto',
     save_estimate: 'Guardar estimación',
@@ -331,6 +334,7 @@ export default {
       select_an_item: 'Escriba o haga clic para seleccionar un elemento',
       type_item_description: 'Tipo Elemento Descripción (opcional)'
     },
+    payment_attached_message: 'Una de las facturas seleccionadas ya tiene un pago adjunto. Asegúrese de eliminar primero los pagos adjuntos para continuar con la eliminación',
     confirm_delete: 'No podrá recuperar esta factura | No podrá recuperar estas facturas',
     created_message: 'Factura creada exitosamente',
     updated_message: 'Factura actualizada exitosamente',
@@ -597,6 +601,7 @@ export default {
     },
     tax_types: {
       title: 'Tipos de impuestos',
+      add_tax: 'Agregar impuesto',
       description: 'Puede agregar o eliminar impuestos a su gusto. Crater admite impuestos sobre artículos individuales, así como sobre la factura.',
       add_new_tax: 'Agregar nuevo impuesto',
       tax_settings: 'Configuraciones de impuestos',
@@ -699,13 +704,13 @@ export default {
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',
     payment_greater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.',
-    quantity_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
-    price_maxlength: 'El precio no debe tener más de 10 caracteres.',
-    amount_maxlength: 'La cantidad no debe ser mayor de 10 caracteres.',
+    quantity_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
+    price_maxlength: 'El precio no debe ser mayor de 10 dígitos.',
+    amount_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
     description_maxlength: 'La descripción no debe tener más de 255 caracteres.',
     maximum_options_error: 'Máximo de {max} opciones seleccionadas. Primero elimine una opción seleccionada para seleccionar otra.',
     notes_maxlength: 'Las notas no deben tener más de 255 caracteres.',
     address_maxlength: 'La dirección no debe tener más de 255 caracteres.',
-    ref_number_maxlength: 'El número de referencia no debe tener más de 10 caracteres.'
+    ref_number_maxlength: 'El número de referencia no debe tener más de 10 dígitos.'
   }
 }

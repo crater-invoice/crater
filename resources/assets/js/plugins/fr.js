@@ -49,7 +49,8 @@ export default {
     all: 'Tout',
     select_all: 'Tout sélectionner',
     choose_file: 'Cliquez ici pour choisir un fichier',
-    choose_template: 'Choisir',
+    choose_template: 'Choisissez un modèle',
+    choose: 'Choisir',
     remove: 'Retirer',
     powered_by: 'Alimenté par',
     bytefury: 'Bytefury',
@@ -186,6 +187,7 @@ export default {
     list_of_items: 'Cette section contiendra la liste des éléments.',
     select_a_unit: 'sélectionner lunité',
 
+    item_attached_message: 'Impossible de supprimer un élément déjà utilisé',
     confirm_delete: 'Vous ne pourrez pas récupérer cet article | Vous ne pourrez pas récupérer ces objets',
     created_message: 'Article créé avec succès',
     updated_message: 'Élément mis à jour avec succès',
@@ -225,6 +227,7 @@ export default {
     estimate_template: 'Modèle destimation',
     convert_to_invoice: 'Convertir en facture',
     mark_as_sent: 'Marquer comme envoyé',
+    send_estimate: 'Envoyer une estimation',
     record_payment: 'Record de paiement',
     add_estimate: 'Ajouter une estimation',
     save_estimate: 'Sauvegarder lestimation',
@@ -331,6 +334,7 @@ export default {
       select_an_item: 'Tapez ou cliquez pour sélectionner un élément',
       type_item_description: 'Type Item Description (optionnel)'
     },
+    payment_attached_message: "Un paiement est déjà associé à l'une des factures sélectionnées. Assurez-vous d’effacer d’abord les paiements en pièce jointe afin de procéder à la suppression.",
     confirm_delete: 'Vous ne pourrez pas récupérer cette facture | Vous ne pourrez pas récupérer ces factures',
     created_message: 'Facture créée avec succès',
     updated_message: 'Facture mise à jour avec succès',
@@ -597,6 +601,7 @@ export default {
     },
     tax_types: {
       title: 'Types de taxe',
+      add_tax: 'Ajouter une taxe',
       description: 'Vous pouvez ajouter ou supprimer des taxes à votre guise. Crater prend en charge les taxes sur les articles individuels ainsi que sur la facture.',
       add_new_tax: 'Ajouter une nouvelle taxe',
       tax_settings: 'Paramètres de taxe',
@@ -690,7 +695,7 @@ export default {
     not_yet: 'Pas encore? Envoyer à nouveau',
     password_min_length: 'Le mot de passe doit contenir {nombre} caractères',
     name_min_length: 'Le nom doit avoir au moins {count} lettres.',
-    enter_valid_tax_rate: 'Enter valid tax rate',
+    enter_valid_tax_rate: 'Entrez un taux de taxe valide',
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
@@ -699,13 +704,13 @@ export default {
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',
     payment_greater_than_due_amount: 'Le paiement entré est plus que le montant dû de cette facture.',
-    quantity_maxlength: 'La quantité ne doit pas dépasser 10 caractères.',
-    price_maxlength: 'Le prix ne doit pas dépasser 10 caractères.',
-    amount_maxlength: 'Le montant ne doit pas dépasser 10 caractères.',
+    quantity_maxlength: 'La quantité ne doit pas dépasser 10 chiffres.',
+    price_maxlength: 'Le prix ne doit pas dépasser 10 chiffres.',
+    amount_maxlength: 'Le montant ne doit pas dépasser 10 chiffres.',
     description_maxlength: 'La description ne doit pas dépasser 255 caractères.',
     maximum_options_error: 'Maximum de {max} options sélectionnées. Commencez par supprimer une option sélectionnée pour en sélectionner une autre.',
     notes_maxlength: 'Les notes ne doivent pas dépasser 255 caractères.',
     address_maxlength: "L'adresse ne doit pas dépasser 255 caractères.",
-    ref_number_maxlength: 'Le numéro de référence ne doit pas dépasser 10 caractères'
+    ref_number_maxlength: 'Le numéro de référence ne doit pas dépasser 10 chiffres.'
   }
 }

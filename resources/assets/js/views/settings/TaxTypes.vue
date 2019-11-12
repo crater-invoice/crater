@@ -34,7 +34,7 @@
         >
           <template slot-scope="row">
             <span>{{ $t('settings.tax_types.tax_name') }}</span>
-            <span class="tax-name">
+            <span class="tax-name mt-3">
               {{ row.name }}
             </span>
           </template>
@@ -159,13 +159,23 @@ export default {
       }
     },
     async removeTax (id, index) {
-      let response = await this.deleteTaxType(id)
-      if (response.data.success) {
-        window.toastr['success'](this.$t('settings.tax_types.deleted_message'))
-        this.id = null
-        this.$refs.table.refresh()
-        return true
-      }window.toastr['success'](this.$t('settings.tax_types.already_in_use'))
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('settings.tax_types.confirm_delete'),
+        icon: '/assets/icon/trash-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          let response = await this.deleteTaxType(id)
+          if (response.data.success) {
+            window.toastr['success'](this.$t('settings.tax_types.deleted_message'))
+            this.id = null
+            this.$refs.table.refresh()
+            return true
+          }window.toastr['error'](this.$t('settings.tax_types.already_in_use'))
+        }
+      })
     },
     openTaxModal () {
       this.openModal({

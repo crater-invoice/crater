@@ -92,13 +92,14 @@
                     <money
                       v-model="amount"
                       v-bind="defaultCurrencyForInput"
+                      :class="{'invalid' : $v.formData.amount.$error}"
                       class="input-field"
-                      @input="$v.formData.amount.$touch()"
                     />
                   </div>
                   <div v-if="$v.formData.amount.$error">
                     <span v-if="!$v.formData.amount.required" class="text-danger">{{ $t('validation.required') }}</span>
                     <span v-if="!$v.formData.amount.maxLength" class="text-danger">{{ $t('validation.amount_maxlength') }}</span>
+                    <span v-if="!$v.formData.amount.maxValue" class="text-danger">{{ $t('validation.amount_minvalue') }}</span>
                   </div>
                 </div>
                 <div class="form-group col-sm-6">

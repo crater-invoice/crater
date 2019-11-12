@@ -228,6 +228,10 @@ export default {
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
     conversion_message: 'Conversion successful',
+    confirm_send_estimate: 'This estimate will be sent via email to the customer',
+    confirm_mark_as_sent: 'This estimate will be marked as sent',
+    confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
+    confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
     errors: {
       required: 'Field is required'
@@ -551,6 +555,16 @@ export default {
       action: 'Action',
       add_currency: 'Add Currency'
     },
+    mail: {
+      host: 'Mail Host',
+      port: 'Mail Port',
+      driver: 'Mail Driver',
+      password: 'Mail Password',
+      username: 'Mail Username',
+      mail_config: 'Mail Configuration',
+      encryption: 'Mail Encryption',
+      mail_config_desc: 'Below details will be used to update the mail environment. Also you can change the details anytime after logging in.'
+    },
     pdf: {
       title: 'PDF Setting',
       footer_text: 'Footer Text',
@@ -616,6 +630,7 @@ export default {
       created_message: 'Sales tax created successfully',
       updated_message: 'Sales tax updated successfully',
       deleted_message: 'Sales tax deleted successfully',
+      confirm_delete: 'You will not be able to recover this Tax Type',
       already_in_use: 'Tax is already in use'
     },
     expense_category: {
@@ -628,6 +643,7 @@ export default {
       created_message: 'Category created successfully',
       deleted_message: 'Expense category deleted successfully',
       updated_message: 'Expense category updated successfully',
+      confirm_delete: 'You will not be able to recover this Expense Category',
       already_in_use: 'Category is already in use'
     },
     preferences: {
@@ -682,6 +698,7 @@ export default {
     username: 'Username',
     next: 'Next',
     continue: 'Continue',
+    skip: 'Skip',
     database: {
       database: 'Site URL & Database',
       connection: 'Database Connection',
@@ -752,7 +769,9 @@ export default {
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
     quantity_maxlength: 'Quantity should not be greater than 10 digits.',
     price_maxlength: 'Price should not be greater than 10 digits.',
+    price_minvalue: 'Price should be greater than 0 digits',
     amount_maxlength: 'Amount should not be greater than 10 digits.',
+    amount_minvalue: 'Amount should be greater than 0 digits',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',

@@ -34,7 +34,7 @@
         >
           <template slot-scope="row">
             <span>{{ $t('settings.tax_types.tax_name') }}</span>
-            <span class="tax-name">
+            <span class="tax-name mt-3">
               {{ row.name }}
             </span>
           </template>

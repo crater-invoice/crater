@@ -228,10 +228,10 @@ export default {
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
     conversion_message: 'Conversion successful',
-    confirm_send_estimate: 'You want to send this Estimate?',
-    confirm_mark_as_sent: 'You want to mark this estimate as sent?',
-    confirm_mark_as_accepted: 'You want to mark this estimate as accepted?',
-    confirm_mark_as_rejected: 'You want to mark this estimate as rejected?',
+    confirm_send_estimate: 'This estimate will be sent via email to the customer',
+    confirm_mark_as_sent: 'This estimate will be marked as sent',
+    confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
+    confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
     errors: {
       required: 'Field is required'

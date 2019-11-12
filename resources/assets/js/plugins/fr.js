@@ -233,10 +233,10 @@ export default {
     save_estimate: 'Sauvegarder lestimation',
     confirm_conversion: 'Vous souhaitez convertir cette estimation en facture?',
     conversion_message: 'Conversion réussie',
-    confirm_send_estimate: 'Vous voulez envoyer cette estimation?',
-    confirm_mark_as_sent: 'Vous souhaitez marquer cette estimation comme envoyée?',
-    confirm_mark_as_accepted: 'Vous souhaitez marquer cette estimation comme acceptée?',
-    confirm_mark_as_rejected: 'Vous souhaitez marquer cette estimation comme rejetée?',
+    confirm_send_estimate: 'Cette estimation sera envoyée par courrier électronique au client.',
+    confirm_mark_as_sent: 'Cette estimation sera marquée comme envoyé',
+    confirm_mark_as_accepted: 'Cette estimation sera marquée comme acceptée',
+    confirm_mark_as_rejected: 'Cette estimation sera marquée comme Rejetée',
     errors: {
       required: 'Champ requis'
     },

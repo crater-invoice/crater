@@ -173,7 +173,7 @@ export default {
             this.id = null
             this.$refs.table.refresh()
             return true
-          }window.toastr['success'](this.$t('settings.tax_types.already_in_use'))
+          }window.toastr['error'](this.$t('settings.tax_types.already_in_use'))
         }
       })
     },

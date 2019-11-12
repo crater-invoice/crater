@@ -43,7 +43,7 @@
                 <div v-if="$v.formData.price.$error">
                   <span v-if="!$v.formData.price.required" class="text-danger">{{ $t('validation.required') }} </span>
                   <span v-if="!$v.formData.price.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
-                  <span v-if="!$v.formData.price.minValue" class="text-danger">{{ $t('validation.price_minValue') }}</span>
+                  <span v-if="!$v.formData.price.minValue" class="text-danger">{{ $t('validation.price_minvalue') }}</span>
                 </div>
               </div>
               <div class="form-group">

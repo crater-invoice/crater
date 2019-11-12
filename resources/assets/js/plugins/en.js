@@ -522,8 +522,7 @@ export default {
       preferences: 'Preferences',
       notifications: 'Notifications',
       tax_types: 'Tax Types',
-      expense_category: 'Expense Categories',
-      mail_configuration: 'Mail Configuration'
+      expense_category: 'Expense Categories'
     },
     title: 'Settings',
     setting: 'Settings | Settings',
@@ -647,10 +646,6 @@ export default {
       select_time_zone: 'select Time Zone',
       select_date_formate: 'select Date Formate',
       select_financial_year: 'select financial year'
-    },
-    mail_configuration: {
-      mail_confiuration: 'Mail Configuration | Mail Configurations',
-      description: 'Below details will be used to create the main Administrator account. Also you can change the details anytime after logging in.'
     }
   },
   wizard: {
@@ -755,6 +750,7 @@ export default {
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
     quantity_maxlength: 'Quantity should not be greater than 10 digits.',
     price_maxlength: 'Price should not be greater than 10 digits.',
+    price_minvalue: 'Price should be greater than 0 digits',
     amount_maxlength: 'Amount should not be greater than 10 digits.',
     amount_minvalue: 'Amount should be greater than 0 digits',
     description_maxlength: 'Description should not be greater than 255 characters.',

@@ -519,14 +519,6 @@ export default {
     ...mapActions('item', [
       'fetchItems'
     ]),
-    isEmpty (obj) {
-      for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          return false
-        }
-      }
-      return true
-    },
     selectFixed () {
       if (this.newInvoice.discount_type === 'fixed') {
         return

@@ -249,25 +249,25 @@
                   {{ $t('estimates.convert_to_invoice') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item>
+              <v-dropdown-item v-if="row.status !== 'SENT'">
                 <a class="dropdown-item" href="#" @click.self="onMarkAsSent(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_sent') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item>
+              <v-dropdown-item v-if="row.status !== 'SENT'">
                 <a class="dropdown-item" href="#" @click.self="sendEstimate(row.id)">
                   <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
                   {{ $t('estimates.send_estimate') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status === 'DRAFT'">
+              <v-dropdown-item v-if="row.status === 'DRAFT' || row.status === 'REJECTED'">
                 <a class="dropdown-item" href="#" @click.self="onMarkAsAccepted(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_accepted') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status === 'DRAFT'">
+              <v-dropdown-item v-if="row.status === 'ACCEPTED' || row.status === 'DRAFT'">
                 <a class="dropdown-item" href="#" @click.self="onMarkAsRejected(row.id)">
                   <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
                   {{ $t('estimates.mark_as_rejected') }}
@@ -409,28 +409,48 @@ export default {
       }
     },
     async onMarkAsAccepted (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsAccepted(data)
-      this.refreshTable()
-      if (response.data) {
-        this.filters.status = 'ACCEPTED'
-        this.$refs.table.refresh()
-        window.toastr['success'](this.$tc('estimates.marked_as_accepted_message'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_accepted'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (markedAsRejected) => {
+        if (markedAsRejected) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsAccepted(data)
+          this.refreshTable()
+          if (response.data) {
+            this.filters.status = 'ACCEPTED'
+            this.$refs.table.refresh()
+            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
+          }
+        }
+      })
     },
     async onMarkAsRejected (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsRejected(data)
-      this.refreshTable()
-      if (response.data) {
-        this.filters.status = 'REJECTED'
-        this.$refs.table.refresh()
-        window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_rejected'),
+        icon: '/assets/icon/times-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (markedAsRejected) => {
+        if (markedAsRejected) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsRejected(data)
+          this.refreshTable()
+          if (response.data) {
+            this.filters.status = 'REJECTED'
+            this.$refs.table.refresh()
+            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
+          }
+        }
+      })
     },
     setFilters () {
       this.filtersApplied = true
@@ -470,7 +490,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 1),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -491,7 +511,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
-        icon: 'error',
+        icon: '/assets/icon/envelope-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -510,7 +530,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 2),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -536,24 +556,44 @@ export default {
       this.refreshTable()
     },
     async onMarkAsSent (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsSent(data)
-      this.refreshTable()
-      if (response.data) {
-        window.toastr['success'](this.$tc('estimates.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsSent(data)
+          this.refreshTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+          }
+        }
+      })
     },
     async sendEstimate (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.sendEmail(data)
-      this.refreshTable()
-      if (response.data) {
-        window.toastr['success'](this.$tc('estimates.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_send_estimate'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (sendEstimate) => {
+        if (sendEstimate) {
+          const data = {
+            id: id
+          }
+          let response = await this.sendEmail(data)
+          this.refreshTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+          }
+        }
+      })
     }
   }
 }

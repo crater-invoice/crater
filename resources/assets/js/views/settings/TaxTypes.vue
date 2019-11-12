@@ -161,15 +161,15 @@ export default {
     async removeTax (id, index) {
       let response = await this.deleteTaxType(id)
       if (response.data.success) {
-        window.toastr['success'](this.$t('settings.sales_taxes.deleted_message'))
+        window.toastr['success'](this.$t('settings.tax_types.deleted_message'))
         this.id = null
         this.$refs.table.refresh()
         return true
-      }window.toastr['success'](this.$t('settings.sales_taxes.already_in_use'))
+      }window.toastr['success'](this.$t('settings.tax_types.already_in_use'))
     },
     openTaxModal () {
       this.openModal({
-        'title': 'Add Tax',
+        'title': this.$t('settings.tax_types.add_tax'),
         'componentName': 'TaxTypeModal'
       })
       this.$refs.table.refresh()

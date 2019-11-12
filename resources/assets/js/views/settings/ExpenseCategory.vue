@@ -101,13 +101,23 @@ export default {
       'deleteCategory'
     ]),
     async removeExpenseCategory (id, index) {
-      let response = await this.deleteCategory(id)
-      if (response.data.success) {
-        window.toastr['success'](this.$tc('settings.expense_category.deleted_message'))
-        this.id = null
-        this.$refs.table.refresh()
-        return true
-      } window.toastr['success'](this.$t('settings.expense_category.already_in_use'))
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('settings.expense_category.confirm_delete'),
+        icon: '/assets/icon/trash-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          let response = await this.deleteCategory(id)
+          if (response.data.success) {
+            window.toastr['success'](this.$tc('settings.expense_category.deleted_message'))
+            this.id = null
+            this.$refs.table.refresh()
+            return true
+          } window.toastr['success'](this.$t('settings.expense_category.already_in_use'))
+        }
+      })
     },
     openCategoryModal () {
       this.openModal({

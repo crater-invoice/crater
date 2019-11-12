@@ -233,6 +233,10 @@ export default {
     save_estimate: 'Guardar estimación',
     confirm_conversion: '¿Quiere convertir esta estimación en factura?',
     conversion_message: 'Conversión exitosa',
+    confirm_send_estimate: '¿Quieres enviar este presupuesto?',
+    confirm_mark_as_sent: '¿Desea marcar esta estimación como enviada?',
+    confirm_mark_as_accepted: '¿Quiere marcar esta estimación como aceptada?',
+    confirm_mark_as_rejected: '¿Desea marcar esta estimación como rechazada?',
     errors: {
       required: 'Se requiere campo'
     },
@@ -614,6 +618,7 @@ export default {
       created_message: 'Impuesto sobre las ventas creado con éxito',
       updated_message: 'Impuesto sobre ventas actualizado con éxito',
       deleted_message: 'Impuesto sobre las ventas eliminado con éxito',
+      confirm_delete: 'No podrá recuperar este tipo de impuesto',
       already_in_use: 'El impuesto ya está en uso.'
     },
     expense_category: {
@@ -626,6 +631,7 @@ export default {
       created_message: 'Categoría creada con éxito',
       deleted_message: 'Categoría de gastos eliminada correctamente',
       updated_message: 'Categoría de gastos actualizada con éxito',
+      confirm_delete: 'No podrá recuperar esta categoría de gastos',
       already_in_use: 'La categoría ya está en uso.'
     },
     preferences: {

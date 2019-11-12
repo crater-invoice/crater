@@ -358,7 +358,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete'),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -378,7 +378,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete', 2),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {

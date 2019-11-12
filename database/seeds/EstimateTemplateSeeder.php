@@ -13,19 +13,19 @@ class EstimateTemplateSeeder extends Seeder
     public function run()
     {
         EstimateTemplate::create([
-            'name' => 'Estimate Template1',
+            'name' => 'Template 1',
             'view' => 'estimate1',
             'path' => '/assets/img/PDF/Template1.png'
         ]);
 
         EstimateTemplate::create([
-            'name' => 'Estimate Template2',
+            'name' => 'Template 2',
             'view' => 'estimate2',
             'path' => '/assets/img/PDF/Template2.png'
         ]);
 
         EstimateTemplate::create([
-            'name' => 'Estimate Template3',
+            'name' => 'Template 3',
             'view' => 'estimate3',
             'path' => '/assets/img/PDF/Template3.png'
         ]);

@@ -30,7 +30,7 @@ class CreateTaxesTable extends Migration
             $table->integer('company_id')->unsigned()->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('name');
-            $table->decimal('amount', 15, 0);
+            $table->unsignedBigInteger('amount');
             $table->decimal('percent', 5, 2);
             $table->tinyInteger('compound_tax')->default(0);
             $table->timestamps();

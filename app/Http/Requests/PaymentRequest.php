@@ -26,7 +26,7 @@ class PaymentRequest extends FormRequest
             'payment_date' => 'required',
             'payment_number' => 'required|unique:payments,payment_number',
             'user_id' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|digits_between:1,20',
         ];
 
         if ($this->getMethod() == 'PUT') {

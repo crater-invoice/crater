@@ -35,6 +35,8 @@
             <div v-if="$v.formData.price.$error">
               <span v-if="!$v.formData.price.required" class="text-danger">{{ $tc('validation.required') }}</span>
               <span v-if="!$v.formData.price.numeric" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
+              <span v-if="!$v.formData.price.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
+              <span v-if="!$v.formData.price.minValue" class="text-danger">{{ $t('validation.price_minValue') }}</span>
             </div>
           </div>
         </div>
@@ -138,7 +140,8 @@ export default {
       price: {
         required,
         numeric,
-        minValue: minValue(0.1)
+        minValue: minValue(0.1),
+        maxLength: maxLength(10)
       },
       description: {
         maxLength: maxLength(255)

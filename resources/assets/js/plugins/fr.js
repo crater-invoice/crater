@@ -752,7 +752,7 @@ export default {
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
-    password_length: 'Le mot de passe doit comporter 6 caractères.',
+    password_length: 'Le mot de passe doit comporter 5 caractères.',
     qty_must_greater_than_zero: 'La quantité doit être supérieure à zéro.',
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',

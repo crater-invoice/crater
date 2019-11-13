@@ -4,20 +4,21 @@ namespace Laraspace\Space;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Laraspace\Setting;
 
 trait SiteApi
 {
 
     protected static function getRemote($url, $data = array())
     {
-        $base = 'https://codeload.github.com/';
+        $base = 'http://download-test.test/';
 
         $client = new Client(['verify' => false, 'base_uri' => $base]);
 
         $headers['headers'] = array(
             'Accept'        => 'application/json',
             'Referer'       => url('/'),
-            'crater'        => getFullVersion()
+            'crater'        => Setting::getSetting('version')
         );
 
         $data['http_errors'] = false;

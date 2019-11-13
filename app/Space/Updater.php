@@ -17,9 +17,9 @@ class Updater
         $data = null;
         $path = null;
 
-        $url = 'laraspace/laraspace/zip/master';
+        $url = '/api/download';
 
-        $response = static::getRemote($url, ['timeout' => 50, 'track_redirects' => true]);
+        $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
         // Exception
         if ($response instanceof RequestException) {

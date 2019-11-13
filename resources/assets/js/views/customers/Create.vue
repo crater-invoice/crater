@@ -219,7 +219,7 @@
             </div>
           </div>
           <hr> <!-- second row complete  -->
-          <div class="row same-address-checkbox-container">
+          <div class="same-address-checkbox-container">
             <div class="p-1">
               <base-button ref="sameAddress" icon="copy" color="theme" class="btn-sm" @click="copyAddress(true)">
                 {{ $t('customers.copy_billing_address') }}

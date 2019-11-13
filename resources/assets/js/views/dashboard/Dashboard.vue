@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main-content">
+  <div id="app" class="main-content dashboard">
     <div class="row">
       <div class="dash-item col-sm-6">
         <router-link slot="item-title" to="/admin/invoices">
@@ -177,7 +177,7 @@
             <table-column
               :sortable="false"
               :filterable="false"
-              cell-class="action-dropdown no-click"
+              cell-class="action-dropdown dashboard-recent-invoice-options no-click"
             >
               <template slot-scope="row">
                 <v-dropdown>

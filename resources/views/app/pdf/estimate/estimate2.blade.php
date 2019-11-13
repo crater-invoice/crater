@@ -142,6 +142,7 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
+            width: 170px;
         }
         .bill-user-phone {
             font-style: normal;
@@ -190,6 +191,7 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
+            width: 170px;
         }
 
         .ship-user-phone {

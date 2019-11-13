@@ -247,13 +247,13 @@
                   {{ $t('invoices.view') }}
                 </router-link>
               </v-dropdown-item>
-              <v-dropdown-item>
+              <v-dropdown-item v-if="row.status == 'DRAFT'">
                 <a class="dropdown-item" href="#" @click="sendInvoice(row.id)" >
                   <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
                   {{ $t('invoices.send_invoice') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status === 'DRAFT'">
+              <v-dropdown-item v-if="row.status == 'DRAFT'">
                 <a class="dropdown-item" href="#" @click="sentInvoice(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('invoices.mark_as_sent') }}
@@ -384,24 +384,44 @@ export default {
       'fetchCustomers'
     ]),
     async sendInvoice (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.sendEmail(data)
-      this.refreshTable()
-      if (response.data) {
-        window.toastr['success'](this.$tc('invoices.send_invoice'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.confirm_send'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (Send_Invoice) => {
+        if (Send_Invoice) {
+          const data = {
+            id: id
+          }
+          let response = await this.sendEmail(data)
+          this.refreshTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.send_invoice'))
+          }
+        }
+      })
     },
     async sentInvoice (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsSent(data)
-      this.refreshTable()
-      if (response.data) {
-        window.toastr['success'](this.$tc('invoices.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.invoice_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (MarkAsSend_Invoice) => {
+        if (MarkAsSend_Invoice) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsSent(data)
+          this.refreshTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.mark_as_sent'))
+          }
+        }
+      })
     },
     getStatus (val) {
       this.filters.status = {

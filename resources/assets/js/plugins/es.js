@@ -312,6 +312,8 @@ export default {
     invoice_template: 'Plantilla de factura',
     template: 'Modelo',
     mark_as_sent: 'Marcar como enviado',
+    invoice_mark_as_sent: 'Esta factura se marcará como enviada',
+    confirm_send: 'Estas facturas se enviarán por correo electrónico al cliente.',
     invoice_date: 'Fecha de la factura',
     record_payment: 'Registro de pago',
     add_new_invoice: 'Añadir nueva factura',

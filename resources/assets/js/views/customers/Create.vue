@@ -219,7 +219,7 @@
             </div>
           </div>
           <hr> <!-- second row complete  -->
-          <div class="row same-address-checkbox-container">
+          <div class="same-address-checkbox-container">
             <div class="p-1">
               <base-button ref="sameAddress" icon="copy" color="theme" class="btn-sm" @click="copyAddress(true)">
                 {{ $t('customers.copy_billing_address') }}
@@ -624,17 +624,20 @@ export default {
           this.isLoading = true
           this.formData.currency_id = this.currency.id
         }
-
-        let response = await this.addCustomer(this.formData)
-
-        if (response.data.success) {
-          window.toastr['success'](this.$t('customers.created_message'))
-          this.$router.push('/admin/customers')
-          this.isLoading = false
-          return true
+        try {
+          let response = await this.addCustomer(this.formData)
+          if (response.data.success) {
+            window.toastr['success'](this.$t('customers.created_message'))
+            this.$router.push('/admin/customers')
+            this.isLoading = false
+            return true
+          }
+        } catch (err) {
+          if (err.response.data.errors.email) {
+            this.isLoading = false
+            window.toastr['error'](this.$t('validation.email_already_taken'))
+          }
         }
-
-        window.toastr['error'](response.data.error)
       }
     },
     async fetchBillingState () {

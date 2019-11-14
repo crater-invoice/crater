@@ -76,8 +76,6 @@ class Updater
         File::deleteDirectory($temp_path);
         File::deleteDirectory($temp_path2);
 
-        Artisan::call('cache:clear');
-
         try {
             event(new UpdateFinished($alias, $installed, $version));
 

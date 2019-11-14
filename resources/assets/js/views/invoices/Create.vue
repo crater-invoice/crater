@@ -554,6 +554,8 @@ export default {
         if (response.data) {
           this.selectCustomer(response.data.invoice.user_id)
           this.newInvoice = response.data.invoice
+          this.newInvoice.invoice_date = moment(response.data.invoice.invoice_date, 'YYYY-MM-DD').toString()
+          this.newInvoice.due_date = moment(response.data.invoice.due_date, 'YYYY-MM-DD').toString()
           this.discountPerItem = response.data.discount_per_item
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency

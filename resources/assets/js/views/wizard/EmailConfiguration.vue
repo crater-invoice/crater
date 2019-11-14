@@ -61,7 +61,7 @@
           <base-input
             :invalid="$v.mailConfigData.mail_password.$error"
             v-model.trim="mailConfigData.mail_password"
-            type="mail_password"
+            type="password"
             name="name"
             @input="$v.mailConfigData.mail_password.$touch()"
           />

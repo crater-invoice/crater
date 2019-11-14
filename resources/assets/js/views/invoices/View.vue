@@ -252,7 +252,7 @@ export default {
       swal({
         title: 'Deleted',
         text: 'you will not be able to recover this invoice!',
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {

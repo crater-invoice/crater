@@ -554,7 +554,17 @@ export default {
       right: 'Droite',
       left: 'La gauche',
       action: 'action',
-      add_currency: 'Ajouter une devise',
+      add_currency: 'Ajouter une devise'
+    },
+    mail: {
+      host: 'Mail Host',
+      port: 'Port mail',
+      driver: 'Pilote de courrier',
+      password: 'Mot de passe mail',
+      username: "Mail Nom d'utilisateur",
+      mail_config: 'Configuration du courrier',
+      encryption: 'Chiffrement du courrier',
+      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
     },
     pdf: {
       title: 'Paramètre PDF',

@@ -556,6 +556,16 @@ export default {
       action: 'Acción',
       add_currency: 'Agregar moneda'
     },
+    mail: {
+      host: 'Host de correo',
+      port: 'Puerto de correo',
+      driver: 'Conductor de correo',
+      password: 'Contraseña de correo',
+      username: 'Nombre de usuario de correo',
+      mail_config: 'Configuración de correo',
+      encryption: 'Cifrado de correo',
+      mail_config_desc: 'Los detalles a continuación se utilizarán para actualizar el entorno de correo. También puede cambiar los detalles en cualquier momento después de iniciar sesión.'
+    },
     pdf: {
       title: 'Configuración de PDF',
       footer_text: 'Texto de pie de página',
@@ -749,7 +759,7 @@ export default {
     numbers_only: 'Solo numeros.',
     characters_only: 'Solo personajes.',
     password_incorrect: 'Las contraseñas deben ser idénticas',
-    password_length: 'La contraseña debe tener 6 caracteres de longitud.',
+    password_length: 'La contraseña debe tener 5 caracteres de longitud.',
     qty_must_greater_than_zero: 'La cantidad debe ser mayor que cero.',
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',

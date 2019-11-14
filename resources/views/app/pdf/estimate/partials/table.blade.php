@@ -1,27 +1,32 @@
 <table width="100%" class="table2" cellspacing="0" border="0">
     <tr class="main-table-header">
+        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">#</th>
         @if($estimate->discount_per_item === 'NO')
             <th width="80%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
         @else
             <th width="40%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
         @endif
         <th width="17%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Quantity</th>
-        <th width="18%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 40px">Price</th>
+        <th width="18%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 40px">Price</th>
         @if($estimate->discount_per_item === 'YES')
-            <th width="10%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 10px">Discount</th>
+            <th width="10%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-left: 10px">Discount</th>
         @endif
         <th width="15%" class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
     </tr>
+    @php
+        $index = 1
+    @endphp
     @foreach ($estimate->items as $item)
         <tr class="item-details">
+            <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 20px; vertical-align: top;">{{$index}}</td>
             <td class="inv-item items" style="text-align: left; color: #040405;padding-left: 0px">
                 <span>{{ $item->name }}</span><br>
                 <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{{ $item->description }}</span>
             </td>
             <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 20px">{{$item->quantity}}</td>
-            <td class="inv-item items" style="text-align: left; color: #040405; padding-left: 40px">{{$item->price/100}}</td>
+            <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 40px">{{$item->price/100}}</td>
             @if($estimate->discount_per_item === 'YES')
-                <td class="inv-item items" style="text-align: left; color: #040405; padding-left: 10px">
+                <td class="inv-item items" style="text-align: right; color: #040405; padding-left: 10px">
                     @if($item->discount_type === 'fixed')
                         {{$item->discount_val/100}}
                     @endif
@@ -30,12 +35,15 @@
                     @endif
                 </td>
             @endif
-            <td class="inv-item items" style="text-align: right; color: #040405">{{$item->total/100}}</td>
+            <td class="inv-item items" style="text-align: right; color: #040405;">{{$item->total/100}}</td>
         </tr>
+        @php
+            $index += 1
+        @endphp
     @endforeach
 </table>
 
-<table width="100%" style="margin-left:420px" cellspacing="0px" border="0" class="table3">
+<table width="100%" cellspacing="0px" style="margin-left:420px" border="0" class="table3 @if(count($estimate->items) > 12) page-break @endif">
     <tr>
         <td class="no-borde" style="color: #55547A; padding-left:10px;  font-size:12px;">Subtotal</td>
         <td class="no-border items"

@@ -528,7 +528,8 @@ export default {
       preferences: 'Preferences',
       notifications: 'Notifications',
       tax_types: 'Tax Types',
-      expense_category: 'Expense Categories'
+      expense_category: 'Expense Categories',
+      update_app: 'Update App'
     },
     title: 'Settings',
     setting: 'Settings | Settings',
@@ -664,6 +665,11 @@ export default {
       select_time_zone: 'select Time Zone',
       select_date_formate: 'select Date Formate',
       select_financial_year: 'select financial year'
+    },
+    update_app: {
+      title: 'Update App',
+      description: 'update app description',
+      update: 'Update'
     }
   },
   wizard: {

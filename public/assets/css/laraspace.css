@@ -4636,57 +4636,6 @@ input[type=button].btn-block {
   display: none;
 }
 
-.navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.navbar-light .navbar-brand:hover,
-.navbar-light .navbar-brand:focus {
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.navbar-light .navbar-nav .nav-link.disabled {
-  color: rgba(0, 0, 0, 0.3);
-}
-
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
-.navbar-light .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.navbar-light .navbar-text {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.navbar-light .navbar-text a {
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.navbar-light .navbar-text a:hover,
-.navbar-light .navbar-text a:focus {
-  color: rgba(0, 0, 0, 0.9);
-}
-
 .navbar-dark .navbar-brand {
   color: #fff;
 }
@@ -11504,10 +11453,6 @@ code,
   align-items: center;
 }
 
-.swal-icon--custom {
-  height: 70px !important;
-}
-
 .site-header {
   background-color: #5851D8;
   height: 60px;
@@ -15112,10 +15057,6 @@ fieldset[disabled] .multiselect {
   color: #FB7178;
 }
 
-.dashboard .dashboard-table .table-component .dashboard-recent-invoice-options .dropdown-container {
-  margin: 10px 5px 0 -75px;
-}
-
 .dashbox {
   background-color: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -18325,6 +18266,8 @@ fieldset[disabled] .multiselect {
 
 .customer-create .same-address-checkbox-container {
   display: flex;
+  justify-content: flex-end;
+  padding-left: 12px;
   margin-bottom: 1.5rem;
   align-items: center;
   justify-content: flex-end;
@@ -18375,6 +18318,7 @@ fieldset[disabled] .multiselect {
   .customer-create .same-address-checkbox-container {
     display: flex;
     justify-content: flex-start;
+    padding-left: 15px;
     margin-bottom: 0rem;
   }
 

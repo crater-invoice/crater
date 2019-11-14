@@ -238,7 +238,14 @@ export default {
       return true
     },
     downloadReport () {
-      this.url += '&download=true'
+      if (!this.getReports()) {
+        return false
+      }
+      if (navigator.appVersion.indexOf('Mac') !== -1) {
+        this.url += '&download=true'
+      } else {
+        window.open(this.getReportUrl + '&download=true')
+      }
       setTimeout(() => {
         if (this.selectedType === 'By Customer') {
           this.url = `${this.customerSiteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`

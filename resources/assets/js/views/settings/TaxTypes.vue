@@ -28,6 +28,7 @@
         class="mb-3"
       >
         <table-column
+          :sortable="true"
           :label="$t('settings.tax_types.tax_name')"
           show="name"
         />

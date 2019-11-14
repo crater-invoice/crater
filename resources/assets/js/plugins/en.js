@@ -665,6 +665,8 @@ export default {
     update_app: {
       title: 'Update App',
       description: 'update app description',
+      check_update: 'Check for updates',
+      avail_update: 'Update available',
       update: 'Update'
     }
   },

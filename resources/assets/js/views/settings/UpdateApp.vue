@@ -6,9 +6,18 @@
         <p class="page-sub-title">
           {{ $t('settings.update_app.description') }}
         </p>
-        <base-button size="large" icon="sync-alt" color="theme" @click="onUpdateApp">
-          {{ $t('settings.update_app.update') }}
+        <p class="page-sub-title">Current version: 1.0.0</p>
+        <base-button size="large" color="theme" @click="checkUpdate">
+          <font-awesome-icon :class="{'update': isUpdateAvail}" style="margin-right: 5px;" icon="sync-alt" />
+          {{ $t('settings.update_app.check_update') }}
         </base-button>
+        <div v-if="isUpdateAvail" class="mt-4 content">
+          <label class="input-label">{{ $t('settings.update_app.avail_update') }}</label>
+          <p class="page-sub-title">Latest version: 2.0.0</p>
+          <base-button size="large" color="theme" @click="onUpdateApp">
+            {{ $t('settings.update_app.update') }}
+          </base-button>
+        </div>
         <div v-if="isShowProgressBar" class="progress mt-4">
           <div
             :style="[{'width': progress+'%'}]"
@@ -29,6 +38,7 @@ export default {
   data () {
     return {
       isShowProgressBar: false,
+      isUpdateAvail: false,
       progress: 10,
       interval: null
     }
@@ -49,7 +59,26 @@ export default {
         }
         this.progress += 10
       }, 250)
+    },
+    checkUpdate () {
+      this.isUpdateAvail = !this.isUpdateAvail
     }
   }
 }
 </script>
+
+<style scoped>
+.update {
+  transform: rotate(360deg);
+  animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

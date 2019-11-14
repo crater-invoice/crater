@@ -11,8 +11,6 @@ use Laraspace\Setting;
 
 class Version101 extends Listener
 {
-    const ALIAS = 'core';
-
     const VERSION = '1.0.1';
 
     /**

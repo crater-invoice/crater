@@ -14,8 +14,6 @@ class UpdateFinished
 {
     use Dispatchable;
 
-    public $alias;
-
     public $new;
 
     public $old;
@@ -25,9 +23,8 @@ class UpdateFinished
      *
      * @return void
      */
-    public function __construct($alias, $old, $new)
+    public function __construct($old, $new)
     {
-        $this->alias = $alias;
         $this->old   = $old;
         $this->new   = $new;
     }

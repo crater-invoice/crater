@@ -129,6 +129,11 @@ Route::group(['middleware' => 'api'], function () {
             'uses' => 'UpdateController@update'
         ]);
 
+        Route::get('/check/update', [
+            'as' => 'check.update',
+            'uses' => 'UpdateController@checkLatestVersion'
+        ]);
+
         Route::get('/bootstrap', [
             'as' => 'bootstrap',
             'uses' => 'UsersController@getBootstrap'

@@ -7,17 +7,18 @@ use Artisan;
 use GuzzleHttp\Exception\RequestException;
 use Laraspace\Space\SiteApi;
 use Laraspace\Events\UpdateFinished;
+use Laraspace\Setting;
 
 class Updater
 {
     use SiteApi;
 
-    public static function update($alias, $installed, $version)
+    public static function update($installed, $version)
     {
         $data = null;
         $path = null;
 
-        $url = '/api/download';
+        $url = '/download/'.$version;
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -68,7 +69,7 @@ class Updater
         // Delete zip file
         File::delete($file);
 
-        if (!File::copyDirectory($temp_path2, base_path())) {
+        if (!File::copyDirectory($temp_path2.'/crater', base_path())) {
             return false;
         }
 
@@ -77,7 +78,7 @@ class Updater
         File::deleteDirectory($temp_path2);
 
         try {
-            event(new UpdateFinished($alias, $installed, $version));
+            event(new UpdateFinished($installed, $version));
 
             return [
                 'success' => true,
@@ -91,5 +92,19 @@ class Updater
                 'data' => []
             ];
         }
+    }
+
+    public static function checkForUpdate()
+    {
+        $data = null;
+        $url = '/check/latest/download/'.Setting::getSetting('version');
+
+        $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
+
+        if ($response && ($response->getStatusCode() == 200)) {
+            $data = $response->getBody()->getContents();
+        }
+
+        return json_decode($data);
     }
 }

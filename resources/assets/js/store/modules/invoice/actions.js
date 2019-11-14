@@ -47,6 +47,7 @@ export const fetchViewInvoice = ({ commit, dispatch, state }, id) => {
 export const sendEmail = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/invoices/send`, data).then((response) => {
+      commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
       resolve(response)
     }).catch((err) => {
       reject(err)

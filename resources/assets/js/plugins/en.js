@@ -308,6 +308,7 @@ export default {
     invoice_template: 'Invoice Template',
     template: 'Template',
     mark_as_sent: 'Mark as sent',
+    confirm_send_invoice: 'This invoice will be sent via email to the customer',
     invoice_mark_as_sent: 'This invoice will be marked as sent',
     confirm_send: 'This invoice will be sent via email to the customer',
     invoice_date: 'Invoice Date',

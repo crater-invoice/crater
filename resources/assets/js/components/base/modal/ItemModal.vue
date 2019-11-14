@@ -3,7 +3,7 @@
     <form action="" @submit.prevent="submitItemData">
       <div class="card-body">
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">
+          <label class="col-sm-4 col-form-label input-label">
             {{ $t('items.name') }}<span class="required">*</span>
           </label>
           <div class="col-sm-7">
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">{{ $t('items.price') }}<span class="required">*</span></label>
+          <label class="col-sm-4 col-form-label input-label">{{ $t('items.price') }}<span class="required">*</span></label>
           <div class="col-sm-7">
             <div class="base-input">
               <money
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">{{ $t('items.unit') }}</label>
+          <label class="col-sm-4 col-form-label input-label">{{ $t('items.unit') }}</label>
           <div class="col-sm-7">
             <base-select
               v-model="formData.unit"
@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">{{ $t('items.description') }}</label>
+          <label class="col-sm-4 col-form-label input-label">{{ $t('items.description') }}</label>
           <div class="col-sm-7">
             <base-text-area
               v-model="formData.description"
@@ -121,7 +121,8 @@ export default {
         { name: 'kg', value: 'kg' },
         { name: 'km', value: 'km' },
         { name: 'lb', value: 'lb' },
-        { name: 'mg', value: 'mg' }
+        { name: 'mg', value: 'mg' },
+        { name: 'pc', value: 'pc ' }
       ],
       formData: {
         name: null,

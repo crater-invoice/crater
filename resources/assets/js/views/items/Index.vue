@@ -246,7 +246,7 @@ export default {
         { name: 'km', value: 'km' },
         { name: 'lb', value: 'lb' },
         { name: 'mg', value: 'mg' },
-        { name: 'pc', value: 'pc ' }
+        { name: 'pc', value: 'pc' }
       ],
       isRequestOngoing: true,
       filtersApplied: false,

@@ -5,6 +5,7 @@
       <div class="page-actions row">
         <div class="col-xs-2">
           <base-button
+            v-if="estimate.status !== 'SENT'"
             :loading="isRequestOnGoing"
             :disabled="isRequestOnGoing"
             :outline="true"
@@ -33,7 +34,7 @@
         </v-dropdown>
       </div>
     </div>
-    <div class="estimate-sidebar">
+    <div class="estimate-si debar">
       <base-loader v-if="isSearching" />
       <div v-else class="side-header">
         <base-input
@@ -144,6 +145,8 @@ export default {
         orderByField: null,
         searchText: null
       },
+      status: ['DRAFT', 'SENT', 'VIEWED', 'EXPIRED', 'ACCEPTED', 'REJECTED'],
+      isMarkAsSent: false,
       isRequestOnGoing: false,
       isSearching: false
     }
@@ -230,9 +233,9 @@ export default {
         dangerMode: true
       }).then(async (willMarkAsSent) => {
         if (willMarkAsSent) {
-          this.isRequestOnGoing = true
+          this.isMarkAsSent = true
           let response = await this.markAsSent({id: this.estimate.id})
-          this.isRequestOnGoing = false
+          this.isMarkAsSent = false
           if (response.data) {
             window.toastr['success'](this.$tc('estimates.mark_as_sent'))
           }

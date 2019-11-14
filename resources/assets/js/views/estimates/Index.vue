@@ -425,7 +425,7 @@ export default {
           if (response.data) {
             this.filters.status = 'ACCEPTED'
             this.$refs.table.refresh()
-            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
+            window.toastr['success'](this.$tc('estimates.confirm_mark_as_accepted'))
           }
         }
       })

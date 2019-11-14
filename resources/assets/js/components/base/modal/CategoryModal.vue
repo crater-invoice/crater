@@ -3,7 +3,7 @@
     <form action="" @submit.prevent="submitCategoryData">
       <div class="card-body">
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label">{{ $t('expenses.category') }}<span class="required text-danger">*</span></label>
+          <label class="col-sm-4 col-form-label input-label">{{ $t('expenses.category') }}<span class="required text-danger">*</span></label>
           <div class="col-sm-7">
             <base-input
               ref="name"

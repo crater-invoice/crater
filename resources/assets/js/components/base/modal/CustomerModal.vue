@@ -7,7 +7,7 @@
           <tab id="basic-home" :name="$t('customers.basic_info')">
             <div class="basic-info">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.display_name') }} <span class="required">*</span></label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.display_name') }} <span class="required">*</span></label>
                 <div class="col-sm-7">
                   <base-input
                     ref="name"
@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.primary_display_name') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.primary_display_name') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="formData.contact_name"
@@ -34,7 +34,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('login.email') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('login.email') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     :invalid="$v.formData.email.$error"
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $tc('settings.currencies.currency') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $tc('settings.currencies.currency') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="currency"
@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     :invalid="$v.formData.phone.$error"
@@ -79,7 +79,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.website') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.website') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="formData.website"
@@ -100,7 +100,7 @@
           <tab id="basic-profile" :name="$t('customers.billing_address')">
             <div class="basic-info">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.name') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.name') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="billing.name"
@@ -110,7 +110,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     :invalid="$v.billing.phone.$error"
@@ -126,7 +126,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.address') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.address') }}</label>
                 <div class="col-sm-7">
                   <base-text-area
                     v-model="billing.address_street_1"
@@ -155,7 +155,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.country') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.country') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="billingCountry"
@@ -171,7 +171,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.state') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.state') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="billingState"
@@ -187,7 +187,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.city') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.city') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="billingCity"
@@ -213,7 +213,7 @@
               </div> -->
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.zip_code') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.zip_code') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="billing.zip"
@@ -236,7 +236,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.name') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.name') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="shipping.name"
@@ -246,7 +246,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.phone') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     :invalid="$v.shipping.phone.$error"
@@ -262,7 +262,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.address') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.address') }}</label>
                 <div class="col-sm-7">
                   <base-text-area
                     v-model="shipping.address_street_1"
@@ -291,7 +291,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.country') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.country') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="shippingCountry"
@@ -307,7 +307,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.state') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.state') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="shippingState"
@@ -323,7 +323,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.city') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.city') }}</label>
                 <div class="col-sm-7">
                   <base-select
                     v-model="shippingCity"
@@ -339,7 +339,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">{{ $t('customers.zip_code') }}</label>
+                <label class="col-sm-4 col-form-label input-label">{{ $t('customers.zip_code') }}</label>
                 <div class="col-sm-7">
                   <base-input
                     v-model="shipping.zip"

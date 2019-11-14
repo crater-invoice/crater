@@ -34,3 +34,20 @@
     }
 
 }
+
+
+@media(max-width: $x-small-breakpoint ) {
+
+    .base-modal {
+
+        .customer-modal {
+
+            .input-label {
+                text-align: left;
+            }
+
+        }
+
+    }
+
+}

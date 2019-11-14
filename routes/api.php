@@ -323,6 +323,21 @@ Route::group(['middleware' => 'api'], function () {
                 'uses' => 'CompanyController@updateSetting'
             ]);
 
+            Route::get('/environment/mail', [
+                'as' => 'admin.environment.mail',
+                'uses' => 'EnvironmentController@getMailDrivers'
+            ]);
+
+            Route::get('/environment/mail-env', [
+                'as' => 'admin.mail.env',
+                'uses' => 'EnvironmentController@getMailEnvironment'
+            ]);
+
+            Route::post('/environment/mail', [
+                'as' => 'admin.environment.mail.save',
+                'uses' => 'EnvironmentController@saveMailEnvironment'
+            ]);
+
         });
 
     });

@@ -529,7 +529,8 @@ export default {
       preferences: 'Préférences',
       notifications: 'Les notifications',
       tax_types: 'Types de taxe',
-      expense_category: 'Catégories de dépenses'
+      expense_category: 'Catégories de dépenses',
+      update_app: "Mise à jour de l'application"
     },
     title: 'Paramètres',
     setting: 'Paramètres | Paramètres',
@@ -664,6 +665,11 @@ export default {
       select_time_zone: 'sélectionnez le fuseau horaire',
       select_date_formate: 'sélectionnez Date Formate',
       select_financial_year: 'sélectionner lexercice'
+    },
+    update_app: {
+      title: "Mise à jour de l'application",
+      description: "mettre à jour la description de l'application",
+      update: 'Mise à jour'
     }
   },
   wizard: {

@@ -35,7 +35,7 @@
       </div>
     </div>
     <base-button
-      v-if="requirements"
+      v-if="hasNext"
       :loading="loading"
       class="pull-right mt-4"
       icon="arrow-right"
@@ -46,7 +46,7 @@
       {{ $t('wizard.continue') }}
     </base-button>
     <base-button
-      v-else
+      v-if="!requirements"
       :loading="loading"
       class="pull-right mt-4"
       color="theme"
@@ -72,6 +72,20 @@ export default {
       phpSupportInfo: null,
       loading: false,
       isShow: true
+    }
+  },
+  computed: {
+    hasNext () {
+      if (this.requirements) {
+        let isRequired = true
+        for (const key in this.requirements) {
+          if (!this.requirements[key]) {
+            isRequired = false
+          }
+        }
+        return this.requirements && this.phpSupportInfo.supported && isRequired
+      }
+      return false
     }
   },
   methods: {

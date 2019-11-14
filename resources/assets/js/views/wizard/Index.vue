@@ -67,8 +67,8 @@ export default {
   data () {
     return {
       loading: false,
-      tab: 'step_1',
-      step: 1
+      tab: 'step_3',
+      step: 3
     }
   },
   created () {

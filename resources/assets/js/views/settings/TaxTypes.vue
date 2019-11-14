@@ -29,16 +29,9 @@
       >
         <table-column
           :sortable="true"
-          :filterable="true"
           :label="$t('settings.tax_types.tax_name')"
-        >
-          <template slot-scope="row">
-            <span>{{ $t('settings.tax_types.tax_name') }}</span>
-            <span class="tax-name mt-3">
-              {{ row.name }}
-            </span>
-          </template>
-        </table-column>
+          show="name"
+        />
         <table-column
           :sortable="true"
           :filterable="true"

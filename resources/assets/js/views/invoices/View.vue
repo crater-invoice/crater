@@ -229,12 +229,22 @@ export default {
       return true
     },
     async onMarkAsSent () {
-      this.isRequestOnGoing = true
-      let response = await this.markAsSent({id: this.invoice.id})
-      this.isRequestOnGoing = false
-      if (response.data) {
-        window.toastr['success'](this.$tc('invoices.marked_as_sent_message'))
-      }
+       swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.invoice_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (MarkAsSend_Invoice) => {
+        if (MarkAsSend_Invoice) {
+          this.isRequestOnGoing = true
+          let response = await this.markAsSent({id: this.invoice.id})
+          this.isRequestOnGoing = false
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.marked_as_sent_message'))
+          }
+        }
+      })
     },
     async removeInvoice (id) {
       this.selectInvoice([parseInt(id)])

@@ -19,3 +19,20 @@
     }
 
 }
+
+
+@media(max-width: $x-small-breakpoint ) {
+
+    .base-modal {
+
+        .item-modal {
+
+            .input-label {
+                text-align: left;
+            }
+
+        }
+
+    }
+
+}

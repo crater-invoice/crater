@@ -43,6 +43,9 @@
               type="password"
               @input="$v.formData.password.$touch()"
             />
+            <div v-if="$v.formData.password.$error">
+              <span v-if="!$v.formData.password.minLength" class="text-danger"> {{ $tc('validation.password_min_length', $v.formData.password.$params.minLength.min, {count: $v.formData.password.$params.minLength.min}) }} </span>
+            </div>
           </div>
           <div class="col-md-6 mb-4 form-group">
             <label class="input-label">{{ $tc('settings.account_settings.confirm_password') }}</label>
@@ -78,7 +81,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions } from 'vuex'
-const { required, requiredIf, sameAs, email } = require('vuelidate/lib/validators')
+const { required, requiredIf, sameAs, email, minLength } = require('vuelidate/lib/validators')
 
 export default {
   mixins: [validationMixin],
@@ -103,6 +106,7 @@ export default {
         email
       },
       password: {
+        minLength: minLength(5)
       },
       confirm_password: {
         required: requiredIf('isRequired'),

@@ -38,7 +38,7 @@
     }
 
     .filter-date {
-        flex: 1;
+        flex: 2;
         display: flex;
         margin-right: 40px;
         align-items: center;
@@ -60,7 +60,7 @@
         margin-top: 28px;
     }
 
-    @media(max-width: $medium-breakpoint ) {
+    @media(max-width: $large-breakpoint ) {
         .filter-container {
             flex-direction: column;
         }

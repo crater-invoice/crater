@@ -553,6 +553,8 @@ export default {
         if (response.data) {
           this.selectCustomer(response.data.estimate.user_id)
           this.newEstimate = response.data.estimate
+          this.newEstimate.estimate_date = moment(response.data.estimate.estimate_date, 'YYYY-MM-DD').toString()
+          this.newEstimate.expiry_date = moment(response.data.estimate.expiry_date, 'YYYY-MM-DD').toString()
           this.discountPerItem = response.data.discount_per_item
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency

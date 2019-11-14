@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payment_mode')->nullable();
             $table->date('payment_date');
             $table->text('notes')->nullable();
-            $table->decimal('amount', 15, 0);
+            $table->unsignedBigInteger('amount');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('invoice_id')->unsigned()->nullable();

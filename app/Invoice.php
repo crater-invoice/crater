@@ -113,6 +113,19 @@ class Invoice extends Model
         return $this->belongsTo(InvoiceTemplate::class);
     }
 
+    public function getPreviousStatus()
+    {
+        if ($this->due_date < Carbon::now()) {
+            return self::STATUS_OVERDUE;
+        } elseif ($this->viewed) {
+            return self::STATUS_VIEWED;
+        } elseif ($this->sent) {
+            return self::STATUS_SENT;
+        } else {
+            return self::STATUS_DRAFT;
+        }
+    }
+
     private function strposX($haystack, $needle, $number)
     {
         if ($number == '1') {

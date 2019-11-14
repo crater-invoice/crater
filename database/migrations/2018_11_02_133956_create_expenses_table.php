@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->date('expense_date');
             $table->string('attachment_receipt')->nullable();
-            $table->integer('amount');
+            $table->unsignedBigInteger('amount');
             $table->string('notes')->nullable();
             $table->integer('expense_category_id')->unsigned();
             $table->foreign('expense_category_id')->references('id')->on('expense_categories')->onDelete('cascade');

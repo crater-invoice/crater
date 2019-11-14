@@ -68,16 +68,16 @@ class Updater
         // Delete zip file
         File::delete($file);
 
-        if (!File::copyDirectory($temp_path2.'/test', base_path())) {
+        if (!File::copyDirectory($temp_path2, base_path())) {
             return false;
         }
 
         // Delete temp directory
         File::deleteDirectory($temp_path);
         File::deleteDirectory($temp_path2);
-        event(new UpdateFinished($alias, $installed, $version));
+
         try {
-            // event(new UpdateFinished($alias, $installed, $version));
+            event(new UpdateFinished($alias, $installed, $version));
 
             return [
                 'success' => true,

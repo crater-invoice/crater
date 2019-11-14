@@ -736,7 +736,8 @@ export default {
       migrate_failed: 'Migrate Failed',
       database_variables_save_error: 'Unable to connect to the DB with Provided Values.',
       mail_variables_save_error: 'Email configuration failed.',
-      connection_failed: 'Database Connection Failed'
+      connection_failed: 'Database connection failed',
+      database_should_be_empty: 'Database should be empty'
     },
     success: {
       mail_variables_save_successfully: 'Email configured successfully',

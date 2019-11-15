@@ -668,10 +668,13 @@ export default {
     },
     update_app: {
       title: 'Update App',
-      description: 'update app description',
+      description: 'You can easily update Crater by checking for a new update by clicking the button below',
       check_update: 'Check for updates',
-      avail_update: 'Update available',
-      update: 'Update'
+      avail_update: 'New Update available',
+      next_version: 'Next version',
+      update: 'Update',
+      update_progress: 'Update in progress...',
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
     }
   },
   wizard: {

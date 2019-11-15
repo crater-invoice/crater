@@ -6,62 +6,72 @@
         <p class="page-sub-title">
           {{ $t('settings.update_app.description') }}
         </p>
-        <p class="page-sub-title">Current version: 1.0.0</p>
-        <base-button size="large" color="theme" @click="checkUpdate">
+        <label class="input-label">Current version</label><br>
+        <label class="version">1.0.0</label>
+        <base-button :outline="true" size="large" color="theme" @click="checkUpdate">
           <font-awesome-icon :class="{'update': isUpdateAvail}" style="margin-right: 5px;" icon="sync-alt" />
           {{ $t('settings.update_app.check_update') }}
         </base-button>
-        <div v-if="isUpdateAvail" class="mt-4 content">
-          <label class="input-label">{{ $t('settings.update_app.avail_update') }}</label>
-          <p class="page-sub-title">Latest version: 2.0.0</p>
+        <hr>
+        <div class="mt-4 content">
+          <h3 class="page-title">{{ $t('settings.update_app.avail_update') }}</h3>
+          <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
+          <label class="version">{{ updateData.version }}</label>
+          <p class="page-sub-title">
+            {{ description }}
+          </p>
           <base-button size="large" color="theme" @click="onUpdateApp">
             {{ $t('settings.update_app.update') }}
           </base-button>
         </div>
-        <div v-if="isShowProgressBar" class="progress mt-4">
-          <div
-            :style="[{'width': progress+'%'}]"
-            class="progress-bar progress-bar-striped progress-bar-animated"
-            role="progressbar"
-            aria-valuenow="0"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          />
-        </div>
+        <!-- <div>
+          <h3 class="page-title">{{ $t('settings.update_app.update_progress') }}</h3>
+          <p class="page-sub-title">
+            {{ $t('settings.update_app.progress_text') }}
+          </p>
+          <font-awesome-icon icon="spinner" class="fa-spin"/>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       isShowProgressBar: false,
       isUpdateAvail: false,
       progress: 10,
-      interval: null
+      interval: null,
+      description: '',
+      updateData: {
+        isMinor: Boolean,
+        installed: '',
+        version: ''
+      }
     }
+  },
+  computed: {
   },
   watch: {
   },
   mounted () {
   },
   methods: {
-    onUpdateApp () {
-      this.isShowProgressBar = true
-      this.interval = setInterval(() => {
-        if (this.progress >= 100) {
-          clearInterval(this.interval)
-          setTimeout(() => {
-            this.isShowProgressBar = false
-          }, 1000)
-        }
-        this.progress += 10
-      }, 250)
+    async onUpdateApp () {
+      const data = this.updateData
+      let response = await axios.post('/api/update', data)
+      console.log(response.data)
     },
-    checkUpdate () {
-      this.isUpdateAvail = !this.isUpdateAvail
+    async checkUpdate () {
+      let response = await axios.get('/api/check/update')
+      console.log(response.data)
+      if (response.data) {
+        this.updateData.isMinor = response.data.is_minor
+        this.updateData.version = response.data.version.version
+        this.updateData.description = response.data.version.description
+      }
     }
   }
 }

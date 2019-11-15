@@ -233,6 +233,8 @@ export default {
     confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
     confirm_mark_as_rejected: 'This estimate will be marked as Rejected',
     no_matching_estimates: 'There are no matching estimates!',
+    mark_as_sent_successfully: 'Estimate marked as sent successfully',
+    send_estimate_successfully: 'Estimate sent successfully',
     errors: {
       required: 'Field is required'
     },
@@ -324,6 +326,8 @@ export default {
     list_of_invoices: 'This section will contain the list of invoices.',
     select_invoice: 'Select Invoice',
     no_matching_invoices: 'There are no matching invoices!',
+    mark_as_sent_successfully: 'Invoice marked as sent successfully',
+    send_invoice_successfully: 'Invoice sent successfully',
     item: {
       title: 'Item Title',
       description: 'Description',

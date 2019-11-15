@@ -106,6 +106,8 @@ Route::group(['middleware' => 'redirect-if-installed'], function () {
         'uses' => 'OnboardingController@companySettings'
     ]);
 });
+
+
 // App version
 // ----------------------------------
 
@@ -119,6 +121,18 @@ Route::group(['middleware' => 'api'], function () {
     Route::group([
       'middleware' => 'admin'
     ], function () {
+
+        // Auto update routes
+        //----------------------------------
+        Route::post('/update', [
+            'as' => 'auto.update',
+            'uses' => 'UpdateController@update'
+        ]);
+
+        Route::get('/check/update', [
+            'as' => 'check.update',
+            'uses' => 'UpdateController@checkLatestVersion'
+        ]);
 
         Route::get('/bootstrap', [
             'as' => 'bootstrap',

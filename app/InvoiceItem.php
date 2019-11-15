@@ -60,7 +60,7 @@ class InvoiceItem extends Model
             $query->whereBetween(
                 'invoice_date',
                 [$start->format('Y-m-d'), $end->format('Y-m-d')]
-            )->where('paid_status', Invoice::STATUS_PAID);
+            );
         });
     }
 

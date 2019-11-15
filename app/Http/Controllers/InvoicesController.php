@@ -260,6 +260,7 @@ class InvoicesController extends Controller
                 'error' => 'invalid_due_amount'
             ]);
         } elseif ($invoice->due_amount != 0 && $invoice->paid_status == Invoice::STATUS_PAID) {
+            $invoice->status = $invoice->getPreviousStatus();
             $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
         }
 

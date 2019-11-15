@@ -1,22 +1,22 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\User;
-use Laraspace\Setting;
-use Laraspace\Company;
-use Laraspace\Address;
-use Laraspace\Http\Requests\SettingRequest;
-use Laraspace\Http\Requests\SettingKeyRequest;
-use Laraspace\Http\Requests\ProfileRequest;
-use Laraspace\Http\Requests\CompanyRequest;
-use Laraspace\Http\Requests\CompanySettingRequest;
-use Laraspace\Http\Requests\NotificationSettingsRequest;
-use Laraspace\Space\CurrencyFormatter;
-use Laraspace\Space\DateFormatter;
-use Laraspace\Space\TimeZones;
-use Laraspace\Currency;
-use Laraspace\CompanySetting;
+use Crater\User;
+use Crater\Setting;
+use Crater\Company;
+use Crater\Address;
+use Crater\Http\Requests\SettingRequest;
+use Crater\Http\Requests\SettingKeyRequest;
+use Crater\Http\Requests\ProfileRequest;
+use Crater\Http\Requests\CompanyRequest;
+use Crater\Http\Requests\CompanySettingRequest;
+use Crater\Http\Requests\NotificationSettingsRequest;
+use Crater\Space\CurrencyFormatter;
+use Crater\Space\DateFormatter;
+use Crater\Space\TimeZones;
+use Crater\Currency;
+use Crater\CompanySetting;
 
 class CompanyController extends Controller
 {

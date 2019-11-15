@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Space;
+namespace Crater\Space;
 
 class PermissionsChecker
 {

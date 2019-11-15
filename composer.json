@@ -38,7 +38,7 @@
             "database"
         ],
         "psr-4": {
-            "Laraspace\\": "app/"
+            "Crater\\": "app/"
         },
         "files": [
             "app/Space/helpers.php"

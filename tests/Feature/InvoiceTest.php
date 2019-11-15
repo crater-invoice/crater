@@ -4,11 +4,11 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laraspace\Tax;
-use Laraspace\User;
-use Laraspace\Invoice;
-use Laraspace\CompanySetting;
-use Laraspace\InvoiceItem;
+use Crater\Tax;
+use Crater\User;
+use Crater\Invoice;
+use Crater\CompanySetting;
+use Crater\InvoiceItem;
 use Laravel\Passport\Passport;
 use SettingsSeeder;
 

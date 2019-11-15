@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Laraspace\Expense;
-use Laraspace\ExpenseCategory;
+use Crater\Expense;
+use Crater\ExpenseCategory;
 use Faker\Generator as Faker;
-use Laraspace\User;
+use Crater\User;
 
 $factory->define(Expense::class, function (Faker $faker) {
     return [

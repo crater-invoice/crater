@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Laraspace\User::class,
+            'model' => Crater\User::class,
         ],
 
         // 'users' => [

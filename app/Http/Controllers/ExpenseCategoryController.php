@@ -1,11 +1,11 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
-use Laraspace\ExpenseCategory;
-use Laraspace\Expense;
-use Laraspace\User;
+use Crater\ExpenseCategory;
+use Crater\Expense;
+use Crater\User;
 use Illuminate\Http\Request;
-use Laraspace\Http\Requests\ExpenseCategoryRequest;
+use Crater\Http\Requests\ExpenseCategoryRequest;
 
 class ExpenseCategoryController extends Controller
 {
@@ -56,7 +56,7 @@ class ExpenseCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Laraspace\ExpenseCategory $ExpenseCategory
+     * @param  \Crater\ExpenseCategory $ExpenseCategory
      * @return \Illuminate\Http\Response
      */
     public function show(ExpenseCategory $ExpenseCategory)
@@ -67,7 +67,7 @@ class ExpenseCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Laraspace\ExpensesCategory $ExpensesCategory
+     * @param  \Crater\ExpensesCategory $ExpensesCategory
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,7 +83,7 @@ class ExpenseCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Laraspace\ExpenseCategory $ExpenseCategory
+     * @param  \Crater\ExpenseCategory $ExpenseCategory
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseCategoryRequest $request, $id)
@@ -102,7 +102,7 @@ class ExpenseCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Laraspace\ExpensesCategory $expensesCategory
+     * @param  \Crater\ExpensesCategory $expensesCategory
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -1,7 +1,7 @@
 <?php
-namespace Laraspace\Http\Controllers\Auth;
+namespace Crater\Http\Controllers\Auth;
 
-use Laraspace\Http\Controllers\Controller;
+use Crater\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;

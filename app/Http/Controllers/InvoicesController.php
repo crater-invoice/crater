@@ -1,25 +1,25 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\CompanySetting;
+use Crater\CompanySetting;
 use Illuminate\Support\Collection;
-use Laraspace\Currency;
-use Laraspace\InvoiceTemplate;
-use Laraspace\Http\Requests;
-use Laraspace\Invoice;
-use Laraspace\InvoiceItem;
+use Crater\Currency;
+use Crater\InvoiceTemplate;
+use Crater\Http\Requests;
+use Crater\Invoice;
+use Crater\InvoiceItem;
 use Carbon\Carbon;
-use Laraspace\Item;
-use Laraspace\Mail\invoicePdf;
+use Crater\Item;
+use Crater\Mail\invoicePdf;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Support\Facades\Log;
-use Laraspace\User;
+use Crater\User;
 use Mailgun\Mailgun;
 use PDF;
 use Validator;
-use Laraspace\TaxType;
-use Laraspace\Tax;
+use Crater\TaxType;
+use Crater\Tax;
 
 class InvoicesController extends Controller
 {
@@ -371,12 +371,6 @@ class InvoicesController extends Controller
     {
         $invoice = Invoice::findOrFail($request->id);
 
-        if ($invoice->status == Invoice::STATUS_DRAFT) {
-            $invoice->status = Invoice::STATUS_SENT;
-            $invoice->sent = true;
-            $invoice->save();
-        }
-
         $data['invoice'] = $invoice->toArray();
         $userId = $data['invoice']['user_id'];
         $data['user'] = User::find($userId)->toArray();
@@ -396,6 +390,12 @@ class InvoicesController extends Controller
             return response()->json([
                 'error' => 'notification_email_does_not_exist'
             ]);
+        }
+
+        if ($invoice->status == Invoice::STATUS_DRAFT) {
+            $invoice->status = Invoice::STATUS_SENT;
+            $invoice->sent = true;
+            $invoice->save();
         }
 
         \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));

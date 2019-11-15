@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Notifications;
+namespace Crater\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;

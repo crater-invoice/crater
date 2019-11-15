@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Laraspace\EstimateTemplate;
+use Crater\EstimateTemplate;
 
 class EstimateTemplateSeeder extends Seeder
 {

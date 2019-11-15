@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Laraspace\EstimateItem;
-use Laraspace\Item;
+use Crater\EstimateItem;
+use Crater\Item;
 use Faker\Generator as Faker;
-use Laraspace\User;
+use Crater\User;
 
 $factory->define(EstimateItem::class, function (Faker $faker) {
     return [

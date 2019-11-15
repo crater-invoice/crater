@@ -328,12 +328,12 @@ class EstimatesController extends Controller
             ]);
         }
 
+        \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
+
         if ($estimate->status == Estimate::STATUS_DRAFT) {
             $estimate->status = Estimate::STATUS_SENT;
             $estimate->save();
         }
-
-        \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
 
         return response()->json([
             'success' => true

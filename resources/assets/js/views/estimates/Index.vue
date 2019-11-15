@@ -425,7 +425,7 @@ export default {
           if (response.data) {
             this.filters.status = 'ACCEPTED'
             this.$refs.table.refresh()
-            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
+            window.toastr['success'](this.$tc('estimates.confirm_mark_as_accepted'))
           }
         }
       })
@@ -570,7 +570,7 @@ export default {
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
           }
         }
       })
@@ -590,7 +590,7 @@ export default {
           let response = await this.sendEmail(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+            window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
           }
         }
       })

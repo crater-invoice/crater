@@ -36,11 +36,16 @@
 }
 
 
-@media(max-width: $x-small-breakpoint ) {
+@media (max-width: $x-small-breakpoint) {
 
     .base-modal {
 
         .customer-modal {
+            width: 100vw;
+
+            .required {
+                position: relative;
+            }
 
             .input-label {
                 text-align: left;

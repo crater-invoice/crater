@@ -55,14 +55,29 @@
 
     .close-icon {
         position: absolute;
-        padding: 6px 0 0 0;
+        padding: 6px;
         top: 23px;
         right: 15px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 20px;
         cursor: pointer;
     }
 
 }
 
 
+@media (max-width: $x-small-breakpoint) {
+    .base-modal {
 
+        .modal-body {
+            height: 100%;
+            overflow: scroll;
+            border-radius: 0px;
+
+        }
+
+    }
+}
 

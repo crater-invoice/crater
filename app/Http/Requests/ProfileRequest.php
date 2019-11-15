@@ -31,6 +31,8 @@ class ProfileRequest extends FormRequest
                 return [
                     'name' => 'required',
                     'password' => 'required',
+                    'address_street_1' => 'max:255',
+                    'address_street_2' => 'max:255',
                     'email' => [
                         'required',
                         'email',
@@ -41,6 +43,8 @@ class ProfileRequest extends FormRequest
             case 'PUT':
                 return [
                     'name' => 'required',
+                    'address_street_1' => 'max:255',
+                    'address_street_2' => 'max:255',
                     'email' => 'required|email'
                 ];
                 break;

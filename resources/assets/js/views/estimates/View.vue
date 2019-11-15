@@ -237,7 +237,7 @@ export default {
           let response = await this.markAsSent({id: this.estimate.id})
           this.isMarkAsSent = false
           if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent'))
+            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
           }
         }
       })

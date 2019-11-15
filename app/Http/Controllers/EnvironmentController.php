@@ -35,9 +35,7 @@ class EnvironmentController extends Controller
     {
         $results = $this->EnvironmentManager->saveDatabaseVariables($request);
 
-
         if(array_key_exists("success", $results)) {
-
             Artisan::call('config:clear');
             Artisan::call('key:generate --force');
             Artisan::call('migrate --seed');

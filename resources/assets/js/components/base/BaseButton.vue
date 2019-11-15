@@ -1,9 +1,29 @@
 <template>
-  <button :type="type" :class="btnClass" :disabled="disabled" @click="handleClick">
-    <font-awesome-icon v-if="icon && !loading && !rightIcon" :class="iconClass" :icon="icon" class="vue-icon icon-left" />
-    <font-awesome-icon v-if="loading" :class="iconClass" icon="spinner" class="fa-spin"/>
+  <button
+    :type="type"
+    :class="btnClass"
+    :disabled="disabled || loading"
+    @click="handleClick"
+  >
+    <font-awesome-icon
+      v-if="icon && !loading && !rightIcon"
+      :class="iconClass"
+      :icon="icon"
+      class="vue-icon icon-left"
+    />
+    <font-awesome-icon
+      v-if="loading"
+      :class="iconClass"
+      icon="spinner"
+      class="fa-spin"
+    />
     <slot />
-    <font-awesome-icon v-if="icon && !loading && rightIcon" :class="iconClass" :icon="icon" class="vue-icon icon-right" />
+    <font-awesome-icon
+      v-if="icon && !loading && rightIcon"
+      :class="iconClass"
+      :icon="icon"
+      class="vue-icon icon-right"
+    />
   </button>
 </template>
 

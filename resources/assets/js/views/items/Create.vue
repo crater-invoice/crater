@@ -38,6 +38,7 @@
                     v-model="price"
                     v-bind="defaultCurrencyForInput"
                     class="input-field"
+                    
                   />
                 </div>
                 <div v-if="$v.formData.price.$error">
@@ -92,7 +93,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
-const { required, minLength, numeric, alpha, minValue, maxLength } = require('vuelidate/lib/validators')
+const { required, minLength, numeric, minValue, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   mixins: {
@@ -163,7 +164,7 @@ export default {
       price: {
         required,
         numeric,
-        maxLength: maxLength(10),
+        maxLength: maxLength(20),
         minValue: minValue(0.1)
       },
       description: {

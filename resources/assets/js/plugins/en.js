@@ -772,7 +772,7 @@ export default {
     payment_greater_than_zero: 'Payment must be greater than zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
     quantity_maxlength: 'Quantity should not be greater than 10 digits.',
-    price_maxlength: 'Price should not be greater than 10 digits.',
+    price_maxlength: 'Price should not be greater than 20 digits.',
     price_minvalue: 'Price should be greater than 0.',
     amount_maxlength: 'Amount should not be greater than 10 digits.',
     amount_minvalue: 'Amount should be greater than 0.',

@@ -4636,6 +4636,57 @@ input[type=button].btn-block {
   display: none;
 }
 
+.navbar-light .navbar-brand {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-brand:focus {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar-light .navbar-nav .nav-link.disabled {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-light .navbar-toggler {
+  color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-light .navbar-text {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-light .navbar-text a {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-light .navbar-text a:hover,
+.navbar-light .navbar-text a:focus {
+  color: rgba(0, 0, 0, 0.9);
+}
+
 .navbar-dark .navbar-brand {
   color: #fff;
 }
@@ -11453,6 +11504,10 @@ code,
   align-items: center;
 }
 
+.swal-icon--custom {
+  height: 70px !important;
+}
+
 .site-header {
   background-color: #5851D8;
   height: 60px;
@@ -14920,6 +14975,10 @@ fieldset[disabled] .multiselect {
   cursor: pointer;
 }
 
+.base-modal .modal-body {
+  overflow: visible !important;
+}
+
 .item-modal .card-footer {
   display: flex;
   justify-content: flex-end;
@@ -14936,6 +14995,12 @@ fieldset[disabled] .multiselect {
   position: absolute;
   right: -10px;
   color: #FB7178;
+}
+
+@media (max-width: 480px) {
+  .base-modal .item-modal .input-label {
+    text-align: left;
+  }
 }
 
 .template-modal .template-container {
@@ -15009,6 +15074,12 @@ fieldset[disabled] .multiselect {
   justify-content: flex-end;
 }
 
+@media (max-width: 480px) {
+  .base-modal .customer-modal .input-label {
+    text-align: left;
+  }
+}
+
 .tax-type-modal .card-footer {
   display: flex;
   justify-content: flex-end;
@@ -15055,6 +15126,16 @@ fieldset[disabled] .multiselect {
   position: absolute;
   right: -10px;
   color: #FB7178;
+}
+
+@media (max-width: 480px) {
+  .base-modal .category-modal .input-label {
+    text-align: left;
+  }
+}
+
+.dashboard .dashboard-table .table-component .dashboard-recent-invoice-options .dropdown-container {
+  margin: 10px 5px 0 -75px;
 }
 
 .dashbox {
@@ -15989,6 +16070,7 @@ fieldset[disabled] .multiselect {
 
 .invoice-create-page .address-menu .content {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -16371,6 +16453,9 @@ fieldset[disabled] .multiselect {
 .invoice-create-page .invoice-foot .invoice-total .section .invoice-amount {
   font-size: 18px;
   color: #55547A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .invoice-create-page .invoice-foot .invoice-total .section .total {
@@ -16745,7 +16830,7 @@ fieldset[disabled] .multiselect {
 }
 
 .invoice-index-page .filter-date {
-  flex: 1;
+  flex: 2;
   display: flex;
   margin-right: 40px;
   align-items: center;
@@ -16769,7 +16854,7 @@ fieldset[disabled] .multiselect {
   margin-top: 28px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
   .invoice-index-page .filter-container {
     flex-direction: column;
   }
@@ -16852,6 +16937,7 @@ fieldset[disabled] .multiselect {
 
 .estimate-create-page .address-menu .content {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -17234,6 +17320,9 @@ fieldset[disabled] .multiselect {
 .estimate-create-page .estimate-foot .estimate-total .section .estimate-amount {
   font-size: 18px;
   color: #55547A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .estimate-create-page .estimate-foot .estimate-total .section .total {
@@ -17274,7 +17363,6 @@ fieldset[disabled] .multiselect {
   font-weight: 300;
   font-size: 12px;
   padding-top: 2px;
-  padding-left: 10px;
 }
 
 .estimate-create-page .item-row .item-description textarea {
@@ -17420,7 +17508,7 @@ fieldset[disabled] .multiselect {
 }
 
 .estimate-index-page .filter-date {
-  flex: 1;
+  flex: 2;
   display: flex;
   margin-right: 40px;
   align-items: center;
@@ -17444,7 +17532,7 @@ fieldset[disabled] .multiselect {
   margin-top: 28px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
   .estimate-index-page .filter-container {
     flex-direction: column;
   }
@@ -18096,6 +18184,9 @@ fieldset[disabled] .multiselect {
   border-radius: 50%;
   height: 21px;
   width: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wizard .indicator-line .steps.completed .icon-check {
@@ -18266,8 +18357,6 @@ fieldset[disabled] .multiselect {
 
 .customer-create .same-address-checkbox-container {
   display: flex;
-  justify-content: flex-end;
-  padding-left: 12px;
   margin-bottom: 1.5rem;
   align-items: center;
   justify-content: flex-end;
@@ -18318,7 +18407,6 @@ fieldset[disabled] .multiselect {
   .customer-create .same-address-checkbox-container {
     display: flex;
     justify-content: flex-start;
-    padding-left: 15px;
     margin-bottom: 0rem;
   }
 
@@ -18440,7 +18528,7 @@ fieldset[disabled] .multiselect {
   }
 }
 
-.inv-status-due {
+.inv-status-overdue {
   background: #FED7D7;
   font-size: 13px;
   color: #9B2C2C;
@@ -18455,9 +18543,9 @@ fieldset[disabled] .multiselect {
 }
 
 .inv-status-unpaid {
-  background: rgba(246, 208, 154, 0.4);
+  background: #F8EDCB;
   font-size: 13px;
-  color: #A96E1A;
+  color: #6C432E;
   padding: 5px 10px;
 }
 
@@ -18490,9 +18578,9 @@ fieldset[disabled] .multiselect {
 }
 
 .inv-status-partially_paid {
-  background: #E1E0EA;
+  background: #C9E3EC;
   font-size: 13px;
-  color: #312F57;
+  color: #1E576C;
   padding: 5px 10px;
 }
 

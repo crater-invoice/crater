@@ -237,6 +237,8 @@ export default {
     confirm_mark_as_sent: 'Esta estimación se marcará como enviada',
     confirm_mark_as_accepted: 'Esta estimación se marcará como Aceptada',
     confirm_mark_as_rejected: 'Esta estimación se marcará como Rechazada',
+    mark_as_sent_successfully: 'Estimación marcada como enviada correctamente',
+    send_estimate_successfully: 'Estimación enviada con éxito',
     errors: {
       required: 'Se requiere campo'
     },
@@ -326,6 +328,8 @@ export default {
     no_invoices: '¡Aún no hay facturas!',
     list_of_invoices: 'Esta sección contendrá la lista de facturas.',
     select_invoice: 'Seleccionar factura',
+    mark_as_sent_successfully: 'Factura marcada como enviada con éxito',
+    send_invoice_successfully: 'Factura enviada exitosamente',
     item: {
       title: 'Título del artículo',
       description: 'Descripción',

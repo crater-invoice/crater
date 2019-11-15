@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="modalActive" class="base-modal" :class="'size-' + modalSize">
+    <div v-if="modalActive" :class="'size-' + modalSize" class="base-modal">
       <div class="modal-body">
         <div class="close-icon">
           <font-awesome-icon class="mr-2" icon="times" @click="closeModal"/>

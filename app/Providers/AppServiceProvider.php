@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Providers;
+namespace Crater\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;

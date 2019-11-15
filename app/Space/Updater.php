@@ -1,13 +1,13 @@
 <?php
-namespace Laraspace\Space;
+namespace Crater\Space;
 
 use File;
 use ZipArchive;
 use Artisan;
 use GuzzleHttp\Exception\RequestException;
-use Laraspace\Space\SiteApi;
-use Laraspace\Events\UpdateFinished;
-use Laraspace\Setting;
+use Crater\Space\SiteApi;
+use Crater\Events\UpdateFinished;
+use Crater\Setting;
 
 class Updater
 {
@@ -18,7 +18,7 @@ class Updater
         $data = null;
         $path = null;
 
-        $url = '/download/'.$version.'?type=update';
+        $url = '/downloads/file/'.$version.'?type=update';
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -99,7 +99,7 @@ class Updater
     public static function checkForUpdate()
     {
         $data = null;
-        $url = '/check/latest/download/'.Setting::getSetting('version');
+        $url = '/downloads/check/latest/'.Setting::getSetting('version');
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 

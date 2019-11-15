@@ -1,8 +1,8 @@
 <?php
-namespace Laraspace\Http\Middleware;
+namespace Crater\Http\Middleware;
 
 use Closure;
-use Laraspace\CompanySetting;
+use Crater\CompanySetting;
 
 class ConfigMiddleware
 {

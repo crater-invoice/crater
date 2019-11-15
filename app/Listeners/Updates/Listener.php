@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Listeners\Updates;
+namespace Crater\Listeners\Updates;
 
 class Listener
 {

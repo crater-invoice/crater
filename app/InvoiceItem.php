@@ -1,11 +1,11 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Laraspace\Invoice;
-use Laraspace\Tax;
-use Laraspace\Item;
+use Crater\Invoice;
+use Crater\Tax;
+use Crater\Item;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 

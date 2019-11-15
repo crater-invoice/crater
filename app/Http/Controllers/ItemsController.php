@@ -1,12 +1,12 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\Http\Requests;
-use Laraspace\Item;
-use Laraspace\TaxType;
-use Laraspace\Tax;
-use Laraspace\User;
+use Crater\Http\Requests;
+use Crater\Item;
+use Crater\TaxType;
+use Crater\Tax;
+use Crater\User;
 
 class ItemsController extends Controller
 {

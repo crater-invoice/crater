@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Providers;
+namespace Crater\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Laraspace\Model' => 'Laraspace\Policies\ModelPolicy',
+        'Crater\Model' => 'Crater\Policies\ModelPolicy',
     ];
 
     /**

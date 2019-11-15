@@ -1,10 +1,10 @@
 <?php
 
-namespace Laraspace\Space;
+namespace Crater\Space;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Laraspace\Setting;
+use Crater\Setting;
 
 trait SiteApi
 {

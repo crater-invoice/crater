@@ -1,8 +1,8 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\Estimate;
+use Crater\Estimate;
 
 class EstimateTemplate extends Model
 {

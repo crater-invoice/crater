@@ -1,11 +1,11 @@
 <?php
-namespace Laraspace\Providers;
+namespace Crater\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Laraspace\Events\UpdateFinished;
-use Laraspace\Listeners\Updates\V10\Version101;
+use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\V10\Version101;
 
 class EventServiceProvider extends ServiceProvider
 {

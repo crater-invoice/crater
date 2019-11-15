@@ -142,6 +142,7 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
+            width: 170px;
         }
         .bill-user-phone {
             font-style: normal;
@@ -190,6 +191,7 @@
             color: #595959;
             padding: 0px;
             margin: 0px;
+            width: 170px;
         }
 
         .ship-user-phone {
@@ -262,7 +264,7 @@
         }
 
         tr.main-table-header th {
-            border-bottom: 1px solid #EAF1FB;
+            border-bottom: 0.620315px solid #E8E8E8;
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
@@ -435,7 +437,7 @@
                 @include('app.pdf.invoice.partials.billing-address')
             </div>
         </div>
-        @include('app.pdf.invoice.partials.table')
+            @include('app.pdf.invoice.partials.table')
         @include('app.pdf.invoice.partials.notes')
     </div>
 </body>

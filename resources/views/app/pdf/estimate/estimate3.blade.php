@@ -146,6 +146,7 @@
             line-height: 15px;
             color: #595959;
             margin: 0px;
+            width: 160px;
         }
 
         .ship-user-phone {
@@ -184,6 +185,7 @@
             line-height: 15px;
             color: #595959;
             margin: 0px;
+            width: 160px;
         }
 
         .bill-user-phone {

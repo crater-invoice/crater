@@ -8,7 +8,7 @@
         </p>
       </div>
       <form action="" @submit.prevent="saveEmailConfig()">
-        <div class="row my-2 mt-5">
+        <div class="row">
           <div class="col-md-6 my-2">
             <label class="form-label">{{ $t('settings.mail.driver') }}</label>
             <span class="text-danger"> *</span>
@@ -66,8 +66,9 @@
             <base-input
               :invalid="$v.mailConfigData.mail_password.$error"
               v-model.trim="mailConfigData.mail_password"
-              type="mail_password"
+              type="password"
               name="name"
+              show-password
               @input="$v.mailConfigData.mail_password.$touch()"
             />
             <div v-if="$v.mailConfigData.mail_password.$error">
@@ -116,12 +117,12 @@
         </div>
         <base-button
           :loading="loading"
-          class="pull-right mt-5"
+          class="pull-right mt-4"
           icon="save"
           color="theme"
           type="submit"
         >
-          {{ $t('wizard.save_cont') }}
+          {{ $t('general.save') }}
         </base-button>
       </form>
     </div>
@@ -141,12 +142,12 @@ export default {
   data () {
     return {
       mailConfigData: {
-        mail_driver: 'smtp',
-        mail_host: 'mailtrap.io',
-        mail_port: 2525,
-        mail_username: 'cc3c64516febd4',
-        mail_password: 'e6a0176301f587',
-        mail_encryption: 'tls'
+        mail_driver: '',
+        mail_host: '',
+        mail_port: null,
+        mail_username: '',
+        mail_password: '',
+        mail_encryption: ''
       },
       loading: false,
       mail_drivers: []
@@ -176,18 +177,22 @@ export default {
     }
   },
   mounted () {
-    // this.getMailDrivers()
+    this.loadData()
   },
   methods: {
-    async getMailDrivers () {
+    async loadData () {
       this.loading = true
 
-      let response = await window.axios.get('/api/admin/onboarding/environment/mail')
+      let mailDrivers = await window.axios.get('/api/settings/environment/mail')
+      let mailData = await window.axios.get('/api/settings/environment/mail-env')
 
-      if (response.data) {
-        this.mail_drivers = response.data
-        this.loading = false
+      if (mailDrivers.data) {
+        this.mail_drivers = mailDrivers.data
       }
+      if (mailData.data) {
+        this.mailConfigData = mailData.data
+      }
+      this.loading = false
     },
     async saveEmailConfig () {
       this.$v.mailConfigData.$touch()
@@ -196,7 +201,7 @@ export default {
       }
       this.loading = true
       try {
-        let response = await window.axios.post('/api/admin/onboarding/environment/mail', this.mailConfigData)
+        let response = await window.axios.post('/api/settings/environment/mail', this.mailConfigData)
         if (response.data.success) {
           window.toastr['success'](this.$t('wizard.success.' + response.data.success))
         } else {

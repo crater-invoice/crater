@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main-content">
+  <div id="app" class="main-content dashboard">
     <div class="row">
       <div class="dash-item col-sm-6">
         <router-link slot="item-title" to="/admin/invoices">
@@ -168,7 +168,7 @@
           >
             <table-column :label="$t('dashboard.recent_invoices_card.due_on')" show="formattedDueDate" />
             <table-column :label="$t('dashboard.recent_invoices_card.customer')" show="user.name" />
-            <table-column :label="$t('dashboard.recent_invoices_card.amount_due')" sort-as="due_amount">
+            <table-column :label="$t('dashboard.recent_invoices_card.amount_due')" show="due_amount" sort-as="due_amount">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_invoices_card.amount_due') }}</span>
                 <div v-html="$utils.formatMoney(row.due_amount, row.user.currency)"/>
@@ -177,7 +177,7 @@
             <table-column
               :sortable="false"
               :filterable="false"
-              cell-class="action-dropdown no-click"
+              cell-class="action-dropdown dashboard-recent-invoice-options no-click"
             >
               <template slot-scope="row">
                 <v-dropdown>
@@ -242,7 +242,7 @@
           >
             <table-column :label="$t('dashboard.recent_estimate_card.date')" show="formattedExpiryDate" />
             <table-column :label="$t('dashboard.recent_estimate_card.customer')" show="user.name" />
-            <table-column :label="$t('dashboard.recent_estimate_card.amount_due')" sort-as="total">
+            <table-column :label="$t('dashboard.recent_estimate_card.amount_due')" show="total" sort-as="total">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_estimate_card.amount_due') }}</span>
                 <div v-html="$utils.formatMoney(row.total, row.user.currency)"/>
@@ -396,7 +396,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 1),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -416,7 +416,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
-        icon: 'error',
+        icon: '/assets/icon/envelope-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -433,14 +433,24 @@ export default {
       })
     },
     async onMarkAsSent (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsSent(data)
-      this.$refs.table.refresh()
-      if (response.data) {
-        window.toastr['success'](this.$tc('estimates.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willMarkAsSent) => {
+        if (willMarkAsSent) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsSent(data)
+          this.$refs.table.refresh()
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
+          }
+        }
+      })
     },
 
     async removeInvoice (id) {
@@ -448,7 +458,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete'),
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -465,24 +475,44 @@ export default {
     },
 
     async sendInvoice (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.sendEmail(data)
-      this.$refs.table.refresh()
-      if (response.data) {
-        window.toastr['success'](this.$tc('invoices.send_invoice'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.confirm_send'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willSendInvoice) => {
+        if (willSendInvoice) {
+          const data = {
+            id: id
+          }
+          let response = await this.sendEmail(data)
+          this.$refs.table.refresh()
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+          }
+        }
+      })
     },
     async sentInvoice (id) {
-      const data = {
-        id: id
-      }
-      let response = await this.markAsSent(data)
-      this.$refs.table.refresh()
-      if (response.data) {
-        window.toastr['success'](this.$tc('invoices.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.invoice_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willMarkAsSend) => {
+        if (willMarkAsSend) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsSent(data)
+          this.$refs.table.refresh()
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+          }
+        }
+      })
     }
 
   }

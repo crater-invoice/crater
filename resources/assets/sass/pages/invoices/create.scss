@@ -58,6 +58,7 @@
 
         .content {
             display: flex;
+            flex: 1;
             flex-direction: column;
 
             label {
@@ -445,6 +446,9 @@
                 .invoice-amount {
                     font-size: 18px;
                     color: #55547A;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 .total {
@@ -490,7 +494,7 @@
             font-weight: 300;
             font-size: 12px;
             padding-top: 2px;
-            padding-left: 10px;
+            // padding-left: 10px;
 
             textarea {
 
@@ -504,6 +508,7 @@
                 border: none;
                 resize: none;
                 width: 100%;
+                padding-left: 11px;
                 color: $ls-color-gray--very-dark;
             }
         }

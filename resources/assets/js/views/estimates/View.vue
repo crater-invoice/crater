@@ -5,6 +5,7 @@
       <div class="page-actions row">
         <div class="col-xs-2">
           <base-button
+            v-if="estimate.status !== 'SENT'"
             :loading="isRequestOnGoing"
             :disabled="isRequestOnGoing"
             :outline="true"
@@ -33,7 +34,7 @@
         </v-dropdown>
       </div>
     </div>
-    <div class="estimate-sidebar">
+    <div class="estimate-si debar">
       <base-loader v-if="isSearching" />
       <div v-else class="side-header">
         <base-input
@@ -144,6 +145,8 @@ export default {
         orderByField: null,
         searchText: null
       },
+      status: ['DRAFT', 'SENT', 'VIEWED', 'EXPIRED', 'ACCEPTED', 'REJECTED'],
+      isMarkAsSent: false,
       isRequestOnGoing: false,
       isSearching: false
     }
@@ -222,12 +225,22 @@ export default {
       return true
     },
     async onMarkAsSent () {
-      this.isRequestOnGoing = true
-      let response = await this.markAsSent({id: this.estimate.id})
-      this.isRequestOnGoing = false
-      if (response.data) {
-        window.toastr['success'](this.$tc('estimates.mark_as_sent'))
-      }
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_sent'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willMarkAsSent) => {
+        if (willMarkAsSent) {
+          this.isMarkAsSent = true
+          let response = await this.markAsSent({id: this.estimate.id})
+          this.isMarkAsSent = false
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
+          }
+        }
+      })
     },
     async removeEstimate (id) {
       this.selectEstimate([parseInt(id)])
@@ -235,7 +248,7 @@ export default {
       swal({
         title: 'Deleted',
         text: 'you will not be able to recover this estimate!',
-        icon: 'error',
+        icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {

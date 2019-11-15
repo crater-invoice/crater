@@ -233,6 +233,12 @@ export default {
     save_estimate: 'Sauvegarder lestimation',
     confirm_conversion: 'Vous souhaitez convertir cette estimation en facture?',
     conversion_message: 'Conversion réussie',
+    confirm_send_estimate: 'Cette estimation sera envoyée par courrier électronique au client.',
+    confirm_mark_as_sent: 'Cette estimation sera marquée comme envoyé',
+    confirm_mark_as_accepted: 'Cette estimation sera marquée comme acceptée',
+    confirm_mark_as_rejected: 'Cette estimation sera marquée comme Rejetée',
+    mark_as_sent_successfully: 'Estimation marquée comme envoyée avec succès',
+    send_estimate_successfully: 'Estimation envoyée avec succès',
     errors: {
       required: 'Champ requis'
     },
@@ -308,6 +314,8 @@ export default {
     invoice_template: 'Modèle de facture',
     template: 'Modèle',
     mark_as_sent: 'Marquer comme envoyé',
+    invoice_mark_as_sent: 'Cette facture sera marquée comme envoyé',
+    confirm_send: 'Cette facture sera envoyée par courrier électronique au client.',
     invoice_date: 'Date de facturation',
     record_payment: 'Record de paiement',
     add_new_invoice: 'Ajouter une nouvelle facture',
@@ -320,6 +328,8 @@ export default {
     no_invoices: 'Aucune facture pour le moment!',
     list_of_invoices: 'Cette section contiendra la liste des factures.',
     select_invoice: 'Sélectionnez facture',
+    mark_as_sent_successfully: 'Facture marquée comme envoyée avec succès',
+    send_invoice_successfully: 'Facture envoyée avec succès',
     item: {
       title: 'Titre de larticle',
       description: 'La description',
@@ -523,7 +533,8 @@ export default {
       preferences: 'Préférences',
       notifications: 'Les notifications',
       tax_types: 'Types de taxe',
-      expense_category: 'Catégories de dépenses'
+      expense_category: 'Catégories de dépenses',
+      update_app: "Mise à jour de l'application"
     },
     title: 'Paramètres',
     setting: 'Paramètres | Paramètres',
@@ -548,7 +559,17 @@ export default {
       right: 'Droite',
       left: 'La gauche',
       action: 'action',
-      add_currency: 'Ajouter une devise',
+      add_currency: 'Ajouter une devise'
+    },
+    mail: {
+      host: 'Mail Host',
+      port: 'Port mail',
+      driver: 'Pilote de courrier',
+      password: 'Mot de passe mail',
+      username: "Mail Nom d'utilisateur",
+      mail_config: 'Configuration du courrier',
+      encryption: 'Chiffrement du courrier',
+      mail_config_desc: "Les détails ci-dessous seront utilisés pour mettre à jour l'environnement de messagerie. Aussi, vous pouvez modifier les détails à tout moment après la connexion."
     },
     pdf: {
       title: 'Paramètre PDF',
@@ -614,6 +635,7 @@ export default {
       created_message: 'La taxe de vente créée avec succès',
       updated_message: 'La taxe de vente a été mise à jour avec succès',
       deleted_message: 'La taxe de vente a été supprimée avec succès',
+      confirm_delete: 'Vous ne pourrez pas récupérer ce type de taxe',
       already_in_use: 'La taxe est déjà utilisée'
     },
     expense_category: {
@@ -626,6 +648,7 @@ export default {
       created_message: 'Catégorie créée avec succès',
       deleted_message: 'La catégorie de dépenses a été supprimée avec succès',
       updated_message: 'Catégorie de dépenses mise à jour avec succès',
+      confirm_delete: 'Vous ne pourrez pas récupérer cette catégorie de dépenses',
       already_in_use: 'La catégorie est déjà utilisée'
     },
     preferences: {
@@ -646,6 +669,11 @@ export default {
       select_time_zone: 'sélectionnez le fuseau horaire',
       select_date_formate: 'sélectionnez Date Formate',
       select_financial_year: 'sélectionner lexercice'
+    },
+    update_app: {
+      title: "Mise à jour de l'application",
+      description: "mettre à jour la description de l'application",
+      update: 'Mise à jour'
     }
   },
   wizard: {
@@ -744,7 +772,7 @@ export default {
     numbers_only: 'Chiffres uniquement.',
     characters_only: 'Caractères seulement.',
     password_incorrect: 'Les mots de passe doivent être identiques',
-    password_length: 'Le mot de passe doit comporter 6 caractères.',
+    password_length: 'Le mot de passe doit comporter 5 caractères.',
     qty_must_greater_than_zero: 'La quantité doit être supérieure à zéro.',
     price_greater_than_zero: 'Le prix doit être supérieur à zéro.',
     payment_greater_than_zero: 'Le paiement doit être supérieur à zéro.',

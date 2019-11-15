@@ -1,8 +1,8 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\CompanySetting;
+use Crater\CompanySetting;
 use Carbon\Carbon;
 
 class Estimate extends Model
@@ -79,12 +79,12 @@ class Estimate extends Model
 
     public function items()
     {
-        return $this->hasMany('Laraspace\EstimateItem');
+        return $this->hasMany('Crater\EstimateItem');
     }
 
     public function user()
     {
-        return $this->belongsTo('Laraspace\User');
+        return $this->belongsTo('Crater\User');
     }
 
     public function taxes()
@@ -94,7 +94,7 @@ class Estimate extends Model
 
     public function estimateTemplate()
     {
-        return $this->belongsTo('Laraspace\EstimateTemplate');
+        return $this->belongsTo('Crater\EstimateTemplate');
     }
 
     public function getEstimateNumAttribute()

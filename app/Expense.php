@@ -1,10 +1,10 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Laraspace\ExpenseCategory;
+use Crater\ExpenseCategory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 

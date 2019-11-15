@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Http\Middleware;
+namespace Crater\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 

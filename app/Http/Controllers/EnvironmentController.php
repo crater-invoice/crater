@@ -1,14 +1,14 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Exception;
 use Validator;
-use Laraspace\Setting;
+use Crater\Setting;
 use Illuminate\Http\Request;
-use Laraspace\Space\EnvironmentManager;
-use Laraspace\Http\Requests\DatabaseEnvironmentRequest;
-use Laraspace\Http\Requests\MailEnvironmentRequest;
+use Crater\Space\EnvironmentManager;
+use Crater\Http\Requests\DatabaseEnvironmentRequest;
+use Crater\Http\Requests\MailEnvironmentRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Artisan;
 

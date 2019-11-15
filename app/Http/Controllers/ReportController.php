@@ -1,14 +1,14 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\User;
-use Laraspace\Invoice;
-use Laraspace\Company;
-use Laraspace\InvoiceItem;
-use Laraspace\Expense;
-use Laraspace\CompanySetting;
-use Laraspace\Tax;
+use Crater\User;
+use Crater\Invoice;
+use Crater\Company;
+use Crater\InvoiceItem;
+use Crater\Expense;
+use Crater\CompanySetting;
+use Crater\Tax;
 use PDF;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;

@@ -150,6 +150,16 @@
             overflow: hidden;
         }
     }
+
+    .version {
+        background: #EAF1FB;
+        color: #A5ACC1;
+        border: 1px solid #EAF1FB;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
 }
 
 @media(max-width: $x-small-breakpoint ) {

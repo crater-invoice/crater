@@ -1,9 +1,9 @@
 <?php
-namespace Laraspace\Http\Requests;
+namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Laraspace\User;
+use Crater\User;
 
 class ProfileRequest extends FormRequest
 {

@@ -4,9 +4,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laraspace\Country;
-use Laraspace\State;
-use Laraspace\City;
+use Crater\Country;
+use Crater\State;
+use Crater\City;
 use SettingsSeeder;
 class LocationTest extends TestCase
 {

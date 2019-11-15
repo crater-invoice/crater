@@ -161,11 +161,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Laraspace\Providers\AppServiceProvider::class,
-        Laraspace\Providers\AuthServiceProvider::class,
-        Laraspace\Providers\BroadcastServiceProvider::class,
-        Laraspace\Providers\EventServiceProvider::class,
-        Laraspace\Providers\RouteServiceProvider::class,
+        Crater\Providers\AppServiceProvider::class,
+        Crater\Providers\AuthServiceProvider::class,
+        Crater\Providers\BroadcastServiceProvider::class,
+        Crater\Providers\EventServiceProvider::class,
+        Crater\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class

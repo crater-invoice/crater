@@ -1,8 +1,8 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
-use Laraspace\Space\PermissionsChecker;
+use Crater\Space\PermissionsChecker;
 use Illuminate\Http\JsonResponse;
 
 class PermissionsController extends Controller

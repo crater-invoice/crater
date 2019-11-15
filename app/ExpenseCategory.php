@@ -1,8 +1,8 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\Expense;
+use Crater\Expense;
 use Carbon\Carbon;
 
 class ExpenseCategory extends Model

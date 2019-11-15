@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Http\Requests;
+namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Exceptions;
+namespace Crater\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

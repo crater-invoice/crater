@@ -1,18 +1,18 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\Http\Requests;
-use Laraspace\User;
-use Laraspace\Currency;
-use Laraspace\Setting;
-use Laraspace\Item;
-use Laraspace\TaxType;
+use Crater\Http\Requests;
+use Crater\User;
+use Crater\Currency;
+use Crater\Setting;
+use Crater\Item;
+use Crater\TaxType;
 use DB;
 use Carbon\Carbon;
 use Auth;
-use Laraspace\Company;
-use Laraspace\CompanySetting;
+use Crater\Company;
+use Crater\CompanySetting;
 
 class UsersController extends Controller
 {

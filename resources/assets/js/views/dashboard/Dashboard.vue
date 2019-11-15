@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main-content">
+  <div id="app" class="main-content dashboard">
     <div class="row">
       <div class="dash-item col-sm-6">
         <router-link slot="item-title" to="/admin/invoices">
@@ -168,7 +168,7 @@
           >
             <table-column :label="$t('dashboard.recent_invoices_card.due_on')" show="formattedDueDate" />
             <table-column :label="$t('dashboard.recent_invoices_card.customer')" show="user.name" />
-            <table-column :label="$t('dashboard.recent_invoices_card.amount_due')" sort-as="due_amount">
+            <table-column :label="$t('dashboard.recent_invoices_card.amount_due')" show="due_amount" sort-as="due_amount">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_invoices_card.amount_due') }}</span>
                 <div v-html="$utils.formatMoney(row.due_amount, row.user.currency)"/>
@@ -177,7 +177,7 @@
             <table-column
               :sortable="false"
               :filterable="false"
-              cell-class="action-dropdown no-click"
+              cell-class="action-dropdown dashboard-recent-invoice-options no-click"
             >
               <template slot-scope="row">
                 <v-dropdown>
@@ -242,7 +242,7 @@
           >
             <table-column :label="$t('dashboard.recent_estimate_card.date')" show="formattedExpiryDate" />
             <table-column :label="$t('dashboard.recent_estimate_card.customer')" show="user.name" />
-            <table-column :label="$t('dashboard.recent_estimate_card.amount_due')" sort-as="total">
+            <table-column :label="$t('dashboard.recent_estimate_card.amount_due')" show="total" sort-as="total">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_estimate_card.amount_due') }}</span>
                 <div v-html="$utils.formatMoney(row.total, row.user.currency)"/>

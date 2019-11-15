@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraspace\Proxy;
+namespace Crater\Proxy;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

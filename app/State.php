@@ -1,10 +1,10 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\City;
-use Laraspace\Country;
-use Laraspace\Address;
+use Crater\City;
+use Crater\Country;
+use Crater\Address;
 
 class State extends Model
 {

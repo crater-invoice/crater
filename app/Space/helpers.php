@@ -1,6 +1,6 @@
 <?php
-use Laraspace\CompanySetting;
-use Laraspace\Currency;
+use Crater\CompanySetting;
+use Crater\Currency;
 
 /**
  * Set Active Path

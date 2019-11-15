@@ -1,18 +1,18 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\User;
-use Laraspace\Company;
-use Laraspace\Address;
-use Laraspace\Http\Requests\ProfileRequest;
-use Laraspace\Http\Requests\CompanyRequest;
-use Laraspace\Http\Requests\CompanySettingRequest;
-use Laraspace\Space\DateFormatter;
-use Laraspace\Space\TimeZones;
-use Laraspace\Currency;
-use Laraspace\Setting;
-use Laraspace\CompanySetting;
+use Crater\User;
+use Crater\Company;
+use Crater\Address;
+use Crater\Http\Requests\ProfileRequest;
+use Crater\Http\Requests\CompanyRequest;
+use Crater\Http\Requests\CompanySettingRequest;
+use Crater\Space\DateFormatter;
+use Crater\Space\TimeZones;
+use Crater\Currency;
+use Crater\Setting;
+use Crater\CompanySetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 

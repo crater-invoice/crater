@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Providers;
+namespace Crater\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;

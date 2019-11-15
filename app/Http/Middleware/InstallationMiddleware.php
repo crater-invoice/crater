@@ -1,9 +1,9 @@
 <?php
 
-namespace Laraspace\Http\Middleware;
+namespace Crater\Http\Middleware;
 
 use Closure;
-use Laraspace\Setting;
+use Crater\Setting;
 
 class InstallationMiddleware
 {

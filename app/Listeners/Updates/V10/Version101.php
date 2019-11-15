@@ -1,13 +1,13 @@
 <?php
 
-namespace Laraspace\Listeners\Updates\V10;
+namespace Crater\Listeners\Updates\V10;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Laraspace\Listeners\Updates\Listener;
-use Laraspace\Events\UpdateFinished;
+use Crater\Listeners\Updates\Listener;
+use Crater\Events\UpdateFinished;
 use Illuminate\Support\Facades\Artisan;
-use Laraspace\Setting;
+use Crater\Setting;
 
 class Version101 extends Listener
 {

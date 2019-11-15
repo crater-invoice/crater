@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-use Laraspace\User;
+use Crater\User;
 
 Broadcast::channel('conversation.{cid}', function ($user,$cid) {
     return true; //(int) $user->conversation_id === (int) $cid

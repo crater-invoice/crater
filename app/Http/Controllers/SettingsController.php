@@ -1,9 +1,9 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\Setting;
+use Crater\Setting;
 
 class SettingsController extends Controller
 {

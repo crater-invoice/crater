@@ -4,7 +4,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laraspace\Address;
+use Crater\Address;
 
 class OnboardingTest extends TestCase
 {

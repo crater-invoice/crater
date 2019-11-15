@@ -59,7 +59,6 @@
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
-import Ls from '../../services/ls'
 
 export default {
   components: {

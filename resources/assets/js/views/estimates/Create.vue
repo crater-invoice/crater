@@ -11,13 +11,14 @@
           <li v-else class="breadcrumb-item">{{ $t('estimates.new_estimate') }}</li>
         </ol>
         <div class="page-actions row">
-          <a v-if="$route.name === 'estimates.edit'" :href="`/estimates/pdf/${newEstimate.unique_hash}`" target="_blank" class="mr-3 base-button btn btn-outline-primary default-size" outline color="theme">
+          <a v-if="$route.name === 'estimates.edit'" :href="`/estimates/pdf/${newEstimate.unique_hash}`" target="_blank" class="mr-3 base-button btn btn-outline-primary default-size invoice-action-btn" outline color="theme">
             {{ $t('general.view_pdf') }}
           </a>
           <base-button
             :loading="isLoading"
             :disabled="isLoading"
             icon="save"
+            class="invoice-action-btn"
             color="theme"
             type="submit">
             {{ $t('estimates.save_estimate') }}
@@ -25,7 +26,7 @@
         </div>
       </div>
       <div class="row estimate-input-group">
-        <div class="col-md-5">
+        <div class="col-md-5 estimate-customer-container">
           <div
             v-if="selectedCustomer"
             class="show-customer"
@@ -101,7 +102,7 @@
         </div>
         <div class="col estimate-input">
           <div class="row mb-3">
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('reports.estimates.estimate_date') }}<span class="text-danger"> * </span></label>
               <base-date-picker
                 v-model="newEstimate.estimate_date"
@@ -111,7 +112,7 @@
               />
               <span v-if="$v.newEstimate.estimate_date.$error && !$v.newEstimate.estimate_date.required" class="text-danger"> {{ $t('validation.required') }} </span>
             </div>
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('estimates.due_date') }}<span class="text-danger"> * </span></label>
               <base-date-picker
                 v-model="newEstimate.expiry_date"
@@ -124,7 +125,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('estimates.estimate_number') }}<span class="text-danger"> * </span></label>
               <base-input
                 :invalid="$v.newEstimate.estimate_number.$error"
@@ -135,7 +136,7 @@
               />
               <span v-show="$v.newEstimate.estimate_number.$error && !$v.newEstimate.estimate_number.required" class="text-danger mt-1"> {{ $tc('estimates.errors.required') }}  </span>
             </div>
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('estimates.ref_number') }}</label>
               <base-input
                 v-model="newEstimate.reference_number"

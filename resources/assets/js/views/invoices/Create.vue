@@ -11,7 +11,7 @@
           <li v-else class="breadcrumb-item">{{ $t('invoices.new_invoice') }}</li>
         </ol>
         <div class="page-actions row">
-          <a v-if="$route.name === 'invoices.edit'" :href="`/invoices/pdf/${newInvoice.unique_hash}`" target="_blank" class="mr-3 base-button btn btn-outline-primary default-size" outline color="theme">
+          <a v-if="$route.name === 'invoices.edit'" :href="`/invoices/pdf/${newInvoice.unique_hash}`" target="_blank" class="mr-3 invoice-action-btn base-button btn btn-outline-primary default-size" outline color="theme">
             {{ $t('general.view_pdf') }}
           </a>
           <base-button
@@ -19,13 +19,14 @@
             :disabled="isLoading"
             icon="save"
             color="theme"
+            class="invoice-action-btn"
             type="submit">
             {{ $t('invoices.save_invoice') }}
           </base-button>
         </div>
       </div>
       <div class="row invoice-input-group">
-        <div class="col-md-5">
+        <div class="col-md-5 invoice-customer-container">
           <div
             v-if="selectedCustomer" class="show-customer">
             <div class="row px-2 mt-1">
@@ -101,7 +102,7 @@
         </div>
         <div class="col invoice-input">
           <div class="row mb-3">
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $tc('invoices.invoice',1) }} {{ $t('invoices.date') }}<span class="text-danger"> * </span></label>
               <base-date-picker
                 v-model="newInvoice.invoice_date"
@@ -111,7 +112,7 @@
               />
               <span v-if="$v.newInvoice.invoice_date.$error && !$v.newInvoice.invoice_date.required" class="text-danger"> {{ $t('validation.required') }} </span>
             </div>
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('invoices.due_date') }}<span class="text-danger"> * </span></label>
               <base-date-picker
                 v-model="newInvoice.due_date"
@@ -124,7 +125,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('invoices.invoice_number') }}<span class="text-danger"> * </span></label>
               <base-input
                 :invalid="$v.newInvoice.invoice_number.$error"
@@ -135,7 +136,7 @@
               />
               <span v-show="$v.newInvoice.invoice_number.$error && !$v.newInvoice.invoice_number.required" class="text-danger mt-1"> {{ $tc('validation.required') }}  </span>
             </div>
-            <div class="col">
+            <div class="col collapse-input">
               <label>{{ $t('invoices.ref_number') }}</label>
               <base-input
                 v-model="newInvoice.reference_number"
@@ -149,7 +150,6 @@
           </div>
         </div>
       </div>
-
       <table class="item-table">
         <colgroup>
           <col style="width: 40%;">

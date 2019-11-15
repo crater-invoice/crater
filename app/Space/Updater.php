@@ -40,8 +40,8 @@ class Updater
         // Create temp directory
         $path = 'temp-' . md5(mt_rand());
         $path2 = 'temp2-' . md5(mt_rand());
-        $temp_path = storage_path('app/temp') . '/' . $path;
-        $temp_path2 = storage_path('app/temp') . '/' . $path2;
+        $temp_path = storage_path('app') . '/' . $path;
+        $temp_path2 = storage_path('app') . '/' . $path2;
 
         if (!File::isDirectory($temp_path)) {
             File::makeDirectory($temp_path);

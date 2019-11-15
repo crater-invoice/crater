@@ -38,7 +38,6 @@
                     v-model="price"
                     v-bind="defaultCurrencyForInput"
                     class="input-field"
-                    
                   />
                 </div>
                 <div v-if="$v.formData.price.$error">

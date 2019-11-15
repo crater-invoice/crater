@@ -392,13 +392,14 @@ class InvoicesController extends Controller
             ]);
         }
 
+        \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
+
         if ($invoice->status == Invoice::STATUS_DRAFT) {
             $invoice->status = Invoice::STATUS_SENT;
             $invoice->sent = true;
             $invoice->save();
         }
 
-        \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
 
         return response()->json([
             'success' => true

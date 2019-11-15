@@ -13,7 +13,7 @@
           {{ $t('settings.update_app.check_update') }}
         </base-button>
         <hr>
-        <div class="mt-4 content">
+        <div v-if="isUpdateAvail" class="mt-4 content">
           <h3 class="page-title">{{ $t('settings.update_app.avail_update') }}</h3>
           <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
           <label class="version">{{ updateData.version }}</label>
@@ -24,13 +24,13 @@
             {{ $t('settings.update_app.update') }}
           </base-button>
         </div>
-        <!-- <div>
+        <div v-if="isUpdating">
           <h3 class="page-title">{{ $t('settings.update_app.update_progress') }}</h3>
           <p class="page-sub-title">
             {{ $t('settings.update_app.progress_text') }}
           </p>
           <font-awesome-icon icon="spinner" class="fa-spin"/>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -42,6 +42,7 @@ export default {
     return {
       isShowProgressBar: false,
       isUpdateAvail: false,
+      isUpdating: false,
       progress: 10,
       interval: null,
       description: '',
@@ -60,11 +61,14 @@ export default {
   },
   methods: {
     async onUpdateApp () {
+      this.isUpdating = true
       const data = this.updateData
       let response = await axios.post('/api/update', data)
       console.log(response.data)
+      this.isUpdating = false
     },
     async checkUpdate () {
+      this.isUpdateAvail = true
       let response = await axios.get('/api/check/update')
       console.log(response.data)
       if (response.data) {

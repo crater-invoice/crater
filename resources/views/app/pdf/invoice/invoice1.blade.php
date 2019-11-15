@@ -70,10 +70,15 @@
             color: rgba(0, 0, 0, 0.5);
         }
 
+        @page {
+            margin-top: 60px !important;
+        }
+
         .wrapper {
            display: block;
+           margin-top: 0px;
            padding-top: 16px;
-           padding-bottom: 60px;
+           padding-bottom: 20px;
         }
 
         .address {
@@ -350,6 +355,7 @@
             margin-left: 30px;
             width: 442px;
             text-align: left;
+            page-break-inside: avoid;
         }
 
         .notes-label {

@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,8 +1,8 @@
 <?php
-namespace Laraspace\Http;
+namespace Crater\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use Laraspace\Http\Middleware\AdminMiddleware;
+use Crater\Http\Middleware\AdminMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -16,10 +16,10 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Laraspace\Http\Middleware\TrimStrings::class,
+        \Crater\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Laraspace\Http\Middleware\TrustProxies::class,
-        \Laraspace\Http\Middleware\ConfigMiddleware::class,
+        \Crater\Http\Middleware\TrustProxies::class,
+        \Crater\Http\Middleware\ConfigMiddleware::class,
     ];
 
     /**
@@ -29,11 +29,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Laraspace\Http\Middleware\EncryptCookies::class,
+            \Crater\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Laraspace\Http\Middleware\VerifyCsrfToken::class,
+            \Crater\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,12 +55,12 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Laraspace\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Crater\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => AdminMiddleware::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'install' => \Laraspace\Http\Middleware\InstallationMiddleware::class,
-        'redirect-if-installed' => \Laraspace\Http\Middleware\RedirectIfInstalled::class,
+        'install' => \Crater\Http\Middleware\InstallationMiddleware::class,
+        'redirect-if-installed' => \Crater\Http\Middleware\RedirectIfInstalled::class,
     ];
      /**
      * The priority-sorted list of middleware.

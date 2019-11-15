@@ -1,9 +1,9 @@
 <?php
-namespace Laraspace;
+namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Laraspace\InvoiceItem;
-use Laraspace\EstimateItem;
+use Crater\InvoiceItem;
+use Crater\EstimateItem;
 use Carbon\Carbon;
 
 class Item extends Model

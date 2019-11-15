@@ -1,5 +1,5 @@
 <?php
-namespace Laraspace\Space;
+namespace Crater\Space;
 
 class TimeZones
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
-use Laraspace\Space\RequirementsChecker;
+use Crater\Space\RequirementsChecker;
 use Illuminate\Http\JsonResponse;
 
 class RequirementsController extends Controller

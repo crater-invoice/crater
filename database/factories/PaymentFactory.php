@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Laraspace\Payment;
-use Laraspace\User;
+use Crater\Payment;
+use Crater\User;
 use Faker\Generator as Faker;
 
 $factory->define(Payment::class, function (Faker $faker) {

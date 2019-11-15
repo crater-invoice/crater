@@ -1,21 +1,21 @@
 <?php
-namespace Laraspace\Http\Controllers;
+namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Laraspace\Estimate;
-use Laraspace\EstimateItem;
-use Laraspace\EstimateTemplate;
+use Crater\Estimate;
+use Crater\EstimateItem;
+use Crater\EstimateTemplate;
 use Carbon\Carbon;
-use Laraspace\Http\Requests\EstimatesRequest;
-use Laraspace\Invoice;
-use Laraspace\Currency;
-use Laraspace\User;
-use Laraspace\Item;
+use Crater\Http\Requests\EstimatesRequest;
+use Crater\Invoice;
+use Crater\Currency;
+use Crater\User;
+use Crater\Item;
 use Validator;
-use Laraspace\CompanySetting;
-use Laraspace\Mail\EstimatePdf;
-use Laraspace\TaxType;
-use Laraspace\Tax;
+use Crater\CompanySetting;
+use Crater\Mail\EstimatePdf;
+use Crater\TaxType;
+use Crater\Tax;
 
 class EstimatesController extends Controller
 {
@@ -306,8 +306,6 @@ class EstimatesController extends Controller
     public function sendEstimate(Request $request)
     {
         $estimate = Estimate::findOrFail($request->id);
-        $estimate->status = Estimate::STATUS_SENT;
-        $estimate->save();
 
         $data['estimate'] = $estimate->toArray();
         $userId = $data['estimate']['user_id'];
@@ -328,6 +326,11 @@ class EstimatesController extends Controller
             return response()->json([
                 'error' => 'notification_email_does_not_exist'
             ]);
+        }
+
+        if ($estimate->status == Estimate::STATUS_DRAFT) {
+            $estimate->status = Estimate::STATUS_SENT;
+            $estimate->save();
         }
 
         \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));

@@ -13,12 +13,12 @@ class Updater
 {
     use SiteApi;
 
-    public static function update($installed, $version)
+    public static function update($installed, $version, $isMinor)
     {
         $data = null;
         $path = null;
 
-        $url = '/download/'.$version;
+        $url = '/download/'.$version.'?type=update';
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -78,7 +78,9 @@ class Updater
         File::deleteDirectory($temp_path2);
 
         try {
-            event(new UpdateFinished($installed, $version));
+            if (!$isMinor) {
+                event(new UpdateFinished($installed, $version));
+            }
 
             return [
                 'success' => true,

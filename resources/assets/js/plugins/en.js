@@ -672,9 +672,11 @@ export default {
       check_update: 'Check for updates',
       avail_update: 'New Update available',
       next_version: 'Next version',
-      update: 'Update',
+      update: 'Update Now',
       update_progress: 'Update in progress...',
-      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
+      update_success: 'App has been updated successfully',
+      latest_message: 'No update available! You are on the latest version.'
     }
   },
   wizard: {
@@ -778,17 +780,17 @@ export default {
     password_length: 'Password must be {count} character long.',
     qty_must_greater_than_zero: 'Quantity must be greater than zero.',
     price_greater_than_zero: 'Price must be greater than zero.',
-    payment_greater_than_zero: 'Payment must be greater than zero.',
+    payment_greater_than_zero: 'Payment must be greater than   zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
-    quantity_maxlength: 'Quantity should not be greater than 10 digits.',
-    price_maxlength: 'Price should not be greater than 10 digits.',
+    quantity_maxlength: 'Quantity should not be greater than 20 digits.',
+    price_maxlength: 'Price should not be greater than 20 digits.',
     price_minvalue: 'Price should be greater than 0.',
-    amount_maxlength: 'Amount should not be greater than 10 digits.',
+    amount_maxlength: 'Amount should not be greater than 20 digits.',
     amount_minvalue: 'Amount should be greater than 0.',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',
     address_maxlength: 'Address should not be greater than 255 characters.',
-    ref_number_maxlength: 'Ref Number should not be greater than 10 digits'
+    ref_number_maxlength: 'Ref Number should not be greater than 255 characters.'
   }
 }

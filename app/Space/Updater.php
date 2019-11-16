@@ -26,7 +26,7 @@ class Updater
         if ($response instanceof RequestException) {
             return [
                 'success' => false,
-                'errors' => 'Download Exception',
+                'error' => 'Download Exception',
                 'data' => [
                     'path' => $path
                 ]
@@ -85,7 +85,7 @@ class Updater
 
             return [
                 'success' => true,
-                'errors' => false,
+                'error' => false,
                 'data' => []
             ];
         } catch (\Exception $e) {
@@ -98,7 +98,7 @@ class Updater
 
             return [
                 'success' => false,
-                'errors' => 'Update error',
+                'error' => 'Update error',
                 'data' => []
             ];
         }

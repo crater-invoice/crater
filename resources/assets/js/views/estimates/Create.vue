@@ -141,7 +141,6 @@
                 v-model="newEstimate.reference_number"
                 :invalid="$v.newEstimate.reference_number.$error"
                 icon="hashtag"
-                type="number"
                 @input="$v.newEstimate.reference_number.$touch()"
               />
               <div v-if="$v.newEstimate.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
@@ -383,7 +382,7 @@ export default {
           maxLength: maxLength(255)
         },
         reference_number: {
-          maxLength: maxLength(10)
+          maxLength: maxLength(255)
         }
       },
       selectedCustomer: {

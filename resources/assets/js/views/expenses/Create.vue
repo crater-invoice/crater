@@ -90,16 +90,16 @@
                   <label>{{ $t('expenses.amount') }}</label> <span class="text-danger"> * </span>
                   <div class="base-input">
                     <money
+                      :class="{'invalid' : $v.formData.amount.$error}"
                       v-model="amount"
                       v-bind="defaultCurrencyForInput"
-                      :class="{'invalid' : $v.formData.amount.$error}"
                       class="input-field"
                     />
                   </div>
                   <div v-if="$v.formData.amount.$error">
-                    <span v-if="!$v.formData.amount.required" class="text-danger">{{ $t('validation.required') }}</span>
-                    <span v-if="!$v.formData.amount.maxLength" class="text-danger">{{ $t('validation.amount_maxlength') }}</span>
-                    <span v-if="!$v.formData.amount.maxValue" class="text-danger">{{ $t('validation.amount_minvalue') }}</span>
+                    <span v-if="!$v.formData.amount.required" class="text-danger">{{ $t('validation.required') }} </span>
+                    <span v-if="!$v.formData.amount.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
+                    <span v-if="!$v.formData.amount.minValue" class="text-danger">{{ $t('validation.price_minvalue') }}</span>
                   </div>
                 </div>
                 <div class="form-group col-sm-6">
@@ -198,8 +198,8 @@ export default {
       },
       amount: {
         required,
-        maxLength: maxLength(10),
-        minValue: minValue(0.1)
+        minValue: minValue(0.1),
+        maxLength: maxLength(20)
       },
       notes: {
         maxLength: maxLength(255)

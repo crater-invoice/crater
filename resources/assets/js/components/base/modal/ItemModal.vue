@@ -142,7 +142,7 @@ export default {
         required,
         numeric,
         minValue: minValue(0.1),
-        maxLength: maxLength(10)
+        maxLength: maxLength(20)
       },
       description: {
         maxLength: maxLength(255)

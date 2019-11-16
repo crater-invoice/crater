@@ -374,7 +374,7 @@ import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
 import AddressStub from '../../../stub/address'
-const { required, minLength, email, numeric, alpha, url, maxLength } = require('vuelidate/lib/validators')
+const { required, minLength, email, numeric, url, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -421,8 +421,7 @@ export default {
     formData: {
       name: {
         required,
-        minLength: minLength(3),
-        alpha
+        minLength: minLength(3)
       },
       email: {
         email

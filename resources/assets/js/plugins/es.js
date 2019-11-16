@@ -774,15 +774,15 @@ export default {
     price_greater_than_zero: 'El precio debe ser mayor que cero.',
     payment_greater_than_zero: 'El pago debe ser mayor que cero.',
     payment_greater_than_due_amount: 'El pago ingresado es mayor al monto adeudado de esta factura.',
-    quantity_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
-    price_maxlength: 'El precio no debe ser mayor de 10 dígitos.',
+    quantity_maxlength: 'La cantidad no debe ser mayor de 20 dígitos.',
+    price_maxlength: 'El precio no debe ser mayor de 20 dígitos.',
     price_minvalue: 'El precio debe ser mayor que 0 dígitos',
-    amount_maxlength: 'La cantidad no debe ser mayor de 10 dígitos.',
+    amount_maxlength: 'La cantidad no debe ser mayor de 20 dígitos.',
     amount_minvalue: 'La cantidad debe ser mayor que 0 dígitos',
     description_maxlength: 'La descripción no debe tener más de 255 caracteres.',
     maximum_options_error: 'Máximo de {max} opciones seleccionadas. Primero elimine una opción seleccionada para seleccionar otra.',
     notes_maxlength: 'Las notas no deben tener más de 255 caracteres.',
     address_maxlength: 'La dirección no debe tener más de 255 caracteres.',
-    ref_number_maxlength: 'El número de referencia no debe tener más de 10 dígitos.'
+    ref_number_maxlength: 'El número de referencia no debe tener más de 255 caracteres.'
   }
 }

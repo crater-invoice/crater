@@ -69,7 +69,7 @@ class Updater
         // Delete zip file
         File::delete($file);
 
-        if (!File::copyDirectory($temp_path2.'/crater', base_path())) {
+        if (!File::copyDirectory($temp_path2.'/Crater', base_path())) {
             return false;
         }
 

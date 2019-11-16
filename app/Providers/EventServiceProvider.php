@@ -16,7 +16,6 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         UpdateFinished::class=> [
-            Version101::class,
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

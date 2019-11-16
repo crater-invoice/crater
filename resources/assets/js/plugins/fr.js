@@ -673,7 +673,15 @@ export default {
     update_app: {
       title: "Mise à jour de l'application",
       description: "mettre à jour la description de l'application",
-      update: 'Mise à jour'
+      check_update: 'Vérifier les mises à jour',
+      avail_update: 'Nouvelle mise à jour disponible',
+      next_version: 'Version suivante',
+      update: 'Mettre à jour maintenant',
+      update_progress: 'Mise à jour en cours...',
+      progress_text: "Cela ne prendra que quelques minutes. S'il vous plaît ne pas actualiser l'écran ou fermer la fenêtre avant la fin de la mise à jour",
+      update_success: "L'application a été mise à jour avec succès",
+      latest_message: 'Pas de mise a jour disponible! Vous êtes sur la dernière version.',
+      current_version: 'Version actuelle'
     }
   },
   wizard: {

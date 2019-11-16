@@ -6,7 +6,7 @@
         <p class="page-sub-title">
           {{ $t('settings.update_app.description') }}
         </p>
-        <label class="input-label">Current version</label><br>
+        <label class="input-label">{{ $t('settings.update_app.current_version') }}</label><br>
         <label class="version mb-4">{{ currentVersion }}</label>
         <base-button :outline="true" :disabled="isCheckingforUpdate || isUpdating" size="large" color="theme" @click="checkUpdate" class="mb-4">
           <font-awesome-icon :class="{'update': isCheckingforUpdate}" style="margin-right: 10px;" icon="sync-alt" />

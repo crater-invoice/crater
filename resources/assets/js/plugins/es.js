@@ -670,7 +670,15 @@ export default {
     update_app: {
       title: 'Actualizar aplicación',
       description: 'actualizar la descripción de la aplicación',
-      update: 'Actualizar'
+      check_update: 'Buscar actualizaciones',
+      avail_update: 'Nueva actualización disponible',
+      next_version: 'Próxima versión',
+      update: 'Actualizar',
+      update_progress: 'Actualización en progreso...',
+      progress_text: 'Solo tomará unos minutos. No actualice la pantalla ni cierre la ventana antes de que finalice la actualización.',
+      update_success: 'La aplicación se actualizó correctamente',
+      latest_message: '¡Actualización no disponible! Estás en la última versión.',
+      current_version: 'Versión actual'
     }
   },
   wizard: {

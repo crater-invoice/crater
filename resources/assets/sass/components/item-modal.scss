@@ -36,13 +36,15 @@
                 text-align: left;
             }
 
-            .required {
-                position: absolute;
-                left: -10px;
-                color: $ls-color-red;
-            }
-
         }
+
+        .required {
+            position: absolute;
+            right: auto;
+            margin-left: 5px;
+            color: #FB7178;
+        }
+
         text-align: left;
 
     }

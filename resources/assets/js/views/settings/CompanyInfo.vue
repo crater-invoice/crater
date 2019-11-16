@@ -27,6 +27,7 @@
             :upload-handler="cropperHandler"
             trigger="#pick-avatar"
             @changed="setFileObject"
+            @error="hadleUploadError"
           />
         </div>
         <div class="row">
@@ -177,9 +178,9 @@ export default {
       },
       isFetchingData: false,
       formData: {
-        name: '',
+        name: null,
         logo: null,
-        email: '',
+        email: null,
         phone: null,
         zip: null,
         address_street_1: null,
@@ -286,6 +287,9 @@ export default {
     setFileObject (file) {
       this.fileObject = file
     },
+    hadleUploadError (message, type, xhr) {
+      window.toastr['error']('Oops! Something went wrong...')
+    },
     async setInitialData () {
       let response = await this.loadData()
       this.isFetchingData = true
@@ -318,15 +322,19 @@ export default {
       let response = await this.editCompany(data)
       if (response.data.success) {
         this.isLoading = false
-        if (this.previewLogo) {
+        if (this.fileObject && this.previewLogo) {
           let logoData = new FormData()
-          logoData.append('company_logo', JSON.stringify({name: 'company', data: this.previewLogo}))
-          let logoUpload = await axios.post('/api/settings/company/upload-logo', logoData)
-          console.log(logoUpload.data)
+          logoData.append('company_logo', JSON.stringify({
+            name: this.fileObject.name,
+            data: this.previewLogo
+          }))
+          await axios.post('/api/settings/company/upload-logo', logoData)
         }
+        this.isLoading = false
         window.toastr['success'](this.$t('settings.company_info.updated_message'))
         return true
       }
+      this.isLoading = false
       window.toastr['error'](response.data.error)
       return true
     },

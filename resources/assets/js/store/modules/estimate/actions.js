@@ -101,7 +101,7 @@ export const deleteMultipleEstimates = ({ commit, dispatch, state }, id) => {
 export const updateEstimate = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.put(`/api/estimates/${data.id}`, data).then((response) => {
-      commit(types.UPDATE_ESTIMATE_STATUS, response.data)
+      commit(types.UPDATE_ESTIMATE, response.data)
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -132,7 +132,7 @@ export const markAsRejected = ({ commit, dispatch, state }, data) => {
 export const markAsSent = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/estimates/mark-as-sent`, data).then((response) => {
-      // commit(types.UPDATE_INVOICE, response.data)
+      commit(types.UPDATE_ESTIMATE_STATUS, {id: data.id, status: 'SENT'})
       resolve(response)
     }).catch((err) => {
       reject(err)

@@ -46,7 +46,7 @@
         </v-dropdown>
       </div>
     </div>
-    <div class="estimate-si debar">
+    <div class="estimate-sidebar">
       <base-loader v-if="isSearching" />
       <div v-else class="side-header">
         <base-input
@@ -141,8 +141,7 @@
   </div>
 </template>
 <script>
-// import { mapActions } from 'vuex'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 const _ = require('lodash')
 export default {
@@ -151,9 +150,7 @@ export default {
       id: null,
       count: null,
       estimates: [],
-      // estimate: null,
       currency: null,
-      // shareableLink: null,
       searchData: {
         orderBy: null,
         orderByField: null,
@@ -176,14 +173,10 @@ export default {
         return true
       }
       return false
-    }
-  },
+    },
+
     shareableLink () {
       return `/estimates/pdf/${this.estimate.unique_hash}`
-    },
-  watch: {
-    '$route.params.id' (val) {
-      this.fetchEstimate()
     }
   },
   created () {
@@ -205,7 +198,6 @@ export default {
       if (response.data) {
         this.estimates = response.data.estimates.data
       }
-      this.fetchEstimate()
     },
     async onSearched () {
       let data = ''
@@ -227,15 +219,6 @@ export default {
         this.estimates = response.data.estimates.data
       }
     },
-    // async fetchEstimate () {
-    //   let estimate = await this.fetchViewEstimate(this.$route.params.id)
-
-    //   if (estimate.data) {
-    //     this.estimate = estimate.data.estimate
-    //     this.shareableLink = estimate.data.shareable_link
-    //     this.currency = estimate.data.estimate.user.currency
-    //   }
-    // },
     sortData () {
       if (this.searchData.orderBy === 'asc') {
         this.searchData.orderBy = 'desc'

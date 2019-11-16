@@ -2,21 +2,14 @@
 namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Crater\Expense;
-use Crater\Http\Requests;
 use Crater\Invoice;
-use Crater\Payment;
-use Crater\PdfSetting;
 use PDF;
-use Crater\Currency;
 use Crater\CompanySetting;
 use Crater\Estimate;
-use Crater\Item;
 use Crater\User;
 use Crater\Company;
 use Crater\InvoiceTemplate;
 use Crater\EstimateTemplate;
-use Auth;
 use Crater\Mail\EstimateViewed;
 use Crater\Mail\InvoiceViewed;
 

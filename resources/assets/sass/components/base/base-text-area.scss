@@ -1,5 +1,6 @@
 .base-text-area {
     width: 100%;
+
     &.text-area-field {
         width: 100%;
         padding: 8px 13px;
@@ -38,5 +39,7 @@
         &-icon {
             padding-left: 35px;
         }
+
     }
+
 }

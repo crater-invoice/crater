@@ -1,10 +1,6 @@
 <template>
   <div class="card-body">
     <form action="" @submit.prevent="next()">
-      <!-- <div v-if="previewLogo" class="upload-logo">
-        <label class="form-label">{{ $t('wizard.logo_preview') }}</label><br>
-        <img v-if="previewLogo" :src="previewLogo" class="preview-logo">
-      </div> -->
       <p class="form-title">{{ $t('wizard.company_info') }}</p>
       <p class="form-desc">{{ $t('wizard.company_info_desc') }}</p>
       <div class="row mb-4">
@@ -155,8 +151,7 @@
 import MultiSelect from 'vue-multiselect'
 import AvatarCropper from 'vue-avatar-cropper'
 import { validationMixin } from 'vuelidate'
-import Ls from '../../services/ls'
-const { required, minLength, email, maxLength } = require('vuelidate/lib/validators')
+const { required, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: {

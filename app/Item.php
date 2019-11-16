@@ -108,6 +108,7 @@ class Item extends Model
         if ($item->estimateItems()->exists() && $item->estimateItems()->count() > 0) {
             return false;
         }
+
         $item->delete();
 
         return true;

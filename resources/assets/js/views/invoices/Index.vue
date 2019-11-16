@@ -254,7 +254,7 @@
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#" @click="sentInvoice(row.id)">
+                <a class="dropdown-item" href="#" @click="markInvoiceAsSent(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('invoices.mark_as_sent') }}
                 </a>
@@ -390,8 +390,8 @@ export default {
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willSendInvoice) => {
-        if (willSendInvoice) {
+      }).then(async (value) => {
+        if (value) {
           const data = {
             id: id
           }
@@ -403,15 +403,15 @@ export default {
         }
       })
     },
-    async sentInvoice (id) {
+    async markInvoiceAsSent (id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willMarkAsSend) => {
-        if (willMarkAsSend) {
+      }).then(async (value) => {
+        if (value) {
           const data = {
             id: id
           }
@@ -499,8 +499,8 @@ export default {
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willDelete) => {
-        if (willDelete) {
+      }).then(async (value) => {
+        if (value) {
           let res = await this.deleteInvoice(this.id)
 
           if (res.data.success) {
@@ -529,8 +529,8 @@ export default {
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willDelete) => {
-        if (willDelete) {
+      }).then(async (value) => {
+        if (value) {
           let res = await this.deleteMultipleInvoices()
           if (res.data.error === 'payment_attached') {
             window.toastr['error'](this.$t('invoices.payment_attached_message'), this.$t('general.action_failed'))

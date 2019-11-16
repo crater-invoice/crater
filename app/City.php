@@ -3,7 +3,6 @@ namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
 use Crater\State;
-use Crater\Country;
 
 class City extends Model
 {

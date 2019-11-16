@@ -7,24 +7,24 @@
           {{ $t('settings.update_app.description') }}
         </p>
         <label class="input-label">Current version</label><br>
-        <label class="version">1.0.0</label>
-        <base-button :outline="true" size="large" color="theme" @click="checkUpdate">
-          <font-awesome-icon :class="{'update': isUpdateAvail}" style="margin-right: 10px;" icon="sync-alt" />
+        <label class="version mb-4">{{ currentVersion }}</label>
+        <base-button :outline="true" :disabled="isCheckingforUpdate || isUpdating" size="large" color="theme" @click="checkUpdate" class="mb-4">
+          <font-awesome-icon :class="{'update': isCheckingforUpdate}" style="margin-right: 10px;" icon="sync-alt" />
           {{ $t('settings.update_app.check_update') }}
         </base-button>
         <hr>
-        <div v-show="!isUpdating" v-if="isUpdateAvail" class="mt-4 content">
-          <h3 class="page-title">{{ $t('settings.update_app.avail_update') }}</h3>
+        <div v-show="!isUpdating" v-if="isUpdateAvailable" class="mt-4 content">
+          <h3 class="page-title mb-3">{{ $t('settings.update_app.avail_update') }}</h3>
           <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
           <label class="version">{{ updateData.version }}</label>
           <p class="page-sub-title">
             {{ description }}
           </p>
-          <base-button size="large" color="theme" @click="onUpdateApp">
+          <base-button size="large" icon="rocket" color="theme" @click="onUpdateApp">
             {{ $t('settings.update_app.update') }}
           </base-button>
         </div>
-        <div v-if="isUpdating">
+        <div v-if="isUpdating" class="mt-4 content">
           <h3 class="page-title">{{ $t('settings.update_app.update_progress') }}</h3>
           <p class="page-sub-title">
             {{ $t('settings.update_app.progress_text') }}
@@ -35,17 +35,19 @@
     </div>
   </div>
 </template>
+
 <script>
-import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
       isShowProgressBar: false,
-      isUpdateAvail: false,
+      isUpdateAvailable: false,
       isUpdating: false,
+      isCheckingforUpdate: false,
       progress: 10,
       interval: null,
       description: '',
+      currentVersion: '',
       updateData: {
         isMinor: Boolean,
         installed: '',
@@ -53,33 +55,55 @@ export default {
       }
     }
   },
-  computed: {
-  },
-  watch: {
-  },
+
   mounted () {
+    window.axios.get('/api/settings/app/version').then((res) => {
+      this.currentVersion = res.data.version
+    })
   },
   methods: {
     async onUpdateApp () {
-      this.isUpdating = true
-      const data = this.updateData
-      let response = await axios.post('/api/update', data)
-      console.log(response.data)
+      try {
+        this.isUpdating = true
+        this.updateData.installed = this.currentVersion
+        let res = await window.axios.post('/api/update', this.updateData)
+
+        if (res.data.success) {
+          this.isUpdateAvailable = false
+          window.toastr['success'](this.$t('settings.update_app.update_success'))
+          this.currentVersion = this.updateData.version
+        } else {
+          console.log(res.data)
+          window.toastr['error'](res.data.error)
+        }
+      } catch (e) {
+        console.log(e)
+        window.toastr['error']('Something went wrong')
+      }
+
       this.isUpdating = false
-      this.isUpdateAvail = false
     },
     async checkUpdate () {
       try {
-        let response = await axios.get('/api/check/update')
-        console.log(response.data)
+        this.isCheckingforUpdate = true
+        let response = await window.axios.get('/api/check/update')
+        this.isCheckingforUpdate = false
+
+        if (!response.data.version) {
+          window.toastr['warning'](this.$t('settings.update_app.latest_message'))
+
+          return
+        }
+
         if (response.data) {
           this.updateData.isMinor = response.data.is_minor
-          this.updateData.version = response.data.version
+          this.updateData.version = response.data.version.version
           this.description = response.data.description
+          this.isUpdateAvailable = true
         }
-        this.isUpdateAvail = true
       } catch (e) {
-        this.isUpdateAvail = false
+        this.isUpdateAvailable = false
+        this.isCheckingforUpdate = false
         window.toastr['error']('Something went wrong')
       }
     }

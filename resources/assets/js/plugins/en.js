@@ -182,7 +182,7 @@ export default {
     list_of_items: 'This section will contain the list of items.',
     select_a_unit: 'select unit',
 
-    item_attached_message: 'Cannot delete an item already in use',
+    item_attached_message: 'Cannot delete an item which is already in use',
     confirm_delete: 'You will not be able to recover this Item | You will not be able to recover these Items',
     created_message: 'Item created successfully',
     updated_message: 'Item updated successfully',
@@ -227,7 +227,7 @@ export default {
     add_estimate: 'Add Estimate',
     save_estimate: 'Save Estimate',
     confirm_conversion: 'You want to convert this Estimate into Invoice?',
-    conversion_message: 'Conversion successful',
+    conversion_message: 'Invoice created successful',
     confirm_send_estimate: 'This estimate will be sent via email to the customer',
     confirm_mark_as_sent: 'This estimate will be marked as sent',
     confirm_mark_as_accepted: 'This estimate will be marked as Accepted',
@@ -672,9 +672,11 @@ export default {
       check_update: 'Check for updates',
       avail_update: 'New Update available',
       next_version: 'Next version',
-      update: 'Update',
+      update: 'Update Now',
       update_progress: 'Update in progress...',
-      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
+      update_success: 'App has been updated successfully',
+      latest_message: 'No update available! You are on the latest version.'
     }
   },
   wizard: {
@@ -778,17 +780,17 @@ export default {
     password_length: 'Password must be {count} character long.',
     qty_must_greater_than_zero: 'Quantity must be greater than zero.',
     price_greater_than_zero: 'Price must be greater than zero.',
-    payment_greater_than_zero: 'Payment must be greater than zero.',
+    payment_greater_than_zero: 'Payment must be greater than   zero.',
     payment_greater_than_due_amount: 'Entered Payment is more than due amount of this invoice.',
-    quantity_maxlength: 'Quantity should not be greater than 10 digits.',
-    price_maxlength: 'Price should not be greater than 10 digits.',
+    quantity_maxlength: 'Quantity should not be greater than 20 digits.',
+    price_maxlength: 'Price should not be greater than 20 digits.',
     price_minvalue: 'Price should be greater than 0.',
-    amount_maxlength: 'Amount should not be greater than 10 digits.',
+    amount_maxlength: 'Amount should not be greater than 20 digits.',
     amount_minvalue: 'Amount should be greater than 0.',
     description_maxlength: 'Description should not be greater than 255 characters.',
     maximum_options_error: 'Maximum  of {max} options selected. First remove a selected option to select another.',
     notes_maxlength: 'Notes should not be greater than 255 characters.',
     address_maxlength: 'Address should not be greater than 255 characters.',
-    ref_number_maxlength: 'Ref Number should not be greater than 10 digits'
+    ref_number_maxlength: 'Ref Number should not be greater than 255 characters.'
   }
 }

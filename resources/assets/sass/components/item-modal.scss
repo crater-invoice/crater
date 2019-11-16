@@ -1,3 +1,7 @@
+.base-modal .modal-body {
+    overflow: visible !important;
+ }
+
 .item-modal {
 
     .card-footer {
@@ -23,7 +27,7 @@
 
 @media(max-width: $x-small-breakpoint ) {
 
-    .base-modal {
+    .base-modal .item-modal .input-label{
 
         .item-modal {
             width: 100vw;
@@ -32,7 +36,14 @@
                 text-align: left;
             }
 
+            .required {
+                position: absolute;
+                left: -10px;
+                color: $ls-color-red;
+            }
+
         }
+        text-align: left;
 
     }
 

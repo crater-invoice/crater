@@ -18,7 +18,7 @@ class Updater
         $data = null;
         $path = null;
 
-        $url = '/downloads/file/'.$version.'?type=update';
+        $url = 'https://craterapp.com/downloads/file/'.$version.'?type=update';
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -26,7 +26,7 @@ class Updater
         if ($response instanceof RequestException) {
             return [
                 'success' => false,
-                'errors' => 'Download Exception',
+                'error' => 'Download Exception',
                 'data' => [
                     'path' => $path
                 ]
@@ -84,13 +84,13 @@ class Updater
 
             return [
                 'success' => true,
-                'errors' => false,
+                'error' => false,
                 'data' => []
             ];
         } catch (\Exception $e) {
             return [
                 'success' => false,
-                'errors' => 'Update error',
+                'error' => 'Update error',
                 'data' => []
             ];
         }
@@ -99,7 +99,7 @@ class Updater
     public static function checkForUpdate()
     {
         $data = null;
-        $url = '/downloads/check/latest/'.Setting::getSetting('version');
+        $url = 'https://craterapp.com/downloads/check/latest/'. Setting::getSetting('version');
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 

@@ -10,7 +10,7 @@
     background-color: transparent;
     border: 0;
     margin: 0;
-    overflow: visible; 
+    overflow: visible;
 }
 
 .hamburger-box {
@@ -25,34 +25,44 @@
     top: 50%;
     left: 4.5px;
     right: 4.5px;
-    margin-top: -2px; 
+    margin-top: -2px;
 }
-.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
     height: 2px;
     background-color: $header-buttons-font-color;
     border-radius: 2px;
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
-    transition-timing-function: ease; 
+    transition-timing-function: ease;
 }
-.hamburger-inner::before, .hamburger-inner::after {
+
+.hamburger-inner::before,
+.hamburger-inner::after {
     content: "";
     display: block;
     width:100%;
 }
+
 .hamburger-inner::before {
-    top: -5px; 
+    top: -5px;
 }
+
 .hamburger-inner::after {
-    bottom: -5px; 
+    bottom: -5px;
 }
+
 .hamburger--arrowturn.is-active .hamburger-inner {
     transform: rotate(-180deg);
 }
+
 .hamburger--arrowturn.is-active .hamburger-inner::before {
-    transform: translate3d(3px, 1px, 0) rotate(45deg) scale(0.7, 1); 
+    transform: translate3d(3px, 1px, 0) rotate(45deg) scale(0.7, 1);
 }
+
 .hamburger--arrowturn.is-active .hamburger-inner::after {
-    transform: translate3d(3px, -1px, 0) rotate(-45deg) scale(0.7, 1); 
+    transform: translate3d(3px, -1px, 0) rotate(-45deg) scale(0.7, 1);
 }

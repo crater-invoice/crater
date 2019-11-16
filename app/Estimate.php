@@ -218,6 +218,7 @@ class Estimate extends Model
         if ($estimate->taxes()->exists()) {
             $estimate->taxes()->delete();
         }
+
         $estimate->delete();
 
         return true;

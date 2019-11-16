@@ -145,7 +145,7 @@ export default {
         name: this.formData.name,
         email: this.formData.email
       }
-      if (this.formData.password != null && this.formData.password != undefined && this.formData.password != '') {
+      if (this.formData.password != null && this.formData.password !== undefined && this.formData.password !== '') {
         data = { ...data, password: this.formData.password }
       }
       let response = await this.editUser(data)

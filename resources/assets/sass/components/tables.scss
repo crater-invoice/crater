@@ -290,7 +290,7 @@ table.full-width {
 }
 
 .table-component td > span:first-child {
-    background: $gray--light;
+    background: $ls-color-gray--light;
     color: $ls-color-secondary;
     display: none;
     font-size: 10px;
@@ -346,7 +346,7 @@ table.full-width {
             position: relative;
             width: 50%;
             left: 0;
-            border: 1px solid $gray--light !important;
+            border: 1px solid $ls-color-gray--light !important;
 
             &:not(:first-child) {
                 text-align: center !important;

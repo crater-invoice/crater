@@ -101,6 +101,11 @@ Route::group(['middleware' => 'redirect-if-installed'], function () {
         'uses' => 'OnboardingController@adminCompany'
     ]);
 
+    Route::post('/admin/onboarding/company/upload-logo', [
+        'as' => 'upload.admin.company.logo',
+        'uses' => 'CompanyController@uploadCompanyLogo'
+    ]);
+
     Route::post('/admin/onboarding/settings', [
         'as' => 'admin.settings',
         'uses' => 'OnboardingController@companySettings'

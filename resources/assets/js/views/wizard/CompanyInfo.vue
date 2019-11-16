@@ -276,7 +276,12 @@ export default {
             data: this.previewLogo
           }))
 
-          await axios.post('/api/settings/company/upload-logo', logoData)
+          await axios.post('/api/admin/onboarding/company/upload-logo', logoData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'company': response.data.user.company.id
+            }
+          })
         }
 
         this.$emit('next')

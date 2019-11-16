@@ -314,12 +314,16 @@ export default {
       data.append('country_id', this.formData.country_id)
       data.append('zip', this.formData.zip)
       data.append('phone', this.formData.phone)
-      if (this.fileObject) {
-        data.append('logo', this.fileObject)
-      }
+
       let response = await this.editCompany(data)
       if (response.data.success) {
         this.isLoading = false
+        if (this.previewLogo) {
+          let logoData = new FormData()
+          logoData.append('company_logo', JSON.stringify({name: 'company', data: this.previewLogo}))
+          let logoUpload = await axios.post('/api/settings/company/upload-logo', logoData)
+          console.log(logoUpload.data)
+        }
         window.toastr['success'](this.$t('settings.company_info.updated_message'))
         return true
       }

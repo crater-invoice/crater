@@ -672,9 +672,11 @@ export default {
       check_update: 'Check for updates',
       avail_update: 'New Update available',
       next_version: 'Next version',
-      update: 'Update',
+      update: 'Update Now',
       update_progress: 'Update in progress...',
-      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes'
+      progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
+      update_success: 'App has been updated successfully',
+      latest_message: 'No update available! You are on the latest version.'
     }
   },
   wizard: {

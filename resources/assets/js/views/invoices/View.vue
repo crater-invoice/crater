@@ -180,11 +180,6 @@ export default {
       return `/invoices/pdf/${this.invoice.unique_hash}`
     }
   },
-  watch: {
-    '$route.params.id' (val) {
-      this.invoice()
-    }
-  },
   created () {
     this.loadInvoices()
     this.onSearched = _.debounce(this.onSearched, 500)

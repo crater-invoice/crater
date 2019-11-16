@@ -65,7 +65,9 @@ export default {
     async onUpdateApp () {
       try {
         this.isUpdating = true
+        this.updateData.installed = this.currentVersion
         let res = await window.axios.post('/api/update', this.updateData)
+
         if (res.data.success) {
           this.isUpdateAvailable = false
           window.toastr['success'](this.$t('settings.update_app.update_success'))
@@ -95,7 +97,7 @@ export default {
 
         if (response.data) {
           this.updateData.isMinor = response.data.is_minor
-          this.updateData.version = response.data.version
+          this.updateData.version = response.data.version.version
           this.description = response.data.description
           this.isUpdateAvailable = true
         }

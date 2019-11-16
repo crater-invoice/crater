@@ -24,8 +24,6 @@
         }
     }
 
-
-
 }
 
 .vdp-datepicker__calendar-button {
@@ -39,7 +37,8 @@
     line-height: 16px;
     top: 50%;
     left: 20px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+
     .icon-fa {
         color: $ls-color-gray;
     }

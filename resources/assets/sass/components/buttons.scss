@@ -57,6 +57,7 @@
 .btn-icon {
     padding: 0.6rem;
     line-height: 1em;
+
     i {
         text-align: center;
     }
@@ -159,7 +160,4 @@
 .btn-crater-hollow:hover {
     opacity: 0.9;
     color: $ls-color-primary;
-}
-
-.btn-crater-hollow:focus {
 }

@@ -11453,6 +11453,10 @@ code,
   align-items: center;
 }
 
+.swal-icon--custom {
+  height: 70px !important;
+}
+
 .site-header {
   background-color: #5851D8;
   height: 60px;
@@ -14938,6 +14942,12 @@ fieldset[disabled] .multiselect {
   color: #FB7178;
 }
 
+@media (max-width: 480px) {
+  .base-modal .item-modal .input-label {
+    text-align: left;
+  }
+}
+
 .template-modal .template-container {
   display: flex;
   justify-content: flex-start;
@@ -15009,6 +15019,12 @@ fieldset[disabled] .multiselect {
   justify-content: flex-end;
 }
 
+@media (max-width: 480px) {
+  .base-modal .customer-modal .input-label {
+    text-align: left;
+  }
+}
+
 .tax-type-modal .card-footer {
   display: flex;
   justify-content: flex-end;
@@ -15055,6 +15071,16 @@ fieldset[disabled] .multiselect {
   position: absolute;
   right: -10px;
   color: #FB7178;
+}
+
+@media (max-width: 480px) {
+  .base-modal .category-modal .input-label {
+    text-align: left;
+  }
+}
+
+.dashboard .dashboard-table .table-component .dashboard-recent-invoice-options .dropdown-container {
+  margin: 10px 5px 0 -75px;
 }
 
 .dashbox {
@@ -15901,6 +15927,16 @@ fieldset[disabled] .multiselect {
   overflow: hidden;
 }
 
+.settings-container .version {
+  background: #EAF1FB;
+  color: #A5ACC1;
+  border: 1px solid #EAF1FB;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 480px) {
   .settings-container .setting-main-container .setting-card {
     overflow: scroll;
@@ -15989,6 +16025,7 @@ fieldset[disabled] .multiselect {
 
 .invoice-create-page .address-menu .content {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -16371,6 +16408,9 @@ fieldset[disabled] .multiselect {
 .invoice-create-page .invoice-foot .invoice-total .section .invoice-amount {
   font-size: 18px;
   color: #55547A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .invoice-create-page .invoice-foot .invoice-total .section .total {
@@ -16745,7 +16785,7 @@ fieldset[disabled] .multiselect {
 }
 
 .invoice-index-page .filter-date {
-  flex: 1;
+  flex: 2;
   display: flex;
   margin-right: 40px;
   align-items: center;
@@ -16769,7 +16809,7 @@ fieldset[disabled] .multiselect {
   margin-top: 28px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
   .invoice-index-page .filter-container {
     flex-direction: column;
   }
@@ -16852,6 +16892,7 @@ fieldset[disabled] .multiselect {
 
 .estimate-create-page .address-menu .content {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -17234,6 +17275,9 @@ fieldset[disabled] .multiselect {
 .estimate-create-page .estimate-foot .estimate-total .section .estimate-amount {
   font-size: 18px;
   color: #55547A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .estimate-create-page .estimate-foot .estimate-total .section .total {
@@ -17274,7 +17318,6 @@ fieldset[disabled] .multiselect {
   font-weight: 300;
   font-size: 12px;
   padding-top: 2px;
-  padding-left: 10px;
 }
 
 .estimate-create-page .item-row .item-description textarea {
@@ -17420,7 +17463,7 @@ fieldset[disabled] .multiselect {
 }
 
 .estimate-index-page .filter-date {
-  flex: 1;
+  flex: 2;
   display: flex;
   margin-right: 40px;
   align-items: center;
@@ -17444,7 +17487,7 @@ fieldset[disabled] .multiselect {
   margin-top: 28px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
   .estimate-index-page .filter-container {
     flex-direction: column;
   }
@@ -17963,6 +18006,16 @@ fieldset[disabled] .multiselect {
   overflow: hidden;
 }
 
+.settings-container .version {
+  background: #EAF1FB;
+  color: #A5ACC1;
+  border: 1px solid #EAF1FB;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 480px) {
   .settings-container .setting-main-container .setting-card {
     overflow: scroll;
@@ -18096,6 +18149,9 @@ fieldset[disabled] .multiselect {
   border-radius: 50%;
   height: 21px;
   width: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wizard .indicator-line .steps.completed .icon-check {
@@ -18266,8 +18322,6 @@ fieldset[disabled] .multiselect {
 
 .customer-create .same-address-checkbox-container {
   display: flex;
-  justify-content: flex-end;
-  padding-left: 12px;
   margin-bottom: 1.5rem;
   align-items: center;
   justify-content: flex-end;
@@ -18318,7 +18372,6 @@ fieldset[disabled] .multiselect {
   .customer-create .same-address-checkbox-container {
     display: flex;
     justify-content: flex-start;
-    padding-left: 15px;
     margin-bottom: 0rem;
   }
 
@@ -18440,7 +18493,7 @@ fieldset[disabled] .multiselect {
   }
 }
 
-.inv-status-due {
+.inv-status-overdue {
   background: #FED7D7;
   font-size: 13px;
   color: #9B2C2C;
@@ -18455,9 +18508,9 @@ fieldset[disabled] .multiselect {
 }
 
 .inv-status-unpaid {
-  background: rgba(246, 208, 154, 0.4);
+  background: #F8EDCB;
   font-size: 13px;
-  color: #A96E1A;
+  color: #6C432E;
   padding: 5px 10px;
 }
 
@@ -18490,9 +18543,9 @@ fieldset[disabled] .multiselect {
 }
 
 .inv-status-partially_paid {
-  background: #E1E0EA;
+  background: #C9E3EC;
   font-size: 13px;
-  color: #312F57;
+  color: #1E576C;
   padding: 5px 10px;
 }
 

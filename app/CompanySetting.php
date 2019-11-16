@@ -2,7 +2,6 @@
 namespace Crater;
 
 use Illuminate\Database\Eloquent\Model;
-use Crater\User;
 
 class CompanySetting extends Model
 {

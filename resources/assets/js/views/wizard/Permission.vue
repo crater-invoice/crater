@@ -34,8 +34,6 @@
   </div>
 </template>
 <script>
-import Ls from '../../services/ls'
-
 export default {
   data () {
     return {

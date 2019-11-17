@@ -60,7 +60,7 @@
           icon="search"
           type="text"
           align-icon="right"
-          @input="onSearched()"
+          @input="onSearch"
         />
         <div
           class="btn-group ml-3"
@@ -82,7 +82,7 @@
                 name="filter"
                 class="inv-radio"
                 value="invoice_date"
-                @change="onSearched"
+                @change="onSearch"
               >
               <label class="inv-label" for="filter_invoice_date">{{ $t('invoices.invoice_date') }}</label>
             </div>
@@ -94,7 +94,7 @@
                 name="filter"
                 class="inv-radio"
                 value="due_date"
-                @change="onSearched"
+                @change="onSearch"
               >
               <label class="inv-label" for="filter_due_date">{{ $t('invoices.due_date') }}</label>
             </div>
@@ -106,7 +106,7 @@
                 name="filter"
                 class="inv-radio"
                 value="invoice_number"
-                @change="onSearched"
+                @change="onSearch"
               >
               <label class="inv-label" for="filter_invoice_number">{{ $t('invoices.invoice_number') }}</label>
             </div>
@@ -182,7 +182,7 @@ export default {
   },
   created () {
     this.loadInvoices()
-    this.onSearched = _.debounce(this.onSearched, 500)
+    this.onSearch = _.debounce(this.onSearch, 500)
   },
   methods: {
     ...mapActions('invoice', [
@@ -200,7 +200,7 @@ export default {
         this.invoices = response.data.invoices.data
       }
     },
-    async onSearched () {
+    async onSearch () {
       let data = ''
       if (this.searchData.searchText !== '' && this.searchData.searchText !== null && this.searchData.searchText !== undefined) {
         data += `search=${this.searchData.searchText}&`
@@ -223,22 +223,22 @@ export default {
     sortData () {
       if (this.searchData.orderBy === 'asc') {
         this.searchData.orderBy = 'desc'
-        this.onSearched()
+        this.onSearch()
         return true
       }
       this.searchData.orderBy = 'asc'
-      this.onSearched()
+      this.onSearch()
       return true
     },
     async onMarkAsSent () {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willMarkAsSent) => {
-        if (willMarkAsSent) {
+      }).then(async (value) => {
+        if (value) {
           this.isMarkingAsSent = true
           let response = await this.markAsSent({id: this.invoice.id})
           this.isMarkingAsSent = false
@@ -249,14 +249,14 @@ export default {
       })
     },
     async onSendInvoice () {
-      swal({
+      window.swal({
         title: this.$tc('general.are_you_sure'),
         text: this.$tc('invoices.confirm_send_invoice'),
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willSendInvoice) => {
-        if (willSendInvoice) {
+      }).then(async (value) => {
+        if (value) {
           this.isSendingEmail = true
           let response = await this.sendEmail({id: this.invoice.id})
           this.isSendingEmail = false
@@ -269,14 +269,14 @@ export default {
     async removeInvoice (id) {
       this.selectInvoice([parseInt(id)])
       this.id = id
-      swal({
+      window.swal({
         title: 'Deleted',
         text: 'you will not be able to recover this invoice!',
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willDelete) => {
-        if (willDelete) {
+      }).then(async (value) => {
+        if (value) {
           let request = await this.deleteInvoice(this.id)
           if (request.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message', 1))

@@ -188,13 +188,13 @@
           sort-as="estimate_date"
           show="formattedEstimateDate" />
         <table-column
-          :label="$t('estimates.contact')"
+          :label="$t('estimates.customer')"
           sort-as="name"
           show="name" />
-        <table-column
+        <!-- <table-column
           :label="$t('estimates.expiry_date')"
           sort-as="expiry_date"
-          show="formattedExpiryDate" />
+          show="formattedExpiryDate" /> -->
         <table-column
           :label="$t('estimates.status')"
           show="status" >

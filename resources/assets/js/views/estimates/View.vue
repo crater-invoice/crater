@@ -140,10 +140,11 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapActions } from 'vuex'
-
 const _ = require('lodash')
+
 export default {
   data () {
     return {
@@ -230,14 +231,14 @@ export default {
       return true
     },
     async onMarkAsSent () {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willMarkAsSent) => {
-        if (willMarkAsSent) {
+      }).then(async (value) => {
+        if (value) {
           this.isMarkAsSent = true
           let response = await this.markAsSent({id: this.estimate.id})
           this.isMarkAsSent = false
@@ -248,14 +249,14 @@ export default {
       })
     },
     async onSendEstimate (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_send_estimate'),
         icon: '/assets/icon/paper-plane-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willSendEstimate) => {
-        if (willSendEstimate) {
+      }).then(async (value) => {
+        if (value) {
           this.isSendingEmail = true
           let response = await this.sendEmail({id: this.estimate.id})
           this.isSendingEmail = false
@@ -266,17 +267,15 @@ export default {
       })
     },
     async removeEstimate (id) {
-      this.selectEstimate([parseInt(id)])
-      this.id = id
-      swal({
+      window.swal({
         title: 'Deleted',
         text: 'you will not be able to recover this estimate!',
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (willDelete) => {
-        if (willDelete) {
-          let request = await this.deleteEstimate(this.id)
+      }).then(async (value) => {
+        if (value) {
+          let request = await this.deleteEstimate(id)
           if (request.data.success) {
             window.toastr['success'](this.$tc('estimates.deleted_message', 1))
             this.$router.push('/admin/estimates')

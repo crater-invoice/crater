@@ -349,7 +349,7 @@ export default {
     updated_message: 'Invoice updated successfully',
     deleted_message: 'Invoice deleted successfully | Invoices deleted successfully',
     marked_as_sent_message: 'Invoice marked as sent successfully',
-    invalid_due_amount_message: 'The payment entered is more than the total amount due for this invoice. Please check and retry'
+    invalid_due_amount_message: 'Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue.'
   },
   credit_notes: {
     title: 'Credit Notes',
@@ -677,7 +677,8 @@ export default {
       update_progress: 'Update in progress...',
       progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
       update_success: 'App has been updated successfully',
-      latest_message: 'No update available! You are on the latest version.'
+      latest_message: 'No update available! You are on the latest version.',
+      current_version: 'Current Version'
     }
   },
   wizard: {

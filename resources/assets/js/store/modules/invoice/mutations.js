@@ -28,6 +28,12 @@ export default {
     state.invoices[pos] = data.invoice
   },
 
+  [types.UPDATE_INVOICE_STATUS] (state, data) {
+    let pos = state.invoices.findIndex(invoice => invoice.id === data.id)
+
+    state.invoices[pos].status = data.status
+  },
+
   [types.RESET_SELECTED_INVOICES] (state, data) {
     state.selectedInvoices = []
     state.selectAllField = false

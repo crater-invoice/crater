@@ -5,8 +5,9 @@
       <div class="page-actions row">
         <div class="col-xs-2 mr-3">
           <base-button
-            :loading="isRequestOnGoing"
-            :disabled="isRequestOnGoing"
+            v-if="invoice.status === 'DRAFT'"
+            :loading="isMarkingAsSent"
+            :disabled="isMarkingAsSent"
             :outline="true"
             color="theme"
             @click="onMarkAsSent"
@@ -14,7 +15,17 @@
             {{ $t('invoices.mark_as_sent') }}
           </base-button>
         </div>
-        <router-link :to="`/admin/payments/${$route.params.id}/create`">
+        <base-button
+          v-if="invoice.status === 'DRAFT'"
+          :loading="isSendingEmail"
+          :disabled="isSendingEmail"
+          :outline="true"
+          color="theme"
+          @click="onSendInvoice"
+        >
+          {{ $t('invoices.send_invoice') }}
+        </base-button>
+        <router-link v-if="invoice.status === 'SENT'" :to="`/admin/payments/${$route.params.id}/create`">
           <base-button
             color="theme"
           >
@@ -135,7 +146,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 const _ = require('lodash')
 export default {
   data () {
@@ -143,42 +154,43 @@ export default {
       id: null,
       count: null,
       invoices: [],
-      invoice: null,
       currency: null,
-      shareableLink: null,
       searchData: {
         orderBy: null,
         orderByField: null,
         searchText: null
       },
       isRequestOnGoing: false,
-      isSearching: false
+      isSearching: false,
+      isSendingEmail: false,
+      isMarkingAsSent: false
     }
   },
   computed: {
+    invoice () {
+      return this.$store.getters['invoice/getInvoice'](this.$route.params.id)
+    },
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
       }
       return false
+    },
+    shareableLink () {
+      return `/invoices/pdf/${this.invoice.unique_hash}`
     }
   },
-  watch: {
-    '$route.params.id' (val) {
-      this.fetchInvoice()
-    }
-  },
-  mounted () {
+  created () {
     this.loadInvoices()
     this.onSearched = _.debounce(this.onSearched, 500)
   },
   methods: {
     ...mapActions('invoice', [
       'fetchInvoices',
-      'fetchViewInvoice',
       'getRecord',
       'searchInvoice',
       'markAsSent',
+      'sendEmail',
       'deleteInvoice',
       'selectInvoice'
     ]),
@@ -187,7 +199,6 @@ export default {
       if (response.data) {
         this.invoices = response.data.invoices.data
       }
-      this.fetchInvoice()
     },
     async onSearched () {
       let data = ''
@@ -209,15 +220,6 @@ export default {
         this.invoices = response.data.invoices.data
       }
     },
-    async fetchInvoice () {
-      let invoice = await this.fetchViewInvoice(this.$route.params.id)
-
-      if (invoice.data) {
-        this.invoice = invoice.data.invoice
-        this.shareableLink = invoice.data.shareable_link
-        this.currency = invoice.data.invoice.user.currency
-      }
-    },
     sortData () {
       if (this.searchData.orderBy === 'asc') {
         this.searchData.orderBy = 'desc'
@@ -229,19 +231,37 @@ export default {
       return true
     },
     async onMarkAsSent () {
-       swal({
+      swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
         dangerMode: true
-      }).then(async (MarkAsSend_Invoice) => {
-        if (MarkAsSend_Invoice) {
-          this.isRequestOnGoing = true
+      }).then(async (willMarkAsSent) => {
+        if (willMarkAsSent) {
+          this.isMarkingAsSent = true
           let response = await this.markAsSent({id: this.invoice.id})
-          this.isRequestOnGoing = false
+          this.isMarkingAsSent = false
           if (response.data) {
             window.toastr['success'](this.$tc('invoices.marked_as_sent_message'))
+          }
+        }
+      })
+    },
+    async onSendInvoice () {
+      swal({
+        title: this.$tc('general.are_you_sure'),
+        text: this.$tc('invoices.confirm_send_invoice'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willSendInvoice) => {
+        if (willSendInvoice) {
+          this.isSendingEmail = true
+          let response = await this.sendEmail({id: this.invoice.id})
+          this.isSendingEmail = false
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.confirm_send_invoice'))
           }
         }
       })

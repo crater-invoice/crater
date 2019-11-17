@@ -56,6 +56,7 @@ export const fetchViewEstimate = ({ commit, dispatch, state }, id) => {
 export const sendEmail = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/estimates/send`, data).then((response) => {
+      commit(types.UPDATE_ESTIMATE_STATUS, {id: data.id, status: 'SENT'})
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -131,7 +132,7 @@ export const markAsRejected = ({ commit, dispatch, state }, data) => {
 export const markAsSent = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/estimates/mark-as-sent`, data).then((response) => {
-      // commit(types.UPDATE_INVOICE, response.data)
+      commit(types.UPDATE_ESTIMATE_STATUS, {id: data.id, status: 'SENT'})
       resolve(response)
     }).catch((err) => {
       reject(err)

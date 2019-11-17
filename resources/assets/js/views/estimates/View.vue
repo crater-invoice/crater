@@ -3,16 +3,28 @@
     <div class="page-header">
       <h3 class="page-title"> {{ estimate.estimate_number }}</h3>
       <div class="page-actions row">
-        <div class="col-xs-2">
+        <div class="col-xs-2 mr-3">
           <base-button
-            v-if="estimate.status !== 'SENT'"
-            :loading="isRequestOnGoing"
-            :disabled="isRequestOnGoing"
+            v-if="estimate.status === 'DRAFT'"
+            :loading="isMarkAsSent"
+            :disabled="isMarkAsSent"
             :outline="true"
             color="theme"
             @click="onMarkAsSent"
           >
             {{ $t('estimates.mark_as_sent') }}
+          </base-button>
+        </div>
+        <div class="col-xs-2">
+          <base-button
+            v-if="estimate.status === 'DRAFT'"
+            :loading="isSendingEmail"
+            :disabled="isSendingEmail"
+            :outline="true"
+            color="theme"
+            @click="onSendEstimate"
+          >
+            {{ $t('estimates.send_estimate') }}
           </base-button>
         </div>
         <v-dropdown :close-on-select="false" align="left" class="filter-container">
@@ -111,7 +123,7 @@
           <div class="left">
             <div class="inv-name">{{ estimate.user.name }}</div>
             <div class="inv-number">{{ estimate.estimate_number }}</div>
-            <div :class="'est-status-'+estimate.status.toLowerCase()" class="inv-status">{{ estimate.status }}</div>
+            <div :class="'est-status-'+estimate.status.toLowerCase()"class="inv-status">{{ estimate.status }}</div>
           </div>
           <div class="right">
             <div class="inv-amount" v-html="$utils.formatMoney(estimate.total, estimate.user.currency)" />
@@ -130,6 +142,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+
 const _ = require('lodash')
 export default {
   data () {
@@ -137,9 +150,7 @@ export default {
       id: null,
       count: null,
       estimates: [],
-      estimate: null,
       currency: null,
-      shareableLink: null,
       searchData: {
         orderBy: null,
         orderByField: null,
@@ -147,34 +158,38 @@ export default {
       },
       status: ['DRAFT', 'SENT', 'VIEWED', 'EXPIRED', 'ACCEPTED', 'REJECTED'],
       isMarkAsSent: false,
+      isSendingEmail: false,
       isRequestOnGoing: false,
       isSearching: false
     }
   },
   computed: {
+    estimate () {
+      return this.$store.getters['estimate/getEstimate'](this.$route.params.id)
+    },
+
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
       }
       return false
+    },
+
+    shareableLink () {
+      return `/estimates/pdf/${this.estimate.unique_hash}`
     }
   },
-  watch: {
-    '$route.params.id' (val) {
-      this.fetchEstimate()
-    }
-  },
-  mounted () {
+  created () {
     this.loadEstimates()
     this.onSearched = _.debounce(this.onSearched, 500)
   },
   methods: {
     ...mapActions('estimate', [
       'fetchEstimates',
-      'fetchViewEstimate',
       'getRecord',
       'searchEstimate',
       'markAsSent',
+      'sendEmail',
       'deleteEstimate',
       'selectEstimate'
     ]),
@@ -183,7 +198,6 @@ export default {
       if (response.data) {
         this.estimates = response.data.estimates.data
       }
-      this.fetchEstimate()
     },
     async onSearched () {
       let data = ''
@@ -203,15 +217,6 @@ export default {
       this.isSearching = false
       if (response.data) {
         this.estimates = response.data.estimates.data
-      }
-    },
-    async fetchEstimate () {
-      let estimate = await this.fetchViewEstimate(this.$route.params.id)
-
-      if (estimate.data) {
-        this.estimate = estimate.data.estimate
-        this.shareableLink = estimate.data.shareable_link
-        this.currency = estimate.data.estimate.user.currency
       }
     },
     sortData () {
@@ -238,6 +243,24 @@ export default {
           this.isMarkAsSent = false
           if (response.data) {
             window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
+          }
+        }
+      })
+    },
+    async onSendEstimate (id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_send_estimate'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willSendEstimate) => {
+        if (willSendEstimate) {
+          this.isSendingEmail = true
+          let response = await this.sendEmail({id: this.estimate.id})
+          this.isSendingEmail = false
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
           }
         }
       })

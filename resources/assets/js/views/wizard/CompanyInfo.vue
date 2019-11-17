@@ -22,6 +22,7 @@
           :upload-handler="cropperHandler"
           trigger="#pick-avatar"
           @changed="setFileObject"
+          @error="hadleUploadError"
         />
       </div>
       <div class="row">
@@ -256,30 +257,33 @@ export default {
     setFileObject (file) {
       this.fileObject = file
     },
+    hadleUploadError (message, type, xhr) {
+      window.toastr['error']('Oops! Something went wrong...')
+    },
     async next () {
       this.$v.companyData.$touch()
       if (this.$v.companyData.$invalid) {
         return true
       }
       this.loading = true
-      let data = new FormData()
-      data.append('logo', this.fileObject)
-      data.append('name', this.companyData.name)
-      data.append('address_street_1', this.companyData.address_street_1)
-      data.append('address_street_2', this.companyData.address_street_2)
-      data.append('city_id', this.companyData.city_id)
-      data.append('state_id', this.companyData.state_id)
-      data.append('country_id', this.companyData.country_id)
-      data.append('zip', this.companyData.zip)
-      data.append('phone', this.companyData.phone)
-
-      let response = await window.axios.post('/api/admin/onboarding/company', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      let response = await window.axios.post('/api/admin/onboarding/company', this.companyData)
 
       if (response.data) {
+        if (this.fileObject && this.previewLogo) {
+          let logoData = new FormData()
+          logoData.append('company_logo', JSON.stringify({
+            name: this.fileObject.name,
+            data: this.previewLogo
+          }))
+
+          await axios.post('/api/admin/onboarding/company/upload-logo', logoData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'company': response.data.user.company.id
+            }
+          })
+        }
+
         this.$emit('next')
         this.loading = false
       }

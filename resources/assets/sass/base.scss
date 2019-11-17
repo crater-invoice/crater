@@ -115,3 +115,8 @@ code, .code {
 .swal-icon--custom {
     height: 70px !important;
 }
+
+.avatar-cropper-btn:hover  {
+    background-color: $ls-color-primary !important;
+    color: $white;
+}

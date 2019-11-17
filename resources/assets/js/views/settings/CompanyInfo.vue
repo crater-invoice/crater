@@ -47,13 +47,8 @@
             <label class="input-label">{{ $tc('settings.company_info.phone') }}</label>
             <base-input
               v-model="formData.phone"
-              :invalid="$v.formData.phone.$error"
               :placeholder="$t('settings.company_info.phone')"
-              @input="$v.formData.phone.$touch()"
             />
-            <div v-if="$v.formData.phone.$error">
-              <span v-if="!$v.formData.phone.phone" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-            </div>
           </div>
           <div class="col-md-6 mb-4">
             <label class="input-label">{{ $tc('settings.company_info.country') }}</label><span class="text-danger"> * </span>
@@ -259,9 +254,6 @@ export default {
       },
       email: {
         email
-      },
-      phone: {
-        numeric
       },
       address_street_1: {
         maxLength: maxLength(255)

@@ -9,7 +9,7 @@ class SettingsController extends Controller
 {
     public function getAppVersion(Request $request)
     {
-        $version = Setting::getSetting('version', $request->header('company'));
+        $version = Setting::getSetting('version');
 
         return response()->json([
             'version' => $version,

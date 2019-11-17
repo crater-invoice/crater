@@ -20,7 +20,7 @@
       @blur="handleFocusOut"
     >
     <div v-if="showPassword && isAlignLeftIcon" style="cursor: pointer" @click="showPass = !showPass" >
-      <font-awesome-icon :icon="!showPass ?'eye-slash': 'eye'" class="right-icon" />
+      <font-awesome-icon :icon="!showPass ?'eye': 'eye-slash'" class="right-icon" />
     </div>
     <font-awesome-icon v-if="icon && !isAlignLeftIcon" :icon="icon" class="right-icon" />
   </div>

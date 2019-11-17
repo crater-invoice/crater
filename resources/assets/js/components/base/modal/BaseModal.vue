@@ -2,8 +2,8 @@
   <transition name="fade">
     <div v-if="modalActive" :class="'size-' + modalSize" class="base-modal">
       <div class="modal-body">
-        <div class="close-icon">
-          <font-awesome-icon class="mr-2" icon="times" @click="closeModal"/>
+        <div class="close-icon" @click="closeModal">
+          <font-awesome-icon icon="times" />
         </div>
         <div class="modal-header p-3">
           <h5 class="modal-heading">{{ modalTitle }}</h5>

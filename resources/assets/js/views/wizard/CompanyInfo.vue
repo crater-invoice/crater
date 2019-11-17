@@ -22,7 +22,7 @@
           :upload-handler="cropperHandler"
           trigger="#pick-avatar"
           @changed="setFileObject"
-          @error="hadleUploadError"
+          @error="handleUploadError"
         />
       </div>
       <div class="row">
@@ -257,7 +257,7 @@ export default {
     setFileObject (file) {
       this.fileObject = file
     },
-    hadleUploadError (message, type, xhr) {
+    handleUploadError (message, type, xhr) {
       window.toastr['error']('Oops! Something went wrong...')
     },
     async next () {

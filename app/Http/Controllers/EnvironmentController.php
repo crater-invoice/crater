@@ -38,8 +38,8 @@ class EnvironmentController extends Controller
         if(array_key_exists("success", $results)) {
             Artisan::call('config:clear');
             Artisan::call('key:generate --force');
-            Artisan::call('migrate --seed');
-            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);
+            Artisan::call('migrate --seed --force');
+            Artisan::call('migrate --force', ['--path' => 'vendor/laravel/passport/database/migrations']);
 
             \Storage::disk('local')->put('database_created', 'database_created');
 
@@ -75,8 +75,18 @@ class EnvironmentController extends Controller
             'mail_port' => config('mail.port'),
             'mail_username' => config('mail.username'),
             'mail_password' => config('mail.password'),
-            'mail_encryption' => config('mail.encryption')
+            'mail_encryption' => config('mail.encryption'),
+            'from_name' => config('mail.from.name'),
+            'from_mail' => config('mail.from.address'),
+            'mail_mailgun_endpoint' => config('services.mailgun.endpoint'),
+            'mail_mailgun_domain' => config('services.mailgun.domain'),
+            'mail_mailgun_secret' => config('services.mailgun.secret'),
+            'mail_sparkpost_secret' => config('services.sparkpost.secret'),
+            'mail_ses_key' => config('services.ses.key'),
+            'mail_ses_secret' => config('services.ses.secret'),
+            'mail_mandrill_secret' => config('services.mandrill.secret'),
         ];
+
 
         return response()->json($MailData);
     }

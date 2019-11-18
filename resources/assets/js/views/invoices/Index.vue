@@ -248,13 +248,13 @@
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#" @click="sendInvoice(row.id)" >
+                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)" >
                   <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
                   {{ $t('invoices.send_invoice') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#" @click="markInvoiceAsSent(row.id)">
+                <a class="dropdown-item" href="#/" @click="markInvoiceAsSent(row.id)">
                   <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                   {{ $t('invoices.mark_as_sent') }}
                 </a>

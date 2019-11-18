@@ -148,7 +148,7 @@ export default {
     return {
       mailConfigData: {
         mail_driver: 'smtp',
-        mail_host: 'mailtrap.io',
+        mail_host: '',
         mail_port: null,
         mail_username: null,
         mail_password: null,

@@ -142,7 +142,7 @@ export default {
   data () {
     return {
       mailConfigData: {
-        mail_driver: '',
+        mail_driver: 'smtp',
         mail_host: '',
         mail_port: null,
         mail_username: '',

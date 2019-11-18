@@ -168,12 +168,12 @@
           >
             <table-column :label="$t('dashboard.recent_invoices_card.due_on')" show="formattedDueDate" />
             <table-column :label="$t('dashboard.recent_invoices_card.customer')" show="user.name" />
-                 <table-column
+            <table-column
               :label="$t('invoices.status')"
               sort-as="status"
             >
               <template slot-scope="row" >
-                <span> {{ $t('invoices.status') }}</span> 
+                <span> {{ $t('invoices.status') }}</span>
                 <span :class="'inv-status-'+row.status.toLowerCase()">{{ (row.status != 'PARTIALLY_PAID')? row.status : row.status.replace('_', ' ') }}</span>
               </template>
             </table-column>
@@ -190,7 +190,7 @@
             >
               <template slot-scope="row">
                 <v-dropdown>
-                  <a slot="activator" href="#">
+                  <a slot="activator" href="#/">
                     <dot-icon />
                   </a>
                   <v-dropdown-item>
@@ -203,14 +203,14 @@
                       {{ $t('invoices.view') }}
                     </router-link>
                   </v-dropdown-item>
-                  <v-dropdown-item>
-                    <a class="dropdown-item" href="#" @click="sendInvoice(row.id)" >
+                  <v-dropdown-item v-if="row.status == 'DRAFT'">
+                    <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)" >
                       <font-awesome-icon icon="envelope" class="dropdown-item-icon" />
                       {{ $t('invoices.send_invoice') }}
                     </a>
                   </v-dropdown-item>
                   <v-dropdown-item v-if="row.status === 'DRAFT'">
-                    <a class="dropdown-item" href="#" @click="sentInvoice(row.id)">
+                    <a class="dropdown-item" href="#/" @click="sentInvoice(row.id)">
                       <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                       {{ $t('invoices.mark_as_sent') }}
                     </a>
@@ -272,7 +272,7 @@
             >
               <template slot-scope="row">
                 <v-dropdown>
-                  <a slot="activator" href="#">
+                  <a slot="activator" href="#/">
                     <dot-icon />
                   </a>
                   <v-dropdown-item>
@@ -294,35 +294,35 @@
                     </router-link>
                   </v-dropdown-item>
                   <v-dropdown-item>
-                    <a class="dropdown-item" href="#" @click="convertInToinvoice(row.id)">
-                      <font-awesome-icon icon="envelope" class="dropdown-item-icon" />
+                    <a class="dropdown-item" href="#/" @click="convertInToinvoice(row.id)">
+                      <font-awesome-icon icon="file-alt" class="dropdown-item-icon" />
                       {{ $t('estimates.convert_to_invoice') }}
                     </a>
                   </v-dropdown-item>
                   <v-dropdown-item v-if="row.status === 'DRAFT'">
-                    <a class="dropdown-item" href="#" @click.self="onMarkAsSent(row.id)">
+                    <a class="dropdown-item" href="#/" @click.self="onMarkAsSent(row.id)">
                       <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                       {{ $t('estimates.mark_as_sent') }}
                     </a>
                   </v-dropdown-item>
                   <v-dropdown-item v-if="row.status !== 'SENT'">
-                    <a class="dropdown-item" href="#" @click.self="sendEstimate(row.id)">
+                    <a class="dropdown-item" href="#/" @click.self="sendEstimate(row.id)">
                       <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
                       {{ $t('estimates.send_estimate') }}
                     </a>
                   </v-dropdown-item>
                   <v-dropdown-item v-if="row.status !== 'ACCEPTED'">
-                    <a class="dropdown-item" href="#" @click.self="onMarkAsAccepted(row.id)">
+                    <a class="dropdown-item" href="#/" @click.self="onMarkAsAccepted(row.id)">
                       <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
                       {{ $t('estimates.mark_as_accepted') }}
                     </a>
                   </v-dropdown-item>
-              <v-dropdown-item v-if="row.status !== 'REJECTED'">
-                <a class="dropdown-item" href="#" @click.self="onMarkAsRejected(row.id)">
-                  <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
-                  {{ $t('estimates.mark_as_rejected') }}
-                </a>
-              </v-dropdown-item>
+                  <v-dropdown-item v-if="row.status !== 'REJECTED'">
+                    <a class="dropdown-item" href="#/" @click.self="onMarkAsRejected(row.id)">
+                      <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
+                      {{ $t('estimates.mark_as_rejected') }}
+                    </a>
+                  </v-dropdown-item>
                 </v-dropdown>
               </template>
             </table-column>
@@ -459,7 +459,7 @@ export default {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
-        icon: '/assets/icon/envelope-solid.svg',
+        icon: '/assets/icon/file-alt-solid.svg',
         buttons: true,
         dangerMode: true
       }).then(async (willDelete) => {
@@ -603,7 +603,7 @@ export default {
         }
       })
     },
-    
+
     async sendEstimate (id) {
       swal({
         title: this.$t('general.are_you_sure'),

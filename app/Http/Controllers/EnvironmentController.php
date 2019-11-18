@@ -38,8 +38,8 @@ class EnvironmentController extends Controller
         if(array_key_exists("success", $results)) {
             Artisan::call('config:clear');
             Artisan::call('key:generate --force');
-            Artisan::call('migrate --seed');
-            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);
+            Artisan::call('migrate --seed --force');
+            Artisan::call('migrate --force', ['--path' => 'vendor/laravel/passport/database/migrations']);
 
             \Storage::disk('local')->put('database_created', 'database_created');
 

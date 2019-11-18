@@ -260,6 +260,8 @@ export default {
     created_message: 'Estimate created successfully',
     updated_message: 'Estimate updated successfully',
     deleted_message: 'Estimate deleted successfully | Estimates deleted successfully',
+    user_email_does_not_exist: 'User email does not exist',
+    something_went_wrong: 'something went wrong',
     item: {
       title: 'Item Title',
       description: 'Description',
@@ -349,6 +351,8 @@ export default {
     updated_message: 'Invoice updated successfully',
     deleted_message: 'Invoice deleted successfully | Invoices deleted successfully',
     marked_as_sent_message: 'Invoice marked as sent successfully',
+    user_email_does_not_exist: 'User email does not exist',
+    something_went_wrong: 'something went wrong',
     invalid_due_amount_message: 'Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue.'
   },
   credit_notes: {

@@ -260,9 +260,15 @@ export default {
           this.isSendingEmail = true
           let response = await this.sendEmail({id: this.invoice.id})
           this.isSendingEmail = false
-          if (response.data) {
-            window.toastr['success'](this.$tc('invoices.confirm_send_invoice'))
+          if (response.data.success) {
+            window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+            return true
           }
+          if (response.data.error === 'user_email_does_not_exist') {
+            window.toastr['error'](this.$tc('invoices.user_email_does_not_exist'))
+            return false
+          }
+          window.toastr['error'](this.$tc('invoices.something_went_wrong'))
         }
       })
     },

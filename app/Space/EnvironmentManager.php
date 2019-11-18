@@ -96,7 +96,7 @@ class EnvironmentManager
     {
 
         $mailData = $this->getMailData($request);
-
+        dd($mailData);
         try {
 
             file_put_contents($this->envPath, str_replace(
@@ -132,6 +132,10 @@ class EnvironmentManager
             'MAIL_USERNAME='.config('mail.username')."\n".
             'MAIL_PASSWORD='.config('mail.password')."\n";
 
+        $resetCredential =
+            'MAIL_USERNAME='."\n".
+            'MAIL_PASSWORD='."\n";
+
         switch ($request->mail_driver) {
             case 'smtp':
                 $mailCredential=
@@ -140,7 +144,7 @@ class EnvironmentManager
                 break;
 
             case 'mailgun':
-                $mailCredential = $oldMailCredential;
+                $mailCredential = $resetCredential;
                 $otherCredential=
                     'MAILGUN_DOMAIN='.$request->mail_mailgun_domain."\n".
                     'MAILGUN_SECRET='.$request->mail_mailgun_secret."\n".
@@ -156,7 +160,7 @@ class EnvironmentManager
                 break;
 
             case 'sparkpost':
-                $mailCredential = $oldMailCredential;
+                $mailCredential = $resetCredential;
                 $otherCredential=
                     'SPARKPOST_SECRET='.$request->mail_sparkpost_secret."\n\n";
 
@@ -167,7 +171,7 @@ class EnvironmentManager
                 break;
 
             case 'ses':
-                $mailCredential = $oldMailCredential;
+                $mailCredential = $resetCredential;
                 $otherCredential=
                     'SES_KEY='.$request->mail_ses_key."\n".
                     'SES_SECRET='.$request->mail_ses_secret."\n\n";
@@ -183,7 +187,7 @@ class EnvironmentManager
                 $existMailData = 'MAIL_DRIVER='.$request->mail_driver."\n".
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
-                    $oldMailCredential.
+                    $resetCredential.
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n".
@@ -194,7 +198,7 @@ class EnvironmentManager
                 $existMailData = 'MAIL_DRIVER='.$request->mail_driver."\n".
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
-                    $oldMailCredential.
+                    $resetCredential.
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n".
@@ -210,11 +214,6 @@ class EnvironmentManager
                     $oldMailOtherCredential =
                         'MANDRILL_API_KEY='.config('services.mandrill.secret')."\n\n";
                 }
-                break;
-
-            default:
-                $mailCredential = "\n";
-                $otherCredential = "\n";
                 break;
         }
 

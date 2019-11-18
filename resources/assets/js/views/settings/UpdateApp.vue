@@ -8,7 +8,7 @@
         </p>
         <label class="input-label">{{ $t('settings.update_app.current_version') }}</label><br>
         <label class="version mb-4">{{ currentVersion }}</label>
-        <base-button :outline="true" :disabled="isCheckingforUpdate || isUpdating" size="large" color="theme" @click="checkUpdate" class="mb-4">
+        <base-button :outline="true" :disabled="isCheckingforUpdate || isUpdating" size="large" color="theme" class="mb-4" @click="checkUpdate">
           <font-awesome-icon :class="{'update': isCheckingforUpdate}" style="margin-right: 10px;" icon="sync-alt" />
           {{ $t('settings.update_app.check_update') }}
         </base-button>
@@ -98,7 +98,7 @@ export default {
         if (response.data) {
           this.updateData.isMinor = response.data.is_minor
           this.updateData.version = response.data.version.version
-          this.description = response.data.description
+          this.description = response.data.version.description
           this.isUpdateAvailable = true
         }
       } catch (e) {

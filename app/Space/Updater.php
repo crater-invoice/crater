@@ -8,12 +8,13 @@ use GuzzleHttp\Exception\RequestException;
 use Crater\Space\SiteApi;
 use Crater\Events\UpdateFinished;
 use Crater\Setting;
+use Illuminate\Http\Request;
 
 class Updater
 {
     use SiteApi;
 
-    public static function update($installed, $version, $isMinor)
+    public static function update($installed, $version)
     {
         $data = null;
         $path = null;
@@ -79,10 +80,6 @@ class Updater
             File::deleteDirectory($temp_path);
             File::deleteDirectory($temp_path2);
 
-            if (!$isMinor) {
-                event(new UpdateFinished($installed, $version));
-            }
-
             return [
                 'success' => true,
                 'error' => false,
@@ -102,6 +99,17 @@ class Updater
                 'data' => []
             ];
         }
+    }
+
+    public static function finishUpdate($installed, $version)
+    {
+        event(new UpdateFinished($installed, $version));
+
+        return [
+            'success' => true,
+            'error' => false,
+            'data' => []
+        ];
     }
 
     public static function checkForUpdate()

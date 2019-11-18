@@ -404,17 +404,23 @@ export default {
   methods: {
     ...mapActions('dashboard', [
       'getChart',
-      'loadData',
+      'loadData'
+    ]),
+    ...mapActions('invoice', [
       'deleteInvoice',
       'sendEmail',
-      'markAsSent',
-      'sendEstimateEmail',
+      'markAsSent'
+    ]),
+    ...mapActions('estimate', [
       'deleteEstimate',
       'markAsAccepted',
       'markAsRejected',
-      'markEstimateAsSent',
       'convertToInvoice'
     ]),
+    ...mapActions('estimate', {
+      'sendEstimateEmail': 'sendEmail',
+      'markEstimateAsSent': 'markAsSent'
+    }),
 
     async loadChart () {
       await this.$store.dispatch('dashboard/getChart')
@@ -532,9 +538,15 @@ export default {
           }
           let response = await this.sendEmail(data)
           this.refreshInvTable()
-          if (response.data) {
+          if (response.data.success) {
             window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+            return true
           }
+          if (response.data.error === 'user_email_does_not_exist') {
+            window.toastr['error'](this.$tc('invoices.user_email_does_not_exist'))
+            return false
+          }
+          window.toastr['error'](this.$tc('invoices.something_went_wrong'))
         }
       })
     },
@@ -618,9 +630,15 @@ export default {
           }
           let response = await this.sendEstimateEmail(data)
           this.refreshEstTable()
-          if (response.data) {
+          if (response.data.success) {
             window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
+            return true
           }
+          if (response.data.error === 'user_email_does_not_exist') {
+            window.toastr['success'](this.$tc('estimates.user_email_does_not_exist'))
+            return true
+          }
+          window.toastr['error'](this.$tc('estimates.something_went_wrong'))
         }
       })
     }

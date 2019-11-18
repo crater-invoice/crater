@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-// import moment from 'moment'
+import * as dashboardTypes from '../dashboard/mutation-types'
 
 export const fetchInvoices = ({ commit, dispatch, state }, params) => {
   return new Promise((resolve, reject) => {
@@ -47,7 +47,10 @@ export const fetchViewInvoice = ({ commit, dispatch, state }, id) => {
 export const sendEmail = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/invoices/send`, data).then((response) => {
-      commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
+      if (response.data.success) {
+        commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
+        commit('dashboard/' + dashboardTypes.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'}, { root: true })
+      }
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -83,6 +86,7 @@ export const deleteInvoice = ({ commit, dispatch, state }, id) => {
         resolve(response)
       } else {
         commit(types.DELETE_INVOICE, id)
+        commit('dashboard/' + dashboardTypes.DELETE_INVOICE, id, { root: true })
         resolve(response)
       }
     }).catch((err) => {
@@ -123,6 +127,7 @@ export const markAsSent = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post(`/api/invoices/mark-as-sent`, data).then((response) => {
       commit(types.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'})
+      commit('dashboard/' + dashboardTypes.UPDATE_INVOICE_STATUS, {id: data.id, status: 'SENT'}, { root: true })
       resolve(response)
     }).catch((err) => {
       reject(err)

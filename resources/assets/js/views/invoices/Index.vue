@@ -397,9 +397,15 @@ export default {
           }
           let response = await this.sendEmail(data)
           this.refreshTable()
-          if (response.data) {
+          if (response.data.success) {
             window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
+            return true
           }
+          if (response.data.error === 'user_email_does_not_exist') {
+            window.toastr['error'](this.$tc('invoices.user_email_does_not_exist'))
+            return false
+          }
+          window.toastr['error'](this.$tc('invoices.something_went_wrong'))
         }
       })
     },
@@ -505,6 +511,7 @@ export default {
 
           if (res.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message'))
+            this.$refs.table.refresh()
             return true
           }
 

@@ -107,7 +107,7 @@ class Updater
     public static function checkForUpdate()
     {
         $data = null;
-        $url = 'https://craterapp.com/downloads/check/latest/'. Setting::getSetting('version');
+        $url = 'https://craterapp.com/downloads/check/latest/'. Setting::getSetting('version') . '?type=update';
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 

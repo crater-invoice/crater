@@ -34,6 +34,10 @@ return [
         'api_key' => env('SENDGRID_API_KEY'),
     ],
 
+    'mandrill' => [
+        'secret' => env('MANDRILL_API_KEY'),
+    ],
+
     'stripe' => [
         'model' => Crater\User::class,
         'key' => env('STRIPE_KEY'),

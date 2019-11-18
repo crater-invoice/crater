@@ -127,7 +127,7 @@
             <a :class="['tab-link', {'a-active': filters.status === 'SENT'}]" href="#" >{{ $t('general.sent') }}</a>
           </li>
           <li class="tab" @click="getStatus('')">
-            <a :class="['tab-link', {'a-active': filters.status === '' || filters.status === null}]" href="#">{{ $t('general.all') }}</a>
+            <a :class="['tab-link', {'a-active': filters.status === '' || filters.status !== 'DRAFT' && filters.status !== 'SENT'}]" href="#">{{ $t('general.all') }}</a>
           </li>
         </ul>
         <transition name="fade">
@@ -426,7 +426,7 @@ export default {
           if (response.data) {
             this.filters.status = 'ACCEPTED'
             this.$refs.table.refresh()
-            window.toastr['success'](this.$tc('estimates.confirm_mark_as_accepted'))
+            window.toastr['success'](this.$tc('estimates.marked_as_accepted_message'))
           }
         }
       })

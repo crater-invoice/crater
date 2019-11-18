@@ -160,7 +160,7 @@
         </div>
         <div class="dashboard-table">
           <table-component
-            ref="table"
+            ref="inv_table"
             :data="getDueInvoices"
             :show-filter="false"
             table-class="table"
@@ -168,6 +168,15 @@
           >
             <table-column :label="$t('dashboard.recent_invoices_card.due_on')" show="formattedDueDate" />
             <table-column :label="$t('dashboard.recent_invoices_card.customer')" show="user.name" />
+                 <table-column
+              :label="$t('invoices.status')"
+              sort-as="status"
+            >
+              <template slot-scope="row" >
+                <span> {{ $t('invoices.status') }}</span> 
+                <span :class="'inv-status-'+row.status.toLowerCase()">{{ (row.status != 'PARTIALLY_PAID')? row.status : row.status.replace('_', ' ') }}</span>
+              </template>
+            </table-column>
             <table-column :label="$t('dashboard.recent_invoices_card.amount_due')" show="due_amount" sort-as="due_amount">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_invoices_card.amount_due') }}</span>
@@ -235,13 +244,21 @@
         </div>
         <div class="dashboard-table">
           <table-component
-            ref="table"
+            ref="est_table"
             :data="getRecentEstimates"
             :show-filter="false"
             table-class="table"
           >
             <table-column :label="$t('dashboard.recent_estimate_card.date')" show="formattedExpiryDate" />
             <table-column :label="$t('dashboard.recent_estimate_card.customer')" show="user.name" />
+            <table-column
+              :label="$t('estimates.status')"
+              show="status" >
+              <template slot-scope="row" >
+                <span> {{ $t('estimates.status') }}</span>
+                <span :class="'est-status-'+row.status.toLowerCase()">{{ row.status }}</span>
+              </template>
+            </table-column>
             <table-column :label="$t('dashboard.recent_estimate_card.amount_due')" show="total" sort-as="total">
               <template slot-scope="row">
                 <span>{{ $t('dashboard.recent_estimate_card.amount_due') }}</span>
@@ -288,6 +305,24 @@
                       {{ $t('estimates.mark_as_sent') }}
                     </a>
                   </v-dropdown-item>
+                  <v-dropdown-item v-if="row.status !== 'SENT'">
+                    <a class="dropdown-item" href="#" @click.self="sendEstimate(row.id)">
+                      <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
+                      {{ $t('estimates.send_estimate') }}
+                    </a>
+                  </v-dropdown-item>
+                  <v-dropdown-item v-if="row.status !== 'ACCEPTED'">
+                    <a class="dropdown-item" href="#" @click.self="onMarkAsAccepted(row.id)">
+                      <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
+                      {{ $t('estimates.mark_as_accepted') }}
+                    </a>
+                  </v-dropdown-item>
+              <v-dropdown-item v-if="row.status !== 'REJECTED'">
+                <a class="dropdown-item" href="#" @click.self="onMarkAsRejected(row.id)">
+                  <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
+                  {{ $t('estimates.mark_as_rejected') }}
+                </a>
+              </v-dropdown-item>
                 </v-dropdown>
               </template>
             </table-column>
@@ -369,16 +404,16 @@ export default {
   methods: {
     ...mapActions('dashboard', [
       'getChart',
-      'loadData'
-    ]),
-    ...mapActions('estimate', [
-      'deleteEstimate',
-      'convertToInvoice'
-    ]),
-    ...mapActions('invoice', [
+      'loadData',
       'deleteInvoice',
       'sendEmail',
-      'markAsSent'
+      'markAsSent',
+      'sendEstimateEmail',
+      'deleteEstimate',
+      'markAsAccepted',
+      'markAsRejected',
+      'markEstimateAsSent',
+      'convertToInvoice'
     ]),
 
     async loadChart () {
@@ -404,12 +439,20 @@ export default {
           let res = await this.deleteEstimate(this.id)
           if (res.data.success) {
             window.toastr['success'](this.$tc('estimates.deleted_message', 1))
-            this.$refs.table.refresh()
+            this.refreshEstTable()
           } else if (res.data.error) {
             window.toastr['error'](res.data.message)
           }
         }
       })
+    },
+
+    refreshInvTable () {
+      this.$refs.inv_table.refresh()
+    },
+
+    refreshEstTable () {
+      this.$refs.est_table.refresh()
     },
 
     async convertInToinvoice (id) {
@@ -432,6 +475,7 @@ export default {
         }
       })
     },
+
     async onMarkAsSent (id) {
       swal({
         title: this.$t('general.are_you_sure'),
@@ -444,8 +488,8 @@ export default {
           const data = {
             id: id
           }
-          let response = await this.markAsSent(data)
-          this.$refs.table.refresh()
+          let response = await this.markEstimateAsSent(data)
+          this.refreshEstTable()
           if (response.data) {
             window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
           }
@@ -466,7 +510,7 @@ export default {
           let res = await this.deleteInvoice(this.id)
           if (res.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message'))
-            this.$refs.table.refresh()
+            this.refreshInvTable()
           } else if (res.data.error) {
             window.toastr['error'](res.data.message)
           }
@@ -487,13 +531,14 @@ export default {
             id: id
           }
           let response = await this.sendEmail(data)
-          this.$refs.table.refresh()
+          this.refreshInvTable()
           if (response.data) {
             window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
           }
         }
       })
     },
+
     async sentInvoice (id) {
       swal({
         title: this.$t('general.are_you_sure'),
@@ -507,9 +552,74 @@ export default {
             id: id
           }
           let response = await this.markAsSent(data)
-          this.$refs.table.refresh()
+          this.refreshInvTable()
           if (response.data) {
             window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+          }
+        }
+      })
+    },
+
+    async onMarkAsAccepted (id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_accepted'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (markedAsRejected) => {
+        if (markedAsRejected) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsAccepted(data)
+          this.refreshEstTable()
+          if (response.data) {
+            this.refreshEstTable()
+            window.toastr['success'](this.$tc('estimates.marked_as_accepted_message'))
+          }
+        }
+      })
+    },
+
+    async onMarkAsRejected (id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_rejected'),
+        icon: '/assets/icon/times-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (markedAsRejected) => {
+        if (markedAsRejected) {
+          const data = {
+            id: id
+          }
+          let response = await this.markAsRejected(data)
+          this.refreshEstTable()
+          if (response.data) {
+            this.refreshEstTable()
+            window.toastr['success'](this.$tc('estimates.marked_as_rejected_message'))
+          }
+        }
+      })
+    },
+    
+    async sendEstimate (id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_send_estimate'),
+        icon: '/assets/icon/paper-plane-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (willSendEstimate) => {
+        if (willSendEstimate) {
+          const data = {
+            id: id
+          }
+          let response = await this.sendEstimateEmail(data)
+          this.refreshEstTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
           }
         }
       })

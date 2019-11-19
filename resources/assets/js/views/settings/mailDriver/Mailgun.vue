@@ -2,7 +2,7 @@
   <form @submit.prevent="saveEmailConfig()">
     <div class="row">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.driver') }}</label>
+        <label class="form-label">{{ $t('settings.mail.driver') }}</label>
         <span class="text-danger"> *</span>
         <base-select
           v-model="mailConfigData.mail_driver"
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.host') }}</label>
+        <label class="form-label">{{ $t('settings.mail.host') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_host.$error"
@@ -37,7 +37,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.port') }}</label>
+        <label class="form-label">{{ $t('settings.mail.port') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_port.$error"
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.encryption') }}</label>
+        <label class="form-label">{{ $t('settings.mail.encryption') }}</label>
         <span class="text-danger"> *</span>
         <base-select
           v-model.trim="mailConfigData.mail_encryption"
@@ -75,7 +75,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_mail') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_mail') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_mail.$error"
@@ -94,13 +94,13 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_name') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_name') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_name.$error"
           v-model.trim="mailConfigData.from_name"
           type="text"
-          name="name"
+          name="from_name"
           @input="$v.mailConfigData.from_name.$touch()"
         />
         <div v-if="$v.mailConfigData.from_name.$error">
@@ -112,13 +112,13 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.domain') }}</label>
+        <label class="form-label">{{ $t('settings.mail.mailgun_domain') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_mailgun_domain.$error"
           v-model.trim="mailConfigData.mail_mailgun_domain"
           type="text"
-          name="db_name"
+          name="mailgun_domain"
           @input="$v.mailConfigData.mail_mailgun_domain.$touch()"
         />
         <div v-if="$v.mailConfigData.mail_mailgun_domain.$error">
@@ -128,13 +128,13 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.mailgin_secret') }}</label>
+        <label class="form-label">{{ $t('settings.mail.mailgun_secret') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_mailgun_secret.$error"
           v-model.trim="mailConfigData.mail_mailgun_secret"
           type="password"
-          name="name"
+          name="mailgun_secret"
           show-password
           @input="$v.mailConfigData.mail_mailgun_secret.$touch()"
         />
@@ -147,13 +147,13 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.endpoint') }}</label>
+        <label class="form-label">{{ $t('settings.mail.mailgun_endpoint') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_mailgun_endpoint.$error"
           v-model.trim="mailConfigData.mail_mailgun_endpoint"
           type="text"
-          name="mail_mailgun_endpoint"
+          name="mailgun_endpoint"
           @input="$v.mailConfigData.mail_mailgun_endpoint.$touch()"
         />
         <div v-if="$v.mailConfigData.mail_mailgun_endpoint.$error">

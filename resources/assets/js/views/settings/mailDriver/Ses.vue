@@ -2,7 +2,7 @@
   <form @submit.prevent="saveEmailConfig()">
     <div class="row">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.driver') }}</label>
+        <label class="form-label">{{ $t('settings.mail.driver') }}</label>
         <span class="text-danger"> *</span>
         <base-select
           v-model="mailConfigData.mail_driver"
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.host') }}</label>
+        <label class="form-label">{{ $t('settings.mail.host') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_host.$error"
@@ -37,7 +37,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.port') }}</label>
+        <label class="form-label">{{ $t('settings.mail.port') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_port.$error"
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.encryption') }}</label>
+        <label class="form-label">{{ $t('settings.mail.encryption') }}</label>
         <span class="text-danger"> *</span>
         <base-select
           v-model.trim="mailConfigData.mail_encryption"
@@ -75,7 +75,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_mail') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_mail') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_mail.$error"
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_name') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_name') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_name.$error"
@@ -112,13 +112,13 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.ses_key') }}</label>
+        <label class="form-label">{{ $t('settings.mail.ses_key') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_ses_key.$error"
           v-model.trim="mailConfigData.mail_ses_key"
           type="text"
-          name="name"
+          name="mail_ses_key"
           @input="$v.mailConfigData.mail_ses_key.$touch()"
         />
         <div v-if="$v.mailConfigData.mail_ses_key.$error">
@@ -128,13 +128,13 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.ses_secret') }}</label>
+        <label class="form-label">{{ $t('settings.mail.ses_secret') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_ses_secret.$error"
           v-model.trim="mailConfigData.mail_ses_secret"
           type="password"
-          name="name"
+          name="mail_ses_secret"
           show-password
           @input="$v.mailConfigData.mail_ses_secret.$touch()"
         />

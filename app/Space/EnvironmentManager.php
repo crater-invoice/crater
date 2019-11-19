@@ -203,36 +203,6 @@ class EnvironmentManager
 
                 break;
 
-            case 'sparkpost':
-                $oldMailData =
-                    'MAIL_DRIVER='.config('mail.driver')."\n".
-                    'MAIL_HOST='.config('mail.host')."\n".
-                    'MAIL_PORT='.config('mail.port')."\n".
-                    'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n".
-                    'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
-                    $mailFromCredential;
-
-                $newMailData =
-                    'MAIL_DRIVER='.$request->mail_driver."\n".
-                    'MAIL_HOST='.$request->mail_host."\n".
-                    'MAIL_PORT='.$request->mail_port."\n".
-                    'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n".
-                    'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
-                    'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
-
-                $extraMailData=
-                    'SPARKPOST_SECRET='.$request->mail_sparkpost_secret."\n";
-
-                    if(env('SPARKPOST_SECRET') !== NULL ) {
-                        $extraOldMailData =
-                            'SPARKPOST_SECRET='.config('services.sparkpost.secret')."\n";
-                    }
-
-                break;
-
             case 'ses':
                 $oldMailData =
                     'MAIL_DRIVER='.config('mail.driver')."\n".
@@ -307,35 +277,6 @@ class EnvironmentManager
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
 
-                break;
-
-            case 'mandrill':
-                $oldMailData =
-                    'MAIL_DRIVER='.config('mail.driver')."\n".
-                    'MAIL_HOST='.config('mail.host')."\n".
-                    'MAIL_PORT='.config('mail.port')."\n".
-                    'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n".
-                    'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
-                    $mailFromCredential;
-
-                $newMailData =
-                    'MAIL_DRIVER='.$request->mail_driver."\n".
-                    'MAIL_HOST='.$request->mail_host."\n".
-                    'MAIL_PORT='.$request->mail_port."\n".
-                    'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n".
-                    'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
-                    'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
-
-                $extraMailData=
-                    'MANDRILL_API_KEY='.$request->mail_mandrill_secret."\n";
-
-                if(env('MANDRILL_API_KEY') !== NULL ) {
-                    $extraOldMailData =
-                        'MANDRILL_API_KEY='.config('services.mandrill.secret')."\n";
-                }
                 break;
         }
 

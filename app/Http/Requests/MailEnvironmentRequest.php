@@ -51,18 +51,6 @@ class MailEnvironmentRequest extends FormRequest
                 ];
                 break;
 
-            case 'sparkpost':
-                return [
-                    'mail_driver'           => 'required|string|max:50',
-                    'mail_host'             => 'required|string|max:50',
-                    'mail_port'             => 'required|max:50',
-                    'mail_sparkpost_secret' => 'required|string',
-                    'mail_encryption'       => 'required|string|max:50',
-                    'from_name'             => 'required|string|max:50',
-                    'from_mail'             => 'required|string|max:50',
-                ];
-                break;
-
             case 'ses':
                 return [
                     'mail_driver'           => 'required|string|max:50',
@@ -89,19 +77,6 @@ class MailEnvironmentRequest extends FormRequest
                     'from_mail'             => 'required|string|max:50',
                 ];
                 break;
-
-            case 'mandrill':
-                return [
-                    'mail_driver'           => 'required|string|max:50',
-                    'mail_host'             => 'required|string|max:50',
-                    'mail_port'             => 'required|max:50',
-                    'mail_mandrill_secret'  => 'required|string',
-                    'mail_encryption'       => 'required|string|max:50',
-                    'from_name'             => 'required|string|max:50',
-                    'from_mail'             => 'required|string|max:50',
-                ];
-                break;
         }
-
     }
 }

@@ -31,7 +31,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 ## Roadmap
 
-~~Here's a rough roadmap of things to come (not in order):
+~~Here's a rough roadmap of things to come (not in any specific order):
 -   [x] Automatic Update
 -   [x] Email Configuration
 -   [x] Installation Wizard

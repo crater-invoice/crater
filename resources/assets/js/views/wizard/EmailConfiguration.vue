@@ -36,9 +36,9 @@ export default {
   data () {
     return {
       mailConfigData: {
-        mail_driver: 'smtp'
+        mail_driver: 'mail'
       },
-      mail_driver: 'smtp',
+      mail_driver: 'mail',
       loading: false,
       mail_drivers: []
     }

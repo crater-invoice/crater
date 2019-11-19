@@ -142,7 +142,7 @@ class EnvironmentManager
         if(env('MAIL_FROM_ADDRESS') !== NULL && env('MAIL_FROM_NAME') !== NULL ) {
             $mailFromCredential =
                 'MAIL_FROM_ADDRESS='.config('mail.from.address')."\n".
-                'MAIL_FROM_NAME='.config('mail.from.name')."\n\n";
+                'MAIL_FROM_NAME="'.config('mail.from.name')."\"\n\n";
         }
 
         switch ($request->mail_driver) {
@@ -165,7 +165,7 @@ class EnvironmentManager
                     'MAIL_PASSWORD='.$request->mail_password."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
+                    'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
                 break;
 
@@ -187,7 +187,7 @@ class EnvironmentManager
                     'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
+                    'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
                 $extraMailData=
                     'MAILGUN_DOMAIN='.$request->mail_mailgun_domain."\n".
@@ -221,7 +221,7 @@ class EnvironmentManager
                     'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
+                    'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
                 $extraMailData=
                     'SES_KEY='.$request->mail_ses_key."\n".
@@ -253,7 +253,7 @@ class EnvironmentManager
                     'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
+                    'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
                 break;
 
@@ -275,7 +275,7 @@ class EnvironmentManager
                     'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
-                    'MAIL_FROM_NAME='.$request->from_name."\n\n";
+                    'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
                 break;
         }

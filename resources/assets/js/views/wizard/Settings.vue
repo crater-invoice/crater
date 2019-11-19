@@ -101,6 +101,7 @@
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
 import Ls from '../../services/ls'
+import { mapActions } from 'vuex'
 const { required, minLength, email } = require('vuelidate/lib/validators')
 
 export default {
@@ -149,6 +150,9 @@ export default {
     this.getOnboardingData()
   },
   methods: {
+    ...mapActions('auth', [
+      'loginOnBoardingUser'
+    ]),
     async getOnboardingData () {
       let response = await window.axios.get('/api/admin/onboarding')
       if (response.data) {
@@ -201,6 +205,8 @@ export default {
         // this.$emit('next')
         this.loading = false
         Ls.set('auth.token', response.data.token)
+        this.loginOnBoardingUser(response.data.token)
+        window.toastr['success']('Login Successful')
         this.$router.push('/admin/dashboard')
       }
     }

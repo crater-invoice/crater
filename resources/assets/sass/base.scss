@@ -116,6 +116,12 @@ code, .code {
     height: 70px !important;
 }
 
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: $ls-color-primary !important;
+    background-color: $ls-color-primary !important;
+}
+
 .avatar-cropper-btn:hover  {
     background-color: $ls-color-primary !important;
     color: $white;

@@ -595,7 +595,7 @@ export default {
             return true
           }
           if (response.data.error === 'user_email_does_not_exist') {
-            window.toastr['success'](this.$tc('estimates.user_email_does_not_exist'))
+            window.toastr['error'](this.$tc('estimates.user_email_does_not_exist'))
             return true
           }
           window.toastr['error'](this.$tc('estimates.something_went_wrong'))

@@ -112,7 +112,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.domain') }}</label>
+        <label class="form-label">{{ $t('wizard.mail.mailgun_domain') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_mailgun_domain.$error"
@@ -128,7 +128,7 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.mailgin_secret') }}</label>
+        <label class="form-label">{{ $t('wizard.mail.mailgun_secret') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_mailgun_secret.$error"

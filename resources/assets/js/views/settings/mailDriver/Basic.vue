@@ -2,7 +2,7 @@
   <form @submit.prevent="saveEmailConfig()">
     <div class="row">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.driver') }}</label>
+        <label class="form-label">{{ $t('settings.mail.driver') }}</label>
         <span class="text-danger"> *</span>
         <base-select
           v-model="mailConfigData.mail_driver"
@@ -19,7 +19,7 @@
         </div>
       </div>
       <!-- <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.host') }}</label>
+        <label class="form-label">{{ $t('settings.mail.host') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.mail_host.$error"
@@ -37,7 +37,7 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_mail') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_mail') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_mail.$error"
@@ -50,10 +50,13 @@
           <span v-if="!$v.mailConfigData.from_mail.required" class="text-danger">
             {{ $tc('validation.required') }}
           </span>
+          <span v-if="!$v.mailConfigData.from_mail.email" class="text-danger">
+            {{ $tc('validation.email_incorrect') }}
+          </span>
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.from_name') }}</label>
+        <label class="form-label">{{ $t('settings.mail.from_name') }}</label>
         <span class="text-danger"> *</span>
         <base-input
           :invalid="$v.mailConfigData.from_name.$error"

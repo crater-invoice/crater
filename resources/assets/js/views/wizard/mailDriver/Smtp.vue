@@ -123,8 +123,8 @@
           <span v-if="!$v.mailConfigData.from_mail.required" class="text-danger">
             {{ $tc('validation.required') }}
           </span>
-          <span v-if="!$v.mailConfigData.from_mail.numeric" class="text-danger">
-            {{ $tc('validation.numbers_only') }}
+          <span v-if="!$v.mailConfigData.from_mail.email" class="text-danger">
+            {{ $tc('validation.email_incorrect') }}
           </span>
         </div>
       </div>
@@ -135,7 +135,7 @@
           :invalid="$v.mailConfigData.from_name.$error"
           v-model.trim="mailConfigData.from_name"
           type="text"
-          name="name"
+          name="from_name"
           @input="$v.mailConfigData.from_name.$touch()"
         />
         <div v-if="$v.mailConfigData.from_name.$error">

@@ -14,6 +14,7 @@
     </form>
   </div>
 </template>
+
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'

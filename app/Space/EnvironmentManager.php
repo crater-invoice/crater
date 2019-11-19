@@ -94,11 +94,8 @@ class EnvironmentManager
      */
     public function saveMailVariables(MailEnvironmentRequest $request)
     {
-
         $mailData = $this->getMailData($request);
-        dd($mailData);
-//         extra_mail_data
-// extra_old_mail_data
+
         try {
 
             file_put_contents($this->envPath, str_replace(
@@ -106,6 +103,22 @@ class EnvironmentManager
                 $mailData['new_mail_data'],
                 file_get_contents($this->envPath)
             ));
+
+            if($mailData['extra_old_mail_data']) {
+                file_put_contents($this->envPath, str_replace(
+                    $mailData['extra_old_mail_data'],
+                    $mailData['extra_mail_data'],
+                    file_get_contents($this->envPath)
+                ));
+            } else {
+                file_put_contents(
+                    $this->envPath,
+                    "\n".$mailData['extra_mail_data'],
+                    FILE_APPEND
+                );
+            }
+
+
 
         } catch (Exception $e) {
             return [
@@ -126,7 +139,7 @@ class EnvironmentManager
         $oldMailData = "";
         $newMailData = "";
 
-        if(env('MAIL_FROM_ADDRESS') && env('MAIL_FROM_NAME')) {
+        if(env('MAIL_FROM_ADDRESS') !== NULL && env('MAIL_FROM_NAME') !== NULL ) {
             $mailFromCredential =
                 'MAIL_FROM_ADDRESS='.config('mail.from.address')."\n".
                 'MAIL_FROM_NAME='.config('mail.from.name')."\n\n";
@@ -140,19 +153,20 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
-        
+
                 $newMailData =
                     'MAIL_DRIVER='.$request->mail_driver."\n".
                     'MAIL_HOST='.$request->mail_host."\n".
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.$request->mail_username."\n".
-                    'MAIL_PASSWORD='.$request->mail_password."\n";
+                    'MAIL_PASSWORD='.$request->mail_password."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
+
                 break;
 
             case 'mailgun':
@@ -161,16 +175,16 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
-        
+
                 $newMailData =
                     'MAIL_DRIVER='.$request->mail_driver."\n".
                     'MAIL_HOST='.$request->mail_host."\n".
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
@@ -178,13 +192,13 @@ class EnvironmentManager
                 $extraMailData=
                     'MAILGUN_DOMAIN='.$request->mail_mailgun_domain."\n".
                     'MAILGUN_SECRET='.$request->mail_mailgun_secret."\n".
-                    'MAILGUN_ENDPOINT='.$request->mail_mailgun_endpoint."\n\n";
+                    'MAILGUN_ENDPOINT='.$request->mail_mailgun_endpoint."\n";
 
-                if(env('MAILGUN_DOMAIN') && env('MAILGUN_SECRET') && env('MAILGUN_ENDPOINT')) {
+                if(env('MAILGUN_DOMAIN') !== NULL && env('MAILGUN_SECRET') !== NULL && env('MAILGUN_ENDPOINT') !== NULL) {
                     $extraOldMailData =
                         'MAILGUN_DOMAIN='.config('services.mailgun.domain')."\n".
                         'MAILGUN_SECRET='.config('services.mailgun.secret')."\n".
-                        'MAILGUN_ENDPOINT='.config('services.mailgun.endpoint')."\n\n";
+                        'MAILGUN_ENDPOINT='.config('services.mailgun.endpoint')."\n";
                 }
 
                 break;
@@ -195,7 +209,7 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
 
@@ -204,18 +218,19 @@ class EnvironmentManager
                     'MAIL_HOST='.$request->mail_host."\n".
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
 
                 $extraMailData=
-                    'SPARKPOST_SECRET='.$request->mail_sparkpost_secret."\n\n";
+                    'SPARKPOST_SECRET='.$request->mail_sparkpost_secret."\n";
 
-                    if(env('SPARKPOST_SECRET')) {
+                    if(env('SPARKPOST_SECRET') !== NULL ) {
                         $extraOldMailData =
-                            'SPARKPOST_SECRET='.config('services.sparkpost.secret')."\n\n";
+                            'SPARKPOST_SECRET='.config('services.sparkpost.secret')."\n";
                     }
+
                 break;
 
             case 'ses':
@@ -224,7 +239,7 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
 
@@ -233,20 +248,21 @@ class EnvironmentManager
                     'MAIL_HOST='.$request->mail_host."\n".
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
 
                 $extraMailData=
                     'SES_KEY='.$request->mail_ses_key."\n".
-                    'SES_SECRET='.$request->mail_ses_secret."\n\n";
+                    'SES_SECRET='.$request->mail_ses_secret."\n";
 
-                if(env('SES_KEY') && env('SES_SECRET')) {
+                if(env('SES_KEY') !== NULL  && env('SES_SECRET') !== NULL ) {
                     $extraOldMailData =
                         'SES_KEY='.config('services.ses.key')."\n".
-                        'SES_SECRET='.config('services.ses.secret')."\n\n";
+                        'SES_SECRET='.config('services.ses.secret')."\n";
                 }
+
                 break;
 
             case 'mail':
@@ -255,7 +271,7 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
 
@@ -264,10 +280,11 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
+
                 break;
 
             case 'sendmail':
@@ -276,7 +293,7 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
 
@@ -285,10 +302,11 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
+
                 break;
 
             case 'mandrill':
@@ -297,7 +315,7 @@ class EnvironmentManager
                     'MAIL_HOST='.config('mail.host')."\n".
                     'MAIL_PORT='.config('mail.port')."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.config('mail.encryption')."\n\n".
                     $mailFromCredential;
 
@@ -306,17 +324,17 @@ class EnvironmentManager
                     'MAIL_HOST='.$request->mail_host."\n".
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
-                    'MAIL_PASSWORD='.config('mail.password')."\n";
+                    'MAIL_PASSWORD='.config('mail.password')."\n".
                     'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME='.$request->from_name."\n\n";
 
                 $extraMailData=
-                    'MANDRILL_API_KEY='.$request->mail_mandrill_secret."\n\n";
+                    'MANDRILL_API_KEY='.$request->mail_mandrill_secret."\n";
 
-                if(env('MANDRILL_API_KEY')) {
+                if(env('MANDRILL_API_KEY') !== NULL ) {
                     $extraOldMailData =
-                        'MANDRILL_API_KEY='.config('services.mandrill.secret')."\n\n";
+                        'MANDRILL_API_KEY='.config('services.mandrill.secret')."\n";
                 }
                 break;
         }

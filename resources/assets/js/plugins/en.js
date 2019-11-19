@@ -581,7 +581,7 @@ export default {
       from_name: 'From Mail Name',
       from_mail: 'From Mail Address',
       encryption: 'Mail Encryption',
-      mail_config_desc: 'Below details will be used to update the mail environment. Also you can change the details anytime after logging in.'
+      mail_config_desc: 'Below is the form for Configuring Email driver for sending emails from the app. You can also configure third party providers like Sendgrid, SES etc.'
     },
     pdf: {
       title: 'PDF Setting',
@@ -757,7 +757,7 @@ export default {
       from_name: 'From Mail Name',
       from_mail: 'From Mail Address',
       encryption: 'Mail Encryption',
-      mail_config_desc: 'Below details will be used to update the mail environment. Also you can change the details anytime after logging in.'
+      mail_config_desc: 'Below is the form for Configuring Email driver for sending emails from the app. You can also configure third party providers like Sendgrid, SES etc.'
     },
     req: {
       system_req: 'System Requirements',

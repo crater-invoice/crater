@@ -3,7 +3,7 @@
 <head>
     <title>Crater - Self Hosted Invoicing Platform</title>
     <script src="/assets/js/pace.js"></script>
-    <link href="{{mix("/assets/css/laraspace.css")}}" rel="stylesheet" type="text/css">
+    <link href="{{mix("/assets/css/crater.css")}}" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">

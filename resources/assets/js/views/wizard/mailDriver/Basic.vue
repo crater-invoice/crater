@@ -50,6 +50,9 @@
           <span v-if="!$v.mailConfigData.from_mail.required" class="text-danger">
             {{ $tc('validation.required') }}
           </span>
+          <span v-if="!$v.mailConfigData.from_mail.email" class="text-danger">
+            {{ $tc('validation.email_incorrect') }}
+          </span>
         </div>
       </div>
       <div class="col-md-6 my-2">

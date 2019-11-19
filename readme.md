@@ -25,9 +25,9 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 - [Download Link](https://craterapp.com/downloads)
 
 ## Mobile Apps
-- [Android](https://craterapp.com/downloads)
+- [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
 - IOS - Coming Soon
-- [Source](https://craterapp.com/downloads)
+- [Source](https://github.com/bytefuryco/crater-mobile)
 
 ## Roadmap
 

@@ -32,16 +32,17 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 ## Roadmap
 
 ~~Here's a rough roadmap of things to come (not in order):
-
--   [x] Automatic Digital-Ocean Installation
--   [x] Available as a docker image
--   [x] Performance Improvements
--   [x] Customer Portal
--   [x] Accept Payments (Stripe Integration)
--   [x] Custom Fields
--   [x] Multiple Companies
--   [x] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
--   [x] Vendors, Inventory & Bills
+-   [x] Automatic Update
+-   [x] Email Configuration
+-   [x] Installation Wizard
+-   [ ] Available as a docker image
+-   [ ] Performance Improvements
+-   [ ] Customer Portal
+-   [ ] Accept Payments (Stripe Integration)
+-   [ ] Add and Use Custom Fields on Invoices & Estimates.
+-   [ ] Multiple Companies
+-   [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
+-   [ ] Vendors, Inventory & Bills
 
 ## License
 Crater is released under the Attribution Assurance License.

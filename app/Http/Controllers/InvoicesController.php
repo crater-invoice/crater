@@ -148,10 +148,8 @@ class InvoicesController extends Controller
 
         if ($request->has('invoiceSend')) {
             $data['invoice'] = Invoice::findOrFail($invoice->id)->toArray();
-            $company = Company::find($invoice->company_id);
             $data['user'] = User::find($request->user_id)->toArray();
-            $data['logo'] = $company->getMedia('logo')->first();
-            $data['company_name'] = $company->name;
+            $data['company'] = Company::find($invoice->company_id);
 
             $notificationEmail = CompanySetting::getSetting(
                 'notification_email',
@@ -374,13 +372,11 @@ class InvoicesController extends Controller
     public function sendInvoice(Request $request)
     {
         $invoice = Invoice::findOrFail($request->id);
-        $company = Company::find($invoice->company_id);
 
         $data['invoice'] = $invoice->toArray();
         $userId = $data['invoice']['user_id'];
         $data['user'] = User::find($userId)->toArray();
-        $data['logo'] = $company->getMedia('logo')->first();
-        $data['company_name'] = $company->name;
+        $data['company'] = Company::find($invoice->company_id);
         $email = $data['user']['email'];
         $notificationEmail = CompanySetting::getSetting(
             'notification_email',

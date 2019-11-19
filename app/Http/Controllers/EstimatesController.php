@@ -146,11 +146,9 @@ class EstimatesController extends Controller
 
         if ($request->has('estimateSend')) {
             $data['estimate'] = $estimate->toArray();
-            $company = Company::find($data['estimate']['company_id']);
             $userId = $data['estimate']['user_id'];
             $data['user'] = User::find($userId)->toArray();
-            $data['logo'] = $company->getMedia('logo')->first();
-            $data['company_name'] = $company->name;
+            $data['company'] = Company::find($estimate->company_id);
             $email = $data['user']['email'];
             $notificationEmail = CompanySetting::getSetting(
                 'notification_email',
@@ -310,13 +308,11 @@ class EstimatesController extends Controller
     public function sendEstimate(Request $request)
     {
         $estimate = Estimate::findOrFail($request->id);
-        $company = Company::find($estimate->company_id);
 
         $data['estimate'] = $estimate->toArray();
         $userId = $data['estimate']['user_id'];
         $data['user'] = User::find($userId)->toArray();
-        $data['logo'] = $company->getMedia('logo')->first();
-        $data['company_name'] = $company->name;
+        $data['company'] = Company::find($estimate->company_id);
 
         $email = $data['user']['email'];
         $notificationEmail = CompanySetting::getSetting(

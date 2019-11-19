@@ -8,6 +8,7 @@
           v-model="mailConfigData.mail_driver"
           :invalid="$v.mailConfigData.mail_driver.$error"
           :options="mailDrivers"
+          :allow-empty="false"
           :searchable="true"
           :show-labels="false"
           @input="onChangeDriver"

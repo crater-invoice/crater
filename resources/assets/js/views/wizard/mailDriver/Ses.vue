@@ -9,6 +9,7 @@
           :invalid="$v.mailConfigData.mail_driver.$error"
           :options="mailDrivers"
           :searchable="true"
+          :allow-empty="false"
           :show-labels="false"
           @input="onChangeDriver"
         />

@@ -67,15 +67,10 @@
                 <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
-                    :invalid="$v.formData.phone.$error"
                     v-model.trim="formData.phone"
                     type="text"
                     name="phone"
-                    @input="$v.formData.phone.$touch()"
                   />
-                  <div v-if="$v.formData.phone.$error">
-                    <span v-if="!$v.formData.phone.numeric" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                  </div>
                 </div>
               </div>
               <div class="form-group row">
@@ -113,15 +108,10 @@
                 <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
-                    :invalid="$v.billing.phone.$error"
                     v-model.trim="billing.phone"
                     type="text"
                     name="phone"
-                    @input="$v.billing.phone.$touch()"
                   />
-                  <div v-if="$v.billing.phone.$error">
-                    <span v-if="!$v.billing.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                  </div>
                 </div>
               </div>
 
@@ -249,15 +239,10 @@
                 <label class="col-sm-4 col-form-label input-label">{{ $t('customers.phone') }}</label>
                 <div class="col-sm-7">
                   <base-input
-                    :invalid="$v.shipping.phone.$error"
                     v-model.trim="shipping.phone"
                     type="text"
                     name="phone"
-                    @input="$v.shipping.phone.$touch()"
                   />
-                  <div v-if="$v.shipping.phone.$error">
-                    <span v-if="!$v.shipping.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                  </div>
                 </div>
               </div>
 
@@ -426,17 +411,11 @@ export default {
       email: {
         email
       },
-      phone: {
-        numeric
-      },
       website: {
         url
       }
     },
     billing: {
-      phone: {
-        numeric
-      },
       address_street_1: {
         maxLength: maxLength(255)
       },
@@ -445,9 +424,6 @@ export default {
       }
     },
     shipping: {
-      phone: {
-        numeric
-      },
       address_street_1: {
         maxLength: maxLength(255)
       },
@@ -629,21 +605,28 @@ export default {
       } else {
         this.formData.currency_id = this.defaultCurrency.id
       }
-      let response = await this.addCustomer(this.formData)
-      if (response.data) {
-        window.toastr['success'](this.$tc('customers.created_message'))
-        this.isLoading = false
-        if (this.$route.name === 'invoices.create') {
-          this.setInvoiceCustomer(response.data.customer.id)
+      try {
+        let response = await this.addCustomer(this.formData)
+        if (response.data) {
+          window.toastr['success'](this.$tc('customers.created_message'))
+          this.isLoading = false
+          if (this.$route.name === 'invoices.create') {
+            this.setInvoiceCustomer(response.data.customer.id)
+          }
+          if (this.$route.name === 'estimates.create') {
+            this.setEstimateCustomer(response.data.customer.id)
+          }
+          this.resetData()
+          this.closeModal()
+          return true
         }
-        if (this.$route.name === 'estimates.create') {
-          this.setEstimateCustomer(response.data.customer.id)
+      // window.toastr['error'](response.data.error)
+      } catch (err) {
+        if (err.response.data.errors.email) {
+          this.isLoading = false
+          window.toastr['error'](this.$t('validation.email_already_taken'))
         }
-        this.resetData()
-        this.closeModal()
-        return true
       }
-      window.toastr['error'](response.data.error)
     },
     async fetchCountry () {
       let res = await window.axios.get('/api/countries')

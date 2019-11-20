@@ -84,16 +84,11 @@
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.phone') }}</label>
                 <base-input
-                  :invalid="$v.formData.phone.$error"
                   v-model.trim="formData.phone"
                   type="text"
                   name="phone"
                   tab-index="4"
-                  @input="$v.formData.phone.$touch()"
                 />
-                <div v-if="$v.formData.phone.$error">
-                  <span v-if="!$v.formData.phone.numeric" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                </div>
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.website') }}</label>
@@ -196,16 +191,11 @@
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.phone') }}</label>
                 <base-input
-                  :invalid="$v.billing.phone.$error"
                   v-model.trim="billing.phone"
                   type="text"
                   name="phone"
                   tab-index="13"
-                  @input="$v.billing.phone.$touch()"
                 />
-                <div v-if="$v.billing.phone.$error">
-                  <span v-if="!$v.billing.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                </div>
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.zip_code') }}</label>
@@ -315,16 +305,11 @@
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.phone') }}</label>
                 <base-input
-                  :invalid="$v.shipping.phone.$error"
                   v-model.trim="shipping.phone"
                   type="text"
                   name="phone"
                   tab-index="21"
-                  @input="$v.shipping.phone.$touch()"
                 />
-                <div v-if="$v.shipping.phone.$error">
-                  <span v-if="!$v.shipping.phone.numberic" class="text-danger">{{ $tc('validation.numbers_only') }}</span>
-                </div>
               </div>
               <div class="form-group">
                 <label class="form-label">{{ $t('customers.zip_code') }}</label>
@@ -432,17 +417,11 @@ export default {
       email: {
         email
       },
-      phone: {
-        numeric
-      },
       website: {
         url
       }
     },
     billing: {
-      phone: {
-        numeric
-      },
       address_street_1: {
         maxLength: maxLength(255)
       },
@@ -451,9 +430,6 @@ export default {
       }
     },
     shipping: {
-      phone: {
-        numeric
-      },
       address_street_1: {
         maxLength: maxLength(255)
       },
@@ -608,16 +584,20 @@ export default {
           this.formData.currency_id = this.currency.id
         }
         this.isLoading = true
-        let response = await this.updateCustomer(this.formData)
-
-        if (response.data) {
-          window.toastr['success'](this.$t('customers.updated_message'))
-          this.$router.push('/admin/customers')
-          this.isLoading = false
-          return true
+        try {
+          let response = await this.updateCustomer(this.formData)
+          if (response.data) {
+            window.toastr['success'](this.$t('customers.updated_message'))
+            this.$router.push('/admin/customers')
+            this.isLoading = false
+            return true
+          }
+        } catch (err) {
+          if (err.response.data.errors.email) {
+            this.isLoading = false
+            window.toastr['error'](this.$t('validation.email_already_taken'))
+          }
         }
-
-        window.toastr['error'](response.data.error)
       } else {
         this.isLoading = true
         if (this.currency) {

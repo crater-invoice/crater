@@ -148,7 +148,11 @@ export default {
       }
 
       if (response.data) {
-        window.toastr['success'](this.$t('settings.expense_category.created_message'))
+        if (!this.isEdit) {
+          window.toastr['success'](this.$t('settings.expense_category.created_message'))
+        } else {
+          window.toastr['success'](this.$t('settings.expense_category.updated_message'))
+        }
         window.hub.$emit('newCategory', response.data.category)
         this.closeCategoryModal()
         this.isLoading = false

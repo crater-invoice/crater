@@ -629,21 +629,28 @@ export default {
       } else {
         this.formData.currency_id = this.defaultCurrency.id
       }
-      let response = await this.addCustomer(this.formData)
-      if (response.data) {
-        window.toastr['success'](this.$tc('customers.created_message'))
-        this.isLoading = false
-        if (this.$route.name === 'invoices.create') {
-          this.setInvoiceCustomer(response.data.customer.id)
+      try {
+        let response = await this.addCustomer(this.formData)
+        if (response.data) {
+          window.toastr['success'](this.$tc('customers.created_message'))
+          this.isLoading = false
+          if (this.$route.name === 'invoices.create') {
+            this.setInvoiceCustomer(response.data.customer.id)
+          }
+          if (this.$route.name === 'estimates.create') {
+            this.setEstimateCustomer(response.data.customer.id)
+          }
+          this.resetData()
+          this.closeModal()
+          return true
         }
-        if (this.$route.name === 'estimates.create') {
-          this.setEstimateCustomer(response.data.customer.id)
+      // window.toastr['error'](response.data.error)
+      } catch (err) {
+        if (err.response.data.errors.email) {
+          this.isLoading = false
+          window.toastr['error'](this.$t('validation.email_already_taken'))
         }
-        this.resetData()
-        this.closeModal()
-        return true
       }
-      window.toastr['error'](response.data.error)
     },
     async fetchCountry () {
       let res = await window.axios.get('/api/countries')

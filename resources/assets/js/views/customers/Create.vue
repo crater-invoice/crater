@@ -586,11 +586,16 @@ export default {
         this.isLoading = true
         try {
           let response = await this.updateCustomer(this.formData)
-          if (response.data) {
+          if (response.data.success) {
             window.toastr['success'](this.$t('customers.updated_message'))
             this.$router.push('/admin/customers')
             this.isLoading = false
             return true
+          } else {
+            this.isLoading = false
+            if (response.data.error) {
+              window.toastr['error'](this.$t('validation.email_already_taken'))
+            }
           }
         } catch (err) {
           if (err.response.data.errors.email) {

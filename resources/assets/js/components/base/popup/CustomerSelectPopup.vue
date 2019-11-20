@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <button class="list-add-button" @click="openCustomerModal">
+    <button type="button" class="list-add-button" @click="openCustomerModal">
       <font-awesome-icon class="icon" icon="user-plus" />
       <label>{{ $t('customers.add_new_customer') }}</label>
     </button>

@@ -189,7 +189,11 @@ export default {
         response = await this.updateTaxType(this.formData)
       }
       if (response.data) {
-        window.toastr['success'](this.$t('settings.tax_types.created_message'))
+        if (!this.isEdit) {
+          window.toastr['success'](this.$t('settings.tax_types.created_message'))
+        } else {
+          window.toastr['success'](this.$t('settings.tax_types.updated_message'))
+        }
         window.hub.$emit('newTax', response.data.taxType)
         this.closeTaxModal()
         this.isLoading = false

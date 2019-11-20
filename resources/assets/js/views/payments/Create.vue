@@ -291,7 +291,6 @@ export default {
         this.customer = response.data.payment.user
         this.formData.payment_date = moment(response.data.payment.payment_date, 'YYYY-MM-DD').toString()
         this.formData.amount = parseFloat(response.data.payment.amount)
-        this.maxPayableAmount = response.data.payment.amount
         if (response.data.payment.invoice !== null) {
           this.maxPayableAmount = parseInt(response.data.payment.amount) + parseInt(response.data.payment.invoice.due_amount)
           this.invoice = response.data.payment.invoice

@@ -24,7 +24,7 @@ class ItemsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required|digits_between:1,20',
+            'price' => 'required',
         ];
     }
 }

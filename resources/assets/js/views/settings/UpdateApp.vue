@@ -92,7 +92,7 @@ export default {
         this.isCheckingforUpdate = false
 
         if (!response.data.version) {
-          window.toastr['warning'](this.$t('settings.update_app.latest_message'))
+          window.toastr['info'](this.$t('settings.update_app.latest_message'))
 
           return
         }

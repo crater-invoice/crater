@@ -1,4 +1,4 @@
-<img height="150px" src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
+<img src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
 
 ## Introduction
 
@@ -36,6 +36,8 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 -   [x] Automatic Update
 -   [x] Email Configuration
 -   [x] Installation Wizard
+-   [ ] Address Customisation & Default notes
+-   [ ] Edit Email before Sending Invoice
 -   [ ] Available as a docker image
 -   [ ] Performance Improvements
 -   [ ] Customer View page
@@ -45,6 +47,8 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 -   [ ] Multiple Companies
 -   [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
 -   [ ] Vendors, Inventory & Bills
+-   [ ] Recurring Invoices & Payment Reminders
+-   [ ] Improve Accessibility
 
 
 ## Credits

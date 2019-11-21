@@ -227,4 +227,31 @@ class CompanyController extends Controller
             'success' => true
         ]);
     }
+
+    /**
+     * Upload the Admin Avatar to public storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadAdminAvatar(Request $request)
+    {
+        $data = json_decode($request->admin_avatar);
+
+        if($data) {
+            $user = auth()->user();
+
+            if($user) {
+                $user->clearMediaCollection('admin_avatar');
+
+                $user->addMediaFromBase64($data->data)
+                    ->usingFileName($data->name)
+                    ->toMediaCollection('admin_avatar');
+            }
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
 }

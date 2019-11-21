@@ -11,9 +11,10 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 1. [Documentation](#documentation)
 2. [Download](#download)
 3. [Mobile Apps](#mobile-apps)
-4. [Roadmap](#roadmap)
-5. [Credits](#credits)
-6. [License](#license)
+4. [Discord](#discord)
+5. [Roadmap](#roadmap)
+6. [Credits](#credits)
+7. [License](#license)
 
 ## Documentation
 
@@ -29,6 +30,10 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 - [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
 - IOS - Coming Soon
 - [Source](https://github.com/bytefury/crater-mobile)
+
+## Discord
+Join the Crater discord server to discuss: 
+[Invite Link](https://discord.gg/nyTstm6)
 
 ## Roadmap
 

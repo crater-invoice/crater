@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  nginx:
+    image: nginx 
+    expose:
+      - 80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: always 
+    
+  php:
+    build: .
+    expose:
+      - 9000
+    restart: always
+

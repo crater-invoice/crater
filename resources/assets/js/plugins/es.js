@@ -599,6 +599,7 @@ export default {
       updated_message: 'Información de la empresa actualizada con éxito'
     },
     account_settings: {
+      profile_picture: 'Foto de perfil',
       name: 'Nombre',
       email: 'Email',
       password: 'Contraseña',

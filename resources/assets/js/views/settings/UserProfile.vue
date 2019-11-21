@@ -8,6 +8,31 @@
             {{ $t('settings.account_settings.section_description') }}
           </p>
         </div>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="input-label">{{ $tc('settings.account_settings.profile_picture') }}</label>
+            <div id="pick-avatar" class="image-upload-box avatar-upload">
+              <div class="overlay">
+                <font-awesome-icon class="white-icon" icon="camera"/>
+              </div>
+              <img v-if="previewAvatar" :src="previewAvatar" class="preview-logo">
+              <div v-else class="upload-content">
+                <font-awesome-icon class="upload-icon" icon="cloud-upload-alt"/>
+                <p class="upload-text"> {{ $tc('general.choose_file') }} </p>
+              </div>
+            </div>
+          </div>
+          <avatar-cropper
+            :labels="{ submit: 'submit', cancel: 'Cancle'}"
+            :cropper-options="cropperOptions"
+            :output-options="cropperOutputOptions"
+            :output-quality="0.8"
+            :upload-handler="cropperHandler"
+            trigger="#pick-avatar"
+            @changed="setFileObject"
+            @error="handleUploadError"
+          />
+        </div>
         <div class="row">
           <div class="col-md-6 mb-4 form-group">
             <label class="input-label">{{ $tc('settings.account_settings.name') }}</label>
@@ -81,19 +106,33 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions } from 'vuex'
+import AvatarCropper from 'vue-avatar-cropper'
 const { required, requiredIf, sameAs, email, minLength } = require('vuelidate/lib/validators')
 
 export default {
+  components: { AvatarCropper },
   mixins: [validationMixin],
   data () {
     return {
-      isLoading: false,
+      cropperOutputOptions: {
+        width: 150,
+        height: 150
+      },
+      cropperOptions: {
+        autoCropArea: 1,
+        viewMode: 0,
+        movable: true,
+        zoomable: true
+      },
       formData: {
         name: null,
         email: null,
         password: null,
         confirm_password: null
-      }
+      },
+      isLoading: false,
+      previewAvatar: null,
+      fileObject: null
     }
   },
   validations: {
@@ -128,12 +167,23 @@ export default {
   methods: {
     ...mapActions('userProfile', [
       'loadData',
-      'editUser'
+      'editUser',
+      'uploadAvatar'
     ]),
+    cropperHandler (cropper) {
+      this.previewAvatar = cropper.getCroppedCanvas().toDataURL(this.cropperOutputMime)
+    },
+    setFileObject (file) {
+      this.fileObject = file
+    },
+    handleUploadError (message, type, xhr) {
+      window.toastr['error']('Oops! Something went wrong...')
+    },
     async setInitialData () {
       let response = await this.loadData()
       this.formData.name = response.data.name
       this.formData.email = response.data.email
+      this.previewAvatar = response.data.avatar
     },
     async updateUserData () {
       this.$v.formData.$touch()
@@ -151,6 +201,14 @@ export default {
       let response = await this.editUser(data)
       if (response.data.success) {
         this.isLoading = false
+        if (this.fileObject && this.previewAvatar) {
+          let avatarData = new FormData()
+          avatarData.append('admin_avatar', JSON.stringify({
+            name: this.fileObject.name,
+            data: this.previewAvatar
+          }))
+          this.uploadAvatar(avatarData)
+        }
         window.toastr['success'](this.$t('settings.account_settings.updated_message'))
         return true
       }

@@ -35,4 +35,41 @@
         margin-bottom: 10px;
     }
 
+    .white-icon {
+        font-size: 30px;
+        line-height: 23px;
+        color: $white;
+        margin-bottom: 10px;
+    }
+
+    .overlay {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        transition: .5s ease;
+        background-color: rgba(0,0,0,0.5);
+        opacity: 0;
+    }
+
+    &:hover {
+        .overlay {
+            opacity: 1;
+        }
+    }
+
 }
+
+.avatar-upload {
+    height: 130px;
+    width: 130px;
+    .preview-logo {
+        max-height: 80% !important;
+    }
+}
+

@@ -603,6 +603,7 @@ export default {
       updated_message: 'Company information updated successfully'
     },
     account_settings: {
+      profile_picture: 'Profile Picture',
       name: 'Name',
       email: 'Email',
       password: 'Password',

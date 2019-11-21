@@ -12,6 +12,9 @@
           <div class="col-md-6">
             <label class="input-label">{{ $tc('settings.company_info.company_logo') }}</label>
             <div id="pick-avatar" class="image-upload-box">
+              <div class="overlay">
+                <font-awesome-icon class="white-icon" icon="cloud-upload-alt"/>
+              </div>
               <img v-if="previewLogo" :src="previewLogo" class="preview-logo">
               <div v-else class="upload-content">
                 <font-awesome-icon class="upload-icon" icon="cloud-upload-alt"/>
@@ -174,7 +177,6 @@ export default {
       isFetchingData: false,
       formData: {
         name: null,
-        logo: '',
         email: '',
         phone: '',
         zip: '',
@@ -301,17 +303,8 @@ export default {
         return true
       }
       this.isLoading = true
-      let data = new FormData()
-      data.append('name', this.formData.name)
-      data.append('address_street_1', this.formData.address_street_1)
-      data.append('address_street_2', this.formData.address_street_2)
-      data.append('city_id', this.formData.city_id)
-      data.append('state_id', this.formData.state_id)
-      data.append('country_id', this.formData.country_id)
-      data.append('zip', this.formData.zip)
-      data.append('phone', this.formData.phone)
 
-      let response = await this.editCompany(data)
+      let response = await this.editCompany(this.formData)
       if (response.data.success) {
         this.isLoading = false
         if (this.fileObject && this.previewLogo) {

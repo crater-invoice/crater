@@ -8,7 +8,7 @@
           <label class="input-label">{{ $tc('settings.company_info.company_logo') }}</label>
           <div id="pick-avatar" class="image-upload-box">
             <div class="overlay">
-              <font-awesome-icon class="white-icon" icon="cloud-upload-alt"/>
+              <font-awesome-icon class="white-icon" icon="camera"/>
             </div>
             <img v-if="previewLogo" :src="previewLogo" class="preview-logo">
             <div v-else class="upload-content">

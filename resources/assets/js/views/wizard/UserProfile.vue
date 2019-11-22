@@ -129,7 +129,7 @@ export default {
         confirm_password: null
       },
       loading: false,
-      previewAvatar: null,
+      previewAvatar: '/images/default-avatar.jpg',
       fileObject: null
     }
   },

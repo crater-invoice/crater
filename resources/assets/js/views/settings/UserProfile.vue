@@ -16,7 +16,7 @@
                 <font-awesome-icon class="white-icon" icon="camera"/>
               </div>
               <img v-if="previewAvatar" :src="previewAvatar" class="preview-logo">
-              <div v-else class="upload-content">
+              <div v-if="!previewAvatar" class="upload-content">
                 <font-awesome-icon class="upload-icon" icon="cloud-upload-alt"/>
                 <p class="upload-text"> {{ $tc('general.choose_file') }} </p>
               </div>
@@ -183,7 +183,11 @@ export default {
       let response = await this.loadData()
       this.formData.name = response.data.name
       this.formData.email = response.data.email
-      this.previewAvatar = response.data.avatar
+      if (response.data.avatar) {
+        this.previewAvatar = response.data.avatar
+      } else {
+        this.previewAvatar = '/images/default-avatar.jpg'
+      }
     },
     async updateUserData () {
       this.$v.formData.$touch()

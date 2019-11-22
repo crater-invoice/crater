@@ -11,8 +11,10 @@
     cursor: pointer;
 
     .preview-logo {
-        max-height: 50%;
+        max-height: 80%;
         position: absolute;
+        opacity: 1;
+        animation: fadeIn 2s ease;
     }
 
     .upload-content {
@@ -69,7 +71,17 @@
     height: 130px;
     width: 130px;
     .preview-logo {
-        max-height: 80% !important;
+        max-width: 80% !important;
+    }
+
+    @keyframes fadeIn{
+      0%{
+        opacity: 0;
+      }
+      100%{
+        opacity: 1;
+      }
     }
 }
+
 

@@ -51,7 +51,8 @@ class User extends Authenticatable implements HasMedia
     ];
 
     protected $appends = [
-        'formattedCreatedAt'
+        'formattedCreatedAt',
+        'avatar'
     ];
 
     /**
@@ -243,5 +244,14 @@ class User extends Authenticatable implements HasMedia
         $customer->delete();
 
         return true;
+    }
+
+    public function getAvatarAttribute()
+    {
+        $avatar = $this->getMedia('admin_avatar')->first();
+        if ($avatar) {
+            return  asset($avatar->getUrl());
+        }
+        return ;
     }
 }

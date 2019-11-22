@@ -66,7 +66,7 @@
             "php artisan clear-compiled",
             "chmod 775 storage", 
             "chmod 775 storage/logs", 
-            "chmod 775 storage/frameworks", 
+            "chmod 775 storage/framework", 
             "chmod 775 bootstrap/cache",
             "php artisan passport:keys"
         ]

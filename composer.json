@@ -64,11 +64,11 @@
         ],
         "post-install-cmd": [ 
             "php artisan clear-compiled",
-            "chmod -R 775 storage", 
-            "chmod -R 775 bootstrap/cache",
-            "php artisan passport:keys",
-            "chmod -R 775 storage", 
-            "chmod -R 775 bootstrap/cache"
+            "chmod 775 storage", 
+            "chmod 775 storage/logs", 
+            "chmod 775 storage/frameworks", 
+            "chmod 775 bootstrap/cache",
+            "php artisan passport:keys"
         ]
     },
     "config": {

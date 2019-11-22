@@ -20,7 +20,7 @@
         "laravel/tinker": "^1.0",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^3.0",
-        "barryvdh/laravel-ide-helper": "^2.6"
+        "barryvdh/laravel-ide-helper": "^2.6"   
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -61,6 +61,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-install-cmd": [ 
+            "php artisan clear-compiled",
+            "chmod -R 777 storage", 
+            "php artisan passport:keys"
         ]
     },
     "config": {

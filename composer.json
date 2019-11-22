@@ -19,13 +19,13 @@
         "laravel/socialite": "^4.2.0",
         "laravel/tinker": "^1.0",
         "spatie/laravel-medialibrary": "^7.0.0",
-        "spatie/laravel-permission": "^3.0"
+        "spatie/laravel-permission": "^3.0",
+        "barryvdh/laravel-ide-helper": "^2.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",

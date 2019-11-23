@@ -736,7 +736,7 @@ export default {
     permissions: {
       permissions: 'Permisos',
       permission_confirm_title: 'Estás seguro de que quieres continuar?',
-      permission_confirm_desc: 'La verificación de permisos de la carpeta falló',
+      permission_confirm_desc: 'Error de verificación de permisos de carpeta',
       permission_desc: 'A continuación se muestra la lista de permisos de carpeta necesarios para que la aplicación funcione. Si la verificación de permisos falla, asegúrese de actualizar los permisos de su carpeta.'
     },
     mail: {

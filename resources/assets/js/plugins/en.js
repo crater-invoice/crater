@@ -689,7 +689,7 @@ export default {
       update: 'Update Now',
       update_progress: 'Update in progress...',
       progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
-      update_success: 'App has been updated successfully',
+      update_success: 'App has been updated! Please wait while your browser window gets reloaded automatically.',
       latest_message: 'No update available! You are on the latest version.',
       current_version: 'Current Version'
     }

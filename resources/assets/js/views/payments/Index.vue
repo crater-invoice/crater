@@ -215,15 +215,14 @@
         </table-column>
       </table-component>
     </div>
-
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { SweetModal, SweetModalTab } from 'sweet-modal-vue'
 import CapsuleIcon from '../../components/icon/CapsuleIcon'
 import BaseButton from '../../../js/components/base/BaseButton'
-import { request } from 'http'
 
 export default {
   components: {

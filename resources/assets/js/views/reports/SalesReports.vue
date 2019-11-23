@@ -4,13 +4,6 @@
       <div class="row">
         <div class="col-md-8">
           <label class="report-label">{{ $t('reports.sales.date_range') }}</label>
-          <!-- <base-date-picker
-            v-model="range"
-            :invalid="$v.range.$error"
-            format="yyyy"
-            minimum-view="year"
-            @change="$v.range.$touch()"
-          /> -->
           <base-select
             v-model="selectedRange"
             :options="dateRange"

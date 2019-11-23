@@ -3,6 +3,31 @@
     <form action="" @submit.prevent="next()">
       <p class="form-title">{{ $t('wizard.account_info') }}</p>
       <p class="form-desc">{{ $t('wizard.account_info_desc') }}</p>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label class="input-label">{{ $tc('settings.account_settings.profile_picture') }}</label>
+          <div id="pick-avatar" class="image-upload-box avatar-upload">
+            <div class="overlay">
+              <font-awesome-icon class="white-icon" icon="camera"/>
+            </div>
+            <img v-if="previewAvatar" :src="previewAvatar" class="preview-logo">
+            <div v-else class="upload-content">
+              <font-awesome-icon class="upload-icon" icon="cloud-upload-alt"/>
+              <p class="upload-text"> {{ $tc('general.choose_file') }} </p>
+            </div>
+          </div>
+        </div>
+        <avatar-cropper
+          :labels="{ submit: 'submit', cancel: 'Cancle'}"
+          :cropper-options="cropperOptions"
+          :output-options="cropperOutputOptions"
+          :output-quality="0.8"
+          :upload-handler="cropperHandler"
+          trigger="#pick-avatar"
+          @changed="setFileObject"
+          @error="handleUploadError"
+        />
+      </div>
       <div class="row">
         <div class="col-md-6">
           <label class="form-label">{{ $t('wizard.name') }}</label><span class="text-danger"> *</span>
@@ -75,24 +100,37 @@
   </div>
 </template>
 <script>
-import MultiSelect from 'vue-multiselect'
+import AvatarCropper from 'vue-avatar-cropper'
 import { validationMixin } from 'vuelidate'
+import { mapActions } from 'vuex'
 const { required, requiredIf, sameAs, minLength, email } = require('vuelidate/lib/validators')
 
 export default {
   components: {
-    MultiSelect
+    AvatarCropper
   },
   mixins: [validationMixin],
   data () {
     return {
+      cropperOutputOptions: {
+        width: 150,
+        height: 150
+      },
+      cropperOptions: {
+        autoCropArea: 1,
+        viewMode: 0,
+        movable: true,
+        zoomable: true
+      },
       profileData: {
         name: null,
         email: null,
         password: null,
         confirm_password: null
       },
-      loading: false
+      loading: false,
+      previewAvatar: '/images/default-avatar.jpg',
+      fileObject: null
     }
   },
   validations: {
@@ -124,6 +162,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions('userProfile', [
+      'uploadOnboardAvatar'
+    ]),
+    cropperHandler (cropper) {
+      this.previewAvatar = cropper.getCroppedCanvas().toDataURL(this.cropperOutputMime)
+    },
+    setFileObject (file) {
+      this.fileObject = file
+    },
+    handleUploadError (message, type, xhr) {
+      window.toastr['error']('Oops! Something went wrong...')
+    },
     async next () {
       this.$v.profileData.$touch()
       if (this.$v.profileData.$invalid) {
@@ -131,7 +181,20 @@ export default {
       }
       this.loading = true
       let response = await window.axios.post('/api/admin/onboarding/profile', this.profileData)
+      console.log('user_id', response.data.user.id)
+
       if (response.data) {
+        if (this.fileObject && this.previewAvatar) {
+          let avatarData = new FormData()
+          avatarData.append('admin_avatar', JSON.stringify({
+            name: this.fileObject.name,
+            data: this.previewAvatar,
+            id: response.data.user.id
+          }))
+          console.log(avatarData);
+
+          this.uploadOnboardAvatar(avatarData)
+        }
         this.$emit('next')
         this.loading = false
       }

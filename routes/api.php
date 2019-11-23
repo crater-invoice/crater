@@ -96,6 +96,11 @@ Route::group(['middleware' => 'redirect-if-installed'], function () {
         'uses' => 'OnboardingController@adminProfile'
     ]);
 
+    Route::post('/admin/profile/upload-avatar', [
+        'as' => 'admin.on_boarding.avatar',
+        'uses' => 'OnboardingController@uploadAdminAvatar'
+    ]);
+
     Route::post('/admin/onboarding/company', [
         'as' => 'admin.company',
         'uses' => 'OnboardingController@adminCompany'

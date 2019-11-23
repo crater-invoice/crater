@@ -12,11 +12,7 @@ export const loadData = ({ commit, dispatch, state }, id) => {
 
 export const editCompany = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
-    window.axios.post('/api/settings/company', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then((response) => {
+    window.axios.post('/api/settings/company', data).then((response) => {
       // commit(types.UPDATE_ITEM, response.data)
       resolve(response)
     }).catch((err) => {

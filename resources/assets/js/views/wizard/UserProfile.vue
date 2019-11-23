@@ -5,7 +5,7 @@
       <p class="form-desc">{{ $t('wizard.account_info_desc') }}</p>
       <div class="row mb-4">
         <div class="col-md-6">
-          <label class="input-label">{{ $tc('settings.account_settings.profile_picture') }}</label>
+          <label class="form-label">{{ $tc('settings.account_settings.profile_picture') }}</label>
           <div id="pick-avatar" class="image-upload-box avatar-upload">
             <div class="overlay">
               <font-awesome-icon class="white-icon" icon="camera"/>
@@ -191,7 +191,6 @@ export default {
             data: this.previewAvatar,
             id: response.data.user.id
           }))
-          console.log(avatarData);
 
           this.uploadOnboardAvatar(avatarData)
         }

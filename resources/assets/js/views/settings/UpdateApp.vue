@@ -17,9 +17,7 @@
           <h3 class="page-title mb-3">{{ $t('settings.update_app.avail_update') }}</h3>
           <label class="input-label">{{ $t('settings.update_app.next_version') }}</label><br>
           <label class="version">{{ updateData.version }}</label>
-          <p class="page-sub-title">
-            {{ description }}
-          </p>
+          <p class="page-sub-title" style="white-space: pre-wrap;">{{ description }}</p>
           <base-button size="large" icon="rocket" color="theme" @click="onUpdateApp">
             {{ $t('settings.update_app.update') }}
           </base-button>

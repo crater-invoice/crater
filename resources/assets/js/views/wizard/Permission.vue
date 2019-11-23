@@ -57,17 +57,21 @@ export default {
         this.errors = response.data.permissions.errors
         let self = this
 
-        swal({
-          title: this.$t('wizard.permissions.permission_confirm_title'),
-          text: this.$t('wizard.permissions.permission_confirm_desc'),
-          icon: 'warning',
-          buttons: true,
-          dangerMode: true
-        }).then(async (willConfirm) => {
-          if (willConfirm) {
-            self.isContinue = true
-          }
-        })
+        if (this.errors) {
+          swal({
+            title: this.$t('wizard.permissions.permission_confirm_title'),
+            text: this.$t('wizard.permissions.permission_confirm_desc'),
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true
+          }).then(async (willConfirm) => {
+            if (willConfirm) {
+              self.isContinue = true
+            }
+          })
+        } else {
+          this.isContinue = true
+        }
 
         this.loading = false
       }

@@ -55,13 +55,22 @@ export default {
       }
     }
   },
-
+  created () {
+    window.addEventListener('beforeunload', (event) => {
+      if (this.isUpdating) {
+        event.returnValue = 'Update is in progress!'
+      }
+    })
+  },
   mounted () {
     window.axios.get('/api/settings/app/version').then((res) => {
       this.currentVersion = res.data.version
     })
   },
   methods: {
+    closeHandler () {
+      console.log('closing')
+    },
     async onUpdateApp () {
       try {
         this.isUpdating = true

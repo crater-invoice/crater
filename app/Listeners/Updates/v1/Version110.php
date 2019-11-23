@@ -111,7 +111,5 @@ class Version110 extends Listener
             'thousand_separator' => ',',
             'decimal_separator' => '.'
         ]);
-
-
     }
 }

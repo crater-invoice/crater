@@ -47,6 +47,8 @@ Route::group(['prefix' => 'reports'], function () {
         'uses' => 'ReportController@profitLossReport'
     ]);
 
+
+
 });
 
 

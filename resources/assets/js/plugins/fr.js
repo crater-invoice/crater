@@ -738,6 +738,8 @@ export default {
     },
     permissions: {
       permissions: 'Les permissions',
+      permission_confirm_title: 'Es-tu sur de vouloir continuer?',
+      permission_confirm_desc: 'La vérification de l\'autorisation du dossier a échoué',
       permission_desc: "Vous trouverez ci-dessous la liste des autorisations de dossier requises pour le fonctionnement de l'application. Si la vérification des autorisations échoue, veillez à mettre à jour vos autorisations de dossier."
     },
     mail: {

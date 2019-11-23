@@ -740,6 +740,8 @@ export default {
     },
     permissions: {
       permissions: 'Permissions',
+      permission_confirm_title: 'Are you sure you want to continue?',
+      permission_confirm_desc: 'Folder\'s permission check failed',
       permission_desc: 'Below is the list of folder permissions which are required in order for the app to work. If the permission check fails, make sure to update your folder permissions.'
     },
     mail: {

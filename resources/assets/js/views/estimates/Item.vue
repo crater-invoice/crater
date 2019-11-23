@@ -353,7 +353,7 @@ export default {
       this.item.name = val
     },
     deselectItem () {
-      this.item = {...EstimateStub, id: this.item.id}
+      this.item = {...EstimateStub, id: this.item.id, taxes: [{...TaxStub, id: Guid.raw()}]}
       this.$nextTick(() => {
         this.$refs.itemSelect.$refs.baseSelect.$refs.search.focus()
       })

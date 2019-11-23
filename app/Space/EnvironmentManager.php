@@ -54,7 +54,7 @@ class EnvironmentManager
                 'error' => 'connection_failed'
             ];
         } else {
-            if(count(DB::connection()->select('SHOW TABLES'))) {
+            if(\Schema::hasTable('users') ) {
                 return [
                     'error' => 'database_should_be_empty'
                 ];

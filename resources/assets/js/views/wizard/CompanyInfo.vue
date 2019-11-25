@@ -64,29 +64,18 @@
       <div class="row">
         <div class="col-md-6">
           <label class="form-label">{{ $t('wizard.state') }}</label>
-          <base-select
-            v-model="state"
-            :options="states"
-            :searchable="true"
-            :show-labels="false"
-            :disabled="isDisabledState"
-            :placeholder="$t('general.select_state')"
-            track-by="id"
-            label="name"
-            @input="fetchCities"
+          <base-input
+            v-model="companyData.state"
+            name="state"
+            type="text"
           />
         </div>
         <div class="col-md-6">
           <label class="form-label">{{ $t('wizard.city') }}</label>
-          <base-select
-            v-model="city"
-            :options="cities"
-            :searchable="true"
-            :show-labels="false"
-            :disabled="isDisabledCity"
-            :placeholder="$t('general.select_city')"
-            track-by="id"
-            label="name"
+          <base-input
+            v-model="companyData.city"
+            name="city"
+            type="text"
           />
         </div>
       </div>
@@ -180,8 +169,8 @@ export default {
         name: null,
         address_street_1: '',
         address_street_2: '',
-        city_id: '',
-        state_id: '',
+        city: '',
+        state: '',
         country_id: '',
         zip: '',
         phone: ''
@@ -190,13 +179,7 @@ export default {
       step: 1,
       countries: [],
       country: null,
-      states: [],
-      state: null,
-      cities: [],
-      city: null,
-      previewLogo: null,
-      isDisabledCity: true,
-      isDisabledState: true
+      previewLogo: null
     }
   },
   validations: {
@@ -218,35 +201,6 @@ export default {
   watch: {
     country ({ id }) {
       this.companyData.country_id = id
-      this.state = null
-      this.city = null
-      if (id !== null && id !== undefined) {
-        this.isDisabledState = false
-        return true
-      }
-      this.isDisabledState = true
-      return true
-    },
-    state (newState) {
-      if (newState !== null && newState !== undefined) {
-        this.city = null
-        this.companyData.state_id = newState.id
-        this.isDisabledCity = false
-        return true
-      }
-      this.companyData.state_id = null
-      this.isDisabledCity = true
-      this.cities = []
-      this.city = null
-      this.companyData.city_id = null
-      return true
-    },
-    city (newCity) {
-      if (newCity !== null && newCity !== undefined) {
-        this.companyData.city_id = newCity.id
-        return true
-      }
-      this.companyData.city_id = null
       return true
     }
   },
@@ -306,22 +260,6 @@ export default {
       let res = await window.axios.get('/api/countries')
       if (res) {
         this.countries = res.data.countries
-      }
-    },
-    async fetchState () {
-      this.$v.companyData.country_id.$touch()
-      let res = await window.axios.get(`/api/states/${this.country.id}`)
-      if (res) {
-        this.states = res.data.states
-      }
-    },
-    async fetchCities () {
-      if (this.state === null || this.state === undefined) {
-        return false
-      }
-      let res = await window.axios.get(`/api/cities/${this.state.id}`)
-      if (res) {
-        this.cities = res.data.cities
       }
     }
   }

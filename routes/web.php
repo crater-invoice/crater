@@ -47,10 +47,13 @@ Route::group(['prefix' => 'reports'], function () {
         'uses' => 'ReportController@profitLossReport'
     ]);
 
-
-
 });
 
+Route::get('/newinvoice', function() {
+
+
+    return 'success';
+});
 
 Route::get('/invoices/pdf/{id}', [
     'as' => 'get.invoice.pdf',

@@ -76,14 +76,17 @@ export default {
         let res = await window.axios.post('/api/update', this.updateData)
 
         if (res.data.success) {
-          await window.axios.post('/api/update/finish', this.updateData)
-          this.isUpdateAvailable = false
-          window.toastr['success'](this.$t('settings.update_app.update_success'))
-          this.currentVersion = this.updateData.version
+          setTimeout(async () => {
+            await window.axios.post('/api/update/finish', this.updateData)
 
-          setTimeout(() => {
-            location.reload()
-          }, 2000)
+            window.toastr['success'](this.$t('settings.update_app.update_success'))
+            this.currentVersion = this.updateData.version
+            this.isUpdateAvailable = false
+
+            setTimeout(() => {
+              location.reload()
+            }, 2000)
+          }, 5000)
         } else {
           console.log(res.data)
           window.toastr['error'](res.data.error)

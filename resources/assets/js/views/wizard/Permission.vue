@@ -22,7 +22,7 @@
       </div>
     </div>
     <base-button
-      v-if="!errors"
+      v-if="isContinue"
       class="pull-right mt-5"
       icon="arrow-right"
       right-icon
@@ -39,7 +39,8 @@ export default {
     return {
       loading: false,
       permissions: [],
-      errors: false
+      errors: false,
+      isContinue: false
     }
   },
   created () {
@@ -54,6 +55,24 @@ export default {
       if (response.data) {
         this.permissions = response.data.permissions.permissions
         this.errors = response.data.permissions.errors
+        let self = this
+
+        if (this.errors) {
+          swal({
+            title: this.$t('wizard.permissions.permission_confirm_title'),
+            text: this.$t('wizard.permissions.permission_confirm_desc'),
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true
+          }).then(async (willConfirm) => {
+            if (willConfirm) {
+              self.isContinue = true
+            }
+          })
+        } else {
+          this.isContinue = true
+        }
+
         this.loading = false
       }
     },

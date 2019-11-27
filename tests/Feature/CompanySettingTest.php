@@ -65,8 +65,8 @@ class CompanySettingTest extends TestCase
         $company = [
             'name' => 'XYZ',
             'country_id' => 2,
-            'state_id' => 3,
-            'city_id' => 4,
+            'state' => 'city',
+            'city' => 'state',
             'address_street_1' => 'test1',
             'address_street_2' => 'test2',
             'phone' => '1234567890',
@@ -80,8 +80,8 @@ class CompanySettingTest extends TestCase
         $address2 = $response->decodeResponseJson()['user']['addresses'][0];
         $this->assertEquals($company['name'], $company2['name']);
         $this->assertEquals($company['country_id'], $address2['country_id']);
-        $this->assertEquals($company['state_id'], $address2['state_id']);
-        $this->assertEquals($company['city_id'], $address2['city_id']);
+        $this->assertEquals($company['state'], $address2['state']);
+        $this->assertEquals($company['city'], $address2['city']);
         $this->assertEquals($company['address_street_1'], $address2['address_street_1']);
         $this->assertEquals($company['address_street_2'], $address2['address_street_2']);
         $this->assertEquals($company['phone'], $address2['phone']);

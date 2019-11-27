@@ -689,7 +689,7 @@ export default {
       update: 'Update Now',
       update_progress: 'Update in progress...',
       progress_text: 'It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes',
-      update_success: 'App has been updated successfully',
+      update_success: 'App has been updated! Please wait while your browser window gets reloaded automatically.',
       latest_message: 'No update available! You are on the latest version.',
       current_version: 'Current Version'
     }
@@ -740,6 +740,8 @@ export default {
     },
     permissions: {
       permissions: 'Permissions',
+      permission_confirm_title: 'Are you sure you want to continue?',
+      permission_confirm_desc: 'Folder permission check failed',
       permission_desc: 'Below is the list of folder permissions which are required in order for the app to work. If the permission check fails, make sure to update your folder permissions.'
     },
     mail: {

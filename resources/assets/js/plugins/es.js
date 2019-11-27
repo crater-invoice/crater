@@ -685,7 +685,7 @@ export default {
       update: 'Actualizar',
       update_progress: 'Actualización en progreso...',
       progress_text: 'Solo tomará unos minutos. No actualice la pantalla ni cierre la ventana antes de que finalice la actualización.',
-      update_success: 'La aplicación se actualizó correctamente',
+      update_success: '¡La aplicación ha sido actualizada! Espere mientras la ventana de su navegador se vuelve a cargar automáticamente.',
       latest_message: '¡Actualización no disponible! Estás en la última versión.',
       current_version: 'Versión actual'
     }
@@ -735,6 +735,8 @@ export default {
     },
     permissions: {
       permissions: 'Permisos',
+      permission_confirm_title: 'Estás seguro de que quieres continuar?',
+      permission_confirm_desc: 'Error de verificación de permisos de carpeta',
       permission_desc: 'A continuación se muestra la lista de permisos de carpeta necesarios para que la aplicación funcione. Si la verificación de permisos falla, asegúrese de actualizar los permisos de su carpeta.'
     },
     mail: {

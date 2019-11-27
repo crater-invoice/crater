@@ -263,9 +263,6 @@ export default {
     }
   },
   async mounted () {
-    // if (!this.$route.params.id) {
-    //   this.$refs.baseSelect.$refs.search.focus()
-    // }
     this.$nextTick(() => {
       this.loadData()
       if (this.$route.params.id && !this.isEdit) {

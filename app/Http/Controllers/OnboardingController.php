@@ -58,8 +58,6 @@ class OnboardingController extends Controller
         $user = User::with([
             'addresses',
             'addresses.country',
-            'addresses.state',
-            'addresses.city',
             'company'
         ])->find(1);
 
@@ -156,8 +154,8 @@ class OnboardingController extends Controller
         $fields = $request->only([
             'address_street_1',
             'address_street_2',
-            'city_id',
-            'state_id',
+            'city',
+            'state',
             'country_id',
             'zip',
             'phone'

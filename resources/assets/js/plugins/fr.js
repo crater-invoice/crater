@@ -688,7 +688,7 @@ export default {
       update: 'Mettre à jour maintenant',
       update_progress: 'Mise à jour en cours...',
       progress_text: "Cela ne prendra que quelques minutes. S'il vous plaît ne pas actualiser l'écran ou fermer la fenêtre avant la fin de la mise à jour",
-      update_success: "L'application a été mise à jour avec succès",
+      update_success: 'App a été mis à jour! Veuillez patienter pendant le rechargement automatique de la fenêtre de votre navigateur.',
       latest_message: 'Pas de mise a jour disponible! Vous êtes sur la dernière version.',
       current_version: 'Version actuelle'
     }
@@ -738,6 +738,8 @@ export default {
     },
     permissions: {
       permissions: 'Les permissions',
+      permission_confirm_title: 'Es-tu sur de vouloir continuer?',
+      permission_confirm_desc: 'La vérification de l\'autorisation du dossier a échoué',
       permission_desc: "Vous trouverez ci-dessous la liste des autorisations de dossier requises pour le fonctionnement de l'application. Si la vérification des autorisations échoue, veillez à mettre à jour vos autorisations de dossier."
     },
     mail: {

@@ -36,7 +36,9 @@ export const addCustomer = ({ commit, dispatch, state }, data) => {
 export const updateCustomer = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.put(`/api/customers/${data.id}`, data).then((response) => {
-      commit(types.UPDATE_CUSTOMER, response.data)
+      if(response.data.success){
+        commit(types.UPDATE_CUSTOMER, response.data)
+      }
       resolve(response)
     }).catch((err) => {
       reject(err)

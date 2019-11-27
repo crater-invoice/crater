@@ -183,7 +183,8 @@ export default {
       customerList: [],
       invoiceList: [],
       isLoading: false,
-      maxPayableAmount: Number.MAX_SAFE_INTEGER
+      maxPayableAmount: Number.MAX_SAFE_INTEGER,
+      isSettingInitialData: true
     }
   },
   validations () {
@@ -247,7 +248,12 @@ export default {
     customer (newValue) {
       this.formData.user_id = newValue.id
       if (!this.isEdit) {
-        this.invoice = null
+        if (this.isSettingInitialData) {
+          this.isSettingInitialData = false
+        } else {
+          this.invoice = null
+          this.formData.invoice_id = null
+        }
         this.formData.amount = 0
         this.invoiceList = []
         this.fetchCustomerInvoices(newValue.id)

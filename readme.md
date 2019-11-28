@@ -14,7 +14,8 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 4. [Discord](#discord)
 5. [Roadmap](#roadmap)
 6. [Credits](#credits)
-7. [License](#license)
+7. [Help us translate](#translate)
+8. [License](#license)
 
 ## Documentation
 
@@ -32,7 +33,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 - [Source](https://github.com/bytefury/crater-mobile)
 
 ## Discord
-Join the Crater discord server to discuss: 
+Join the Crater discord server to discuss:
 [Invite Link](https://discord.gg/nyTstm6)
 
 ## Roadmap
@@ -58,6 +59,9 @@ Join the Crater discord server to discuss:
 
 ## Credits
 Crater is a product of [Bytefury](https://bytefury.com)
+
+## Translate
+Help us translate on [Transifex](https://www.transifex.com/bytefury/crater-invoice)
 
 ## License
 Crater is released under the Attribution Assurance License.

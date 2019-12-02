@@ -56,7 +56,7 @@ class CompanyController extends Controller
 
     public function getAdminCompany()
     {
-        $user = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city', 'company'])->find(1);
+        $user = User::with(['addresses', 'addresses.country', 'company'])->find(1);
 
         return response()->json([
             'user' => $user
@@ -75,9 +75,9 @@ class CompanyController extends Controller
             $company->addMediaFromRequest('logo')->toMediaCollection('logo');
         }
 
-        $fields = $request->only(['address_street_1', 'address_street_2', 'city_id', 'state_id', 'country_id', 'zip', 'phone']);
+        $fields = $request->only(['address_street_1', 'address_street_2', 'city', 'state', 'country_id', 'zip', 'phone']);
         $address = Address::updateOrCreate(['user_id' => 1], $fields);
-        $user = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city', 'company'])->find(1);
+        $user = User::with(['addresses', 'addresses.country', 'company'])->find(1);
 
         return response()->json([
             'user' => $user,

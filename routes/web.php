@@ -47,10 +47,7 @@ Route::group(['prefix' => 'reports'], function () {
         'uses' => 'ReportController@profitLossReport'
     ]);
 
-
-
 });
-
 
 Route::get('/invoices/pdf/{id}', [
     'as' => 'get.invoice.pdf',

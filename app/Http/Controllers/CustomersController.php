@@ -80,8 +80,8 @@ class CustomersController extends Controller
                 $newAddress->name = $address["name"];
                 $newAddress->address_street_1 = $address["address_street_1"];
                 $newAddress->address_street_2 = $address["address_street_2"];
-                $newAddress->city_id = $address["city_id"];
-                $newAddress->state_id = $address["state_id"];
+                $newAddress->city = $address["city"];
+                $newAddress->state = $address["state"];
                 $newAddress->country_id = $address["country_id"];
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];
@@ -187,8 +187,8 @@ class CustomersController extends Controller
                 $newAddress->name = $address["name"];
                 $newAddress->address_street_1 = $address["address_street_1"];
                 $newAddress->address_street_2 = $address["address_street_2"];
-                $newAddress->city_id = $address["city_id"];
-                $newAddress->state_id = $address["state_id"];
+                $newAddress->city = $address["city"];
+                $newAddress->state = $address["state"];
                 $newAddress->country_id = $address["country_id"];
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];

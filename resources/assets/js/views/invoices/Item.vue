@@ -36,7 +36,7 @@
               <base-input
                 v-model="item.quantity"
                 :invalid="$v.item.quantity.$error"
-                type="number"
+                type="text"
                 small
                 @keyup="updateItem"
                 @input="$v.item.quantity.$touch()"

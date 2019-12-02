@@ -112,11 +112,7 @@ class CustomersController extends Controller
             'billingAddress',
             'shippingAddress',
             'billingAddress.country',
-            'billingAddress.state',
-            'billingAddress.city',
             'shippingAddress.country',
-            'shippingAddress.state',
-            'shippingAddress.city',
         ])->find($id);
 
         return response()->json([

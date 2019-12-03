@@ -5,15 +5,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 RUN apk add --no-cache curl git tar unzip libpng-dev libxml2-dev
 
-RUN docker-php-ext-install bcmath && \
-    docker-php-ext-install ctype && \
-    docker-php-ext-install json && \
-    docker-php-ext-install gd && \
-    docker-php-ext-install mbstring && \
-    docker-php-ext-install pdo && \
-    docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install tokenizer && \
-    docker-php-ext-install xml && \
+RUN docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer --version
 

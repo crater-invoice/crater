@@ -3,7 +3,9 @@ version: '3.1'
 services:
 
   nginx:
-    image: nginx 
+    image: nginx
+    depends_on:
+      - php
     expose:
       - 80
     volumes:
@@ -12,7 +14,17 @@ services:
     
   php:
     build: .
+    depends_on:
+      - db
     expose:
       - 9000
     restart: always
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_USER: crater
+      MYSQL_PASSWORD: crater
+      MYSQL_DATABASE: crater
 

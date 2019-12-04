@@ -14,11 +14,11 @@
         @if($invoice->user->billingaddress->address_street_2)
             {{$invoice->user->billingaddress->address_street_2}}<br>
         @endif
-        @if($invoice->user->billingaddress->city && $invoice->user->billingaddress->city->name)
-            {{$invoice->user->billingaddress->city->name}},
+        @if($invoice->user->billingaddress->city && $invoice->user->billingaddress->city)
+            {{$invoice->user->billingaddress->city}},
         @endif
-        @if($invoice->user->billingaddress->state && $invoice->user->billingaddress->state->name)
-            {{$invoice->user->billingaddress->state->name}}.
+        @if($invoice->user->billingaddress->state && $invoice->user->billingaddress->state)
+            {{$invoice->user->billingaddress->state}}.
         @endif
         @if($invoice->user->billingaddress->zip)
             {{$invoice->user->billingaddress->zip}}<br>

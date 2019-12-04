@@ -1,24 +1,19 @@
 FROM composer as composer
 
-# Copy composer files from project root into composer container's working dir
-COPY composer.* /app/
+# Copy everything from project root into composer container's working dir
+COPY . /app
  
 # Run composer to build dependencies in vendor folder
 RUN set -xe \
-  && composer install --no-dev --no-scripts --no-suggest --no-interaction --prefer-dist --optimize-autoloader
-   
-# Copy everything from project root into composer container's working dir
-COPY . /app
-    
-# Generated optimized autoload files containing all classes from vendor folder and project itself
-RUN composer dump-autoload --no-dev --optimize --classmap-authoritative
+  && composer install --no-scripts --no-suggest --no-interaction --prefer-dist --optimize-autoloader \
+  && composer dump-autoload --optimize --classmap-authoritative
 
 FROM php:7.4.0-fpm-alpine
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN apk add --no-cache libpng-dev libxml2-dev && \
+RUN apk add --no-cache libpng-dev libxml2-dev oniguruma-dev && \
     docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml
 
 # Set container's working dir

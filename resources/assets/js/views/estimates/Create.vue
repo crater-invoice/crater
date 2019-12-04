@@ -46,7 +46,7 @@
                       {{ selectedCustomer.billing_address.address_street_2 }}
                     </label>
                     <label v-if="selectedCustomer.billing_address.city && selectedCustomer.billing_address.state">
-                      {{ selectedCustomer.billing_address.city.name }}, {{ selectedCustomer.billing_address.state.name }} {{ selectedCustomer.billing_address.zip }}
+                      {{ selectedCustomer.billing_address.city }}, {{ selectedCustomer.billing_address.state }} {{ selectedCustomer.billing_address.zip }}
                     </label>
                     <label v-if="selectedCustomer.billing_address.country">
                       {{ selectedCustomer.billing_address.country.name }}
@@ -71,7 +71,7 @@
                       {{ selectedCustomer.shipping_address.address_street_2 }}
                     </label>
                     <label v-if="selectedCustomer.shipping_address.city && selectedCustomer.shipping_address">
-                      {{ selectedCustomer.shipping_address.city.name }}, {{ selectedCustomer.shipping_address.state.name }} {{ selectedCustomer.shipping_address.zip }}
+                      {{ selectedCustomer.shipping_address.city }}, {{ selectedCustomer.shipping_address.state }} {{ selectedCustomer.shipping_address.zip }}
                     </label>
                     <label v-if="selectedCustomer.shipping_address.country" class="country">
                       {{ selectedCustomer.shipping_address.country.name }}

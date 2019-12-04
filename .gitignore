@@ -12,3 +12,4 @@ Homestead.yaml
 /.expo
 /.vscode
 docker-compose.yml
+docker-compose.yaml

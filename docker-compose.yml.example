@@ -27,4 +27,4 @@ services:
       MYSQL_USER: crater
       MYSQL_PASSWORD: crater
       MYSQL_DATABASE: crater
-
+      MYSQL_ROOT_PASSWORD: crater

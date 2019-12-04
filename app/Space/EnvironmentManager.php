@@ -51,7 +51,7 @@ class EnvironmentManager
         if (! $this->checkDatabaseConnection($request)) {
 
             return [
-                'error' => 'connection_failed'
+                'error' => $this->checkDatabaseConnection($request)
             ];
         } else {
             if(\Schema::hasTable('users') ) {
@@ -321,7 +321,7 @@ class EnvironmentManager
 
             return true;
         } catch (Exception $e) {
-            return false;
+            return $e->getMessage();
         }
     }
 }

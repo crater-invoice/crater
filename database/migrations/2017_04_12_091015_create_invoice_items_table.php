@@ -18,10 +18,10 @@ class CreateInvoiceItemsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('discount_type');
-            $table->unsignedBigInteger('quantity');
             $table->unsignedBigInteger('price');
+            $table->decimal('quantity', 15, 2);
+            $table->decimal('discount', 15, 2)->nullable();
             $table->unsignedBigInteger('discount_val');
-            $table->unsignedBigInteger('discount');
             $table->unsignedBigInteger('tax');
             $table->unsignedBigInteger('total');
             $table->integer('invoice_id')->unsigned();

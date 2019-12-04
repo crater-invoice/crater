@@ -82,7 +82,7 @@ class Invoice extends Model
         // So the substr returns this 000001
 
         // Add the string in front and higher up the number.
-        // the %05d part makes sure that there are always 6 numbers in the string.
+        // the %06d part makes sure that there are always 6 numbers in the string.
         // so it adds the missing zero's when needed.
 
         return sprintf('%06d', intval($number) + 1);

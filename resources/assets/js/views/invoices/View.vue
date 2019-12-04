@@ -286,7 +286,7 @@ export default {
           let request = await this.deleteInvoice(this.id)
           if (request.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message', 1))
-            this.$router.push('/admin/invoices/')
+            this.$router.push('/admin/invoices')
           } else if (request.data.error) {
             window.toastr['error'](request.data.message)
           }

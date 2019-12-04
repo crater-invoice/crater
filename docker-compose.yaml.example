@@ -26,6 +26,8 @@ services:
   db:
     image: mariadb
     restart: always
+    volumes:
+      - db:/var/lib/mysql
     environment:
       MYSQL_USER: crater
       MYSQL_PASSWORD: crater
@@ -34,3 +36,4 @@ services:
 
 volumes:
   app:
+  db:

@@ -86,7 +86,7 @@ export default {
             setTimeout(() => {
               location.reload()
             }, 2000)
-          }, 5000)
+          }, 1000)
         } else {
           console.log(res.data)
           window.toastr['error'](res.data.error)

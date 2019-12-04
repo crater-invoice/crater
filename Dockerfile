@@ -36,7 +36,6 @@ COPY . /app
 COPY --from=composer /app/vendor /app/vendor
 
 RUN touch database/database.sqlite && \
-    php artisan migrate && \
     php artisan config:cache && \
     php artisan passport:install && \
     php artisan key:generate && \

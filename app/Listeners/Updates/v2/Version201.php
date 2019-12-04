@@ -66,11 +66,9 @@ class Version201 extends Listener
     private function changeMigrations()
     {
         \Schema::table('invoices', function (Blueprint $table) {
-            $table->decimal('quantity', 15, 2)->change();
             $table->decimal('discount', 15, 2)->nullable()->change();
         });
         \Schema::table('estimates', function (Blueprint $table) {
-            $table->decimal('quantity', 15, 2)->change();
             $table->decimal('discount', 15, 2)->nullable()->change();
         });
         \Schema::table('invoice_items', function (Blueprint $table) {

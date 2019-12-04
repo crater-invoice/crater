@@ -49,19 +49,21 @@ class EnvironmentManager
             'DB_PASSWORD='.$request->database_password."\n\n";
 
         try {
-            if ($this->checkDatabaseConnection($request)) {
-                if(\Schema::hasTable('users') ) {
-                    return [
-                        'error' => 'database_should_be_empty'
-                    ];
-                }
+
+            $this->checkDatabaseConnection($request);
+
+            if(\Schema::hasTable('users') ) {
+                return [
+                    'error' => 'database_should_be_empty'
+                ];
             }
+
         } catch (Exception $e) {
+
             return [
                 'error' => $e->getMessage()
             ];
         }
-
 
         try {
 
@@ -119,8 +121,6 @@ class EnvironmentManager
                     FILE_APPEND
                 );
             }
-
-
 
         } catch (Exception $e) {
             return [
@@ -318,12 +318,6 @@ class EnvironmentManager
             ],
         ]);
 
-        try {
-            DB::connection()->getPdo();
-
-            return true;
-        } catch (Exception $e) {
-            return $e;
-        }
+        return DB::connection()->getPdo();
     }
 }

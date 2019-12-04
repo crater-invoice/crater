@@ -48,18 +48,20 @@ class EnvironmentManager
             'DB_USERNAME='.$request->database_username."\n".
             'DB_PASSWORD='.$request->database_password."\n\n";
 
-        if (! $this->checkDatabaseConnection($request)) {
-
-            return [
-                'error' => 'connection_failed'
-            ];
-        } else {
-            if(\Schema::hasTable('users') ) {
-                return [
-                    'error' => 'database_should_be_empty'
-                ];
+        try {
+            if ($this->checkDatabaseConnection($request)) {
+                if(\Schema::hasTable('users') ) {
+                    return [
+                        'error' => 'database_should_be_empty'
+                    ];
+                }
             }
+        } catch (Exception $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
         }
+
 
         try {
 
@@ -321,7 +323,7 @@ class EnvironmentManager
 
             return true;
         } catch (Exception $e) {
-            return false;
+            return $e;
         }
     }
 }

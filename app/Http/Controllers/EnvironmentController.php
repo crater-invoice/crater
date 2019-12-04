@@ -33,10 +33,14 @@ class EnvironmentController extends Controller
      */
     public function saveDatabaseEnvironment(DatabaseEnvironmentRequest $request)
     {
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+
         $results = $this->EnvironmentManager->saveDatabaseVariables($request);
 
         if(array_key_exists("success", $results)) {
             Artisan::call('config:clear');
+            Artisan::call('cache:clear');
             Artisan::call('storage:link');
             Artisan::call('key:generate --force');
             Artisan::call('migrate --seed --force');

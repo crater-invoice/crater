@@ -30,6 +30,7 @@ class InvoiceItem extends Model
         'price' => 'integer',
         'total' => 'integer',
         'discount' => 'float',
+        'quantity' => 'float',
         'discount_val' => 'integer',
         'tax' => 'integer'
     ];

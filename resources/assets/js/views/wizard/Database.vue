@@ -206,10 +206,10 @@ export default {
         } else {
           window.toastr['error'](this.$t('wizard.errors.' + response.data.error))
         }
-        this.loading = false
       } catch (e) {
-        console.log(e.response)
         window.toastr['error'](e.response.data.message)
+      } finally {
+        this.loading = false
       }
     }
   }

@@ -1,12 +1,22 @@
+##### STAGE 1 #####
+
 FROM composer as composer
+
+# Copy composer files from project root into composer container's working dir
+COPY composer.* /app/
+
+# Copy database directory for autoloader optimization
+COPY database /app/database
+
+# Run composer to build dependencies in vendor folder
+RUN composer install --no-scripts --no-suggest --no-interaction --prefer-dist --optimize-autoloader 
 
 # Copy everything from project root into composer container's working dir
 COPY . /app
  
-# Run composer to build dependencies in vendor folder
-RUN set -xe \
-  && composer install --no-scripts --no-suggest --no-interaction --prefer-dist --optimize-autoloader \
-  && composer dump-autoload --optimize --classmap-authoritative
+RUN composer dump-autoload --optimize --classmap-authoritative
+
+##### STAGE 2 #####
 
 FROM php:7.4.0-fpm-alpine
 
@@ -25,10 +35,18 @@ COPY . /app
 # Copy vendor folder from composer container into php container
 COPY --from=composer /app/vendor /app/vendor
 
-RUN php artisan config:cache && \
-    chmod -R 755 storage bootstrap/cache && \
-    chown -R www-data:www-data storage
+RUN touch database/database.sqlite && \
+    php artisan migrate && \
+    php artisan config:cache && \
+    php artisan passport:install && \
+    php artisan key:generate && \
+    chown -R www-data:www-data . && \
+    chmod -R 755 . && \
+    chmod -R 775 storage/framework/ && \
+    chmod -R 775 storage/logs/ && \
+    chmod -R 775 bootstrap/cache/  
 
 EXPOSE 9000
+
 CMD ["php-fpm", "--nodaemonize"]
 

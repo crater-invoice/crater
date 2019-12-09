@@ -33,15 +33,15 @@
         }
 
         &.router-link-exact-active {
-           border-left: 3px solid #645ddb;
+           border-left: 3px solid $crater-theme;
        }
        
        &.router-link-exact-active {
-           background-color: #F9FBFF;
-       }
+            background-color: $gray--very-light;
+        }
 
         &:hover {
-            background-color: #F9FBFF;
+            background-color: $gray--very-light;
         }
 
         .left {

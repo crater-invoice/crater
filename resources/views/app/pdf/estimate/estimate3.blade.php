@@ -426,7 +426,7 @@
                 <div style="float:left;">
                     @include('app.pdf.estimate.partials.billing-address')
                 </div>
-                @if($estimate->user->billingaddress->name || $estimate->user->billingaddress->address_street_1 || $estimate->user->billingaddress->address_street_2 || $estimate->user->billingaddress->country || $estimate->user->billingaddress->state || $estimate->user->billingaddress->city || $estimate->user->billingaddress->zip || $estimate->user->billingaddress->phone)
+                @if($estimate->user->billingaddress && ($estimate->user->billingaddress->name || $estimate->user->billingaddress->address_street_1 || $estimate->user->billingaddress->address_street_2 || $estimate->user->billingaddress->country || $estimate->user->billingaddress->state || $estimate->user->billingaddress->city || $estimate->user->billingaddress->zip || $estimate->user->billingaddress->phone))
                     <div style="float:right;">
                 @else
                     <div style="float:left;">

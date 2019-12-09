@@ -37,7 +37,7 @@ COPY --from=composer /app/vendor /app/vendor
 
 RUN touch database/database.sqlite && \
     php artisan config:cache && \
-    php artisan passport:install && \
+    php artisan passport:keys && \
     php artisan key:generate && \
     chown -R www-data:www-data . && \
     chmod -R 755 . && \

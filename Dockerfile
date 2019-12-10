@@ -36,6 +36,7 @@ COPY . /app
 COPY --from=composer /app/vendor /app/vendor
 
 RUN touch database/database.sqlite && \
+    cp .env.example .env && \
     php artisan config:cache && \
     php artisan passport:keys && \
     php artisan key:generate && \

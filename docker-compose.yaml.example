@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
 
-  nginx:
+  web:
     image: nginx
     depends_on:
       - php
@@ -37,3 +37,4 @@ services:
 volumes:
   app:
   db:
+

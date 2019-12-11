@@ -11,3 +11,5 @@ Homestead.yaml
 .rnd
 /.expo
 /.vscode
+docker-compose.yml
+docker-compose.yaml

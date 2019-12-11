@@ -11,6 +11,7 @@
             v-model="settingData.currency"
             :class="{'error': $v.settingData.currency.$error }"
             :options="currencies"
+            :custom-label="currencyNameWithCode"
             :searchable="true"
             :show-labels="false"
             :placeholder="$t('settings.currencies.select_currency')"
@@ -150,6 +151,9 @@ export default {
     this.getOnboardingData()
   },
   methods: {
+    currencyNameWithCode ({name, code}) {
+      return `${code} - ${name}`
+    },
     ...mapActions('auth', [
       'loginOnBoardingUser'
     ]),

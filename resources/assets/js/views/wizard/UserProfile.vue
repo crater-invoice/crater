@@ -18,7 +18,7 @@
           </div>
         </div>
         <avatar-cropper
-          :labels="{ submit: 'submit', cancel: 'Cancle'}"
+          :labels="{ submit: 'submit', cancel: 'Cancel'}"
           :cropper-options="cropperOptions"
           :output-options="cropperOutputOptions"
           :output-quality="0.8"

@@ -1,0 +1,10 @@
+.dockerignore
+.gitignore
+*.md
+.git/
+.idea/
+.DS_Store/
+docker-compose.*
+LICENSE
+nginx.conf
+yarn.lock

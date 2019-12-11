@@ -153,6 +153,83 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function getCustomizeSetting (Request $request)
+    {
+        $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
+        $invoice_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
+        $invoice_notes = CompanySetting::getSetting('invoice_notes',  $request->header('company'), true);
+        $invoice_terms_and_conditions = CompanySetting::getSetting('invoice_terms_and_conditions', $request->header('company'), true);
+
+        $estimate_prefix = CompanySetting::getSetting('estimate_prefix', $request->header('company'));
+        $estimate_notes = CompanySetting::getSetting('estimate_notes', $request->header('company'), true);
+        $estimate_terms_and_conditions = CompanySetting::getSetting('estimate_terms_and_conditions', $request->header('company'), true);
+        $estimate_auto_generate  = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
+
+        $payment_prefix = CompanySetting::getSetting('payment_prefix', $request->header('company'));
+        $payment_auto_generate = CompanySetting::getSetting('payment_auto_generate', $request->header('company'));
+
+        $billing_address_format = CompanySetting::getSetting('billing_address_format', $request->header('company'), $large= true);
+        $shipping_address_format = CompanySetting::getSetting('shipping_address_format', $request->header('company'), $large= true);
+        $company_address_format = CompanySetting::getSetting('company_address_format', $request->header('company'), $large= true);
+
+        return  response()->json([
+            'invoice_prefix' => $invoice_prefix,
+            'invoice_auto_generate' => $invoice_auto_generate,
+            'invoice_notes' => $invoice_notes,
+            'invoice_terms_and_conditions' => $invoice_terms_and_conditions,
+            'estimate_prefix' => $estimate_prefix,
+            'estimate_auto_generate' => $estimate_auto_generate,
+            'estimate_notes' => $estimate_notes,
+            'estimate_terms_and_conditions' => $estimate_terms_and_conditions,
+            'payment_prefix' => $payment_prefix,
+            'payment_auto_generate' => $payment_auto_generate,
+            'billing_address_format' => $billing_address_format,
+            'shipping_address_format' => $shipping_address_format,
+            'company_address_format' => $company_address_format
+        ]);
+    }
+
+    public function updateCustomizeSetting (Request $request)
+    {
+        $sets = [];
+
+        if ($request->type == "PAYMENTS") {
+            $sets = [
+                'payment_prefix'
+            ];
+        } elseif ($request->type == "INVOICES") {
+            $sets = [
+                'invoice_prefix',
+                'invoice_notes',
+                'invoice_terms_and_conditions'
+            ];
+        } elseif ($request->type == "ESTIMATES") {
+            $sets = [
+                'estimate_prefix',
+                'estimate_notes',
+                'estimate_terms_and_conditions'
+            ];
+        } else {
+            $sets = [
+                'billing_address_format',
+                'shipping_address_format',
+                'company_address_format'
+            ];
+        }
+
+        foreach ($sets as $key) {
+            if ($key == 'invoice_terms_and_conditions' || $key == 'invoice_notes' || $request->type == "ADDRESSES" || $key === 'estimate_terms_and_conditions' || $key === 'estimate_notes') {
+                CompanySetting::setSetting($key, $request->$key, $request->header('company'), true);
+            } else {
+                CompanySetting::setSetting($key, $request->$key, $request->header('company'));
+            }
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
     public function updateSetting(SettingRequest $request)
     {
         CompanySetting::setSetting($request->key, $request->value, $request->header('company'));

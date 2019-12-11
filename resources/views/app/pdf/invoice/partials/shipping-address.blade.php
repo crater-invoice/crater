@@ -16,12 +16,12 @@
             {{$invoice->user->shippingaddress->address_street_2}}<br>
         @endif
 
-        @if($invoice->user->shippingaddress->city && $invoice->user->shippingaddress->city->name)
-            {{$invoice->user->shippingaddress->city->name}},
+        @if($invoice->user->shippingaddress->city && $invoice->user->shippingaddress->city)
+            {{$invoice->user->shippingaddress->city}},
         @endif
 
-        @if($invoice->user->shippingaddress->state && $invoice->user->shippingaddress->state->name)
-            {{$invoice->user->shippingaddress->state->name}}.
+        @if($invoice->user->shippingaddress->state && $invoice->user->shippingaddress->state)
+            {{$invoice->user->shippingaddress->state}}.
         @endif
 
         @if($invoice->user->shippingaddress->zip)

@@ -58,8 +58,6 @@ class OnboardingController extends Controller
         $user = User::with([
             'addresses',
             'addresses.country',
-            'addresses.state',
-            'addresses.city',
             'company'
         ])->find(1);
 
@@ -99,6 +97,32 @@ class OnboardingController extends Controller
         ]);
     }
 
+    public function uploadAdminAvatar(Request $request)
+    {
+        $setting = Setting::getSetting('profile_complete');
+
+        if ($setting == '1' || $setting == 'COMPLETED') {
+            return response()->json(['error' => 'Profile already created.']);
+        }
+        $data = json_decode($request->admin_avatar);
+
+        if($data) {
+            $user = User::find($data->id);
+            if($user) {
+                $user->clearMediaCollection('admin_avatar');
+
+                $user->addMediaFromBase64($data->data)
+                    ->usingFileName($data->name)
+                    ->toMediaCollection('admin_avatar');
+            }
+        }
+
+        return response()->json([
+            'user' => $user,
+            'success' => true
+        ]);
+    }
+
     public function adminCompany(CompanyRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -130,8 +154,8 @@ class OnboardingController extends Controller
         $fields = $request->only([
             'address_street_1',
             'address_street_2',
-            'city_id',
-            'state_id',
+            'city',
+            'state',
             'country_id',
             'zip',
             'phone'

@@ -58,7 +58,7 @@
             aria-expanded="false"
             class="avatar"
           >
-            <img src="/images/avatar.png" alt="Avatar">
+            <img :src="profilePicture" alt="Avatar">
           </a>
           <v-dropdown-item>
             <router-link class="dropdown-item" to="/admin/settings">
@@ -83,7 +83,25 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters('userProfile', [
+      'user'
+    ]),
+    profilePicture () {
+      if (this.user && this.user.avatar !== null) {
+        return this.user.avatar
+      } else {
+        return '/images/default-avatar.jpg'
+      }
+    }
+  },
+  created () {
+    this.loadData()
+  },
   methods: {
+    ...mapActions('userProfile', [
+      'loadData'
+    ]),
     ...mapActions({
       companySelect: 'changeCompany'
     }),

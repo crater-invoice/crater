@@ -151,6 +151,7 @@ export default {
       id: null,
       count: null,
       estimates: [],
+      estimate: null,
       currency: null,
       searchData: {
         orderBy: null,
@@ -165,10 +166,6 @@ export default {
     }
   },
   computed: {
-    estimate () {
-      return this.$store.getters['estimate/getEstimate'](this.$route.params.id)
-    },
-
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
@@ -180,8 +177,14 @@ export default {
       return `/estimates/pdf/${this.estimate.unique_hash}`
     }
   },
+  watch: {
+    $route (to, from) {
+      this.loadEstimate()
+    }
+  },
   created () {
     this.loadEstimates()
+    this.loadEstimate()
     this.onSearched = _.debounce(this.onSearched, 500)
   },
   methods: {
@@ -192,12 +195,20 @@ export default {
       'markAsSent',
       'sendEmail',
       'deleteEstimate',
-      'selectEstimate'
+      'selectEstimate',
+      'fetchViewEstimate'
     ]),
     async loadEstimates () {
       let response = await this.fetchEstimates()
       if (response.data) {
         this.estimates = response.data.estimates.data
+      }
+    },
+    async loadEstimate () {
+      let response = await this.fetchViewEstimate(this.$route.params.id)
+
+      if (response.data) {
+        this.estimate = response.data.estimate
       }
     },
     async onSearched () {

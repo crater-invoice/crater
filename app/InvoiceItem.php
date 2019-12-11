@@ -30,6 +30,7 @@ class InvoiceItem extends Model
         'price' => 'integer',
         'total' => 'integer',
         'discount' => 'float',
+        'quantity' => 'float',
         'discount_val' => 'integer',
         'tax' => 'integer'
     ];
@@ -78,7 +79,8 @@ class InvoiceItem extends Model
     public function scopeItemAttributes($query)
     {
         $query->select(
-            DB::raw('sum(quantity) as total_quantity, sum(total) as total_amount, item_id')
-        )->groupBy('item_id');
+            DB::raw('sum(quantity) as total_quantity, sum(total) as total_amount, invoice_items.name')
+        )->groupBy('invoice_items.name');
+
     }
 }

@@ -421,7 +421,7 @@
             <div class="ship-address-container">
                 @include('app.pdf.estimate.partials.shipping-address')
             </div>
-            @if($estimate->user->shippingaddress->name || $estimate->user->shippingaddress->address_street_1 || $estimate->user->shippingaddress->address_street_2 || $estimate->user->shippingaddress->country || $estimate->user->shippingaddress->state || $estimate->user->shippingaddress->city || $estimate->user->shippingaddress->zip || $estimate->user->phone)
+            @if($estimate->user->shippingaddress && ($estimate->user->shippingaddress->name || $estimate->user->shippingaddress->address_street_1 || $estimate->user->shippingaddress->address_street_2 || $estimate->user->shippingaddress->country || $estimate->user->shippingaddress->state || $estimate->user->shippingaddress->city || $estimate->user->shippingaddress->zip || $estimate->user->phone))
                 <div class="bill-address-container">
             @else
                 <div class="bill-address-container" style="float:right;padding-right:0px;">

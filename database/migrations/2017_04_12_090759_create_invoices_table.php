@@ -25,7 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->string('discount_per_item');
             $table->text('notes')->nullable();
             $table->string('discount_type')->nullable();
-            $table->unsignedBigInteger('discount')->nullable();
+            $table->decimal('discount', 15, 2)->nullable();
             $table->unsignedBigInteger('discount_val')->nullable();
             $table->unsignedBigInteger('sub_total');
             $table->unsignedBigInteger('total');

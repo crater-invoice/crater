@@ -83,7 +83,7 @@
                   :allow-empty="false"
                   :disabled="isEdit"
                   :placeholder="$t('invoices.select_invoice')"
-                  label="invoice_number"
+                  :custom-label="invoiceWithAmount"
                   track-by="invoice_number"
                 />
               </div>
@@ -183,7 +183,8 @@ export default {
       customerList: [],
       invoiceList: [],
       isLoading: false,
-      maxPayableAmount: Number.MAX_SAFE_INTEGER
+      maxPayableAmount: Number.MAX_SAFE_INTEGER,
+      isSettingInitialData: true
     }
   },
   validations () {
@@ -246,10 +247,15 @@ export default {
   watch: {
     customer (newValue) {
       this.formData.user_id = newValue.id
-      this.invoice = null
-      this.formData.amount = 0
-      this.invoiceList = []
       if (!this.isEdit) {
+        if (this.isSettingInitialData) {
+          this.isSettingInitialData = false
+        } else {
+          this.invoice = null
+          this.formData.invoice_id = null
+        }
+        this.formData.amount = 0
+        this.invoiceList = []
         this.fetchCustomerInvoices(newValue.id)
       }
     },
@@ -263,9 +269,6 @@ export default {
     }
   },
   async mounted () {
-    // if (!this.$route.params.id) {
-    //   this.$refs.baseSelect.$refs.search.focus()
-    // }
     this.$nextTick(() => {
       this.loadData()
       if (this.$route.params.id && !this.isEdit) {
@@ -283,6 +286,9 @@ export default {
       'updatePayment',
       'fetchPayment'
     ]),
+    invoiceWithAmount ({ invoice_number, due_amount }) {
+      return `${invoice_number} (${this.$utils.formatGraphMoney(due_amount, this.customer.currency)})`
+    },
     async loadData () {
       if (this.isEdit) {
         let response = await this.fetchPayment(this.$route.params.id)
@@ -291,7 +297,6 @@ export default {
         this.customer = response.data.payment.user
         this.formData.payment_date = moment(response.data.payment.payment_date, 'YYYY-MM-DD').toString()
         this.formData.amount = parseFloat(response.data.payment.amount)
-        this.maxPayableAmount = response.data.payment.amount
         if (response.data.payment.invoice !== null) {
           this.maxPayableAmount = parseInt(response.data.payment.amount) + parseInt(response.data.payment.invoice.due_amount)
           this.invoice = response.data.payment.invoice

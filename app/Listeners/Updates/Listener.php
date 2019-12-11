@@ -12,10 +12,10 @@ class Listener
      * @param  $event
      * @return boolean
      */
-    protected function check($event)
+    protected function isListenerFired($event)
     {
         // Do not apply to the same or newer versions
-        if (version_compare(static::VERSION, $event->old, '>')) {
+        if (version_compare(static::VERSION, $event->old, '<=')) {
             return true;
         }
 

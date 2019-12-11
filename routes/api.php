@@ -96,6 +96,11 @@ Route::group(['middleware' => 'redirect-if-installed'], function () {
         'uses' => 'OnboardingController@adminProfile'
     ]);
 
+    Route::post('/admin/profile/upload-avatar', [
+        'as' => 'admin.on_boarding.avatar',
+        'uses' => 'OnboardingController@uploadAdminAvatar'
+    ]);
+
     Route::post('/admin/onboarding/company', [
         'as' => 'admin.company',
         'uses' => 'OnboardingController@adminCompany'
@@ -306,6 +311,11 @@ Route::group(['middleware' => 'api'], function () {
             Route::put('/profile', [
                 'as' => 'admin.profile',
                 'uses' => 'CompanyController@updateAdminProfile'
+            ]);
+
+            Route::post('/profile/upload-avatar', [
+                'as' => 'admin.profile.avatar',
+                'uses' => 'CompanyController@uploadAdminAvatar'
             ]);
 
             Route::post('/company/upload-logo', [

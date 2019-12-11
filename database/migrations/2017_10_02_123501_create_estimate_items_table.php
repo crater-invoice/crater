@@ -18,9 +18,9 @@ class CreateEstimateItemsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('discount_type');
-            $table->unsignedBigInteger('quantity');
-            $table->unsignedBigInteger('discount');
-            $table->unsignedBigInteger('discount_val');
+            $table->decimal('quantity', 15, 2);
+            $table->decimal('discount', 15, 2)->nullable();
+            $table->unsignedBigInteger('discount_val')->nullable();
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('tax');
             $table->unsignedBigInteger('total');

@@ -90,7 +90,7 @@ class FrontendController extends Controller
             }
         }
 
-        $companyAddress = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city'])->find(1);
+        $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
 
         $colors = [
             'invoice_primary_color',
@@ -189,7 +189,7 @@ class FrontendController extends Controller
             }
         }
 
-        $companyAddress = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city'])->find(1);
+        $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
 
         $colors = [
             'invoice_primary_color',
@@ -262,7 +262,7 @@ class FrontendController extends Controller
         $estimateTemplate = EstimateTemplate::find($estimate->estimate_template_id);
 
         $company = Company::find($estimate->company_id);
-        $companyAddress = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city'])->find(1);
+        $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
@@ -338,7 +338,7 @@ class FrontendController extends Controller
 
         $invoiceTemplate = InvoiceTemplate::find($invoice->invoice_template_id);
         $company = Company::find($invoice->company_id);
-        $companyAddress = User::with(['addresses', 'addresses.country', 'addresses.state', 'addresses.city'])->find(1);
+        $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
 
         $logo = $company->getMedia('logo')->first();
 

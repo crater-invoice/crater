@@ -23,8 +23,8 @@ class CreateEstimatesTable extends Migration
             $table->string('tax_per_item');
             $table->string('discount_per_item');
             $table->string('notes')->nullable();
+            $table->decimal('discount', 15, 2)->nullable();
             $table->string('discount_type')->nullable();
-            $table->unsignedBigInteger('discount')->nullable();
             $table->unsignedBigInteger('discount_val')->nullable();
             $table->unsignedBigInteger('sub_total');
             $table->unsignedBigInteger('total');

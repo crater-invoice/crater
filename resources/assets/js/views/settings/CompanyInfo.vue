@@ -12,6 +12,9 @@
           <div class="col-md-6">
             <label class="input-label">{{ $tc('settings.company_info.company_logo') }}</label>
             <div id="pick-avatar" class="image-upload-box">
+              <div class="overlay">
+                <font-awesome-icon class="white-icon" icon="camera"/>
+              </div>
               <img v-if="previewLogo" :src="previewLogo" class="preview-logo">
               <div v-else class="upload-content">
                 <font-awesome-icon class="upload-icon" icon="cloud-upload-alt"/>
@@ -69,37 +72,22 @@
           </div>
           <div class="col-md-6 mb-4">
             <label class="input-label">{{ $tc('settings.company_info.state') }}</label>
-            <base-select
-              v-model="state"
-              :options="states"
-              :searchable="true"
-              :disabled="isDisabledState"
-              :show-labels="false"
-              :placeholder="$t('general.select_state')"
-              label="name"
-              track-by="id"
+            <base-input
+              v-model="formData.state"
+              :placeholder="$tc('settings.company_info.state')"
+              name="state"
+              type="text"
             />
           </div>
           <div class="col-md-6 mb-4">
             <label class="input-label">{{ $tc('settings.company_info.city') }}</label>
-            <base-select
-              v-model="city"
-              :options="cities"
-              :searchable="true"
-              :show-labels="false"
-              :disabled="isDisabledCity"
-              :placeholder="$t('general.select_city')"
-              label="name"
-              track-by="id"
+            <base-input
+              v-model="formData.city"
+              :placeholder="$tc('settings.company_info.city')"
+              name="city"
+              type="text"
             />
           </div>
-          <!-- <div class="col-md-6 mb-3">
-            <label class="input-label">Website</label>
-            <base-input
-              v-model="formData.website"
-              placeholder="Website"
-            />
-          </div> -->
           <div class="col-md-6 mb-4">
             <label class="input-label">{{ $tc('settings.company_info.zip') }}</label>
             <base-input
@@ -154,7 +142,7 @@ import ImageBox from '../components/ImageBox.vue'
 import AvatarCropper from 'vue-avatar-cropper'
 import { validationMixin } from 'vuelidate'
 import { mapActions } from 'vuex'
-const { required, email, numeric, maxLength } = require('vuelidate/lib/validators')
+const { required, email, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: { AvatarCropper, IconUpload, ImageBox },
@@ -174,7 +162,6 @@ export default {
       isFetchingData: false,
       formData: {
         name: null,
-        logo: '',
         email: '',
         phone: '',
         zip: '',
@@ -182,20 +169,14 @@ export default {
         address_street_2: '',
         website: '',
         country_id: null,
-        state_id: '',
-        city_id: ''
+        state: '',
+        city: ''
       },
       isLoading: false,
       isHidden: false,
       country: null,
       previewLogo: null,
-      city: null,
-      state: null,
       countries: [],
-      isDisabledState: true,
-      isDisabledCity: true,
-      states: [],
-      cities: [],
       passData: [],
       fileSendUrl: '/api/settings/company',
       fileObject: null
@@ -204,44 +185,9 @@ export default {
   watch: {
     country (newCountry) {
       this.formData.country_id = newCountry.id
-      if (this.formData.country_id) {
-        this.isDisabledState = false
-      }
-      this.fetchState()
       if (this.isFetchingData) {
         return true
       }
-
-      this.state = null
-      this.city = null
-    },
-    state (newState) {
-      if (newState !== null && newState !== undefined) {
-        this.formData.state_id = newState.id
-        this.fetchCities()
-        this.isDisabledCity = false
-
-        if (this.isFetchingData) {
-          this.isFetchingData = false
-          return true
-        }
-        this.city = null
-        return true
-      }
-      // this.formData.state_id = null
-      this.cities = []
-      this.city = null
-      // this.formData.city_id = null
-      this.isDisabledCity = true
-      return true
-    },
-    city (newCity) {
-      if (newCity !== null && newCity !== undefined) {
-        this.formData.city_id = newCity.id
-        return true
-      }
-      // this.formData.city_id = null
-      // return true
     }
   },
   validations: {
@@ -290,9 +236,9 @@ export default {
       this.formData.address_street_2 = response.data.user.addresses[0].address_street_2
       this.formData.zip = response.data.user.addresses[0].zip
       this.formData.phone = response.data.user.addresses[0].phone
+      this.formData.state = response.data.user.addresses[0].state
+      this.formData.city = response.data.user.addresses[0].city
       this.country = response.data.user.addresses[0].country
-      this.state = response.data.user.addresses[0].state
-      this.city = response.data.user.addresses[0].city
       this.previewLogo = response.data.user.company.logo
     },
     async updateCompany () {
@@ -301,17 +247,8 @@ export default {
         return true
       }
       this.isLoading = true
-      let data = new FormData()
-      data.append('name', this.formData.name)
-      data.append('address_street_1', this.formData.address_street_1)
-      data.append('address_street_2', this.formData.address_street_2)
-      data.append('city_id', this.formData.city_id)
-      data.append('state_id', this.formData.state_id)
-      data.append('country_id', this.formData.country_id)
-      data.append('zip', this.formData.zip)
-      data.append('phone', this.formData.phone)
 
-      let response = await this.editCompany(data)
+      let response = await this.editCompany(this.formData)
       if (response.data.success) {
         this.isLoading = false
         if (this.fileObject && this.previewLogo) {
@@ -334,19 +271,6 @@ export default {
       let res = await window.axios.get('/api/countries')
       if (res) {
         this.countries = res.data.countries
-      }
-    },
-    async fetchState () {
-      this.$v.formData.country_id.$touch()
-      let res = await window.axios.get(`/api/states/${this.country.id}`)
-      if (res) {
-        this.states = res.data.states
-      }
-    },
-    async fetchCities () {
-      let res = await window.axios.get(`/api/cities/${this.state.id}`)
-      if (res) {
-        this.cities = res.data.cities
       }
     }
   }

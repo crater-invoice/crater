@@ -80,8 +80,8 @@ class CustomersController extends Controller
                 $newAddress->name = $address["name"];
                 $newAddress->address_street_1 = $address["address_street_1"];
                 $newAddress->address_street_2 = $address["address_street_2"];
-                $newAddress->city_id = $address["city_id"];
-                $newAddress->state_id = $address["state_id"];
+                $newAddress->city = $address["city"];
+                $newAddress->state = $address["state"];
                 $newAddress->country_id = $address["country_id"];
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];
@@ -112,11 +112,7 @@ class CustomersController extends Controller
             'billingAddress',
             'shippingAddress',
             'billingAddress.country',
-            'billingAddress.state',
-            'billingAddress.city',
             'shippingAddress.country',
-            'shippingAddress.state',
-            'shippingAddress.city',
         ])->find($id);
 
         return response()->json([
@@ -160,6 +156,7 @@ class CustomersController extends Controller
             if ($verifyEmail) {
                 if ($verifyEmail->id !== $customer->id) {
                     return response()->json([
+                        'success' => false,
                         'error' => 'Email already in use'
                     ]);
                 }
@@ -186,8 +183,8 @@ class CustomersController extends Controller
                 $newAddress->name = $address["name"];
                 $newAddress->address_street_1 = $address["address_street_1"];
                 $newAddress->address_street_2 = $address["address_street_2"];
-                $newAddress->city_id = $address["city_id"];
-                $newAddress->state_id = $address["state_id"];
+                $newAddress->city = $address["city"];
+                $newAddress->state = $address["state"];
                 $newAddress->country_id = $address["country_id"];
                 $newAddress->zip = $address["zip"];
                 $newAddress->phone = $address["phone"];

@@ -222,7 +222,7 @@
                     <table class="expenses-table">
                         <tr>
                             <td>
-                                <p class="expense-title">{{ $item->item->name }}</p>
+                                <p class="expense-title">{{ $item->name }}</p>
                             </td>
                             <td>
                                 <p class="expense-money">{!! format_money_pdf($item->total_amount) !!}</p>

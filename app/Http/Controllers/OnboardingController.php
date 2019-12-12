@@ -202,6 +202,45 @@ class OnboardingController extends Controller
             );
         }
 
+        $invoices = [
+            'invoice_auto_generate' => 'YES',
+            'invoice_prefix' => 'INV'
+        ];
+
+        foreach ($invoices as $key => $value) {
+            CompanySetting::setSetting(
+                $key,
+                $value,
+                $user->company_id
+            );
+        }
+
+        $estimates = [
+            'estimate_prefix' => 'EST',
+            'estimate_auto_generate' => 'YES'
+        ];
+
+        foreach ($estimates as $key => $value) {
+            CompanySetting::setSetting(
+                $key,
+                $value,
+                $user->company_id
+            );
+        }
+
+        $payments = [
+            'payment_prefix' => 'PAY',
+            'payment_auto_generate' => 'YES'
+        ];
+
+        foreach ($payments as $key => $value) {
+            CompanySetting::setSetting(
+                $key,
+                $value,
+                $user->company_id
+            );
+        }
+
         $colors = [
             'primary_text_color' => '#5851D8',
             'heading_text_color' => '#595959',

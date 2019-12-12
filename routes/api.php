@@ -348,6 +348,16 @@ Route::group(['middleware' => 'api'], function () {
                 'uses' => 'CompanyController@updateSetting'
             ]);
 
+            Route::get('/get-customize-setting', [
+                'as' => 'admin.get.customize.setting',
+                'uses' => 'CompanyController@getCustomizeSetting'
+            ]);
+
+            Route::put('/update-customize-setting', [
+                'as' => 'admin.update.customize.setting',
+                'uses' => 'CompanyController@updateCustomizeSetting'
+            ]);
+
             Route::get('/environment/mail', [
                 'as' => 'admin.environment.mail',
                 'uses' => 'EnvironmentController@getMailDrivers'

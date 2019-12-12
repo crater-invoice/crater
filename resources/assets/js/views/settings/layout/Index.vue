@@ -46,6 +46,12 @@ export default {
           iconType: 'far'
         },
         {
+          link: '/admin/settings/customization',
+          title: 'settings.menu_title.customization',
+          icon: 'edit',
+          iconType: 'fa'
+        },
+        {
           link: '/admin/settings/preferences',
           title: 'settings.menu_title.preferences',
           icon: 'cog',

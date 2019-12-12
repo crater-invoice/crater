@@ -66,14 +66,22 @@ class InvoicesController extends Controller
     {
         $tax_per_item = CompanySetting::getSetting('tax_per_item', $request->header('company'));
         $discount_per_item = CompanySetting::getSetting('discount_per_item', $request->header('company'));
-        $nextInvoiceNumber = "INV-".Invoice::getNextInvoiceNumber();
+        $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
+        $invoice_num_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
+
+        $nextInvoiceNumberAttribute = null;
+
+        if ($invoice_num_auto_generate == "YES") {
+            $nextInvoiceNumberAttribute = Invoice::getNextInvoiceNumber($invoice_prefix);
+        }
 
         return response()->json([
-            'nextInvoiceNumber' => $nextInvoiceNumber,
+            'nextInvoiceNumber' => $nextInvoiceNumberAttribute,
             'items' => Item::with('taxes')->whereCompany($request->header('company'))->get(),
             'invoiceTemplates' => InvoiceTemplate::all(),
             'tax_per_item' => $tax_per_item,
-            'discount_per_item' => $discount_per_item
+            'discount_per_item' => $discount_per_item,
+            'invoice_prefix' => $invoice_prefix
         ]);
     }
 
@@ -85,6 +93,13 @@ class InvoicesController extends Controller
      */
     public function store(Requests\InvoicesRequest $request)
     {
+        $invoice_number = explode("-",$request->invoice_number);
+        $number_attributes['invoice_number'] = $invoice_number[0].'-'.sprintf('%06d', intval($invoice_number[1]));
+
+        Validator::make($number_attributes, [
+            'invoice_number' => 'required|unique:invoices,invoice_number'
+        ])->validate();
+
         $invoice_date = Carbon::createFromFormat('d/m/Y', $request->invoice_date);
         $due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);
         $status = Invoice::STATUS_DRAFT;
@@ -99,7 +114,7 @@ class InvoicesController extends Controller
         $invoice = Invoice::create([
             'invoice_date' => $invoice_date,
             'due_date' => $due_date,
-            'invoice_number' => $request->invoice_number,
+            'invoice_number' => $number_attributes['invoice_number'],
             'reference_number' => $request->reference_number,
             'user_id' => $request->user_id,
             'company_id' => $request->header('company'),
@@ -222,12 +237,13 @@ class InvoicesController extends Controller
         ])->find($id);
 
         return response()->json([
-            'nextInvoiceNumber' => $invoice->invoice_number,
+            'nextInvoiceNumber' => $invoice->getInvoiceNumAttribute(),
             'invoice' => $invoice,
             'invoiceTemplates' => InvoiceTemplate::all(),
             'tax_per_item' => $invoice->tax_per_item,
             'discount_per_item' => $invoice->discount_per_item,
-            'shareable_link' => url('/invoices/pdf/'.$invoice->unique_hash)
+            'shareable_link' => url('/invoices/pdf/'.$invoice->unique_hash),
+            'invoice_prefix' => $invoice->getInvoicePrefixAttribute()
         ]);
     }
 
@@ -240,6 +256,13 @@ class InvoicesController extends Controller
      */
     public function update(Requests\InvoicesRequest $request, $id)
     {
+        $invoice_number = explode("-",$request->invoice_number);
+        $number_attributes['invoice_number'] = $invoice_number[0].'-'.sprintf('%06d', intval($invoice_number[1]));
+
+        Validator::make($number_attributes, [
+            'invoice_number' => 'required|unique:invoices,invoice_number'.','.$id
+        ])->validate();
+
         $invoice_date = Carbon::createFromFormat('d/m/Y', $request->invoice_date);
         $due_date = Carbon::createFromFormat('d/m/Y', $request->due_date);
 
@@ -268,7 +291,7 @@ class InvoicesController extends Controller
 
         $invoice->invoice_date = $invoice_date;
         $invoice->due_date = $due_date;
-        $invoice->invoice_number = $request->invoice_number;
+        $invoice->invoice_number =  $number_attributes['invoice_number'];
         $invoice->reference_number = $request->reference_number;
         $invoice->user_id = $request->user_id;
         $invoice->invoice_template_id = $request->invoice_template_id;

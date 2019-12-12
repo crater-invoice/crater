@@ -1,0 +1,40 @@
+version: '3.1'
+
+services:
+
+  web:
+    image: nginx
+    depends_on:
+      - php
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - app:/app
+    restart: always 
+    
+  php:
+    build: .
+    depends_on:
+      - db
+    expose:
+      - 9000
+    volumes:
+      - app:/app
+    restart: always
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_USER: crater
+      MYSQL_PASSWORD: crater
+      MYSQL_DATABASE: crater
+      MYSQL_ROOT_PASSWORD: crater
+
+volumes:
+  app:
+  db:
+

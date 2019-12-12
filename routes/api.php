@@ -46,16 +46,6 @@ Route::get('/countries', [
     'uses' => 'LocationController@getCountries'
 ]);
 
-Route::get('/states/{id}', [
-    'as' => 'states',
-    'uses' => 'LocationController@getStates'
-]);
-
-Route::get('/cities/{id}', [
-    'as' => 'cities',
-    'uses' => 'LocationController@getCities'
-]);
-
 
 // Onboarding
 //----------------------------------

@@ -164,10 +164,6 @@ class CompanyController extends Controller
         $payment_prefix = CompanySetting::getSetting('payment_prefix', $request->header('company'));
         $payment_auto_generate = CompanySetting::getSetting('payment_auto_generate', $request->header('company'));
 
-        $billing_address_format = CompanySetting::getSetting('billing_address_format', $request->header('company'), $large= true);
-        $shipping_address_format = CompanySetting::getSetting('shipping_address_format', $request->header('company'), $large= true);
-        $company_address_format = CompanySetting::getSetting('company_address_format', $request->header('company'), $large= true);
-
         return  response()->json([
             'invoice_prefix' => $invoice_prefix,
             'invoice_auto_generate' => $invoice_auto_generate,
@@ -175,9 +171,6 @@ class CompanyController extends Controller
             'estimate_auto_generate' => $estimate_auto_generate,
             'payment_prefix' => $payment_prefix,
             'payment_auto_generate' => $payment_auto_generate,
-            'billing_address_format' => $billing_address_format,
-            'shipping_address_format' => $shipping_address_format,
-            'company_address_format' => $company_address_format
         ]);
     }
 
@@ -189,28 +182,22 @@ class CompanyController extends Controller
             $sets = [
                 'payment_prefix'
             ];
-        } elseif ($request->type == "INVOICES") {
+        }
+
+        if ($request->type == "INVOICES") {
             $sets = [
                 'invoice_prefix',
             ];
-        } elseif ($request->type == "ESTIMATES") {
+        }
+
+        if ($request->type == "ESTIMATES") {
             $sets = [
                 'estimate_prefix',
-            ];
-        } else {
-            $sets = [
-                'billing_address_format',
-                'shipping_address_format',
-                'company_address_format'
             ];
         }
 
         foreach ($sets as $key) {
-            if ($key == 'invoice_terms_and_conditions' || $key == 'invoice_notes' || $request->type == "ADDRESSES" || $key === 'estimate_terms_and_conditions' || $key === 'estimate_notes') {
-                CompanySetting::setSetting($key, $request->$key, $request->header('company'), true);
-            } else {
-                CompanySetting::setSetting($key, $request->$key, $request->header('company'));
-            }
+            CompanySetting::setSetting($key, $request->$key, $request->header('company'));
         }
 
         return response()->json([

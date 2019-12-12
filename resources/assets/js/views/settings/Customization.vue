@@ -218,9 +218,6 @@ export default {
         required,
         maxLength: maxLength(5),
         alpha
-      },
-      invoice_notes: {
-        maxLength: maxLength(255)
       }
     },
     estimates: {
@@ -228,9 +225,6 @@ export default {
         required,
         maxLength: maxLength(5),
         alpha
-      },
-      estimate_notes: {
-        maxLength: maxLength(255)
       }
     },
     payments: {

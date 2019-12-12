@@ -3,6 +3,6 @@
         <div class="notes-label">
             Notes
         </div>
-        {{$invoice->notes}}
+        {!! $invoice->notes !!}
     </div>
 @endif

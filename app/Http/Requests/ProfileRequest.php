@@ -24,7 +24,7 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        $user = User::find(1);
+        $user = auth()->user() ?? User::find(1);
 
         switch ($this->getMethod()) {
             case 'POST':

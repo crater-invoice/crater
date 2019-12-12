@@ -22,7 +22,7 @@ class CompanyController extends Controller
 {
     public function getAdmin()
     {
-        return User::find(1);
+        return auth()->user() ?? User::find(1);
     }
 
     public function updateAdminProfile(ProfileRequest $request)

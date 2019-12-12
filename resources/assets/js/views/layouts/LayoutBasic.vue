@@ -50,7 +50,7 @@ export default {
     Layout.set('layout-default')
   },
 
-  created() {
+  created () {
     this.bootstrap().then((res) => {
       this.setInitialCompany()
     })
@@ -59,7 +59,7 @@ export default {
   methods: {
     ...mapActions(['bootstrap']),
     ...mapActions('company', ['setSelectedCompany']),
-    setInitialCompany() {
+    setInitialCompany () {
       let selectedCompany = Ls.get('selectedCompany') !== null
 
       if (selectedCompany) {

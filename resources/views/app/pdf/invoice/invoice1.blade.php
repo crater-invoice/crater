@@ -3,6 +3,7 @@
 <head>
     <title>Invoice</title>
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style type="text/css">
         body {
             font-family: 'Roboto', sans-serif;

@@ -54,10 +54,13 @@ class Estimate extends Model
         'sub_total' => 'float'
     ];
 
-    public static function getNextEstimateNumber()
+    public static function getNextEstimateNumber($value)
     {
-        // Get the last created order
-        $lastOrder = Estimate::orderBy('created_at', 'desc')->first();
+         // Get the last created order
+         $lastOrder = Estimate::where('estimate_number', 'LIKE', $value . '-%')
+                        ->orderBy('created_at', 'desc')
+                        ->first();
+
         if (!$lastOrder) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
@@ -99,8 +102,14 @@ class Estimate extends Model
 
     public function getEstimateNumAttribute()
     {
-        $position = $this->strposX($this->estimate_number, "-", 2) + 1;
+        $position = $this->strposX($this->estimate_number, "-", 1) + 1;
         return substr($this->estimate_number, $position);
+    }
+
+    public function getEstimatePrefixAttribute()
+    {
+        $prefix = explode("-",$this->estimate_number)[0];
+        return $prefix;
     }
 
     private function strposX($haystack, $needle, $number)

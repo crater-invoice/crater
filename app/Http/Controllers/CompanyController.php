@@ -157,12 +157,8 @@ class CompanyController extends Controller
     {
         $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
         $invoice_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
-        $invoice_notes = CompanySetting::getSetting('invoice_notes',  $request->header('company'), true);
-        $invoice_terms_and_conditions = CompanySetting::getSetting('invoice_terms_and_conditions', $request->header('company'), true);
 
         $estimate_prefix = CompanySetting::getSetting('estimate_prefix', $request->header('company'));
-        $estimate_notes = CompanySetting::getSetting('estimate_notes', $request->header('company'), true);
-        $estimate_terms_and_conditions = CompanySetting::getSetting('estimate_terms_and_conditions', $request->header('company'), true);
         $estimate_auto_generate  = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
 
         $payment_prefix = CompanySetting::getSetting('payment_prefix', $request->header('company'));
@@ -175,12 +171,8 @@ class CompanyController extends Controller
         return  response()->json([
             'invoice_prefix' => $invoice_prefix,
             'invoice_auto_generate' => $invoice_auto_generate,
-            'invoice_notes' => $invoice_notes,
-            'invoice_terms_and_conditions' => $invoice_terms_and_conditions,
             'estimate_prefix' => $estimate_prefix,
             'estimate_auto_generate' => $estimate_auto_generate,
-            'estimate_notes' => $estimate_notes,
-            'estimate_terms_and_conditions' => $estimate_terms_and_conditions,
             'payment_prefix' => $payment_prefix,
             'payment_auto_generate' => $payment_auto_generate,
             'billing_address_format' => $billing_address_format,
@@ -200,14 +192,10 @@ class CompanyController extends Controller
         } elseif ($request->type == "INVOICES") {
             $sets = [
                 'invoice_prefix',
-                'invoice_notes',
-                'invoice_terms_and_conditions'
             ];
         } elseif ($request->type == "ESTIMATES") {
             $sets = [
                 'estimate_prefix',
-                'estimate_notes',
-                'estimate_terms_and_conditions'
             ];
         } else {
             $sets = [

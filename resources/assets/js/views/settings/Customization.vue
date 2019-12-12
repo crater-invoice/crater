@@ -14,7 +14,7 @@
       </ul>
 
       <!-- Invoices Tab -->
-      <transition name="fade">
+      <transition name="fade-customize">
         <div v-if="activeTab === 'INVOICES'" class="invoice-tab">
           <form action="" class="form-section" @submit.prevent="updateInvoiceSetting">
             <div class="row">
@@ -69,7 +69,7 @@
       </transition>
 
       <!-- Estimates Tab -->
-      <transition name="fade">
+      <transition name="fade-customize">
         <div v-if="activeTab === 'ESTIMATES'" class="estimate-tab">
           <form action="" class="form-section" @submit.prevent="updateEstimateSetting">
             <div class="row">
@@ -124,7 +124,7 @@
       </transition>
 
       <!-- Payments Tab -->
-      <transition name="fade">
+      <transition name="fade-customize">
         <div v-if="activeTab === 'PAYMENTS'" class="payment-tab">
           <form action="" class="form-section" @submit.prevent="updatePaymentSetting">
             <div class="row">
@@ -208,6 +208,9 @@ export default {
     }
   },
   watch: {
+    activeTab () {
+      this.loadData()
+    }
   },
   validations: {
     invoices: {
@@ -373,3 +376,16 @@ export default {
   }
 }
 </script>
+<style>
+  .fade-customize-enter-active {
+    transition: opacity 0.9s;
+  }
+
+  .fade-customize-leave-active  {
+    transition: opacity 0s;
+  }
+
+  .fade-customize-enter, .fade-customize-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+</style>

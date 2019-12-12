@@ -61,6 +61,7 @@
                 <base-select
                   v-model="currency"
                   :options="currencies"
+                  :custom-label="currencyNameWithCode"
                   :allow-empty="false"
                   :searchable="true"
                   :show-labels="false"
@@ -435,6 +436,9 @@ export default {
     }
   },
   methods: {
+    currencyNameWithCode ({name, code}) {
+      return `${code} - ${name}`
+    },
     ...mapActions('customer', [
       'addCustomer',
       'fetchCustomer',

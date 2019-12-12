@@ -60,9 +60,10 @@ class EstimatesController extends Controller
         $estimate_num_auto_generate = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
 
         $nextEstimateNumberAttribute = null;
+        $nextEstimateNumber = Estimate::getNextEstimateNumber($estimate_prefix);
 
         if ($estimate_num_auto_generate == "YES") {
-            $nextEstimateNumberAttribute = Estimate::getNextEstimateNumber($estimate_prefix);
+            $nextEstimateNumberAttribute = $nextEstimateNumber;
         }
 
         $tax_per_item = CompanySetting::getSetting('tax_per_item', $request->header('company'));
@@ -71,7 +72,8 @@ class EstimatesController extends Controller
 
         return response()->json([
             'customers' => $customers,
-            'nextEstimateNumber' =>  $nextEstimateNumberAttribute,
+            'nextEstimateNumberAttribute' => $nextEstimateNumberAttribute,
+            'nextEstimateNumber' => $estimate_prefix.'-'.$nextEstimateNumber,
             'taxes' => Tax::whereCompany($request->header('company'))->latest()->get(),
             'items' => Item::whereCompany($request->header('company'))->get(),
             'tax_per_item' => $tax_per_item,

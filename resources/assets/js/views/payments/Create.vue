@@ -309,7 +309,7 @@ export default {
       } else {
         let response = await this.fetchCreatePayment()
         this.customerList = response.data.customers
-        this.paymentNumAttribute = response.data.nextPaymentNumber
+        this.paymentNumAttribute = response.data.nextPaymentNumberAttribute
         this.paymentPrefix = response.data.payment_prefix
         this.formData.payment_date = moment(new Date()).toString()
       }

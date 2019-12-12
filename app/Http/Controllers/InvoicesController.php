@@ -70,13 +70,15 @@ class InvoicesController extends Controller
         $invoice_num_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
 
         $nextInvoiceNumberAttribute = null;
+        $nextInvoiceNumber = Invoice::getNextInvoiceNumber($invoice_prefix);
 
         if ($invoice_num_auto_generate == "YES") {
-            $nextInvoiceNumberAttribute = Invoice::getNextInvoiceNumber($invoice_prefix);
+            $nextInvoiceNumberAttribute = $nextInvoiceNumber;
         }
 
         return response()->json([
-            'nextInvoiceNumber' => $nextInvoiceNumberAttribute,
+            'nextInvoiceNumberAttribute' => $nextInvoiceNumberAttribute,
+            'nextInvoiceNumber' => $invoice_prefix.'-'.$nextInvoiceNumber,
             'items' => Item::with('taxes')->whereCompany($request->header('company'))->get(),
             'invoiceTemplates' => InvoiceTemplate::all(),
             'tax_per_item' => $tax_per_item,

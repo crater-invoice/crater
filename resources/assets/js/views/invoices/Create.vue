@@ -582,7 +582,7 @@ export default {
         this.newInvoice.due_date = moment(today).add(7, 'days').toString()
         this.itemList = response.data.items
         this.invoicePrefix = response.data.invoice_prefix
-        this.invoiceNumAttribute = response.data.nextInvoiceNumber
+        this.invoiceNumAttribute = response.data.nextInvoiceNumberAttribute
       }
       this.initLoading = false
     },

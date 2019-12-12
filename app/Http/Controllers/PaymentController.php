@@ -56,16 +56,18 @@ class PaymentController extends Controller
 
 
         $nextPaymentNumberAttribute = null;
+        $nextPaymentNumber = Payment::getNextPaymentNumber($payment_prefix);
 
         if ($payment_num_auto_generate == "YES") {
-            $nextPaymentNumberAttribute = Payment::getNextPaymentNumber($payment_prefix);
+            $nextPaymentNumberAttribute = $nextPaymentNumber;
         }
 
         return response()->json([
             'customers' => User::where('role', 'customer')
                 ->whereCompany($request->header('company'))
                 ->get(),
-            'nextPaymentNumber' => $nextPaymentNumberAttribute,
+            'nextPaymentNumberAttribute' => $nextPaymentNumberAttribute,
+            'nextPaymentNumber' => $payment_prefix.'-'.$nextPaymentNumber,
             'payment_prefix' => $payment_prefix
         ]);
     }

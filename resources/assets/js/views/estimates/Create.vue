@@ -582,7 +582,7 @@ export default {
         this.newEstimate.expiry_date = moment(today).add(7, 'days').toString()
         this.itemList = response.data.items
         this.estimatePrefix = response.data.estimate_prefix
-        this.estimateNumAttribute = response.data.nextEstimateNumber
+        this.estimateNumAttribute = response.data.nextEstimateNumberAttribute
       }
       this.initLoading = false
     },

@@ -5,7 +5,7 @@
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
-            font-family: 'Roboto', sans-serif;
+			font-family: DejaVu Sans, sans-serif;
         }
 
         html {

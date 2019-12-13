@@ -47,7 +47,7 @@
     <tr>
         <td class="no-borde" style="color: #55547A; padding-left:10px;  font-size:12px;">Subtotal</td>
         <td class="no-border items"
-            style="padding-right:10px; text-align: right;  font-size:12px; color: #040405; font-weight: 500;">{!! format_money_pdf($estimate->sub_total) !!}</td>
+            style="padding-right:10px; text-align: right;  font-size:12px; color: #040405; font-weight: 500;">{!! format_money_pdf($estimate->sub_total, $estimate->user->currency) !!}</td>
     </tr>
 
     @if ($estimate->tax_per_item === 'YES')
@@ -57,7 +57,7 @@
                     {{$labels[$i]}}
                 </td>
                 <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
-                    {!! format_money_pdf($taxes[$i]) !!}
+                    {!! format_money_pdf($taxes[$i], $estimate->user->currency) !!}
                 </td>
             </tr>
         @endfor
@@ -68,7 +68,7 @@
                     {{$tax->name.' ('.$tax->percent.'%)'}}
                 </td>
                 <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
-                    {!! format_money_pdf($tax->amount) !!}
+                    {!! format_money_pdf($tax->amount, $estimate->user->currency) !!}
                 </td>
             </tr>
         @endforeach
@@ -77,14 +77,19 @@
     @if ($estimate->discount_per_item === 'NO')
         <tr>
             <td class="no-border" style="padding-left:10px; text-align:left; font-size:12px; color: #55547A;">
-                Discount ({{$estimate->discount}}%)
+                @if($estimate->discount_type === 'fixed')
+                    Discount
+                @endif
+                @if($estimate->discount_type === 'percentage')
+                    Discount ({{$estimate->discount}}%)
+                @endif
             </td>
             <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
                 @if($estimate->discount_type === 'fixed')
-                    {!! format_money_pdf($estimate->discount_val) !!}
+                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
                 @endif
                 @if($estimate->discount_type === 'percentage')
-                    {!! format_money_pdf($estimate->discount_val) !!}
+                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
                 @endif
             </td>
         </tr>
@@ -103,7 +108,7 @@
             class="no-border total-border-right items padd8"
             style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  padding-top:20px; color: #5851DB"
         >
-            {!! format_money_pdf($estimate->total)!!}
+            {!! format_money_pdf($estimate->total, $estimate->user->currency)!!}
         </td>
     </tr>
 </table>

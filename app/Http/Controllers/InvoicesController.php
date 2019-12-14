@@ -145,8 +145,7 @@ class InvoicesController extends Controller
             if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
                 foreach ($invoiceItem['taxes'] as $tax) {
                     $tax['company_id'] = $request->header('company');
-
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $item->taxes()->create($tax);
                     }
                 }
@@ -157,7 +156,7 @@ class InvoicesController extends Controller
             foreach ($request->taxes as $tax) {
                 $tax['company_id'] = $request->header('company');
 
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $invoice->taxes()->create($tax);
                 }
             }
@@ -317,7 +316,6 @@ class InvoicesController extends Controller
         foreach ($oldTaxes as $oldTax) {
             Tax::destroy($oldTax['id']);
         }
-
         foreach ($invoiceItems as $invoiceItem) {
             $invoiceItem['company_id'] = $request->header('company');
             $item = $invoice->items()->create($invoiceItem);
@@ -325,8 +323,7 @@ class InvoicesController extends Controller
             if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
                 foreach ($invoiceItem['taxes'] as $tax) {
                     $tax['company_id'] = $request->header('company');
-
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $item->taxes()->create($tax);
                     }
                 }
@@ -337,7 +334,7 @@ class InvoicesController extends Controller
             foreach ($request->taxes as $tax) {
                 $tax['company_id'] = $request->header('company');
 
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $invoice->taxes()->create($tax);
                 }
             }

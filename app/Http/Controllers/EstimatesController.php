@@ -145,7 +145,7 @@ class EstimatesController extends Controller
 
             if (array_key_exists('taxes', $estimateItem) && $estimateItem['taxes']) {
                 foreach ($estimateItem['taxes'] as $tax) {
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $tax['company_id'] = $request->header('company');
                         $item->taxes()->create($tax);
                     }
@@ -155,7 +155,7 @@ class EstimatesController extends Controller
 
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $tax['company_id'] = $request->header('company');
                     $estimate->taxes()->create($tax);
                 }
@@ -291,7 +291,7 @@ class EstimatesController extends Controller
 
             if (array_key_exists('taxes', $estimateItem) && $estimateItem['taxes']) {
                 foreach ($estimateItem['taxes'] as $tax) {
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $tax['company_id'] = $request->header('company');
                         $item->taxes()->create($tax);
                     }
@@ -301,7 +301,7 @@ class EstimatesController extends Controller
 
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $tax['company_id'] = $request->header('company');
                     $estimate->taxes()->create($tax);
                 }

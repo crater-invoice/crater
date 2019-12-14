@@ -223,10 +223,14 @@
                         @foreach ($customer->invoices as $invoice)
                             <tr>
                                 <td>
-                                    <p class="expense-title">{{ $invoice->formattedInvoiceDate }} ({{ $invoice->invoice_number }})</p>
+                                    <p class="expense-title">
+                                        {{ $invoice->formattedInvoiceDate }} ({{ $invoice->invoice_number }})
+                                    </p>
                                 </td>
                                 <td>
-                                    <p class="expense-money">{!! format_money_pdf($invoice->total) !!}</p>
+                                    <p class="expense-money">
+                                        {!! format_money_pdf($invoice->total) !!}
+                                    </p>
                                 </td>
                             </tr>
                         @endforeach
@@ -235,7 +239,9 @@
                 <table class="expense-total-table">
                     <tr>
                         <td class="expense-total-cell">
-                            <p class="expense-total">{!! format_money_pdf($customer->totalAmount) !!}</p>
+                            <p class="expense-total">
+                                {!! format_money_pdf($customer->totalAmount) !!}
+                            </p>
                         </td>
                     </tr>
                 </table>
@@ -249,7 +255,9 @@
                     <p class="profit-title">TOTAL SALES</p>
                 </td>
                 <td>
-                    <p class="profit-money">{!! format_money_pdf($totalAmount) !!}</p>
+                    <p class="profit-money">
+                        {!! format_money_pdf($totalAmount) !!}
+                    </p>
                 </td>
             </tr>
         </table>

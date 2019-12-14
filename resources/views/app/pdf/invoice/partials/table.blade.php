@@ -18,24 +18,47 @@
     @endphp
     @foreach ($invoice->items as $item)
         <tr class="item-details">
-            <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 20px; vertical-align: top;">{{$index}}</td>
-            <td class="inv-item items" style="text-align: left; color: #040405;padding-left: 0px">
+            <td
+                class="inv-item items"
+                style="text-align: right; color: #040405; padding-right: 20px; vertical-align: top;"
+            >
+                {{$index}}
+            </td>
+            <td
+                class="inv-item items"
+                style="text-align: left; color: #040405;padding-left: 0px"
+            >
                 <span>{{ $item->name }}</span><br>
                 <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{{ $item->description }}</span>
             </td>
-            <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 20px">{{$item->quantity}}</td>
-            <td class="inv-item items" style="text-align: right; color: #040405; padding-right: 40px">{{$item->price/100}}</td>
+            <td
+                class="inv-item items"
+                style="text-align: right; color: #040405; padding-right: 20px"
+            >
+                {{$item->quantity}}
+            </td>
+            <td
+                class="inv-item items"
+                style="text-align: right; color: #040405; padding-right: 40px"
+            >
+                {!! format_money_pdf($item->price, $invoice->user->currency) !!}
+            </td>
             @if($invoice->discount_per_item === 'YES')
                 <td class="inv-item items" style="text-align: right; color: #040405; padding-left: 10px">
                     @if($item->discount_type === 'fixed')
-                        {{$item->discount_val/100}}
+                        {!! format_money_pdf($item->discount_val, $invoice->user->currency) !!}
                     @endif
                     @if($item->discount_type === 'percentage')
                         {{$item->discount}}%
                     @endif
                 </td>
             @endif
-            <td class="inv-item items" style="text-align: right; color: #040405;">{{$item->total/100}}</td>
+            <td
+                class="inv-item items"
+                style="text-align: right; color: #040405;"
+            >
+                {!! format_money_pdf($item->total, $invoice->user->currency) !!}
+            </td>
         </tr>
         @php
             $index += 1

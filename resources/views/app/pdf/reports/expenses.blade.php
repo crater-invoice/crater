@@ -181,10 +181,14 @@
                     @foreach ($expenseCategories as $expenseCategory)
                         <tr>
                             <td>
-                                <p class="expense-title">{{ $expenseCategory->category->name }}</p>
+                                <p class="expense-title">
+                                    {{ $expenseCategory->category->name }}
+                                </p>
                             </td>
                             <td>
-                                <p class="expense-money">{!! format_money_pdf($expenseCategory->total_amount) !!}</p>
+                                <p class="expense-money">
+                                    {!! format_money_pdf($expenseCategory->total_amount) !!}
+                                </p>
                             </td>
                         </tr>
                     @endforeach

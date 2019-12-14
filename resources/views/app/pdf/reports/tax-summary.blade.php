@@ -174,10 +174,14 @@
             <table class="header">
                 <tr>
                     <td>
-                        <p class="heading-text">{{ $company->name }}</p>
+                        <p class="heading-text">
+                            {{ $company->name }}
+                        </p>
                     </td>
                     <td>
-                        <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
+                        <p class="heading-date-range">
+                            {{ $from_date }} - {{ $to_date }}
+                        </p>
                     </td>
                 </tr>
                 <tr>
@@ -192,10 +196,14 @@
                     @foreach ($taxTypes as $tax)
                         <tr>
                             <td>
-                                <p class="tax-title">{{ $tax->taxType->name }}</p>
+                                <p class="tax-title">
+                                    {{ $tax->taxType->name }}
+                                </p>
                             </td>
                             <td>
-                                <p class="tax-money">{!! format_money_pdf($tax->total_tax_amount) !!}</p>
+                                <p class="tax-money">
+                                    {!! format_money_pdf($tax->total_tax_amount) !!}
+                                </p>
                             </td>
                         </tr>
                     @endforeach
@@ -207,7 +215,9 @@
         <table class="tax-total-table">
             <tr>
                 <td class="tax-total-cell">
-                    <p class="tax-total">{!! format_money_pdf($totalTaxAmount) !!}</p>
+                    <p class="tax-total">
+                        {!! format_money_pdf($totalTaxAmount) !!}
+                    </p>
                 </td>
             </tr>
         </table>
@@ -217,7 +227,9 @@
                     <p class="total-tax-title">TOTAL TAX</p>
                 </td>
                 <td>
-                    <p class="total-tax-money">{!! format_money_pdf($totalTaxAmount) !!}</p>
+                    <p class="total-tax-money">
+                        {!! format_money_pdf($totalTaxAmount) !!}
+                    </p>
                 </td>
             </tr>
         </table>

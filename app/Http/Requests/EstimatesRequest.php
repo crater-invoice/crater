@@ -25,7 +25,6 @@ class EstimatesRequest extends FormRequest
         $rules = [
             'estimate_date' => 'required',
             'expiry_date' => 'required',
-            'estimate_number' => 'required|unique:estimates,estimate_number',
             'user_id' => 'required',
             'discount' => 'required',
             'discount_val' => 'required',
@@ -40,10 +39,6 @@ class EstimatesRequest extends FormRequest
             'items.*.quantity' => 'required',
             'items.*.price' => 'required'
         ];
-
-        if ($this->getMethod() == 'PUT') {
-            $rules['estimate_number'] = $rules['estimate_number'].','.$this->get('id');
-        }
 
         return $rules;
     }

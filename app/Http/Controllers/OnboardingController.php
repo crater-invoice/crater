@@ -277,7 +277,14 @@ class OnboardingController extends Controller
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-                'PROXY_OAUTH_CLIENT_SECRET='.config('auth.proxy.client_secret'), 'PROXY_OAUTH_CLIENT_SECRET='.$client->secret, file_get_contents($path)
+                'PROXY_OAUTH_CLIENT_SECRET='.config('auth.proxy.client_secret'),
+                'PROXY_OAUTH_CLIENT_SECRET='.$client->secret,
+                file_get_contents($path)
+            ));
+            file_put_contents($path, str_replace(
+                'APP_DEBUG=true',
+                'APP_DEBUG=false',
+                file_get_contents($path)
             ));
         }
 

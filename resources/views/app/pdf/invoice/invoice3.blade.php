@@ -66,13 +66,11 @@
             margin-left:160px;
         }
         .header {
-            font-family: "DejaVu Sans";
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: "DejaVu Sans";
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -384,7 +382,6 @@
         }
 
         .notes {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -397,7 +394,6 @@
         }
 
         .notes-label {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -438,7 +434,7 @@
                 <div style="float:left;">
                     @include('app.pdf.invoice.partials.billing-address')
                 </div>
-                @if($invoice->user->billingaddress && ($invoice->user->billingaddress->name || $invoice->user->billingaddress->address_street_1 || $invoice->user->billingaddress->address_street_2 || $invoice->user->billingaddress->country || $invoice->user->billingaddress->state || $invoice->user->billingaddress->city || $invoice->user->billingaddress->zip || $invoice->user->billingaddress->phone))
+                @if($invoice->user->billingaddress)
                     <div style="float:right;">
                 @else
                     <div style="float:left;">

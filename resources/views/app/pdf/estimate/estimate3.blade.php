@@ -66,13 +66,11 @@
             margin-left:160px;
         }
         .header {
-            font-family: "DejaVu Sans";
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: "DejaVu Sans";
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -374,7 +372,6 @@
         }
 
         .notes {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -387,7 +384,6 @@
         }
 
         .notes-label {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -428,7 +424,7 @@
                 <div style="float:left;">
                     @include('app.pdf.estimate.partials.billing-address')
                 </div>
-                @if($estimate->user->billingaddress && ($estimate->user->billingaddress->name || $estimate->user->billingaddress->address_street_1 || $estimate->user->billingaddress->address_street_2 || $estimate->user->billingaddress->country || $estimate->user->billingaddress->state || $estimate->user->billingaddress->city || $estimate->user->billingaddress->zip || $estimate->user->billingaddress->phone))
+               @if($estimate->user->billingaddress)
                     <div style="float:right;">
                 @else
                     <div style="float:left;">

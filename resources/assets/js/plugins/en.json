@@ -728,7 +728,7 @@
       "date_format": "Date Format",
       "discount_setting": "Discount Setting",
       "discount_per_item": "Discount Per Item ",
-      "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount are added directly to the invoice.",
+      "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount is added directly to the invoice.",
       "save": "Save",
       "preference": "Preference | Preferences",
       "general_settings": "Default preferences for the system.",

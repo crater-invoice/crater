@@ -62,13 +62,11 @@
             margin-left:160px;
         }
         .header {
-            font-family: "DejaVu Sans";
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: "DejaVu Sans";
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -374,7 +372,6 @@
         }
 
         .notes {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -387,7 +384,6 @@
         }
 
         .notes-label {
-            font-family: "DejaVu Sans";
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -432,7 +428,7 @@
             <div class="ship-address-container">
                 @include('app.pdf.invoice.partials.shipping-address')
             </div>
-            @if($invoice->user->shippingaddress && ($invoice->user->shippingaddress->name || $invoice->user->shippingaddress->address_street_1 || $invoice->user->shippingaddress->address_street_2 || $invoice->user->shippingaddress->country || $invoice->user->shippingaddress->state || $invoice->user->shippingaddress->city || $invoice->user->shippingaddress->zip || $invoice->user->phone))
+            @if($invoice->user->shippingaddress)
                 <div class="bill-address-container">
             @else
                 <div class="bill-address-container" style="float:right;padding-right:0px;">

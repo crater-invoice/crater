@@ -5,7 +5,7 @@
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: "DejaVu Sans";
         }
 
         /* html {
@@ -181,10 +181,14 @@
                     @foreach ($expenseCategories as $expenseCategory)
                         <tr>
                             <td>
-                                <p class="expense-title">{{ $expenseCategory->category->name }}</p>
+                                <p class="expense-title">
+                                    {{ $expenseCategory->category->name }}
+                                </p>
                             </td>
                             <td>
-                                <p class="expense-money">{!! format_money_pdf($expenseCategory->total_amount) !!}</p>
+                                <p class="expense-money">
+                                    {!! format_money_pdf($expenseCategory->total_amount) !!}
+                                </p>
                             </td>
                         </tr>
                     @endforeach

@@ -32,8 +32,8 @@
             class="show-customer"
           >
             <div class="row px-2 mt-1">
-              <div class="col col-6">
-                <div v-if="selectedCustomer.billing_address != null" class="row address-menu">
+              <div v-if="selectedCustomer.billing_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.bill_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.billing_address.name">
@@ -57,8 +57,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col col-6">
-                <div v-if="selectedCustomer.shipping_address != null" class="row address-menu">
+              <div v-if="selectedCustomer.shipping_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.ship_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.shipping_address.name">
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="customer-content mb-1">
-              <label class="email">{{ selectedCustomer.email ? selectedCustomer.email : selectedCustomer.name }}</label>
+              <label class="email">{{ selectedCustomer.name }}</label>
               <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
             </div>
           </div>

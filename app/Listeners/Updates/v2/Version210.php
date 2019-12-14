@@ -57,7 +57,7 @@ class Version210 extends Listener
             CompanySetting::setSetting(
                 $key,
                 $value,
-                $user->company_id
+                auth()->user()->company->id
             );
         }
     }

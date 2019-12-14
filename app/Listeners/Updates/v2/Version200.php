@@ -6,7 +6,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Database\Schema\Blueprint;
 use Crater\Listeners\Updates\Listener;
-use Crater\Listeners\Updates\v2\Version200;
 use Crater\Events\UpdateFinished;
 use Crater\Setting;
 use Crater\Address;

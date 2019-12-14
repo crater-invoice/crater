@@ -29,7 +29,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 ## Mobile Apps
 - [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
-- IOS - Coming Soon
+- [IOS](https://apps.apple.com/app/id1489169767)
 - [Source](https://github.com/bytefury/crater-mobile)
 
 ## Discord

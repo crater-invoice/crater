@@ -154,6 +154,7 @@
     "select_currency": "Select currency",
     "select_a_customer": "Select a customer",
     "type_or_click": "Type or click to select",
+    "tax_id": "Tax ID",
 
     "confirm_delete": "You will not be able to recover this Customer | You will not be able to recover these Customers",
     "created_message": "Customer created successfully",
@@ -597,7 +598,8 @@
       "address": "Address",
       "zip": "Zip",
       "save": "Save",
-      "updated_message": "Company information updated successfully"
+      "updated_message": "Company information updated successfully",
+      "tax_id": "Tax ID"
     },
     "customization": {
         "customization": "customization",
@@ -728,7 +730,7 @@
       "date_format": "Date Format",
       "discount_setting": "Discount Setting",
       "discount_per_item": "Discount Per Item ",
-      "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount is added directly to the invoice.",
+      "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount are added directly to the invoice.",
       "save": "Save",
       "preference": "Preference | Preferences",
       "general_settings": "Default preferences for the system.",

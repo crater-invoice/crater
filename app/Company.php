@@ -11,7 +11,7 @@ class Company extends Model implements HasMedia
 {
     use HasMediaTrait;
 
-    protected $fillable = ['name', 'logo', 'unique_hash'];
+    protected $fillable = ['name', 'logo', 'unique_hash', 'tax_id'];
 
     protected $appends=['logo'];
 

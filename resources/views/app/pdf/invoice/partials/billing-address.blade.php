@@ -29,5 +29,8 @@
                 Phone :{{$invoice->user->billingaddress->phone}}
             </p>
         @endif
+        @if($invoice->user->tax_id)
+            {{$invoice->user->tax_id}}
+        @endif
     </p>
 @endif

@@ -26,5 +26,8 @@
         @if($company_address->addresses[0]['phone'])
            {{$company_address->addresses[0]['phone']}} <br>
         @endif
+        @if($invoice->user->company->tax_id)
+            {{$invoice->user->company->tax_id}}
+        @endif
     </p>
 @endif

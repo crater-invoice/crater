@@ -118,6 +118,13 @@
               <span v-if="!$v.formData.address_street_2.maxLength" class="text-danger">{{ $tc('validation.address_maxlength') }}</span>
             </div>
           </div>
+          <div class="col-md-6 mb-4">
+            <label class="input-label">{{ $tc('settings.company_info.tax_id') }}</label>
+            <base-input
+              v-model="formData.tax_id"
+              :placeholder="$tc('settings.company_info.tax_id')"
+            />
+          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -170,7 +177,8 @@ export default {
         website: '',
         country_id: null,
         state: '',
-        city: ''
+        city: '',
+        tax_id: ''
       },
       isLoading: false,
       isHidden: false,
@@ -206,6 +214,9 @@ export default {
       },
       address_street_2: {
         maxLength: maxLength(255)
+      },
+      tax_id: {
+        maxLength: maxLength(255)
       }
     }
   },
@@ -234,6 +245,7 @@ export default {
       this.formData.name = response.data.user.company.name
       this.formData.address_street_1 = response.data.user.addresses[0].address_street_1
       this.formData.address_street_2 = response.data.user.addresses[0].address_street_2
+      this.formData.tax_id = response.data.user.company.tax_id
       this.formData.zip = response.data.user.addresses[0].zip
       this.formData.phone = response.data.user.addresses[0].phone
       this.formData.state = response.data.user.addresses[0].state

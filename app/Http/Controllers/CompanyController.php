@@ -68,6 +68,7 @@ class CompanyController extends Controller
         $user = User::find(1);
         $company = $user->company;
         $company->name = $request->name;
+        $company->tax_id = $request->tax_id;
         $company->save();
 
         if ($request->has('logo')) {

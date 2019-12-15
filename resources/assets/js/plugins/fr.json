@@ -159,6 +159,7 @@
     "street_2": "Rue 2",
     "select_a_customer": "Sélectionnez un client",
     "type_or_click": "Tapez ou cliquez pour sélectionner",
+    "tax_id": "Identifiant de l'entreprise",
 
     "confirm_delete": "Vous ne pourrez pas récupérer ce client | Vous ne pourrez pas récupérer ces clients",
     "created_message": "Client créé avec succès",
@@ -592,7 +593,8 @@
       "address": "Adresse",
       "zip": "Zip",
       "save": "sauver",
-      "updated_message": "Informations sur la société mises à jour avec succès"
+      "updated_message": "Informations sur la société mises à jour avec succès",
+      "tax_id": "Identifiant de l'entreprise"
     },
     "account_settings": {
       "profile_picture": "Image de profil",

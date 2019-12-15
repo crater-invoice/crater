@@ -71,6 +71,7 @@ class CustomersController extends Controller
         $customer->website = $request->website;
         $customer->enable_portal = $request->enable_portal;
         $customer->role = 'customer';
+        $customer->tax_id = $request->tax_id;
         $customer->password = Hash::make($request->password);
         $customer->save();
 
@@ -175,6 +176,7 @@ class CustomersController extends Controller
         $customer->contact_name = $request->contact_name;
         $customer->website = $request->website;
         $customer->enable_portal = $request->enable_portal;
+        $customer->tax_id = $request->tax_id;
         $customer->save();
 
         $customer->addresses()->delete();

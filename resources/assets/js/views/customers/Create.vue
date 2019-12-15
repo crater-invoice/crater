@@ -71,6 +71,17 @@
                   track-by="id"
                 />
               </div>
+              <div class="form-group">
+                <label class="form-label">{{ $t('customers.tax_id') }}</label>
+                <base-input
+                  :invalid="$v.formData.tax_id.$error"
+                  v-model="formData.tax_id"
+                  type="text"
+                  name="tax_id"
+                  tab-index="6"
+                  @input="$v.formData.tax_id.$touch()"
+                />
+              </div>
             </div>
             <div class="col-sm-5">
               <div class="form-group">
@@ -337,6 +348,7 @@ export default {
         phone: null,
         currency_id: null,
         website: null,
+        tax_id: null,
         addresses: []
       },
       currency: null,
@@ -382,6 +394,9 @@ export default {
       },
       website: {
         url
+      },
+      tax_id: {
+        minLength: maxLength(255)
       }
     },
     billing: {
@@ -488,6 +503,7 @@ export default {
       this.formData.phone = customer.phone
       this.formData.currency_id = customer.currency_id
       this.formData.website = customer.website
+      this.formData.tax_id = customer.tax_id
 
       if (customer.billing_address) {
         this.billing = customer.billing_address

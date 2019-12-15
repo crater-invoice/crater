@@ -29,6 +29,7 @@ class CustomerRequest extends FormRequest
                     'addresses.*.address_street_1' => 'max:255',
                     'addresses.*.address_street_2' => 'max:255',
                     'email' => 'email|nullable|unique:users,email',
+                    'tax_id' => 'max:255'
                 ];
                 break;
             case 'PUT':
@@ -36,6 +37,7 @@ class CustomerRequest extends FormRequest
                     'name' => 'required',
                     'addresses.*.address_street_1' => 'max:255',
                     'addresses.*.address_street_2' => 'max:255',
+                    'tax_id' => 'max:255'
                 ];
                 break;
             default:

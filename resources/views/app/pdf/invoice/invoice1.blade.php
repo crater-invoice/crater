@@ -369,6 +369,20 @@
             padding-bottom: 10px;
         }
 
+        .footer {
+            bottom: 60px;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            font-size: 10px;
+            color: grey;
+        }
+
+        .footer hr {
+            border: 0.5px solid #EAF1FB;
+            margin: 5px 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -429,5 +443,6 @@
         </div>
         @include('app.pdf.invoice.partials.notes')
     </div>
+    @include('app.pdf.invoice.partials.footer')
 </body>
 </html>

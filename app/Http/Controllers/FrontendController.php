@@ -343,7 +343,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         $colors = [

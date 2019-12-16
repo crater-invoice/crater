@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Artisan;
 
 class OnboardingController extends Controller
 {
+
+    /**
+     * Retrieve Onboarding data.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getOnboardingData(Request $request)
     {
         if (!\Storage::disk('local')->has('database_created')) {
@@ -72,6 +79,13 @@ class OnboardingController extends Controller
         ]);
     }
 
+
+    /**
+     * Setup Admin Profile.
+     *
+     * @param  \Crater\Http\Requests\ProfileRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function adminProfile(ProfileRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -97,6 +111,12 @@ class OnboardingController extends Controller
         ]);
     }
 
+    /**
+     * Setup Admin Avatar.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function uploadAdminAvatar(Request $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -123,6 +143,12 @@ class OnboardingController extends Controller
         ]);
     }
 
+    /**
+     * Setup Admin Company.
+     *
+     * @param  \Crater\Http\Requests\CompanyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function adminCompany(CompanyRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');
@@ -174,6 +200,13 @@ class OnboardingController extends Controller
         ]);
     }
 
+
+    /**
+     * Setup Company Settings.
+     *
+     * @param  \Crater\Http\Requests\CompanySettingRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function companySettings(CompanySettingRequest $request)
     {
         $setting = Setting::getSetting('profile_complete');

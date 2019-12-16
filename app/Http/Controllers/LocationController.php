@@ -6,6 +6,12 @@ use Crater\Country;
 
 class LocationController extends Controller
 {
+
+    /**
+     * Retrive a list of Countries.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCountries()
     {
         return response()->json([

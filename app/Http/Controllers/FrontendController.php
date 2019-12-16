@@ -118,6 +118,11 @@ class FrontendController extends Controller
         return $pdf->stream();
     }
 
+
+    /**
+    *
+     * @return \Illuminate\Http\Response
+     */
     public function getCustomerInvoicePdf($id)
     {
         $invoice = Invoice::with([

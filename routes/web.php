@@ -49,11 +49,16 @@ Route::group(['prefix' => 'reports'], function () {
 
 });
 
+// download invoice pdf with a unique_hash $id
+// -------------------------------------------------
 Route::get('/invoices/pdf/{id}', [
     'as' => 'get.invoice.pdf',
     'uses' => 'FrontendController@getInvoicePdf'
 ]);
 
+
+// download estimate pdf with a unique_hash $id
+// -------------------------------------------------
 Route::get('/estimates/pdf/{id}', [
     'as' => 'get.estimate.pdf',
     'uses' => 'FrontendController@getEstimatePdf'
@@ -74,12 +79,14 @@ Route::get('/expenses/{id}/receipt/{hash}', [
     'uses' => 'ExpensesController@downloadReceipt'
 ]);
 
-
+// Setup for instalation of app
+// ----------------------------------------------
 Route::get('/on-boarding', function () {
     return view('app');
 })->name('install')->middleware('redirect-if-installed');
 
-
+// Move other http requests to the Vue App
+// -------------------------------------------------
 Route::get('/{vue?}', function () {
     return view('app');
 })->where('vue', '[\/\w\.-]*')->name('home')->middleware('install');

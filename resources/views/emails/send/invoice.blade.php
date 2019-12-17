@@ -16,10 +16,23 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new invoice from <span class="company-name">{{$data['company']['name']}}</span>
-            @component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
-                View Invoice
-            @endcomponent
+            <h1>Dear {!! $data['user']['contact_name'] !!}</h1>
+
+<p>Hereby you will find your current invoice {!! $data['invoice']['invoice_number'] !!}.</p><br/>
+
+<p>The invoice amount is {!! format_money_pdf($data['invoice']['due_amount'], $data['user']['currency']) !!}.</p><br/>
+
+<p>To view and print the invoice a PDF reader is required.</p>
+@component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
+    View Invoice
+@endcomponent
+
+<p>If you have any further queries, please let us know.</p><br/>
+
+<h2>Best regards, </h2>
+
+<h2>{{$data['company']['name']}}</h2>
+            
         @endcomponent
     @endslot
      {{-- Footer --}}

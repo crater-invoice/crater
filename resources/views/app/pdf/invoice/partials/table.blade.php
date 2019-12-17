@@ -29,7 +29,7 @@
                 style="text-align: left; color: #040405;padding-left: 0px"
             >
                 <span>{{ $item->name }}</span><br>
-                <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{{ $item->description }}</span>
+                <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{!! str_replace("\n", "<br/>", $item->description) !!}</span>
             </td>
             <td
                 class="inv-item items"

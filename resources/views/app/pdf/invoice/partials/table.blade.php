@@ -2,16 +2,16 @@
     <tr class="main-table-header">
         <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">#</th>
         @if($invoice->discount_per_item === 'NO')
-            <th width="80%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
+            <th width="75%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
         @else
-            <th width="40%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
+            <th width="35%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
         @endif
         <th width="17%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Quantity</th>
         <th width="18%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 40px">Price</th>
         @if($invoice->discount_per_item === 'YES')
             <th width="10%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-left: 10px">Discount</th>
         @endif
-        <th width="15%" class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
+        <th width="20%" class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
     </tr>
     @php
         $index = 1

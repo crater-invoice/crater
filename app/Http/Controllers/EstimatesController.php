@@ -421,11 +421,14 @@ class EstimatesController extends Controller
                 'discount_per_item',
                 $request->header('company')
             ) : 'NO';
+        
+        $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
+        $nextInvoiceNumber = Invoice::getNextInvoiceNumber($invoice_prefix);
 
         $invoice = Invoice::create([
             'invoice_date' => $invoice_date,
             'due_date' => $due_date,
-            'invoice_number' => "INV-".Invoice::getNextInvoiceNumber(),
+            'invoice_number' => $nextInvoiceNumber,
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

@@ -62,7 +62,7 @@ Crater is a product of [Bytefury](https://bytefury.com)
 
 **Special thanks to:**
 * [Birkhoff Lee](https://github.com/BirkhoffLee)
-
+* [Hassan A. Ba Abdullah](https://github.com/hsnapps)
 
 ## Translate
 Help us translate on [Transifex](https://www.transifex.com/bytefury/crater-invoice)

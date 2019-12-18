@@ -115,7 +115,8 @@ class CompanyController extends Controller
         $languages = [
             ["code"=>"en", "name" => "English"],
             ["code"=>"fr", "name" => "French"],
-            ["code"=>"es", "name" => "Spanish"]
+            ["code"=>"es", "name" => "Spanish"],
+            ["code"=>"ar", "name" => "العربية"],
         ];
 
         return response()->json([

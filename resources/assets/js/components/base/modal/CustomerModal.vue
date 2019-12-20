@@ -55,6 +55,7 @@
                     v-model="currency"
                     :options="currencies"
                     :searchable="true"
+                    :allow-empty="false"
                     :show-labels="false"
                     :placeholder="$t('customers.select_currency')"
                     label="name"

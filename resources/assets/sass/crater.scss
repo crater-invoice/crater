@@ -48,6 +48,7 @@
 @import 'components/base/base-text-area';
 @import "components/base/base-switch";
 @import 'components/base/base-loader/index';
+@import 'components/base/base-prefix-input';
 
 
 // Components
@@ -91,6 +92,7 @@
 @import 'pages/login';
 @import 'pages/login-3';
 @import 'pages/404';
+@import 'pages/customization';
 @import 'pages/settings';
 @import 'pages/invoices/create';
 @import 'pages/invoices/view';

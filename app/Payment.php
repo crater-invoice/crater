@@ -32,10 +32,34 @@ class Payment extends Model
         'formattedPaymentDate'
     ];
 
-    public static function getNextPaymentNumber()
+
+    private function strposX($haystack, $needle, $number)
+    {
+        if ($number == '1') {
+            return strpos($haystack, $needle);
+        } elseif ($number > '1') {
+            return strpos(
+                $haystack,
+                $needle,
+                $this->strposX($haystack, $needle, $number - 1) + strlen($needle)
+            );
+        } else {
+            return error_log('Error: Value for parameter $number is out of range');
+        }
+    }
+
+    public function getPaymentNumAttribute()
+    {
+        $position = $this->strposX($this->payment_number, "-", 1) + 1;
+        return substr($this->payment_number, $position);
+    }
+
+    public static function getNextPaymentNumber($value)
     {
         // Get the last created order
-        $payment = Payment::orderBy('created_at', 'desc')->first();
+        $payment = Payment::where('payment_number', 'LIKE', $value . '-%')
+                    ->orderBy('created_at', 'desc')
+                    ->first();
         if (!$payment) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
@@ -53,6 +77,13 @@ class Payment extends Model
 
         return sprintf('%06d', intval($number) + 1);
     }
+
+    public function getPaymentPrefixAttribute ()
+    {
+        $prefix= explode("-",$this->payment_number)[0];
+        return $prefix;
+    }
+
 
     public function invoice()
     {

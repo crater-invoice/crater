@@ -191,6 +191,58 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function getCustomizeSetting (Request $request)
+    {
+        $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));
+        $invoice_auto_generate = CompanySetting::getSetting('invoice_auto_generate', $request->header('company'));
+
+        $estimate_prefix = CompanySetting::getSetting('estimate_prefix', $request->header('company'));
+        $estimate_auto_generate  = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
+
+        $payment_prefix = CompanySetting::getSetting('payment_prefix', $request->header('company'));
+        $payment_auto_generate = CompanySetting::getSetting('payment_auto_generate', $request->header('company'));
+
+        return  response()->json([
+            'invoice_prefix' => $invoice_prefix,
+            'invoice_auto_generate' => $invoice_auto_generate,
+            'estimate_prefix' => $estimate_prefix,
+            'estimate_auto_generate' => $estimate_auto_generate,
+            'payment_prefix' => $payment_prefix,
+            'payment_auto_generate' => $payment_auto_generate,
+        ]);
+    }
+
+    public function updateCustomizeSetting (Request $request)
+    {
+        $sets = [];
+
+        if ($request->type == "PAYMENTS") {
+            $sets = [
+                'payment_prefix'
+            ];
+        }
+
+        if ($request->type == "INVOICES") {
+            $sets = [
+                'invoice_prefix',
+            ];
+        }
+
+        if ($request->type == "ESTIMATES") {
+            $sets = [
+                'estimate_prefix',
+            ];
+        }
+
+        foreach ($sets as $key) {
+            CompanySetting::setSetting($key, $request->$key, $request->header('company'));
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
     /**
      * Update a specific Company Setting
      * @param \Crater\Http\Requests\SettingRequest $request

@@ -27,7 +27,7 @@ class InvoicesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -60,7 +60,7 @@ class InvoicesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create(Request $request)
     {
@@ -91,7 +91,7 @@ class InvoicesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Requests\InvoicesRequest $request)
     {
@@ -201,7 +201,7 @@ class InvoicesController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
     {
@@ -225,7 +225,7 @@ class InvoicesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit(Request $request,$id)
     {
@@ -253,7 +253,7 @@ class InvoicesController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Requests\InvoicesRequest $request, $id)
     {
@@ -353,7 +353,7 @@ class InvoicesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -391,6 +391,14 @@ class InvoicesController extends Controller
         ]);
     }
 
+
+
+     /**
+     * Mail a specific invoice to the correponding cusitomer's email address.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function sendInvoice(Request $request)
     {
         $invoice = Invoice::findOrFail($request->id);
@@ -431,6 +439,13 @@ class InvoicesController extends Controller
         ]);
     }
 
+
+     /**
+     * Mark a specific invoice as sent.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function markAsSent(Request $request)
     {
         $invoice = Invoice::findOrFail($request->id);
@@ -443,6 +458,13 @@ class InvoicesController extends Controller
         ]);
     }
 
+
+     /**
+     * Mark a specific invoice as paid.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function markAsPaid(Request $request)
     {
         $invoice = Invoice::findOrFail($request->id);
@@ -456,6 +478,14 @@ class InvoicesController extends Controller
         ]);
     }
 
+
+     /**
+     * Retrive a specified user's unpaid invoices from storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCustomersUnpaidInvoices(Request $request, $id)
     {
         $invoices = Invoice::where('paid_status', '<>', Invoice::STATUS_PAID)

@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    /**
+     * Retrieve Dashboard details
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $invoiceTotals = [];
@@ -137,6 +143,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * Retrive Expense Chart data
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getExpenseChartData(Request $request)
     {
         $expensesCategories = Expense::with('category')

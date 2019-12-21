@@ -524,6 +524,14 @@ class CurrenciesTableSeeder extends Seeder
                 'thousand_separator' => '.',
                 'decimal_separator' => ','
             ],
+            [
+                'name' => 'Serbian Dinar',
+                'code' => 'RSD',
+                'symbol' => 'RSD',
+                'precision' => '2',
+                'thousand_separator' => '.',
+                'decimal_separator' => ','
+            ],
         ];
 
         foreach ($currencies as $currency) {

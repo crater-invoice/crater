@@ -31,16 +31,16 @@
         &:last-child {
             margin-bottom: 98px;
         }
-        
+
         &.router-link-exact-active {
-            border-left: 3px solid $crater-theme;
-            background-color: $gray--very-light;
+            border-left: 3px solid $ls-color-primary;
+            background-color: $ls-color-gray--very-light;
         }
-     
+
         &:hover {
-            background-color: $gray--very-light;
+            background-color: $ls-color-gray--very-light;
         }
- 
+
         .left {
 
             .status-expired {

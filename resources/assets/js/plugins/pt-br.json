@@ -365,19 +365,19 @@
     "date": "Data",
     "amount": "Montante",
     "action": "Ação",
-    "credit_number": "Credit Number",
+    "credit_number": "Número de crédito",
     "notes": "Notes",
-    "confirm_delete": "Do you want to delete this credit note?",
+    "confirm_delete": "Deseja excluir esta nota de crédito?",
     "item": {
-      "title": "Item Title",
-      "description": "Description",
-      "quantity": "Quantity",
-      "price": "Price",
-      "discount": "Discount",
+      "title": "Título do Item",
+      "description": "Descrição",
+      "quantity": "Quantidade",
+      "price": "Preço",
+      "discount": "Desconto",
       "total": "Total",
-      "total_discount": "Total Discount",
-      "sub_total": "Sub Total",
-      "tax": "Tax"
+      "total_discount": "Desconto Total",
+      "sub_total": "SubTotal",
+      "tax": "Imposto"
     }
   },
   "payments": {

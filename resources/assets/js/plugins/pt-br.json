@@ -18,8 +18,8 @@
     "cancel": "Cancelar",
     "update": "Atualizar",
     "download": "Baixar",
-    "from_date": "A partir de",
-    "to_date": "Até",
+    "from_date": "A partir da Data",
+    "to_date": "Até a Data",
     "from": "De",
     "to": "Para",
     "go_back": "Voltar",
@@ -122,7 +122,7 @@
     "name": "Nome",
     "display_name": "Nome de exibição",
     "primary_contact_name": "Nome do contato principal",
-    "contact_name": "Nome para contato",
+    "contact_name": "Nome de Contato",
     "amount_due": "Valor Devido",
     "email": "Email",
     "address": "Endereço",
@@ -211,15 +211,15 @@
     "discount": "Desconto",
     "sub_total": "Subtotal",
     "estimate_number": "Numero do Orçamento",
-    "ref_number": "Número de referência",
+    "ref_number": "Referência",
     "contact": "Contato",
     "add_item": "Adicionar Item",
     "date": "Data",
-    "due_date": "Data de vencimento",
+    "due_date": "Data de Vencimento",
     "expiry_date": "Data de expiração",
     "status": "Status",
     "add_tax": "Adicionar Imposto",
-    "amount": "Quantidade",
+    "amount": "Montante",
     "action": "Ação",
     "notes": "Observações",
     "tax": "Imposto",
@@ -274,7 +274,7 @@
       "total_discount": "Desconto total",
       "sub_total": "Subtotal",
       "tax": "Imposto",
-      "amount": "Quantidade total",
+      "amount": "Montante",
       "select_an_item": "Escreva ou clique para selecionar um item",
       "type_item_description": "Tipo Item Descrição (opcional)"
     }
@@ -416,8 +416,8 @@
     "expense_title": "Título",
     "contact": "Contato",
     "category": "Categoria",
-    "from_date": "A partir da data",
-    "to_date": "Até a data",
+    "from_date": "A partir da Data",
+    "to_date": "Até a Data",
     "expense_date": "Data",
     "description": "Descrição",
     "receipt": "Receita",
@@ -469,64 +469,64 @@
     "login_placeholder": "mail@exemplo.com"
   },
   "reports": {
-    "title": "Reporte",
-    "from_date": "Partir de la fecha",
-    "to_date": "Hasta la fecha",
-    "status": "Estado",
-    "paid": "Pagada",
-    "unpaid": "No pagado",
-    "download_pdf": "Descargar PDF",
+    "title": "Relatório",
+    "from_date": "A partir da Data",
+    "to_date": "Até a Data",
+    "status": "Status",
+    "paid": "Pago",
+    "unpaid": "Não Pago",
+    "download_pdf": "Baixar PDF",
     "view_pdf": "Ver PDF",
-    "update_report": "Informe de actualización",
-    "report": "Informe | Informes",
+    "update_report": "Atualizar Relatório",
+    "report": "Relatório | Relatórios",
     "profit_loss": {
-      "profit_loss": "Pérdida de beneficios",
-      "to_date": "Hasta la fecha",
-      "from_date": "Partir de la fecha",
-      "date_range": "Seleccionar rango de fechas"
+      "profit_loss": "Perda de lucro",
+      "to_date": "Até a Data",
+      "from_date": "A partir da Data",
+      "date_range": "Selecionar período"
     },
     "sales": {
       "sales": "Vendas",
-      "date_range": "Seleccionar rango de fechas",
-      "to_date": "Hasta la fecha",
-      "from_date": "Partir de la fecha",
-      "report_type": "Tipo de informe"
+      "date_range": "Selecionar período",
+      "to_date": "Até a Data",
+      "from_date": "A partir da Data",
+      "report_type": "Tipo de Relatório"
     },
     "taxes": {
       "taxes": "Impostos",
-      "to_date": "Hasta la fecha",
-      "from_date": "Partir de la fecha",
-      "date_range": "Seleccionar rango de fechas"
+      "to_date": "Até a Data",
+      "from_date": "A partir da Data",
+      "date_range": "Selecionar período"
     },
     "errors": {
-      "required": "Se requiere campo"
+      "required": "Campo obrigatório"
     },
     "invoices": {
-      "invoice": "Factura",
-      "invoice_date": "Fecha de la factura",
-      "due_date": "Fecha de vencimiento",
-      "amount": "Cantidad",
-      "contact_name": "Nome de contacto",
-      "status": "Estado"
+      "invoice": "Fatura",
+      "invoice_date": "Data da Fatura",
+      "due_date": "Data de Vencimento",
+      "amount": "Montante",
+      "contact_name": "Nome de Contato",
+      "status": "Status"
     },
     "estimates": {
-      "estimate": "Estimar",
-      "estimate_date": "Data do orçamento",
-      "due_date": "Fecha de vencimiento",
-      "estimate_number": "Numero Estimado",
-      "ref_number": "Número de referencia",
-      "amount": "Cantidad",
-      "contact_name": "Nome de contacto",
-      "status": "Estado"
+      "estimate": "Orçamento",
+      "estimate_date": "Data do Orçamento",
+      "due_date": "Data de Vencimento",
+      "estimate_number": "Número do Orçamento",
+      "ref_number": "Referência",
+      "amount": "Montante",
+      "contact_name": "Nome de Contato",
+      "status": "Status"
     },
     "expenses": {
-      "expenses": "Gastos",
-      "category": "Categoría",
-      "date": "Fecha",
-      "amount": "Cantidad",
-      "to_date": "Hasta la fecha",
-      "from_date": "Partir de la fecha",
-      "date_range": "Seleccionar rango de fechas"
+      "expenses": "Despesas",
+      "category": "Categoria",
+      "date": "Data",
+      "amount": "Montante",
+      "to_date": "Até a Data",
+      "from_date": "A partir da Data",
+      "date_range": "Selecionar período"
     }
   },
   "settings": {

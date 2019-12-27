@@ -457,15 +457,16 @@
   "login": {
     "email": "Email",
     "password": "Senha",
-    "forgot_password": "¿Se te olvidó tu Senha?",
-    "or_signIn_with": "o Inicie sesión con",
-    "login": "Iniciar sesión",
-    "register": "Registro",
-    "reset_password": "Restablecer la Senha",
-    "enter_email": "Ingrese correo eletrônico",
-    "enter_password": "Introducir la Senha",
-    "retype_password": "Retype Password",
-    "login_placeholder": "mail@example.com"
+    "forgot_password": "Esqueceu a senha?",
+    "or_signIn_with": "ou Entre com",
+    "login": "Entrar",
+    "register": "Registre-se",
+    "reset_password": "Resetar Senha",
+    "password_reset_successfully": "Senha redefinida com sucesso",
+    "enter_email": "Digite email",
+    "enter_password": "Digite a senha",
+    "retype_password": "Confirme a Senha",
+    "login_placeholder": "mail@exemplo.com"
   },
   "reports": {
     "title": "Reporte",

@@ -148,7 +148,7 @@ class CompanyController extends Controller
             ["code"=>"fr", "name" => "French"],
             ["code"=>"es", "name" => "Spanish"],
             ["code"=>"ar", "name" => "العربية"],
-            ["code"=>"pt_BR", "name" => "Portuguese"],
+            ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
         ];
 
         return response()->json([

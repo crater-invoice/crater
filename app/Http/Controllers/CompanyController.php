@@ -19,7 +19,7 @@ use Crater\Currency;
 use Crater\CompanySetting;
 
 class CompanyController extends Controller
-{   
+{
     /**
      * Retrive the Admin account.
      * @return \Crater\User
@@ -66,9 +66,9 @@ class CompanyController extends Controller
     }
 
 
-    
+
     /**
-     * Get Admin Account alongside the country from the addresses table and 
+     * Get Admin Account alongside the country from the addresses table and
      * The company from companies table
      *
      * @return \Illuminate\Http\JsonResponse
@@ -148,6 +148,7 @@ class CompanyController extends Controller
             ["code"=>"fr", "name" => "French"],
             ["code"=>"es", "name" => "Spanish"],
             ["code"=>"ar", "name" => "العربية"],
+            ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
         ];
 
         return response()->json([
@@ -191,7 +192,7 @@ class CompanyController extends Controller
             'success' => true
         ]);
     }
-  
+
     public function getCustomizeSetting (Request $request)
     {
         $invoice_prefix = CompanySetting::getSetting('invoice_prefix', $request->header('company'));

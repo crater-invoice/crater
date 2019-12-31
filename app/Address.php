@@ -7,8 +7,8 @@ use Crater\Country;
 
 class Address extends Model
 {
-    const BILLING_TYPE = 'BILLING';
-    const SHIPPING_TYPE = 'SHIPPING';
+    const BILLING_TYPE = 'billing';
+    const SHIPPING_TYPE = 'shipping';
 
     protected $fillable = [
         'name',

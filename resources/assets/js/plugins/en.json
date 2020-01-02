@@ -828,7 +828,7 @@
     },
     "errors": {
       "migrate_failed": "Migrate Failed",
-      "database_variables_save_error": "Unable to connect to the DB with Provided Values.",
+      "database_variables_save_error": "Cannot write configuration to .env file. Please check its file permissions",
       "mail_variables_save_error": "Email configuration failed.",
       "connection_failed": "Database connection failed",
       "database_should_be_empty": "Database should be empty"

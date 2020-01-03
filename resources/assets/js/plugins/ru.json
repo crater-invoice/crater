@@ -1,26 +1,26 @@
 {
 	"credit_notes": {
-		"action": "",
-		"amount": "",
-		"confirm_delete": "",
-		"contact": "",
-		"credit_notes": "",
-		"credit_notes_list": "",
-		"credit_number": "",
-		"date": "",
+		"action": "Действия",
+		"amount": "Количество",
+		"confirm_delete": "Вы действительно хотите удалить этот неоплаченный счет?",
+		"contact": "Контакты",
+		"credit_notes": "Неоплаченные счета",
+		"credit_notes_list": "Список неоплаченных счетов",
+		"credit_number": "Кредитный номер",
+		"date": "Дата",
 		"item": {
-			"description": "",
-			"discount": "",
-			"price": "",
-			"quantity": "",
-			"sub_total": "",
-			"tax": "",
-			"title": "",
-			"total": "",
-			"total_discount": ""
+			"description": "Описание",
+			"discount": "Скидка",
+			"price": "Цена",
+			"quantity": "Количество",
+			"sub_total": "Транши",
+			"tax": "Налог",
+			"title": "Название товара",
+			"total": "Итого",
+			"total_discount": "Итого (с учетом скидки)"
 		},
-		"notes": "",
-		"title": ""
+		"notes": "Оповещения",
+		"title": "Неоплаченные счета"
 	},
 	"customers": {
 		"action": "",

@@ -4,6 +4,7 @@ import en from './en.json'
 import fr from './fr.json'
 import es from './es.json'
 import ar from './ar.json'
+import ru from './ru.json'
 import pt_BR from './pt-br.json'
 
 Vue.use(VueI18n)
@@ -15,6 +16,7 @@ const i18n = new VueI18n({
     fr,
     es,
     ar,
+    ru,
     pt_BR
   }
 })

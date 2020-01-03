@@ -68,40 +68,40 @@
 	},
 	"dashboard": {
 		"cards": {
-			"customers": "",
-			"due_amount": "",
-			"estimates": "",
-			"invoices": ""
+			"customers": "Клиенты",
+			"due_amount": "Сумма задолженности",
+			"estimates": "Расчеты",
+			"invoices": "Счета"
 		},
 		"chart_info": {
-			"net_income": "",
-			"total_expense": "",
-			"total_receipts": "",
-			"total_sales": "",
-			"year": ""
+			"net_income": "Чистая прибыль",
+			"total_expense": "Расходы",
+			"total_receipts": "Квитанции",
+			"total_sales": "Продажи",
+			"year": "Выберите год"
 		},
 		"monthly_chart": {
-			"title": ""
+			"title": "Продажи и расходы"
 		},
 		"recent_estimate_card": {
-			"actions": "",
-			"amount_due": "",
-			"customer": "",
-			"date": "",
-			"title": "",
-			"view_all": ""
+			"actions": "Действия",
+			"amount_due": "Сумма задолженности",
+			"customer": "Клиент",
+			"date": "Дата",
+			"title": "Последние расчеты",
+			"view_all": "Посмотреть все"
 		},
 		"recent_invoices_card": {
-			"actions": "",
-			"amount_due": "",
-			"customer": "",
-			"due_on": "",
-			"title": "",
-			"view_all": ""
+			"actions": "Действия",
+			"amount_due": "Сумма задолженности",
+			"customer": "Клиент",
+			"due_on": "Должно быть выплачено до",
+			"title": "Надлежащие счета",
+			"view_all": "Посмотреть все"
 		},
-		"select_year": "",
+		"select_year": "Выберите год",
 		"weekly_invoices": {
-			"title": ""
+			"title": "Еженедельные счета"
 		}
 	},
 	"estimates": {

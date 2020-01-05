@@ -12,6 +12,7 @@ import CustomerModal from './components/base/modal/CustomerModal.vue'
 import TaxTypeModal from './components/base/modal/TaxTypeModal.vue'
 import CategoryModal from './components/base/modal/CategoryModal.vue'
 import money from 'v-money'
+import VTooltip from 'v-tooltip'
 
 /**
  * Global css plugins
@@ -107,6 +108,7 @@ window.toastr = require('toastr')
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VTooltip)
 
 // register directive v-money and component <money>
 Vue.use(money, {precision: 2})

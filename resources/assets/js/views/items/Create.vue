@@ -50,11 +50,31 @@
                 <label>{{ $t('items.unit') }}</label>
                 <base-select
                   v-model="formData.unit"
-                  :options="units"
+                  :options="itemUnits"
                   :searchable="true"
                   :show-labels="false"
                   :placeholder="$t('items.select_a_unit')"
                   label="name"
+                >
+                  <div slot="afterList">
+                    <button type="button" class="list-add-button" @click="addItemUnit">
+                      <font-awesome-icon class="icon" icon="cart-plus" />
+                      <label>{{ $t('settings.customization.items.add_item_unit') }}</label>
+                    </button>
+                  </div>
+                </base-select>
+              </div>
+              <div v-if="isTaxPerItem" class="form-group">
+                <label>{{ $t('items.taxes') }}</label>
+                <base-select
+                  v-model="formData.taxes"
+                  :options="getTaxTypes"
+                  :searchable="true"
+                  :show-labels="false"
+                  :allow-empty="true"
+                  :multiple="true"
+                  track-by="tax_type_id"
+                  label="tax_name"
                 />
               </div>
               <div class="form-group">
@@ -66,7 +86,9 @@
                   @input="$v.formData.description.$touch()"
                 />
                 <div v-if="$v.formData.description.$error">
-                  <span v-if="!$v.formData.description.maxLength" class="text-danger">{{ $t('validation.description_maxlength') }}</span>
+                  <span v-if="!$v.formData.description.maxLength" class="text-danger">
+                    {{ $t('validation.description_maxlength') }}
+                  </span>
                 </div>
               </div>
               <div class="form-group">
@@ -102,24 +124,17 @@ export default {
     return {
       isLoading: false,
       title: 'Add Item',
-      units: [
-        { name: 'box', value: 'box' },
-        { name: 'cm', value: 'cm' },
-        { name: 'dz', value: 'dz' },
-        { name: 'ft', value: 'ft' },
-        { name: 'g', value: 'g' },
-        { name: 'in', value: 'in' },
-        { name: 'kg', value: 'kg' },
-        { name: 'km', value: 'km' },
-        { name: 'lb', value: 'lb' },
-        { name: 'mg', value: 'mg' },
-        { name: 'pc', value: 'pc' }
-      ],
+      units: [],
+      taxes: [],
+      taxPerItem: '',
       formData: {
         name: '',
         description: '',
         price: '',
-        unit: null
+        unit_id: null,
+        unit: null,
+        taxes: [],
+        tax_per_item: false
       },
       money: {
         decimal: '.',
@@ -134,6 +149,9 @@ export default {
     ...mapGetters('currency', [
       'defaultCurrencyForInput'
     ]),
+    ...mapGetters('item', [
+      'itemUnits'
+    ]),
     price: {
       get: function () {
         return this.formData.price / 100
@@ -142,14 +160,26 @@ export default {
         this.formData.price = newValue * 100
       }
     },
+    ...mapGetters('taxType', [
+      'taxTypes'
+    ]),
     isEdit () {
       if (this.$route.name === 'items.edit') {
         return true
       }
       return false
+    },
+    isTaxPerItem () {
+      return this.taxPerItem === 'YES' ? 1 : 0
+    },
+    getTaxTypes () {
+      return this.taxTypes.map(tax => {
+        return {...tax, tax_type_id: tax.id, tax_name: tax.name + ' (' + tax.percent + '%)'}
+      })
     }
   },
   created () {
+    this.setTaxPerItem()
     if (this.isEdit) {
       this.loadEditData()
     }
@@ -177,10 +207,26 @@ export default {
       'fetchItem',
       'updateItem'
     ]),
+    ...mapActions('modal', [
+      'openModal'
+    ]),
+    async setTaxPerItem () {
+      let res = await axios.get('/api/settings/get-setting?key=tax_per_item')
+      if (res.data && res.data.tax_per_item === 'YES') {
+        this.taxPerItem = 'YES'
+      } else {
+        this.taxPerItem = 'FALSE'
+      }
+    },
     async loadEditData () {
       let response = await this.fetchItem(this.$route.params.id)
-      this.formData = response.data.item
-      this.formData.unit = this.units.find(_unit => response.data.item.unit === _unit.name)
+
+      this.formData = {...response.data.item, unit: null}
+      this.formData.taxes = response.data.item.taxes.map(tax => {
+        return {...tax, tax_name: tax.name + ' (' + tax.percent + '%)'}
+      })
+
+      this.formData.unit = this.itemUnits.find(_unit => response.data.item.unit_id === _unit.id)
       this.fractional_price = response.data.item.price
     },
     async submitItem () {
@@ -189,30 +235,40 @@ export default {
         return false
       }
       if (this.formData.unit) {
-        this.formData.unit = this.formData.unit.name
+        this.formData.unit_id = this.formData.unit.id
       }
+      let response
       if (this.isEdit) {
         this.isLoading = true
-        let response = await this.updateItem(this.formData)
-        if (response.data) {
-          this.isLoading = false
-          window.toastr['success'](this.$tc('items.updated_message'))
-          this.$router.push('/admin/items')
-          return true
-        }
-        window.toastr['error'](response.data.error)
+        response = await this.updateItem(this.formData)
       } else {
-        this.isLoading = true
-        let response = await this.addItem(this.formData)
-
-        if (response.data) {
-          window.toastr['success'](this.$tc('items.created_message'))
-          this.$router.push('/admin/items')
-          this.isLoading = false
-          return true
+        let data = {
+          ...this.formData,
+          taxes: this.formData.taxes.map(tax => {
+            return {
+              tax_type_id: tax.id,
+              amount: ((this.formData.price * tax.percent) / 100),
+              percent: tax.percent,
+              name: tax.name,
+              collective_tax: 0
+            }
+          })
         }
-        window.toastr['success'](response.data.success)
+        response = await this.addItem(data)
       }
+      if (response.data) {
+        this.isLoading = false
+        window.toastr['success'](this.$tc('items.updated_message'))
+        this.$router.push('/admin/items')
+        return true
+      }
+      window.toastr['error'](response.data.error)
+    },
+    async addItemUnit () {
+      this.openModal({
+        'title': 'Add Item Unit',
+        'componentName': 'ItemUnit'
+      })
     }
   }
 }

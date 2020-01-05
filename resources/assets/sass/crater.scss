@@ -49,6 +49,7 @@
 @import "components/base/base-switch";
 @import 'components/base/base-loader/index';
 @import 'components/base/base-prefix-input';
+@import 'components/v-tooltips.scss';
 
 
 // Components
@@ -72,6 +73,9 @@
 @import "components/item-select";
 @import "components/tax-select";
 @import "components/avatar-cropper";
+@import "components/payment-modes-modal";
+@import "components/item-unit-modal.scss";
+@import "components/mail-test-modal.scss";
 
 
 // Modals
@@ -107,5 +111,6 @@
 @import 'pages/reports.scss';
 @import 'pages/customers';
 @import 'pages/payments.scss';
+@import 'pages/payment-view.scss';
 @import 'pages/items.scss';
 @import 'pages/statuses.scss';

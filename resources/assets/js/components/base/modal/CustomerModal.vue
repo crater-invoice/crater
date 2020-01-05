@@ -341,6 +341,7 @@ export default {
   mixins: [validationMixin],
   data () {
     return {
+      isEdit: false,
       isLoading: false,
       countryList: [],
       billingCountry: null,
@@ -399,9 +400,22 @@ export default {
     ...mapGetters('currency', [
       'defaultCurrency',
       'currencies'
+    ]),
+    ...mapGetters('modal', [
+      'modalDataID',
+      'modalData',
+      'modalActive'
     ])
   },
   watch: {
+    'modalDataID' (val) {
+      if (val) {
+        this.isEdit = true
+        this.setData()
+      } else {
+        this.isEdit = false
+      }
+    },
     billingCountry () {
       if (this.billingCountry) {
         this.billing.country_id = this.billingCountry.id
@@ -419,6 +433,9 @@ export default {
     this.$refs.name.focus = true
     this.currency = this.defaultCurrency
     this.fetchCountry()
+    if (this.modalDataID) {
+      this.setData()
+    }
   },
   methods: {
     ...mapActions('invoice', {
@@ -493,6 +510,24 @@ export default {
       this.formData.addresses = [{...this.shipping, type: 'shipping'}]
       return true
     },
+    async setData () {
+      this.formData.id = this.modalData.id
+      this.formData.name = this.modalData.name
+      this.formData.email = this.modalData.email
+      this.formData.contact_name = this.modalData.contact_name
+      this.formData.phone = this.modalData.phone
+      this.formData.website = this.modalData.website
+      this.currency = this.modalData.currency
+
+      if (this.modalData.billing_address) {
+        this.billing = this.modalData.billing_address
+        this.billingCountry = this.modalData.billing_address.country
+      }
+      if (this.modalData.shipping_address) {
+        this.shipping = this.modalData.shipping_address
+        this.shippingCountry = this.modalData.shipping_address.country
+      }
+    },
     async submitCustomerData () {
       this.$v.formData.$touch()
 
@@ -510,14 +545,23 @@ export default {
         this.formData.currency_id = this.defaultCurrency.id
       }
       try {
-        let response = await this.addCustomer(this.formData)
+        let response = null
+        if (this.modalDataID) {
+          response = await this.updateCustomer(this.formData)
+        } else {
+          response = await this.addCustomer(this.formData)
+        }
         if (response.data) {
-          window.toastr['success'](this.$tc('customers.created_message'))
+          if (this.modalDataID) {
+            window.toastr['success'](this.$tc('customers.updated_message'))
+          } else {
+            window.toastr['success'](this.$tc('customers.created_message'))
+          }
           this.isLoading = false
-          if (this.$route.name === 'invoices.create') {
+          if (this.$route.name === 'invoices.create' || this.$route.name === 'invoices.edit') {
             this.setInvoiceCustomer(response.data.customer.id)
           }
-          if (this.$route.name === 'estimates.create') {
+          if (this.$route.name === 'estimates.create' || this.$route.name === 'estimates.edit') {
             this.setEstimateCustomer(response.data.customer.id)
           }
           this.resetData()

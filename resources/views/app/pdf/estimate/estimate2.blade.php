@@ -2,9 +2,7 @@
 <html>
 <head>
     <title>Estimate</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
@@ -25,7 +23,6 @@
             display:inline-block;
             width:30%;
         }
-
         @page {
             margin-top: 60px !important;
         }
@@ -80,7 +77,8 @@
         }
 
         .address {
-            display: inline-block;
+            display: block;
+            padding-top: 20px;
         }
         .company {
             padding: 0 0 0 30px;
@@ -110,8 +108,8 @@
         /* -------------------------- */
         /* billing style */
         .bill-address-container {
-            display: inline;
-            position: absolute;
+            display: block;
+            /* position: absolute; */
             float:right;
             padding: 0 40px 0 0;
         }
@@ -159,8 +157,7 @@
         /* -------------------------- */
         /* shipping style */
         .ship-address-container {
-            display: inline;
-            position: absolute;
+            display: block;
             float:right;
             padding: 0 30px 0 0;
         }
@@ -247,11 +244,16 @@
         }
 
         .table2 {
-            margin-top: 200px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            margin-top: 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
+        }
+
+        hr {
+            margin: 0 30px 0 30px;
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
         }
 
         .table2 hr {
@@ -285,6 +287,7 @@
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
         }
 
         .note-header {
@@ -317,6 +320,16 @@
             page-break-after: auto;
         }
 
+        .text-per-item-table3 {
+            border: 1px solid #EAF1FB;
+            border-top: none;
+            padding-right: 30px;
+            box-sizing: border-box;
+            width: 260px;
+            /* height: 100px; */
+            position: absolute;
+            right: -25;
+        }
 
         .inv-item {
             border-color: #d9d9d9;
@@ -402,6 +415,7 @@
                             <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
                         @endif
                 @endif
+                </td>
                 <td width="40%" class="header-right company-details">
                     <h1>Estimate</h1>
                     <h4>{{$estimate->estimate_number}}</h4>
@@ -426,6 +440,7 @@
             @endif
                 @include('app.pdf.estimate.partials.billing-address')
             </div>
+            <div style="clear: both;"></div>
         </div>
         @include('app.pdf.estimate.partials.table')
         @include('app.pdf.estimate.partials.notes')

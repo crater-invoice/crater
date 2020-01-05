@@ -3,6 +3,6 @@
         <div class="notes-label">
             Notes
         </div>
-        {!! $invoice->notes !!}
+        {!! nl2br(htmlspecialchars($invoice->notes)) !!}
     </div>
 @endif

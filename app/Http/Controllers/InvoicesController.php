@@ -497,4 +497,94 @@ class InvoicesController extends Controller
             'invoices' => $invoices
         ]);
     }
+
+    public function cloneInvoice(Request $request)
+    {
+        $oldInvoice = Invoice::with([
+            'items.taxes',
+            'user',
+            'invoiceTemplate',
+            'taxes.taxType'
+        ])
+        ->find($request->id);
+
+        $date = Carbon::now();
+        $invoice_prefix = CompanySetting::getSetting(
+            'invoice_prefix',
+            $request->header('company')
+        );
+        $tax_per_item = CompanySetting::getSetting(
+                'tax_per_item',
+                $request->header('company')
+            ) ? CompanySetting::getSetting(
+                'tax_per_item',
+                $request->header('company')
+            ) : 'NO';
+        $discount_per_item = CompanySetting::getSetting(
+                'discount_per_item',
+                $request->header('company')
+            ) ? CompanySetting::getSetting(
+                'discount_per_item',
+                $request->header('company')
+            ) : 'NO';
+
+        $invoice = Invoice::create([
+            'invoice_date' => $date,
+            'due_date' => $date,
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
+            'reference_number' => $oldInvoice->reference_number,
+            'user_id' => $oldInvoice->user_id,
+            'company_id' => $request->header('company'),
+            'invoice_template_id' => 1,
+            'status' => Invoice::STATUS_DRAFT,
+            'paid_status' => Invoice::STATUS_UNPAID,
+            'sub_total' => $oldInvoice->sub_total,
+            'discount' => $oldInvoice->discount,
+            'discount_type' => $oldInvoice->discount_type,
+            'discount_val' => $oldInvoice->discount_val,
+            'total' => $oldInvoice->total,
+            'due_amount' => $oldInvoice->total,
+            'tax_per_item' => $oldInvoice->tax_per_item,
+            'discount_per_item' => $oldInvoice->discount_per_item,
+            'tax' => $oldInvoice->tax,
+            'notes' => $oldInvoice->notes,
+            'unique_hash' => str_random(60)
+        ]);
+
+        $invoiceItems = $oldInvoice->items->toArray();
+
+        foreach ($invoiceItems as $invoiceItem) {
+            $invoiceItem['company_id'] = $request->header('company');
+            $invoiceItem['name'] = $invoiceItem['name'];
+            $item = $invoice->items()->create($invoiceItem);
+
+            if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
+                foreach ($invoiceItem['taxes'] as $tax) {
+                    $tax['company_id'] = $request->header('company');
+
+                    if ($tax['amount']) {
+                        $item->taxes()->create($tax);
+                    }
+                }
+            }
+        }
+
+        if ($oldInvoice->taxes) {
+            foreach ($oldInvoice->taxes->toArray() as $tax) {
+                $tax['company_id'] = $request->header('company');
+                $invoice->taxes()->create($tax);
+            }
+        }
+
+        $invoice = Invoice::with([
+            'items',
+            'user',
+            'invoiceTemplate',
+            'taxes'
+        ])->find($invoice->id);
+
+        return response()->json([
+            'invoice' => $invoice
+        ]);
+    }
 }

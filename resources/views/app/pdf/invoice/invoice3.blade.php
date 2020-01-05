@@ -18,7 +18,7 @@
             border-collapse: collapse;
         }
 
-        hr {
+        .header-line {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 80px;
@@ -26,6 +26,16 @@
             right: -70px;
             width: 100%;
         }
+
+        hr {
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
+        }
+
+        .items-table-hr{
+            margin: 0 30px 0 30px;
+        }
+
 
         .header-left {
             padding-top: 45px;
@@ -86,7 +96,7 @@
 
         .address {
             display: inline-block;
-            padding-top: 20px
+            padding-top: 100px;
         }
 
         .bill-add {
@@ -200,8 +210,7 @@
 
 
         .job-add {
-            display: inline;
-            position: absolute;
+            display: block;
             float: right;
             padding: 20px 30px 0 0;
         }
@@ -250,9 +259,7 @@
             line-height: 18px;
         }
         .table2 {
-            margin-top: 188px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -427,7 +434,9 @@
             </tr>
         </table>
     </div>
-    <hr style="border: 0.620315px solid #E8E8E8;">
+
+    <hr class="header-line">
+
     <div class="wrapper">
         <div class="address">
             <div class="bill-add">
@@ -460,6 +469,7 @@
                     </tr>
                 </table>
             </div>
+            <div style="clear: both;"></div>
         </div>
         @include('app.pdf.invoice.partials.table')
         @include('app.pdf.invoice.partials.notes')

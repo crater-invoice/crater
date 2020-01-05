@@ -7,6 +7,8 @@ use Crater\User;
 use Crater\Currency;
 use Crater\Setting;
 use Crater\Item;
+use Crater\PaymentMethod;
+use Crater\Unit;
 use Crater\TaxType;
 use DB;
 use Carbon\Carbon;
@@ -46,9 +48,17 @@ class UsersController extends Controller
             $request->header('company')
         );
 
-        $items = Item::all();
+        $items = Item::with('taxes')->get();
 
         $taxTypes = TaxType::latest()->get();
+
+        $paymentMethods = PaymentMethod::whereCompany($request->header('company'))
+            ->latest()
+            ->get();
+
+        $units = Unit::whereCompany($request->header('company'))
+            ->latest()
+            ->get();
 
         return response()->json([
             'user' => $user,
@@ -61,6 +71,8 @@ class UsersController extends Controller
             'items' => $items,
             'taxTypes' => $taxTypes,
             'moment_date_format' => $moment_date_format,
+            'paymentMethods' => $paymentMethods,
+            'units' => $units,
             'fiscal_year' => $fiscal_year,
         ]);
     }

@@ -406,6 +406,10 @@ class EstimatesController extends Controller
     {
         $estimate = Estimate::with(['items', 'items.taxes', 'user', 'estimateTemplate', 'taxes'])->find($id);
         $invoice_date = Carbon::parse($estimate->estimate_date);
+        $invoice_prefix = CompanySetting::getSetting(
+            'invoice_prefix',
+            $request->header('company')
+        );
         $due_date = Carbon::parse($estimate->estimate_date)->addDays(7);
         $tax_per_item = CompanySetting::getSetting(
                 'tax_per_item',
@@ -425,7 +429,7 @@ class EstimatesController extends Controller
         $invoice = Invoice::create([
             'invoice_date' => $invoice_date,
             'due_date' => $due_date,
-            'invoice_number' => "INV-".Invoice::getNextInvoiceNumber(),
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

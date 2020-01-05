@@ -49,6 +49,7 @@ Route::group(['prefix' => 'reports'], function () {
 
 });
 
+
 // download invoice pdf with a unique_hash $id
 // -------------------------------------------------
 Route::get('/invoices/pdf/{id}', [
@@ -62,6 +63,14 @@ Route::get('/invoices/pdf/{id}', [
 Route::get('/estimates/pdf/{id}', [
     'as' => 'get.estimate.pdf',
     'uses' => 'FrontendController@getEstimatePdf'
+]);
+
+
+// download payment pdf with a unique_hash $id
+// -------------------------------------------------
+Route::get('/payments/pdf/{id}', [
+    'as' => 'get.payment.pdf',
+    'uses' => 'FrontendController@getPaymentPdf'
 ]);
 
 Route::get('/customer/invoices/pdf/{id}', [

@@ -78,7 +78,8 @@
         }
 
         .address {
-            display: inline-block;
+            display: block;
+            padding-top: 20px;
         }
         .company {
             padding: 0 0 0 30px;
@@ -108,8 +109,8 @@
         /* -------------------------- */
         /* billing style */
         .bill-address-container {
-            display: inline;
-            position: absolute;
+            display: block;
+            /* position: absolute; */
             float:right;
             padding: 0 40px 0 0;
         }
@@ -157,8 +158,7 @@
         /* -------------------------- */
         /* shipping style */
         .ship-address-container {
-            display: inline;
-            position: absolute;
+            display: block;
             float:right;
             padding: 0 30px 0 0;
         }
@@ -245,11 +245,16 @@
         }
 
         .table2 {
-            margin-top: 200px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            margin-top: 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
+        }
+
+        hr {
+            margin: 0 30px 0 30px;
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
         }
 
         .table2 hr {
@@ -283,6 +288,7 @@
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
         }
 
         .note-header {
@@ -435,8 +441,9 @@
             @endif
                 @include('app.pdf.invoice.partials.billing-address')
             </div>
+            <div style="clear: both;"></div>
         </div>
-            @include('app.pdf.invoice.partials.table')
+        @include('app.pdf.invoice.partials.table')
         @include('app.pdf.invoice.partials.notes')
     </div>
 </body>

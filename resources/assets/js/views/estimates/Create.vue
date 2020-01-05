@@ -85,7 +85,8 @@
             </div>
             <div class="customer-content mb-1">
               <label class="email">{{ selectedCustomer.name }}</label>
-              <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
+              <label class="action" @click="editCustomer">{{ $t('general.edit') }}</label>
+              <label class="action" @click="removeCustomer">{{ $t('general.deselect') }}</label>
             </div>
           </div>
 
@@ -195,6 +196,7 @@
             :index="index"
             :item-data="item"
             :currency="currency"
+            :estimate-items="newEstimate.items"
             :tax-per-item="taxPerItem"
             :discount-per-item="discountPerItem"
             @remove="removeItem"
@@ -588,6 +590,14 @@ export default {
     },
     removeCustomer () {
       this.resetSelectedCustomer()
+    },
+    editCustomer () {
+      this.openModal({
+        'title': this.$t('customers.edit_customer'),
+        'componentName': 'CustomerModal',
+        'id': this.selectedCustomer.id,
+        'data': this.selectedCustomer
+      })
     },
     openTemplateModal () {
       this.openModal({

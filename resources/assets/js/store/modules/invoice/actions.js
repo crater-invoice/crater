@@ -135,6 +135,16 @@ export const markAsSent = ({ commit, dispatch, state }, data) => {
   })
 }
 
+export const cloneInvoice = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.post(`/api/invoices/clone`, data).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
 export const searchInvoice = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.get(`/api/invoices?${data}`).then((response) => {

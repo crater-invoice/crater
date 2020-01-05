@@ -73,7 +73,9 @@
                 <font-awesome-icon icon="filter" />
               </base-button>
             </a>
-
+            <div class="filter-title">
+              {{ $t('general.sort_by') }}
+            </div>
             <div class="filter-items">
               <input
                 id="filter_invoice_date"
@@ -111,7 +113,7 @@
               <label class="inv-label" for="filter_invoice_number">{{ $t('invoices.invoice_number') }}</label>
             </div>
           </v-dropdown>
-          <base-button class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
+          <base-button v-tooltip.top-center="{ content: getOrderName }" class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
             <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
             <font-awesome-icon v-else icon="sort-amount-down" />
           </base-button>
@@ -168,12 +170,17 @@ export default {
     }
   },
   computed: {
-
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
       }
       return false
+    },
+    getOrderName () {
+      if (this.getOrderBy) {
+        return this.$t('general.ascending')
+      }
+      return this.$t('general.descending')
     },
     shareableLink () {
       return `/invoices/pdf/${this.invoice.unique_hash}`

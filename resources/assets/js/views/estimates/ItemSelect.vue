@@ -68,6 +68,14 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    taxPerItem: {
+      type: String,
+      default: ''
+    },
+    taxes: {
+      type: Array,
+      default: null
     }
   },
   data () {
@@ -129,7 +137,8 @@ export default {
       this.$emit('onSelectItem')
       this.openModal({
         'title': 'Add Item',
-        'componentName': 'ItemModal'
+        'componentName': 'ItemModal',
+        'data': {taxPerItem: this.taxPerItem, taxes: this.taxes}
       })
     },
     deselectItem () {

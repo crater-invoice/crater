@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Invoice</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <style type="text/css">
@@ -20,13 +19,18 @@
             border-collapse: collapse;
         }
 
-        hr {
+        .header-line {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 90px;
             left: 0px;
             width: 100%;
+        }
+
+        hr {
             margin: 0 30px 0 30px;
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
         }
 
         .header-center {
@@ -251,8 +255,7 @@
 
         .table2 {
             margin-top: 35px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -289,6 +292,7 @@
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
         }
 
         .padd8 {

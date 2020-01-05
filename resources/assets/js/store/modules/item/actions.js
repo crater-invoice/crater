@@ -26,7 +26,6 @@ export const addItem = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
     window.axios.post('/api/items', data).then((response) => {
       commit(types.ADD_ITEM, response.data)
-
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -89,4 +88,58 @@ export const selectItem = ({ commit, dispatch, state }, data) => {
   } else {
     commit(types.SET_SELECT_ALL_STATE, false)
   }
+}
+
+export const addItemUnit = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.post(`/api/units`, data).then((response) => {
+      commit(types.ADD_ITEM_UNIT, response.data)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const updateItemUnit = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.put(`/api/units/${data.id}`, data).then((response) => {
+      commit(types.UPDATE_ITEM_UNIT, response.data)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const fetchItemUnits = ({ commit, dispatch, state }) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/units`).then((response) => {
+      commit(types.SET_ITEM_UNITS, response.data.units)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const fatchItemUnit = ({ commit, dispatch, state }, id) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/units/${id}`).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const deleteItemUnit = ({ commit, dispatch, state }, id) => {
+  return new Promise((resolve, reject) => {
+    window.axios.delete(`/api/units/${id}`).then((response) => {
+      commit(types.DELETE_ITEM_UNIT, id)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }

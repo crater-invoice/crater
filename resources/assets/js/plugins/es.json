@@ -784,6 +784,8 @@
     "required": "Se requiere campo",
     "email_incorrect": "Email incorrecto.",
     "email_does_not_exist": " Usuario con correo electrónico dado no existe",
+    "item_unit_already_taken": "La unidad del artículo ya ha sido tomada",
+    "payment_mode_already_taken": "El modo de pago ya ha sido tomado",
     "send_reset_link": "Enviar restablecer enlace",
     "not_yet": "¿Aún no? Envialo de nuevo",
     "password_min_length": "La contraseña debe contener {count} caracteres",

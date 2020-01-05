@@ -30,6 +30,6 @@ class CreateExpenseCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expenses_categories');
+        Schema::dropIfExists('expense_categories');
     }
 }

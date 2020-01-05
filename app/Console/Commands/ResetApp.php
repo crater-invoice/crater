@@ -44,8 +44,8 @@ class ResetApp extends Command
 
             \Storage::disk('local')->delete('database_created');
 
-            $file = new Filesystem;
-            $file->cleanDirectory('storage/app/public');
+            // $file = new Filesystem;
+            // $file->cleanDirectory('public/storage');
         }
     }
 }

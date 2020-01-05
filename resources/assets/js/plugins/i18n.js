@@ -5,7 +5,7 @@ import fr from './fr.json'
 import es from './es.json'
 import ar from './ar.json'
 import de from './de.json'
-import ptBr from './pt-br.json'
+import pt_BR from './pt-br.json'
 
 Vue.use(VueI18n)
 
@@ -17,7 +17,7 @@ const i18n = new VueI18n({
     es,
     ar,
     de,
-    ptBr
+    pt_BR
   }
 })
 

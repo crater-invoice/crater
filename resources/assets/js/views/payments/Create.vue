@@ -109,12 +109,20 @@
               <div class="form-group">
                 <label class="form-label">{{ $t('payments.payment_mode') }}</label>
                 <base-select
-                  v-model="formData.payment_mode"
-                  :options="getPaymentMode"
+                  v-model="formData.payment_method"
+                  :options="paymentModes"
                   :searchable="true"
                   :show-labels="false"
                   :placeholder="$t('payments.select_payment_mode')"
-                />
+                  label="name"
+                >
+                  <div slot="afterList">
+                    <button type="button" class="list-add-button" @click="addPaymentMode">
+                      <font-awesome-icon class="icon" icon="cart-plus" />
+                      <label>{{ $t('settings.customization.payments.add_payment_mode') }}</label>
+                    </button>
+                  </div>
+                </base-select>
               </div>
             </div>
             <div class="col-sm-12 ">
@@ -166,9 +174,10 @@ export default {
         payment_number: null,
         payment_date: null,
         amount: 0,
-        payment_mode: null,
+        payment_method: null,
         invoice_id: null,
-        notes: null
+        notes: null,
+        payment_method_id: null
       },
       money: {
         decimal: '.',
@@ -215,9 +224,9 @@ export default {
     ...mapGetters('currency', [
       'defaultCurrencyForInput'
     ]),
-    getPaymentMode () {
-      return ['Cash', 'Check', 'Credit Card', 'Bank Transfer']
-    },
+    ...mapGetters('payment', [
+      'paymentModes'
+    ]),
     amount: {
       get: function () {
         return this.formData.amount / 100
@@ -286,14 +295,23 @@ export default {
       'fetchCreatePayment',
       'addPayment',
       'updatePayment',
-      'fetchPayment'
+      'fetchEditPaymentData'
+    ]),
+    ...mapActions('modal', [
+      'openModal'
     ]),
     invoiceWithAmount ({ invoice_number, due_amount }) {
       return `${invoice_number} (${this.$utils.formatGraphMoney(due_amount, this.customer.currency)})`
     },
+    async addPaymentMode () {
+      this.openModal({
+        'title': 'Add Payment Mode',
+        'componentName': 'PaymentMode'
+      })
+    },
     async loadData () {
       if (this.isEdit) {
-        let response = await this.fetchPayment(this.$route.params.id)
+        let response = await this.fetchEditPaymentData(this.$route.params.id)
         this.customerList = response.data.customers
         this.formData = { ...response.data.payment }
         this.customer = response.data.payment.user
@@ -301,6 +319,7 @@ export default {
         this.formData.amount = parseFloat(response.data.payment.amount)
         this.paymentPrefix = response.data.payment_prefix
         this.paymentNumAttribute = response.data.nextPaymentNumber
+        this.formData.payment_method = response.data.payment.payment_method
         if (response.data.payment.invoice !== null) {
           this.maxPayableAmount = parseInt(response.data.payment.amount) + parseInt(response.data.payment.invoice.due_amount)
           this.invoice = response.data.payment.invoice
@@ -344,6 +363,7 @@ export default {
         let data = {
           editData: {
             ...this.formData,
+            payment_method_id: this.formData.payment_method.id,
             payment_date: moment(this.formData.payment_date).format('DD/MM/YYYY')
           },
           id: this.$route.params.id
@@ -371,6 +391,7 @@ export default {
       } else {
         let data = {
           ...this.formData,
+          payment_method_id: this.formData.payment_method.id,
           payment_date: moment(this.formData.payment_date).format('DD/MM/YYYY')
         }
         this.isLoading = true

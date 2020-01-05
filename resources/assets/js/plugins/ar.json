@@ -839,7 +839,7 @@
     }
   },
   "layout_login": {
-    "copyright_crater": "حقوق الطبع والنشر @ كريتر - 2019",
+    "copyright_crater": "حقوق الطبع والنشر @ كريتر - 2020",
     "super_simple_invoicing": "فوترة سهلة ومبسطة للغاية",
     "for_freelancer": "للمبرمجين المستقلين",
     "small_businesses": "والأعال الصغيرة ",
@@ -852,6 +852,8 @@
     "email_incorrect": "بريد الكتروني غير صحيح.",
     "email_already_taken": "هذا البريد الالكتروني مستخدم مسبقاً",
     "email_does_not_exist": "لا يوجد كستخدم بهذا البريد الالكتروني",
+    "item_unit_already_taken": "وحدة البند قد اتخذت بالفعل",
+    "payment_mode_already_taken": "لقد تم بالفعل أخذ طريقة الدفع",
     "send_reset_link": "أرسال رابط استعادة كلمة المرور",
     "not_yet": "ليس بعد؟ أعد الإرسال الآن..",
     "password_min_length": "كلمة المرور يجب أن تتكون من {count} أحرف على الأقل",

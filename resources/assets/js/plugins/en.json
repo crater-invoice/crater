@@ -17,11 +17,17 @@
     "save": "Save",
     "cancel": "Cancel",
     "update": "Update",
+    "deselect": "Deselect",
     "download": "Download",
     "from_date": "From Date",
     "to_date": "To Date",
     "from": "From",
     "to": "To",
+    "sort_by": "Sort By",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "subject": "Subject",
+    "message": "Message",
     "go_back": "Go Back",
     "back_to_login": "Back to Login?",
     "home": "Home",
@@ -62,6 +68,8 @@
     "four_zero_four": "404",
     "you_got_lost": "Whoops! You got Lost!",
     "go_home": "Go Home",
+    "test_mail_conf": "Test Mail Configuration",
+    "send_mail_successfully": "Mail sent successfully",
 
     "setting_updated": "Setting updated successfully",
     "select_state": "Select state",
@@ -180,7 +188,7 @@
     "no_items": "No items yet!",
     "list_of_items": "This section will contain the list of items.",
     "select_a_unit": "select unit",
-
+    "taxes": "Taxes",
     "item_attached_message": "Cannot delete an item which is already in use",
     "confirm_delete": "You will not be able to recover this Item | You will not be able to recover these Items",
     "created_message": "Item created successfully",
@@ -225,7 +233,7 @@
     "record_payment": "Record Payment",
     "add_estimate": "Add Estimate",
     "save_estimate": "Save Estimate",
-    "confirm_conversion": "You want to convert this Estimate into Invoice?",
+    "confirm_conversion": "This estimate will be used to create a new Invoice.",
     "conversion_message": "Invoice created successful",
     "confirm_send_estimate": "This estimate will be sent via email to the customer",
     "confirm_mark_as_sent": "This estimate will be marked as sent",
@@ -329,6 +337,9 @@
     "no_matching_invoices": "There are no matching invoices!",
     "mark_as_sent_successfully": "Invoice marked as sent successfully",
     "send_invoice_successfully": "Invoice sent successfully",
+    "cloned_successfully": "Invoice cloned successfully",
+    "clone_invoice": "Clone Invoice",
+    "confirm_clone": "This invoice will be cloned into a new Invoice",
     "item": {
       "title": "Item Title",
       "description": "Description",
@@ -343,7 +354,6 @@
       "select_an_item": "Type or click to select an item",
       "type_item_description": "Type Item Description (optional)"
     },
-
     "payment_attached_message": "One of the selected invoices already have a payment attached to it. Make sure to delete the attached payments first in order to go ahead with the removal",
     "confirm_delete": "You will not be able to recover this Invoice | You will not be able to recover these Invoices",
     "created_message": "Invoice created successfully",
@@ -394,12 +404,17 @@
     "edit_payment": "Edit Payment",
     "view_payment": "View Payment",
     "add_new_payment": "Add New Payment",
+    "send_payment_receipt": "Send Payment Receipt",
     "save_payment": "Save Payment",
     "update_payment": "Update Payment",
     "payment": "Payment | Payments",
     "no_payments": "No payments yet!",
     "list_of_payments": "This section will contain the list of payments.",
     "select_payment_mode": "Select payment mode",
+    "confirm_send_payment": "This payment will be sent via email to the customer",
+    "send_payment_successfully": "Payment sent successfully",
+    "user_email_does_not_exist": "User email does not exist",
+    "something_went_wrong": "something went wrong",
 
     "confirm_delete": "You will not be able to recover this Payment | You will not be able to recover these Payments",
     "created_message": "Payment created successfully",
@@ -633,7 +648,7 @@
             "notes": "Notes",
             "invoice_prefix": "Invoice Prefix",
             "invoice_settings": "Invoice Settings",
-            "autogenerate_invoice_number": "Autogenerate Invoice Number",
+            "autogenerate_invoice_number": "Auto-generate Invoice Number",
             "invoice_setting_description": "Disable this, If you don't wish to auto-generate invoice numbers each time you create a new invoice.",
             "enter_invoice_prefix": "Enter invoice prefix",
             "terms_and_conditions": "Terms and Conditions",
@@ -644,7 +659,7 @@
             "title": "Estimates",
             "estimate_prefix": "Estimate Prefix",
             "estimate_settings": "Estimate Settings",
-            "autogenerate_estimate_number": "Autogenerate Estimate Number",
+            "autogenerate_estimate_number": "Auto-generate Estimate Number",
             "estimate_setting_description": "Disable this, If you don't wish to auto-generate estimate numbers each time you create a new estimate.",
             "enter_estimate_prefix": "Enter estmiate prefix",
             "estimate_setting_updated": "Estimate Setting updated successfully"
@@ -654,10 +669,30 @@
             "title": "Payments",
             "payment_prefix": "Payment Prefix",
             "payment_settings": "Payment Settings",
-            "autogenerate_payment_number": "Autogenerate Payment Number",
+            "autogenerate_payment_number": "Auto-generate Payment Number",
             "payment_setting_description": "Disable this, If you don't wish to auto-generate payment numbers each time you create a new payment.",
             "enter_payment_prefix": "Enter Payment Prefix",
-            "payment_setting_updated": "Payment Setting updated successfully"
+            "payment_setting_updated": "Payment Setting updated successfully",
+            "payment_mode": "Payment Mode",
+            "add_payment_mode": "Add Payment Mode",
+            "mode_name": "Mode Name",
+            "payment_mode_added": "Payment Mode Added",
+            "payment_mode_updated": "Payment Mode Updated",
+            "payment_mode_confirm_delete":"You will not be able to recover this Payment Mode",
+            "already_in_use": "Payment Mode is already in use",
+            "deleted_message": "Payment Mode deleted successfully"
+        },
+
+        "items": {
+            "title": "Items",
+            "units": "units",
+            "add_item_unit": "Add Item Unit",
+            "unit_name": "Unit Name",
+            "item_unit_added": "Item Unit Added",
+            "item_unit_updated": "Item Unit Updated",
+            "item_unit_confirm_delete":"You will not be able to recover this Item unit",
+            "already_in_use": "Item Unit is already in use",
+            "deleted_message": "Item Unit deleted successfully"
         }
     },
     "account_settings": {
@@ -839,7 +874,7 @@
     }
   },
   "layout_login": {
-    "copyright_crater": "Copyright @ Crater - 2019",
+    "copyright_crater": "Copyright @ Crater - 2020",
     "super_simple_invoicing": "Super Simple Invoicing",
     "for_freelancer": "for Freelancers &",
     "small_businesses": "Small Businesses ",
@@ -852,6 +887,8 @@
     "email_incorrect": "Incorrect Email.",
     "email_already_taken": "The email has already been taken.",
     "email_does_not_exist": "User with given email doesn't exist",
+    "item_unit_already_taken": "This item unit name has already been taken",
+    "payment_mode_already_taken": "This payment mode name has already been taken",
     "send_reset_link": "Send Reset Link",
     "not_yet": "Not yet? Send it again",
     "password_min_length": "Password must contain {count} characters",
@@ -871,10 +908,13 @@
     "amount_maxlength": "Amount should not be greater than 20 digits.",
     "amount_minvalue": "Amount should be greater than 0.",
     "description_maxlength": "Description should not be greater than 255 characters.",
+    "subject_maxlength": "Subject should not be greater than 100 characters.",
+    "message_maxlength": "Message should not be greater than 255 characters.",
     "maximum_options_error": "Maximum  of {max} options selected. First remove a selected option to select another.",
     "notes_maxlength": "Notes should not be greater than 255 characters.",
     "address_maxlength": "Address should not be greater than 255 characters.",
     "ref_number_maxlength": "Ref Number should not be greater than 255 characters.",
-    "prefix_maxlength": "Prefix should not be greater than 5 characters."
+    "prefix_maxlength": "Prefix should not be greater than 5 characters.",
+    "something_went_wrong": "something went wrong"
   }
 }

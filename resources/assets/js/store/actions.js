@@ -4,6 +4,8 @@ import * as userTypes from './modules/user/mutation-types'
 import * as companyTypes from './modules/company/mutation-types'
 import * as preferencesTypes from './modules/settings/preferences/mutation-types'
 import * as taxTypeTypes from './modules/tax-type/mutation-types'
+import * as itemTypes from './modules/item/mutation-types'
+import * as paymentModes from './modules/payment/mutation-types'
 
 export default {
   bootstrap ({ commit, dispatch, state }) {
@@ -17,6 +19,8 @@ export default {
         commit('taxType/' + taxTypeTypes.BOOTSTRAP_TAX_TYPES, response.data.taxTypes)
         commit('preferences/' + preferencesTypes.SET_MOMENT_DATE_FORMAT, response.data.moment_date_format)
         commit('preferences/' + preferencesTypes.SET_LANGUAGE_FORMAT, response.data.default_language)
+        commit('item/' + itemTypes.SET_ITEM_UNITS, response.data.units)
+        commit('payment/' + paymentModes.SET_PAYMENT_MODES, response.data.paymentMethods)
         commit(types.UPDATE_APP_LOADING_STATUS, true)
         resolve(response)
       }).catch((err) => {

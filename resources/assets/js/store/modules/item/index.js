@@ -6,7 +6,8 @@ const initialState = {
   items: [],
   totalItems: 0,
   selectAllField: false,
-  selectedItems: []
+  selectedItems: [],
+  itemUnits: []
 }
 
 export default {

@@ -6,6 +6,7 @@ use Crater\Invoice;
 use PDF;
 use Crater\CompanySetting;
 use Crater\Estimate;
+use Crater\Payment;
 use Crater\User;
 use Crater\Company;
 use Crater\InvoiceTemplate;
@@ -373,6 +374,36 @@ class FrontendController extends Controller
             'taxes' => $taxes
         ]);
         $pdf = PDF::loadView('app.pdf.invoice.'.$invoiceTemplate->view);
+
+        return $pdf->stream();
+    }
+
+    public function getPaymentPdf($id)
+    {
+        $payment = Payment::with([
+                'user',
+                'invoice',
+                'paymentMethod'
+            ])
+            ->where('unique_hash', $id)
+            ->first();
+
+        $company = Company::find($payment->company_id);
+        $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
+
+        $logo = $company->getMedia('logo')->first();
+
+        if($logo) {
+            $logo = $logo->getFullUrl();
+        }
+
+        view()->share([
+            'payment' => $payment,
+            'company_address' => $companyAddress,
+            'logo' => $logo ?? null
+        ]);
+
+        $pdf = PDF::loadView('app.pdf.payment.payment');
 
         return $pdf->stream();
     }

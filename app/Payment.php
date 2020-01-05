@@ -5,6 +5,7 @@ use Crater\User;
 use Crater\Invoice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Crater\PaymentMethod;
 
 class Payment extends Model
 {
@@ -19,9 +20,11 @@ class Payment extends Model
     protected $fillable = [
         'user_id',
         'invoice_id',
+        'payment_method_id',
         'payment_date',
         'company_id',
         'notes',
+        'unique_hash',
         'payment_number',
         'payment_mode',
         'amount'
@@ -84,7 +87,6 @@ class Payment extends Model
         return $prefix;
     }
 
-
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
@@ -93,6 +95,11 @@ class Payment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     public function getFormattedCreatedAtAttribute($value)
@@ -123,9 +130,9 @@ class Payment extends Model
         return $query->where('payments.payment_number', 'LIKE', '%'.$paymentNumber.'%');
     }
 
-    public function scopePaymentMode($query, $paymentMode)
+    public function scopePaymentMethod($query, $paymentMethodId)
     {
-        return $query->where('payments.payment_mode', $paymentMode);
+        return $query->where('payments.payment_method_id', $paymentMethodId);
     }
 
     public function scopeApplyFilters($query, array $filters)
@@ -140,8 +147,8 @@ class Payment extends Model
             $query->paymentNumber($filters->get('payment_number'));
         }
 
-        if ($filters->get('payment_mode')) {
-            $query->paymentMode($filters->get('payment_mode'));
+        if ($filters->get('payment_method_id')) {
+            $query->paymentMethod($filters->get('payment_method_id'));
         }
 
         if ($filters->get('customer_id')) {

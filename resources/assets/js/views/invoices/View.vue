@@ -73,7 +73,9 @@
                 <font-awesome-icon icon="filter" />
               </base-button>
             </a>
-
+            <div class="filter-title">
+              {{ $t('general.sort_by') }}
+            </div>
             <div class="filter-items">
               <input
                 id="filter_invoice_date"
@@ -111,7 +113,7 @@
               <label class="inv-label" for="filter_invoice_number">{{ $t('invoices.invoice_number') }}</label>
             </div>
           </v-dropdown>
-          <base-button class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
+          <base-button v-tooltip.top-center="{ content: getOrderName }" class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
             <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
             <font-awesome-icon v-else icon="sort-amount-down" />
           </base-button>
@@ -123,17 +125,19 @@
           v-for="(invoice,index) in invoices"
           :to="`/admin/invoices/${invoice.id}/view`"
           :key="index"
-          class="side-invoice"
+          class="side-invoice"     
         >
-          <div class="left">
-            <div class="inv-name">{{ invoice.user.name }}</div>
-            <div class="inv-number">{{ invoice.invoice_number }}</div>
-            <div :class="'inv-status-'+invoice.status.toLowerCase()" class="inv-status">{{ invoice.status }}</div>
-          </div>
-          <div class="right">
-            <div class="inv-amount" v-html="$utils.formatMoney(invoice.due_amount, invoice.user.currency)" />
-            <div class="inv-date">{{ invoice.formattedInvoiceDate }}</div>
-          </div>
+        
+        <div class="left">
+          <div class="inv-name">{{ invoice.user.name }}</div>
+          <div class="inv-number">{{ invoice.invoice_number }}</div>
+          <div :class="'inv-status-'+invoice.status.toLowerCase()" class="inv-status">{{ invoice.status }}</div>
+        </div>
+        <div class="right">
+          <div class="inv-amount" v-html="$utils.formatMoney(invoice.due_amount, invoice.user.currency)" />
+          <div class="inv-date">{{ invoice.formattedInvoiceDate }}</div>
+        </div>
+        
         </router-link>
         <p v-if="!invoices.length" class="no-result">
           {{ $t('invoices.no_matching_invoices') }}
@@ -168,17 +172,22 @@ export default {
     }
   },
   computed: {
-
     getOrderBy () {
       if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
         return true
       }
       return false
     },
+    getOrderName () {
+      if (this.getOrderBy) {
+        return this.$t('general.ascending')
+      }
+      return this.$t('general.descending')
+    },
     shareableLink () {
       return `/invoices/pdf/${this.invoice.unique_hash}`
     }
-  },
+  },  
   watch: {
     $route (to, from) {
       this.loadInvoice()

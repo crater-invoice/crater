@@ -24,6 +24,8 @@
                   :invalid="$v.item.name.$error"
                   :invalid-description="$v.item.description.$error"
                   :item="item"
+                  :tax-per-item="taxPerItem"
+                  :taxes="item.taxes"
                   @search="searchVal"
                   @select="onSelectItem"
                   @deselect="deselectItem"
@@ -109,7 +111,7 @@
 
                 <div class="remove-icon-wrapper">
                   <font-awesome-icon
-                    v-if="index > 0"
+                    v-if="showRemoveItemIcon"
                     class="remove-icon"
                     icon="trash-alt"
                     @click="removeItem"
@@ -181,6 +183,10 @@ export default {
     discountPerItem: {
       type: String,
       default: ''
+    },
+    invoiceItems: {
+      type: Array,
+      default: null
     }
   },
   data () {
@@ -221,6 +227,12 @@ export default {
       } else {
         return this.defaultCurrenctForInput
       }
+    },
+    showRemoveItemIcon () {
+      if (this.invoiceItems.length == 1) {
+        return false
+      }
+      return true
     },
     subtotal () {
       return this.item.price * this.item.quantity
@@ -325,6 +337,9 @@ export default {
   created () {
     window.hub.$on('checkItems', this.validateItem)
     window.hub.$on('newItem', (val) => {
+      if (this.taxPerItem === 'YES') {
+        this.item.taxes = val.taxes
+      }
       if (!this.item.item_id && this.modalActive && this.isSelected) {
         this.onSelectItem(val)
       }
@@ -364,7 +379,13 @@ export default {
       this.item.price = item.price
       this.item.item_id = item.id
       this.item.description = item.description
-
+      if (this.taxPerItem === 'YES' && item.taxes) {
+        let index = 0
+        item.taxes.forEach(tax => {
+          this.updateTax({index, item: { ...tax }})
+          index++
+        })
+      }
       // if (this.item.taxes.length) {
       //   this.item.taxes = {...item.taxes}
       // }

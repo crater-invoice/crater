@@ -54,7 +54,6 @@
             :placeholder="$t('general.select_country')"
             track-by="id"
             label="name"
-            @input="fetchState()"
           />
           <div v-if="$v.companyData.country_id.$error">
             <span v-if="!$v.companyData.country_id.required" class="text-danger">{{ $tc('validation.required') }}</span>

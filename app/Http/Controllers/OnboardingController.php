@@ -44,9 +44,13 @@ class OnboardingController extends Controller
         $date_formats = DateFormatter::get_list();
         $time_zones = TimeZones::get_list();
         $languages = [
+            ["code"=>"ar", "name" => "Arabic"],
             ["code"=>"en", "name" => "English"],
             ["code"=>"fr", "name" => "French"],
-            ["code"=>"es", "name" => "Spanish"]
+            ["code"=>"es", "name" => "Spanish"],
+            ["code"=>"ar", "name" => "العربية"],
+            ["code"=>"de", "name" => "German"],
+            ["code"=>"pt-br", "name" => "Portuguese (Brazilian)"]
         ];
         $fiscal_years = [
             ['key' => 'january-december' , 'value' => '1-12'],
@@ -303,6 +307,10 @@ class OnboardingController extends Controller
         Setting::setSetting('version', config('crater.version'));
 
         Artisan::call('passport:install --force');
+
+        Artisan::call('db:seed', ['--class' => 'PaymentMethodSeeder', '--force' => true]);
+
+        Artisan::call('db:seed', ['--class' => 'UnitSeeder', '--force' => true]);
 
         $client = DB::table('oauth_clients')->find(2);
 

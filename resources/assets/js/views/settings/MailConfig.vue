@@ -15,7 +15,19 @@
           :mail-drivers="mail_drivers"
           @on-change-driver="(val) => mail_driver = mailConfigData.mail_driver = val"
           @submit-data="saveEmailConfig"
-        />
+        >
+          <base-button
+            :loading="loading"
+            outline
+            class="pull-right mt-4 ml-2"
+            icon="check"
+            color="theme"
+            type="button"
+            @click="openMailTestModal"
+          >
+            {{ $t('general.test_mail_conf') }}
+          </base-button>
+        </component>
       </div>
     </div>
   </div>
@@ -27,6 +39,7 @@ import Smtp from './mailDriver/Smtp'
 import Mailgun from './mailDriver/Mailgun'
 import Ses from './mailDriver/Ses'
 import Basic from './mailDriver/Basic'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -50,6 +63,9 @@ export default {
     this.loadData()
   },
   methods: {
+    ...mapActions('modal', [
+      'openModal'
+    ]),
     async loadData () {
       this.loading = true
 
@@ -79,6 +95,12 @@ export default {
       } catch (e) {
         window.toastr['error']('Something went wrong')
       }
+    },
+    openMailTestModal () {
+      this.openModal({
+        'title': 'Test Mail Configuration',
+        'componentName': 'MailTestModal'
+      })
     }
   }
 }

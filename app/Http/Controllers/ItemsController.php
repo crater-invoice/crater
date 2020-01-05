@@ -14,14 +14,17 @@ class ItemsController extends Controller
     {
         $limit = $request->has('limit') ? $request->limit : 10;
 
-        $items = Item::applyFilters($request->only([
+        $items = Item::with(['taxes'])
+            ->leftJoin('units', 'units.id', '=', 'items.unit_id')
+            ->applyFilters($request->only([
                 'search',
                 'price',
-                'unit',
+                'unit_id',
                 'orderByField',
                 'orderBy'
             ]))
             ->whereCompany($request->header('company'))
+            ->select('items.*', 'units.name as unit_name')
             ->latest()
             ->paginate($limit);
 
@@ -33,7 +36,7 @@ class ItemsController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $item = Item::with('taxes')->find($id);
+        $item = Item::with(['taxes', 'unit'])->find($id);
 
         return response()->json([
             'item' => $item,
@@ -54,7 +57,7 @@ class ItemsController extends Controller
     {
         $item = new Item();
         $item->name = $request->name;
-        $item->unit = $request->unit;
+        $item->unit_id = $request->unit_id;
         $item->description = $request->description;
         $item->company_id = $request->header('company');
         $item->price = $request->price;
@@ -85,7 +88,7 @@ class ItemsController extends Controller
     {
         $item = Item::find($id);
         $item->name = $request->name;
-        $item->unit = $request->unit;
+        $item->unit_id = $request->unit_id;
         $item->description = $request->description;
         $item->price = $request->price;
         $item->save();
@@ -145,7 +148,7 @@ class ItemsController extends Controller
         $items = [];
         foreach ($request->id as $id) {
             $item = Item::deleteItem($id);
-            if (!$item) {
+            if ($item) {
                 array_push($items, $id);
             }
         }

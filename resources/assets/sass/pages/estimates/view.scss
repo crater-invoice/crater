@@ -32,6 +32,11 @@
             margin-bottom: 98px;
         }
 
+        &.router-link-exact-active {
+            border-left: 3px solid $ls-color-primary;
+            background-color: $ls-color-gray--very-light;
+        }
+
         &:hover {
             background-color: $ls-color-gray--very-light;
         }
@@ -158,6 +163,7 @@
             border: 1px solid #eaf1fb;
             box-sizing: border-box;
             color: $ls-color-gray--dark;
+            box-shadow: none !important;
         }
     }
 
@@ -190,8 +196,17 @@
 
     .filter-container {
         margin-left: 12px;
+
+        .filter-title {
+            padding: 5px 10px;
+            border-bottom: 1px solid rgba(185, 193, 209, 0.41);
+            margin-bottom: 10px;
+        }
+
         .filter-items {
             display: flex;
+            padding: 4px 9px;
+            cursor: pointer;
 
             &:first-child {
                 margin-top: auto;
@@ -202,11 +217,12 @@
             font-style: normal;
             font-weight: normal;
             font-size: 14px;
-            line-height: 18px;
+            line-height: 12px;
             text-transform: capitalize;
             color: $ls-color-black;
             margin-bottom: 6px;
             margin-left: 10px;
+            cursor: pointer;
         }
 
         .base-input {
@@ -214,7 +230,7 @@
         }
 
         .dropdown-container {
-            padding: 11px;
+            padding: 0px !important;
             left: auto;
             right: 0px;
             width: 166px;

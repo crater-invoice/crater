@@ -1,17 +1,13 @@
 <table width="100%" class="table2" cellspacing="0" border="0">
     <tr class="main-table-header">
-        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">#</th>
-        @if($invoice->discount_per_item === 'NO')
-            <th width="80%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
-        @else
-            <th width="40%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
-        @endif
-        <th width="17%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Quantity</th>
-        <th width="18%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 40px">Price</th>
+        <th width="2%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">#</th>
+        <th width="40%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
+        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Quantity</th>
+        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Price</th>
         @if($invoice->discount_per_item === 'YES')
-            <th width="10%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-left: 10px">Discount</th>
+        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-left: 10px">Discount</th>
         @endif
-        <th width="15%" class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
+        <th class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
     </tr>
     @php
         $index = 1
@@ -29,7 +25,7 @@
                 style="text-align: left; color: #040405;padding-left: 0px"
             >
                 <span>{{ $item->name }}</span><br>
-                <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{{ $item->description }}</span>
+                <span style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;">{!! nl2br(htmlspecialchars($item->description)) !!}</span>
             </td>
             <td
                 class="inv-item items"
@@ -39,7 +35,7 @@
             </td>
             <td
                 class="inv-item items"
-                style="text-align: right; color: #040405; padding-right: 40px"
+                style="text-align: right; color: #040405; padding-right: 20px"
             >
                 {!! format_money_pdf($item->price, $invoice->user->currency) !!}
             </td>
@@ -66,10 +62,12 @@
     @endforeach
 </table>
 
-<table width="100%" cellspacing="0px" style="margin-left:420px" border="0" class="table3 @if(count($invoice->items) > 12) page-break @endif">
+<hr class="items-table-hr">
+
+<table width="100%" cellspacing="0px" style="margin-left:420px; margin-top: 10px" border="0" class="table3 @if(count($invoice->items) > 12) page-break @endif">
     <tr>
-        <td class="no-borde" style="color: #55547A; padding-left:10px;  font-size:12px;">Subtotal</td>
-        <td class="no-border items"
+        <td class="no-border" style="color: #55547A; padding-left:10px;  font-size:12px;">Subtotal</td>
+        <td class="no-border items padd2"
             style="padding-right:10px; text-align: right;  font-size:12px; color: #040405; font-weight: 500;">{!! format_money_pdf($invoice->sub_total, $invoice->user->currency) !!}</td>
     </tr>
 

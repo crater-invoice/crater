@@ -12,9 +12,9 @@ export const fetchPayments = ({ commit, dispatch, state }, params) => {
   })
 }
 
-export const fetchCreatePayment = ({ commit, dispatch }, page) => {
+export const fetchPayment = ({ commit, dispatch }, id) => {
   return new Promise((resolve, reject) => {
-    window.axios.get(`/api/payments/create`).then((response) => {
+    window.axios.get(`/api/payments/${id}`).then((response) => {
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -22,9 +22,19 @@ export const fetchCreatePayment = ({ commit, dispatch }, page) => {
   })
 }
 
-export const fetchPayment = ({ commit, dispatch }, id) => {
+export const fetchEditPaymentData = ({ commit, dispatch }, id) => {
   return new Promise((resolve, reject) => {
     window.axios.get(`/api/payments/${id}/edit`).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const fetchCreatePayment = ({ commit, dispatch }, page) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/payments/create`).then((response) => {
       resolve(response)
     }).catch((err) => {
       reject(err)
@@ -96,4 +106,79 @@ export const selectAllPayments = ({ commit, dispatch, state }) => {
     commit(types.SET_SELECTED_PAYMENTS, allPaymentIds)
     commit(types.SET_SELECT_ALL_STATE, true)
   }
+}
+
+export const addPaymentMode = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.post(`/api/payment-methods`, data).then((response) => {
+      commit(types.ADD_PAYMENT_MODE, response.data)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const updatePaymentMode = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.put(`/api/payment-methods/${data.id}`, data).then((response) => {
+      commit(types.UPDATE_PAYMENT_MODE, response.data)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const fetchPaymentModes = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/payment-methods`, data).then((response) => {
+      commit(types.SET_PAYMENT_MODES, response.data.paymentMethods)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const fetchPaymentMode = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/payment-methods/${data.id}`, data).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const deletePaymentMode = ({ commit, dispatch, state }, id) => {
+  return new Promise((resolve, reject) => {
+    window.axios.delete(`/api/payment-methods/${id}`).then((response) => {
+      commit(types.DELETE_PAYMENT_MODE, id)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const sendEmail = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.post(`/api/payments/send`, data).then((response) => {
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
+}
+
+export const searchPayment = ({ commit, dispatch, state }, data) => {
+  return new Promise((resolve, reject) => {
+    window.axios.get(`/api/payments?${data}`).then((response) => {
+      // commit(types.UPDATE_INVOICE, response.data)
+      resolve(response)
+    }).catch((err) => {
+      reject(err)
+    })
+  })
 }

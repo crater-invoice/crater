@@ -46,6 +46,7 @@ import InvoiceView from './views/invoices/View.vue'
 // Payments
 import PaymentsIndex from './views/payments/Index.vue'
 import PaymentCreate from './views/payments/Create.vue'
+import PaymentView from './views/payments/View.vue'
 
 // Estimates
 import EstimateIndex from './views/estimates/Index.vue'
@@ -258,6 +259,11 @@ const routes = [
         path: 'payments/:id/edit',
         name: 'payments.edit',
         component: PaymentCreate
+      },
+      {
+        path: 'payments/:id/view',
+        name: 'payments.view',
+        component: PaymentView
       },
 
       // Expenses

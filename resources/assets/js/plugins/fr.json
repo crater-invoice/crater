@@ -774,7 +774,7 @@
     }
   },
   "layout_login": {
-    "copyright_crater": "Copyright @ Crater - 2019",
+    "copyright_crater": "Copyright @ Crater - 2020",
     "super_simple_invoicing": "Super Simple Facturation",
     "for_freelancer": "pour les pigistes et",
     "small_businesses": "Petites entreprises ",
@@ -787,6 +787,8 @@
     "required": "Champ requis",
     "email_incorrect": "Adresse Email incorrecte.",
     "email_does_not_exist": "L'utilisateur avec un email donné n'existe pas",
+    "item_unit_already_taken": "L'unité d'article a déjà été prise",
+    "payment_mode_already_taken": "Le mode de paiement a déjà été pris",
     "send_reset_link": "Envoyer le lien de réinitialisation",
     "not_yet": "Pas encore? Envoyer à nouveau",
     "password_min_length": "Le mot de passe doit contenir {nombre} caractères",

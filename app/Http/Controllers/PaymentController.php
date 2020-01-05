@@ -4,13 +4,16 @@ namespace Crater\Http\Controllers;
 use Illuminate\Http\Request;
 use Crater\CompanySetting;
 use Crater\Currency;
+use Crater\Company;
 use Crater\Invoice;
 use Crater\Payment;
+use Crater\PaymentMethod;
 use Carbon\Carbon;
 use function MongoDB\BSON\toJSON;
 use Crater\User;
 use Crater\Http\Requests\PaymentRequest;
 use Validator;
+use Crater\Mail\PaymentPdf;
 
 class PaymentController extends Controller
 {
@@ -23,19 +26,20 @@ class PaymentController extends Controller
     {
         $limit = $request->has('limit') ? $request->limit : 10;
 
-        $payments = Payment::with('user', 'invoice')
+        $payments = Payment::with(['user', 'invoice', 'paymentMethod'])
             ->join('users', 'users.id', '=', 'payments.user_id')
             ->leftJoin('invoices', 'invoices.id', '=', 'payments.invoice_id')
+            ->leftJoin('payment_methods', 'payment_methods.id', '=', 'payments.payment_method_id')
             ->applyFilters($request->only([
                 'search',
                 'payment_number',
-                'payment_mode',
+                'payment_method_id',
                 'customer_id',
                 'orderByField',
                 'orderBy'
             ]))
             ->whereCompany($request->header('company'))
-            ->select('payments.*', 'users.name', 'invoices.invoice_number')
+            ->select('payments.*', 'users.name', 'invoices.invoice_number', 'payment_methods.name as payment_mode')
             ->latest()
             ->paginate($limit);
 
@@ -65,6 +69,9 @@ class PaymentController extends Controller
         return response()->json([
             'customers' => User::where('role', 'customer')
                 ->whereCompany($request->header('company'))
+                ->get(),
+            'paymentMethods' => PaymentMethod::whereCompany($request->header('company'))
+                ->latest()
                 ->get(),
             'nextPaymentNumberAttribute' => $nextPaymentNumberAttribute,
             'nextPaymentNumber' => $payment_prefix.'-'.$nextPaymentNumber,
@@ -113,13 +120,15 @@ class PaymentController extends Controller
             'user_id' => $request->user_id,
             'company_id' => $request->header('company'),
             'invoice_id' => $request->invoice_id,
-            'payment_mode' => $request->payment_mode,
+            'payment_method_id' => $request->payment_method_id,
             'amount' => $request->amount,
             'notes' => $request->notes,
+            'unique_hash' => str_random(60)
         ]);
 
         return response()->json([
             'payment' => $payment,
+            'shareable_link' => url('/payments/pdf/'.$payment->unique_hash),
             'success' => true
         ]);
     }
@@ -132,7 +141,12 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        $payment = Payment::with(['user', 'invoice', 'paymentMethod'])->find($id);
+
+        return response()->json([
+            'payment' => $payment,
+            'shareable_link' => url('/payments/pdf/'.$payment->unique_hash)
+        ]);
     }
 
     /**
@@ -143,7 +157,7 @@ class PaymentController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $payment = Payment::with('user', 'invoice')->find($id);
+        $payment = Payment::with(['user', 'invoice', 'paymentMethod'])->find($id);
 
         $invoices = Invoice::where('paid_status', '<>', Invoice::STATUS_PAID)
             ->where('user_id', $payment->user_id)->where('due_amount', '>', 0)
@@ -154,8 +168,12 @@ class PaymentController extends Controller
             'customers' => User::where('role', 'customer')
                 ->whereCompany($request->header('company'))
                 ->get(),
+            'paymentMethods' => PaymentMethod::whereCompany($request->header('company'))
+                ->latest()
+                ->get(),
             'nextPaymentNumber' => $payment->getPaymentNumAttribute(),
             'payment_prefix' => $payment->getPaymentPrefixAttribute(),
+            'shareable_link' => url('/payments/pdf/'.$payment->unique_hash),
             'payment' => $payment,
             'invoices' => $invoices
         ]);
@@ -208,13 +226,14 @@ class PaymentController extends Controller
         $payment->payment_number = $number_attributes['payment_number'];
         $payment->user_id = $request->user_id;
         $payment->invoice_id = $request->invoice_id;
-        $payment->payment_mode = $request->payment_mode;
+        $payment->payment_method_id = $request->payment_method_id;
         $payment->amount = $request->amount;
         $payment->notes = $request->notes;
         $payment->save();
 
         return response()->json([
             'payment' => $payment,
+            'shareable_link' => url('/payments/pdf/'.$payment->unique_hash),
             'success' => true
         ]);
     }
@@ -271,6 +290,39 @@ class PaymentController extends Controller
 
             $payment->delete();
         }
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function sendPayment(Request $request)
+    {
+        $payment = Payment::findOrFail($request->id);
+
+        $data['payment'] = $payment->toArray();
+        $userId = $data['payment']['user_id'];
+        $data['user'] = User::find($userId)->toArray();
+        $data['company'] = Company::find($payment->company_id);
+        $email = $data['user']['email'];
+        $notificationEmail = CompanySetting::getSetting(
+            'notification_email',
+            $request->header('company')
+        );
+
+        if (!$email) {
+            return response()->json([
+                'error' => 'user_email_does_not_exist'
+            ]);
+        }
+
+        if (!$notificationEmail) {
+            return response()->json([
+                'error' => 'notification_email_does_not_exist'
+            ]);
+        }
+
+        \Mail::to($email)->send(new PaymentPdf($data, $notificationEmail));
 
         return response()->json([
             'success' => true

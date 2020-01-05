@@ -22,11 +22,12 @@
     }
 
     .side-estimate {
+        cursor: pointer;
         padding: 12px 16px;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgba(185, 193, 209, 0.41);
-        cursor: pointer;
+        border-left: 3px solid transparent;
 
         &:last-child {
             margin-bottom: 98px;

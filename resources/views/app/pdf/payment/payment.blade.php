@@ -503,7 +503,7 @@
                     </tr>
                     <tr>
                         <td class="textStyle1" style="text-align: left; color: #55547A">Payment Mode</td>
-                        <td class="textStyle2"> &nbsp;{{$payment->paymentMethod->name}}</td>
+                        <td class="textStyle2"> &nbsp;{{$payment->paymentMethod ? $payment->paymentMethod->name : '-'}}</td>
                     </tr>
                     @if ($payment->invoice && $payment->invoice->invoice_number)
                         <tr>

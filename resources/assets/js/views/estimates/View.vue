@@ -125,7 +125,7 @@
           <div class="left">
             <div class="inv-name">{{ estimate.user.name }}</div>
             <div class="inv-number">{{ estimate.estimate_number }}</div>
-            <div :class="'est-status-'+estimate.status.toLowerCase()"class="inv-status">{{ estimate.status }}</div>
+            <div :class="'est-status-'+estimate.status.toLowerCase()" class="inv-status">{{ estimate.status }}</div>
           </div>
           <div class="right">
             <div class="inv-amount" v-html="$utils.formatMoney(estimate.total, estimate.user.currency)" />

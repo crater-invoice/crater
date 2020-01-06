@@ -32,6 +32,11 @@
             margin-bottom: 98px;
         }
 
+        &.router-link-exact-active {
+            border-left: 3px solid $ls-color-primary;
+            background-color: $ls-color-gray--very-light;
+        }
+
         &:hover {
             background-color: $ls-color-gray--very-light;
         }

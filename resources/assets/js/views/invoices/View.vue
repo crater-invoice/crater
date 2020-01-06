@@ -125,19 +125,17 @@
           v-for="(invoice,index) in invoices"
           :to="`/admin/invoices/${invoice.id}/view`"
           :key="index"
-          class="side-invoice"     
+          class="side-invoice"
         >
-        
-        <div class="left">
-          <div class="inv-name">{{ invoice.user.name }}</div>
-          <div class="inv-number">{{ invoice.invoice_number }}</div>
-          <div :class="'inv-status-'+invoice.status.toLowerCase()" class="inv-status">{{ invoice.status }}</div>
-        </div>
-        <div class="right">
-          <div class="inv-amount" v-html="$utils.formatMoney(invoice.due_amount, invoice.user.currency)" />
-          <div class="inv-date">{{ invoice.formattedInvoiceDate }}</div>
-        </div>
-        
+          <div class="left">
+            <div class="inv-name">{{ invoice.user.name }}</div>
+            <div class="inv-number">{{ invoice.invoice_number }}</div>
+            <div :class="'inv-status-'+invoice.status.toLowerCase()" class="inv-status">{{ invoice.status }}</div>
+          </div>
+          <div class="right">
+            <div class="inv-amount" v-html="$utils.formatMoney(invoice.due_amount, invoice.user.currency)" />
+            <div class="inv-date">{{ invoice.formattedInvoiceDate }}</div>
+          </div>
         </router-link>
         <p v-if="!invoices.length" class="no-result">
           {{ $t('invoices.no_matching_invoices') }}
@@ -187,7 +185,7 @@ export default {
     shareableLink () {
       return `/invoices/pdf/${this.invoice.unique_hash}`
     }
-  },  
+  },
   watch: {
     $route (to, from) {
       this.loadInvoice()

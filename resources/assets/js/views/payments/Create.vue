@@ -391,7 +391,7 @@ export default {
       } else {
         let data = {
           ...this.formData,
-          payment_method_id: this.formData.payment_method.id,
+          payment_method_id: this.formData.payment_method ? this.formData.payment_method.id : null,
           payment_date: moment(this.formData.payment_date).format('DD/MM/YYYY')
         }
         this.isLoading = true

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Listeners\Updates\v2;
+namespace Crater\Listeners\Updates\v3;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,9 +14,9 @@ use Crater\User;
 use Crater\Listeners\Updates\Listener;
 use Illuminate\Database\Schema\Blueprint;
 
-class Version220 extends Listener
+class Version300 extends Listener
 {
-    const VERSION = '2.2.0';
+    const VERSION = '3.0.0';
 
     /**
      * Create the event listener.

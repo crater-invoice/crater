@@ -354,7 +354,6 @@
       "select_an_item": "Type or click to select an item",
       "type_item_description": "Type Item Description (optional)"
     },
-
     "payment_attached_message": "One of the selected invoices already have a payment attached to it. Make sure to delete the attached payments first in order to go ahead with the removal",
     "confirm_delete": "You will not be able to recover this Invoice | You will not be able to recover these Invoices",
     "created_message": "Invoice created successfully",
@@ -875,7 +874,7 @@
     }
   },
   "layout_login": {
-    "copyright_crater": "Copyright @ Crater - 2019",
+    "copyright_crater": "Copyright @ Crater - 2020",
     "super_simple_invoicing": "Super Simple Invoicing",
     "for_freelancer": "for Freelancers &",
     "small_businesses": "Small Businesses ",

@@ -125,7 +125,7 @@
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
-const { required, email, numeric } = require('vuelidate/lib/validators')
+const { required, email } = require('vuelidate/lib/validators')
 
 export default {
   components: {

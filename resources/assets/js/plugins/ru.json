@@ -457,69 +457,69 @@
 		"select_payment_mode": "Выберите режим оплаты",
 		"title": "Платежи",
 		"update_payment": "Изменить платеж",
-		"updated_message": "Платежи успешно изменен",
+		"updated_message": "Платеж успешно изменен",
 		"view_payment": "Просмотр платежа"
 	},
 	"reports": {
-		"download_pdf": "",
+		"download_pdf": "Скачать PDF",
 		"errors": {
-			"required": ""
+			"required": "Поле обязательно для заполнения"
 		},
 		"estimates": {
-			"amount": "",
-			"contact_name": "",
-			"due_date": "",
-			"estimate": "",
-			"estimate_date": "",
-			"estimate_number": "",
-			"ref_number": "",
-			"status": ""
+			"amount": "Количество",
+			"contact_name": "Контактное лицо",
+			"due_date": "Дата исполнения",
+			"estimate": "Оценка",
+			"estimate_date": "Дата оценки",
+			"estimate_number": "Номер оценки",
+			"ref_number": "Реферальный номер",
+			"status": "Статус"
 		},
 		"expenses": {
-			"amount": "",
-			"category": "",
-			"date": "",
-			"date_range": "",
-			"expenses": "",
-			"from_date": "",
-			"to_date": ""
+			"amount": "Количество",
+			"category": "Категория",
+			"date": "Дата",
+			"date_range": "Выберите диапазон дат",
+			"expenses": "Расходы",
+			"from_date": "От",
+			"to_date": "До"
 		},
-		"from_date": "",
+		"from_date": "От",
 		"invoices": {
-			"amount": "",
-			"contact_name": "",
-			"due_date": "",
-			"invoice": "",
-			"invoice_date": "",
-			"status": ""
+			"amount": "Количество",
+			"contact_name": "Контактное лицо",
+			"due_date": "Дата исполнения",
+			"invoice": "Счет",
+			"invoice_date": "Дата выставления счета",
+			"status": "Статус"
 		},
-		"paid": "",
+		"paid": "Оплачено",
 		"profit_loss": {
-			"date_range": "",
-			"from_date": "",
-			"profit_loss": "",
-			"to_date": ""
+			"date_range": "Выберите диапазон дат",
+			"from_date": "От",
+			"profit_loss": "Прибыль и убытки",
+			"to_date": "До"
 		},
-		"report": "",
+		"report": "Отчет | Отчеты",
 		"sales": {
-			"date_range": "",
-			"from_date": "",
-			"report_type": "",
-			"sales": "",
-			"to_date": ""
+			"date_range": "Выберите диапазон дат",
+			"from_date": "От",
+			"report_type": "Тип отчета",
+			"sales": "Продажи",
+			"to_date": "До"
 		},
-		"status": "",
+		"status": "Статус",
 		"taxes": {
-			"date_range": "",
-			"from_date": "",
-			"taxes": "",
-			"to_date": ""
+			"date_range": "Выберите диапазон дат",
+			"from_date": "От",
+			"taxes": "Налоги",
+			"to_date": "До"
 		},
-		"title": "",
-		"to_date": "",
-		"unpaid": "",
-		"update_report": "",
-		"view_pdf": ""
+		"title": "Отчет",
+		"to_date": "До",
+		"unpaid": "Неоплаченный",
+		"update_report": "Редактировать отчет",
+		"view_pdf": "Просмотреть PDF"
 	},
 	"settings": {
 		"account_settings": {

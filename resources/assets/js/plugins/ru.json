@@ -745,10 +745,10 @@
 		}
 	},
 	"tax_types": {
-		"compound_tax": "",
-		"description": "",
-		"name": "",
-		"percent": ""
+		"compound_tax": "Составной налог",
+		"description": "Описание",
+		"name": "Название",
+		"percent": "Процент"
 	},
 	"validation": {
 		"address_maxlength": "",

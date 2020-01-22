@@ -150,6 +150,7 @@ class CompanyController extends Controller
             ["code"=>"ar", "name" => "العربية"],
             ["code"=>"de", "name" => "German"],
             ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
+			["code" => "nl", "name" => "Dutch"]
         ];
 
         return response()->json([

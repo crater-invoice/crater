@@ -62,7 +62,7 @@
         "four_zero_four": "404",
         "you_got_lost": "Whoops! Je bent verloren!",
         "go_home": "Ga naar de homepagina",
-        "setting_updated": "Instellingen zijn geüpdate",
+        "setting_updated": "Instellingen zijn geüpdatet",
         "select_state": "Selecteer staat",
         "select_country": "Selecteer land",
         "select_city": "Selecteer stad",
@@ -86,7 +86,7 @@
             "year": "Selecteer jaar"
         },
         "weekly_invoices": {
-            "title": "Wekelijkse facutren"
+            "title": "Wekelijkse facturen"
         },
         "monthly_chart": {
             "title": "Verkopen & uitgaven"
@@ -339,7 +339,7 @@
             "select_an_item": "Typ of klik om te selecteren",
             "type_item_description": "Type Artikel omschrijving (optioneel)"
         },
-        "payment_attached_message": "Een van de geselecteerde facturen is al aan een betaling gekoppeld. Zorg ervoor dat u de bijgevoegde betalingen eerst verwijdert om door te kunnen gaan met de verwijdering.",
+        "payment_attached_message": "Een van de geselecteerde facturen is al aan een betaling gekoppeld. Zorg ervoor dat u de bijgevoegde betalingen eerst verwijderd om door te kunnen gaan met de verwijdering.",
         "confirm_delete": "U zult deze factuur niet kunnen herstellen | U zult deze facturen niet kunnen herstellen",
         "created_message": "Factuur succesvol aangemaakt ",
         "updated_message": "Factuur succesvol bijgewerkt ",
@@ -427,7 +427,7 @@
         "expense": "Uitgave | Uitgaven",
         "no_expenses": "Nog geen uitgaven!",
         "list_of_expenses": "Dit gedeelte bevat de lijst met uitgaven.",
-        "confirm_delete": "U zult niet in staat zijn om deze uitgaven te herstellen | U zult niet in staat zijn om deze uitgavenen te herstellen",
+        "confirm_delete": "U zult niet in staat zijn om deze uitgave te herstellen | U zult niet in staat zijn om deze uitgaven te herstellen",
         "created_message": "Uitgave succesvol aangemaakt",
         "updated_message": "Uitgave succesvol bijgewerkt",
         "deleted_message": "Uitgave succesvol verwijderd | Uitgaven succesvol verwijderd",
@@ -561,7 +561,7 @@
             "driver": "Mail Driver",
             "secret": "Geheim",
             "mailgun_secret": "Mailgun Geheim",
-            "mailgun_domain": "Domeinn",
+            "mailgun_domain": "Domein",
             "mailgun_endpoint": "Mailgun Endpoint",
             "ses_secret": "SES Secret",
             "ses_key": "SES Key",
@@ -707,7 +707,7 @@
             "created_message": "Uitgavencategorie succevol aangemaakt",
             "deleted_message": "Uitgavencategorie succevol verwijderd",
             "updated_message": "Uitgavencategorie succevol bijgewerkt",
-            "confirm_delete": "U zult niet in staat zijn om deze uitgavecategorie te herstellen",
+            "confirm_delete": "U zult niet in staat zijn om deze uitgavencategorie te herstellen",
             "already_in_use": "Categorie is al in gebruik"
         },
         "preferences": {
@@ -749,7 +749,7 @@
         "email": "E-mail",
         "password": "Wachtwoord",
         "confirm_password": "Bevestig wachtwoord",
-        "save_cont": "Opslaan & doorgaane",
+        "save_cont": "Opslaan & doorgaan",
         "company_info": "Bedrijfsinformatie",
         "company_info_desc": "Deze informatie wordt op de facturen weergegeven. Merk op dat u dit later op de instellingenpagina kunt bewerken.",
         "company_name": "Bedrijfsnaam",
@@ -842,7 +842,7 @@
         "email_incorrect": "Onjuist E-mail.",
         "email_already_taken": "De e-mail is reeds ingenomen.",
         "email_does_not_exist": "Gebruiker met opgegeven e-mail bestaat niet",
-        "send_reset_link": "Verstuur Reset LInk",
+        "send_reset_link": "Verstuur Reset Link",
         "not_yet": "Nog niet? Verstuur opnieuw.",
         "password_min_length": "Wachtwoord moet {count} karakters bevatten",
         "name_min_length": "Naam moet tenminste {count} letters bevatten.",

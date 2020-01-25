@@ -6,7 +6,6 @@
         <base-button
           :loading="isSendingEmail"
           :disabled="isSendingEmail"
-          :outline="true"
           color="theme"
           @click="onPaymentSend"
         >

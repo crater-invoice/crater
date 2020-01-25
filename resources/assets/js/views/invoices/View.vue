@@ -19,7 +19,6 @@
           v-if="invoice.status === 'DRAFT'"
           :loading="isSendingEmail"
           :disabled="isSendingEmail"
-          :outline="true"
           color="theme"
           @click="onSendInvoice"
         >

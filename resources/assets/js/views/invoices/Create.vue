@@ -135,8 +135,17 @@
                 icon="hashtag"
                 @input="$v.invoiceNumAttribute.$touch()"
               />
-              <span v-show="$v.invoiceNumAttribute.$error && !$v.invoiceNumAttribute.required" class="text-danger mt-1"> {{ $tc('validation.required') }}  </span>
-              <span v-show="!$v.invoiceNumAttribute.numeric" class="text-danger mt-1"> {{ $tc('validation.numbers_only') }}  </span>
+              <span
+                v-show="$v.invoiceNumAttribute.$error && !$v.invoiceNumAttribute.required"
+                class="text-danger mt-1"
+              >
+                {{ $tc('validation.required') }}
+              </span>
+              <span
+                v-show="!$v.invoiceNumAttribute.numeric" class="text-danger mt-1"
+              >
+                {{ $tc('validation.numbers_only') }}
+              </span>
             </div>
             <div class="col collapse-input">
               <label>{{ $t('invoices.ref_number') }}</label>
@@ -146,7 +155,12 @@
                 icon="hashtag"
                 @input="$v.newInvoice.reference_number.$touch()"
               />
-              <div v-if="$v.newInvoice.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
+              <div
+                v-if="$v.newInvoice.reference_number.$error"
+                class="text-danger"
+              >
+                {{ $tc('validation.ref_number_maxlength') }}
+              </div>
             </div>
           </div>
         </div>

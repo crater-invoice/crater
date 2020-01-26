@@ -46,7 +46,10 @@ RUN touch database/database.sqlite && \
     chmod -R 775 storage/logs/ && \
     chmod -R 775 bootstrap/cache/  
 
+# Fix for https://github.com/bytefury/crater/issues/69
+RUN apk add --no-cache gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
 EXPOSE 9000
 
 CMD ["php-fpm", "--nodaemonize"]
-

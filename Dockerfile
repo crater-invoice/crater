@@ -23,8 +23,10 @@ FROM php:7.3.12-fpm-alpine
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN apk add --no-cache libpng-dev libxml2-dev oniguruma-dev libzip-dev && \
+RUN apk add --no-cache libpng-dev libxml2-dev oniguruma-dev libzip-dev gnu-libiconv && \
     docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml zip
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 # Set container's working dir
 WORKDIR /app
@@ -47,8 +49,6 @@ RUN touch database/database.sqlite && \
     chmod -R 775 bootstrap/cache/  
 
 # Fix for https://github.com/bytefury/crater/issues/69
-RUN apk add --no-cache gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 EXPOSE 9000
 

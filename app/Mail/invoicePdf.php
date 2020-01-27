@@ -32,6 +32,9 @@ class invoicePdf extends Mailable
      */
     public function build()
     {
-        return $this->from($this->notificationEmail)->markdown('emails.send.invoice', ['data', $this->data]);
+        $company = $this->data['company']['name'];
+        return $this->from($this->notificationEmail)
+                    ->subject("Invoice from $company")
+                    ->markdown('emails.send.invoice', ['data', $this->data]);
     }
 }

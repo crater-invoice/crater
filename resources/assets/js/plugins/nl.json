@@ -704,9 +704,9 @@
             "add_new_category": "Nieuwe categorie toevoegen",
             "category_name": "Categorienaam",
             "category_description": "Omschrijving",
-            "created_message": "Uitgavencategorie succevol aangemaakt",
-            "deleted_message": "Uitgavencategorie succevol verwijderd",
-            "updated_message": "Uitgavencategorie succevol bijgewerkt",
+            "created_message": "Uitgavencategorie succesvol aangemaakt",
+            "deleted_message": "Uitgavencategorie succesvol verwijderd",
+            "updated_message": "Uitgavencategorie succesvol bijgewerkt",
             "confirm_delete": "U zult niet in staat zijn om deze uitgavencategorie te herstellen",
             "already_in_use": "Categorie is al in gebruik"
         },

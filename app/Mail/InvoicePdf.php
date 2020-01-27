@@ -6,23 +6,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class invoicePdf extends Mailable
+class InvoicePdf extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $data = [];
-
-    public $notificationEmail = '';
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $notificationEmail)
+    public function __construct($data)
     {
         $this->data = $data;
-        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -33,8 +30,8 @@ class invoicePdf extends Mailable
     public function build()
     {
         $company = $this->data['company']['name'];
-        return $this->from($this->notificationEmail)
-                    ->subject("Invoice from $company")
+
+        return $this->subject("Invoice from $company")
                     ->markdown('emails.send.invoice', ['data', $this->data]);
     }
 }

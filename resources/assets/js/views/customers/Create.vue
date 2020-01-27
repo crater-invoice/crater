@@ -4,9 +4,15 @@
       <div class="page-header">
         <h3 class="page-title">{{ isEdit ? $t('customers.edit_customer') : $t('customers.new_customer') }}</h3>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/dashboard">{{ $t('general.home') }}</router-link></li>
-          <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/customers">{{ $tc('customers.customer', 2) }}</router-link></li>
-          <li class="breadcrumb-item">{{ isEdit ? $t('customers.edit_customer') : $t('customers.new_customer') }}</li>
+          <li class="breadcrumb-item">
+            <router-link slot="item-title" to="/admin/dashboard">{{ $t('general.home') }}</router-link>
+          </li>
+          <li class="breadcrumb-item">
+            <router-link slot="item-title" to="/admin/customers">{{ $tc('customers.customer', 2) }}</router-link>
+          </li>
+          <li class="breadcrumb-item">
+            {{ isEdit ? $t('customers.edit_customer') : $t('customers.new_customer') }}
+          </li>
         </ol>
         <div class="page-actions header-button-container">
           <base-button
@@ -38,8 +44,12 @@
                   @input="$v.formData.name.$touch()"
                 />
                 <div v-if="$v.formData.name.$error">
-                  <span v-if="!$v.formData.name.required" class="text-danger">{{ $tc('validation.required') }}</span>
-                  <span v-if="!$v.formData.name.minLength" class="text-danger"> {{ $tc('validation.name_min_length', $v.formData.name.$params.minLength.min, { count: $v.formData.name.$params.minLength.min }) }} </span>
+                  <span v-if="!$v.formData.name.required" class="text-danger">
+                    {{ $tc('validation.required') }}
+                  </span>
+                  <span v-if="!$v.formData.name.minLength" class="text-danger">
+                    {{ $tc('validation.name_min_length', $v.formData.name.$params.minLength.min, { count: $v.formData.name.$params.minLength.min }) }}
+                  </span>
                 </div>
               </div>
               <div class="form-group">
@@ -53,7 +63,9 @@
                   @input="$v.formData.email.$touch()"
                 />
                 <div v-if="$v.formData.email.$error">
-                  <span v-if="!$v.formData.email.email" class="text-danger"> {{ $tc('validation.email_incorrect') }} </span>
+                  <span v-if="!$v.formData.email.email" class="text-danger">
+                    {{ $tc('validation.email_incorrect') }}
+                  </span>
                 </div>
               </div>
               <div class="form-group">
@@ -97,10 +109,13 @@
                   v-model="formData.website"
                   :invalid="$v.formData.website.$error"
                   type="url"
+                  tab-index="6"
                   @input="$v.formData.website.$touch()"
                 />
                 <div v-if="$v.formData.website.$error">
-                  <span v-if="!$v.formData.website.url" class="text-danger">{{ $tc('validation.invalid_url') }}</span>
+                  <span v-if="!$v.formData.website.url" class="text-danger">
+                    {{ $tc('validation.invalid_url') }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -124,6 +139,7 @@
                   v-model="billing.state"
                   name="billing.state"
                   type="text"
+                  tab-index="9"
                 />
               </div>
               <div class="form-group">
@@ -138,7 +154,9 @@
                   @input="$v.billing.address_street_1.$touch()"
                 />
                 <div v-if="$v.billing.address_street_1.$error">
-                  <span v-if="!$v.billing.address_street_1.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  <span v-if="!$v.billing.address_street_1.maxLength" class="text-danger">
+                    {{ $t('validation.address_maxlength') }}
+                  </span>
                 </div>
                 <base-text-area
                   :tabindex="12"
@@ -150,7 +168,9 @@
                   @input="$v.billing.address_street_2.$touch()"
                 />
                 <div v-if="$v.billing.address_street_2.$error">
-                  <span v-if="!$v.billing.address_street_2.maxLength" class="text-danger">{{ $t('validation.address_maxlength') }}</span>
+                  <span v-if="!$v.billing.address_street_2.maxLength" class="text-danger">
+                    {{ $t('validation.address_maxlength') }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -175,6 +195,7 @@
                   v-model="billing.city"
                   name="billing.city"
                   type="text"
+                  tab-index="10"
                 />
               </div>
               <div class="form-group">
@@ -226,6 +247,7 @@
                   v-model="shipping.state"
                   name="shipping.state"
                   type="text"
+                  tab-index="17"
                 />
               </div>
               <div class="form-group">
@@ -277,6 +299,7 @@
                   v-model="shipping.city"
                   name="shipping.city"
                   type="text"
+                  tab-index="18"
                 />
               </div>
               <div class="form-group">

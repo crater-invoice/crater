@@ -452,6 +452,7 @@
     "list_of_payments": "Dieser Abschnitt enthält die Liste der Zahlungen.",
     "new_payment": "Neue Zahlung",
     "no_payments": "Keine Zahlungen vorhanden!",
+    "no_matching_payments": "Es gibt keine passenden Zahlungen!",
     "note": "Hinweis",
     "payment": "Zahlung | Zahlungen",
     "payment_mode": "Zahlungsart",

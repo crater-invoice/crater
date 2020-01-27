@@ -167,11 +167,6 @@ class InvoicesController extends Controller
             $data['user'] = User::find($request->user_id)->toArray();
             $data['company'] = Company::find($invoice->company_id);
 
-            $notificationEmail = CompanySetting::getSetting(
-                'notification_email',
-                $request->header('company')
-            );
-
             $email = $data['user']['email'];
 
             if (!$email) {
@@ -180,13 +175,13 @@ class InvoicesController extends Controller
                 ]);
             }
 
-            if (!$notificationEmail) {
+            if (!config('mail.from.name')) {
                 return response()->json([
-                    'error' => 'notification_email_does_not_exist'
+                    'error' => 'from_email_does_not_exist'
                 ]);
             }
 
-            \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
+            \Mail::to($email)->send(new invoicePdf($data));
         }
 
         $invoice = Invoice::with(['items', 'user', 'invoiceTemplate', 'taxes'])->find($invoice->id);
@@ -408,10 +403,6 @@ class InvoicesController extends Controller
         $data['user'] = User::find($userId)->toArray();
         $data['company'] = Company::find($invoice->company_id);
         $email = $data['user']['email'];
-        $notificationEmail = CompanySetting::getSetting(
-            'notification_email',
-            $request->header('company')
-        );
 
         if (!$email) {
             return response()->json([
@@ -419,13 +410,13 @@ class InvoicesController extends Controller
             ]);
         }
 
-        if (!$notificationEmail) {
+        if (!config('mail.from.name')) {
             return response()->json([
-                'error' => 'notification_email_does_not_exist'
+                'error' => 'from_email_does_not_exist'
             ]);
         }
 
-        \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
+        \Mail::to($email)->send(new invoicePdf($data));
 
         if ($invoice->status == Invoice::STATUS_DRAFT) {
             $invoice->status = Invoice::STATUS_SENT;

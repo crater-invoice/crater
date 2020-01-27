@@ -154,7 +154,9 @@ export const fetchPaymentMode = ({ commit, dispatch, state }, data) => {
 export const deletePaymentMode = ({ commit, dispatch, state }, id) => {
   return new Promise((resolve, reject) => {
     window.axios.delete(`/api/payment-methods/${id}`).then((response) => {
-      commit(types.DELETE_PAYMENT_MODE, id)
+      if (!response.data.error) {
+        commit(types.DELETE_PAYMENT_MODE, id)
+      }
       resolve(response)
     }).catch((err) => {
       reject(err)

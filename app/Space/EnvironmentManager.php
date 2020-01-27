@@ -38,7 +38,7 @@ class EnvironmentManager
             'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
             'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n".
             'DB_USERNAME='.config('database.connections.'.config('database.default').'.username')."\n".
-            'DB_PASSWORD='.config('database.connections.'.config('database.default').'.password')."\n\n";
+            'DB_PASSWORD="'.config('database.connections.'.config('database.default').'.password')."\"\n\n";
 
         $newDatabaseData =
             'DB_CONNECTION='.$request->database_connection."\n".
@@ -46,7 +46,7 @@ class EnvironmentManager
             'DB_PORT='.$request->database_port."\n".
             'DB_DATABASE='.$request->database_name."\n".
             'DB_USERNAME='.$request->database_username."\n".
-            'DB_PASSWORD='.$request->database_password."\n\n";
+            'DB_PASSWORD="'.$request->database_password."\"\n\n";
 
         try {
 

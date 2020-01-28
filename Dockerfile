@@ -23,8 +23,8 @@ FROM php:7.3.12-fpm-alpine
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN apk add --no-cache libpng-dev libxml2-dev oniguruma-dev && \
-    docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml
+RUN apk add --no-cache libpng-dev libxml2-dev oniguruma-dev libzip-dev && \
+    docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml zip
 
 # Set container's working dir
 WORKDIR /app

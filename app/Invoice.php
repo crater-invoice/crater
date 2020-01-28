@@ -66,10 +66,14 @@ class Invoice extends Model
         'formattedDueDate'
     ];
 
-    public static function getNextInvoiceNumber()
+    public static function getNextInvoiceNumber($value)
     {
         // Get the last created order
-        $lastOrder = Invoice::orderBy('created_at', 'desc')->first();
+        $lastOrder = Invoice::where('invoice_number', 'LIKE', $value . '-%')
+                    ->orderBy('created_at', 'desc')
+                    ->first();
+
+
         if (!$lastOrder) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
@@ -143,8 +147,13 @@ class Invoice extends Model
 
     public function getInvoiceNumAttribute()
     {
-        $position = $this->strposX($this->invoice_number, "-", 2) + 1;
+        $position = $this->strposX($this->invoice_number, "-", 1) + 1;
         return substr($this->invoice_number, $position);
+    }
+
+    public function getInvoicePrefixAttribute () {
+        $prefix = explode("-", $this->invoice_number)[0];
+        return $prefix;
     }
 
     public function getFormattedCreatedAtAttribute($value)

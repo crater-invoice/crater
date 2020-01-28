@@ -40,12 +40,9 @@ class MailEnvironmentRequest extends FormRequest
             case 'mailgun':
                 return [
                     'mail_driver'           => 'required|string',
-                    'mail_host'             => 'required|string',
-                    'mail_port'             => 'required',
                     'mail_mailgun_domain'   => 'required|string',
                     'mail_mailgun_secret'   => 'required|string',
                     'mail_mailgun_endpoint' => 'required|string',
-                    'mail_encryption'       => 'required|string',
                     'from_name'             => 'required|string',
                     'from_mail'             => 'required|string',
                 ];

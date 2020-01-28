@@ -46,6 +46,7 @@ import InvoiceView from './views/invoices/View.vue'
 // Payments
 import PaymentsIndex from './views/payments/Index.vue'
 import PaymentCreate from './views/payments/Create.vue'
+import PaymentView from './views/payments/View.vue'
 
 // Estimates
 import EstimateIndex from './views/estimates/Index.vue'
@@ -66,6 +67,7 @@ import ReportLayout from './views/reports/layout/Index.vue'
 // Settings
 import SettingsLayout from './views/settings/layout/Index.vue'
 import CompanyInfo from './views/settings/CompanyInfo.vue'
+import Customization from './views/settings/Customization.vue'
 import Notifications from './views/settings/Notifications.vue'
 import Preferences from './views/settings/Preferences.vue'
 import UserProfile from './views/settings/UserProfile.vue'
@@ -258,6 +260,11 @@ const routes = [
         name: 'payments.edit',
         component: PaymentCreate
       },
+      {
+        path: 'payments/:id/view',
+        name: 'payments.view',
+        component: PaymentView
+      },
 
       // Expenses
       {
@@ -308,6 +315,11 @@ const routes = [
             path: 'company-info',
             name: 'company.info',
             component: CompanyInfo
+          },
+          {
+            path: 'customization',
+            name: 'customization',
+            component: Customization
           },
           {
             path: 'user-profile',

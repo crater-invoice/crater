@@ -19,7 +19,7 @@ class CustomersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -53,7 +53,7 @@ class CustomersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Requests\CustomerRequest $request)
     {
@@ -104,7 +104,7 @@ class CustomersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -124,7 +124,7 @@ class CustomersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id)
     {
@@ -144,7 +144,7 @@ class CustomersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($id, Requests\CustomerRequest $request)
     {
@@ -177,6 +177,7 @@ class CustomersController extends Controller
         $customer->enable_portal = $request->enable_portal;
         $customer->save();
 
+        $customer->addresses()->delete();
         if ($request->addresses) {
             foreach ($request->addresses as $address) {
                 $newAddress = $customer->addresses()->firstOrNew(['type' => $address["type"]]);
@@ -203,10 +204,10 @@ class CustomersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Customer along side all his/her resources (ie. Estimates, Invoices, Payments and Addresses)
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -217,6 +218,13 @@ class CustomersController extends Controller
         ]);
     }
 
+
+    /**
+     * Remove a list of Customers along side all their resources (ie. Estimates, Invoices, Payments and Addresses)
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(Request $request)
     {
         foreach ($request->id as $id) {

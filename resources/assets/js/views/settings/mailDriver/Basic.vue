@@ -73,15 +73,18 @@
         </div>
       </div>
     </div>
-    <base-button
-      :loading="loading"
-      class="pull-right mt-4"
-      icon="save"
-      color="theme"
-      type="submit"
-    >
-      {{ $t('general.save') }}
-    </base-button>
+    <div class="d-flex">
+      <base-button
+        :loading="loading"
+        class="pull-right mt-4"
+        icon="save"
+        color="theme"
+        type="submit"
+      >
+        {{ $t('general.save') }}
+      </base-button>
+      <slot/>
+    </div>
   </form>
 </template>
 <script>

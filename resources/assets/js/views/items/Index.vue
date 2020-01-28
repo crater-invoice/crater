@@ -64,7 +64,7 @@
             <label class="form-label"> {{ $tc('items.unit') }} </label>
             <base-select
               v-model="filters.unit"
-              :options="units"
+              :options="itemUnits"
               :searchable="true"
               :show-labels="false"
               :placeholder="$t('items.select_a_unit')"
@@ -169,7 +169,7 @@
         />
         <table-column
           :label="$t('items.unit')"
-          show="unit"
+          show="unit_name"
         />
         <table-column
           :label="$t('items.price')"
@@ -235,19 +235,6 @@ export default {
       id: null,
       showFilters: false,
       sortedBy: 'created_at',
-      units: [
-        { name: 'box', value: 'box' },
-        { name: 'cm', value: 'cm' },
-        { name: 'dz', value: 'dz' },
-        { name: 'ft', value: 'ft' },
-        { name: 'g', value: 'g' },
-        { name: 'in', value: 'in' },
-        { name: 'kg', value: 'kg' },
-        { name: 'km', value: 'km' },
-        { name: 'lb', value: 'lb' },
-        { name: 'mg', value: 'mg' },
-        { name: 'pc', value: 'pc' }
-      ],
       isRequestOngoing: true,
       filtersApplied: false,
       filters: {
@@ -262,7 +249,8 @@ export default {
       'items',
       'selectedItems',
       'totalItems',
-      'selectAllField'
+      'selectAllField',
+      'itemUnits'
     ]),
     ...mapGetters('currency', [
       'defaultCurrency'
@@ -296,6 +284,7 @@ export default {
       deep: true
     }
   },
+
   destroyed () {
     if (this.selectAllField) {
       this.selectAllItems()
@@ -316,7 +305,7 @@ export default {
     async fetchData ({ page, filter, sort }) {
       let data = {
         search: this.filters.name !== null ? this.filters.name : '',
-        unit: this.filters.unit !== null ? this.filters.unit.name : '',
+        unit_id: this.filters.unit !== null ? this.filters.unit.id : '',
         price: this.filters.price * 100,
         orderByField: sort.fieldName || 'created_at',
         orderBy: sort.order || 'desc',
@@ -395,7 +384,7 @@ export default {
       }).then(async (willDelete) => {
         if (willDelete) {
           let res = await this.deleteMultipleItems()
-          if (res.data.success) {
+          if (res.data.success || res.data.items) {
             window.toastr['success'](this.$tc('items.deleted_message', 2))
             this.$refs.table.refresh()
           } else if (res.data.error) {

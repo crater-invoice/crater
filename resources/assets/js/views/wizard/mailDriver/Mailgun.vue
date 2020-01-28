@@ -20,17 +20,17 @@
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.host') }}</label>
+        <label class="form-label">{{ $t('wizard.mail.mailgun_domain') }}</label>
         <span class="text-danger"> *</span>
         <base-input
-          :invalid="$v.mailConfigData.mail_host.$error"
-          v-model.trim="mailConfigData.mail_host"
+          :invalid="$v.mailConfigData.mail_mailgun_domain.$error"
+          v-model.trim="mailConfigData.mail_mailgun_domain"
           type="text"
-          name="mail_host"
-          @input="$v.mailConfigData.mail_host.$touch()"
+          name="mailgun_domain"
+          @input="$v.mailConfigData.mail_mailgun_domain.$touch()"
         />
-        <div v-if="$v.mailConfigData.mail_host.$error">
-          <span v-if="!$v.mailConfigData.mail_host.required" class="text-danger">
+        <div v-if="$v.mailConfigData.mail_mailgun_domain.$error">
+          <span v-if="!$v.mailConfigData.mail_mailgun_domain.required" class="text-danger">
             {{ $tc('validation.required') }}
           </span>
         </div>
@@ -38,38 +38,38 @@
     </div>
     <div class="row my-2">
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.port') }}</label>
+        <label class="form-label">{{ $t('wizard.mail.mailgun_secret') }}</label>
         <span class="text-danger"> *</span>
         <base-input
-          :invalid="$v.mailConfigData.mail_port.$error"
-          v-model.trim="mailConfigData.mail_port"
-          type="text"
-          name="mail_port"
-          @input="$v.mailConfigData.mail_port.$touch()"
+          :invalid="$v.mailConfigData.mail_mailgun_secret.$error"
+          v-model.trim="mailConfigData.mail_mailgun_secret"
+          type="password"
+          name="mailgun_secret"
+          show-password
+          @input="$v.mailConfigData.mail_mailgun_secret.$touch()"
         />
-        <div v-if="$v.mailConfigData.mail_port.$error">
-          <span v-if="!$v.mailConfigData.mail_port.required" class="text-danger">
+        <div v-if="$v.mailConfigData.mail_mailgun_secret.$error">
+          <span v-if="!$v.mailConfigData.mail_mailgun_secret.required" class="text-danger">
             {{ $tc('validation.required') }}
-          </span>
-          <span v-if="!$v.mailConfigData.mail_port.numeric" class="text-danger">
-            {{ $tc('validation.numbers_only') }}
           </span>
         </div>
       </div>
       <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.encryption') }}</label>
+        <label class="form-label">{{ $t('wizard.mail.mailgun_endpoint') }}</label>
         <span class="text-danger"> *</span>
-        <base-select
-          v-model.trim="mailConfigData.mail_encryption"
-          :invalid="$v.mailConfigData.mail_encryption.$error"
-          :options="encryptions"
-          :searchable="true"
-          :show-labels="false"
-          @input="$v.mailConfigData.mail_encryption.$touch()"
+        <base-input
+          :invalid="$v.mailConfigData.mail_mailgun_endpoint.$error"
+          v-model.trim="mailConfigData.mail_mailgun_endpoint"
+          type="text"
+          name="mailgun_endpoint"
+          @input="$v.mailConfigData.mail_mailgun_endpoint.$touch()"
         />
-        <div v-if="$v.mailConfigData.mail_encryption.$error">
-          <span v-if="!$v.mailConfigData.mail_encryption.required" class="text-danger">
+        <div v-if="$v.mailConfigData.mail_mailgun_endpoint.$error">
+          <span v-if="!$v.mailConfigData.mail_mailgun_endpoint.required" class="text-danger">
             {{ $tc('validation.required') }}
+          </span>
+          <span v-if="!$v.mailConfigData.mail_mailgun_endpoint.numeric" class="text-danger">
+            {{ $tc('validation.numbers_only') }}
           </span>
         </div>
       </div>
@@ -111,62 +111,6 @@
         </div>
       </div>
     </div>
-    <div class="row my-2">
-      <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.mailgun_domain') }}</label>
-        <span class="text-danger"> *</span>
-        <base-input
-          :invalid="$v.mailConfigData.mail_mailgun_domain.$error"
-          v-model.trim="mailConfigData.mail_mailgun_domain"
-          type="text"
-          name="mailgun_domain"
-          @input="$v.mailConfigData.mail_mailgun_domain.$touch()"
-        />
-        <div v-if="$v.mailConfigData.mail_mailgun_domain.$error">
-          <span v-if="!$v.mailConfigData.mail_mailgun_domain.required" class="text-danger">
-            {{ $tc('validation.required') }}
-          </span>
-        </div>
-      </div>
-      <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.mailgun_secret') }}</label>
-        <span class="text-danger"> *</span>
-        <base-input
-          :invalid="$v.mailConfigData.mail_mailgun_secret.$error"
-          v-model.trim="mailConfigData.mail_mailgun_secret"
-          type="password"
-          name="mailgun_secret"
-          show-password
-          @input="$v.mailConfigData.mail_mailgun_secret.$touch()"
-        />
-        <div v-if="$v.mailConfigData.mail_mailgun_secret.$error">
-          <span v-if="!$v.mailConfigData.mail_mailgun_secret.required" class="text-danger">
-            {{ $tc('validation.required') }}
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="row my-2">
-      <div class="col-md-6 my-2">
-        <label class="form-label">{{ $t('wizard.mail.mailgun_endpoint') }}</label>
-        <span class="text-danger"> *</span>
-        <base-input
-          :invalid="$v.mailConfigData.mail_mailgun_endpoint.$error"
-          v-model.trim="mailConfigData.mail_mailgun_endpoint"
-          type="text"
-          name="mailgun_endpoint"
-          @input="$v.mailConfigData.mail_mailgun_endpoint.$touch()"
-        />
-        <div v-if="$v.mailConfigData.mail_mailgun_endpoint.$error">
-          <span v-if="!$v.mailConfigData.mail_mailgun_endpoint.required" class="text-danger">
-            {{ $tc('validation.required') }}
-          </span>
-          <span v-if="!$v.mailConfigData.mail_mailgun_endpoint.numeric" class="text-danger">
-            {{ $tc('validation.numbers_only') }}
-          </span>
-        </div>
-      </div>
-    </div>
     <base-button
       :loading="loading"
       class="pull-right mt-4"
@@ -181,7 +125,7 @@
 <script>
 import MultiSelect from 'vue-multiselect'
 import { validationMixin } from 'vuelidate'
-const { required, email, numeric } = require('vuelidate/lib/validators')
+const { required, email } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -209,29 +153,18 @@ export default {
     return {
       mailConfigData: {
         mail_driver: '',
-        mail_host: '',
-        mail_port: null,
         mail_mailgun_domain: '',
         mail_mailgun_secret: '',
         mail_mailgun_endpoint: '',
-        mail_encryption: 'tls',
         from_mail: '',
         from_name: ''
-      },
-      encryptions: ['tls', 'ssl', 'starttls']
+      }
     }
   },
   validations: {
     mailConfigData: {
       mail_driver: {
         required
-      },
-      mail_host: {
-        required
-      },
-      mail_port: {
-        required,
-        numeric
       },
       mail_mailgun_domain: {
         required
@@ -240,9 +173,6 @@ export default {
         required
       },
       mail_mailgun_secret: {
-        required
-      },
-      mail_encryption: {
         required
       },
       from_mail: {

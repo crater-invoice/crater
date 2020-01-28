@@ -104,9 +104,28 @@
         }
     }
 
+    .payment-tab {
+
+        .dropdown-container {
+            right: 0;
+            left: auto;
+        }
+
+    }
+
+    .item-tab {
+
+        .dropdown-container {
+            right: 0;
+            left: auto;
+        }
+
+    }
+
     .add-new-tax {
         height: 45px;
         white-space: nowrap;
+        z-index: 1;
     }
 
     .flex-box {

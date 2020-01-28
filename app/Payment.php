@@ -5,6 +5,7 @@ use Crater\User;
 use Crater\Invoice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Crater\PaymentMethod;
 
 class Payment extends Model
 {
@@ -19,9 +20,11 @@ class Payment extends Model
     protected $fillable = [
         'user_id',
         'invoice_id',
+        'payment_method_id',
         'payment_date',
         'company_id',
         'notes',
+        'unique_hash',
         'payment_number',
         'payment_mode',
         'amount'
@@ -32,10 +35,34 @@ class Payment extends Model
         'formattedPaymentDate'
     ];
 
-    public static function getNextPaymentNumber()
+
+    private function strposX($haystack, $needle, $number)
+    {
+        if ($number == '1') {
+            return strpos($haystack, $needle);
+        } elseif ($number > '1') {
+            return strpos(
+                $haystack,
+                $needle,
+                $this->strposX($haystack, $needle, $number - 1) + strlen($needle)
+            );
+        } else {
+            return error_log('Error: Value for parameter $number is out of range');
+        }
+    }
+
+    public function getPaymentNumAttribute()
+    {
+        $position = $this->strposX($this->payment_number, "-", 1) + 1;
+        return substr($this->payment_number, $position);
+    }
+
+    public static function getNextPaymentNumber($value)
     {
         // Get the last created order
-        $payment = Payment::orderBy('created_at', 'desc')->first();
+        $payment = Payment::where('payment_number', 'LIKE', $value . '-%')
+                    ->orderBy('created_at', 'desc')
+                    ->first();
         if (!$payment) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
@@ -54,6 +81,12 @@ class Payment extends Model
         return sprintf('%06d', intval($number) + 1);
     }
 
+    public function getPaymentPrefixAttribute ()
+    {
+        $prefix= explode("-",$this->payment_number)[0];
+        return $prefix;
+    }
+
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
@@ -62,6 +95,11 @@ class Payment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     public function getFormattedCreatedAtAttribute($value)
@@ -92,9 +130,9 @@ class Payment extends Model
         return $query->where('payments.payment_number', 'LIKE', '%'.$paymentNumber.'%');
     }
 
-    public function scopePaymentMode($query, $paymentMode)
+    public function scopePaymentMethod($query, $paymentMethodId)
     {
-        return $query->where('payments.payment_mode', $paymentMode);
+        return $query->where('payments.payment_method_id', $paymentMethodId);
     }
 
     public function scopeApplyFilters($query, array $filters)
@@ -109,8 +147,8 @@ class Payment extends Model
             $query->paymentNumber($filters->get('payment_number'));
         }
 
-        if ($filters->get('payment_mode')) {
-            $query->paymentMode($filters->get('payment_mode'));
+        if ($filters->get('payment_method_id')) {
+            $query->paymentMethod($filters->get('payment_method_id'));
         }
 
         if ($filters->get('customer_id')) {

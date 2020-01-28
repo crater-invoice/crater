@@ -24,14 +24,9 @@ class PaymentRequest extends FormRequest
     {
         $rules = [
             'payment_date' => 'required',
-            'payment_number' => 'required|unique:payments,payment_number',
             'user_id' => 'required',
             'amount' => 'required',
         ];
-
-        if ($this->getMethod() == 'PUT') {
-            $rules['payment_number'] = $rules['payment_number'].','.$this->route('payment');
-        }
 
         return $rules;
     }

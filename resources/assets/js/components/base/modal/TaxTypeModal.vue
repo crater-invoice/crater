@@ -124,7 +124,7 @@ export default {
       },
       percent: {
         required,
-        between: between(0.10, 100)
+        between: between(0, 100)
       },
       description: {
         maxLength: maxLength(255)

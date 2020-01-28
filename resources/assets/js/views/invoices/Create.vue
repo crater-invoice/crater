@@ -30,8 +30,8 @@
           <div
             v-if="selectedCustomer" class="show-customer">
             <div class="row px-2 mt-1">
-              <div class="col col-6">
-                <div v-if="selectedCustomer.billing_address" class="row address-menu">
+              <div v-if="selectedCustomer.billing_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.bill_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.billing_address.name">
@@ -55,8 +55,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col col-6">
-                <div v-if="selectedCustomer.shipping_address" class="row address-menu">
+              <div v-if="selectedCustomer.shipping_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.ship_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.shipping_address.name">
@@ -83,7 +83,8 @@
             </div>
             <div class="customer-content mb-1">
               <label class="email">{{ selectedCustomer.name }}</label>
-              <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
+              <label class="action" @click="editCustomer">{{ $t('general.edit') }}</label>
+              <label class="action" @click="removeCustomer">{{ $t('general.deselect') }}</label>
             </div>
           </div>
 
@@ -127,14 +128,24 @@
           <div class="row mt-4">
             <div class="col collapse-input">
               <label>{{ $t('invoices.invoice_number') }}<span class="text-danger"> * </span></label>
-              <base-input
-                :invalid="$v.newInvoice.invoice_number.$error"
-                :read-only="true"
-                v-model="newInvoice.invoice_number"
+              <base-prefix-input
+                v-model="invoiceNumAttribute"
+                :invalid="$v.invoiceNumAttribute.$error"
+                :prefix="invoicePrefix"
                 icon="hashtag"
-                @input="$v.newInvoice.invoice_number.$touch()"
+                @input="$v.invoiceNumAttribute.$touch()"
               />
-              <span v-show="$v.newInvoice.invoice_number.$error && !$v.newInvoice.invoice_number.required" class="text-danger mt-1"> {{ $tc('validation.required') }}  </span>
+              <span
+                v-show="$v.invoiceNumAttribute.$error && !$v.invoiceNumAttribute.required"
+                class="text-danger mt-1"
+              >
+                {{ $tc('validation.required') }}
+              </span>
+              <span
+                v-show="!$v.invoiceNumAttribute.numeric" class="text-danger mt-1"
+              >
+                {{ $tc('validation.numbers_only') }}
+              </span>
             </div>
             <div class="col collapse-input">
               <label>{{ $t('invoices.ref_number') }}</label>
@@ -144,7 +155,12 @@
                 icon="hashtag"
                 @input="$v.newInvoice.reference_number.$touch()"
               />
-              <div v-if="$v.newInvoice.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
+              <div
+                v-if="$v.newInvoice.reference_number.$error"
+                class="text-danger"
+              >
+                {{ $tc('validation.ref_number_maxlength') }}
+              </div>
             </div>
           </div>
         </div>
@@ -192,6 +208,7 @@
             :key="item.id"
             :index="index"
             :item-data="item"
+            :invoice-items="newInvoice.items"
             :currency="currency"
             :tax-per-item="taxPerItem"
             :discount-per-item="discountPerItem"
@@ -320,7 +337,7 @@ import { validationMixin } from 'vuelidate'
 import Guid from 'guid'
 import TaxStub from '../../stub/tax'
 import Tax from './InvoiceTax'
-const { required, between, maxLength } = require('vuelidate/lib/validators')
+const { required, between, maxLength, numeric } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -361,7 +378,9 @@ export default {
       discountPerItem: null,
       initLoading: false,
       isLoading: false,
-      maxDiscount: 0
+      maxDiscount: 0,
+      invoicePrefix: null,
+      invoiceNumAttribute: null
     }
   },
   validations () {
@@ -371,9 +390,6 @@ export default {
           required
         },
         due_date: {
-          required
-        },
-        invoice_number: {
           required
         },
         discount_val: {
@@ -388,6 +404,10 @@ export default {
       },
       selectedCustomer: {
         required
+      },
+      invoiceNumAttribute: {
+        required,
+        numeric
       }
     }
   },
@@ -559,6 +579,8 @@ export default {
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency
           this.invoiceTemplates = response.data.invoiceTemplates
+          this.invoicePrefix = response.data.invoice_prefix
+          this.invoiceNumAttribute = response.data.nextInvoiceNumber
         }
         this.initLoading = false
         return
@@ -574,13 +596,22 @@ export default {
         let today = new Date()
         this.newInvoice.invoice_date = moment(today).toString()
         this.newInvoice.due_date = moment(today).add(7, 'days').toString()
-        this.newInvoice.invoice_number = response.data.nextInvoiceNumber
         this.itemList = response.data.items
+        this.invoicePrefix = response.data.invoice_prefix
+        this.invoiceNumAttribute = response.data.nextInvoiceNumberAttribute
       }
       this.initLoading = false
     },
     removeCustomer () {
       this.resetSelectedCustomer()
+    },
+    editCustomer () {
+      this.openModal({
+        'title': this.$t('customers.edit_customer'),
+        'componentName': 'CustomerModal',
+        'id': this.selectedCustomer.id,
+        'data': this.selectedCustomer
+      })
     },
     openTemplateModal () {
       this.openModal({
@@ -604,6 +635,7 @@ export default {
       }
 
       this.isLoading = true
+      this.newInvoice.invoice_number = this.invoicePrefix + '-' + this.invoiceNumAttribute
 
       let data = {
         ...this.newInvoice,
@@ -637,6 +669,10 @@ export default {
         this.isLoading = false
       }).catch((err) => {
         this.isLoading = false
+        if (err.response.data.errors.invoice_number) {
+          window.toastr['error'](err.response.data.errors.invoice_number)
+          return true
+        }
         console.log(err)
       })
     },
@@ -653,6 +689,10 @@ export default {
         }
       }).catch((err) => {
         this.isLoading = false
+        if (err.response.data.errors.invoice_number) {
+          window.toastr['error'](err.response.data.errors.invoice_number)
+          return true
+        }
         console.log(err)
       })
     },

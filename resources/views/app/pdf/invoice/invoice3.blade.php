@@ -3,9 +3,11 @@
 <head>
     <title>Invoice</title>
     {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <style type="text/css">
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: "DejaVu Sans";
         }
 
         html {
@@ -16,7 +18,7 @@
             border-collapse: collapse;
         }
 
-        hr {
+        .header-line {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 80px;
@@ -24,6 +26,16 @@
             right: -70px;
             width: 100%;
         }
+
+        hr {
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
+        }
+
+        .items-table-hr{
+            margin: 0 30px 0 30px;
+        }
+
 
         .header-left {
             padding-top: 45px;
@@ -64,13 +76,11 @@
             margin-left:160px;
         }
         .header {
-            font-family: 'Roboto', sans-serif;
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -86,7 +96,7 @@
 
         .address {
             display: inline-block;
-            padding-top: 20px
+            padding-top: 100px;
         }
 
         .bill-add {
@@ -200,8 +210,7 @@
 
 
         .job-add {
-            display: inline;
-            position: absolute;
+            display: block;
             float: right;
             padding: 20px 30px 0 0;
         }
@@ -250,9 +259,7 @@
             line-height: 18px;
         }
         .table2 {
-            margin-top: 188px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -382,7 +389,6 @@
         }
 
         .notes {
-            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -395,7 +401,6 @@
         }
 
         .notes-label {
-            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -429,14 +434,16 @@
             </tr>
         </table>
     </div>
-    <hr style="border: 0.620315px solid #E8E8E8;">
+
+    <hr class="header-line">
+
     <div class="wrapper">
         <div class="address">
             <div class="bill-add">
                 <div style="float:left;">
                     @include('app.pdf.invoice.partials.billing-address')
                 </div>
-                @if($invoice->user->billingaddress->name || $invoice->user->billingaddress->address_street_1 || $invoice->user->billingaddress->address_street_2 || $invoice->user->billingaddress->country || $invoice->user->billingaddress->state || $invoice->user->billingaddress->city || $invoice->user->billingaddress->zip || $invoice->user->billingaddress->phone)
+                @if($invoice->user->billingaddress)
                     <div style="float:right;">
                 @else
                     <div style="float:left;">
@@ -462,6 +469,7 @@
                     </tr>
                 </table>
             </div>
+            <div style="clear: both;"></div>
         </div>
         @include('app.pdf.invoice.partials.table')
         @include('app.pdf.invoice.partials.notes')

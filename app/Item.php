@@ -24,19 +24,24 @@ class Item extends Model
         'formattedCreatedAt'
     ];
 
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
     public function scopeWhereSearch($query, $search)
     {
-        return $query->where('name', 'LIKE', '%'.$search.'%');
+        return $query->where('items.name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopeWherePrice($query, $price)
     {
-        return $query->where('price', $price);
+        return $query->where('items.price', $price);
     }
 
-    public function scopeWhereUnit($query, $unit)
+    public function scopeWhereUnit($query, $unit_id)
     {
-        return $query->where('unit', $unit);
+        return $query->where('items.unit_id', $unit_id);
     }
 
     public function scopeWhereOrder($query, $orderByField, $orderBy)
@@ -56,8 +61,8 @@ class Item extends Model
             $query->wherePrice($filters->get('price'));
         }
 
-        if ($filters->get('unit')) {
-            $query->whereUnit($filters->get('unit'));
+        if ($filters->get('unit_id')) {
+            $query->whereUnit($filters->get('unit_id'));
         }
 
         if ($filters->get('orderByField') || $filters->get('orderBy')) {
@@ -80,7 +85,7 @@ class Item extends Model
 
     public function scopeWhereCompany($query, $company_id)
     {
-        $query->where('company_id', $company_id);
+        $query->where('items.company_id', $company_id);
     }
 
     public function invoiceItems()

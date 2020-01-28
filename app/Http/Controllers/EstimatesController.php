@@ -56,25 +56,43 @@ class EstimatesController extends Controller
 
     public function create(Request $request)
     {
-        $nextEstimateNumber = 'EST-'.Estimate::getNextEstimateNumber();
+        $estimate_prefix = CompanySetting::getSetting('estimate_prefix', $request->header('company'));
+        $estimate_num_auto_generate = CompanySetting::getSetting('estimate_auto_generate', $request->header('company'));
+
+        $nextEstimateNumberAttribute = null;
+        $nextEstimateNumber = Estimate::getNextEstimateNumber($estimate_prefix);
+
+        if ($estimate_num_auto_generate == "YES") {
+            $nextEstimateNumberAttribute = $nextEstimateNumber;
+        }
+
         $tax_per_item = CompanySetting::getSetting('tax_per_item', $request->header('company'));
         $discount_per_item = CompanySetting::getSetting('discount_per_item', $request->header('company'));
         $customers = User::where('role', 'customer')->get();
 
         return response()->json([
             'customers' => $customers,
-            'nextEstimateNumber' => $nextEstimateNumber,
+            'nextEstimateNumberAttribute' => $nextEstimateNumberAttribute,
+            'nextEstimateNumber' => $estimate_prefix.'-'.$nextEstimateNumber,
             'taxes' => Tax::whereCompany($request->header('company'))->latest()->get(),
             'items' => Item::whereCompany($request->header('company'))->get(),
             'tax_per_item' => $tax_per_item,
             'discount_per_item' => $discount_per_item,
             'estimateTemplates' => EstimateTemplate::all(),
-            'shareable_link' => ''
+            'shareable_link' => '',
+            'estimate_prefix' => $estimate_prefix
         ]);
     }
 
     public function store(EstimatesRequest $request)
     {
+        $estimate_number = explode("-",$request->estimate_number);
+        $number_attributes['estimate_number'] = $estimate_number[0].'-'.sprintf('%06d', intval($estimate_number[1]));
+
+        Validator::make($number_attributes, [
+            'estimate_number' => 'required|unique:estimates,estimate_number'
+        ])->validate();
+
         $estimate_date = Carbon::createFromFormat('d/m/Y', $request->estimate_date);
         $expiry_date = Carbon::createFromFormat('d/m/Y', $request->expiry_date);
         $status = Estimate::STATUS_DRAFT;
@@ -101,7 +119,7 @@ class EstimatesController extends Controller
         $estimate = Estimate::create([
             'estimate_date' => $estimate_date,
             'expiry_date' => $expiry_date,
-            'estimate_number' => $request->estimate_number,
+            'estimate_number' => $number_attributes['estimate_number'],
             'reference_number' => $request->reference_number,
             'user_id' => $request->user_id,
             'company_id' => $request->header('company'),
@@ -127,7 +145,7 @@ class EstimatesController extends Controller
 
             if (array_key_exists('taxes', $estimateItem) && $estimateItem['taxes']) {
                 foreach ($estimateItem['taxes'] as $tax) {
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $tax['company_id'] = $request->header('company');
                         $item->taxes()->create($tax);
                     }
@@ -137,7 +155,7 @@ class EstimatesController extends Controller
 
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $tax['company_id'] = $request->header('company');
                     $estimate->taxes()->create($tax);
                 }
@@ -216,26 +234,33 @@ class EstimatesController extends Controller
 
         return response()->json( [
             'customers' => $customers,
-            'nextEstimateNumber' => $estimate->estimate_number,
+            'nextEstimateNumber' => $estimate->getEstimateNumAttribute(),
             'taxes' => Tax::latest()->whereCompany($request->header('company'))->get(),
             'estimate' => $estimate,
             'items' => Item::whereCompany($request->header('company'))->latest()->get(),
             'estimateTemplates' => EstimateTemplate::all(),
             'tax_per_item' => $estimate->tax_per_item,
             'discount_per_item' => $estimate->discount_per_item,
-            'shareable_link' => url('/estimates/pdf/'.$estimate->unique_hash)
+            'shareable_link' => url('/estimates/pdf/'.$estimate->unique_hash),
+            'estimate_prefix' => $estimate->getEstimatePrefixAttribute()
         ]);
     }
 
     public function update(EstimatesRequest $request, $id)
     {
+        $estimate_number = explode("-",$request->estimate_number);
+        $number_attributes['estimate_number'] = $estimate_number[0].'-'.sprintf('%06d', intval($estimate_number[1]));
+        Validator::make($number_attributes, [
+            'estimate_number' => 'required|unique:estimates,estimate_number'.','.$id
+        ])->validate();
+
         $estimate_date = Carbon::createFromFormat('d/m/Y', $request->estimate_date);
         $expiry_date = Carbon::createFromFormat('d/m/Y', $request->expiry_date);
 
         $estimate = Estimate::find($id);
         $estimate->estimate_date = $estimate_date;
         $estimate->expiry_date = $expiry_date;
-        $estimate->estimate_number = $request->estimate_number;
+        $estimate->estimate_number = $number_attributes['estimate_number'];
         $estimate->reference_number = $request->reference_number;
         $estimate->user_id = $request->user_id;
         $estimate->estimate_template_id = $request->estimate_template_id;
@@ -266,7 +291,7 @@ class EstimatesController extends Controller
 
             if (array_key_exists('taxes', $estimateItem) && $estimateItem['taxes']) {
                 foreach ($estimateItem['taxes'] as $tax) {
-                    if ($tax['amount']) {
+                    if (gettype($tax['amount']) !== "NULL") {
                         $tax['company_id'] = $request->header('company');
                         $item->taxes()->create($tax);
                     }
@@ -276,7 +301,7 @@ class EstimatesController extends Controller
 
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                if ($tax['amount']) {
+                if (gettype($tax['amount']) !== "NULL") {
                     $tax['company_id'] = $request->header('company');
                     $estimate->taxes()->create($tax);
                 }
@@ -381,6 +406,10 @@ class EstimatesController extends Controller
     {
         $estimate = Estimate::with(['items', 'items.taxes', 'user', 'estimateTemplate', 'taxes'])->find($id);
         $invoice_date = Carbon::parse($estimate->estimate_date);
+        $invoice_prefix = CompanySetting::getSetting(
+            'invoice_prefix',
+            $request->header('company')
+        );
         $due_date = Carbon::parse($estimate->estimate_date)->addDays(7);
         $tax_per_item = CompanySetting::getSetting(
                 'tax_per_item',
@@ -400,7 +429,7 @@ class EstimatesController extends Controller
         $invoice = Invoice::create([
             'invoice_date' => $invoice_date,
             'due_date' => $due_date,
-            'invoice_number' => "INV-".Invoice::getNextInvoiceNumber(),
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

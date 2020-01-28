@@ -2,10 +2,11 @@
 <html>
 <head>
     <title>Estimate</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
     <style type="text/css">
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: "DejaVu Sans";
         }
 
         html {
@@ -17,13 +18,18 @@
             border-collapse: collapse;
         }
 
-        hr {
+        .header-line {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 90px;
             left: 0px;
             width: 100%;
+        }
+
+        hr {
             margin: 0 30px 0 30px;
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
         }
 
         .header-center {
@@ -58,13 +64,11 @@
             margin-left:160px;
         }
         .header {
-            font-family: 'Roboto', sans-serif;
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
         .TextColor1 {
-            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             color: rgba(0, 0, 0, 0.5);
         }
@@ -250,8 +254,7 @@
 
         .table2 {
             margin-top: 35px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -265,6 +268,7 @@
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
+            padding-bottom: 10px;
         }
 
         tr.main-table-header th {
@@ -273,6 +277,10 @@
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
+        }
+
+        .main-table-header {
+            margin-bottom: 10px;
         }
 
         tr.item-details td {
@@ -287,6 +295,7 @@
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
         }
 
         .padd8 {
@@ -339,7 +348,6 @@
         }
 
         .notes {
-            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: 300;
             font-size: 12px;
@@ -352,7 +360,6 @@
         }
 
         .notes-label {
-            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
@@ -381,7 +388,7 @@
                 </td>
             </tr>
         </table>
-        <hr class="header-line" style="border: 0.620315px solid #E8E8E8;" />
+        <hr class="header-line" />
     </div>
     <div class="wrapper">
         <div class="address">
@@ -410,7 +417,7 @@
             <div class="bill-address-container">
                 @include('app.pdf.estimate.partials.billing-address')
             </div>
-            @if($estimate->user->billingaddress && ($estimate->user->billingaddress->name || $estimate->user->billingaddress->address_street_1 || $estimate->user->billingaddress->address_street_2 || $estimate->user->billingaddress->country || $estimate->user->billingaddress->state || $estimate->user->billingaddress->city || $estimate->user->billingaddress->zip || $estimate->user->billingaddress->phone))
+            @if($estimate->user->billingaddress)
                 <div class="ship-address-container">
             @else
                 <div class="ship-address-container " style="float:left;padding-left:0px;">

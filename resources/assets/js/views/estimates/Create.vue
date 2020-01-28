@@ -32,8 +32,8 @@
             class="show-customer"
           >
             <div class="row px-2 mt-1">
-              <div class="col col-6">
-                <div v-if="selectedCustomer.billing_address != null" class="row address-menu">
+              <div v-if="selectedCustomer.billing_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.bill_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.billing_address.name">
@@ -57,8 +57,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col col-6">
-                <div v-if="selectedCustomer.shipping_address != null" class="row address-menu">
+              <div v-if="selectedCustomer.shipping_address" class="col col-6">
+                <div class="row address-menu">
                   <label class="col-sm-4 px-2 title">{{ $t('general.ship_to') }}</label>
                   <div class="col-sm p-0 px-2 content">
                     <label v-if="selectedCustomer.shipping_address.name">
@@ -84,8 +84,9 @@
               </div>
             </div>
             <div class="customer-content mb-1">
-              <label class="email">{{ selectedCustomer.email ? selectedCustomer.email : selectedCustomer.name }}</label>
-              <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
+              <label class="email">{{ selectedCustomer.name }}</label>
+              <label class="action" @click="editCustomer">{{ $t('general.edit') }}</label>
+              <label class="action" @click="removeCustomer">{{ $t('general.deselect') }}</label>
             </div>
           </div>
 
@@ -127,14 +128,15 @@
           <div class="row mt-4">
             <div class="col collapse-input">
               <label>{{ $t('estimates.estimate_number') }}<span class="text-danger"> * </span></label>
-              <base-input
-                :invalid="$v.newEstimate.estimate_number.$error"
-                :read-only="true"
-                v-model="newEstimate.estimate_number"
+              <base-prefix-input
+                v-model="estimateNumAttribute"
+                :invalid="$v.estimateNumAttribute.$error"
+                :prefix="estimatePrefix"
                 icon="hashtag"
-                @input="$v.newEstimate.estimate_number.$touch()"
+                @input="$v.estimateNumAttribute.$touch()"
               />
-              <span v-show="$v.newEstimate.estimate_number.$error && !$v.newEstimate.estimate_number.required" class="text-danger mt-1"> {{ $tc('estimates.errors.required') }}  </span>
+              <span v-show="$v.estimateNumAttribute.$error && !$v.estimateNumAttribute.required" class="text-danger mt-1"> {{ $tc('estimates.errors.required') }}  </span>
+              <span v-show="!$v.estimateNumAttribute.numeric" class="text-danger mt-1"> {{ $tc('validation.numbers_only') }}  </span>
             </div>
             <div class="col collapse-input">
               <label>{{ $t('estimates.ref_number') }}</label>
@@ -194,6 +196,7 @@
             :index="index"
             :item-data="item"
             :currency="currency"
+            :estimate-items="newEstimate.items"
             :tax-per-item="taxPerItem"
             :discount-per-item="discountPerItem"
             @remove="removeItem"
@@ -320,7 +323,7 @@ import { validationMixin } from 'vuelidate'
 import Guid from 'guid'
 import TaxStub from '../../stub/tax'
 import Tax from './EstimateTax'
-const { required, between, maxLength } = require('vuelidate/lib/validators')
+const { required, between, maxLength, numeric } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -361,7 +364,9 @@ export default {
       discountPerItem: null,
       initLoading: false,
       isLoading: false,
-      maxDiscount: 0
+      maxDiscount: 0,
+      estimatePrefix: null,
+      estimateNumAttribute: null
     }
   },
   validations () {
@@ -371,9 +376,6 @@ export default {
           required
         },
         expiry_date: {
-          required
-        },
-        estimate_number: {
           required
         },
         discount_val: {
@@ -388,6 +390,10 @@ export default {
       },
       selectedCustomer: {
         required
+      },
+      estimateNumAttribute: {
+        required,
+        numeric
       }
     }
   },
@@ -559,6 +565,8 @@ export default {
           this.taxPerItem = response.data.tax_per_item
           this.selectedCurrency = this.defaultCurrency
           this.estimateTemplates = response.data.estimateTemplates
+          this.estimatePrefix = response.data.estimate_prefix
+          this.estimateNumAttribute = response.data.nextEstimateNumber
         }
         this.initLoading = false
         return
@@ -574,13 +582,22 @@ export default {
         let today = new Date()
         this.newEstimate.estimate_date = moment(today).toString()
         this.newEstimate.expiry_date = moment(today).add(7, 'days').toString()
-        this.newEstimate.estimate_number = response.data.nextEstimateNumber
         this.itemList = response.data.items
+        this.estimatePrefix = response.data.estimate_prefix
+        this.estimateNumAttribute = response.data.nextEstimateNumberAttribute
       }
       this.initLoading = false
     },
     removeCustomer () {
       this.resetSelectedCustomer()
+    },
+    editCustomer () {
+      this.openModal({
+        'title': this.$t('customers.edit_customer'),
+        'componentName': 'CustomerModal',
+        'id': this.selectedCustomer.id,
+        'data': this.selectedCustomer
+      })
     },
     openTemplateModal () {
       this.openModal({
@@ -604,6 +621,7 @@ export default {
       }
 
       this.isLoading = true
+      this.newEstimate.estimate_number = this.estimatePrefix + '-' + this.estimateNumAttribute
 
       let data = {
         ...this.newEstimate,
@@ -637,7 +655,11 @@ export default {
         this.isLoading = false
       }).catch((err) => {
         this.isLoading = false
-        console.log(err)
+        if (err.response.data.errors.estimate_number) {
+          window.toastr['error'](err.response.data.errors.estimate_number)
+          return true
+        }
+        window.toastr['error'](err.response.data.message)
       })
     },
     submitUpdate (data) {
@@ -650,7 +672,11 @@ export default {
         this.isLoading = false
       }).catch((err) => {
         this.isLoading = false
-        console.log(err)
+        if (err.response.data.errors.estimate_number) {
+          window.toastr['error'](err.response.data.errors.estimate_number)
+          return true
+        }
+        window.toastr['error'](err.response.data.message)
       })
     },
     checkItemsData (index, isValid) {

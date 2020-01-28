@@ -6,7 +6,8 @@ const initialState = {
   payments: [],
   totalPayments: 0,
   selectAllField: false,
-  selectedPayments: []
+  selectedPayments: [],
+  paymentModes: []
 }
 
 export default {

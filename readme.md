@@ -29,7 +29,7 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 ## Mobile Apps
 - [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
-- IOS - Coming Soon
+- [IOS](https://apps.apple.com/app/id1489169767)
 - [Source](https://github.com/bytefury/crater-mobile)
 
 ## Discord
@@ -62,10 +62,12 @@ Crater is a product of [Bytefury](https://bytefury.com)
 
 **Special thanks to:**
 * [Birkhoff Lee](https://github.com/BirkhoffLee)
-
+* [Hassan A. Ba Abdullah](https://github.com/hsnapps)
 
 ## Translate
-Help us translate on [Transifex](https://www.transifex.com/bytefury/crater-invoice)
+Help us translate or suggest changes to existing languages if you find any mistakes by creating a new PR. 
+
+Here's the [english-version](https://github.com/bytefury/crater/blob/master/resources/assets/js/plugins/en.json) json file which you can use as a reference.
 
 ## License
 Crater is released under the Attribution Assurance License.

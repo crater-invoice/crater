@@ -8,6 +8,7 @@ import BaseTextArea from './BaseTextArea.vue'
 import BaseSelect from './base-select/BaseSelect.vue'
 import BaseLoader from './BaseLoader.vue'
 import BaseCustomerSelect from './BaseCustomerSelect.vue'
+import BasePrefixInput from './BasePrefixInput.vue'
 
 import BasePopup from './popup/BasePopup.vue'
 import CustomerSelectPopup from './popup/CustomerSelectPopup.vue'
@@ -23,6 +24,7 @@ Vue.component('base-input', BaseInput)
 Vue.component('base-switch', BaseSwitch)
 Vue.component('base-text-area', BaseTextArea)
 Vue.component('base-loader', BaseLoader)
+Vue.component('base-prefix-input', BasePrefixInput)
 
 Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)

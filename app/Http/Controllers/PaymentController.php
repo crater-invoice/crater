@@ -305,10 +305,6 @@ class PaymentController extends Controller
         $data['user'] = User::find($userId)->toArray();
         $data['company'] = Company::find($payment->company_id);
         $email = $data['user']['email'];
-        $notificationEmail = CompanySetting::getSetting(
-            'notification_email',
-            $request->header('company')
-        );
 
         if (!$email) {
             return response()->json([
@@ -316,13 +312,7 @@ class PaymentController extends Controller
             ]);
         }
 
-        if (!$notificationEmail) {
-            return response()->json([
-                'error' => 'notification_email_does_not_exist'
-            ]);
-        }
-
-        \Mail::to($email)->send(new PaymentPdf($data, $notificationEmail));
+        \Mail::to($email)->send(new PaymentPdf($data));
 
         return response()->json([
             'success' => true

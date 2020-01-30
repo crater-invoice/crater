@@ -35,7 +35,6 @@
     "axios": "^0.19",
     "bootstrap": "^4.1.0",
     "chart.js": "^2.7.3",
-    "cross-env": "^5.1.4",
     "easy-pie-chart": "^2.1.7",
     "fs": "0.0.1-security",
     "guid": "0.0.12",

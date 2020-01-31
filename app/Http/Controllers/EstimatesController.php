@@ -175,12 +175,6 @@ class EstimatesController extends Controller
                 ]);
             }
 
-            if (!config('mail.from.name')) {
-                return response()->json([
-                    'error' => 'from_email_does_not_exist'
-                ]);
-            }
-
             \Mail::to($email)->send(new EstimatePdf($data));
         }
 
@@ -340,12 +334,6 @@ class EstimatesController extends Controller
         if (!$email) {
             return response()->json([
                 'error' => 'user_email_does_not_exist'
-            ]);
-        }
-
-        if (!config('mail.from.name')) {
-            return response()->json([
-                'error' => 'from_email_does_not_exist'
             ]);
         }
 

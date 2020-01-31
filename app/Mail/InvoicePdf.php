@@ -6,7 +6,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class invoicePdf extends Mailable
+class InvoicePdf extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,6 +29,9 @@ class invoicePdf extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.send.invoice', ['data', $this->data]);
+        $company = $this->data['company']['name'];
+
+        return $this->subject("Invoice from $company")
+                    ->markdown('emails.send.invoice', ['data', $this->data]);
     }
 }

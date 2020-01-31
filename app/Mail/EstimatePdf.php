@@ -29,6 +29,9 @@ class EstimatePdf extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.send.estimate', ['data', $this->data]);
+        $company = $this->data['company']['name'];
+
+        return $this->subject("Estimate from $company")
+                    ->markdown('emails.send.estimate', ['data', $this->data]);
     }
 }

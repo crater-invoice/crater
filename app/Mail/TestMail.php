@@ -6,23 +6,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class invoicePdf extends Mailable
+class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $data = [];
-
-    public $notificationEmail = '';
+    public $subject;
+    public $message;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $subject
+     * @param $message
      */
-    public function __construct($data, $notificationEmail)
+    public function __construct($subject, $message)
     {
-        $this->data = $data;
-        $this->notificationEmail = $notificationEmail;
+        $this->subject = $subject;
+        $this->message = $message;
     }
 
     /**
@@ -32,6 +31,8 @@ class invoicePdf extends Mailable
      */
     public function build()
     {
-        return $this->from($this->notificationEmail)->markdown('emails.send.invoice', ['data', $this->data]);
+        return $this->subject($this->subject)->markdown('emails.test')->with([
+            'my_message' => $this->message
+        ]);
     }
 }

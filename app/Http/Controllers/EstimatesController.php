@@ -168,10 +168,6 @@ class EstimatesController extends Controller
             $data['user'] = User::find($userId)->toArray();
             $data['company'] = Company::find($estimate->company_id);
             $email = $data['user']['email'];
-            $notificationEmail = CompanySetting::getSetting(
-                'notification_email',
-                $request->header('company')
-            );
 
             if (!$email) {
                 return response()->json([
@@ -179,13 +175,7 @@ class EstimatesController extends Controller
                 ]);
             }
 
-            if (!$notificationEmail) {
-                return response()->json([
-                    'error' => 'notification_email_does_not_exist'
-                ]);
-            }
-
-            \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
+            \Mail::to($email)->send(new EstimatePdf($data));
         }
 
         $estimate = Estimate::with([
@@ -340,10 +330,6 @@ class EstimatesController extends Controller
         $data['company'] = Company::find($estimate->company_id);
 
         $email = $data['user']['email'];
-        $notificationEmail = CompanySetting::getSetting(
-            'notification_email',
-            $request->header('company')
-        );
 
         if (!$email) {
             return response()->json([
@@ -351,13 +337,7 @@ class EstimatesController extends Controller
             ]);
         }
 
-        if (!$notificationEmail) {
-            return response()->json([
-                'error' => 'notification_email_does_not_exist'
-            ]);
-        }
-
-        \Mail::to($email)->send(new EstimatePdf($data, $notificationEmail));
+        \Mail::to($email)->send(new EstimatePdf($data));
 
         if ($estimate->status == Estimate::STATUS_DRAFT) {
             $estimate->status = Estimate::STATUS_SENT;
@@ -406,6 +386,10 @@ class EstimatesController extends Controller
     {
         $estimate = Estimate::with(['items', 'items.taxes', 'user', 'estimateTemplate', 'taxes'])->find($id);
         $invoice_date = Carbon::parse($estimate->estimate_date);
+        $invoice_prefix = CompanySetting::getSetting(
+            'invoice_prefix',
+            $request->header('company')
+        );
         $due_date = Carbon::parse($estimate->estimate_date)->addDays(7);
         $tax_per_item = CompanySetting::getSetting(
                 'tax_per_item',
@@ -425,7 +409,7 @@ class EstimatesController extends Controller
         $invoice = Invoice::create([
             'invoice_date' => $invoice_date,
             'due_date' => $due_date,
-            'invoice_number' => "INV-".Invoice::getNextInvoiceNumber(),
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

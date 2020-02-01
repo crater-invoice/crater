@@ -14,14 +14,17 @@ class ItemsController extends Controller
     {
         $limit = $request->has('limit') ? $request->limit : 10;
 
-        $items = Item::applyFilters($request->only([
+        $items = Item::with(['taxes'])
+            ->leftJoin('units', 'units.id', '=', 'items.unit_id')
+            ->applyFilters($request->only([
                 'search',
                 'price',
-                'unit',
+                'unit_id',
                 'orderByField',
                 'orderBy'
             ]))
             ->whereCompany($request->header('company'))
+            ->select('items.*', 'units.name as unit_name')
             ->latest()
             ->paginate($limit);
 
@@ -33,7 +36,7 @@ class ItemsController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $item = Item::with('taxes')->find($id);
+        $item = Item::with(['taxes', 'unit'])->find($id);
 
         return response()->json([
             'item' => $item,
@@ -43,11 +46,18 @@ class ItemsController extends Controller
         ]);
     }
 
+
+     /**
+     * Create Item.
+     *
+     * @param  Crater\Http\Requests\ItemsRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Requests\ItemsRequest $request)
     {
         $item = new Item();
         $item->name = $request->name;
-        $item->unit = $request->unit;
+        $item->unit_id = $request->unit_id;
         $item->description = $request->description;
         $item->company_id = $request->header('company');
         $item->price = $request->price;
@@ -67,11 +77,18 @@ class ItemsController extends Controller
         ]);
     }
 
+    /**
+     * Update an existing Item.
+     *
+     * @param  Crater\Http\Requests\ItemsRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Requests\ItemsRequest $request, $id)
     {
         $item = Item::find($id);
         $item->name = $request->name;
-        $item->unit = $request->unit;
+        $item->unit_id = $request->unit_id;
         $item->description = $request->description;
         $item->price = $request->price;
         $item->save();
@@ -96,6 +113,13 @@ class ItemsController extends Controller
         ]);
     }
 
+
+    /**
+     * Delete an existing Item.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         $data = Item::deleteItem($id);
@@ -111,12 +135,20 @@ class ItemsController extends Controller
         ]);
     }
 
+
+
+    /**
+     * Delete a list of existing Items.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(Request $request)
     {
         $items = [];
         foreach ($request->id as $id) {
             $item = Item::deleteItem($id);
-            if (!$item) {
+            if ($item) {
                 array_push($items, $id);
             }
         }

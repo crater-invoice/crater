@@ -33,5 +33,25 @@ export default {
 
   [types.SET_SELECT_ALL_STATE] (state, data) {
     state.selectAllField = data
+  },
+
+  [types.SET_PAYMENT_MODES] (state, data) {
+    state.paymentModes = data
+  },
+
+  [types.ADD_PAYMENT_MODE] (state, data) {
+    state.paymentModes.push(data.paymentMethod)
+    state.paymentModes = [data.paymentMethod, ...state.paymentModes]
+  },
+
+  [types.DELETE_PAYMENT_MODE] (state, id) {
+    let index = state.paymentModes.findIndex(paymentMethod => paymentMethod.id === id)
+    state.paymentModes.splice(index, 1)
+  },
+
+  [types.UPDATE_PAYMENT_MODE] (state, data) {
+    let pos = state.paymentModes.findIndex(paymentMethod => paymentMethod.id === data.paymentMethod.id)
+    state.paymentModes.splice(pos, 1)
+    state.paymentModes = [data.paymentMethod, ...state.paymentModes]
   }
 }

@@ -67,10 +67,11 @@
             <label class="form-label">{{ $t('payments.payment_mode') }}</label>
             <base-select
               v-model="filters.payment_mode"
-              :options="payment_mode"
+              :options="paymentModes"
               :searchable="true"
               :show-labels="false"
               :placeholder="$t('payments.payment_mode')"
+              label="name"
             />
           </div>
         </div>
@@ -205,6 +206,14 @@
 
               </v-dropdown-item>
               <v-dropdown-item>
+
+                <router-link :to="{path: `payments/${row.id}/view`}" class="dropdown-item">
+                  <font-awesome-icon icon="eye" class="dropdown-item-icon" />
+                  {{ $t('general.view') }}
+                </router-link>
+
+              </v-dropdown-item>
+              <v-dropdown-item>
                 <div class="dropdown-item" @click="removePayment(row.id)">
                   <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
                   {{ $t('general.delete') }}
@@ -237,7 +246,6 @@ export default {
       sortedBy: 'created_at',
       filtersApplied: false,
       isRequestOngoing: true,
-      payment_mode: ['Cash', 'Check', 'Credit Card', 'Bank Transfer'],
       filters: {
         customer: null,
         payment_mode: '',
@@ -259,7 +267,8 @@ export default {
       'selectedPayments',
       'totalPayments',
       'payments',
-      'selectAllField'
+      'selectAllField',
+      'paymentModes'
     ]),
     selectField: {
       get: function () {
@@ -308,7 +317,7 @@ export default {
       let data = {
         customer_id: this.filters.customer !== null ? this.filters.customer.id : '',
         payment_number: this.filters.payment_number,
-        payment_mode: this.filters.payment_mode ? this.filters.payment_mode : '',
+        payment_method_id: this.filters.payment_mode ? this.filters.payment_mode.id : '',
         orderByField: sort.fieldName || 'created_at',
         orderBy: sort.order || 'desc',
         page

@@ -145,6 +145,10 @@ Route::group(['middleware' => 'api'], function () {
             'uses' => 'UsersController@getBootstrap'
         ]);
 
+        Route::resource('payment-methods', 'PaymentMethodController');
+
+        Route::resource('units', 'UnitController');
+
 
         // Dashboard
         //----------------------------------
@@ -188,6 +192,11 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/invoices/send', [
             'as' => 'invoices.send',
             'uses' => 'InvoicesController@sendInvoice'
+        ]);
+
+        Route::post('/invoices/clone', [
+            'as' => 'invoices.send',
+            'uses' => 'InvoicesController@cloneInvoice'
         ]);
 
         Route::post('/invoices/mark-as-paid', [
@@ -285,6 +294,11 @@ Route::group(['middleware' => 'api'], function () {
             'uses' => 'PaymentController@delete'
         ]);
 
+        Route::post('/payments/send', [
+            'as' => 'payments.send',
+            'uses' => 'PaymentController@sendPayment'
+        ]);
+
         Route::resource('payments', 'PaymentController');
 
 
@@ -371,6 +385,11 @@ Route::group(['middleware' => 'api'], function () {
             Route::post('/environment/mail', [
                 'as' => 'admin.environment.mail.save',
                 'uses' => 'EnvironmentController@saveMailEnvironment'
+            ]);
+
+            Route::post('/test/mail', [
+                'as' => 'admin.test.mail.config',
+                'uses' => 'SettingsController@testEmailConfig'
             ]);
 
         });

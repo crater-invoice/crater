@@ -83,7 +83,8 @@
             </div>
             <div class="customer-content mb-1">
               <label class="email">{{ selectedCustomer.name }}</label>
-              <label class="action" @click="removeCustomer">{{ $t('general.remove') }}</label>
+              <label class="action" @click="editCustomer">{{ $t('general.edit') }}</label>
+              <label class="action" @click="removeCustomer">{{ $t('general.deselect') }}</label>
             </div>
           </div>
 
@@ -134,8 +135,17 @@
                 icon="hashtag"
                 @input="$v.invoiceNumAttribute.$touch()"
               />
-              <span v-show="$v.invoiceNumAttribute.$error && !$v.invoiceNumAttribute.required" class="text-danger mt-1"> {{ $tc('validation.required') }}  </span>
-              <span v-show="!$v.invoiceNumAttribute.numeric" class="text-danger mt-1"> {{ $tc('validation.numbers_only') }}  </span>
+              <span
+                v-show="$v.invoiceNumAttribute.$error && !$v.invoiceNumAttribute.required"
+                class="text-danger mt-1"
+              >
+                {{ $tc('validation.required') }}
+              </span>
+              <span
+                v-show="!$v.invoiceNumAttribute.numeric" class="text-danger mt-1"
+              >
+                {{ $tc('validation.numbers_only') }}
+              </span>
             </div>
             <div class="col collapse-input">
               <label>{{ $t('invoices.ref_number') }}</label>
@@ -145,7 +155,12 @@
                 icon="hashtag"
                 @input="$v.newInvoice.reference_number.$touch()"
               />
-              <div v-if="$v.newInvoice.reference_number.$error" class="text-danger">{{ $tc('validation.ref_number_maxlength') }}</div>
+              <div
+                v-if="$v.newInvoice.reference_number.$error"
+                class="text-danger"
+              >
+                {{ $tc('validation.ref_number_maxlength') }}
+              </div>
             </div>
           </div>
         </div>
@@ -193,6 +208,7 @@
             :key="item.id"
             :index="index"
             :item-data="item"
+            :invoice-items="newInvoice.items"
             :currency="currency"
             :tax-per-item="taxPerItem"
             :discount-per-item="discountPerItem"
@@ -588,6 +604,14 @@ export default {
     },
     removeCustomer () {
       this.resetSelectedCustomer()
+    },
+    editCustomer () {
+      this.openModal({
+        'title': this.$t('customers.edit_customer'),
+        'componentName': 'CustomerModal',
+        'id': this.selectedCustomer.id,
+        'data': this.selectedCustomer
+      })
     },
     openTemplateModal () {
       this.openModal({

@@ -21,6 +21,9 @@ import EstimateTemplate from './EstimateTemplate'
 import InvoiceTemplate from './InvoiceTemplate'
 import CustomerModal from './CustomerModal'
 import CategoryModal from './CategoryModal'
+import PaymentMode from './PaymentModeModal'
+import ItemUnit from './ItemUnitModal'
+import MailTestModal from './MailTestModal'
 
 export default {
   components: {
@@ -29,7 +32,10 @@ export default {
     EstimateTemplate,
     InvoiceTemplate,
     CustomerModal,
-    CategoryModal
+    CategoryModal,
+    PaymentMode,
+    ItemUnit,
+    MailTestModal
   },
   data () {
     return {

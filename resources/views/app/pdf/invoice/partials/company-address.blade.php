@@ -5,11 +5,11 @@
 @if($company_address)
     <p class="company-add">
         @if($company_address->addresses[0]['address_street_1'])
-            {{$company_address->addresses[0]['address_street_1']}} <br>
+            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_1'])) !!} <br>
         @endif
 
         @if($company_address->addresses[0]['address_street_2'])
-            {{$company_address->addresses[0]['address_street_2']}} <br>
+            {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_2'])) !!} <br>
         @endif
         @if($company_address->addresses[0]['city'])
             {{$company_address->addresses[0]['city']}}

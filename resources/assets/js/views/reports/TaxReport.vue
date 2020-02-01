@@ -49,7 +49,8 @@
     <div class="col-sm-8 reports-tab-container">
       <iframe :src="getReportUrl" class="reports-frame-style"/>
       <a class="base-button btn btn-primary btn-lg report-view-button" @click="viewReportsPDF">
-        <font-awesome-icon icon="file-pdf" class="vue-icon icon-left svg-inline--fa fa-download fa-w-16 mr-2" /> <span>{{ $t('reports.view_pdf') }}</span>
+        <font-awesome-icon icon="file-pdf" class="vue-icon icon-left svg-inline--fa fa-download fa-w-16 mr-2" />
+        <span>{{ $t('reports.view_pdf') }}</span>
       </a>
     </div>
   </div>
@@ -199,11 +200,9 @@ export default {
       if (!this.getReports()) {
         return false
       }
-      if (navigator.appVersion.indexOf('Mac') !== -1) {
-        this.url += '&download=true'
-      } else {
-        window.open(this.url + '&download=true')
-      }
+
+      window.open(this.url + '&download=true')
+
       setTimeout(() => {
         this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
       }, 200)

@@ -20,7 +20,6 @@
             v-if="estimate.status === 'DRAFT'"
             :loading="isSendingEmail"
             :disabled="isSendingEmail"
-            :outline="true"
             color="theme"
             @click="onSendEstimate"
           >
@@ -69,7 +68,9 @@
                 <font-awesome-icon icon="filter" />
               </base-button>
             </a>
-
+            <div class="filter-title">
+              {{ $t('general.sort_by') }}
+            </div>
             <div class="filter-items">
               <input
                 id="filter_estimate_date"
@@ -107,7 +108,7 @@
               <label class="inv-label" for="filter_estimate_number">{{ $t('estimates.estimate_number') }}</label>
             </div>
           </v-dropdown>
-          <base-button class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
+          <base-button v-tooltip.top-center="{ content: getOrderName }" class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
             <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
             <font-awesome-icon v-else icon="sort-amount-down" />
           </base-button>
@@ -123,7 +124,7 @@
           <div class="left">
             <div class="inv-name">{{ estimate.user.name }}</div>
             <div class="inv-number">{{ estimate.estimate_number }}</div>
-            <div :class="'est-status-'+estimate.status.toLowerCase()"class="inv-status">{{ estimate.status }}</div>
+            <div :class="'est-status-'+estimate.status.toLowerCase()" class="inv-status">{{ estimate.status }}</div>
           </div>
           <div class="right">
             <div class="inv-amount" v-html="$utils.formatMoney(estimate.total, estimate.user.currency)" />
@@ -172,7 +173,12 @@ export default {
       }
       return false
     },
-
+    getOrderName () {
+      if (this.getOrderBy) {
+        return this.$t('general.ascending')
+      }
+      return this.$t('general.descending')
+    },
     shareableLink () {
       return `/estimates/pdf/${this.estimate.unique_hash}`
     }

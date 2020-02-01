@@ -18,7 +18,7 @@
           </div>
         </div>
         <avatar-cropper
-          :labels="{ submit: 'submit', cancel: 'Cancle'}"
+          :labels="{ submit: 'Submit', cancel: 'Cancel'}"
           :cropper-options="cropperOptions"
           :output-options="cropperOutputOptions"
           :output-quality="0.8"
@@ -54,7 +54,6 @@
             :placeholder="$t('general.select_country')"
             track-by="id"
             label="name"
-            @input="fetchState()"
           />
           <div v-if="$v.companyData.country_id.$error">
             <span v-if="!$v.companyData.country_id.required" class="text-danger">{{ $tc('validation.required') }}</span>

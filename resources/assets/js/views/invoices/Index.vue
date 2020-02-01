@@ -259,6 +259,18 @@
                   {{ $t('invoices.mark_as_sent') }}
                 </a>
               </v-dropdown-item>
+              <v-dropdown-item v-if="row.status === 'SENT' || row.status === 'VIEWED' || row.status === 'OVERDUE'">
+                <router-link :to="`/admin/payments/${row.id}/create`" class="dropdown-item">
+                  <font-awesome-icon :icon="['fas', 'credit-card']" class="dropdown-item-icon"/>
+                  {{ $t('payments.record_payment') }}
+                </router-link>
+              </v-dropdown-item>
+              <v-dropdown-item>
+                <a class="dropdown-item" href="#/" @click="onCloneInvoice(row.id)">
+                  <font-awesome-icon icon="copy" class="dropdown-item-icon" />
+                  {{ $t('invoices.clone_invoice') }}
+                </a>
+              </v-dropdown-item>
               <v-dropdown-item>
                 <div class="dropdown-item" @click="removeInvoice(row.id)">
                   <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
@@ -378,7 +390,8 @@ export default {
       'deleteMultipleInvoices',
       'sendEmail',
       'markAsSent',
-      'setSelectAllState'
+      'setSelectAllState',
+      'cloneInvoice'
     ]),
     ...mapActions('customer', [
       'fetchCustomers'
@@ -425,6 +438,27 @@ export default {
           this.refreshTable()
           if (response.data) {
             window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+          }
+        }
+      })
+    },
+    async onCloneInvoice (id) {
+      swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.confirm_clone'),
+        icon: '/assets/icon/check-circle-solid.svg',
+        buttons: true,
+        dangerMode: true
+      }).then(async (value) => {
+        if (value) {
+          const data = {
+            id: id
+          }
+          let response = await this.cloneInvoice(data)
+          this.refreshTable()
+          if (response.data) {
+            window.toastr['success'](this.$tc('invoices.cloned_successfully'))
+            this.$router.push(`/admin/invoices/${response.data.invoice.id}/edit`)
           }
         }
       })

@@ -45,14 +45,34 @@
           <div class="col-sm-7">
             <base-select
               v-model="formData.unit"
-              :options="units"
+              :options="itemUnits"
               :searchable="true"
               :show-labels="false"
               label="name"
+            >
+              <div slot="afterList">
+                <button type="button" class="list-add-button" @click="addItemUnit">
+                  <font-awesome-icon class="icon" icon="cart-plus" />
+                  <label>{{ $t('settings.customization.items.add_item_unit') }}</label>
+                </button>
+              </div>
+            </base-select>
+          </div>
+        </div>
+        <div v-if="isTexPerItem" class="form-group row">
+          <label class="col-sm-4 col-form-label input-label">{{ $t('items.taxes') }}</label>
+          <div class="col-sm-7">
+            <base-select
+              v-model="formData.taxes"
+              :options="getTaxTypes"
+              :searchable="true"
+              :show-labels="false"
+              :allow-empty="true"
+              :multiple="true"
+              label="tax_name"
             />
           </div>
         </div>
-
         <div class="form-group row">
           <label class="col-sm-4 col-form-label input-label">{{ $t('items.description') }}</label>
           <div class="col-sm-7">
@@ -124,11 +144,13 @@ export default {
         { name: 'mg', value: 'mg' },
         { name: 'pc', value: 'pc' }
       ],
+      taxes: [],
       formData: {
         name: null,
         price: null,
         description: null,
-        unit: null
+        unit: null,
+        taxes: []
       }
     }
   },
@@ -161,12 +183,28 @@ export default {
         this.formData.price = newValue * 100
       }
     },
+    // itemUnits () {
+    //   return this.units
+    // },
     ...mapGetters('modal', [
-      'modalDataID'
+      'modalDataID',
+      'modalData'
     ]),
     ...mapGetters('item', [
-      'getItemById'
-    ])
+      'getItemById',
+      'itemUnits'
+    ]),
+    ...mapGetters('taxType', [
+      'taxTypes'
+    ]),
+    isTexPerItem () {
+      return this.modalData.taxPerItem === 'YES'
+    },
+    getTaxTypes () {
+      return this.taxTypes.map(tax => {
+        return {...tax, tax_name: tax.name + ' (' + tax.percent + '%)'}
+      })
+    }
   },
   watch: {
     modalDataID () {
@@ -179,12 +217,17 @@ export default {
       this.isEdit = true
       this.fetchEditData()
     }
+
+    if (this.isEdit) {
+      this.loadEditData()
+    }
   },
   mounted () {
     this.$refs.name.focus = true
   },
   methods: {
     ...mapActions('modal', [
+      'openModal',
       'closeModal',
       'resetModalData'
     ]),
@@ -203,7 +246,6 @@ export default {
         unit: null,
         id: null
       }
-
       this.$v.$reset()
     },
     fetchEditData () {
@@ -230,9 +272,20 @@ export default {
       if (this.isEdit) {
         response = await this.updateItem(this.formData)
       } else {
-        response = await this.addItem(this.formData)
+        let data = {
+          ...this.formData,
+          taxes: this.formData.taxes.map(tax => {
+            return {
+              tax_type_id: tax.id,
+              amount: ((this.formData.price * tax.percent) / 100),
+              percent: tax.percent,
+              name: tax.name,
+              collective_tax: 0
+            }
+          })
+        }
+        response = await this.addItem(data)
       }
-
       if (response.data) {
         window.toastr['success'](this.$tc('items.created_message'))
         this.setItem(response.data.item)
@@ -244,6 +297,12 @@ export default {
         return true
       }
       window.toastr['error'](response.data.error)
+    },
+    async addItemUnit () {
+      this.openModal({
+        'title': 'Add Item Unit',
+        'componentName': 'ItemUnit'
+      })
     },
     closeItemModal () {
       this.resetFormData()

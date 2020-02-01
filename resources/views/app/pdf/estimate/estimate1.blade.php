@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Estimate</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <style type="text/css">
@@ -19,13 +18,18 @@
             border-collapse: collapse;
         }
 
-        hr {
+        .header-line {
             color:rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 90px;
             left: 0px;
             width: 100%;
+        }
+
+        hr {
             margin: 0 30px 0 30px;
+            color:rgba(0, 0, 0, 0.2);
+            border: 0.5px solid #EAF1FB;
         }
 
         .header-center {
@@ -250,8 +254,7 @@
 
         .table2 {
             margin-top: 35px;
-            border-bottom: 1px solid #EAF1FB;
-            padding: 0px 30px 0 30px;
+            padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -265,6 +268,7 @@
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
+            padding-bottom: 10px;
         }
 
         tr.main-table-header th {
@@ -273,6 +277,10 @@
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
+        }
+
+        .main-table-header {
+            margin-bottom: 10px;
         }
 
         tr.item-details td {
@@ -287,6 +295,7 @@
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
         }
 
         .padd8 {
@@ -379,7 +388,7 @@
                 </td>
             </tr>
         </table>
-        <hr class="header-line" style="border: 0.620315px solid #E8E8E8;" />
+        <hr class="header-line" />
     </div>
     <div class="wrapper">
         <div class="address">

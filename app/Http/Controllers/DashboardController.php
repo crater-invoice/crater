@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+
+    /**
+     * Retrieve Dashboard details
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(Request $request)
     {
         $invoiceTotals = [];
@@ -30,7 +36,8 @@ class DashboardController extends Controller
         $start = Carbon::now();
         $end = Carbon::now();
         $terms = explode('-', $fiscalYear);
-        if ($terms[0] < $start->month) {
+
+        if ($terms[0] <= $start->month) {
             $startDate->month($terms[0])->startOfMonth();
             $start->month($terms[0])->startOfMonth();
             $end->month($terms[0])->endOfMonth();
@@ -87,6 +94,7 @@ class DashboardController extends Controller
         }
 
         $start->subMonth()->endOfMonth();
+
         $salesTotal = Invoice::whereCompany($request->header('company'))
             ->whereBetween(
                 'invoice_date',
@@ -137,6 +145,11 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * Retrive Expense Chart data
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getExpenseChartData(Request $request)
     {
         $expensesCategories = Expense::with('category')

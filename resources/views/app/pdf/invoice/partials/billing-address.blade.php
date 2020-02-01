@@ -7,10 +7,10 @@
     @endif
     <p class="bill-user-address">
         @if($invoice->user->billingaddress->address_street_1)
-            {{$invoice->user->billingaddress->address_street_1}}<br>
+            {!! nl2br(htmlspecialchars($invoice->user->billingaddress->address_street_1)) !!}<br>
         @endif
         @if($invoice->user->billingaddress->address_street_2)
-            {{$invoice->user->billingaddress->address_street_2}}<br>
+            {!! nl2br(htmlspecialchars($invoice->user->billingaddress->address_street_2)) !!}<br>
         @endif
         @if($invoice->user->billingaddress->city && $invoice->user->billingaddress->city)
             {{$invoice->user->billingaddress->city}},

@@ -321,7 +321,7 @@ export default {
       data.append('expense_category_id', this.formData.expense_category_id)
       data.append('expense_date',  moment(this.formData.expense_date).format('DD/MM/YYYY'))
       data.append('amount', (this.formData.amount))
-      data.append('notes', this.formData.notes)
+      data.append('notes', this.formData.notes ? this.formData.notes : '')
 
       if (this.isEdit) {
         this.isLoading = true

@@ -175,17 +175,7 @@ class InvoicesController extends Controller
                 ]);
             }
 
-<<<<<<< HEAD
-            if (!config('mail.from.name')) {
-                return response()->json([
-                    'error' => 'from_email_does_not_exist'
-                ]);
-            }
-
-            \Mail::to($email)->send(new invoicePdf($data));
-=======
             \Mail::to($email)->send(new InvoicePdf($data));
->>>>>>> c2eb22d66634a3b57d7ebade6ab9c7b359047c93
         }
 
         $invoice = Invoice::with(['items', 'user', 'invoiceTemplate', 'taxes'])->find($invoice->id);
@@ -414,17 +404,7 @@ class InvoicesController extends Controller
             ]);
         }
 
-<<<<<<< HEAD
-        if (!config('mail.from.name')) {
-            return response()->json([
-                'error' => 'from_email_does_not_exist'
-            ]);
-        }
-
-        \Mail::to($email)->send(new invoicePdf($data));
-=======
         \Mail::to($email)->send(new InvoicePdf($data));
->>>>>>> c2eb22d66634a3b57d7ebade6ab9c7b359047c93
 
         if ($invoice->status == Invoice::STATUS_DRAFT) {
             $invoice->status = Invoice::STATUS_SENT;

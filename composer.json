@@ -53,11 +53,20 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "initial-setup": [
+            "test -f .env || (cp .env.example .env; php artisan key:generate 2>/dev/null; exit 0)"
+        ],
+        "pre-install-cmd": [
+            "@initial-setup"
+        ],
+        "pre-update-cmd": [
+            "@initial-setup"
+        ],
         "post-root-package-install": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@initial-setup"
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate --ansi"
+            "@initial-setup"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

@@ -21,13 +21,6 @@ export const login = ({ commit, dispatch, state }, data) => {
       window.toastr['success']('Login Successful')
       resolve(response)
     }).catch(err => {
-      if (err.response.data.error === 'invalid_credentials') {
-        window.toastr['error']('Invalid Credentials')
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Error', err.message)
-      }
-
       commit(types.AUTH_ERROR, err.response)
       Ls.remove('auth.token')
       reject(err)

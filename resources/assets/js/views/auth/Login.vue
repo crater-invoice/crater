@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <base-button type="submit" color="theme">{{ $t('login.login') }}</base-button>
+    <base-button :loading="isLoading" type="submit" color="theme">{{ $t('login.login') }}</base-button>
 
     <!-- <div class="social-links">
 
@@ -87,7 +87,8 @@ export default {
         password: '',
         remember: ''
       },
-      submitted: false
+      submitted: false,
+      isLoading: false
     }
   },
   validations: {
@@ -98,7 +99,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(5)
+        minLength: minLength(8)
       }
     }
   },
@@ -113,7 +114,6 @@ export default {
       }
 
       this.isLoading = true
-
       this.login(this.loginData).then((res) => {
         this.$router.push('/admin/dashboard')
         this.isLoading = false

@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "bytefury/crater",
+    "description": "Free & Open Source Invoice App for Freelancers & Small Businesses. https://craterapp.com",
     "keywords": [
         "framework",
         "laravel"

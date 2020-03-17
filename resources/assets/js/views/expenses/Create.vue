@@ -103,6 +103,19 @@
                   </div>
                 </div>
                 <div class="form-group col-sm-6">
+                  <label class="form-label">{{ $t('payments.customer') }}</label><span class="text-danger"> *</span>
+                  <base-select
+                    ref="baseSelect"
+                    v-model="customer"
+                    :options="customerList"
+                    :searchable="true"
+                    :show-labels="false"
+                    :placeholder="$t('customers.select_a_customer')"
+                    label="name"
+                    track-by="id"
+                  />
+                </div>
+                <div class="form-group col-sm-6">
                   <label for="description">{{ $t('expenses.note') }}</label>
                   <base-text-area
                     v-model="formData.notes"
@@ -169,7 +182,8 @@ export default {
         expense_category_id: null,
         expense_date: new Date(),
         amount: null,
-        notes: ''
+        notes: '',
+        user_id: null
       },
       money: {
         decimal: '.',
@@ -185,7 +199,9 @@ export default {
       passData: [],
       contacts: [],
       previewReceipt: null,
-      fileSendUrl: '/api/expenses'
+      fileSendUrl: '/api/expenses',
+      customer: null,
+      customerList: []
     }
   },
   validations: {
@@ -297,6 +313,8 @@ export default {
     },
     async fetchInitialData () {
       this.fetchCategories()
+      let fetchData = await this.fetchCreateExpense()
+      this.customerList = fetchData.data.customers
       if (this.isEdit) {
         let response = await this.fetchExpense(this.$route.params.id)
         this.category = response.data.expense.category
@@ -319,9 +337,10 @@ export default {
         data.append('attachment_receipt', this.file)
       }
       data.append('expense_category_id', this.formData.expense_category_id)
-      data.append('expense_date',  moment(this.formData.expense_date).format('DD/MM/YYYY'))
+      data.append('expense_date', moment(this.formData.expense_date).format('DD/MM/YYYY'))
       data.append('amount', (this.formData.amount))
       data.append('notes', this.formData.notes ? this.formData.notes : '')
+      data.append('user_id', this.customer ? this.customer.id : '')
 
       if (this.isEdit) {
         this.isLoading = true

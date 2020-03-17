@@ -53,9 +53,13 @@ class ExpensesController extends Controller
     public function create(Request $request)
     {
         $categories = ExpenseCategory::whereCompany($request->header('company'))->get();
+        $customers = User::customer()
+            ->whereCompany($request->header('company'))
+            ->get();
 
         return response()->json([
-            'categories' => $categories
+            'categories' => $categories,
+            'customers' => $customers
         ]);
     }
 
@@ -107,7 +111,9 @@ class ExpensesController extends Controller
     public function edit(Request $request,$id)
     {
         $categories = ExpenseCategory::whereCompany($request->header('company'))->get();
-        $customers = User::where('role', 'customer')->whereCompany($request->header('company'))->get();
+        $customers = User::customer()
+            ->whereCompany($request->header('company'))
+            ->get();
         $expense = Expense::with('category')->where('id', $id)->first();
 
         return response()->json([
@@ -205,7 +211,7 @@ class ExpensesController extends Controller
      * Retrive details of an expense receipt from storage.
      * @param   int $id
      * @return  \Illuminate\Http\JsonResponse
-     */ 
+     */
     public function showReceipt($id)
     {
         $expense = Expense::find($id);
@@ -239,7 +245,7 @@ class ExpensesController extends Controller
      * @param   int $id
      * @param   strig $hash
      * @return  \Symfony\Component\HttpFoundation\BinaryFileResponse | \Illuminate\Http\JsonResponse
-     */    
+     */
     public function downloadReceipt($id, $hash)
     {
         $company = Company::where('unique_hash', $hash)->first();

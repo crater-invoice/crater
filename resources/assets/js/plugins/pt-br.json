@@ -414,6 +414,7 @@
     "expense_title": "Título",
     "contact": "Contato",
     "category": "Categoria",
+    "customer": "Cliente",
     "from_date": "A partir da Data",
     "to_date": "Até a Data",
     "expense_date": "Data",

@@ -215,6 +215,7 @@
       "title": "Titel"
     },
     "category": "Kategorie",
+    "customer": "Kunden",
     "category_id": "Kategorie-Id",
     "confirm_delete": "Sie können diese Ausgabe nicht wiederherstellen. | Sie können diese Ausgaben nicht wiederherstellen.",
     "contact": "Kontakt",

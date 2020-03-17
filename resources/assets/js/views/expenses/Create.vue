@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div class="form-group col-sm-6">
-                  <label class="form-label">{{ $t('payments.customer') }}</label><span class="text-danger"> *</span>
+                  <label class="form-label">{{ $t('expenses.customer') }}</label>
                   <base-select
                     ref="baseSelect"
                     v-model="customer"

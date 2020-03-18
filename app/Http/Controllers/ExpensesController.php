@@ -24,9 +24,11 @@ class ExpensesController extends Controller
         $limit = $request->has('limit') ? $request->limit : 10;
 
         $expenses = Expense::with('category')
+            ->join('users', 'users.id', '=', 'expenses.user_id')
             ->join('expense_categories', 'expense_categories.id', '=', 'expenses.expense_category_id')
             ->applyFilters($request->only([
                 'expense_category_id',
+                'user_id',
                 'search',
                 'from_date',
                 'to_date',
@@ -34,7 +36,7 @@ class ExpensesController extends Controller
                 'orderBy'
             ]))
             ->whereCompany($request->header('company'))
-            ->select('expenses.*', 'expense_categories.name')
+            ->select('expenses.*', 'expense_categories.name', 'users.name as user_name')
             ->paginate($limit);
 
         return response()->json([
@@ -76,6 +78,11 @@ class ExpensesController extends Controller
         $expense = new Expense();
         $expense->notes = $request->notes;
         $expense->expense_category_id = $request->expense_category_id;
+
+        if ($request->has('user_id') && $request->user_id != null) {
+            $expense->user_id = $request->user_id;
+        }
+
         $expense->amount = $request->amount;
         $expense->company_id = $request->header('company');
         $expense->expense_date = $expense_date;
@@ -138,6 +145,11 @@ class ExpensesController extends Controller
         $expense->notes = $request->notes;
         $expense->expense_category_id = $request->expense_category_id;
         $expense->amount = $request->amount;
+
+        if ($request->has('user_id') && $request->user_id != null) {
+            $expense->user_id = $request->user_id;
+        }
+
         $expense->expense_date = $expense_date;
         $expense->save();
 

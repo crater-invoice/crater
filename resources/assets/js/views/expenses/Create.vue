@@ -322,6 +322,9 @@ export default {
         this.formData.expense_date = moment(this.formData.expense_date).toString()
         this.formData.amount = (response.data.expense.amount)
         this.fileSendUrl = `/api/expenses/${this.$route.params.id}`
+        if (response.data.expense.user_id) {
+          this.customer = this.customerList.find(customer => customer.id === response.data.expense.user_id)
+        }
       }
     },
     async sendData () {

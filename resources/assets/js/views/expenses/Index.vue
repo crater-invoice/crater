@@ -174,6 +174,11 @@
           show="category.name"
         />
         <table-column
+          :label="$t('expenses.customer')"
+          sort-as="user_name"
+          show="user_name"
+        />
+        <table-column
           :label="$t('expenses.date')"
           sort-as="expense_date"
           show="formattedExpenseDate"

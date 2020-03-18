@@ -201,6 +201,7 @@
     "action": "Aktion",
     "add_expense": "Aufwendung hinzufügen",
     "add_new_expense": "Neue Aufwendung hinzufügen",
+    "select_a_customer": "Wählen Sie einen Kunden aus",
     "amount": "Summe",
     "categories": {
       "actions": "Aktionen",

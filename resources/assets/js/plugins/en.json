@@ -426,6 +426,7 @@
   "expenses": {
     "title": "Expenses",
     "expenses_list": "Expenses List",
+    "select_a_customer": "Select a customer",
     "expense_title": "Title",
     "customer": "Customer",
     "contact": "Contact",

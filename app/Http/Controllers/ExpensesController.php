@@ -37,8 +37,13 @@ class ExpensesController extends Controller
             ->select('expenses.*', 'expense_categories.name')
             ->paginate($limit);
 
+        $customers = User::customer()
+            ->whereCompany($request->header('company'))
+            ->get();
+
         return response()->json([
             'expenses' => $expenses,
+            'customers' => $customers,
             'currency' => Currency::findOrFail(
                 CompanySetting::getSetting('currency', $request->header('company'))
             )

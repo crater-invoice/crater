@@ -411,6 +411,7 @@
     "expense_title": "Titre",
     "contact": "Contact",
     "customer": "Client Client",
+    "select_a_customer": "Sélectionnez un client",
     "category": "Catégorie",
     "from_date": "A partir de la date",
     "to_date": "À ce jour",

@@ -412,6 +412,8 @@
     "expenses_list": "Lista de gastos",
     "expense_title": "Título",
     "contact": "Contacto",
+    "customer": "Cliente",
+    "select_a_customer": "Selecciona un cliente",
     "category": "Categoría",
     "from_date": "Desde la fecha",
     "to_date": "Hasta la fecha",

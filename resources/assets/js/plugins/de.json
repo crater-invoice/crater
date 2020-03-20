@@ -201,6 +201,7 @@
     "action": "Aktion",
     "add_expense": "Aufwendung hinzufügen",
     "add_new_expense": "Neue Aufwendung hinzufügen",
+    "select_a_customer": "Wählen Sie einen Kunden aus",
     "amount": "Summe",
     "categories": {
       "actions": "Aktionen",
@@ -215,6 +216,7 @@
       "title": "Titel"
     },
     "category": "Kategorie",
+    "customer": "Kunden",
     "category_id": "Kategorie-Id",
     "confirm_delete": "Sie können diese Ausgabe nicht wiederherstellen. | Sie können diese Ausgaben nicht wiederherstellen.",
     "contact": "Kontakt",

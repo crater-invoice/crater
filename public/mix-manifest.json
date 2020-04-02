@@ -1,4 +1,6 @@
 {
-    "/assets/js/app.js": "/assets/js/app.js?id=08d4f6357dbe7738effa",
-    "/assets/css/crater.css": "/assets/css/crater.css?id=a00ceebbb86dd82a024b"
+    "/assets/js/app.js": "/assets/js/app.js",
+    "/assets/css/crater.css": "/assets/css/crater.css",
+    "/assets/js/app.js.map": "/assets/js/app.js.map",
+    "/assets/css/crater.css.map": "/assets/css/crater.css.map"
 }

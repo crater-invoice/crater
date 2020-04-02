@@ -38,7 +38,7 @@
         type="text"
         rows="1"
         class="description-input"
-        @input="$emit('onDesriptionInput')"
+        @input="searchItems($event.target.value)"
       />
       <div v-if="invalidDescription">
         <span class="text-danger">{{ $tc('validation.description_maxlength') }}</span>
@@ -115,6 +115,7 @@ export default {
       this.loading = true
 
       await this.fetchItems(data)
+      this.$emit('onDesriptionInput')
 
       this.loading = false
     },

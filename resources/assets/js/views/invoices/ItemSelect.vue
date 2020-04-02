@@ -50,6 +50,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import {debounce} from 'lodash'
 
 export default {
   props: {
@@ -92,14 +93,9 @@ export default {
       console.log(newValue)
     }
   },
-  methods: {
-    ...mapActions('modal', [
-      'openModal'
-    ]),
-    ...mapActions('item', [
-      'fetchItems'
-    ]),
-    async searchItems (search) {
+  async mounted () {
+    this.debouncer = await debounce(async (search) => {
+      console.log('SEARCH', search);
       let data = {
         search,
         filter: {
@@ -118,6 +114,17 @@ export default {
       this.$emit('onDesriptionInput')
 
       this.loading = false
+    }, 400)
+  },
+  methods: {
+    ...mapActions('modal', [
+      'openModal'
+    ]),
+    ...mapActions('item', [
+      'fetchItems'
+    ]),
+    async searchItems (search) {
+      this.debouncer(search);
     },
     onTextChange (val) {
       this.searchItems(val)

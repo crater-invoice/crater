@@ -95,7 +95,6 @@ export default {
   },
   async mounted () {
     this.debouncer = await debounce(async (search) => {
-      console.log('SEARCH', search);
       let data = {
         search,
         filter: {

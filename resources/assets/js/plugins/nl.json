@@ -68,7 +68,14 @@
         "select_city": "Selecteer stad",
         "street_1": "Straat 1",
         "street_2": "Straat 2",
-        "action_failed": "Actie mislukt"
+        "action_failed": "Actie mislukt",
+        "sort_by": "sorteer op",
+        "ascending": "Oplopend",
+        "descending": "Aflopend",
+        "subject": "onderwerpen",
+        "message": "Bericht",
+        "test_mail_conf": "Test de e-mailconfiguratie",
+        "send_mail_successfully": "Mail is succesvol verzonden",
     },
     "dashboard": {
         "select_year": "Selecteer jaar",
@@ -182,7 +189,8 @@
         "confirm_delete": "U zult niet in staat zijn om dit artikel terug te krijgen. | U zult niet in staat zijn om deze artikels terug te krijgen.",
         "created_message": "Artikel succesvol aangemaakt",
         "updated_message": "Artikel succesvol bijgewerkt",
-        "deleted_message": "Artikel succesvol verwijderd | Artikels succesvol verwijderd"
+        "deleted_message": "Artikel succesvol verwijderd | Artikels succesvol verwijderd",
+        "taxes": "Belastingen",
     },
     "estimates": {
         "title": "Offertes",
@@ -347,7 +355,10 @@
         "marked_as_sent_message": "Factuur succesvol gemarkeerd als verzonden",
         "user_email_does_not_exist": "E-mail van de gebruiker bestaat niet",
         "something_went_wrong": "er ging iets mis",
-        "invalid_due_amount_message": "Het totale factuurbedrag kan niet lager zijn dan het totale betaalde bedrag voor deze factuur. Gelieve de factuur bij te werken of de bijhorende betalingen te verwijderen om verder te kunnen gaan."
+        "invalid_due_amount_message": "Het totale factuurbedrag kan niet lager zijn dan het totale betaalde bedrag voor deze factuur. Gelieve de factuur bij te werken of de bijhorende betalingen te verwijderen om verder te kunnen gaan.",
+        "cloned_successfully": "Factuur succesvol gekloond",
+        "clone_invoice": "Factuur klonen",
+        "confirm_clone": "Deze factuur wordt gekloond in een nieuwe factuur",
     },
     "credit_notes": {
         "title": "Creditnota's",
@@ -399,7 +410,12 @@
         "created_message": "Betaling succesvol aangemaakt",
         "updated_message": "Betaling succesvol bijgewerkt",
         "deleted_message": "Betaling succesvol verwijderd | Betalingen succesvol verwijderd",
-        "invalid_amount_message": "Betalingsbedrag is ongeldig"
+        "invalid_amount_message": "Betalingsbedrag is ongeldig",
+        "send_payment_receipt": "Betaalbewijs verzenden",
+        "confirm_send_payment": "Deze betaling wordt via e-mail naar de klant gestuurd",
+        "send_payment_successfully": "Betaling succesvol verzonden",
+        "user_email_does_not_exist": "E-mailadres van gebruiker bestaat niet",
+        "something_went_wrong": "Er is iets fout gegaan",
     },
     "expenses": {
         "title": "Uitgaven",
@@ -431,6 +447,8 @@
         "created_message": "Uitgave succesvol aangemaakt",
         "updated_message": "Uitgave succesvol bijgewerkt",
         "deleted_message": "Uitgave succesvol verwijderd | Uitgaven succesvol verwijderd",
+        "select_a_customer": "Selecteer een klant",
+        "customer": "Klanten",
         "categories": {
             "categories_list": "Categories Lijst",
             "title": "Titel",
@@ -520,6 +538,17 @@
         }
     },
     "settings": {
+        "items": {
+            "title": "Artikelen",
+            "units": "eenheden",
+            "add_item_unit": "Itemeenheid toevoegen",
+            "unit_name": "Naam eenheid",
+            "item_unit_added": "Item Unit toegevoegd",
+            "item_unit_updated": "Artikeleenheid geüpdatet",
+            "item_unit_confirm_delete": "U kunt dit item niet terughalen",
+            "already_in_use": "Item Unit is al in gebruik",
+            "deleted_message": "Artikeleenheid succesvol verwijderd"
+        },
         "menu_title": {
             "account_settings": "Account Instellingen",
             "company_information": "Bedrijfsinformatie",
@@ -647,7 +676,15 @@
                 "autogenerate_payment_number": "Autogenereer betalingsnummer",
                 "payment_setting_description": "Schakel dit uit, Als u niet elke keer dat u een nieuwe betaling aanmaakt automatisch betalingsnummers wilt genereren.",
                 "enter_payment_prefix": "Voer betaling prefix in",
-                "payment_setting_updated": "Betaling instellingen succesvol bijgewerkt"
+                "payment_setting_updated": "Betaling instellingen succesvol bijgewerkt",
+                "payment_mode": "Betalingsmiddel",
+                "add_payment_mode": "Betaalmodus toevoegen",
+                "mode_name": "Mode Name",
+                "payment_mode_added": "Betaalmethode toegevoegd",
+                "payment_mode_updated": "Betalingsmodus geüpdatet",
+                "payment_mode_confirm_delete": "U kunt deze betalingsmodus niet herstellen",
+                "already_in_use": "De betalingsmodus is al in gebruik",
+                "deleted_message": "Betaalmethode succesvol verwijderd"
             }
         },
         "account_settings": {
@@ -865,6 +902,11 @@
         "notes_maxlength": "Notities mogen niet groter zijn dan 255 tekens.",
         "address_maxlength": "Het adres mag niet groter zijn dan 255 tekens.",
         "ref_number_maxlength": "Ref. Nummer mag niet groter zijn dan 255 tekens.",
-        "prefix_maxlength": "prefix mag niet groter zijn dan 5 karakters."
+        "prefix_maxlength": "prefix mag niet groter zijn dan 5 karakters.",
+        "item_unit_already_taken": "De naam van dit item is al in gebruik",
+        "payment_mode_already_taken": "Deze naam voor de betalingsmodus is al in gebruik",
+        "subject_maxlength": "Het onderwerp mag niet meer dan 100 tekens bevatten.",
+        "message_maxlength": "Bericht mag niet groter zijn dan 255 tekens.",    
+        "something_went_wrong": "Er is iets fout gegaan"
     }
 }

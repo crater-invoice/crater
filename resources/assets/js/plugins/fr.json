@@ -71,7 +71,12 @@
     "select_city": "Sélectionnez une ville",
     "street_1": "Rue 1",
     "street_2": "Rue # 2",
-    "action_failed": "Action : échoué"
+    "action_failed": "Action : échoué",
+    "sort_by": "Trier par",
+    "ascending": "Ascendant",
+    "descending": "Descendant",
+    "subject": "matière",
+    "message": "Message"
   },
   "dashboard": {
     "select_year": "Sélectionnez l'année",
@@ -278,7 +283,10 @@
       "amount": "Montant",
       "select_an_item": "Tapez ou cliquez pour sélectionner un élément",
       "type_item_description": "Type Item Description (optionnel)"
-    }
+    },
+    "no_matching_estimates": "Aucune estimation correspondante!",
+    "user_email_does_not_exist": "L'e-mail de l'utilisateur n'existe pas",
+    "something_went_wrong": "quelque chose a mal tourné"
   },
   "invoices": {
     "title": "Factures",
@@ -353,7 +361,12 @@
     "updated_message": "Facture mise à jour avec succès",
     "deleted_message": "La Facture a été supprimée ! | Les Factures ont été supprimées !",
     "marked_as_sent_message": "Facture supprimée avec succès | Factures supprimées avec succès",
-    "invalid_due_amount_message": "Le paiement entré est supérieur au montant total dû pour cette facture. Veuillez vérifier et réessayer"
+    "invalid_due_amount_message": "Le paiement entré est supérieur au montant total dû pour cette facture. Veuillez vérifier et réessayer",
+    "confirm_send_invoice": "Cette facture sera envoyée par email au client",
+    "no_matching_invoices": "Aucune facture correspondante!",
+    "confirm_clone": "Cette facture sera clonée dans une nouvelle facture",
+    "user_email_does_not_exist": "L'e-mail de l'utilisateur n'existe pas",
+    "something_went_wrong": "quelque chose a mal tourné"
   },
   "credit_notes": {
     "title": "Notes de crédit",
@@ -408,7 +421,11 @@
     "created_message": "Paiement créé avec succès",
     "updated_message": "Paiement mis à jour avec succès",
     "deleted_message": "Paiement supprimé avec succès | Paiements supprimés avec succès",
-    "invalid_amount_message": "Le montant du paiement est invalide"
+    "invalid_amount_message": "Le montant du paiement est invalide",
+    "confirm_send_payment": "Ce paiement sera envoyé par e-mail au client",
+    "send_payment_successfully": "Paiement envoyé avec succès",
+    "user_email_does_not_exist": "L'e-mail de l'utilisateur n'existe pas",
+    "something_went_wrong": "quelque chose a mal tourné"
   },
   "expenses": {
     "title": "Dépenses",
@@ -452,7 +469,8 @@
       "new_category": "Nouvelle catégorie",
       "category": "Catégorie | Les catégories",
       "select_a_category": "choisissez une catégorie"
-    }
+    },
+    "customer": "Client"
   },
   "login": {
     "email": "Email",
@@ -465,7 +483,8 @@
     "enter_email": "Entrer email",
     "enter_password": "Entrer le mot de passe",
     "retype_password": "Retaper le mot de passe",
-    "login_placeholder": "mail@example.com"
+    "login_placeholder": "mail@example.com",
+    "password_reset_successfully": "Réinitialisation du mot de passe réussie"
   },
   "reports": {
     "title": "rapport",
@@ -603,83 +622,83 @@
     },
 
     "customization": {
-        "customization": "Personnalisation",
-        "save": "Sauvegarder",
-        "addresses": {
-            "title": "Adresses",
-            "section_description": "You can set Customer Billing Address and Customer Shipping Address Format (Displayed in PDF only). ",
-            "customer_billing_address": "Adresse de paiement",
-            "customer_shipping_address": "Adresse de livraison",
-            "company_address": "Adresse de l'entreprise",
-            "insert_fields": "Ajouter des champs",
-            "contact": "Contact",
-            "address": "Addresse",
-            "display_name": "Nom",
-            "primary_contact_name": "Nom du contact principal",
-            "email": "Email",
-            "website": "Website",
-            "name": "Nom",
-            "country": "Pays",
-            "state": "State",
-            "city": "Ville",
-            "company_name": "Nom de l'entreprise",
-            "address_street_1": "Rue",
-            "address_street_2": "Complément",
-            "phone": "Téléphone",
-            "zip_code": "Code postal",
-            "address_setting_updated": "Adresse mise à jour avec succès"
-        },
-        "updated_message": "Informations de l'entreprise mises à jour",
+      "customization": "Personnalisation",
+      "save": "Sauvegarder",
+      "addresses": {
+        "title": "Adresses",
+        "section_description": "You can set Customer Billing Address and Customer Shipping Address Format (Displayed in PDF only). ",
+        "customer_billing_address": "Adresse de paiement",
+        "customer_shipping_address": "Adresse de livraison",
+        "company_address": "Adresse de l'entreprise",
+        "insert_fields": "Ajouter des champs",
+        "contact": "Contact",
+        "address": "Addresse",
+        "display_name": "Nom",
+        "primary_contact_name": "Nom du contact principal",
+        "email": "Email",
+        "website": "Website",
+        "name": "Nom",
+        "country": "Pays",
+        "state": "State",
+        "city": "Ville",
+        "company_name": "Nom de l'entreprise",
+        "address_street_1": "Rue",
+        "address_street_2": "Complément",
+        "phone": "Téléphone",
+        "zip_code": "Code postal",
+        "address_setting_updated": "Adresse mise à jour avec succès"
+      },
+      "updated_message": "Informations de l'entreprise mises à jour",
 
-        "invoices": {
-            "title": "Factures",
-            "notes": "Notes",
-            "invoice_prefix": "Préfixe",
-            "invoice_settings": "Paramètre",
-            "autogenerate_invoice_number": "Générer automatiquement le numéro de facture",
-            "invoice_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de facture à chaque fois que vous en créez une nouvelle.",
-            "enter_invoice_prefix": "Ajouter le préfixe de facture",
-            "terms_and_conditions": "Termes et conditions",
-            "invoice_setting_updated": "Paramètres de facturation mis à jour"
-        },
+      "invoices": {
+        "title": "Factures",
+        "notes": "Notes",
+        "invoice_prefix": "Préfixe",
+        "invoice_settings": "Paramètre",
+        "autogenerate_invoice_number": "Générer automatiquement le numéro de facture",
+        "invoice_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de facture à chaque fois que vous en créez une nouvelle.",
+        "enter_invoice_prefix": "Ajouter le préfixe de facture",
+        "terms_and_conditions": "Termes et conditions",
+        "invoice_setting_updated": "Paramètres de facturation mis à jour"
+      },
 
-        "estimates": {
-            "title": "Devis",
-            "estimate_prefix": "Préfixe",
-            "estimate_settings": "Paramètre",
-            "autogenerate_estimate_number": "Générer automatiquement le numéro de devis",
-            "estimate_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de devis à chaque fois que vous en créez un nouveau.",
-            "estimate_setting_updated": "Paramètres de devis mis à jour"
-        },
+      "estimates": {
+        "title": "Devis",
+        "estimate_prefix": "Préfixe",
+        "estimate_settings": "Paramètre",
+        "autogenerate_estimate_number": "Générer automatiquement le numéro de devis",
+        "estimate_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de devis à chaque fois que vous en créez un nouveau.",
+        "estimate_setting_updated": "Paramètres de devis mis à jour"
+      },
 
-        "payments": {
-            "title": "Paiements",
-            "payment_prefix": "Préfixe",
-            "payment_settings": "Paramètre",
-            "autogenerate_payment_number": "Générer automatiquement le numéro de paiement",
-            "payment_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de paiement à chaque fois que vous en créez un nouveau.",
-            "payment_setting_updated": "Les paramètres de paiement ont bien été mis à jour",
-            "payment_mode": "Mode de paiement",
-            "add_payment_mode": "Ajouter un mode de paiement",
-            "mode_name": "Nom",
-            "payment_mode_added": "Mode de paiement ajouté",
-            "payment_mode_updated": "Mode de paiement mis à jour",
-            "payment_mode_confirm_delete":"Êtes-vous sur de supprimer ce mode de paiement ?",
-            "already_in_use": "Ce mode de paiement existe déjà.",
-            "deleted_message": "Mode de paiement supprimé avec succès"
-        },
+      "payments": {
+        "title": "Paiements",
+        "payment_prefix": "Préfixe",
+        "payment_settings": "Paramètre",
+        "autogenerate_payment_number": "Générer automatiquement le numéro de paiement",
+        "payment_setting_description": "Désactivez cette option si vous ne souhaitez pas générer automatiquement les numéros de paiement à chaque fois que vous en créez un nouveau.",
+        "payment_setting_updated": "Les paramètres de paiement ont bien été mis à jour",
+        "payment_mode": "Mode de paiement",
+        "add_payment_mode": "Ajouter un mode de paiement",
+        "mode_name": "Nom",
+        "payment_mode_added": "Mode de paiement ajouté",
+        "payment_mode_updated": "Mode de paiement mis à jour",
+        "payment_mode_confirm_delete": "Êtes-vous sur de supprimer ce mode de paiement ?",
+        "already_in_use": "Ce mode de paiement existe déjà.",
+        "deleted_message": "Mode de paiement supprimé avec succès"
+      },
 
-        "items": {
-            "title": "Articles",
-            "units": "Unités",
-            "add_item_unit": "Ajouter une unité",
-            "unit_name": "Nom",
-            "item_unit_added": "Unité ajouté",
-            "item_unit_updated": "Unité mis à jour",
-            "item_unit_confirm_delete":"Êtes-vous sur de supprimer cette unité ?",
-            "already_in_use": "Cette unité existe déjà",
-            "deleted_message": "Unité supprimé avec succès"
-        }
+      "items": {
+        "title": "Articles",
+        "units": "Unités",
+        "add_item_unit": "Ajouter une unité",
+        "unit_name": "Nom",
+        "item_unit_added": "Unité ajouté",
+        "item_unit_updated": "Unité mis à jour",
+        "item_unit_confirm_delete": "Êtes-vous sur de supprimer cette unité ?",
+        "already_in_use": "Cette unité existe déjà",
+        "deleted_message": "Unité supprimé avec succès"
+      }
     },
     "account_settings": {
       "profile_picture": "Image de profil",
@@ -858,7 +877,8 @@
     "success": {
       "mail_variables_save_successfully": "Email configuré avec succès",
       "database_variables_save_successfully": "Base de données configurée avec succès."
-    }
+    },
+    "skip": "sauter"
   },
   "layout_login": {
     "copyright_crater": "Copyright @ Crater - 2020",
@@ -898,6 +918,7 @@
     "maximum_options_error": "Maximum de {max} options sélectionnées. Commencez par supprimer une option sélectionnée pour en sélectionner une autre.",
     "notes_maxlength": "Les notes ne doivent pas dépasser 255 caractères.",
     "address_maxlength": "L'adresse ne doit pas dépasser 255 caractères.",
-    "ref_number_maxlength": "Le numéro de référence ne doit pas dépasser 255 caractères."
+    "ref_number_maxlength": "Le numéro de référence ne doit pas dépasser 255 caractères.",
+    "email_already_taken": "Un compte est déjà associé à cette adresse e-mail."
   }
 }

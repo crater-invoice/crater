@@ -153,8 +153,12 @@
             text-align: right;
         }
         .bill-add {
-            width:45%;
+            display: table;
             padding: 0px 0 0 0px;
+        }
+
+        .bill-add > div {
+            display: table-cell;
         }
 
         /* -------------------------- */

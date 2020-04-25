@@ -47,6 +47,13 @@
             </div>
           </div>
           <div class="col-md-6 mb-4">
+            <label class="input-label">{{ $tc('settings.company_info.abn') }}</label>
+            <base-input
+              v-model="formData.abn"
+              :placeholder="$t('settings.company_info.abn')"
+            />
+          </div>
+          <div class="col-md-6 mb-4">
             <label class="input-label">{{ $tc('settings.company_info.phone') }}</label>
             <base-input
               v-model="formData.phone"

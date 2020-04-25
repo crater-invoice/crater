@@ -37,12 +37,7 @@ COPY . /app
 # Copy vendor folder from composer container into php container
 COPY --from=composer /app/vendor /app/vendor
 
-RUN touch database/database.sqlite && \
-    cp .env.example .env && \
-    php artisan config:cache && \
-    php artisan passport:keys && \
-    php artisan key:generate && \
-    chown -R www-data:www-data . && \
+RUN chown -R www-data:www-data . && \
     chmod -R 755 . && \
     chmod -R 775 storage/framework/ && \
     chmod -R 775 storage/logs/ && \

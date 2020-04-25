@@ -94,6 +94,7 @@ class CompanyController extends Controller
         $user = User::find(1);
         $company = $user->company;
         $company->name = $request->name;
+        $company->abn = $request->abn;
         $company->save();
 
         if ($request->has('logo')) {

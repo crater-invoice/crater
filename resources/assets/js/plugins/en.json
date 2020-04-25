@@ -602,6 +602,7 @@
       "pdf_layout": "PDF Layout"
     },
     "company_info": {
+      "abn": "Company ABN",
       "company_info": "Company info",
       "company_name": "Company Name",
       "company_logo": "Company Logo",

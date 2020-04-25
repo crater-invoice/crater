@@ -429,17 +429,17 @@
     <div class="wrapper">
         <div class="address">
             <div class="company">
-                @include('app.pdf.invoice.partials.company-address')
+                @include('app.pdf.invoice.partials.billing-address')
             </div>
-            <div class="ship-address-container">
+            {{-- <div class="ship-address-container">
                 @include('app.pdf.invoice.partials.shipping-address')
             </div>
-            {{-- @if($invoice->user->shippingaddress)
+            @if($invoice->user->shippingaddress)
                 <div class="bill-address-container">
             @else
                 <div class="bill-address-container" style="float:right;padding-right:0px;">
             @endif
-                @include('app.pdf.invoice.partials.billing-address')
+              @include('app.pdf.invoice.partials.company-address')
             </div> --}}
             <div style="clear: both;"></div>
         </div>

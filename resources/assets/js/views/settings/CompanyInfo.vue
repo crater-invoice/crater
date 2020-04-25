@@ -171,6 +171,7 @@ export default {
         name: null,
         email: '',
         phone: '',
+        abn: '',
         zip: '',
         address_street_1: '',
         address_street_2: '',
@@ -239,6 +240,7 @@ export default {
       let response = await this.loadData()
       this.isFetchingData = true
       this.formData.name = response.data.user.company.name
+      this.formData.abn = response.data.user.company.abn
       this.formData.address_street_1 = response.data.user.addresses[0].address_street_1
       this.formData.address_street_2 = response.data.user.addresses[0].address_street_2
       this.formData.zip = response.data.user.addresses[0].zip

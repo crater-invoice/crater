@@ -68,7 +68,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         if ($estimate && ($estimate->status == Estimate::STATUS_SENT || $estimate->status == Estimate::STATUS_DRAFT)) {
@@ -171,7 +171,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         if ($invoice && ($invoice->status == Invoice::STATUS_SENT || $invoice->status == Invoice::STATUS_DRAFT)) {
@@ -272,7 +272,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         $colors = [
@@ -349,7 +349,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         $colors = [
@@ -394,7 +394,7 @@ class FrontendController extends Controller
         $logo = $company->getMedia('logo')->first();
 
         if($logo) {
-            $logo = $logo->getFullUrl();
+            $logo = $logo->getPath();
         }
 
         view()->share([

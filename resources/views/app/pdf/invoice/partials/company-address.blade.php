@@ -1,5 +1,6 @@
 @if($invoice->user->company)
     <h1> {{$invoice->user->company->name}} </h1>
+    <p class="company-add"> ABN {{ format_abn($invoice->user->company->abn)}}</p>
 @endif
 
 @if($company_address)

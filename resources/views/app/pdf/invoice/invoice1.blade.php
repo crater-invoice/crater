@@ -419,13 +419,13 @@
             <div class="bill-address-container">
                     @include('app.pdf.invoice.partials.billing-address')
             </div>
-            @if($invoice->user->billingaddress)
+            {{-- @if($invoice->user->billingaddress)
                 <div class="ship-address-container">
             @else
                 <div class="ship-address-container " style="float:left;padding-left:0px;">
             @endif
                 @include('app.pdf.invoice.partials.shipping-address')
-            </div>
+            </div> --}}
             <div style="clear: both;"></div>
         </div>
         <div style="position:relative">

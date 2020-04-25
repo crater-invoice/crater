@@ -64,3 +64,20 @@ function format_money_pdf($money, $currency = null)
     }
     return $currency_with_symbol;
 }
+
+function format_abn($abn) {
+  if (!$abn) {
+    return $abn;
+  }
+  // $abn = preg_replace('/[^\d]/','', $abn);
+  $abn = str_split($abn);
+
+  if (count($abn) <= 5) {
+    return  implode("", array_splice($abn,0, 2))." ". implode("", array_splice($abn,0,3));
+  }
+  if ($abn <= 8) {
+    return  implode("", array_splice($abn,0, 2))." ". implode("", array_splice($abn,0, 3))." ". implode("", array_splice($abn,0, 3));
+  }
+  $abn = implode("", array_splice($abn,0, 2))." ". implode("", array_splice($abn,0, 3))." ". implode("", array_splice($abn,0, 3))." ". implode("", array_splice($abn,0, 3));
+  return $abn;
+}

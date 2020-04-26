@@ -398,7 +398,6 @@ export default {
     }
   },
   created () {
-    this.loadChart()
     this.loadData()
   },
   methods: {
@@ -422,11 +421,6 @@ export default {
       'markEstimateAsSent': 'markAsSent'
     }),
 
-    async loadChart () {
-      await this.$store.dispatch('dashboard/getChart')
-      this.isLoaded = true
-    },
-
     async loadData (params) {
       await this.$store.dispatch('dashboard/loadData', params)
       this.isLoaded = true
@@ -434,7 +428,7 @@ export default {
 
     async removeEstimate (id) {
       this.id = id
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 1),
         icon: '/assets/icon/trash-solid.svg',
@@ -462,7 +456,7 @@ export default {
     },
 
     async convertInToinvoice (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
         icon: '/assets/icon/file-alt-solid.svg',
@@ -483,7 +477,7 @@ export default {
     },
 
     async onMarkAsSent (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
@@ -505,7 +499,7 @@ export default {
 
     async removeInvoice (id) {
       this.id = id
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete'),
         icon: '/assets/icon/trash-solid.svg',
@@ -525,7 +519,7 @@ export default {
     },
 
     async sendInvoice (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.confirm_send'),
         icon: '/assets/icon/paper-plane-solid.svg',
@@ -552,7 +546,7 @@ export default {
     },
 
     async sentInvoice (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
@@ -573,7 +567,7 @@ export default {
     },
 
     async onMarkAsAccepted (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_accepted'),
         icon: '/assets/icon/check-circle-solid.svg',
@@ -595,7 +589,7 @@ export default {
     },
 
     async onMarkAsRejected (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_rejected'),
         icon: '/assets/icon/times-circle-solid.svg',
@@ -617,7 +611,7 @@ export default {
     },
 
     async sendEstimate (id) {
-      swal({
+      window.swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_send_estimate'),
         icon: '/assets/icon/paper-plane-solid.svg',

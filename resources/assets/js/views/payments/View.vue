@@ -6,7 +6,6 @@
         <base-button
           :loading="isSendingEmail"
           :disabled="isSendingEmail"
-          :outline="true"
           color="theme"
           @click="onPaymentSend"
         >
@@ -119,7 +118,7 @@
           </div>
         </router-link>
         <p v-if="!payments.length" class="no-result">
-          {{ $t('payments.no_matching_invoices') }}
+          {{ $t('payments.no_matching_payments') }}
         </p>
       </div>
     </div>

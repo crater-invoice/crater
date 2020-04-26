@@ -398,6 +398,7 @@
     "update_payment": "تحديث الدفعة",
     "payment": "دفعة | مدفوعات",
     "no_payments": "لا يوجد مدفوعات حتى الآن!",
+    "no_matching_payments": "لا توجد مدفوعات مطابقة!",
     "list_of_payments": "سوف تحتوي هذه القائمة على مدفوعات الفواتير.",
     "select_payment_mode": "اختر طريقة الدفع",
 

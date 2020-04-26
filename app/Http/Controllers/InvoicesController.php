@@ -12,7 +12,7 @@ use Crater\Invoice;
 use Crater\InvoiceItem;
 use Carbon\Carbon;
 use Crater\Item;
-use Crater\Mail\invoicePdf;
+use Crater\Mail\InvoicePdf;
 use function MongoDB\BSON\toJSON;
 use Illuminate\Support\Facades\Log;
 use Crater\User;
@@ -167,11 +167,6 @@ class InvoicesController extends Controller
             $data['user'] = User::find($request->user_id)->toArray();
             $data['company'] = Company::find($invoice->company_id);
 
-            $notificationEmail = CompanySetting::getSetting(
-                'notification_email',
-                $request->header('company')
-            );
-
             $email = $data['user']['email'];
 
             if (!$email) {
@@ -180,13 +175,7 @@ class InvoicesController extends Controller
                 ]);
             }
 
-            if (!$notificationEmail) {
-                return response()->json([
-                    'error' => 'notification_email_does_not_exist'
-                ]);
-            }
-
-            \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
+            \Mail::to($email)->send(new InvoicePdf($data));
         }
 
         $invoice = Invoice::with(['items', 'user', 'invoiceTemplate', 'taxes'])->find($invoice->id);
@@ -408,10 +397,6 @@ class InvoicesController extends Controller
         $data['user'] = User::find($userId)->toArray();
         $data['company'] = Company::find($invoice->company_id);
         $email = $data['user']['email'];
-        $notificationEmail = CompanySetting::getSetting(
-            'notification_email',
-            $request->header('company')
-        );
 
         if (!$email) {
             return response()->json([
@@ -419,13 +404,7 @@ class InvoicesController extends Controller
             ]);
         }
 
-        if (!$notificationEmail) {
-            return response()->json([
-                'error' => 'notification_email_does_not_exist'
-            ]);
-        }
-
-        \Mail::to($email)->send(new invoicePdf($data, $notificationEmail));
+        \Mail::to($email)->send(new InvoicePdf($data));
 
         if ($invoice->status == Invoice::STATUS_DRAFT) {
             $invoice->status = Invoice::STATUS_SENT;

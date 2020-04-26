@@ -409,6 +409,7 @@
     "update_payment": "Update Payment",
     "payment": "Payment | Payments",
     "no_payments": "No payments yet!",
+    "no_matching_payments": "There are no matching payments!",
     "list_of_payments": "This section will contain the list of payments.",
     "select_payment_mode": "Select payment mode",
     "confirm_send_payment": "This payment will be sent via email to the customer",

@@ -136,7 +136,9 @@ export const fatchItemUnit = ({ commit, dispatch, state }, id) => {
 export const deleteItemUnit = ({ commit, dispatch, state }, id) => {
   return new Promise((resolve, reject) => {
     window.axios.delete(`/api/units/${id}`).then((response) => {
-      commit(types.DELETE_ITEM_UNIT, id)
+      if (!response.data.error) {
+        commit(types.DELETE_ITEM_UNIT, id)
+      }
       resolve(response)
     }).catch((err) => {
       reject(err)

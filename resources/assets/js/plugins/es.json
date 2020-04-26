@@ -397,6 +397,7 @@
     "update_payment": "Actualizar pago",
     "payment": "Pago | Pagos",
     "no_payments": "¡Aún no hay pagos!",
+    "no_matching_payments": "¡No hay pagos equivalentes!",
     "list_of_payments": "Esta sección contendrá la lista de pagos.",
     "select_payment_mode": "Seleccionar modo de pago",
 

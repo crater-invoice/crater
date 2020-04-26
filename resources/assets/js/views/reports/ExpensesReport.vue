@@ -199,11 +199,9 @@ export default {
       if (!this.getReports()) {
         return false
       }
-      if (navigator.appVersion.indexOf('Mac') !== -1) {
-        this.url += '&download=true'
-      } else {
-        window.open(this.getReportUrl + '&download=true')
-      }
+
+      window.open(this.getReportUrl + '&download=true')
+
       setTimeout(() => {
         this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
       }, 200)

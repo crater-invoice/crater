@@ -13,17 +13,14 @@ class PaymentPdf extends Mailable
 
     public $data = [];
 
-    public $notificationEmail = '';
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $notificationEmail)
+    public function __construct($data)
     {
         $this->data = $data;
-        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -33,6 +30,9 @@ class PaymentPdf extends Mailable
      */
     public function build()
     {
-        return $this->from($this->notificationEmail)->markdown('emails.send.payment', ['data', $this->data]);
+        $company = $this->data['company']['name'];
+
+        return $this->subject("Payment from $company")
+                    ->markdown('emails.send.payment', ['data', $this->data]);
     }
 }

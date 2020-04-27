@@ -40,7 +40,6 @@ export default {
   },
 
   [types.ADD_PAYMENT_MODE] (state, data) {
-    state.paymentModes.push(data.paymentMethod)
     state.paymentModes = [data.paymentMethod, ...state.paymentModes]
   },
 

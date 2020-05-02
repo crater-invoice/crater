@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Invoice</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
         body {
@@ -20,7 +21,7 @@
         }
 
         .header-line {
-            color:rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 90px;
             left: 0px;
@@ -29,7 +30,7 @@
 
         hr {
             margin: 0 30px 0 30px;
-            color:rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
         }
 
@@ -52,18 +53,20 @@
             color: #817AE3;
         }
 
-        .inv-flex{
-            display:flex;
+        .inv-flex {
+            display: flex;
         }
 
-        .inv-data{
-            text-align:right;
-            margin-right:120px;
+        .inv-data {
+            text-align: right;
+            margin-right: 120px;
         }
-        .inv-value{
-            text-align:left;
-            margin-left:160px;
+
+        .inv-value {
+            text-align: left;
+            margin-left: 160px;
         }
+
         .header {
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
@@ -79,10 +82,10 @@
         }
 
         .wrapper {
-           display: block;
-           margin-top: 0px;
-           padding-top: 16px;
-           padding-bottom: 20px;
+            display: block;
+            margin-top: 0px;
+            padding-top: 16px;
+            padding-bottom: 20px;
         }
 
         .address {
@@ -91,12 +94,11 @@
         }
 
         .company {
-            float: left;
             padding-left: 30px;
             font-weight: normal;
             display: inline;
-            float:left;
-            width:30%;
+            float: left;
+            width: 30%;
             text-transform: capitalize;
             margin-bottom: 2px;
         }
@@ -125,6 +127,7 @@
             float: right;
             padding: 10px 30px 0 0;
         }
+
         .amount-due {
             background-color: #f2f2f2;
         }
@@ -152,8 +155,9 @@
             line-height: 18px;
             text-align: right;
         }
+
         .bill-add {
-            width:45%;
+            width: 45%;
             padding: 0px 0 0 0px;
         }
 
@@ -176,14 +180,14 @@
         }
 
         .ship-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
             margin: 0px;
         }
+
         .ship-user-address {
             font-style: normal;
             font-weight: normal;
@@ -194,6 +198,7 @@
             margin: 0px;
             width: 160px;
         }
+
         .ship-user-phone {
             font-style: normal;
             font-weight: normal;
@@ -223,8 +228,7 @@
         }
 
         .bill-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
@@ -262,7 +266,7 @@
 
 
         .table2 hr {
-            height:0.1px;
+            height: 0.1px;
         }
 
         .ItemTableHeader {
@@ -319,16 +323,17 @@
         }
 
         .total-border-left {
-            border: 1px solid #E8E8E8!important;
+            border: 1px solid #E8E8E8 !important;
             border-right: 0px !important;
             padding-top: 0px;
-            padding:8px !important;
+            padding: 8px !important;
         }
+
         .total-border-right {
-            border: 1px solid #E8E8E8!important;
+            border: 1px solid #E8E8E8 !important;
             border-left: 0px !important;
             padding-top: 0px;
-            padding:8px !important;
+            padding: 8px !important;
 
         }
 
@@ -345,8 +350,8 @@
             text-align: justify;
             font-size: 10px;
             margin-bottom: 15px;
-            margin-top:7px;
-            color:rgba(0, 0, 0, 0.85);
+            margin-top: 7px;
+            color: rgba(0, 0, 0, 0.85);
         }
 
         .notes {
@@ -372,25 +377,25 @@
             height: 19.87px;
             padding-bottom: 10px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="header-table">
         <table width="100%">
             <tr>
                 <td class="header-center">
                     @if($logo)
-                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        @if($invoice->user->company)
-                            <h2 class="header-logo"> {{$invoice->user->company->name}} </h2>
-                        @endif
+                    @if($invoice->user->company)
+                    <h2 class="header-logo"> {{$invoice->user->company->name}} </h2>
+                    @endif
                     @endif
                 </td>
             </tr>
         </table>
-        <hr class="header-line" style="border: 0.620315px solid #E8E8E8;"/>
+        <hr class="header-line" style="border: 0.620315px solid #E8E8E8;" />
     </div>
     <div class="wrapper">
         <div class="address">
@@ -417,21 +422,22 @@
         </div>
         <div class="bill-add">
             <div class="bill-address-container">
-                    @include('app.pdf.invoice.partials.billing-address')
+                @include('app.pdf.invoice.partials.billing-address')
             </div>
             @if($invoice->user->billingaddress)
-                <div class="ship-address-container">
-            @else
+            <div class="ship-address-container">
+                @else
                 <div class="ship-address-container " style="float:left;padding-left:0px;">
-            @endif
-                @include('app.pdf.invoice.partials.shipping-address')
+                    @endif
+                    @include('app.pdf.invoice.partials.shipping-address')
+                </div>
+                <div style="clear: both;"></div>
             </div>
-            <div style="clear: both;"></div>
+            <div style="position:relative">
+                @include('app.pdf.invoice.partials.table')
+            </div>
+            @include('app.pdf.invoice.partials.notes')
         </div>
-        <div style="position:relative">
-            @include('app.pdf.invoice.partials.table')
-        </div>
-        @include('app.pdf.invoice.partials.notes')
-    </div>
 </body>
+
 </html>

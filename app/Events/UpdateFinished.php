@@ -25,7 +25,7 @@ class UpdateFinished
      */
     public function __construct($old, $new)
     {
-        $this->old   = $old;
-        $this->new   = $new;
+        $this->old = $old;
+        $this->new = $new;
     }
 }

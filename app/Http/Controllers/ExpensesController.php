@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Controllers;
 
 use Crater\Expense;
@@ -116,7 +117,7 @@ class ExpensesController extends Controller
      * @param  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         $categories = ExpenseCategory::whereCompany($request->header('company'))->get();
         $customers = User::customer()
@@ -196,11 +197,11 @@ class ExpensesController extends Controller
     {
         $data = json_decode($request->attachment_receipt);
 
-        if($data) {
+        if ($data) {
             $expense = Expense::find($id);
 
-            if($expense) {
-                if($request->type === 'edit') {
+            if ($expense) {
+                if ($request->type === 'edit') {
                     $expense->clearMediaCollection('receipts');
                 }
 
@@ -226,9 +227,9 @@ class ExpensesController extends Controller
         $expense = Expense::find($id);
         $imagePath  = null;
 
-        if($expense) {
+        if ($expense) {
             $media = $expense->getFirstMedia('receipts');
-            if($media) {
+            if ($media) {
                 $imagePath = $media->getPath();
             } else {
                 return response()->json([
@@ -239,7 +240,7 @@ class ExpensesController extends Controller
 
         $type = \File::mimeType($imagePath);
 
-        $image = 'data:'.$type.';base64,'.base64_encode(file_get_contents($imagePath));
+        $image = 'data:' . $type . ';base64,' . base64_encode(file_get_contents($imagePath));
 
         return response()->json([
             'image' => $image,
@@ -264,17 +265,10 @@ class ExpensesController extends Controller
             ->first();
         $imagePath  = null;
 
-        if($expense) {
+        if ($expense) {
             $media = $expense->getFirstMedia('receipts');
-            if($media) {
+            if ($media) {
                 $imagePath = $media->getPath();
-                $filename = $media->getPath();
-                $type = \File::mimeType($imagePath);
-
-                $headers = array(
-                    'Content-Type' => $type,
-                );
-
                 $response = \Response::download($imagePath, $media->file_name);
                 ob_end_clean();
                 return $response;
@@ -286,4 +280,3 @@ class ExpensesController extends Controller
         ]);
     }
 }
-

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Estimate</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
         body {
@@ -19,7 +20,7 @@
         }
 
         .header-line {
-            color:rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             position: absolute;
             top: 90px;
             left: 0px;
@@ -28,7 +29,7 @@
 
         hr {
             margin: 0 30px 0 30px;
-            color:rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
         }
 
@@ -51,37 +52,16 @@
             color: #817AE3;
         }
 
-        .inv-flex{
-            display:flex;
-        }
-
-        .inv-data{
-            text-align:right;
-            margin-right:120px;
-        }
-        .inv-value{
-            text-align:left;
-            margin-left:160px;
-        }
         .header {
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
-        .TextColor1 {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        @page {
-            margin-top: 60px !important;
-        }
-
         .wrapper {
-           display: block;
-           margin-top: 0px;
-           padding-top: 16px;
-           padding-bottom: 20px;
+            display: block;
+            margin-top: 0px;
+            padding-top: 16px;
+            padding-bottom: 20px;
         }
 
         .address {
@@ -93,9 +73,7 @@
             float: left;
             padding-left: 30px;
             font-weight: normal;
-            display: inline;
-            float:left;
-            width:30%;
+            width: 30%;
             text-transform: capitalize;
             margin-bottom: 2px;
         }
@@ -109,7 +87,7 @@
             margin-bottom: 0px;
         }
 
-        .company-add {
+        .company-address {
             margin-top: 2px;
             text-align: left;
             font-style: normal;
@@ -124,19 +102,12 @@
             float: right;
             padding: 10px 30px 0 0;
         }
+
         .amount-due {
             background-color: #f2f2f2;
         }
 
-        .textRight {
-            text-align: right;
-        }
-
-        .textLeft {
-            text-align: left;
-        }
-
-        .textStyle1 {
+        .attribute-label {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
@@ -144,15 +115,16 @@
             padding-right: 40px;
         }
 
-        .textStyle2 {
+        .attribute-value {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             text-align: right;
         }
+
         .bill-add {
-            width:45%;
+            width: 45%;
             padding: 0px 0 0 0px;
         }
 
@@ -175,14 +147,14 @@
         }
 
         .ship-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
             margin: 0px;
         }
+
         .ship-user-address {
             font-style: normal;
             font-weight: normal;
@@ -193,6 +165,7 @@
             margin: 0px;
             width: 160px;
         }
+
         .ship-user-phone {
             font-style: normal;
             font-weight: normal;
@@ -222,8 +195,7 @@
         }
 
         .bill-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
@@ -260,10 +232,10 @@
         }
 
         .table2 hr {
-            height:0.1px;
+            height: 0.1px;
         }
 
-        .ItemTableHeader {
+        .item-table-heading {
             font-size: 13.5;
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
@@ -271,7 +243,7 @@
             padding-bottom: 10px;
         }
 
-        tr.main-table-header th {
+        tr.item-table-heading-row th {
             border-bottom: 0.620315px solid #E8E8E8;
             font-style: normal;
             font-weight: normal;
@@ -279,18 +251,18 @@
             line-height: 18px;
         }
 
-        .main-table-header {
+        .item-table-heading-row {
             margin-bottom: 10px;
         }
 
-        tr.item-details td {
+        tr.item-row td {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
-        .items {
+        .item-cell {
             font-size: 13;
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
@@ -307,6 +279,7 @@
             padding-top: 2px;
             padding-bottom: 2px;
         }
+
         .table3 {
             border-top: none;
             box-sizing: border-box;
@@ -318,18 +291,20 @@
         }
 
         .total-border-left {
-            border: 1px solid #E8E8E8!important;
+            border: 1px solid #E8E8E8 !important;
             border-right: 0px !important;
             padding-top: 0px;
-            padding:8px !important;
+            padding: 8px !important;
         }
+
         .total-border-right {
-            border: 1px solid #E8E8E8!important;
+            border: 1px solid #E8E8E8 !important;
             border-left: 0px !important;
             padding-top: 0px;
-            padding:8px !important;
+            padding: 8px !important;
 
         }
+
         .inv-item {
             border-color: #d9d9d9;
         }
@@ -338,14 +313,6 @@
             border: none;
         }
 
-        .desc {
-            font-weight: 100;
-            text-align: justify;
-            font-size: 10px;
-            margin-bottom: 15px;
-            margin-top:7px;
-            color:rgba(0, 0, 0, 0.85);
-        }
 
         .notes {
             font-style: normal;
@@ -370,20 +337,20 @@
             height: 19.87px;
             padding-bottom: 10px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="header-table">
         <table width="100%">
             <tr>
                 <td class="header-center">
                     @if($logo)
-                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        @if($estimate->user->company)
-                        <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
-                        @endif
+                    @if($estimate->user->company)
+                    <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
+                    @endif
                     @endif
                 </td>
             </tr>
@@ -398,16 +365,16 @@
             <div class="job-add">
                 <table>
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Estimate Number</td>
-                        <td class="textStyle2"> &nbsp;{{$estimate->estimate_number}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Estimate Number</td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
                     </tr>
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Estimate Date </td>
-                        <td class="textStyle2"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Estimate Date </td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
                     </tr>
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Expiry Date</td>
-                        <td class="textStyle2"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Expiry Date</td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
                     </tr>
                 </table>
             </div>
@@ -418,18 +385,19 @@
                 @include('app.pdf.estimate.partials.billing-address')
             </div>
             @if($estimate->user->billingaddress)
-                <div class="ship-address-container">
-            @else
+            <div class="ship-address-container">
+                @else
                 <div class="ship-address-container " style="float:left;padding-left:0px;">
-            @endif
-                @include('app.pdf.estimate.partials.shipping-address')
+                    @endif
+                    @include('app.pdf.estimate.partials.shipping-address')
+                </div>
+                <div style="clear: both;"></div>
             </div>
-            <div style="clear: both;"></div>
+            <div style="position:relative">
+                @include('app.pdf.estimate.partials.table')
+            </div>
+            @include('app.pdf.estimate.partials.notes')
         </div>
-        <div style="position:relative">
-            @include('app.pdf.estimate.partials.table')
-        </div>
-        @include('app.pdf.estimate.partials.notes')
-    </div>
 </body>
+
 </html>

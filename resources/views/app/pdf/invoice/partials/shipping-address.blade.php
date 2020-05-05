@@ -30,7 +30,7 @@
             {{$invoice->user->shippingaddress->country->name}}<br>
         @endif
 
-        @if($invoice->user->phone)
+        @if($invoice->user->shippingaddress->phone)
             <p class="ship-user-phone">
                 Phone :{{$invoice->user->shippingaddress->phone}}
             </p>

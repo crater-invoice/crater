@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Invoice</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <style type="text/css">
@@ -70,11 +69,6 @@
             color: rgba(0, 0, 0, 0.7);
         }
 
-        .TextColor1 {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.5);
-        }
-
         @page {
             margin-top: 60px !important;
         }
@@ -109,7 +103,7 @@
             letter-spacing: 0.05em;
         }
 
-        .company-add {
+        .company-address{
             text-align: left;
             font-style: normal;
             font-weight: normal;
@@ -212,41 +206,33 @@
             background-color: #f2f2f2;
         }
 
-        .textRight {
-            text-align: right;
-        }
-
-        .textLeft {
-            text-align: left;
-        }
-
-        .textStyle1 {
+        .attribute-label {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
-        .textStyle2 {
+        .attribute-value {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             text-align: right;
         }
-        .main-table-header td {
+        .item-table-heading-row td {
             padding: 10px;
         }
-        .main-table-header {
+        .item-table-heading-row {
             border-bottom: 1px solid red;
         }
-        tr.main-table-header th {
+        tr.item-table-heading-row th {
             font-style: normal;
             font-weight: 600;
             font-size: 12px;
             line-height: 18px;
         }
-        tr.item-details td {
+        tr.item-row td {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
@@ -264,14 +250,14 @@
             height:0.1px;
         }
 
-        .ItemTableHeader {
+        .item-table-heading {
             font-size: 13.5;
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
         }
 
-        .items {
+        .item-cell {
             font-size: 13;
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
@@ -349,14 +335,7 @@
         .no-border {
             border: none;
         }
-        .desc {
-            font-weight: 100;
-            text-align: justify;
-            font-size: 10px;
-            margin-bottom: 15px;
-            margin-top:7px;
-            color:rgba(0, 0, 0, 0.85);
-        }
+
         .company-details h1 {
             margin:0;
             font-style: normal;
@@ -494,21 +473,21 @@
             <div class="job-add">
                 <table width="100%">
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Payment Date</td>
-                        <td class="textStyle2"> &nbsp;{{$payment->formattedPaymentDate}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Payment Date</td>
+                        <td class="attribute-value"> &nbsp;{{$payment->formattedPaymentDate}}</td>
                     </tr>
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Payment Number</td>
-                        <td class="textStyle2"> &nbsp;{{$payment->payment_number}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Payment Number</td>
+                        <td class="attribute-value"> &nbsp;{{$payment->payment_number}}</td>
                     </tr>
                     <tr>
-                        <td class="textStyle1" style="text-align: left; color: #55547A">Payment Mode</td>
-                        <td class="textStyle2"> &nbsp;{{$payment->paymentMethod ? $payment->paymentMethod->name : '-'}}</td>
+                        <td class="attribute-label" style="text-align: left; color: #55547A">Payment Mode</td>
+                        <td class="attribute-value"> &nbsp;{{$payment->paymentMethod ? $payment->paymentMethod->name : '-'}}</td>
                     </tr>
                     @if ($payment->invoice && $payment->invoice->invoice_number)
                         <tr>
-                            <td class="textStyle1" style="text-align: left; color: #55547A">Invoice</td>
-                            <td class="textStyle2"> &nbsp;{{$payment->invoice->invoice_number}}</td>
+                            <td class="attribute-label" style="text-align: left; color: #55547A">Invoice</td>
+                            <td class="attribute-value"> &nbsp;{{$payment->invoice->invoice_number}}</td>
                         </tr>
                     @endif
                 </table>

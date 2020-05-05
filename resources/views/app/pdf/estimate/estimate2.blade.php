@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Estimate</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
@@ -12,6 +13,7 @@
             margin: 0px;
             padding: 0px;
         }
+
         table {
             border-collapse: collapse;
         }
@@ -20,12 +22,14 @@
             padding-top: 45px;
             padding-bottom: 45px;
             padding-left: 30px;
-            display:inline-block;
-            width:30%;
+            display: inline-block;
+            width: 30%;
         }
+
         @page {
             margin-top: 60px !important;
         }
+
         .header-table {
             background: #817AE3;
             position: absolute;
@@ -34,57 +38,45 @@
             left: 0px;
             top: -60px;
         }
+
         .header-logo {
             position: absolute;
             height: 50px;
             text-transform: capitalize;
             color: #fff;
         }
+
         .header-right {
-            display:inline-block;
-            width:35%;
-            float:right;
+            display: inline-block;
+            width: 35%;
+            float: right;
             padding: 20px 30px 20px 0px;
             text-align: right;
-            color:white;
+            color: white;
 
         }
-        .inv-flex{
-            display:flex;
-        }
-        .inv-data{
-            text-align:right;
-            margin-right:120px;
-        }
-        .inv-value{
-            text-align:left;
-            margin-left:160px;
-        }
+
         .header {
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
         }
 
-        .TextColor1 {
-            font-size: 16px;
-            color: rgba(0, 0, 0, 0.5);
-        }
-
         .wrapper {
-           display: block;
-           margin-top: 60px;
-           padding-bottom: 20px;
+            display: block;
+            margin-top: 60px;
+            padding-bottom: 20px;
         }
 
         .address {
             display: block;
             padding-top: 20px;
         }
+
         .company {
             padding: 0 0 0 30px;
             display: inline;
-            float:left;
-            width:30%;
+            float: left;
+            width: 30%;
         }
 
         .company h1 {
@@ -96,7 +88,7 @@
             margin-bottom: 0;
         }
 
-        .company-add {
+        .company-address{
             font-style: normal;
             font-weight: normal;
             font-size: 10px;
@@ -110,7 +102,7 @@
         .bill-address-container {
             display: block;
             /* position: absolute; */
-            float:right;
+            float: right;
             padding: 0 40px 0 0;
         }
 
@@ -124,8 +116,7 @@
         }
 
         .bill-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
@@ -144,6 +135,7 @@
             margin: 0px;
             width: 170px;
         }
+
         .bill-user-phone {
             font-style: normal;
             font-weight: normal;
@@ -158,7 +150,7 @@
         /* shipping style */
         .ship-address-container {
             display: block;
-            float:right;
+            float: right;
             padding: 0 30px 0 0;
         }
 
@@ -172,8 +164,7 @@
         }
 
         .ship-user-name {
-            max-width: 250px
-            font-style: normal;
+            max-width: 250px font-style: normal;
             font-weight: normal;
             font-size: 15px;
             line-height: 22px;
@@ -206,40 +197,32 @@
         .job-add {
             display: inline;
             float: right;
-            width:40%;
+            width: 40%;
         }
 
         .amount-due {
             background-color: #f2f2f2;
         }
 
-        .textRight {
-            text-align: right;
-        }
-
-        .textLeft {
-            text-align: left;
-        }
-
-        .textStyle1 {
+        .attribute-label {
             font-size: 12;
             font-weight: bold;
-            line-height:22px;
+            line-height: 22px;
             color: rgba(0, 0, 0, 0.8);
         }
 
-        .textStyle2 {
+        .attribute-value {
             font-size: 12;
-            line-height:22px;
+            line-height: 22px;
             color: rgba(0, 0, 0, 0.7);
         }
 
-        .main-table-header td {
+        .item-table-heading-row td {
             padding: 5px;
             padding-bottom: 10px;
         }
 
-        .main-table-header {
+        .item-table-heading-row {
             border-bottom: 1px solid red;
         }
 
@@ -252,22 +235,22 @@
 
         hr {
             margin: 0 30px 0 30px;
-            color:rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
         }
 
         .table2 hr {
-            height:0.1px;
+            height: 0.1px;
         }
 
-        .ItemTableHeader {
+        .item-table-heading {
             font-size: 13.5;
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
         }
 
-        tr.main-table-header th {
+        tr.item-table-heading-row th {
             border-bottom: 0.620315px solid #E8E8E8;
             font-style: normal;
             font-weight: normal;
@@ -275,14 +258,14 @@
             line-height: 18px;
         }
 
-        tr.item-details td {
+        tr.item-row td {
             font-style: normal;
             font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
-        .items {
+        .item-cell {
             font-size: 13;
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
@@ -339,22 +322,13 @@
             border: none;
         }
 
-        .desc {
-            font-weight: 100;
-            text-align: justify;
-            font-size: 10px;
-            margin-bottom: 15px;
-            margin-top:7px;
-            color:rgba(0, 0, 0, 0.85);
-        }
-
-        .company-details{
+        .company-details {
             text-align: center;
             width: 40%;
         }
 
         .company-details h1 {
-            margin:0;
+            margin: 0;
             font-style: normal;
             font-weight: 500;
             font-size: 24px;
@@ -363,7 +337,7 @@
         }
 
         .company-details h4 {
-            margin:0;
+            margin: 0;
             font-style: normal;
             font-weight: normal;
             font-size: 10px;
@@ -372,8 +346,8 @@
         }
 
         .company-details h3 {
-             margin-bottom:1px;
-             margin-top:0;
+            margin-bottom: 1px;
+            margin-top: 0;
         }
 
         .notes {
@@ -399,22 +373,22 @@
             height: 19.87px;
             padding-bottom: 10px;
         }
-
     </style>
 </head>
+
 <body>
     <div class="header-table">
         <table width="100%">
             <tr>
                 @if($logo)
-                    <td width="60%" class="header-left">
-                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
-                @else
-                    <td width="60%" class="header-left" style="padding-top: 0px;">
-                        @if($estimate->user->company)
-                            <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
-                        @endif
-                @endif
+                <td width="60%" class="header-left">
+                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                    @else
+                <td width="60%" class="header-left" style="padding-top: 0px;">
+                    @if($estimate->user->company)
+                    <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
+                    @endif
+                    @endif
                 </td>
                 <td width="40%" class="header-right company-details">
                     <h1>Estimate</h1>
@@ -434,16 +408,17 @@
                 @include('app.pdf.estimate.partials.shipping-address')
             </div>
             @if($estimate->user->shippingaddress)
-                <div class="bill-address-container">
-            @else
+            <div class="bill-address-container">
+                @else
                 <div class="bill-address-container" style="float:right;padding-right:0px;">
-            @endif
-                @include('app.pdf.estimate.partials.billing-address')
+                    @endif
+                    @include('app.pdf.estimate.partials.billing-address')
+                </div>
+                <div style="clear: both;"></div>
             </div>
-            <div style="clear: both;"></div>
+            @include('app.pdf.estimate.partials.table')
+            @include('app.pdf.estimate.partials.notes')
         </div>
-        @include('app.pdf.estimate.partials.table')
-        @include('app.pdf.estimate.partials.notes')
-    </div>
 </body>
+
 </html>

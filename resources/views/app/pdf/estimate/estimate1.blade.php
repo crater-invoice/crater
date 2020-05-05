@@ -13,18 +13,11 @@
         html {
             margin: 0px;
             padding: 0px;
+            margin-top: 50px;
         }
 
         table {
             border-collapse: collapse;
-        }
-
-        .header-line {
-            color: rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 90px;
-            left: 0px;
-            width: 100%;
         }
 
         hr {
@@ -33,11 +26,18 @@
             border: 0.5px solid #EAF1FB;
         }
 
-        .header-center {
-            text-align: center
+        /* -------------------------- */
+        /* header style */
+
+        .header-bottom-divider {
+            color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 90px;
+            left: 0px;
+            width: 100%;
         }
 
-        .header-table {
+        .header-container {
             position: absolute;
             width: 100%;
             height: 90px;
@@ -64,41 +64,38 @@
             padding-bottom: 20px;
         }
 
-        .address {
-            /* display: inline-block; */
-            padding-top: 30px
+        .company-details-container {
+            padding-top: 30px;
         }
 
-        .company {
+        /* -------------------------- */
+        /* company address style */
+
+        .company-address-container {
             float: left;
             padding-left: 30px;
-            font-weight: normal;
             width: 30%;
             text-transform: capitalize;
             margin-bottom: 2px;
         }
 
-        .company h1 {
-            font-style: normal;
-            font-weight: normal;
+        .company-address-heading {
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
             margin-bottom: 0px;
+            margin-top: 10px;
         }
 
-        .company-address {
+        .company-address-text {
             margin-top: 2px;
             text-align: left;
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 15px;
             color: #595959;
         }
 
-        .job-add {
-            /* display: inline; */
+        .estimate-details-container {
             float: right;
             padding: 10px 30px 0 0;
         }
@@ -108,22 +105,24 @@
         }
 
         .attribute-label {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             padding-right: 40px;
+            text-align: left;
+            color: #55547A
         }
 
         .attribute-value {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             text-align: right;
         }
 
-        .bill-add {
+
+        /* -------------------------- */
+        /* customer address style */
+
+        .customer-address-container {
             width: 45%;
             padding: 0px 0 0 0px;
         }
@@ -131,14 +130,17 @@
         /* -------------------------- */
         /* shipping style */
 
-        .ship-address-container {
+        .shipping-address-container {
             float: right;
             padding-left: 30px;
         }
 
-        .ship-to {
-            font-style: normal;
-            font-weight: normal;
+        .shipping-address-container--left {
+            float: left;
+            padding-left: 30px;
+        }
+
+        .shipping-address-label {
             font-size: 12px;
             line-height: 18px;
             padding: 0px;
@@ -146,47 +148,32 @@
             margin-bottom: 0px;
         }
 
-        .ship-user-name {
-            max-width: 250px font-style: normal;
-            font-weight: normal;
+        .shipping-address-name {
+            max-width: 250px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
             margin: 0px;
         }
 
-        .ship-user-address {
-            font-style: normal;
-            font-weight: normal;
+        .shipping-address-text {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
             padding: 0px;
             margin: 0px;
             width: 160px;
-        }
-
-        .ship-user-phone {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            padding: 0px;
-            margin: 0px;
         }
 
         /* -------------------------- */
         /* billing style */
 
-        .bill-address-container {
+        .billing-address-container {
             float: left;
             padding-left: 30px;
         }
 
-        .bill-to {
-            font-style: normal;
-            font-weight: normal;
+        .billing-address-label {
             font-size: 12px;
             line-height: 18px;
             padding: 0px;
@@ -194,18 +181,15 @@
             margin-bottom: 0px;
         }
 
-        .bill-user-name {
-            max-width: 250px font-style: normal;
-            font-weight: normal;
+        .billing-address-name {
+            max-width: 250px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
             margin: 0px;
         }
 
-        .bill-user-address {
-            font-style: normal;
-            font-weight: normal;
+        .billing-address-text {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -214,24 +198,14 @@
             width: 160px;
         }
 
-        .bill-user-phone {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            padding: 0px;
-            margin: 0px;
-        }
-
-        .table2 {
+        .item-table {
             margin-top: 35px;
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
 
-        .table2 hr {
+        .item-table hr {
             height: 0.1px;
         }
 
@@ -245,8 +219,6 @@
 
         tr.item-table-heading-row th {
             border-bottom: 0.620315px solid #E8E8E8;
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
@@ -256,18 +228,17 @@
         }
 
         tr.item-row td {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
         .item-cell {
             font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
+            color: #040405;
             text-align: center;
             padding: 5px;
             padding-top: 10px;
+            border-color: #d9d9d9;
         }
 
         .padd8 {
@@ -280,14 +251,15 @@
             padding-bottom: 2px;
         }
 
-        .table3 {
+        .total-display-table {
             border-top: none;
             box-sizing: border-box;
             width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-
+            margin-left:420px;
+            margin-top: 10px
         }
 
         .total-border-left {
@@ -302,21 +274,13 @@
             border-left: 0px !important;
             padding-top: 0px;
             padding: 8px !important;
-
         }
 
         .inv-item {
-            border-color: #d9d9d9;
+            border-color: red;
         }
-
-        .no-border {
-            border: none;
-        }
-
 
         .notes {
-            font-style: normal;
-            font-weight: 300;
             font-size: 12px;
             color: #595959;
             margin-top: 15px;
@@ -327,8 +291,6 @@
         }
 
         .notes-label {
-            font-style: normal;
-            font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -337,14 +299,30 @@
             height: 19.87px;
             padding-bottom: 10px;
         }
+
+        .text-center {
+            text-align: center
+        }
+
+        table .text-left {
+            text-align: left;
+        }
+
+        table .text-right {
+            text-align: right;
+        }
+
+        .no-border {
+            border: none;
+        }
     </style>
 </head>
 
 <body>
-    <div class="header-table">
+    <div class="header-container">
         <table width="100%">
             <tr>
-                <td class="header-center">
+                <td class="text-center">
                     @if($logo)
                     <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
@@ -355,43 +333,43 @@
                 </td>
             </tr>
         </table>
-        <hr class="header-line" />
+        <hr class="header-bottom-divider" />
     </div>
     <div class="wrapper">
-        <div class="address">
-            <div class="company">
+        <div class="company-details-container">
+            <div class="company-address-container">
                 @include('app.pdf.estimate.partials.company-address')
             </div>
-            <div class="job-add">
-                <table>
+            <div class="estimate-details-container">
+                <table class="estimate-details-table">
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Estimate Number</td>
+                        <td class="attribute-label">Estimate Number</td>
                         <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Estimate Date </td>
+                        <td class="attribute-label">Estimate Date </td>
                         <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Expiry Date</td>
+                        <td class="attribute-label">Expiry Date</td>
                         <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
                     </tr>
                 </table>
             </div>
             <div style="clear: both;"></div>
         </div>
-        <div class="bill-add">
-            <div class="bill-address-container">
+        <div class="customer-address-container">
+            <div class="billing-address-container">
                 @include('app.pdf.estimate.partials.billing-address')
             </div>
             @if($estimate->user->billingaddress)
-            <div class="ship-address-container">
-                @else
-                <div class="ship-address-container " style="float:left;padding-left:0px;">
-                    @endif
-                    @include('app.pdf.estimate.partials.shipping-address')
-                </div>
-                <div style="clear: both;"></div>
+            <div class="shipping-address-container">
+            @else
+            <div class="shipping-address-container--left">
+            @endif
+            @include('app.pdf.estimate.partials.shipping-address')
+            </div>
+            <div style="clear: both;"></div>
             </div>
             <div style="position:relative">
                 @include('app.pdf.estimate.partials.table')

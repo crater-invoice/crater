@@ -79,7 +79,7 @@
             color: #595959;
         }
 
-        .sales-money {
+        .sales-amount {
             padding: 0px;
             margin: 0px;
             font-size: 14px;
@@ -97,7 +97,7 @@
             padding-top: 10px;
         }
 
-        .sales-total-text {
+        .sales-total-amount {
             padding-top: 10px;
             padding-right: 30px;
             padding: 0px;
@@ -173,7 +173,7 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <p class="sales-money">
+                                    <p class="sales-amount">
                                         {!! format_money_pdf($invoice->total) !!}
                                     </p>
                                 </td>
@@ -184,7 +184,7 @@
                 <table class="sales-total-indicator-table">
                     <tr>
                         <td class="sales-total-container">
-                            <p class="sales-total-text">
+                            <p class="sales-total-amount">
                                 {!! format_money_pdf($customer->totalAmount) !!}
                             </p>
                         </td>

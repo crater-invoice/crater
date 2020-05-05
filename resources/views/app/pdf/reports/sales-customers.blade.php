@@ -128,7 +128,7 @@
             color: #595959;
         }
 
-        .profit-money {
+        .profit-amount {
             padding: 0px;
             margin: 0px;
             text-align: right;
@@ -200,7 +200,7 @@
                     <p class="profit-title">TOTAL SALES</p>
                 </td>
                 <td>
-                    <p class="profit-money">
+                    <p class="profit-amount">
                         {!! format_money_pdf($totalAmount) !!}
                     </p>
                 </td>

@@ -13,16 +13,15 @@
             padding: 0px;
         } */
 
-        table {
-            border-collapse: collapse;
-        }
-
         .main-container {
-            /* padding: 30px 60px; */
         }
 
         .sub-container{
             padding: 0px 20px;
+        }
+
+        table {
+            border-collapse: collapse;
         }
 
         .header {
@@ -31,7 +30,6 @@
         }
 
         .heading-text {
-            font-style: normal;
             font-weight: 600;
             font-size: 24px;
             color: #5851D8;
@@ -42,7 +40,6 @@
         }
 
         .heading-date-range {
-            font-style: normal;
             font-weight: 600;
             font-size: 15px;
             color: #A5ACC1;
@@ -53,31 +50,17 @@
         }
 
         .sub-heading-text {
-            font-style: normal;
             font-weight: 600;
             font-size: 16px;
-            /* line-height: 21px; */
             color: #595959;
             padding: 0px;
             margin: 0px;
             margin-top: 6px;
         }
 
-        .types-title {
+        .tax-types-title {
             margin-top: 20px;
             padding-left: 3px;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 21px;
-            color: #040405;
-        }
-
-        .tax-title {
-            margin-top: 60px;
-            padding-left: 3px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 16px;
             line-height: 21px;
             color: #040405;
@@ -95,18 +78,14 @@
         .tax-title {
             padding: 0px;
             margin: 0px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             color: #595959;
         }
 
-        .tax-money {
+        .tax-amount {
             padding: 0px;
             margin: 0px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             text-align: right;
@@ -129,7 +108,6 @@
             padding: 0px;
             margin: 0px;
             text-align: right;
-            font-style: normal;
             font-weight: 500;
             font-size: 16px;
             line-height: 21px;
@@ -137,7 +115,7 @@
             color: #040405;
         }
 
-        .total-tax-table {
+        .total-tax-indicator-table {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -149,18 +127,16 @@
             padding: 0px;
             margin: 0px;
             text-align: left;
-            font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 21px;
             color: #595959;
         }
 
-        .total-tax-money {
+        .total-tax-amount {
             padding: 0px;
             margin: 0px;
             text-align: right;
-            font-style: normal;
             font-weight: 500;
             font-size: 20px;
             line-height: 21px;
@@ -190,7 +166,7 @@
                     </td>
                 </tr>
             </table>
-            <p class="types-title">Tax Types</p>
+            <p class="tax-types-title">Tax Types</p>
             <div class="tax-table-container">
                 <table class="tax-table">
                     @foreach ($taxTypes as $tax)
@@ -201,7 +177,7 @@
                                 </p>
                             </td>
                             <td>
-                                <p class="tax-money">
+                                <p class="tax-amount">
                                     {!! format_money_pdf($tax->total_tax_amount) !!}
                                 </p>
                             </td>
@@ -221,13 +197,13 @@
                 </td>
             </tr>
         </table>
-        <table class="total-tax-table">
+        <table class="total-tax-indicator-table">
             <tr>
                 <td>
                     <p class="total-tax-title">TOTAL TAX</p>
                 </td>
                 <td>
-                    <p class="total-tax-money">
+                    <p class="total-tax-amount">
                         {!! format_money_pdf($totalTaxAmount) !!}
                     </p>
                 </td>

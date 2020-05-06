@@ -93,7 +93,7 @@
             width: 100%;
         }
 
-        .sales-total-container {
+        .sales-total-cell {
             padding-top: 10px;
         }
 
@@ -183,7 +183,7 @@
                 </div>
                 <table class="sales-total-indicator-table">
                     <tr>
-                        <td class="sales-total-container">
+                        <td class="sales-total-cell">
                             <p class="sales-total-amount">
                                 {!! format_money_pdf($customer->totalAmount) !!}
                             </p>

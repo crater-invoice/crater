@@ -64,12 +64,12 @@
             padding-bottom: 20px;
         }
 
+        /* -------------------------- */
+        /* company details style */
+
         .company-details-container {
             padding-top: 30px;
         }
-
-        /* -------------------------- */
-        /* company address style */
 
         .company-address-container {
             float: left;
@@ -100,10 +100,6 @@
             padding: 10px 30px 0 0;
         }
 
-        .amount-due {
-            background-color: #f2f2f2;
-        }
-
         .attribute-label {
             font-size: 12px;
             line-height: 18px;
@@ -117,7 +113,6 @@
             line-height: 18px;
             text-align: right;
         }
-
 
         /* -------------------------- */
         /* customer address style */
@@ -198,14 +193,17 @@
             width: 160px;
         }
 
-        .item-table {
+        /* -------------------------- */
+        /* items style */
+
+        .items-table {
             margin-top: 35px;
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
 
-        .item-table hr {
+        .items-table hr {
             height: 0.1px;
         }
 
@@ -241,15 +239,15 @@
             border-color: #d9d9d9;
         }
 
-        .padd8 {
-            padding-top: 8px;
-            padding-bottom: 8px;
+        .item-description {
+            color: #595959;
+            font-size: 9px;
+            font-weight:300;
+            line-height: 12px;
         }
 
-        .padd2 {
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
+        /* -------------------------- */
+        /* total display table style */
 
         .total-display-table {
             border-top: none;
@@ -260,6 +258,23 @@
             page-break-after: auto;
             margin-left:420px;
             margin-top: 10px
+        }
+
+        .total-table-attribute-label {
+            font-size: 12px;
+            color: #55547A;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .total-table-attribute-value {
+            font-weight: 500;
+            text-align: right;
+            font-size: 12px;
+            color: #040405;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
 
         .total-border-left {
@@ -276,9 +291,8 @@
             padding: 8px !important;
         }
 
-        .inv-item {
-            border-color: red;
-        }
+        /* -------------------------- */
+        /* notes style */
 
         .notes {
             font-size: 12px;
@@ -300,6 +314,13 @@
             padding-bottom: 10px;
         }
 
+        /* -------------------------- */
+        /* helpers style */
+
+        .text-primary {
+            color: #5851DB;
+        }
+
         .text-center {
             text-align: center
         }
@@ -312,8 +333,42 @@
             text-align: right;
         }
 
-        .no-border {
+        .border-0 {
             border: none;
+        }
+
+        .py-2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .py-8 {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .py-3 {
+            padding: 3px 0;
+        }
+
+        .pr-20 {
+            padding-right: 20px;
+        }
+
+        .pr-10 {
+            padding-right: 10px;
+        }
+
+        .pl-20 {
+            padding-left: 20px;
+        }
+
+        .pl-10 {
+            padding-left: 10px;
+        }
+
+        .pl-0 {
+            padding-left: 0;
         }
     </style>
 </head>

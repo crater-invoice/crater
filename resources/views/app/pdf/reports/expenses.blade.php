@@ -13,10 +13,6 @@
             padding: 0px;
         } */
 
-        table {
-            border-collapse: collapse;
-        }
-
         .main-container {
             /* padding: 30px 60px; */
         }
@@ -25,12 +21,15 @@
             padding: 0px 20px;
         }
 
+        table {
+            border-collapse: collapse;
+        }
+
         .header {
             width: 100%;
         }
 
         .heading-text {
-            font-style: normal;
             font-weight: 600;
             font-size: 24px;
             color: #5851D8;
@@ -41,7 +40,6 @@
         }
 
         .heading-date-range {
-            font-style: normal;
             font-weight: 600;
             font-size: 15px;
             color: #A5ACC1;
@@ -52,10 +50,8 @@
         }
 
         .sub-heading-text {
-            font-style: normal;
             font-weight: 600;
             font-size: 16px;
-            /* line-height: 21px; */
             color: #595959;
             padding: 0px;
             margin: 0px;
@@ -65,8 +61,6 @@
         .expenses-title {
             margin-top: 60px;
             padding-left: 3px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 16px;
             line-height: 21px;
             color: #040405;
@@ -84,18 +78,14 @@
         .expense-title {
             padding: 0px;
             margin: 0px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             color: #595959;
         }
 
-        .expense-money {
+        .expense-amount {
             padding: 0px;
             margin: 0px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 14px;
             line-height: 21px;
             text-align: right;
@@ -118,7 +108,6 @@
             padding: 0px;
             margin: 0px;
             text-align: right;
-            font-style: normal;
             font-weight: 500;
             font-size: 16px;
             line-height: 21px;
@@ -126,7 +115,7 @@
             color: #040405;
         }
 
-        .total-expense-table {
+        .expenses-total-indicator-table {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -138,18 +127,16 @@
             padding: 0px;
             margin: 0px;
             text-align: left;
-            font-style: normal;
             font-weight: 600;
             font-size: 16px;
             line-height: 21px;
             color: #595959;
         }
 
-        .total-expense-money {
+        .total-expense-amount {
             padding: 0px;
             margin: 0px;
             text-align: right;
-            font-style: normal;
             font-weight: 500;
             font-size: 20px;
             line-height: 21px;
@@ -186,7 +173,7 @@
                                 </p>
                             </td>
                             <td>
-                                <p class="expense-money">
+                                <p class="expense-amount">
                                     {!! format_money_pdf($expenseCategory->total_amount) !!}
                                 </p>
                             </td>
@@ -203,13 +190,13 @@
                 </td>
             </tr>
         </table>
-        <table class="total-expense-table">
+        <table class="expenses-total-indicator-table">
             <tr>
                 <td>
                     <p class="total-expense-title">TOTAL EXPENSE</p>
                 </td>
                 <td>
-                    <p class="total-expense-money">{!! format_money_pdf($totalExpense) !!}</p>
+                    <p class="total-expense-amount">{!! format_money_pdf($totalExpense) !!}</p>
                 </td>
             </tr>
         </table>

@@ -5,7 +5,7 @@
             {{$estimate->user->shippingaddress->name}}
         </p>
     @endif
-    <p class="shipping-address-text">
+    <p class="shipping-address">
         @if($estimate->user->shippingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($estimate->user->shippingaddress->address_street_1)) !!}<br>
         @endif
@@ -31,7 +31,7 @@
         @endif
 
         @if($estimate->user->phone)
-            <p class="shipping-address-text">
+            <p class="shipping-address">
                 Phone :{{$estimate->user->shippingaddress->phone}}
             </p>
         @endif

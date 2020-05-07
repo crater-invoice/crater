@@ -5,7 +5,7 @@
             {{$estimate->user->billingaddress->name}}
         </p>
     @endif
-    <p class="billing-address-text">
+    <p class="billing-address">
         @if($estimate->user->billingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($estimate->user->billingaddress->address_street_1)) !!}<br>
         @endif
@@ -31,7 +31,7 @@
         @endif
 
         @if($estimate->user->billingaddress->phone)
-            <p class="billing-address-text">
+            <p class="billing-address">
                 Phone :{{$estimate->user->billingaddress->phone}}
             </p>
         @endif

@@ -5,6 +5,7 @@
     <title>Estimate</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
+        /* -- Base -- */
         body {
             font-family: "DejaVu Sans";
         }
@@ -25,8 +26,7 @@
             border: 0.5px solid #EAF1FB;
         }
 
-        /* -------------------------- */
-        /* header style */
+        /* -- Header -- */
 
         .header-container {
             background: #817AE3;
@@ -66,8 +66,7 @@
             color: rgba(0, 0, 0, 0.7);
         }
 
-        /* -------------------------- */
-        /* estimate details container */
+        /* -- Estimate Details -- */
 
         .estimate-details-container {
             text-align: center;
@@ -94,8 +93,7 @@
             margin-top: 0;
         }
 
-        /* -------------------------- */
-        /* address-container */
+        /* -- Address -- */
 
         .wrapper {
             display: block;
@@ -108,6 +106,8 @@
             padding-top: 20px;
         }
 
+        /* -- Company Address -- */
+
         .company-address-container {
             padding: 0 0 0 30px;
             display: inline;
@@ -115,24 +115,36 @@
             width: 30%;
         }
 
-        .company-address-heading {
-            font-weight: bold;
+        .company-address-container {
+            padding-left: 30px;
+
+            float: left;
+            width: 30%;
+            text-transform: capitalize;
+            margin-bottom: 2px;
+        }
+
+        .company-address-container h1 {
+
+
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
-            margin-bottom: 0;
-            margin-top: 12px;
+            margin-bottom: 0px;
+            margin-top: 10px;
         }
 
-        .company-address-text {
-            font-size: 10px;
+        .company-address {
+            margin-top: 2px;
+            text-align: left;
+
+
+            font-size: 12px;
             line-height: 15px;
             color: #595959;
-            margin-top: 0px;
         }
 
-        /* -------------------------- */
-        /* billing style */
+        /* -- Billing -- */
 
         .billing-address-container {
             display: block;
@@ -157,7 +169,7 @@
             margin-bottom: 0px;
         }
 
-        .billing-address-text {
+        .billing-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -166,8 +178,7 @@
             width: 170px;
         }
 
-        /* -------------------------- */
-        /* shipping style */
+        /* -- Shipping -- */
 
         .shipping-address-container {
             display: block;
@@ -191,7 +202,7 @@
             margin-bottom: 0px;
         }
 
-        .shipping-address-text {
+        .shipping-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -213,8 +224,7 @@
             color: rgba(0, 0, 0, 0.7);
         }
 
-        /* -------------------------- */
-        /* items style */
+        /* -- Items Table -- */
 
         .items-table {
             margin-top: 30px;
@@ -256,7 +266,7 @@
 
         .item-cell {
             font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
+            color: #040405;
             text-align: center;
             padding: 5px;
             padding-top: 10px;
@@ -269,8 +279,7 @@
             line-height: 12px;
         }
 
-        /* -------------------------- */
-        /* total display table style */
+        /* -- Total Display Table -- */
 
         .total-display-table {
             border-top: none;
@@ -315,8 +324,7 @@
             padding: 8px !important;
         }
 
-        /* -------------------------- */
-        /* notes style */
+        /* -- Notes -- */
 
         .notes {
             font-weight: 300;
@@ -339,8 +347,7 @@
             padding-bottom: 10px;
         }
 
-        /* -------------------------- */
-        /* helpers style */
+        /* -- Helpers -- */
 
         .text-primary {
             color: #5851DB;

@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
+        /* -- Base -- */
         body {
             font-family: "DejaVu Sans";
         }
@@ -26,8 +27,7 @@
             margin: 0 30px 0 30px;
         }
 
-        /* -------------------------- */
-        /* header style */
+        /* -- Header -- */
 
         .header-container {
             position: absolute;
@@ -73,16 +73,17 @@
             color: rgba(0, 0, 0, 0.7);
         }
 
-        /* -------------------------- */
-        /* company address container */
+        /* -- Company Address -- */
 
         .company-address-container {
-            width: 30%;
+            width: auto;
             text-transform: capitalize;
             margin-bottom: 2px;
         }
 
-        .company-address-heading {
+        .company-address-container h1 {
+
+
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -90,16 +91,17 @@
             margin-top: 10px;
         }
 
-        .company-address-text {
+        .company-address {
             margin-top: 2px;
             text-align: left;
+
+
             font-size: 12px;
             line-height: 15px;
             color: #595959;
         }
 
-        /* -------------------------- */
-        /* main content style */
+        /* -- Content Wrapper -- */
 
         .wrapper {
             display: block;
@@ -119,8 +121,7 @@
             padding: 0 0 0 30px;
         }
 
-        /* -------------------------- */
-        /* shipping style */
+        /* -- Shipping -- */
 
         .shipping-address-container {
             float: right;
@@ -144,7 +145,7 @@
             margin: 0px;
         }
 
-        .shipping-address-text {
+        .shipping-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -152,8 +153,7 @@
             width: 160px;
         }
 
-        /* -------------------------- */
-        /* billing style */
+        /* -- Billing -- */
 
         .billing-address-container {
             float: left;
@@ -173,7 +173,7 @@
             margin: 0px;
         }
 
-        .billing-address-text {
+        .billing-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -181,8 +181,7 @@
             width: 160px;
         }
 
-        /* -------------------------- */
-        /* estimate details container */
+        /* -- Estimate Details -- */
 
         .estimate-details-container {
             display: block;
@@ -203,9 +202,7 @@
             text-align: right;
         }
 
-        /* -------------------------- */
-        /* items style */
-
+        /* -- Items Table -- */
         .items-table {
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
@@ -226,7 +223,7 @@
 
         .item-cell {
             font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
+            color: #040405;
             text-align: center;
             padding: 5px;
         }
@@ -251,8 +248,7 @@
             line-height: 18px;
         }
 
-        /* -------------------------- */
-        /* total display table style */
+        /* -- Total Display Table -- */
 
         .total-display-table {
             border: 1px solid #EAF1FB;
@@ -296,8 +292,7 @@
             padding: 8px !important;
         }
 
-        /* -------------------------- */
-        /* notes style */
+        /* -- Notes -- */
 
         .notes {
             font-size: 12px;
@@ -319,8 +314,7 @@
             padding-bottom: 10px;
         }
 
-        /* -------------------------- */
-        /* helpers style */
+        /* -- Helpers -- */
 
         .text-primary {
             color: #5851DB;

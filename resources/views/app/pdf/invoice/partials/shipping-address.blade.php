@@ -1,11 +1,11 @@
 @if($invoice->user->shippingaddress)
-    <p class="ship-to">Ship To,</p>
+    <p class="shipping-address-label">Ship To,</p>
     @if($invoice->user->shippingaddress->name)
-        <p class="ship-user-name">
+        <p class="shipping-address-name">
             {{$invoice->user->shippingaddress->name}}
         </p>
     @endif
-    <p class="ship-user-address">
+    <p class="shipping-address">
         @if($invoice->user->shippingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($invoice->user->shippingaddress->address_street_1)) !!}<br>
         @endif
@@ -31,7 +31,7 @@
         @endif
 
         @if($invoice->user->shippingaddress->phone)
-            <p class="ship-user-phone">
+            <p class="shipping-address">
                 Phone :{{$invoice->user->shippingaddress->phone}}
             </p>
         @endif

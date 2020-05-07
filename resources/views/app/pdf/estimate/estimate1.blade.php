@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
+        /* -- Base -- */
         body {
             font-family: "DejaVu Sans";
         }
@@ -26,16 +27,7 @@
             border: 0.5px solid #EAF1FB;
         }
 
-        /* -------------------------- */
-        /* header style */
-
-        .header-bottom-divider {
-            color: rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 90px;
-            left: 0px;
-            width: 100%;
-        }
+        /* -- Header -- */
 
         .header-container {
             position: absolute;
@@ -43,6 +35,14 @@
             height: 90px;
             left: 0px;
             top: -50px;
+        }
+
+        .header-bottom-divider {
+            color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 90px;
+            left: 0px;
+            width: 100%;
         }
 
         .header-logo {
@@ -64,8 +64,7 @@
             padding-bottom: 20px;
         }
 
-        /* -------------------------- */
-        /* company details style */
+        /* -- Company Details -- */
 
         .company-details-container {
             padding-top: 30px;
@@ -79,7 +78,18 @@
             margin-bottom: 2px;
         }
 
-        .company-address-heading {
+        .company-address-container {
+            padding-left: 30px;
+
+            float: left;
+            width: 30%;
+            text-transform: capitalize;
+            margin-bottom: 2px;
+        }
+
+        .company-address-container h1 {
+
+
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -87,9 +97,11 @@
             margin-top: 10px;
         }
 
-        .company-address-text {
+        .company-address {
             margin-top: 2px;
             text-align: left;
+
+
             font-size: 12px;
             line-height: 15px;
             color: #595959;
@@ -114,16 +126,14 @@
             text-align: right;
         }
 
-        /* -------------------------- */
-        /* customer address style */
+        /* -- Customer Address -- */
 
         .customer-address-container {
             width: 45%;
             padding: 0px 0 0 0px;
         }
 
-        /* -------------------------- */
-        /* shipping style */
+        /* -- Shipping -- */
 
         .shipping-address-container {
             float: right;
@@ -151,7 +161,7 @@
             margin: 0px;
         }
 
-        .shipping-address-text {
+        .shipping-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -160,8 +170,7 @@
             width: 160px;
         }
 
-        /* -------------------------- */
-        /* billing style */
+        /* -- Billing -- */
 
         .billing-address-container {
             float: left;
@@ -184,7 +193,7 @@
             margin: 0px;
         }
 
-        .billing-address-text {
+        .billing-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -193,8 +202,7 @@
             width: 160px;
         }
 
-        /* -------------------------- */
-        /* items style */
+        /* -- Items Table -- */
 
         .items-table {
             margin-top: 35px;
@@ -246,8 +254,7 @@
             line-height: 12px;
         }
 
-        /* -------------------------- */
-        /* total display table style */
+        /* -- Total Display Table -- */
 
         .total-display-table {
             border-top: none;
@@ -291,8 +298,7 @@
             padding: 8px !important;
         }
 
-        /* -------------------------- */
-        /* notes style */
+        /* -- Notes -- */
 
         .notes {
             font-size: 12px;
@@ -314,8 +320,7 @@
             padding-bottom: 10px;
         }
 
-        /* -------------------------- */
-        /* helpers style */
+        /* -- Helpers -- */
 
         .text-primary {
             color: #5851DB;

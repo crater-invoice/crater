@@ -6,6 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
+        /* -- Base -- */
+
         body {
             font-family: "DejaVu Sans";
         }
@@ -13,19 +15,11 @@
         html {
             margin: 0px;
             padding: 0px;
+            margin-top: 50px;
         }
 
         table {
             border-collapse: collapse;
-        }
-
-        .header-line {
-            color: rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 80px;
-            left: 0px;
-            right: -70px;
-            width: 100%;
         }
 
         hr {
@@ -33,12 +27,17 @@
             border: 0.5px solid #EAF1FB;
         }
 
-        .items-table-hr {
-            margin: 0 30px 0 30px;
+        /* -- Header -- */
+
+        .header-bottom-divider {
+            color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 100px;
+            left: 0px;
+            width: 100%;
         }
 
-
-        .header-left {
+        .header-section-left {
             padding-top: 45px;
             padding-bottom: 45px;
             padding-left: 30px;
@@ -46,7 +45,7 @@
             width: 30%;
         }
 
-        .header-table {
+        .header-container {
             position: absolute;
             width: 100%;
             height: 150px;
@@ -61,7 +60,7 @@
             color: #817AE3;
         }
 
-        .header-right {
+        .header-section-right {
             display: inline-block;
             position: absolute;
             right: 0;
@@ -74,76 +73,103 @@
             color: rgba(0, 0, 0, 0.7);
         }
 
-        @page {
-            margin-top: 60px !important;
+        /* -- Company Address */
+
+        .company-address-container {
+            width: auto;
+            text-transform: capitalize;
+            margin-bottom: 2px;
         }
 
-        .wrapper {
+         .company-address-container h1 {
+            font-size: 15px;
+            line-height: 22px;
+            letter-spacing: 0.05em;
+            margin-bottom: 0px;
+            margin-top: 10px;
+        }
+
+        .company-address {
+            margin-top: 2px;
+            font-size: 12px;
+            line-height: 15px;
+            color: #595959;
+        }
+
+        /* -- Content Wrapper  */
+
+        .content-wrapper {
             display: block;
             padding-top: 50px;
             padding-bottom: 20px;
         }
 
-        .address {
+        .main-content {
             display: inline-block;
             padding-top: 100px;
         }
 
-        .bill-add {
+        .customer-address-container {
             display: block;
             float: left;
             width: 40%;
             padding: 0 0 0 30px;
         }
 
-        .company {
-            padding-left: 30px;
-            display: inline;
+        /* -- Shipping -- */
+        .shipping-address-container {
+            float:right;
+        }
+
+        .shipping-address-container--left {
+            float:left;
+        }
+
+        .shipping-address-label {
+            padding-top: 5px;
+            font-size: 12px;
+            line-height: 18px;
+            margin-bottom: 0px;
+        }
+
+        .shipping-address-name {
+            padding: 0px;
+            font-size: 15px;
+            line-height: 22px;
+            margin: 0px;
+        }
+
+        .shipping-address {
+            font-size: 10px;
+            line-height: 15px;
+            color: #595959;
+            margin: 0px;
+            width: 160px;
+        }
+
+        /* -- Billing -- */
+
+        .billing-address-container {
             float: left;
-            width: 30%;
         }
 
-        .company h1 {
-            font-style: normal;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 22px;
-            letter-spacing: 0.05em;
-        }
-
-        .company-address{
-            text-align: left;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            margin: 0px;
-        }
-
-        /* -------------------------- */
-        /* shipping style */
-        .ship-to {
+        .billing-address-label {
             padding-top: 5px;
-            font-style: normal;
-            font-weight: normal;
+
+
             font-size: 12px;
             line-height: 18px;
             margin-bottom: 0px;
         }
 
-        .ship-user-name {
+        .billing-address-name {
             padding: 0px;
-            font-style: normal;
-            font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
         }
 
-        .ship-user-address {
-            font-style: normal;
-            font-weight: normal;
+        .billing-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -151,78 +177,38 @@
             width: 160px;
         }
 
-        .ship-user-phone {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            margin: 0px;
-        }
+        /*  -- Estimate Details -- */
 
-        /* -------------------------- */
-        /* billing style */
-        .bill-to {
-            padding-top: 5px;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 18px;
-            margin-bottom: 0px;
-        }
-
-        .bill-user-name {
-            padding: 0px;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 15px;
-            line-height: 22px;
-            margin: 0px;
-        }
-
-        .bill-user-address {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            margin: 0px;
-            width: 160px;
-        }
-
-        .bill-user-phone {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            margin: 0px;
-        }
-
-
-        .invoice-attributes {
+        .invoice-details-container {
             display: block;
             float: right;
             padding: 20px 30px 0 0;
         }
 
-        .amount-due {
-            background-color: #f2f2f2;
-        }
-
         .attribute-label {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
+            text-align: left;
+            color: #55547A
         }
 
         .attribute-value {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             text-align: right;
+        }
+
+        /* -- Items Table -- */
+
+        .items-table {
+            padding: 0px 30px 10px 30px;
+            page-break-before: avoid;
+            page-break-after: auto;
+        }
+
+        .items-table hr {
+            height: 0.1px;
+            margin: 0 30px 0 30px;
         }
 
         .item-table-heading-row td {
@@ -234,27 +220,14 @@
         }
 
         tr.item-table-heading-row th {
-            font-style: normal;
             font-weight: 600;
             font-size: 12px;
             line-height: 18px;
         }
 
         tr.item-row td {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
-        }
-
-        .table2 {
-            padding: 0px 30px 10px 30px;
-            page-break-before: avoid;
-            page-break-after: auto;
-        }
-
-        .table2 hr {
-            height: 0.1px;
         }
 
         .item-table-heading {
@@ -266,32 +239,14 @@
 
         .item-cell {
             font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
+            color: #040405;
             text-align: center;
             padding: 5px;
         }
 
-        .note-header {
-            font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
-        }
+        /* -- Total Display Table -- */
 
-        .note-text {
-            font-size: 10;
-            color: rgba(0, 0, 0, 0.6);
-        }
-
-        .padd8 {
-            padding-top: 8px;
-            padding-bottom: 8px;
-        }
-
-        .padd2 {
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
-
-        .table3 {
+        .total-display-table {
             border: 1px solid #EAF1FB;
             border-top: none;
             box-sizing: border-box;
@@ -299,83 +254,29 @@
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
+            margin-left:420px;
+            margin-top: 10px
         }
 
-        .text-per-item-table3 {
-            border: 1px solid #EAF1FB;
-            border-top: none;
-            padding-right: 30px;
-            box-sizing: border-box;
-            width: 260px;
-            /* height: 100px; */
-            position: absolute;
-            right: -25;
-        }
-
-        td.invoice-total1 {
-            text-align: left;
-            padding: 15px 0 15px 10px;
+        .total-table-attribute-label {
             font-size: 12px;
-            line-height: 18px;
             color: #55547A;
-            border-bottom: 1px solid #E8E8E8;
-            border-top: 1px solid #E8E8E8;
-            border-left: 1px solid #E8E8E8;
+            text-align: left;
+            padding-left: 10px;
         }
 
-        td.invoice-total2 {
+        .total-table-attribute-value {
             font-weight: 500;
             text-align: right;
             font-size: 12px;
-            line-height: 18px;
-            padding: 15px 10px 15px 0;
-            color: #5851DB;
-            border-bottom: 1px solid #E8E8E8;
-            border-top: 1px solid #E8E8E8;
-            border-right: 1px solid #E8E8E8;
+            color: #040405;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
 
-        .inv-item {
-            border-color: #d9d9d9;
-        }
-
-        .no-border {
-            border: none;
-        }
-
-        .company-details h1 {
-            margin: 0;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 15px;
-            line-height: 22px;
-            letter-spacing: 0.05em;
-            text-align: left;
-            max-width: 220px;
-        }
-
-        .company-details h4 {
-            margin: 0;
-            font-style: normal;
-            font-weight: 100;
-            font-size: 18px;
-            line-height: 25px;
-            text-align: right;
-        }
-
-        .company-details h3 {
-            margin-bottom: 1px;
-            margin-top: 0;
-        }
-
-        tr.total td {
-            border-bottom: 1px solid #E8E8E8;
-            border-top: 1px solid #E8E8E8;
-        }
-
+        /* -- Notes -- */
         .notes {
-            font-style: normal;
-            font-weight: 300;
             font-size: 12px;
             color: #595959;
             margin-top: 15px;
@@ -386,8 +287,6 @@
         }
 
         .notes-label {
-            font-style: normal;
-            font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -396,57 +295,113 @@
             height: 19.87px;
             padding-bottom: 10px;
         }
+
+         /* -- Helpers -- */
+
+        .text-primary {
+            color: #5851DB;
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        table .text-left {
+            text-align: left;
+        }
+
+        table .text-right {
+            text-align: right;
+        }
+
+        .border-0 {
+            border: none;
+        }
+
+        .py-2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .py-8 {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .py-3 {
+            padding: 3px 0;
+        }
+
+        .pr-20 {
+            padding-right: 20px;
+        }
+
+        .pr-10 {
+            padding-right: 10px;
+        }
+
+        .pl-20 {
+            padding-left: 20px;
+        }
+
+        .pl-10 {
+            padding-left: 10px;
+        }
+
+        .pl-0 {
+            padding-left: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div class="header-table">
+    <div class="header-container">
         <table width="100%">
             <tr>
-                <td class="header-left">
+                <td class="header-section-left">
                     @if($logo)
                         <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
                         <h1 class="header-logo"> {{$invoice->user->company->name}} </h1>
                     @endif
                 </td>
-                <td class="header-right company-details">
+                <td class="header-section-right company-address-container">
                     @include('app.pdf.invoice.partials.company-address')
                 </td>
             </tr>
         </table>
     </div>
 
-    <hr class="header-line">
+    <hr class="header-bottom-divider">
 
-    <div class="wrapper">
-        <div class="address">
-            <div class="bill-add">
-                <div style="float:left;">
+    <div class="content-wrapper">
+        <div class="main-content">
+            <div class="customer-address-container">
+                <div class="billing-address-container">
                     @include('app.pdf.invoice.partials.billing-address')
                 </div>
                 @if($invoice->user->billingaddress)
-                <div style="float:right;">
+                <div class="shipping-address-container">
                     @else
-                    <div style="float:left;">
+                    <div class="shipping-address-container--left">
                         @endif
                         @include('app.pdf.invoice.partials.shipping-address')
                     </div>
                     <div style="clear: both;"></div>
                 </div>
 
-                <div style="display: block;float: right;padding: 20px 30px 0 0;">
+                <div class="invoice-details-container">
                     <table>
                         <tr>
-                            <td class="attribute-label" style="text-align: left; color: #55547A">Invoice Number</td>
+                            <td class="attribute-label">Invoice Number</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->invoice_number}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label" style="text-align: left; color: #55547A">Invoice Date </td>
+                            <td class="attribute-label">Invoice Date </td>
                             <td class="attribute-value"> &nbsp;{{$invoice->formattedInvoiceDate}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label" style="text-align: left; color: #55547A">Due date</td>
+                            <td class="attribute-label">Due date</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
                         </tr>
                     </table>

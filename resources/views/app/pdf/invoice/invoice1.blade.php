@@ -66,7 +66,6 @@
 
         .company-address-container {
             padding-left: 30px;
-            font-weight: normal;
             float: left;
             width: 30%;
             text-transform: capitalize;
@@ -74,8 +73,6 @@
         }
 
         .company-address-container h1 {
-            font-style: normal;
-            font-weight: normal;
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -86,28 +83,25 @@
         .company-address {
             margin-top: 2px;
             text-align: left;
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 15px;
             color: #595959;
         }
 
-        .amount-due {
-            background-color: #f2f2f2;
+        .invoice-details-container {
+            float: right;
+            padding: 10px 30px 0 0;
         }
 
         .attribute-label {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             padding-right: 40px;
+            text-align: left;
+            color: #55547A;
         }
 
         .attribute-value {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             text-align: right;
@@ -115,12 +109,12 @@
 
         /* -- Shipping -- */
 
-        .ship-address-container {
+        .shipping-address-container {
             float: right;
             padding-left: 30px;
         }
 
-        .ship-to {
+        .shipping-address-label {
             font-size: 12px;
             line-height: 18px;
             padding: 0px;
@@ -128,7 +122,7 @@
             margin-bottom: 0px;
         }
 
-        .ship-user-name {
+        .shipping-address-name {
             max-width: 250px;
             font-size: 15px;
             line-height: 22px;
@@ -136,9 +130,7 @@
             margin: 0px;
         }
 
-        .ship-user-address {
-            font-style: normal;
-            font-weight: normal;
+        .shipping-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -147,23 +139,14 @@
             width: 160px;
         }
 
-        .ship-user-phone {
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            padding: 0px;
-            margin: 0px;
-        }
+        /* -- Billing -- */
 
-        /* -------------------------- */
-        /* billing style */
-
-        .bill-address-container {
+        .billing-address-container {
             float: left;
             padding-left: 30px;
         }
 
-        .bill-to {
+        .billing-address-label {
             font-size: 12px;
             line-height: 18px;
             padding: 0px;
@@ -171,7 +154,7 @@
             margin-bottom: 0px;
         }
 
-        .bill-user-name {
+        .billing-address-name {
             max-width: 250px;
             font-size: 15px;
             line-height: 22px;
@@ -179,7 +162,7 @@
             margin: 0px;
         }
 
-        .bill-user-address {
+        .billing-address {
             font-size: 10px;
             line-height: 15px;
             color: #595959;
@@ -188,23 +171,16 @@
             width: 160px;
         }
 
-        .bill-user-phone {
-            font-size: 10px;
-            line-height: 15px;
-            color: #595959;
-            padding: 0px;
-            margin: 0px;
-        }
+        /* -- Items Table -- */
 
-        .table2 {
+        .items-table {
             margin-top: 35px;
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
 
-
-        .table2 hr {
+        .items-table hr {
             height: 0.1px;
         }
 
@@ -213,52 +189,63 @@
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
+            color: #55547A;
         }
 
         tr.item-table-heading-row th {
             border-bottom: 0.620315px solid #E8E8E8;
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
         tr.item-row td {
-            font-style: normal;
-            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
         }
 
         .item-cell {
             font-size: 13;
-            color: rgba(0, 0, 0, 0.6);
             text-align: center;
             padding: 5px;
             padding-top: 10px;
+            color: #040405;
         }
 
-        .padd8 {
-            padding-top: 8px;
-            padding-bottom: 8px;
+        .item-description {
+            color: #595959;
+            font-size: 9px;
+            font-weight:300;
+            line-height: 12px;
         }
 
-        .padd2 {
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
+        /* -- Total Display Table -- */
 
-        .table3 {
-            /* border: 1px solid #EAF1FB; */
+        .total-display-table {
             border-top: none;
-            /* padding-right: 30px; */
             box-sizing: border-box;
             width: 630px;
-            /* position: absolute;
-            right: -25; */
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
+            margin-left: 420px;
+            margin-top: 10px;
+        }
+
+        .total-table-attribute-label {
+            font-size: 13px;
+            color: #55547A;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .total-table-attribute-value {
+            font-weight: 500;
+            text-align: right;
+            font-size: 13px;
+            color: #040405;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
         }
 
         .total-border-left {
@@ -273,16 +260,9 @@
             border-left: 0px !important;
             padding-top: 0px;
             padding: 8px !important;
-
         }
 
-        .inv-item {
-            border-color: #d9d9d9;
-        }
-
-        .no-border {
-            border: none;
-        }
+        /* -- Notes -- */
 
         .notes {
             font-size: 12px;
@@ -302,6 +282,62 @@
             width: 108px;
             height: 19.87px;
             padding-bottom: 10px;
+        }
+
+        /* -- Helpers -- */
+
+        .text-primary {
+            color: #5851DB;
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        table .text-left {
+            text-align: left;
+        }
+
+        table .text-right {
+            text-align: right;
+        }
+
+        .border-0 {
+            border: none;
+        }
+
+        .py-2 {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .py-8 {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .py-3 {
+            padding: 3px 0;
+        }
+
+        .pr-20 {
+            padding-right: 20px;
+        }
+
+        .pr-10 {
+            padding-right: 10px;
+        }
+
+        .pl-20 {
+            padding-left: 20px;
+        }
+
+        .pl-10 {
+            padding-left: 10px;
+        }
+
+        .pl-0 {
+            padding-left: 0;
         }
     </style>
 </head>
@@ -328,18 +364,18 @@
             <div class="company-address-container">
                 @include('app.pdf.invoice.partials.company-address')
             </div>
-            <div style="float: right; padding: 10px 30px 0 0;">
+            <div class="invoice-details-container">
                 <table>
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Invoice Number</td>
+                        <td class="attribute-label">Invoice Number</td>
                         <td class="attribute-value"> &nbsp;{{$invoice->invoice_number}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Invoice Date </td>
+                        <td class="attribute-label">Invoice Date </td>
                         <td class="attribute-value"> &nbsp;{{$invoice->formattedInvoiceDate}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label" style="text-align: left; color: #55547A">Due date</td>
+                        <td class="attribute-label">Due date</td>
                         <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
                     </tr>
                 </table>
@@ -347,11 +383,11 @@
             <div style="clear: both;"></div>
         </div>
 
-        <div class="bill-address-container">
+        <div class="billing-address-container">
             @include('app.pdf.invoice.partials.billing-address')
         </div>
-            
-        <div class="ship-address-container" @if($invoice->user->billingaddress) style="float:left;" @endif>
+
+        <div class="shipping-address-container" @if($invoice->user->billingaddress) style="float:left;" @endif>
             @include('app.pdf.invoice.partials.shipping-address')
             <div style="clear: both;"></div>
         </div>

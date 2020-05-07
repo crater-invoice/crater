@@ -1,9 +1,9 @@
 @if($estimate->user->company)
-    <p class="company-address-heading"> {{$estimate->user->company->name}} </p>
+    <h1> {{$estimate->user->company->name}} </h1>
 @endif
 
 @if($company_address)
-    <p class="company-address-text">
+    <p class="company-address">
         @if($company_address->addresses[0]['address_street_1'])
             {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_1'])) !!} <br>
         @endif

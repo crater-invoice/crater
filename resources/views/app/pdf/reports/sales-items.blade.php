@@ -2,30 +2,20 @@
 <html lang="en">
 <head>
     <title>Sales Item Report</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
-        }
-
-        /* html {
-            margin: 0px;
-            padding: 0px;
-        } */
-
-        .main-container {
-            /* padding: 30px 80px; */
-        }
-
-        .sub-container{
-            padding: 0px 20px;
         }
         
         table {
             border-collapse: collapse;
         }
 
-        .header {
+        .sub-container{
+            padding: 0px 20px;
+        }
+
+        .report-header {
             width: 100%;
         }
 
@@ -115,7 +105,7 @@
             color: #040405;
         }
 
-        .profit-indicator-table {
+        .report-footer {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -123,7 +113,7 @@
             box-sizing: border-box;
         }
 
-        .profit-title {
+        .report-footer-label {
             padding: 0px;
             margin: 0px;
             text-align: left;
@@ -133,7 +123,7 @@
             color: #595959;
         }
 
-        .profit-amount {
+        .report-footer-value {
             padding: 0px;
             margin: 0px;
             text-align: right;
@@ -148,68 +138,66 @@
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="sub-container">
-            <table class="header">
-                <tr>
-                    <td>
-                        <p class="heading-text">{{ $company->name }}</p>
-                    </td>
-                    <td>
-                        <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p class="sub-heading-text text-center">Sales Report: By Item</p>
-                    </td>
-                </tr>
-            </table>
-            
-            <p class="sales-items-title">Items</p>
-            @foreach ($items as $item)
-                <div class="items-table-container">
-                    <table class="items-table">
-                        <tr>
-                            <td>
-                                <p class="item-title">
-                                    {{ $item->name }}
-                                </p>
-                            </td>
-                            <td>
-                                <p class="item-sales-amount">
-                                    {!! format_money_pdf($item->total_amount) !!}
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            @endforeach
-
-                <table class="sales-total-indicator-table">
+    <div class="sub-container">
+        <table class="report-header">
+            <tr>
+                <td>
+                    <p class="heading-text">{{ $company->name }}</p>
+                </td>
+                <td>
+                    <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="sub-heading-text text-center">Sales Report: By Item</p>
+                </td>
+            </tr>
+        </table>
+        
+        <p class="sales-items-title">Items</p>
+        @foreach ($items as $item)
+            <div class="items-table-container">
+                <table class="items-table">
                     <tr>
-                        <td class="sales-total-cell">
-                            <p class="sales-total-amount">
-                                {!! format_money_pdf($totalAmount) !!}
+                        <td>
+                            <p class="item-title">
+                                {{ $item->name }}
+                            </p>
+                        </td>
+                        <td>
+                            <p class="item-sales-amount">
+                                {!! format_money_pdf($item->total_amount) !!}
                             </p>
                         </td>
                     </tr>
                 </table>
-        </div>
+            </div>
+        @endforeach
 
-
-        <table class="profit-indicator-table">
-            <tr>
-                <td>
-                    <p class="profit-title">TOTAL SALES</p>
-                </td>
-                <td>
-                    <p class="profit-amount">
-                        {!! format_money_pdf($totalAmount) !!}
-                    </p>
-                </td>
-            </tr>
-        </table>
+            <table class="sales-total-indicator-table">
+                <tr>
+                    <td class="sales-total-cell">
+                        <p class="sales-total-amount">
+                            {!! format_money_pdf($totalAmount) !!}
+                        </p>
+                    </td>
+                </tr>
+            </table>
     </div>
+
+
+    <table class="report-footer">
+        <tr>
+            <td>
+                <p class="report-footer-label">TOTAL SALES</p>
+            </td>
+            <td>
+                <p class="report-footer-value">
+                    {!! format_money_pdf($totalAmount) !!}
+                </p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

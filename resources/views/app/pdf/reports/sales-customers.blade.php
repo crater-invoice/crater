@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
     <title>Sales Customer Report</title>
-    {{-- <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> --}}
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";
         }
-
-        .main-container {
-            /* padding: 30px 80px; */
+        
+        table {
+            border-collapse: collapse;
         }
 
         .sub-container{
             padding: 0px 20px;
         }
 
-        .header {
+        .report-header {
             width: 100%;
-        }
-
-        table {
-            border-collapse: collapse;
         }
 
         .heading-text {
@@ -54,7 +49,7 @@
             margin-top: 30px;
         }
 
-        .sales-cusutomer-name {
+        .sales-customer-name {
             margin-top: 20px;
             padding-left: 3px;
             font-size: 16px;
@@ -110,7 +105,7 @@
             color: #040405;
         }
 
-        .profit-indicator-table {
+        .report-footer {
             width: 100%;
             margin-top: 40px;
             padding: 15px 20px;
@@ -118,7 +113,7 @@
             box-sizing: border-box;
         }
 
-        .profit-title {
+        .report-footer-label {
             padding: 0px;
             margin: 0px;
             text-align: left;
@@ -128,7 +123,7 @@
             color: #595959;
         }
 
-        .profit-amount {
+        .report-footer-value {
             padding: 0px;
             margin: 0px;
             text-align: right;
@@ -143,69 +138,67 @@
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="sub-container">
-            <table class="header">
-                <tr>
-                    <td>
-                        <p class="heading-text">{{ $company->name }}</p>
-                    </td>
-                    <td>
-                        <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p class="sub-heading-text text-center">Sales Report: By Customer</p>
-                    </td>
-                </tr>
-            </table>
-
-            @foreach ($customers as $customer)
-                <p class="sales-cusutomer-name">{{ $customer->name }}</p>
-                <div class="sales-table-container">
-                    <table class="sales-table">
-                        @foreach ($customer->invoices as $invoice)
-                            <tr>
-                                <td>
-                                    <p class="sales-information-text">
-                                        {{ $invoice->formattedInvoiceDate }} ({{ $invoice->invoice_number }})
-                                    </p>
-                                </td>
-                                <td>
-                                    <p class="sales-amount">
-                                        {!! format_money_pdf($invoice->total) !!}
-                                    </p>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-                <table class="sales-total-indicator-table">
-                    <tr>
-                        <td class="sales-total-cell">
-                            <p class="sales-total-amount">
-                                {!! format_money_pdf($customer->totalAmount) !!}
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            @endforeach
-        </div>
-
-
-        <table class="profit-indicator-table">
+    <div class="sub-container">
+        <table class="report-header">
             <tr>
                 <td>
-                    <p class="profit-title">TOTAL SALES</p>
+                    <p class="heading-text">{{ $company->name }}</p>
                 </td>
                 <td>
-                    <p class="profit-amount">
-                        {!! format_money_pdf($totalAmount) !!}
-                    </p>
+                    <p class="heading-date-range">{{ $from_date }} - {{ $to_date }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="sub-heading-text text-center">Sales Report: By Customer</p>
                 </td>
             </tr>
         </table>
+
+        @foreach ($customers as $customer)
+            <p class="sales-customer-name">{{ $customer->name }}</p>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    @foreach ($customer->invoices as $invoice)
+                        <tr>
+                            <td>
+                                <p class="sales-information-text">
+                                    {{ $invoice->formattedInvoiceDate }} ({{ $invoice->invoice_number }})
+                                </p>
+                            </td>
+                            <td>
+                                <p class="sales-amount">
+                                    {!! format_money_pdf($invoice->total) !!}
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+            <table class="sales-total-indicator-table">
+                <tr>
+                    <td class="sales-total-cell">
+                        <p class="sales-total-amount">
+                            {!! format_money_pdf($customer->totalAmount) !!}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        @endforeach
     </div>
+
+
+    <table class="report-footer">
+        <tr>
+            <td>
+                <p class="report-footer-label">TOTAL SALES</p>
+            </td>
+            <td>
+                <p class="report-footer-value">
+                    {!! format_money_pdf($totalAmount) !!}
+                </p>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

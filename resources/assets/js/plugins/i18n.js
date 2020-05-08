@@ -19,8 +19,8 @@ const i18n = new VueI18n({
     ar,
     de,
     pt_BR,
-    it
-  }
+    it,
+  },
 })
 
 export default i18n

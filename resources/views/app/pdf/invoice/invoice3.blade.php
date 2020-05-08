@@ -100,13 +100,12 @@
 
         .content-wrapper {
             display: block;
-            padding-top: 50px;
+            padding-top: 100px;
             padding-bottom: 20px;
         }
 
         .main-content {
-            display: inline-block;
-            padding-top: 100px;
+
         }
 
         .customer-address-container {
@@ -119,10 +118,13 @@
         /* -- Shipping -- */
         .shipping-address-container {
             float:right;
+            display: block;
         }
 
         .shipping-address-container--left {
             float:left;
+            display: block;
+            padding-left: 0;
         }
 
         .shipping-address-label {
@@ -137,6 +139,7 @@
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
+            max-width: 160px;
         }
 
         .shipping-address {
@@ -150,13 +153,12 @@
         /* -- Billing -- */
 
         .billing-address-container {
+            display: block;
             float: left;
         }
 
         .billing-address-label {
             padding-top: 5px;
-
-
             font-size: 12px;
             line-height: 18px;
             margin-bottom: 0px;
@@ -167,6 +169,7 @@
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
+            max-width: 160px;
         }
 
         .billing-address {
@@ -201,6 +204,7 @@
         /* -- Items Table -- */
 
         .items-table {
+            margin-top: 35px;
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
@@ -208,19 +212,18 @@
 
         .items-table hr {
             height: 0.1px;
-            margin: 0 30px 0 30px;
         }
 
-        .item-table-heading-row td {
-            padding: 10px;
-        }
-
-        .item-table-heading-row {
-            border-bottom: 1px solid red;
+        .item-table-heading {
+            font-size: 13.5;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.85);
+            padding: 5px;
+            color: #55547A;
         }
 
         tr.item-table-heading-row th {
-            font-weight: 600;
+            border-bottom: 0.620315px solid #E8E8E8;
             font-size: 12px;
             line-height: 18px;
         }
@@ -230,32 +233,38 @@
             line-height: 18px;
         }
 
-        .item-table-heading {
-            font-size: 13.5;
-            text-align: center;
-            color: rgba(0, 0, 0, 0.85);
-            padding: 5px;
-        }
-
         .item-cell {
             font-size: 13;
-            color: #040405;
             text-align: center;
             padding: 5px;
+            padding-top: 10px;
+            color: #040405;
+        }
+
+        .item-description {
+            color: #595959;
+            font-size: 9px;
+            line-height: 12px;
+        }
+
+        .item-cell-table-hr {
+            margin: 0 30px 0 30px;
         }
 
         /* -- Total Display Table -- */
 
+        .total-display-container {
+            padding: 0 25px;
+        }
+
+
         .total-display-table {
-            border: 1px solid #EAF1FB;
-            border-top: none;
             box-sizing: border-box;
-            width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left:420px;
-            margin-top: 10px
+            margin-left: 500px;
+            margin-top: 20px;
         }
 
         .total-table-attribute-label {
@@ -266,13 +275,27 @@
         }
 
         .total-table-attribute-value {
-            font-weight: 500;
+            font-weight: bold;
             text-align: right;
             font-size: 12px;
             color: #040405;
             padding-right: 10px;
             padding-top: 2px;
             padding-bottom: 2px;
+        }
+
+        .total-border-left {
+            border: 1px solid #E8E8E8 !important;
+            border-right: 0px !important;
+            padding-top: 0px;
+            padding: 8px !important;
+        }
+
+        .total-border-right {
+            border: 1px solid #E8E8E8 !important;
+            border-left: 0px !important;
+            padding-top: 0px;
+            padding: 8px !important;
         }
 
         /* -- Notes -- */
@@ -382,9 +405,9 @@
                 </div>
                 @if($invoice->user->billingaddress)
                 <div class="shipping-address-container">
-                    @else
-                    <div class="shipping-address-container--left">
-                        @endif
+                @else
+                <div class="shipping-address-container--left">
+                @endif
                         @include('app.pdf.invoice.partials.shipping-address')
                     </div>
                     <div style="clear: both;"></div>
@@ -411,6 +434,7 @@
             @include('app.pdf.invoice.partials.table')
             @include('app.pdf.invoice.partials.notes')
         </div>
+    </div>
 </body>
 
 </html>

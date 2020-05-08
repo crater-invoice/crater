@@ -75,7 +75,6 @@
 
         .invoice-details-container h1 {
             margin: 0;
-            font-weight: 500;
             font-size: 24px;
             line-height: 36px;
             text-align: right;
@@ -200,7 +199,7 @@
         /* -- Items Table -- */
 
         .items-table {
-            margin-top: 30px;
+            margin-top: 35px;
             padding: 0px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
@@ -210,20 +209,12 @@
             height: 0.1px;
         }
 
-        .item-table-heading-row td {
-            padding: 5px;
-            padding-bottom: 10px;
-        }
-
-        .item-table-heading-row {
-            border-bottom: 1px solid red;
-        }
-
         .item-table-heading {
             font-size: 13.5;
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
+            color: #55547A;
         }
 
         tr.item-table-heading-row th {
@@ -239,24 +230,36 @@
 
         .item-cell {
             font-size: 13;
-            color: #040405;
             text-align: center;
             padding: 5px;
             padding-top: 10px;
+            color: #040405;
+        }
+
+        .item-description {
+            color: #595959;
+            font-size: 9px;
+            line-height: 12px;
         }
 
         /* -- Total Display Table -- */
 
+        .total-display-container {
+            padding: 0 25px;
+        }
+
+        .item-cell-table-hr {
+            margin: 0 25px 0 30px;
+        }
+
         .total-display-table {
-            border: 1px solid #EAF1FB;
-            border-top: none;
             box-sizing: border-box;
-            width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left:420px;
-            margin-top: 10px
+            margin-left: 500px;
+            border: 1px solid #EAF1FB;
+            border-top: none;
         }
 
         .total-table-attribute-label {

@@ -24,7 +24,6 @@
         hr {
             color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
-            margin: 0 30px 0 30px;
         }
 
         /* -- Header -- */
@@ -128,6 +127,7 @@
 
         .shipping-address-container--left {
             float: left;
+            padding-left: 0;
         }
 
         .shipping-address-label {
@@ -213,6 +213,7 @@
 
         .items-table hr {
             height: 0.1px;
+            margin: 0 30px;
         }
 
         .item-table-heading {
@@ -253,6 +254,10 @@
             line-height: 12px;
         }
 
+        .item-cell-table-hr {
+            margin: 0 30px 0 30px;
+        }
+
         /* -- Total Display Table -- */
 
         .total-display-container {
@@ -266,8 +271,6 @@
             page-break-after: auto;
             margin-left: 500px;
             margin-top: 20px;
-            border: 1px solid #EAF1FB;
-            border-top: none;
         }
 
         .total-table-attribute-label {

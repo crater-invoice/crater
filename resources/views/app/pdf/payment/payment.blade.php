@@ -219,9 +219,10 @@
         }
 
         .content-heading span {
-            font-weight: 500;
+            font-weight: bold;
             font-size: 14px;
             line-height: 25px;
+            padding-bottom: 5px;
             border-bottom: 1px solid #B9C1D1;
         }
 

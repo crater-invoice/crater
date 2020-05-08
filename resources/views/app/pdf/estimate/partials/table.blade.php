@@ -62,68 +62,68 @@
     @endforeach
 </table>
 
-<hr class="items-table-hr">
+<hr class="item-cell-table-hr">
 
 <div class="total-display-container">
-<table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($estimate->items) > 12) page-break @endif">
-    <tr>
-        <td class="border-0 total-table-attribute-label">Subtotal</td>
-        <td class="border-0 item-cell total-table-attribute-value ">{!! format_money_pdf($estimate->sub_total, $estimate->user->currency) !!}</td>
-    </tr>
-
-    @if ($estimate->tax_per_item === 'YES')
-        @for ($i = 0; $i < count($labels); $i++)
-            <tr>
-                <td class="border-0 total-table-attribute-label">
-                    {{$labels[$i]}}
-                </td>
-                <td class="border-0 item-cell  total-table-attribute-value">
-                    {!! format_money_pdf($taxes[$i], $estimate->user->currency) !!}
-                </td>
-            </tr>
-        @endfor
-    @else
-        @foreach ($estimate->taxes as $tax)
-            <tr>
-                <td class="border-0 total-table-attribute-label">
-                    {{$tax->name.' ('.$tax->percent.'%)'}}
-                </td>
-                <td class="border-0 item-cell total-table-attribute-value" >
-                    {!! format_money_pdf($tax->amount, $estimate->user->currency) !!}
-                </td>
-            </tr>
-        @endforeach
-    @endif
-
-    @if ($estimate->discount_per_item === 'NO')
+    <table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($estimate->items) > 12) page-break @endif">
         <tr>
-            <td class="border-0 total-table-attribute-label pl-10">
-                @if($estimate->discount_type === 'fixed')
-                    Discount
-                @endif
-                @if($estimate->discount_type === 'percentage')
-                    Discount ({{$estimate->discount}}%)
-                @endif
-            </td>
-            <td class="border-0 item-cell total-table-attribute-value text-right">
-                @if($estimate->discount_type === 'fixed')
-                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                @endif
-                @if($estimate->discount_type === 'percentage')
-                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                @endif
+            <td class="border-0 total-table-attribute-label">Subtotal</td>
+            <td class="border-0 item-cell total-table-attribute-value ">{!! format_money_pdf($estimate->sub_total, $estimate->user->currency) !!}</td>
+        </tr>
+
+        @if ($estimate->tax_per_item === 'YES')
+            @for ($i = 0; $i < count($labels); $i++)
+                <tr>
+                    <td class="border-0 total-table-attribute-label">
+                        {{$labels[$i]}}
+                    </td>
+                    <td class="border-0 item-cell  total-table-attribute-value">
+                        {!! format_money_pdf($taxes[$i], $estimate->user->currency) !!}
+                    </td>
+                </tr>
+            @endfor
+        @else
+            @foreach ($estimate->taxes as $tax)
+                <tr>
+                    <td class="border-0 total-table-attribute-label">
+                        {{$tax->name.' ('.$tax->percent.'%)'}}
+                    </td>
+                    <td class="border-0 item-cell total-table-attribute-value" >
+                        {!! format_money_pdf($tax->amount, $estimate->user->currency) !!}
+                    </td>
+                </tr>
+            @endforeach
+        @endif
+
+        @if ($estimate->discount_per_item === 'NO')
+            <tr>
+                <td class="border-0 total-table-attribute-label pl-10">
+                    @if($estimate->discount_type === 'fixed')
+                        Discount
+                    @endif
+                    @if($estimate->discount_type === 'percentage')
+                        Discount ({{$estimate->discount}}%)
+                    @endif
+                </td>
+                <td class="border-0 item-cell total-table-attribute-value text-right">
+                    @if($estimate->discount_type === 'fixed')
+                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                    @endif
+                    @if($estimate->discount_type === 'percentage')
+                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                    @endif
+                </td>
+            </tr>
+        @endif
+        <tr>
+            <td class="py-3"></td>
+            <td class="py-3"></td>
+        </tr>
+        <tr>
+            <td class="border-0 total-border-left total-table-attribute-label">Total</td>
+            <td class="border-0 total-border-right item-cell py-8 total-table-attribute-value text-primary">
+                {!! format_money_pdf($estimate->total, $estimate->user->currency)!!}
             </td>
         </tr>
-    @endif
-    <tr>
-        <td class="py-3"></td>
-        <td class="py-3"></td>
-    </tr>
-    <tr>
-        <td class="border-0 total-border-left total-table-attribute-label">Total</td>
-        <td class="border-0 total-border-right item-cell py-8 total-table-attribute-value text-primary">
-            {!! format_money_pdf($estimate->total, $estimate->user->currency)!!}
-        </td>
-    </tr>
-</table>
+    </table>
 </div>

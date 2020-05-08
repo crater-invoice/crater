@@ -137,7 +137,7 @@
 
         .shipping-address-container--left {
             float: left;
-            padding-left: 30px;
+            padding-left: 0px;
         }
 
         .shipping-address-label {

@@ -21,7 +21,6 @@
         }
 
         hr {
-            margin: 0 30px 0 30px;
             color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
         }
@@ -75,10 +74,10 @@
 
         .estimate-details-container h1 {
             margin: 0;
-            font-weight: 500;
             font-size: 24px;
             line-height: 36px;
             text-align: right;
+            font-family: "DejaVu Sans";
         }
 
         .estimate-details-container h4 {
@@ -158,7 +157,7 @@
         }
 
         .billing-address-name {
-            max-width: 250px;
+            max-width: 160px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
@@ -191,7 +190,7 @@
         }
 
         .shipping-address-name {
-            max-width: 250px;
+            max-width: 160px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
@@ -231,6 +230,7 @@
 
         .items-table hr {
             height: 0.1px;
+            margin: 0 30px;
         }
 
         .item-table-heading {
@@ -281,13 +281,16 @@
             padding: 0 25px;
         }
 
+        .item-cell-table-hr {
+            margin: 0 25px 0 30px;
+        }
+
         .total-display-table {
             box-sizing: border-box;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
             margin-left: 500px;
-            margin-top: 20px;
             border: 1px solid #EAF1FB;
             border-top: none;
         }
@@ -307,20 +310,6 @@
             padding-right: 10px;
             padding-top: 2px;
             padding-bottom: 2px;
-        }
-
-        .total-border-left {
-            border: 1px solid #E8E8E8 !important;
-            border-right: 0px !important;
-            padding-top: 0px;
-            padding: 8px !important;
-        }
-
-        .total-border-right {
-            border: 1px solid #E8E8E8 !important;
-            border-left: 0px !important;
-            padding-top: 0px;
-            padding: 8px !important;
         }
 
         /* -- Notes -- */
@@ -437,7 +426,7 @@
             @if($estimate->user->shippingaddress)
             <div class="billing-address-container">
             @else
-            <div class="billing-address-container" style="float:right;padding-right:0px;">
+            <div class="billing-address-container" style="float:right; padding-right:0px;">
             @endif
                 @include('app.pdf.estimate.partials.billing-address')
             </div>

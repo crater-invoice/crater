@@ -219,7 +219,7 @@
         }
 
         .content-heading span {
-            font-weight: bold;
+            font-weight: 400;
             font-size: 14px;
             line-height: 25px;
             padding-bottom: 5px;

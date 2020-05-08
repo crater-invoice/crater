@@ -30,7 +30,7 @@
             {{$estimate->user->shippingaddress->country->name}}<br>
         @endif
 
-        @if($estimate->user->phone)
+        @if($estimate->user->shippingAddress->phone)
             <p class="shipping-address">
                 Phone :{{$estimate->user->shippingaddress->phone}}
             </p>

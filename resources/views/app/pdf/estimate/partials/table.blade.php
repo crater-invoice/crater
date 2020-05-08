@@ -7,7 +7,7 @@
         @if($estimate->discount_per_item === 'YES')
         <th class="item-table-heading text-right pl-10">Discount</th>
         @endif
-        <th class="item-table-heading text-right">Amount</th>
+        <th class="item-table-heading text-right">Amount </th>
     </tr>
     @php
         $index = 1
@@ -32,16 +32,18 @@
             </td>
             <td
                 class="item-cell text-right pr-20"
+                style="vertical-align: top;"
             >
                 {{$item->quantity}}
             </td>
             <td
                 class="item-cell text-right pr-20"
+                style="vertical-align: top;"
             >
                 {!! format_money_pdf($item->price, $estimate->user->currency) !!}
             </td>
             @if($estimate->discount_per_item === 'YES')
-                <td class="item-cell text-right pl-10">
+                <td class="item-cell text-right pl-10" style="vertical-align: top;">
                     @if($item->discount_type === 'fixed')
                         {!! format_money_pdf($item->discount_val, $estimate->user->currency) !!}
                     @endif
@@ -50,7 +52,7 @@
                     @endif
                 </td>
             @endif
-            <td class="item-cell text-right">
+            <td class="item-cell text-right" style="vertical-align: top;">
                 {!! format_money_pdf($item->total, $estimate->user->currency) !!}
             </td>
         </tr>
@@ -62,6 +64,7 @@
 
 <hr class="items-table-hr">
 
+<div class="total-display-container">
 <table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($estimate->items) > 12) page-break @endif">
     <tr>
         <td class="border-0 total-table-attribute-label">Subtotal</td>
@@ -102,7 +105,7 @@
                     Discount ({{$estimate->discount}}%)
                 @endif
             </td>
-            <td class="border-0 item-cell total-table-attribute-value pr-10">
+            <td class="border-0 item-cell total-table-attribute-value text-right">
                 @if($estimate->discount_type === 'fixed')
                     {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
                 @endif
@@ -123,3 +126,4 @@
         </td>
     </tr>
 </table>
+</div>

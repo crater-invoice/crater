@@ -80,7 +80,6 @@
 
         .company-address-container {
             padding-left: 30px;
-
             float: left;
             width: 30%;
             text-transform: capitalize;
@@ -88,8 +87,6 @@
         }
 
         .company-address-container h1 {
-
-
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -100,8 +97,6 @@
         .company-address {
             margin-top: 2px;
             text-align: left;
-
-
             font-size: 12px;
             line-height: 15px;
             color: #595959;
@@ -154,7 +149,7 @@
         }
 
         .shipping-address-name {
-            max-width: 250px;
+            max-width: 160px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
@@ -186,7 +181,7 @@
         }
 
         .billing-address-name {
-            max-width: 250px;
+            max-width: 160px;
             font-size: 15px;
             line-height: 22px;
             padding: 0px;
@@ -250,21 +245,23 @@
         .item-description {
             color: #595959;
             font-size: 9px;
-            font-weight:300;
             line-height: 12px;
         }
 
         /* -- Total Display Table -- */
 
+        .total-display-container {
+            padding: 0 25px;
+        }
+
         .total-display-table {
             border-top: none;
             box-sizing: border-box;
-            width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left:420px;
-            margin-top: 10px
+            margin-left: 500px;
+            margin-top: 20px;
         }
 
         .total-table-attribute-label {
@@ -275,7 +272,7 @@
         }
 
         .total-table-attribute-value {
-            font-weight: 500;
+            font-weight: bold;
             text-align: right;
             font-size: 12px;
             color: #040405;

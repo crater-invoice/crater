@@ -105,13 +105,11 @@
 
         .wrapper {
             display: block;
-            padding-top: 50px;
+            padding-top: 100px;
             padding-bottom: 20px;
         }
 
         .main-content {
-            display: inline-block;
-            padding-top: 100px
         }
 
         .customer-address-container {
@@ -125,6 +123,7 @@
 
         .shipping-address-container {
             float: right;
+            display: block;
         }
 
         .shipping-address-container--left {
@@ -143,6 +142,7 @@
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
+            max-width: 160px;
         }
 
         .shipping-address {
@@ -171,6 +171,7 @@
             font-size: 15px;
             line-height: 22px;
             margin: 0px;
+            max-width: 160px;
         }
 
         .billing-address {
@@ -203,15 +204,15 @@
         }
 
         /* -- Items Table -- */
+
         .items-table {
-            padding: 0px 30px 10px 30px;
+            padding: 30px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
 
         .items-table hr {
             height: 0.1px;
-            margin: 0 30px 0 30px;
         }
 
         .item-table-heading {
@@ -219,28 +220,17 @@
             text-align: center;
             color: rgba(0, 0, 0, 0.85);
             padding: 5px;
-        }
-
-        .item-cell {
-            font-size: 13;
-            color: #040405;
-            text-align: center;
-            padding: 5px;
-        }
-
-        .item-table-heading-row td {
-            padding: 10px;
-        }
-
-        .item-table-heading-row {
-            border-bottom: 1px solid red;
+            padding-bottom: 10px;
         }
 
         tr.item-table-heading-row th {
-
-            font-weight: 600;
+            border-bottom: 0.620315px solid #E8E8E8;
             font-size: 12px;
             line-height: 18px;
+        }
+
+        .item-table-heading-row {
+            margin-bottom: 10px;
         }
 
         tr.item-row td {
@@ -248,17 +238,36 @@
             line-height: 18px;
         }
 
+        .item-cell {
+            font-size: 13;
+            color: #040405;
+            text-align: center;
+            padding: 5px;
+            padding-top: 10px;
+            border-color: #d9d9d9;
+        }
+
+        .item-description {
+            color: #595959;
+            font-size: 9px;
+            line-height: 12px;
+        }
+
         /* -- Total Display Table -- */
 
+        .total-display-container {
+            padding: 0 25px;
+        }
+
         .total-display-table {
-            border: 1px solid #EAF1FB;
             box-sizing: border-box;
-            width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left:420px;
-            margin-top: 10px
+            margin-left: 500px;
+            margin-top: 20px;
+            border: 1px solid #EAF1FB;
+            border-top: none;
         }
 
         .total-table-attribute-label {
@@ -269,7 +278,7 @@
         }
 
         .total-table-attribute-value {
-            font-weight: 500;
+            font-weight: bold;
             text-align: right;
             font-size: 12px;
             color: #040405;
@@ -432,6 +441,7 @@
             @include('app.pdf.estimate.partials.table')
             @include('app.pdf.estimate.partials.notes')
         </div>
+    </div>
 </body>
 
 </html>

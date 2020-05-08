@@ -117,7 +117,6 @@
 
         .company-address-container {
             padding-left: 30px;
-
             float: left;
             width: 30%;
             text-transform: capitalize;
@@ -125,8 +124,6 @@
         }
 
         .company-address-container h1 {
-
-
             font-size: 15px;
             line-height: 22px;
             letter-spacing: 0.05em;
@@ -227,8 +224,7 @@
         /* -- Items Table -- */
 
         .items-table {
-            margin-top: 30px;
-            padding: 0px 30px 10px 30px;
+            padding: 30px 30px 10px 30px;
             page-break-before: avoid;
             page-break-after: auto;
         }
@@ -275,22 +271,25 @@
         .item-description {
             color: #595959;
             font-size: 9px;
-            font-weight:300;
             line-height: 12px;
+            page-break-inside: avoid;
         }
 
         /* -- Total Display Table -- */
 
+        .total-display-container {
+            padding: 0 25px;
+        }
+
         .total-display-table {
-            border-top: none;
             box-sizing: border-box;
-            width: 630px;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left:420px;
-            margin-top: 10px;
+            margin-left: 500px;
+            margin-top: 20px;
             border: 1px solid #EAF1FB;
+            border-top: none;
         }
 
         .total-table-attribute-label {
@@ -301,7 +300,7 @@
         }
 
         .total-table-attribute-value {
-            font-weight: 500;
+            font-weight: bold;
             text-align: right;
             font-size: 12px;
             color: #040405;
@@ -327,7 +326,6 @@
         /* -- Notes -- */
 
         .notes {
-            font-weight: 300;
             font-size: 12px;
             color: #595959;
             margin-top: 15px;

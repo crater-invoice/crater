@@ -1,11 +1,11 @@
 @if($estimate->user->billingaddress)
-    <p class="bill-to">Bill To,</p>
+    <p class="billing-address-label">Bill To,</p>
     @if($estimate->user->billingaddress->name)
-        <p class="bill-user-name">
+        <p class="billing-address-name">
             {{$estimate->user->billingaddress->name}}
         </p>
     @endif
-    <p class="bill-user-address">
+    <p class="billing-address">
         @if($estimate->user->billingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($estimate->user->billingaddress->address_street_1)) !!}<br>
         @endif
@@ -31,7 +31,7 @@
         @endif
 
         @if($estimate->user->billingaddress->phone)
-            <p class="bill-user-phone">
+            <p class="billing-address">
                 Phone :{{$estimate->user->billingaddress->phone}}
             </p>
         @endif

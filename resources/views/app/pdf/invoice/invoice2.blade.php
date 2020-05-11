@@ -117,9 +117,9 @@
         .company-address-container h1 {
             font-weight: bold;
             font-size: 15px;
-            line-height: 22px;
             letter-spacing: 0.05em;
             margin-bottom: 0;
+            margin-top: 18px;
         }
 
         .company-address{

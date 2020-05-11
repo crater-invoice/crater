@@ -155,7 +155,7 @@
     "select_a_customer": "Selecciona un cliente",
     "type_or_click": "Escriba o haga clic para seleccionar",
 
-    "confirm_delete": "No podrá recuperar este cliente | No podrá recuperar estos clientes",
+    "confirm_delete": "No podrá recuperar este cliente y todas las facturas, estimaciones y pagos relacionados. | No podrá recuperar estos clientes y todas las facturas, estimaciones y pagos relacionados.",
     "created_message": "Cliente creado con éxito",
     "updated_message": "Cliente actualizado con éxito",
     "deleted_message": "Cliente eliminado correctamente | Clientes eliminados exitosamente"
@@ -602,65 +602,65 @@
       "updated_message": "Información de la empresa actualizada con éxito"
     },
     "customization": {
-        "customization": "Personalización",
-        "save": "Guardar",
-        "addresses": {
-            "title": "Direcciones",
-            "section_description": "Puede configurar la Dirección de facturación del cliente y el Formato de dirección de envío del cliente (solo se muestra en PDF).",
-            "customer_billing_address": "Dirección de facturación del cliente",
-            "customer_shipping_address": "Dirección de envío del cliente",
-            "company_address": "Dirección de la compañia",
-            "insert_fields": "Insertar campos",
-            "contact": "Contacto",
-            "address": "Dirección",
-            "display_name": "Nombre para mostrar",
-            "primary_contact_name": "Nombre de contacto principal",
-            "email": "Email",
-            "website": "Sitio web",
-            "name": "Nombre",
-            "country": "País",
-            "state": "Estado",
-            "city": "Ciudad",
-            "company_name": "Nombre de la compañia",
-            "address_street_1": "Dirección de la calle 1",
-            "address_street_2": "Dirección de la calle 2",
-            "phone": "Telefono",
-            "zip_code": "Codigo postal",
-            "address_setting_updated": "Configuración de dirección actualizada correctamente"
-        },
-        "updated_message": "Información de la empresa actualizada con éxito",
+      "customization": "Personalización",
+      "save": "Guardar",
+      "addresses": {
+        "title": "Direcciones",
+        "section_description": "Puede configurar la Dirección de facturación del cliente y el Formato de dirección de envío del cliente (solo se muestra en PDF).",
+        "customer_billing_address": "Dirección de facturación del cliente",
+        "customer_shipping_address": "Dirección de envío del cliente",
+        "company_address": "Dirección de la compañia",
+        "insert_fields": "Insertar campos",
+        "contact": "Contacto",
+        "address": "Dirección",
+        "display_name": "Nombre para mostrar",
+        "primary_contact_name": "Nombre de contacto principal",
+        "email": "Email",
+        "website": "Sitio web",
+        "name": "Nombre",
+        "country": "País",
+        "state": "Estado",
+        "city": "Ciudad",
+        "company_name": "Nombre de la compañia",
+        "address_street_1": "Dirección de la calle 1",
+        "address_street_2": "Dirección de la calle 2",
+        "phone": "Telefono",
+        "zip_code": "Codigo postal",
+        "address_setting_updated": "Configuración de dirección actualizada correctamente"
+      },
+      "updated_message": "Información de la empresa actualizada con éxito",
 
-        "invoices": {
-            "title": "Facturas",
-            "notes": "Notas",
-            "invoice_prefix": "Prefijo de las facturas",
-            "invoice_settings": "Ajustes de facturas",
-            "autogenerate_invoice_number": "Autogenerar número de factura",
-            "invoice_setting_description": "Desactive esto, si no desea generar automáticamente números de factura cada vez que cree una nueva factura.",
-            "enter_invoice_prefix": "Introduzca el prefijo de factura",
-            "terms_and_conditions": "Términos y Condiciones",
-            "invoice_setting_updated": "Configuración de factura actualizada correctamente"
-        },
+      "invoices": {
+        "title": "Facturas",
+        "notes": "Notas",
+        "invoice_prefix": "Prefijo de las facturas",
+        "invoice_settings": "Ajustes de facturas",
+        "autogenerate_invoice_number": "Autogenerar número de factura",
+        "invoice_setting_description": "Desactive esto, si no desea generar automáticamente números de factura cada vez que cree una nueva factura.",
+        "enter_invoice_prefix": "Introduzca el prefijo de factura",
+        "terms_and_conditions": "Términos y Condiciones",
+        "invoice_setting_updated": "Configuración de factura actualizada correctamente"
+      },
 
-        "estimates": {
-            "title": "Estimaciones",
-            "estimate_prefix": "Prefijo de los presupuestos",
-            "estimate_settings": "Ajustes de presupuestos",
-            "autogenerate_estimate_number": "Autogenerar número de presupuesto",
-            "estimate_setting_description": "Desactive esto, si no desea generar automáticamente números de presupuesto cada vez que cree un nuevo presupuesto.",
-            "enter_estimate_prefix": "Introduzca el prefijo de presupuesto",
-            "estimate_setting_updated": "Configuración de presupuestos actualizada correctamente"
-        },
+      "estimates": {
+        "title": "Estimaciones",
+        "estimate_prefix": "Prefijo de los presupuestos",
+        "estimate_settings": "Ajustes de presupuestos",
+        "autogenerate_estimate_number": "Autogenerar número de presupuesto",
+        "estimate_setting_description": "Desactive esto, si no desea generar automáticamente números de presupuesto cada vez que cree un nuevo presupuesto.",
+        "enter_estimate_prefix": "Introduzca el prefijo de presupuesto",
+        "estimate_setting_updated": "Configuración de presupuestos actualizada correctamente"
+      },
 
-        "payments": {
-            "title": "Payments",
-            "payment_prefix": "Prefijo de los pagos",
-            "payment_settings": "Ajustes de pagos",
-            "autogenerate_payment_number": "Autogenerar número de pago",
-            "payment_setting_description": "Desactive esto, si no desea generar automáticamente números de pago cada vez que cree un nuevo pago.",
-            "enter_payment_prefix": "Introduzca el prefijo de pago",
-            "payment_setting_updated": "Configuración de pagos actualizada correctamente"
-        }
+      "payments": {
+        "title": "Payments",
+        "payment_prefix": "Prefijo de los pagos",
+        "payment_settings": "Ajustes de pagos",
+        "autogenerate_payment_number": "Autogenerar número de pago",
+        "payment_setting_description": "Desactive esto, si no desea generar automáticamente números de pago cada vez que cree un nuevo pago.",
+        "enter_payment_prefix": "Introduzca el prefijo de pago",
+        "payment_setting_updated": "Configuración de pagos actualizada correctamente"
+      }
     },
     "account_settings": {
       "profile_picture": "Foto de perfil",

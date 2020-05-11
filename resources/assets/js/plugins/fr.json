@@ -167,7 +167,7 @@
     "select_a_customer": "Sélectionnez un client",
     "type_or_click": "Tapez ou cliquez pour sélectionner",
 
-    "confirm_delete": "Vous ne pourrez pas récupérer ce client | Vous ne pourrez pas récupérer ces clients",
+    "confirm_delete": "Vous ne pourrez pas récupérer ce client et toutes les factures, devis et paiements associés. | Vous ne serez pas en mesure de récupérer ces clients et toutes les factures, devis et paiements associés.",
     "created_message": "Client créé avec succès",
     "updated_message": "Client mis à jour avec succès",
     "deleted_message": "Client supprimé avec succès | Les clients supprimés avec succès"
@@ -889,7 +889,6 @@
     "small_businesses": "Petites entreprises ",
     "crater_help": "Crater vous aide à suivre vos dépenses, à enregistrer vos paiements et à générer de belles",
     "invoices_and_estimates": "factures et devis avec possibilité de choisir plusieurs modèles."
-
   },
   "validation": {
     "invalid_url": "URL invalide (ex: http://www.crater.com)",

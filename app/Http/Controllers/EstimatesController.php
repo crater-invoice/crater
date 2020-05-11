@@ -385,7 +385,7 @@ class EstimatesController extends Controller
     public function estimateToInvoice(Request $request, $id)
     {
         $estimate = Estimate::with(['items', 'items.taxes', 'user', 'estimateTemplate', 'taxes'])->find($id);
-        $invoice_date = Carbon::parse($estimate->estimate_date);
+        $invoice_date = Carbon::now();
         $invoice_prefix = CompanySetting::getSetting(
             'invoice_prefix',
             $request->header('company')

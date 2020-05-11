@@ -390,7 +390,7 @@ class EstimatesController extends Controller
             'invoice_prefix',
             $request->header('company')
         );
-        $due_date = Carbon::parse($estimate->estimate_date)->addDays(7);
+        $due_date = Carbon::now()->addDays(7);
         $tax_per_item = CompanySetting::getSetting(
                 'tax_per_item',
                 $request->header('company')

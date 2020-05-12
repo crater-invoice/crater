@@ -9,7 +9,7 @@
       :readonly="readOnly"
       :name="name"
       :tabindex="tabIndex"
-      :class="[{'input-field-left-icon': icon && isAlignLeftIcon ,'input-field-right-icon': icon && !isAlignLeftIcon ,'invalid': isFieldValid, 'disabled': disabled, 'small-input': small}, inputClass]"
+      :class="[{ 'input-field-left-icon': icon && isAlignLeftIcon, 'input-field-right-icon': (icon && !isAlignLeftIcon) || isInputGroup, invalid: isFieldValid, disabled: disabled, 'small-input': small}, inputClass]"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       class="input-field"
@@ -23,6 +23,9 @@
       <font-awesome-icon :icon="!showPass ?'eye': 'eye-slash'" class="right-icon" />
     </div>
     <font-awesome-icon v-if="icon && !isAlignLeftIcon" :icon="icon" class="right-icon" />
+    <span v-if="isInputGroup" class="right-input-group-text">
+      {{ inputGroupText }}
+    </span>
   </div>
 </template>
 
@@ -84,6 +87,14 @@ export default {
     showPassword: {
       type: Boolean,
       default: false
+    },
+    isInputGroup: {
+      type: Boolean,
+      default: false,
+    },
+    inputGroupText: {
+      type: String,
+      default: null,
     }
   },
   data () {

@@ -678,6 +678,7 @@
         "payment_setting_updated": "Payment Setting updated successfully",
         "payment_mode": "Payment Mode",
         "add_payment_mode": "Add Payment Mode",
+        "edit_payment_mode": "Edit Payment Mode",
         "mode_name": "Mode Name",
         "payment_mode_added": "Payment Mode Added",
         "payment_mode_updated": "Payment Mode Updated",
@@ -690,6 +691,7 @@
         "title": "Items",
         "units": "units",
         "add_item_unit": "Add Item Unit",
+        "edit_item_unit": "Edit Item Unit",
         "unit_name": "Unit Name",
         "item_unit_added": "Item Unit Added",
         "item_unit_updated": "Item Unit Updated",
@@ -730,6 +732,7 @@
     "tax_types": {
       "title": "Tax Types",
       "add_tax": "Add Tax",
+      "edit_tax": "Edit Tax",
       "description": "You can add or Remove Taxes as you please. Crater supports Taxes on Individual Items as well as on the invoice.",
       "add_new_tax": "Add New Tax",
       "tax_settings": "Tax Settings",

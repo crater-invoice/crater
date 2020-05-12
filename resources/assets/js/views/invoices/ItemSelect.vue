@@ -20,7 +20,7 @@
       label="name"
       class="multi-select-item"
       @value="onTextChange"
-      @select="(val) => $emit('select', val)"
+      @select="onSelect"
     >
       <div slot="afterList">
         <button type="button" class="list-add-button" @click="openItemModal">
@@ -130,6 +130,10 @@ export default {
         'componentName': 'ItemModal',
         'data': {taxPerItem: this.taxPerItem, taxes: this.taxes}
       })
+    },
+    onSelect(val) {
+      this.$emit('select', val)
+      this.fetchItems()
     },
     deselectItem () {
       this.itemSelect = null

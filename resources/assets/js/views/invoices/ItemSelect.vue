@@ -12,6 +12,7 @@
       ref="baseSelect"
       v-model="itemSelect"
       :options="items"
+      :loading="loading"
       :show-labels="false"
       :preserve-search="true"
       :initial-search="item.name"

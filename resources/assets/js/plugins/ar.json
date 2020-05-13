@@ -22,6 +22,11 @@
     "to_date": "إلى تاريخ",
     "from": "من",
     "to": "إلى",
+    "sort_by": "ترتيب حسب",
+    "ascending": "تصاعدي",
+    "descending": "تنازلي",
+    "subject": "موضوع",
+    "message": "رسالة",
     "go_back": "إلى الخلف",
     "back_to_login": "العودة إلى تسجيل الدخول؟",
     "home": "الرئيسية",
@@ -112,8 +117,8 @@
   "tax_types": {
     "name": "الاسم",
     "description": "الوصف",
-    "percent": "Percent",
-    "compound_tax": "Compound Tax"
+    "percent": "نسبه مئويه",
+    "compound_tax": "الضريبة المركبة"
   },
   "customers": {
     "title": "العملاء",
@@ -329,6 +334,9 @@
     "no_matching_invoices": "لا يوجد فواتير مطابقة!",
     "mark_as_sent_successfully": "تم تحديد الفاتورة كمرسلة بنجاح",
     "send_invoice_successfully": "تم إرسال الفاتورة بنجاح",
+    "cloned_successfully": "تم استنساخ الفاتورة بنجاح",
+    "clone_invoice": "استنساخ الفاتورة",
+    "confirm_clone": "سيتم استنساخ هذه الفاتورة في فاتورة جديدة",
     "item": {
       "title": "اسم الصنف",
       "description": "الوصف",
@@ -660,7 +668,29 @@
         "autogenerate_payment_number": "ترقيم آلي للمدفوعات",
         "payment_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام الدفعة تلقائيًا في كل مرة تقوم فيها بإنشاء دفعة جديدة.",
         "enter_payment_prefix": "أدخل بادئة رقم الدفعة",
-        "payment_setting_updated": "تم تحديث إعدادات الدفعة بنجاح"
+        "payment_setting_updated": "تم تحديث إعدادات الدفعة بنجاح",
+        "payment_mode": "طريقة الدفع",
+        "add_payment_mode": "أضف وضع الدفع",
+        "edit_payment_mode": "تحرير وضع الدفع",
+        "mode_name": "اسم الوضع",
+        "payment_mode_added": "تمت إضافة وضع الدفع",
+        "payment_mode_updated": "تم تحديث وضع الدفع",
+        "payment_mode_confirm_delete": "لن تتمكن من استعادة وضع الدفع هذا",
+        "already_in_use": "وضع الدفع قيد الاستخدام بالفعل",
+        "deleted_message": "تم حذف وضع الدفع بنجاح"
+      },
+
+      "items": {
+        "title": "العناصر",
+        "units": "الوحدات",
+        "add_item_unit": "إضافة وحدة عنصر",
+        "edit_item_unit": "تحرير وحدة العناصر",
+        "unit_name": "إسم الوحدة",
+        "item_unit_added": "تمت إضافة وحدة العنصر",
+        "item_unit_updated": "تم تحديث وحدة العنصر",
+        "item_unit_confirm_delete": "لن تتمكن من استرداد وحدة العنصر هذه",
+        "already_in_use": "وحدة العنصر قيد الاستخدام بالفعل",
+        "deleted_message": "تم حذف وحدة العنصر بنجاح"
       }
     },
     "account_settings": {
@@ -695,6 +725,7 @@
     "tax_types": {
       "title": "أنواع الضرائب",
       "add_tax": "أضف ضريبة",
+      "edit_tax": "تحرير الضريبة",
       "description": "يمكنك إضافة أو إزالة الضرائب كما يحلو لك. النظام يدعم الضرائب على العناصر الفردية وكذلك على الفاتورة.",
       "add_new_tax": "إضافة ضريبة جديدة",
       "tax_settings": "إعدادات الضريبة",
@@ -715,6 +746,8 @@
       "action": "إجراء",
       "description": "الفئات مطلوبة لإضافة إدخالات النفقات. يمكنك إضافة أو إزالة هذه الفئات وفقًا لتفضيلاتك.",
       "add_new_category": "إضافة فئة جديدة",
+      "add_category": "إضافة فئة",
+      "edit_category": "تحرير الفئة",
       "category_name": "اسم الفئة",
       "category_description": "الوصف",
       "created_message": "تم إنشاء نوع النفقات بنجاح",

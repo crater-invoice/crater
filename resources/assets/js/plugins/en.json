@@ -753,6 +753,8 @@
       "action": "Action",
       "description": "Categories are required for adding expense entries. You can Add or Remove these categories according to your preference.",
       "add_new_category": "Add New Category",
+      "add_category": "Add Category",
+      "edit_category": "Edit Category",
       "category_name": "Category Name",
       "category_description": "Description",
       "created_message": "Expense Category created successfully",

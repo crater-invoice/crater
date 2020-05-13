@@ -68,6 +68,8 @@
     "four_zero_four": "404",
     "you_got_lost": "Ops! Se perdeu!",
     "go_home": "Ir para Home",
+    "test_mail_conf": "Testar configuração de email",
+    "send_mail_successfully": "Correio enviado com sucesso",
 
     "setting_updated": "Configuração atualizada com sucesso",
     "select_state": "Selecione Estado",
@@ -746,6 +748,8 @@
       "action": "Ação",
       "description": "As Categorias são necessárias para adicionar entradas de Despesas. Você pode adicionar ou remover essas Categorias de acordo com sua preferência.",
       "add_new_category": "Adicionar Nova Categoria",
+      "add_category": "Adicionar categoria",
+      "edit_category": "Editar categoria",
       "category_name": "Nome da Categoria",
       "category_description": "Descrição",
       "created_message": "Categoria de Despesa criada com sucesso",

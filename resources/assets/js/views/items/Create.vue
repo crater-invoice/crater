@@ -266,7 +266,7 @@ export default {
     },
     async addItemUnit () {
       this.openModal({
-        'title': 'Add Item Unit',
+        'title': this.$t('settings.customization.items.add_item_unit'),
         'componentName': 'ItemUnit'
       })
     }

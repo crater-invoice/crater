@@ -88,7 +88,7 @@ Route::get('/expenses/{id}/receipt/{hash}', [
     'uses' => 'ExpensesController@downloadReceipt'
 ]);
 
-// Setup for instalation of app
+// Setup for installation of app
 // ----------------------------------------------
 Route::get('/on-boarding', function () {
     return view('app');

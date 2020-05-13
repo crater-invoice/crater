@@ -14,7 +14,7 @@ class Updater
 {
     use SiteApi;
 
-    public static function update($installed, $version)
+    public static function update($version)
     {
         $data = null;
         $path = null;
@@ -25,7 +25,6 @@ class Updater
         } else {
             $url = 'https://craterapp.com/downloads/file/'.$version.'?type=update';
         }
-
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 

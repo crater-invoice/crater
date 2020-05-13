@@ -10,25 +10,17 @@ use Crater\Events\UpdateFinished;
 use Crater\Setting;
 use Crater\Currency;
 use Schema;
+use Artisan;
 
 class Version310 extends Listener
 {
     const VERSION = '3.1.0';
 
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param UpdateFinished $event
      * @return void
      */
     public function handle(UpdateFinished $event)
@@ -52,12 +44,7 @@ class Version310 extends Listener
             ]
         );
 
-        if (!Schema::hasColumn('expenses', 'user_id')) {
-            Schema::table('expenses', function (Blueprint $table) {
-                $table->integer('user_id')->unsigned()->nullable();
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            });
-        }
+        Artisan::call('migrate', ['--force' => true]);
 
         // Update Crater app version
         Setting::setSetting('version', static::VERSION);

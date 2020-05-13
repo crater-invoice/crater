@@ -14,7 +14,7 @@ class Updater
 {
     use SiteApi;
 
-    public static function update($version)
+    public static function update($installed, $version)
     {
         $data = null;
         $path = null;

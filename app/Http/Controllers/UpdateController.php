@@ -43,7 +43,7 @@ class UpdateController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 

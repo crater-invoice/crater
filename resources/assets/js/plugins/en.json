@@ -70,14 +70,14 @@
     "go_home": "Go Home",
     "test_mail_conf": "Test Mail Configuration",
     "send_mail_successfully": "Mail sent successfully",
-
     "setting_updated": "Setting updated successfully",
     "select_state": "Select state",
     "select_country": "Select Country",
     "select_city": "Select City",
     "street_1": "Street 1",
     "street_2": "Street 2",
-    "action_failed": "Action Failed"
+    "action_failed": "Action Failed",
+    "retry": "Retry"
   },
   "dashboard": {
     "select_year": "Select year",
@@ -787,7 +787,14 @@
       "progress_text": "It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes",
       "update_success": "App has been updated! Please wait while your browser window gets reloaded automatically.",
       "latest_message": "No update available! You are on the latest version.",
-      "current_version": "Current Version"
+      "current_version": "Current Version",
+      "download_zip_file": "Download ZIP file",
+      "unzipping_package": "Unzipping Package",
+      "copying_files": "Copying Files",
+      "running_migrations": "Running Migrations",
+      "finishing_update": "Finishing Update",
+      "update_failed": "Update Failed",
+      "update_failed_text": "Sorry! Your update failed on : {step} step"   
     }
   },
   "wizard": {

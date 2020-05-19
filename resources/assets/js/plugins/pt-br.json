@@ -62,14 +62,14 @@
     "four_zero_four": "404",
     "you_got_lost": "Ops! Se perdeu!",
     "go_home": "Ir para Home",
-
     "setting_updated": "Configuração atualizada com sucesso",
     "select_state": "Selecione Estado",
     "select_country": "Selecionar pais",
     "select_city": "Selecionar cidade",
     "street_1": "Rua 1",
     "street_2": "Rua # 2",
-    "action_failed": "Ação: Falhou"
+    "action_failed": "Ação: Falhou",
+    "retry": "Atualização falhou"
   },
   "dashboard": {
     "select_year": "Selecione Ano",
@@ -751,7 +751,14 @@
       "progress_text": "Levará apenas alguns minutos. Não atualize a tela ou feche a janela antes que a atualização seja concluída",
       "update_success": "O aplicativo foi atualizado! Aguarde enquanto a janela do navegador é recarregada automaticamente.",
       "latest_message": "Nenhuma atualização disponível! Você está na versão mais recente.",
-      "current_version": "Versão Atual"
+      "current_version": "Versão Atual",
+      "download_zip_file": "Baixar arquivo ZIP",
+      "unzipping_package": "Descompactando o pacote",
+      "copying_files": "Copiando arquivos",
+      "running_migrations": "Executando migrações",
+      "finishing_update": "Atualização de acabamento",
+      "update_failed": "Atualização falhou",
+      "update_failed_text": "Desculpa! Sua atualização falhou em: {step} step"
     }
   },
   "wizard": {

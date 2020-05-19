@@ -62,14 +62,14 @@
     "four_zero_four": "404",
     "you_got_lost": "عفواً! يبدو أنك قد تهت!",
     "go_home": "عودة إلى الرئيسية",
-
     "setting_updated": "تم تحديث الإعدادات بنجاح",
     "select_state": "اختر الولاية/المنطقة",
     "select_country": "اختر الدولة",
     "select_city": "اختر المدينة",
     "street_1": "عنوان الشارع 1",
     "street_2": "عنوان الشارع 2",
-    "action_failed": "فشلت العملية"
+    "action_failed": "فشلت العملية",
+    "retry": "أعد المحاولة"
   },
   "dashboard": {
     "select_year": "اختر السنة",
@@ -752,7 +752,14 @@
       "progress_text": "سوف يستغرق التحديث بضع دقائق. يرجى عدم تحديث الشاشة أو إغلاق النافذة قبل انتهاء التحديث",
       "update_success": "تم تحديث النظام! يرجى الانتظار حتى يتم إعادة تحميل نافذة المتصفح تلقائيًا.",
       "latest_message": "لا يوجد تحديثات متوفرة! لديك حالياً أحدث نسخة.",
-      "current_version": "النسخة الحالية"
+      "current_version": "النسخة الحالية",
+      "download_zip_file": "تنزيل ملف ZIP",
+      "unzipping_package": "حزمة فك الضغط",
+      "copying_files": "نسخ الملفات",
+      "running_migrations": "إدارة عمليات الترحيل",
+      "finishing_update": "تحديث التشطيب",
+      "update_failed": "فشل التحديث",
+      "update_failed_text": "آسف! فشل التحديث الخاص بك في: {step} خطوة"     
     }
   },
   "wizard": {

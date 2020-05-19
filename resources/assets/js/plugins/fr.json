@@ -76,7 +76,8 @@
     "ascending": "Ascendant",
     "descending": "Descendant",
     "subject": "matière",
-    "message": "Message"
+    "message": "Message",
+    "retry": "Réessayez"
   },
   "dashboard": {
     "select_year": "Sélectionnez l'année",
@@ -794,7 +795,14 @@
       "progress_text": "Cela ne prendra que quelques minutes. S'il vous plaît ne pas actualiser l'écran ou fermer la fenêtre avant la fin de la mise à jour",
       "update_success": "App a été mis à jour! Veuillez patienter pendant le rechargement automatique de la fenêtre de votre navigateur.",
       "latest_message": "Pas de mise a jour disponible! Vous êtes sur la dernière version.",
-      "current_version": "Version actuelle"
+      "current_version": "Version actuelle",
+      "download_zip_file": "Télécharger le fichier ZIP",
+      "unzipping_package": "Dézipper le package",
+      "copying_files": "Copie de fichiers",
+      "running_migrations": "Exécution de migrations",
+      "finishing_update": "Mise à jour de finition",
+      "update_failed": "Mise à jour a échoué",
+      "update_failed_text": "Désolé! Votre mise à jour a échoué à: {step} étape"
     }
   },
   "wizard": {

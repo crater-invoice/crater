@@ -76,7 +76,8 @@
     "select_city": "Stadt wählen",
     "street_1": "Straße",
     "street_2": "Zusatz Strasse",
-    "action_failed": "Aktion fehlgeschlagen"
+    "action_failed": "Aktion fehlgeschlagen",
+    "retry": "Wiederholen"
   },
   "dashboard": {
     "select_year": "Jahr wählen",
@@ -775,7 +776,14 @@
       "progress_text": "Es dauert nur ein paar Minuten. Bitte aktualisieren Sie den Bildschirm nicht und schließen Sie das Fenster nicht, bevor das Update abgeschlossen ist.",
       "update_success": "App wurde aktualisiert! Bitte warten Sie, während Ihr Browserfenster automatisch neu geladen wird.",
       "latest_message": "Kein Update verfügbar! Du bist auf der neuesten Version.",
-      "current_version": "Aktuelle Version"
+      "current_version": "Aktuelle Version",
+      "download_zip_file": "Laden Sie die ZIP-Datei herunter",
+      "unzipping_package": "Paket entpacken",
+      "copying_files": "Dateien kopieren",
+      "running_migrations": "Ausführen von Migrationen",
+      "finishing_update": "Update beenden",
+      "update_failed": "Update fehlgeschlagen",
+      "update_failed_text": "Es tut uns leid! Ihr Update ist am folgenden Schritt fehlgeschlagen: {step}"      
     }
   },
   "wizard": {

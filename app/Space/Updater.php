@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\RequestException;
 use Crater\Events\UpdateFinished;
 use ZipArchive;
 
+// Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class Updater
 {
     use SiteApi;

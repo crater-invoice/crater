@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Crater\Space\Updater;
 use Crater\Setting;
 
+// Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class UpdateCommand extends Command
 {
     public $installed;

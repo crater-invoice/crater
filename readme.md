@@ -63,6 +63,7 @@ Crater is a product of [Bytefury](https://bytefury.com)
 **Special thanks to:**
 * [Birkhoff Lee](https://github.com/BirkhoffLee)
 * [Hassan A. Ba Abdullah](https://github.com/hsnapps)
+* [Akaunting](https://github.com/akaunting/akaunting)
 
 ## Translate
 Help us translate or suggest changes to existing languages if you find any mistakes by creating a new PR. 

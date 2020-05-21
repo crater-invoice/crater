@@ -13,6 +13,7 @@
   },
   "general": {
     "view_pdf": "View PDF",
+    "copy_pdf_url": "Copy PDF Url",
     "download_pdf": "Download PDF",
     "save": "Save",
     "cancel": "Cancel",
@@ -230,6 +231,7 @@
     "convert_to_invoice": "Convert to Invoice",
     "mark_as_sent": "Mark as Sent",
     "send_estimate": "Send Estimate",
+    "resend_estimate": "Resend Estimate",
     "record_payment": "Record Payment",
     "add_estimate": "Add Estimate",
     "save_estimate": "Save Estimate",
@@ -316,6 +318,7 @@
     "notes": "Notes",
     "view": "View",
     "send_invoice": "Send Invoice",
+    "resend_invoice": "Resend Invoice",
     "invoice_template": "Invoice Template",
     "template": "Template",
     "mark_as_sent": "Mark as sent",

@@ -9,7 +9,6 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: crater-php
-    container_name: crater-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:

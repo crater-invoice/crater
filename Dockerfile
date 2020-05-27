@@ -13,10 +13,14 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \ 
-    libzip-dev
+    libzip-dev \ 
+    libmagickwand-dev
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pecl install imagick \ 
+    && docker-php-ext-enable imagick
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd 
@@ -33,8 +37,3 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 USER $user
-
-# COPY ./docker-compose/setup.sh /tmp
-# RUN ln -s /usr/local/bin/setup.sh
-
-# ENTRYPOINT ["/tmp/setup.sh"]

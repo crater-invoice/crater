@@ -75,7 +75,8 @@
     "select_city": "Seleccionar ciudad",
     "street_1": "Calle 1",
     "street_2": "Calle 2",
-    "action_failed": "Accion Fallida"
+    "action_failed": "Accion Fallida",
+    "retry": "Procesar de nuevo"
   },
   "dashboard": {
     "select_year": "Seleccionar año",
@@ -786,7 +787,14 @@
       "progress_text": "Solo tomará unos minutos. No actualice la pantalla ni cierre la ventana antes de que finalice la actualización.",
       "update_success": "¡La aplicación ha sido actualizada! Espere mientras la ventana de su navegador se vuelve a cargar automáticamente.",
       "latest_message": "¡Actualización no disponible! Estás en la última versión.",
-      "current_version": "Versión actual"
+      "current_version": "Versión actual",
+      "download_zip_file": "Descargar archivo ZIP",
+      "unzipping_package": "Descomprimir paquete",
+      "copying_files": "Copiando documentos",
+      "running_migrations": "Ejecutar migraciones",
+      "finishing_update": "Actualización final",
+      "update_failed": "Actualización fallida",
+      "update_failed_text": "¡Lo siento! Su actualización falló el: {step} paso" 
     }
   },
   "wizard": {

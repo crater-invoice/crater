@@ -71,14 +71,14 @@
     "go_home": "Vai alla Home",
     "test_mail_conf": "Configurazione della mail di test",
     "send_mail_successfully": "Mail inviata con successo",
-
     "setting_updated": "Configurazioni aggiornate con successo",
     "select_state": "Seleziona lo Stato",
     "select_country": "Seleziona Paese",
     "select_city": "Seleziona Città",
     "street_1": "Indirizzo 1",
     "street_2": "Indirizzo 2",
-    "action_failed": "Errore"
+    "action_failed": "Errore",
+    "retry": "Retry"
   },
   "dashboard": {
     "select_year": "Seleziona anno",
@@ -792,7 +792,14 @@
       "progress_text": "Sarà necessario qualche minuto. Per favore non aggiornare la pagina e non chiudere la finestra prima che l'aggiornamento sia completato",
       "update_success": "L'App è aggiornata! Attendi che la pagina venga ricaricata automaticamente.",
       "latest_message": "Nessun aggiornamneto disponibile! Sei già alla versione più recente.",
-      "current_version": "Versione corrente"
+      "current_version": "Versione corrente",
+      "download_zip_file": "Scarica il file ZIP",
+      "unzipping_package": "Pacchetto di decompressione",
+      "copying_files": "Copia dei file",
+      "running_migrations": "Esecuzione delle migrazioni",
+      "finishing_update": "Aggiornamento di finitura",
+      "update_failed": "Aggiornamento non riuscito",
+      "update_failed_text": "Scusate! L'aggiornamento non è riuscito il: passaggio {step}"
     }
   },
   "wizard": {

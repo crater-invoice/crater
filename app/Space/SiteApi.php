@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Crater\Setting;
 
+// Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 trait SiteApi
 {
 

@@ -128,6 +128,14 @@ export default {
   },
 
   checkValidUrl(url) {
+    if (
+      url.includes('http://localhost') ||
+      url.includes('http://127.0.0.1') ||
+      url.includes('https://localhost') ||
+      url.includes('https://127.0.0.1')
+    ) {
+      return true
+    }
     let pattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name

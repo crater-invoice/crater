@@ -183,7 +183,7 @@ export default {
     async EditTax (id) {
       let response = await this.fetchTaxType(id)
       this.openModal({
-        'title': 'Edit Tax',
+        'title': this.$t('settings.tax_types.edit_tax'),
         'componentName': 'TaxTypeModal',
         'id': id,
         'data': response.data.taxType

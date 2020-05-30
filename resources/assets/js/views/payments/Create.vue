@@ -305,7 +305,7 @@ export default {
     },
     async addPaymentMode () {
       this.openModal({
-        'title': 'Add Payment Mode',
+        'title': this.$t('settings.customization.payments.add_payment_mode'),
         'componentName': 'PaymentMode'
       })
     },

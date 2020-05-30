@@ -403,14 +403,14 @@ export default {
     },
     async addItemUnit () {
       this.openModal({
-        'title': 'Add Item Unit',
+        'title': this.$t('settings.customization.items.add_item_unit'),
         'componentName': 'ItemUnit'
       })
       this.$refs.itemTable.refresh()
     },
     async editItemUnit (data) {
       this.openModal({
-        'title': 'Edit Item Unit',
+        'title': this.$t('settings.customization.items.edit_item_unit'),
         'componentName': 'ItemUnit',
         'id': data.id,
         'data': data
@@ -439,14 +439,14 @@ export default {
     },
     async addPaymentMode () {
       this.openModal({
-        'title': 'Add Payment Mode',
+        'title': this.$t('settings.customization.payments.add_payment_mode'),
         'componentName': 'PaymentMode'
       })
       this.$refs.table.refresh()
     },
     async editPaymentMode (data) {
       this.openModal({
-        'title': 'Edit Payment Mode',
+        'title': this.$t('settings.customization.payments.edit_payment_mode'),
         'componentName': 'PaymentMode',
         'id': data.id,
         'data': data

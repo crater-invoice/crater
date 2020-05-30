@@ -22,6 +22,11 @@
     "to_date": "Hasta la fecha",
     "from": "De",
     "to": "A",
+    "sort_by": "Ordenar por",
+    "ascending": "Ascendente",
+    "descending": "Descendente",
+    "subject": "Sujeta",
+    "message": "Mensaje",
     "go_back": "Volver",
     "back_to_login": "¿Volver al inicio de sesión?",
     "home": "Inicio",
@@ -62,6 +67,8 @@
     "four_zero_four": "404",
     "you_got_lost": "Whoops! ¡Te perdiste!",
     "go_home": "Volver al Inicio",
+    "test_mail_conf": "Probar configuración de correo",
+    "send_mail_successfully": "El correo enviado con éxito",
     "setting_updated": "Configuración actualizada con éxito",
     "select_state": "Seleccionar estado",
     "select_country": "Seleccionar país",
@@ -180,7 +187,7 @@
     "no_items": "¡Aún no hay artículos!",
     "list_of_items": "Esta sección contendrá la lista de artículos.",
     "select_a_unit": "seleccionar unidad",
-
+    "taxes": "Impuestos",
     "item_attached_message": "No se puede eliminar un elemento que ya está en uso.",
     "confirm_delete": "No podrá recuperar este artículo | No podrás recuperar estos elementos",
     "created_message": "Artículo creado con éxito",
@@ -329,6 +336,9 @@
     "no_matching_invoices": "¡No hay facturas coincidentes con la selección!",
     "mark_as_sent_successfully": "Factura marcada como enviada con éxito",
     "send_invoice_successfully": "Factura enviada exitosamente",
+    "cloned_successfully": "Factura clonada exitosamente",
+    "clone_invoice": "Factura de clonación",
+    "confirm_clone": "Esta factura se clonará en una nueva factura.",
     "item": {
       "title": "Título del artículo",
       "description": "Descripción",
@@ -393,6 +403,7 @@
     "edit_payment": "Editar pago",
     "view_payment": "Ver pago",
     "add_new_payment": "Agregar nuevo pago",
+    "send_payment_receipt": "Enviar recibo de pago",
     "save_payment": "Guardar pago",
     "update_payment": "Actualizar pago",
     "payment": "Pago | Pagos",
@@ -653,13 +664,35 @@
       },
 
       "payments": {
-        "title": "Payments",
+        "title": "Pagos",
         "payment_prefix": "Prefijo de los pagos",
         "payment_settings": "Ajustes de pagos",
         "autogenerate_payment_number": "Autogenerar número de pago",
         "payment_setting_description": "Desactive esto, si no desea generar automáticamente números de pago cada vez que cree un nuevo pago.",
         "enter_payment_prefix": "Introduzca el prefijo de pago",
-        "payment_setting_updated": "Configuración de pagos actualizada correctamente"
+        "payment_setting_updated": "Configuración de pagos actualizada correctamente",
+        "payment_mode": "Modo de pago",
+        "add_payment_mode": "Agregar modo de pago",
+        "edit_payment_mode": "Editar modo de pago",
+        "mode_name": "Nombre del modo",
+        "payment_mode_added": "Modo de pago agregado",
+        "payment_mode_updated": "Modo de pago actualizado",
+        "payment_mode_confirm_delete": "No podrá recuperar este modo de pago",
+        "already_in_use": "El modo de pago ya está en uso",
+        "deleted_message": "Modo de pago eliminado correctamente"
+      },
+
+      "items": {
+        "title": "Artículos",
+        "units": "unidades",
+        "add_item_unit": "Agregar unidad de artículo",
+        "edit_item_unit": "Editar unidad de artículo",
+        "unit_name": "Nombre de la unidad",
+        "item_unit_added": "Unidad de artículo agregada",
+        "item_unit_updated": "Unidad de artículo actualizada",
+        "item_unit_confirm_delete": "No podrás recuperar esta unidad de artículo",
+        "already_in_use": "Unidad de artículo ya está en uso",
+        "deleted_message": "Unidad de elemento eliminada correctamente"
       }
     },
     "account_settings": {
@@ -694,6 +727,7 @@
     "tax_types": {
       "title": "Tipos de impuestos",
       "add_tax": "Agregar impuesto",
+      "edit_tax": "Editar impuesto",
       "description": "Puede agregar o eliminar impuestos a su gusto. Crater admite impuestos sobre artículos individuales, así como sobre la factura.",
       "add_new_tax": "Agregar nuevo impuesto",
       "tax_settings": "Configuraciones de impuestos",
@@ -714,6 +748,8 @@
       "action": "Acción",
       "description": "Se requieren categorías para agregar entradas de gastos. Puede Agregar o Eliminar estas categorías según su preferencia.",
       "add_new_category": "Añadir nueva categoria",
+      "add_category": "Añadir categoría",
+      "edit_category": "Editar categoria",
       "category_name": "nombre de la categoría",
       "category_description": "Descripción",
       "created_message": "Categoría de gastos creada con éxito",

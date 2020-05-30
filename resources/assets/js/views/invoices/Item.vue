@@ -38,6 +38,8 @@
               <base-input
                 v-model="item.quantity"
                 :invalid="$v.item.quantity.$error"
+                :is-input-group="!!item.unit_name"
+                :input-group-text="item.unit_name"
                 type="text"
                 small
                 @keyup="updateItem"
@@ -379,6 +381,7 @@ export default {
       this.item.price = item.price
       this.item.item_id = item.id
       this.item.description = item.description
+      this.item.unit_name = item.unit_name
       if (this.taxPerItem === 'YES' && item.taxes) {
         let index = 0
         item.taxes.forEach(tax => {

@@ -16,7 +16,7 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new invoice from <span class="company-name">{{$data['company']['name']}}</span>
+            You have received a new invoice from <b>{{$data['company']['name']}}</b>
             @component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
                 View Invoice
             @endcomponent

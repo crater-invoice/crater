@@ -16,7 +16,7 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new payment from <span class="company-name">{{$data['company']['name']}}</span>
+            You have received a new payment from <b>{{$data['company']['name']}}</b>
             @component('mail::button', ['url' => url('/payments/pdf/'.$data['payment']['unique_hash'])])
                 View Payment
             @endcomponent

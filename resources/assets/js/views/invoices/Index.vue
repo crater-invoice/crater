@@ -134,11 +134,11 @@
 
         <!-- Tabs -->
         <ul class="tabs">
-          <li class="tab" @click="getStatus('UNPAID')">
+          <li class="tab" @click="getStatus('DUE')">
             <a
               :class="[
                 'tab-link',
-                { 'a-active': filters.status.value === 'UNPAID' },
+                { 'a-active': filters.status.value === 'DUE' },
               ]"
               href="#"
               >{{ $t('general.due') }}</a
@@ -163,7 +163,7 @@
                     filters.status.value === '' ||
                     filters.status.value === null ||
                     (filters.status.value !== 'DRAFT' &&
-                      filters.status.value !== 'UNPAID'),
+                      filters.status.value !== 'DUE'),
                 },
               ]"
               href="#"
@@ -399,7 +399,7 @@ export default {
           isDisable: true,
           options: [
             { name: 'DRAFT', value: 'DRAFT' },
-            { name: 'DUE', value: 'UNPAID' },
+            { name: 'DUE', value: 'DUE' },
             { name: 'SENT', value: 'SENT' },
             { name: 'VIEWED', value: 'VIEWED' },
             { name: 'OVERDUE', value: 'OVERDUE' },
@@ -419,7 +419,7 @@ export default {
       isRequestOngoing: true,
       filters: {
         customer: '',
-        status: { name: 'DUE', value: 'UNPAID' },
+        status: { name: 'DUE', value: 'DUE' },
         from_date: '',
         to_date: '',
         invoice_number: ''

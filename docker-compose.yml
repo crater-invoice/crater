@@ -17,7 +17,7 @@ services:
       - crater
 
   db:
-    image: mariadb
+    image: linuxserver/mariadb
     restart: always
     volumes:
       - db:/var/lib/mysql

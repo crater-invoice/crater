@@ -13,6 +13,7 @@ services:
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
       - crater
 

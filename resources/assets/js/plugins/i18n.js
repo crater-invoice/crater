@@ -7,6 +7,8 @@ import ar from './ar.json'
 import de from './de.json'
 import pt_BR from './pt-br.json'
 import it from './it.json'
+import sr_LATN from './sr-latn.json'
+import sr_CYRL from './sr-cyrl.json'
 
 Vue.use(VueI18n)
 
@@ -20,6 +22,8 @@ const i18n = new VueI18n({
     de,
     pt_BR,
     it,
+    sr_LATN,
+    sr_CYRL,
   },
 })
 

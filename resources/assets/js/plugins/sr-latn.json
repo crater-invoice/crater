@@ -321,7 +321,7 @@
     "resend_invoice": "Ponovo pošalji Fakturu",
     "invoice_template": "Šablon Fakture",
     "template": "Šablon",
-    "mark_as_sent": "Označi kao Poslao",
+    "mark_as_sent": "Označi kao Poslato",
     "confirm_send_invoice": "Ova Faktura će biti poslata putem Email-a klijentu",
     "invoice_mark_as_sent": "Ova Fakture će biti označena kao poslata",
     "confirm_send": "Ova Faktura će biti poslata putem Email-a klijentu",

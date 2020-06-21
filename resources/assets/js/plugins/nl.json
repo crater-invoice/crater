@@ -30,7 +30,7 @@
         "subject": "Onderwerpen",
         "message": "Bericht",
         "go_back": "Ga terug",
-        "back_to_login": "Terug naar Inloggen??",
+        "back_to_login": "Terug naar Inloggen?",
         "home": "Home",
         "filter": "Filter",
         "delete": "Verwijderen",
@@ -63,7 +63,7 @@
         "select_a_status": "Selecteer een status",
         "select_a_tax": "Selecteer een belasting",
         "search": "Zoeken",
-        "are_you_sure": "Weet je het zeker??",
+        "are_you_sure": "Weet je het zeker?",
         "list_is_empty": "Lijst is leeg.",
         "no_tax_found": "Geen belasting gevonden!",
         "four_zero_four": "404",
@@ -270,7 +270,7 @@
         "updated_message": "Offerte succesvol bijgewerkt",
         "deleted_message": "Offerte succesvol verwijderd | Offertes zijn succesvol verwijderd",
         "user_email_does_not_exist": "E-mailadres van gebruiker bestaat niet",
-        "something_went_wrong": "er is iets fout gegaan",
+        "something_went_wrong": "Er is iets fout gegaan",
         "item": {
             "title": "Titel van het item",
             "description": "Omschrijving",
@@ -364,7 +364,7 @@
         "deleted_message": "Factuur succesvol verwijderd | Facturen succesvol verwijderd",
         "marked_as_sent_message": "Factuur gemarkeerd als succesvol verzonden",
         "user_email_does_not_exist": "E-mailadres van gebruiker bestaat niet",
-        "something_went_wrong": "er is iets fout gegaan",
+        "something_went_wrong": "Er is iets fout gegaan",
         "invalid_due_amount_message": "Het totale factuurbedrag mag niet lager zijn dan het totale betaalde bedrag voor deze factuur. Werk de factuur bij of verwijder de bijbehorende betalingen om door te gaan."
     },
     "credit_notes": {
@@ -377,7 +377,7 @@
         "action": "Actie",
         "credit_number": "Kredietnummer",
         "notes": "Opmerkingen",
-        "confirm_delete": "Wilt u deze creditnota verwijderen??",
+        "confirm_delete": "Wilt u deze creditnota verwijderen?",
         "item": {
             "title": "Titel van het item",
             "description": "Omschrijving",
@@ -387,7 +387,7 @@
             "total": "Totaal",
             "total_discount": "Totale korting",
             "sub_total": "Subtotaal",
-            "tax": "Ta"
+            "tax": "BTW"
         }
     },
     "payments": {
@@ -418,7 +418,7 @@
         "confirm_send_payment": "Deze betaling wordt via e-mail naar de klant gestuurd",
         "send_payment_successfully": "Betaling succesvol verzonden",
         "user_email_does_not_exist": "E-mailadres van gebruiker bestaat niet",
-        "something_went_wrong": "er is iets fout gegaan",
+        "something_went_wrong": "Er is iets fout gegaan",
 
         "confirm_delete": "U kunt deze betaling niet herstellen U kunt deze betalingen niet terugkrijgen",
         "created_message": "De betaling is succesvol aangemaakt",
@@ -453,7 +453,7 @@
         "new_expense": "Kosten toevoegen",
         "expense": "Uitgaven | Uitgaven",
         "no_expenses": "Nog geen kosten!",
-        "list_of_expenses": "Hier vind je jouw uitgaven terug..",
+        "list_of_expenses": "Hier vind je jouw uitgaven terug.",
 
         "confirm_delete": "U kunt deze kosten | niet terugkrijgen U kunt deze kosten niet terugvorderen",
         "created_message": "Kosten succesvol gemaakt",
@@ -475,7 +475,7 @@
     "login": {
         "email": "E-mail",
         "password": "Wachtwoord",
-        "forgot_password": "Wachtwoord vergeten??",
+        "forgot_password": "Wachtwoord vergeten?",
         "or_signIn_with": "of Log in met",
         "login": "Log in",
         "register": "Registreren",
@@ -550,13 +550,13 @@
     "settings": {
         "menu_title": {
             "account_settings": "Account instellingen",
-            "company_information": "bedrijfsinformatie",
-            "customization": "Maatwerk",
+            "company_information": "Bedrijfsinformatie",
+            "customization": "Aanpassen",
             "preferences": "Voorkeuren",
             "notifications": "Kennisgevingen",
             "tax_types": "Belastingtypen",
             "expense_category": "Onkostencategorieën",
-            "update_app": "Ap bijwerken"
+            "update_app": "App bijwerken"
         },
         "title": "Instellingen",
         "setting": "Instellingen | Instellingen",
@@ -581,7 +581,7 @@
             "right": "Rechtsaf",
             "left": "Links",
             "action": "Actie",
-            "add_currency": "Currenc toevoegen"
+            "add_currency": "Valuta toevoegen"
         },
         "mail": {
             "host": "Mail Host",
@@ -604,7 +604,7 @@
         "pdf": {
             "title": "PDF-instelling",
             "footer_text": "Voettekst",
-            "pdf_layout": "PDF Layou"
+            "pdf_layout": "PDF indeling"
         },
         "company_info": {
             "company_info": "Bedrijfsinfo",
@@ -621,7 +621,7 @@
             "updated_message": "Bedrijfsinformatie succesvol bijgewerkt"
         },
         "customization": {
-            "customization": "maatwerk",
+            "customization": "aanpassen",
             "save": "Opslaan",
             "addresses": {
                 "title": "Adressen",
@@ -718,19 +718,19 @@
             "name": "Naam",
             "email": "E-mail",
             "password": "Wachtwoord",
-            "confirm_password": "Bevestig Passwor"
+            "confirm_password": "Bevestig wachtwoord"
         },
         "notification": {
             "title": "Kennisgeving",
             "email": "Stuur meldingen naar",
-            "description": "Welke e-mailmeldingen wilt u ontvangen als er iets verandert??",
+            "description": "Welke e-mailmeldingen wilt u ontvangen als er iets verandert?",
             "invoice_viewed": "Factuur bekeken",
             "invoice_viewed_desc": "Wanneer uw klant de factuur bekijkt die via het kraterdashboard is verzonden.",
             "estimate_viewed": "Offerte bekeken",
             "estimate_viewed_desc": "Wanneer uw klant de offerte bekijkt die via het kraterdashboard is verzonden.",
             "save": "Opslaan",
             "email_save_message": "E-mail succesvol opgeslagen",
-            "please_enter_email": "Voer Emai in"
+            "please_enter_email": "Voer e-mailadres in"
         },
         "tax_types": {
             "title": "Belastingtypen",
@@ -749,7 +749,7 @@
             "updated_message": "Belastingtype succesvol bijgewerkt",
             "deleted_message": "Belastingtype succesvol verwijderd",
             "confirm_delete": "U kunt dit belastingtype niet terugkrijgen",
-            "already_in_use": "Belasting zit al in ons"
+            "already_in_use": "Belasting al in gebruik"
         },
         "expense_category": {
             "title": "Onkostencategorieën",
@@ -764,7 +764,7 @@
             "deleted_message": "Uitgavencategorie is verwijderd",
             "updated_message": "Uitgavencategorie is bijgewerkt",
             "confirm_delete": "U kunt deze uitgavencategorie niet herstellen",
-            "already_in_use": "Categorie zit al in ons"
+            "already_in_use": "Categorie al in gebruik"
         },
         "preferences": {
             "currency": "Valuta",
@@ -779,10 +779,10 @@
             "preference": "Voorkeur | Voorkeuren",
             "general_settings": "Standaardvoorkeuren voor het systeem.",
             "updated_message": "Voorkeuren succesvol bijgewerkt",
-            "select_language": "selecteer taal",
-            "select_time_zone": "selecteer Tijdzone",
-            "select_date_formate": "selecteer Datumformaat",
-            "select_financial_year": "selecteer financieel ja"
+            "select_language": "Selecteer taal",
+            "select_time_zone": "Selecteer Tijdzone",
+            "select_date_formate": "Selecteer Datumformaat",
+            "select_financial_year": "Selecteer financieel ja"
         },
         "update_app": {
             "title": "App bijwerken",
@@ -790,14 +790,14 @@
             "check_update": "Controleer op updates",
             "avail_update": "Nieuwe update beschikbaar",
             "next_version": "Volgende versie",
-            "update": "Update nu",
-            "update_progress": "Update wordt uitgevoerd.....",
+            "update": "Nu updaten",
+            "update_progress": "Update wordt uitgevoerd...",
             "progress_text": "Het duurt maar een paar minuten. Vernieuw het scherm niet en sluit het venster niet voordat de update is voltooid",
             "update_success": "App is bijgewerkt! Een ogenblik geduld, uw browservenster wordt automatisch opnieuw geladen.",
             "latest_message": "Geen update beschikbaar! U gebruikt de nieuwste versie.",
             "current_version": "Huidige versie",
             "download_zip_file": "Download ZIP-bestand",
-            "unzipping_package": "Pak pakket uit",
+            "unzipping_package": "Pakket uitpakken",
             "copying_files": "Bestanden kopiëren",
             "running_migrations": "Migraties uitvoeren",
             "finishing_update": "Afwerking Update",
@@ -813,7 +813,7 @@
         "password": "Wachtwoord",
         "confirm_password": "bevestig wachtwoord",
         "save_cont": "Opslaan doorgaan",
-        "company_info": "bedrijfsinformatie",
+        "company_info": "Bedrijfsinformatie",
         "company_info_desc": "Deze informatie wordt weergegeven op facturen. Merk op dat u dit later op de instellingenpagina kunt bewerken.",
         "company_name": "Bedrijfsnaam",
         "company_logo": "Bedrijfslogo",
@@ -837,7 +837,7 @@
         "username": "Gebruikersnaam",
         "next": "De volgende",
         "continue": "Doorgaan met",
-        "skip": "Overspringen",
+        "skip": "Overslaan",
         "database": {
             "database": "Site-URL en database",
             "connection": "Database verbinding",
@@ -851,7 +851,7 @@
         },
         "permissions": {
             "permissions": "Rechten",
-            "permission_confirm_title": "Weet je zeker dat je door wilt gaan??",
+            "permission_confirm_title": "Weet je zeker dat je door wilt gaan?",
             "permission_confirm_desc": "Controle van maprechten is mislukt",
             "permission_desc": "Hieronder vindt u de lijst met mapmachtigingen die vereist zijn om de app te laten werken. Als de machtigingscontrole mislukt, moet u de mapmachtigingen bijwerken."
         },
@@ -933,6 +933,6 @@
         "address_maxlength": "Adres mag niet groter zijn dan 255 tekens.",
         "ref_number_maxlength": "Ref-nummer mag niet groter zijn dan 255 tekens.",
         "prefix_maxlength": "Het voorvoegsel mag niet meer dan 5 tekens bevatten.",
-        "something_went_wrong": "er is iets fout gegaan"
+        "something_went_wrong": "Er is iets fout gegaan"
     }
 }

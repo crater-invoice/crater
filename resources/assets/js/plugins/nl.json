@@ -34,8 +34,8 @@
         "home": "Home",
         "filter": "Filter",
         "delete": "Verwijderen",
-        "edit": "Bewerk",
-        "view": "Bekijk",
+        "edit": "Bewerken",
+        "view": "Bekijken",
         "add_new_item": "Voeg een nieuw item toe",
         "clear_all": "Wis alles",
         "showing": "Weergegeven",
@@ -49,7 +49,7 @@
         "total_amount": "TOTAALBEDRAG",
         "bill_to": "Rekening naar",
         "ship_to": "Verzend naar",
-        "due": "Verschuldigd",
+        "due": "Openstaand",
         "draft": "Concept",
         "sent": "Verzonden",
         "all": "Alles",
@@ -83,17 +83,17 @@
     "dashboard": {
         "select_year": "Selecteer jaar",
         "cards": {
-            "due_amount": "Verschuldigd bedrag",
+            "due_amount": "Openstaand bedrag",
             "customers": "Klanten",
             "invoices": "Facturen",
             "estimates": "Offerte"
         },
         "chart_info": {
             "total_sales": "Verkoop",
-            "total_receipts": "Ontvangsten",
+            "total_receipts": "Inkomsten",
             "total_expense": "Uitgaven",
             "net_income": "Netto inkomen",
-            "year": "Selecteer ja"
+            "year": "Selecteer jaar"
         },
         "weekly_invoices": {
             "title": "Wekelijkse factuur"
@@ -102,10 +102,10 @@
             "title": "Verkoop en kosten"
         },
         "recent_invoices_card": {
-            "title": "Verschuldigde facturen",
-            "due_on": "Verschuldigd op",
+            "title": "Openstaande facturen",
+            "due_on": "Openstaand op",
             "customer": "Klant",
-            "amount_due": "Verschuldigd bedrag",
+            "amount_due": "Openstaand bedrag",
             "actions": "Acties",
             "view_all": "Toon alles"
         },
@@ -113,7 +113,7 @@
             "title": "Recente offertes",
             "date": "Datum",
             "customer": "Klant",
-            "amount_due": "Verschuldigd bedrag",
+            "amount_due": "Openstaand bedrag",
             "actions": "Acties",
             "view_all": "Toon alles"
         }
@@ -131,15 +131,15 @@
         "name": "Naam",
         "display_name": "Weergavenaam",
         "primary_contact_name": "Naam primaire contactpersoon",
-        "contact_name": "contactnaam",
-        "amount_due": "Verschuldigd bedrag",
+        "contact_name": "Contactnaam",
+        "amount_due": "Openstaand bedrag",
         "email": "E-mail",
         "address": "Adres",
         "phone": "Telefoon",
         "website": "Website",
         "country": "Land",
         "state": "Provincie",
-        "city": "stad",
+        "city": "Stad",
         "zip_code": "Postcode",
         "added_on": "Toegevoegd",
         "action": "Actie",
@@ -163,7 +163,6 @@
         "select_currency": "Selecteer valuta",
         "select_a_customer": "Selecteer een klant",
         "type_or_click": "Typ of klik om te selecteren",
-
         "confirm_delete": "U kunt deze klant en alle gerelateerde facturen, offertes en betalingen niet terugkrijgen. | U zult deze klanten en alle gerelateerde facturen, offertes en betalingen niet kunnen terugkrijgen.",
         "created_message": "Klant succesvol aangemaakt",
         "updated_message": "Klant succesvol geüpdatet",
@@ -316,7 +315,7 @@
         "amount": "Bedrag",
         "action": "Actie",
         "notes": "Opmerkingen",
-        "view": "Bekijk",
+        "view": "Bekijken",
         "send_invoice": "Factuur verzenden",
         "resend_invoice": "Factuur opnieuw verzenden",
         "invoice_template": "Factuursjabloon",
@@ -534,7 +533,7 @@
             "estimate_number": "Geschat aantal",
             "ref_number": "Referentie nummer",
             "amount": "Bedrag",
-            "contact_name": "contactnaam",
+            "contact_name": "Contactnaam",
             "status": "Statu"
         },
         "expenses": {
@@ -614,7 +613,7 @@
             "phone": "Telefoon",
             "country": "Land",
             "state": "Provincie",
-            "city": "stad",
+            "city": "Stad",
             "address": "Adres",
             "zip": "Zip",
             "save": "Opslaan",
@@ -639,7 +638,7 @@
                 "name": "Naam",
                 "country": "Land",
                 "state": "Provincie",
-                "city": "stad",
+                "city": "Stad",
                 "company_name": "Bedrijfsnaam",
                 "address_street_1": "Adres Straat 1",
                 "address_street_2": "Adresstraat 2",
@@ -822,7 +821,7 @@
         "preferences_desc": "Standaardvoorkeuren voor het systeem.",
         "country": "Land",
         "state": "Provincie",
-        "city": "stad",
+        "city": "Stad",
         "address": "Adres",
         "street": "Straat1 | Straat # 2",
         "phone": "Telefoon",
@@ -879,7 +878,7 @@
             "check_req": "Controleer vereisten",
             "system_req_desc": "Crater heeft een paar serververeisten. Zorg ervoor dat uw server de vereiste php-versie heeft en alle onderstaande extensies."
         },
-        "errors": {
+        "errors": { 
             "migrate_failed": "Migreren mislukt",
             "database_variables_save_error": "Kan configuratie niet schrijven naar .env-bestand. Controleer de bestandsrechten",
             "mail_variables_save_error": "E-mailconfiguratie is mislukt.",
@@ -894,7 +893,7 @@
     "layout_login": {
         "copyright_crater": "Copyright @ Crater - 2020",
         "super_simple_invoicing": "Supereenvoudige facturering",
-        "for_freelancer": "voor freelancers &&",
+        "for_freelancer": "voor freelancers &",
         "small_businesses": "Kleine bedrijven",
         "crater_help": "Crater helpt u uitgaven bij te houden, betalingen te registreren en mooie inkomsten te genereren",
         "invoices_and_estimates": "facturen en offertes met de mogelijkheid om meerdere sjablonen te kiezen."
@@ -919,7 +918,7 @@
         "qty_must_greater_than_zero": "Hoeveelheid moet groter zijn dan nul.",
         "price_greater_than_zero": "Prijs moet groter zijn dan nul.",
         "payment_greater_than_zero": "De betaling moet hoger zijn dan nul.",
-        "payment_greater_than_due_amount": "Ingevoerde betaling is meer dan het verschuldigde bedrag van deze factuur.",
+        "payment_greater_than_due_amount": "Ingevoerde betaling is meer dan het openstaande bedrag van deze factuur.",
         "quantity_maxlength": "Het aantal mag niet groter zijn dan 20 cijfers.",
         "price_maxlength": "Prijs mag niet groter zijn dan 20 cijfers.",
         "price_minvalue": "Prijs moet hoger zijn dan 0.",

@@ -21,7 +21,7 @@
         "deselect": "Maak de selectie ongedaan",
         "download": "Downloaden",
         "from_date": "Van datum",
-        "to_date": "Tot op heden",
+        "to_date": "Tot datum",
         "from": "Van",
         "to": "Naar",
         "sort_by": "Sorteer op",
@@ -58,7 +58,7 @@
         "choose_template": "Kies een sjabloon",
         "choose": "Kiezen",
         "remove": "Verwijderen",
-        "powered_by": "Aangedreven door",
+        "powered_by": "Mogelijk gemaakt door",
         "bytefury": "Bytefury",
         "select_a_status": "Selecteer een status",
         "select_a_tax": "Selecteer een belasting",
@@ -107,7 +107,7 @@
             "customer": "Klant",
             "amount_due": "Verschuldigd bedrag",
             "actions": "Acties",
-            "view_all": "Bekijk Al"
+            "view_all": "Toon alles"
         },
         "recent_estimate_card": {
             "title": "Recente offertes",
@@ -115,7 +115,7 @@
             "customer": "Klant",
             "amount_due": "Verschuldigd bedrag",
             "actions": "Acties",
-            "view_all": "Bekijk Al"
+            "view_all": "Toon alles"
         }
     },
     "tax_types": {
@@ -138,7 +138,7 @@
         "phone": "Telefoon",
         "website": "Website",
         "country": "Land",
-        "state": "Staat",
+        "state": "Provincie",
         "city": "stad",
         "zip_code": "Postcode",
         "added_on": "Toegevoegd",
@@ -206,10 +206,10 @@
         "all": "Allemaal",
         "paid": "Betaald",
         "unpaid": "Onbetaald",
-        "customer": "KLANT",
-        "ref_no": "REF NR.",
-        "number": "AANTAL",
-        "amount_due": "BEDRAG",
+        "customer": "Klant",
+        "ref_no": "Ref Nr.",
+        "number": "Aantal",
+        "amount_due": "Bedrag",
         "partially_paid": "Gedeeltelijk betaald",
         "total": "Totaal",
         "discount": "Korting",
@@ -221,7 +221,7 @@
         "date": "Datum",
         "due_date": "Opleveringsdatum",
         "expiry_date": "Vervaldatum",
-        "status": "Toestand",
+        "status": "Status",
         "add_tax": "Belasting toevoegen",
         "amount": "Bedrag",
         "action": "Actie",
@@ -296,7 +296,7 @@
         "paid": "Betaald",
         "unpaid": "Onbetaald",
         "customer": "Klant",
-        "paid_status": "Status",
+        "paid_status": "Betaling",
         "ref_no": "REF NR.",
         "number": "AANTAL",
         "amount_due": "BEDRAG",
@@ -311,7 +311,7 @@
         "add_item": "Voeg een item toe",
         "date": "Datum",
         "due_date": "Opleveringsdatum",
-        "status": "Toestand",
+        "status": "Status",
         "add_tax": "Belasting toevoegen",
         "amount": "Bedrag",
         "action": "Actie",
@@ -413,7 +413,7 @@
         "payment": "Betaling | Betalingen",
         "no_payments": "Nog geen betalingen!",
         "no_matching_payments": "Er zijn geen overeenkomende betalingen!",
-        "list_of_payments": "Deze sectie bevat de lijst met betalingen.",
+        "list_of_payments": "Hier vind je jouw betalingen terug.",
         "select_payment_mode": "Selecteer betalingswijze",
         "confirm_send_payment": "Deze betaling wordt via e-mail naar de klant gestuurd",
         "send_payment_successfully": "Betaling succesvol verzonden",
@@ -435,7 +435,7 @@
         "contact": "Contact",
         "category": "Categorie",
         "from_date": "Van datum",
-        "to_date": "Tot op heden",
+        "to_date": "Tot datum",
         "expense_date": "Datum",
         "description": "Omschrijving",
         "receipt": "Bon",
@@ -489,8 +489,8 @@
     "reports": {
         "title": "Verslag doen van",
         "from_date": "Van datum",
-        "to_date": "Tot op heden",
-        "status": "Toestand",
+        "to_date": "Tot datum",
+        "status": "Status",
         "paid": "Betaald",
         "unpaid": "Onbetaald",
         "download_pdf": "Download PDF",
@@ -499,20 +499,20 @@
         "report": "Verslag | Rapporten",
         "profit_loss": {
             "profit_loss": "Verlies",
-            "to_date": "Tot op heden",
+            "to_date": "Tot datum",
             "from_date": "Van datum",
             "date_range": "Selecteer Datumbereik"
         },
         "sales": {
             "sales": "Verkoop",
             "date_range": "Selecteer datumbereik",
-            "to_date": "Tot op heden",
+            "to_date": "Tot datum",
             "from_date": "Van datum",
-            "report_type": "Rapport Typ"
+            "report_type": "Rapporttype"
         },
         "taxes": {
             "taxes": "Belastingen",
-            "to_date": "Tot op heden",
+            "to_date": "Tot datum",
             "from_date": "Van datum",
             "date_range": "Selecteer Datumbereik"
         },
@@ -524,8 +524,8 @@
             "invoice_date": "Factuur datum",
             "due_date": "Opleveringsdatum",
             "amount": "Bedrag",
-            "contact_name": "contactnaam",
-            "status": "Statu"
+            "contact_name": "Contactnaam",
+            "status": "Status"
         },
         "estimates": {
             "estimate": "Offerte",
@@ -542,7 +542,7 @@
             "category": "Categorie",
             "date": "Datum",
             "amount": "Bedrag",
-            "to_date": "Tot op heden",
+            "to_date": "Tot datum",
             "from_date": "Van datum",
             "date_range": "Selecteer Datumbereik"
         }
@@ -613,7 +613,7 @@
             "section_description": "Informatie over uw bedrijf die wordt weergegeven op facturen, offertes en andere documenten die door Crater zijn gemaakt.",
             "phone": "Telefoon",
             "country": "Land",
-            "state": "Staat",
+            "state": "Provincie",
             "city": "stad",
             "address": "Adres",
             "zip": "Zip",
@@ -638,7 +638,7 @@
                 "website": "Website",
                 "name": "Naam",
                 "country": "Land",
-                "state": "Staat",
+                "state": "Provincie",
                 "city": "stad",
                 "company_name": "Bedrijfsnaam",
                 "address_street_1": "Adres Straat 1",
@@ -821,7 +821,7 @@
         "preferences": "Voorkeuren",
         "preferences_desc": "Standaardvoorkeuren voor het systeem.",
         "country": "Land",
-        "state": "Staat",
+        "state": "Provincie",
         "city": "stad",
         "address": "Adres",
         "street": "Straat1 | Straat # 2",

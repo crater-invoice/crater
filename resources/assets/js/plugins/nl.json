@@ -16,7 +16,7 @@
         "copy_pdf_url": "Kopieer PDF-URL",
         "download_pdf": "Download PDF",
         "save": "Opslaan",
-        "cancel": "annuleren",
+        "cancel": "Annuleren",
         "update": "Bijwerken",
         "deselect": "Maak de selectie ongedaan",
         "download": "Downloaden",
@@ -475,15 +475,15 @@
         "email": "E-mail",
         "password": "Wachtwoord",
         "forgot_password": "Wachtwoord vergeten?",
-        "or_signIn_with": "of Log in met",
-        "login": "Log in",
+        "or_signIn_with": "Of log in met",
+        "login": "Inloggen",
         "register": "Registreren",
         "reset_password": "Wachtwoord opnieuw instellen",
         "password_reset_successfully": "Wachtwoord opnieuw ingesteld",
         "enter_email": "Voer email in",
         "enter_password": "Voer wachtwoord in",
-        "retype_password": "Geef nogmaals het wachtwoord",
-        "login_placeholder": "mail@voorbeeld.co"
+        "retype_password": "Bevestig wachtwoord",
+        "login_placeholder": "mail@voorbeeld.com"
     },
     "reports": {
         "title": "Verslag doen van",
@@ -895,8 +895,8 @@
         "super_simple_invoicing": "Supereenvoudige facturering",
         "for_freelancer": "voor freelancers &",
         "small_businesses": "Kleine bedrijven",
-        "crater_help": "Crater helpt u uitgaven bij te houden, betalingen te registreren en mooie inkomsten te genereren",
-        "invoices_and_estimates": "facturen en offertes met de mogelijkheid om meerdere sjablonen te kiezen."
+        "crater_help": "Crater helpt u uitgaven bij te houden, betalingen te registreren en mooie",
+        "invoices_and_estimates": "facturen & offertes te genereren met de mogelijkheid om meerdere sjablonen te kiezen."
     },
     "validation": {
         "invalid_url": "Ongeldige URL (bijvoorbeeld: http://www.crater.com))",

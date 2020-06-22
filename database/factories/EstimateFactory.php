@@ -11,10 +11,10 @@ use Crater\EstimateTemplate;
 
 $factory->define(Estimate::class, function (Faker $faker) {
     return [
-        'estimate_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'expiry_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'estimate_number' => 'EST-'.Estimate::getNextEstimateNumber(),
-        'reference_number' => Estimate::getNextEstimateNumber(),
+        'estimate_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'expiry_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'estimate_number' => 'EST-'.Estimate::getNextEstimateNumber('EST'),
+        'reference_number' => Estimate::getNextEstimateNumber('EST'),
         'company_id' => User::find(1)->company_id,
         'user_id' => function () {
             return factory(User::class)->create(['role' => 'customer'])->id;

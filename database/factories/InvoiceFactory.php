@@ -11,10 +11,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Invoice::class, function (Faker $faker) {
     return [
-        'invoice_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'due_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber(),
-        'reference_number' => Invoice::getNextInvoiceNumber(),
+        'invoice_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'due_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber('INV'),
+        'reference_number' => Invoice::getNextInvoiceNumber('INV'),
         'user_id' => function () {
             return factory(User::class)->create(['role' => 'customer'])->id;
         },

@@ -103,17 +103,17 @@
         },
         "recent_invoices_card": {
             "title": "Openstaande facturen",
-            "due_on": "Openstaand op",
+            "due_on": "Datum",
             "customer": "Klant",
-            "amount_due": "Openstaand bedrag",
+            "amount_due": "Bedrag",
             "actions": "Acties",
             "view_all": "Toon alles"
         },
-        "recent_estimate_card": {
+        "recent_estimate_card": { 
             "title": "Recente offertes",
             "date": "Datum",
             "customer": "Klant",
-            "amount_due": "Openstaand bedrag",
+            "amount_due": "Bedrag",
             "actions": "Acties",
             "view_all": "Toon alles"
         }
@@ -122,7 +122,7 @@
         "name": "Naam",
         "description": "Omschrijving",
         "percent": "Procent",
-        "compound_tax": "Verbinding Ta"
+        "compound_tax": "Samengestelde belasting"
     },
     "customers": {
         "title": "Klanten",
@@ -707,7 +707,7 @@
             "name": "Naam",
             "email": "E-mail",
             "password": "Wachtwoord",
-            "confirm_password": "bevestig wachtwoord",
+            "confirm_password": "Bevestig wachtwoord",
             "account_settings": "Account instellingen",
             "save": "Opslaan",
             "section_description": "U kunt uw naam, e-mailadres en wachtwoord bijwerken via onderstaand formulier.",
@@ -810,7 +810,7 @@
         "name": "Naam",
         "email": "E-mail",
         "password": "Wachtwoord",
-        "confirm_password": "bevestig wachtwoord",
+        "confirm_password": "Bevestig wachtwoord",
         "save_cont": "Opslaan doorgaan",
         "company_info": "Bedrijfsinformatie",
         "company_info_desc": "Deze informatie wordt weergegeven op facturen. Merk op dat u dit later op de instellingenpagina kunt bewerken.",

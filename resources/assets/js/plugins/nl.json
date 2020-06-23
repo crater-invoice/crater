@@ -86,7 +86,7 @@
             "due_amount": "Openstaand bedrag",
             "customers": "Klanten",
             "invoices": "Facturen",
-            "estimates": "Offerte"
+            "estimates": "Offertes"
         },
         "chart_info": {
             "total_sales": "Verkoop",
@@ -147,7 +147,7 @@
         "street_number": "Huisnummer",
         "primary_currency": "Primaire valuta",
         "add_new_customer": "Nieuwe klant toevoegen",
-        "save_customer": "Klant redden",
+        "save_customer": "Klant opslaan",
         "update_customer": "Klant bijwerken",
         "customer": "Klant | Klanten",
         "new_customer": "Nieuwe klant",
@@ -264,7 +264,7 @@
 
         "marked_as_accepted_message": "Offerte gemarkeerd als geaccepteerd",
         "marked_as_rejected_message": "Offerte gemarkeerd als afgewezen",
-        "confirm_delete": "U kunt deze offerte | niet herstellen U kunt deze offertes niet herstellen",
+        "confirm_delete": "Wilt u deze offerte verwijderen? Je kunt deze actie niet ongedaan maken | Wilt u deze offerte verwijderen? Je kunt deze actie niet ongedaan maken",
         "created_message": "Offerte is gemaakt",
         "updated_message": "Offerte succesvol bijgewerkt",
         "deleted_message": "Offerte succesvol verwijderd | Offertes zijn succesvol verwijderd",
@@ -357,7 +357,7 @@
             "type_item_description": "Type Item Beschrijving (optioneel)"
         },
         "payment_attached_message": "Aan een van de geselecteerde facturen is al een betaling gekoppeld. Zorg ervoor dat u eerst de bijgevoegde betalingen verwijdert om door te gaan met de verwijdering",
-        "confirm_delete": "U kunt deze factuur | niet terugvorderen U kunt deze facturen niet terugkrijgen",
+        "confirm_delete": "Wilt u deze factuur verwijderen? Je kunt deze actie niet ongedaan maken | Wilt u deze factuur verwijderen? Je kunt deze actie niet ongedaan maken",
         "created_message": "Factuur succesvol aangemaakt",
         "updated_message": "Factuur succesvol bijgewerkt",
         "deleted_message": "Factuur succesvol verwijderd | Facturen succesvol verwijderd",
@@ -419,7 +419,7 @@
         "user_email_does_not_exist": "E-mailadres van gebruiker bestaat niet",
         "something_went_wrong": "Er is iets fout gegaan",
 
-        "confirm_delete": "U kunt deze betaling niet herstellen U kunt deze betalingen niet terugkrijgen",
+        "confirm_delete": "Wilt u deze betaling verwijderen? Je kunt deze actie niet ongedaan maken",
         "created_message": "De betaling is succesvol aangemaakt",
         "updated_message": "Betaling succesvol bijgewerkt",
         "deleted_message": "Betaling succesvol verwijderd | Betalingen zijn verwijderd",
@@ -453,8 +453,7 @@
         "expense": "Uitgaven | Uitgaven",
         "no_expenses": "Nog geen kosten!",
         "list_of_expenses": "Hier vind je jouw uitgaven terug.",
-
-        "confirm_delete": "U kunt deze kosten | niet terugkrijgen U kunt deze kosten niet terugvorderen",
+        "confirm_delete": "Wilt u deze kosten verwijderen? Je kunt deze actie niet ongedaan maken",
         "created_message": "Kosten succesvol gemaakt",
         "updated_message": "Kosten succesvol bijgewerkt",
         "deleted_message": "Kosten succesvol verwijderd | Uitgaven zijn verwijderd",

@@ -13,7 +13,7 @@
     },
     "general": {
         "view_pdf": "Bekijk PDF",
-        "copy_pdf_url": "Kopieer PDF-URL",
+        "copy_pdf_url": "Kopieer link",
         "download_pdf": "Download PDF",
         "save": "Opslaan",
         "cancel": "Annuleren",
@@ -45,8 +45,8 @@
         "discount": "KORTING",
         "fixed": "Gemaakt",
         "percentage": "Percentage",
-        "tax": "BELASTING",
-        "total_amount": "TOTAALBEDRAG",
+        "tax": "Belasting",
+        "total_amount": "Totaalbedrag",
         "bill_to": "Rekening naar",
         "ship_to": "Verzend naar",
         "due": "Openstaand",
@@ -129,7 +129,7 @@
         "add_customer": "Klant toevoegen",
         "contacts_list": "Klantenlijst",
         "name": "Naam",
-        "display_name": "Weergavenaam",
+        "display_name": "Bedrijfsnaam",
         "primary_contact_name": "Naam primaire contactpersoon",
         "contact_name": "Contactnaam",
         "amount_due": "Openstaand bedrag",
@@ -159,7 +159,7 @@
         "no_customers": "Nog geen klanten!",
         "no_customers_found": "Geen klanten gevonden!",
         "list_of_customers": "Hier vind je jouw klanten terug.",
-        "primary_display_name": "Primaire weergavenaam",
+        "primary_display_name": "Weergavenaam",
         "select_currency": "Selecteer valuta",
         "select_a_customer": "Selecteer een klant",
         "type_or_click": "Typ of klik om te selecteren",
@@ -171,10 +171,10 @@
     "items": {
         "title": "Artikelen",
         "items_list": "Lijst met items",
-        "name": "Naam",
+        "name": "Artikel",
         "unit": "Eenheid",
         "description": "Omschrijving",
-        "added_on": "Toegevoegd",
+        "added_on": "Toegevoegd op",
         "price": "Prijs",
         "date_of_creation": "Datum van creatie",
         "action": "Actie",
@@ -282,7 +282,7 @@
             "tax": "Belasting",
             "amount": "Bedrag",
             "select_an_item": "Typ of klik om een item te selecteren",
-            "type_item_description": "Type Item Beschrijving (optioneel)"
+            "type_item_description": "Beschrijving (optioneel)"
         }
     },
     "invoices": {
@@ -354,7 +354,7 @@
             "tax": "Belasting",
             "amount": "Bedrag",
             "select_an_item": "Typ of klik om een item te selecteren",
-            "type_item_description": "Type Item Beschrijving (optioneel)"
+            "type_item_description": "Beschrijving (optioneel)"
         },
         "payment_attached_message": "Aan een van de geselecteerde facturen is al een betaling gekoppeld. Zorg ervoor dat u eerst de bijgevoegde betalingen verwijdert om door te gaan met de verwijdering",
         "confirm_delete": "Wilt u deze factuur verwijderen? Je kunt deze actie niet ongedaan maken | Wilt u deze factuur verwijderen? Je kunt deze actie niet ongedaan maken",
@@ -632,7 +632,7 @@
                 "insert_fields": "Velden invoegen",
                 "contact": "Contact",
                 "address": "Adres",
-                "display_name": "Weergavenaam",
+                "display_name": "Naam",
                 "primary_contact_name": "Naam primaire contactpersoon",
                 "email": "E-mail",
                 "website": "Website",

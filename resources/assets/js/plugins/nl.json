@@ -339,9 +339,9 @@
         "no_matching_invoices": "Er zijn geen overeenkomende facturen!",
         "mark_as_sent_successfully": "Factuur gemarkeerd als succesvol verzonden",
         "send_invoice_successfully": "Factuur succesvol verzonden",
-        "cloned_successfully": "Factuur succesvol gekloond",
-        "clone_invoice": "Factuur klonen",
-        "confirm_clone": "Deze factuur wordt gekloond in een nieuwe factuur",
+        "cloned_successfully": "Factuur succesvol gekopiëerd",
+        "clone_invoice": "Factuur kopiëren",
+        "confirm_clone": "Deze factuur wordt gekopiëerd naar nieuwe factuur",
         "item": {
             "title": "Titel van het item",
             "description": "Omschrijving",

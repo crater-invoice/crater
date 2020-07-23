@@ -42,7 +42,6 @@ export default {
   },
 
   [types.ADD_ITEM_UNIT] (state, data) {
-    state.itemUnits.push(data.unit)
     state.itemUnits = [data.unit, ...state.itemUnits]
   },
 

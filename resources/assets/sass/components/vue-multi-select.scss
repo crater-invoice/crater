@@ -27,6 +27,7 @@ fieldset[disabled] .multiselect {
     top: 50%;
     left: 50%;
     margin: -8px 0 0 -8px;
+    z-index: 5;
     width: 16px;
     height: 16px;
     border-radius: 100%;

@@ -9,6 +9,7 @@ use carbon\carbon;
 use Crater\MemberLoan;
 use Crater\Address;
 use Crater\Payment;
+use Crater\Expense;
 use Crater\Company;
 use Crater\Notifications\MailResetPasswordNotification;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -103,6 +104,11 @@ class User extends Authenticatable implements HasMedia
     public function addresses()
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
     }
 
     public function billingAddress()

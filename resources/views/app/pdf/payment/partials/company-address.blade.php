@@ -3,7 +3,7 @@
 @endif
 
 @if($company_address)
-    <p class="company-add">
+    <p class="company-address">
         @if($company_address->addresses[0]['address_street_1'])
             {!! nl2br(htmlspecialchars($company_address->addresses[0]['address_street_1'])) !!} <br>
         @endif

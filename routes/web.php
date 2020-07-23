@@ -6,6 +6,7 @@
 |--------------------------------------------------------------------------
 |
 */
+
 Route::group(['prefix' => 'reports'], function () {
 
     // sales report by customer
@@ -46,7 +47,6 @@ Route::group(['prefix' => 'reports'], function () {
         'as' => 'get.profit.loss',
         'uses' => 'ReportController@profitLossReport'
     ]);
-
 });
 
 
@@ -88,7 +88,7 @@ Route::get('/expenses/{id}/receipt/{hash}', [
     'uses' => 'ExpensesController@downloadReceipt'
 ]);
 
-// Setup for instalation of app
+// Setup for installation of app
 // ----------------------------------------------
 Route::get('/on-boarding', function () {
     return view('app');

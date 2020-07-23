@@ -1,7 +1,7 @@
 <template>
   <div v-if="payment" class="main-content payment-view-page">
     <div class="page-header">
-      <h3 class="page-title"> {{ payment.payment_number }}</h3>
+      <h3 class="page-title">{{ payment.payment_number }}</h3>
       <div class="page-actions row">
         <base-button
           :loading="isSendingEmail"
@@ -11,19 +11,39 @@
         >
           {{ $t('payments.send_payment_receipt') }}
         </base-button>
-        <v-dropdown :close-on-select="false" align="left" class="filter-container">
+        <v-dropdown
+          :close-on-select="true"
+          align="left"
+          class="filter-container"
+        >
           <a slot="activator" href="#">
             <base-button color="theme">
               <font-awesome-icon icon="ellipsis-h" />
             </base-button>
           </a>
           <v-dropdown-item>
-            <router-link :to="{path: `/admin/payments/${$route.params.id}/edit`}" class="dropdown-item">
-              <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon"/>
+            <div class="dropdown-item" @click="copyPdfUrl">
+              <font-awesome-icon
+                :icon="['fas', 'link']"
+                class="dropdown-item-icon"
+              />
+              {{ $t('general.copy_pdf_url') }}
+            </div>
+            <router-link
+              :to="{ path: `/admin/payments/${$route.params.id}/edit` }"
+              class="dropdown-item"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'pencil-alt']"
+                class="dropdown-item-icon"
+              />
               {{ $t('general.edit') }}
             </router-link>
             <div class="dropdown-item" @click="removePayment($route.params.id)">
-              <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+              <font-awesome-icon
+                :icon="['fas', 'trash']"
+                class="dropdown-item-icon"
+              />
               {{ $t('general.delete') }}
             </div>
           </v-dropdown-item>
@@ -41,14 +61,18 @@
           align-icon="right"
           @input="onSearch"
         />
-        <div
-          class="btn-group ml-3"
-          role="group"
-          aria-label="First group"
-        >
-          <v-dropdown :close-on-select="false" align="left" class="filter-container">
+        <div class="btn-group ml-3" role="group" aria-label="First group">
+          <v-dropdown
+            :close-on-select="false"
+            align="left"
+            class="filter-container"
+          >
             <a slot="activator" href="#">
-              <base-button class="inv-button inv-filter-fields-btn" color="default" size="medium">
+              <base-button
+                class="inv-button inv-filter-fields-btn"
+                color="default"
+                size="medium"
+              >
                 <font-awesome-icon icon="filter" />
               </base-button>
             </a>
@@ -64,8 +88,10 @@
                 class="inv-radio"
                 value="invoice_number"
                 @change="onSearch"
-              >
-              <label class="inv-label" for="filter_invoice_number">{{ $t('invoices.title') }}</label>
+              />
+              <label class="inv-label" for="filter_invoice_number">{{
+                $t('invoices.title')
+              }}</label>
             </div>
             <div class="filter-items">
               <input
@@ -76,8 +102,10 @@
                 class="inv-radio"
                 value="payment_date"
                 @change="onSearch"
-              >
-              <label class="inv-label" for="filter_payment_date">{{ $t('payments.date') }}</label>
+              />
+              <label class="inv-label" for="filter_payment_date">{{
+                $t('payments.date')
+              }}</label>
             </div>
             <div class="filter-items">
               <input
@@ -88,11 +116,19 @@
                 class="inv-radio"
                 value="payment_number"
                 @change="onSearch"
-              >
-              <label class="inv-label" for="filter_payment_number">{{ $t('payments.payment_number') }}</label>
+              />
+              <label class="inv-label" for="filter_payment_number">{{
+                $t('payments.payment_number')
+              }}</label>
             </div>
           </v-dropdown>
-          <base-button v-tooltip.top-center="{ content: getOrderName }" class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
+          <base-button
+            v-tooltip.top-center="{ content: getOrderName }"
+            class="inv-button inv-filter-sorting-btn"
+            color="default"
+            size="medium"
+            @click="sortData"
+          >
             <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
             <font-awesome-icon v-else icon="sort-amount-down" />
           </base-button>
@@ -101,7 +137,7 @@
       <base-loader v-if="isSearching" />
       <div v-else class="side-content">
         <router-link
-          v-for="(payment,index) in payments"
+          v-for="(payment, index) in payments"
           :to="`/admin/payments/${payment.id}/view`"
           :key="index"
           class="side-payment"
@@ -112,7 +148,10 @@
             <div class="inv-number">{{ payment.invoice_number }}</div>
           </div>
           <div class="right">
-            <div class="inv-amount" v-html="$utils.formatMoney(payment.amount, payment.user.currency)" />
+            <div
+              class="inv-amount"
+              v-html="$utils.formatMoney(payment.amount, payment.user.currency)"
+            />
             <div class="inv-date">{{ payment.formattedPaymentDate }}</div>
             <!-- <div class="inv-number">{{ payment.payment_method.name }}</div> -->
           </div>
@@ -122,8 +161,8 @@
         </p>
       </div>
     </div>
-    <div class="payment-view-page-container" >
-      <iframe :src="`${shareableLink}`" class="frame-style"/>
+    <div class="payment-view-page-container">
+      <iframe :src="`${shareableLink}`" class="frame-style" />
     </div>
   </div>
 </template>
@@ -259,6 +298,13 @@ export default {
           window.toastr['error'](this.$tc('payments.something_went_wrong'))
         }
       })
+    },
+    copyPdfUrl () {
+      let pdfUrl = `${window.location.origin}/payments/pdf/${this.payment.unique_hash}`
+
+      let response = this.$utils.copyTextToClipboard(pdfUrl)
+
+      window.toastr['success'](this.$tc('Copied PDF url to clipboard!'))
     },
     async removePayment (id) {
       this.id = id

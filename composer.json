@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "aws/aws-sdk-php": "^3.137",
         "barryvdh/laravel-dompdf": "^0.8.1",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
@@ -53,20 +54,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "initial-setup": [
-            "test -f .env || (cp .env.example .env; php artisan key:generate 2>/dev/null; exit 0)"
-        ],
-        "pre-install-cmd": [
-            "@initial-setup"
-        ],
-        "pre-update-cmd": [
-            "@initial-setup"
-        ],
         "post-root-package-install": [
-            "@initial-setup"
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@initial-setup"
+            "php artisan key:generate --ansi"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

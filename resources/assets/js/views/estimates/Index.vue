@@ -4,16 +4,12 @@
       <h3 class="page-title">{{ $t('estimates.title') }}</h3>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="dashboard">
+          <router-link slot="item-title" to="dashboard">
             {{ $t('general.home') }}
           </router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="#">
+          <router-link slot="item-title" to="#">
             {{ $tc('estimates.estimate', 2) }}
           </router-link>
         </li>
@@ -33,11 +29,9 @@
           </base-button>
         </div>
         <router-link slot="item-title" class="col-xs-2" to="estimates/create">
-          <base-button
-            size="large"
-            icon="plus"
-            color="theme" >
-            {{ $t('estimates.new_estimate') }}</base-button>
+          <base-button size="large" icon="plus" color="theme">
+            {{ $t('estimates.new_estimate') }}</base-button
+          >
         </router-link>
       </div>
     </div>
@@ -46,7 +40,7 @@
       <div v-show="showFilters" class="filter-section">
         <div class="filter-container">
           <div class="filter-customer">
-            <label>{{ $tc('customers.customer',1) }} </label>
+            <label>{{ $tc('customers.customer', 1) }} </label>
             <base-customer-select
               ref="customerSelect"
               @select="onSelectCustomer"
@@ -85,21 +79,28 @@
           </div>
           <div class="filter-estimate">
             <label>{{ $t('estimates.estimate_number') }}</label>
-            <base-input
-              v-model="filters.estimate_number"
-              icon="hashtag"/>
+            <base-input v-model="filters.estimate_number" icon="hashtag" />
           </div>
         </div>
-        <label class="clear-filter" @click="clearFilter">{{ $t('general.clear_all') }}</label>
+        <label class="clear-filter" @click="clearFilter">{{
+          $t('general.clear_all')
+        }}</label>
       </div>
     </transition>
-    <div v-cloak v-show="showEmptyScreen" class="col-xs-1 no-data-info" align="center">
-      <moon-walker-icon class="mt-5 mb-4"/>
+    <div
+      v-cloak
+      v-show="showEmptyScreen"
+      class="col-xs-1 no-data-info"
+      align="center"
+    >
+      <moon-walker-icon class="mt-5 mb-4" />
       <div class="row" align="center">
         <label class="col title">{{ $t('estimates.no_estimates') }}</label>
       </div>
       <div class="row">
-        <label class="description col mt-1" align="center">{{ $t('estimates.list_of_estimates') }}</label>
+        <label class="description col mt-1" align="center">{{
+          $t('estimates.list_of_estimates')
+        }}</label>
       </div>
       <div class="btn-container">
         <base-button
@@ -116,28 +117,57 @@
 
     <div v-show="!showEmptyScreen" class="table-container">
       <div class="table-actions mt-5">
-        <p class="table-stats">{{ $t('general.showing') }}: <b>{{ estimates.length }}</b> {{ $t('general.of') }} <b>{{ totalEstimates }}</b></p>
+        <p class="table-stats">
+          {{ $t('general.showing') }}: <b>{{ estimates.length }}</b>
+          {{ $t('general.of') }} <b>{{ totalEstimates }}</b>
+        </p>
 
         <!-- Tabs -->
         <ul class="tabs">
           <li class="tab" @click="getStatus('DRAFT')">
-            <a :class="['tab-link', {'a-active': filters.status === 'DRAFT'}]" href="#">{{ $t('general.draft') }}</a>
+            <a
+              :class="['tab-link', { 'a-active': filters.status === 'DRAFT' }]"
+              href="#"
+              >{{ $t('general.draft') }}</a
+            >
           </li>
           <li class="tab" @click="getStatus('SENT')">
-            <a :class="['tab-link', {'a-active': filters.status === 'SENT'}]" href="#" >{{ $t('general.sent') }}</a>
+            <a
+              :class="['tab-link', { 'a-active': filters.status === 'SENT' }]"
+              href="#"
+              >{{ $t('general.sent') }}</a
+            >
           </li>
           <li class="tab" @click="getStatus('')">
-            <a :class="['tab-link', {'a-active': filters.status === '' || filters.status !== 'DRAFT' && filters.status !== 'SENT'}]" href="#">{{ $t('general.all') }}</a>
+            <a
+              :class="[
+                'tab-link',
+                {
+                  'a-active':
+                    filters.status === '' ||
+                    (filters.status !== 'DRAFT' && filters.status !== 'SENT'),
+                },
+              ]"
+              href="#"
+              >{{ $t('general.all') }}</a
+            >
           </li>
         </ul>
         <transition name="fade">
           <v-dropdown v-if="selectedEstimates.length" :show-arrow="false">
-            <span slot="activator" href="#" class="table-actions-button dropdown-toggle">
+            <span
+              slot="activator"
+              href="#"
+              class="table-actions-button dropdown-toggle"
+            >
               {{ $t('general.actions') }}
             </span>
             <v-dropdown-item>
               <div class="dropdown-item" @click="removeMultipleEstimates">
-                <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+                <font-awesome-icon
+                  :icon="['fas', 'trash']"
+                  class="dropdown-item-icon"
+                />
                 {{ $t('general.delete') }}
               </div>
             </v-dropdown-item>
@@ -153,8 +183,12 @@
           type="checkbox"
           class="custom-control-input"
           @change="selectAllEstimates"
+        />
+        <label
+          v-show="!isRequestOngoing"
+          for="select-all"
+          class="custom-control-label selectall"
         >
-        <label v-show="!isRequestOngoing" for="select-all" class="custom-control-label selectall">
           <span class="select-all-label">{{ $t('general.select_all') }} </span>
         </label>
       </div>
@@ -178,7 +212,7 @@
                 :value="row.id"
                 type="checkbox"
                 class="custom-control-input"
-              >
+              />
               <label :for="row.id" class="custom-control-label" />
             </div>
           </template>
@@ -186,30 +220,30 @@
         <table-column
           :label="$t('estimates.date')"
           sort-as="estimate_date"
-          show="formattedEstimateDate" />
+          show="formattedEstimateDate"
+        />
         <table-column
           :label="$t('estimates.customer')"
           sort-as="name"
-          show="name" />
+          show="name"
+        />
         <!-- <table-column
           :label="$t('estimates.expiry_date')"
           sort-as="expiry_date"
           show="formattedExpiryDate" /> -->
-        <table-column
-          :label="$t('estimates.status')"
-          show="status" >
-          <template slot-scope="row" >
+        <table-column :label="$t('estimates.status')" show="status">
+          <template slot-scope="row">
             <span> {{ $t('estimates.status') }}</span>
-            <span :class="'est-status-'+row.status.toLowerCase()">{{ row.status }}</span>
+            <span :class="'est-status-' + row.status.toLowerCase()">{{
+              row.status
+            }}</span>
           </template>
         </table-column>
         <table-column
           :label="$tc('estimates.estimate', 1)"
-          show="estimate_number"/>
-        <table-column
-          :label="$t('invoices.total')"
-          sort-as="total"
-        >
+          show="estimate_number"
+        />
+        <table-column :label="$t('invoices.total')" sort-as="total">
           <template slot-scope="row">
             <span> {{ $t('estimates.total') }}</span>
             <div v-html="$utils.formatMoney(row.total, row.user.currency)" />
@@ -227,50 +261,114 @@
                 <dot-icon />
               </a>
               <v-dropdown-item>
-                <router-link :to="{path: `estimates/${row.id}/edit`}" class="dropdown-item">
-                  <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon" />
+                <router-link
+                  :to="{ path: `estimates/${row.id}/edit` }"
+                  class="dropdown-item"
+                >
+                  <font-awesome-icon
+                    :icon="['fas', 'pencil-alt']"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('general.edit') }}
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item>
                 <div class="dropdown-item" @click="removeEstimate(row.id)">
-                  <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+                  <font-awesome-icon
+                    :icon="['fas', 'trash']"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('general.delete') }}
                 </div>
               </v-dropdown-item>
               <v-dropdown-item>
-                <router-link :to="{path: `estimates/${row.id}/view`}" class="dropdown-item">
+                <router-link
+                  :to="{ path: `estimates/${row.id}/view` }"
+                  class="dropdown-item"
+                >
                   <font-awesome-icon icon="eye" class="dropdown-item-icon" />
                   {{ $t('general.view') }}
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item>
-                <a class="dropdown-item" href="#/" @click="convertInToinvoice(row.id)">
-                  <font-awesome-icon icon="file-alt" class="dropdown-item-icon" />
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click="convertInToinvoice(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="file-alt"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('estimates.convert_to_invoice') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'SENT'">
-                <a class="dropdown-item" href="#/" @click.self="onMarkAsSent(row.id)">
-                  <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click.self="onMarkAsSent(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="check-circle"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('estimates.mark_as_sent') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status !== 'SENT'">
-                <a class="dropdown-item" href="#/" @click.self="sendEstimate(row.id)">
-                  <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
+              <v-dropdown-item v-if="row.status === 'DRAFT'">
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click.self="sendEstimate(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="paper-plane"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('estimates.send_estimate') }}
                 </a>
               </v-dropdown-item>
+              <!-- resend estimte -->
+              <v-dropdown-item
+                v-if="row.status == 'SENT' || row.status == 'VIEWED'"
+              >
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click.self="sendEstimate(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="paper-plane"
+                    class="dropdown-item-icon"
+                  />
+                  {{ $t('estimates.resend_estimate') }}
+                </a>
+              </v-dropdown-item>
+              <!--  -->
               <v-dropdown-item v-if="row.status !== 'ACCEPTED'">
-                <a class="dropdown-item" href="#/" @click.self="onMarkAsAccepted(row.id)">
-                  <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click.self="onMarkAsAccepted(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="check-circle"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('estimates.mark_as_accepted') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status !== 'REJECTED'">
-                <a class="dropdown-item" href="#/" @click.self="onMarkAsRejected(row.id)">
-                  <font-awesome-icon icon="times-circle" class="dropdown-item-icon" />
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click.self="onMarkAsRejected(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="times-circle"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('estimates.mark_as_rejected') }}
                 </a>
               </v-dropdown-item>

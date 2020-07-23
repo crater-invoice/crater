@@ -16,7 +16,7 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new estimate from <span class="company-name">{{$data['company']['name']}}</span>
+            You have received a new estimate from <b>{{$data['company']['name']}}</b>
             @component('mail::button', ['url' => url('/customer/estimates/pdf/'.$data['estimate']['unique_hash'])])
                 View Estimate
             @endcomponent

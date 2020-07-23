@@ -122,23 +122,41 @@ Route::group(['middleware' => 'api'], function () {
       'middleware' => 'admin'
     ], function () {
 
-
-        // Auto update routes
+        // Self Update
         //----------------------------------
-        Route::post('/update', [
-            'as' => 'auto.update',
-            'uses' => 'UpdateController@update'
+
+        Route::get('/check/update', [
+            'as' => 'update.check',
+            'uses' => 'UpdateController@checkLatestVersion'
+        ]);
+
+        Route::post('/update/download', [
+            'as' => 'update.download',
+            'uses' => 'UpdateController@download'
+        ]);
+
+        Route::post('/update/unzip', [
+            'as' => 'update.unzip',
+            'uses' => 'UpdateController@unzip'
+        ]);
+
+        Route::post('/update/copy', [
+            'as' => 'update.copy',
+            'uses' => 'UpdateController@copyFiles'
+        ]);
+
+        Route::post('/update/migrate', [
+            'as' => 'update.migrate',
+            'uses' => 'UpdateController@migrate'
         ]);
 
         Route::post('/update/finish', [
-            'as' => 'auto.update.finish',
+            'as' => 'update.finish',
             'uses' => 'UpdateController@finishUpdate'
         ]);
 
-        Route::get('/check/update', [
-            'as' => 'check.update',
-            'uses' => 'UpdateController@checkLatestVersion'
-        ]);
+        // Bootstrap
+        //----------------------------------
 
         Route::get('/bootstrap', [
             'as' => 'bootstrap',

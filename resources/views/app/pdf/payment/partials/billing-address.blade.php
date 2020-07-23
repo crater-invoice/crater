@@ -1,11 +1,11 @@
 @if($payment->user->billingaddress)
-    <p class="bill-to">Received From:</p>
+    <p class="billing-address-label">Received From:</p>
     @if($payment->user->billingaddress->name)
-        <p class="bill-user-name">
+        <p class="billing-address-name">
             {{$payment->user->billingaddress->name}}
         </p>
     @endif
-    <p class="bill-user-address">
+    <p class="billing-address">
         @if($payment->user->billingaddress->address_street_1)
             {!! nl2br(htmlspecialchars($payment->user->billingaddress->address_street_1)) !!}<br>
         @endif
@@ -25,7 +25,7 @@
             {{$payment->user->billingaddress->country->name}}<br>
         @endif
         @if($payment->user->billingaddress->phone)
-            <p class="bill-user-phone">
+            <p class="billing-address">
                 Phone :{{$payment->user->billingaddress->phone}}
             </p>
         @endif

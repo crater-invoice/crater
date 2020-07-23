@@ -1,19 +1,15 @@
 <template>
   <div class="invoice-index-page invoices main-content">
     <div class="page-header">
-      <h3 class="page-title"> {{ $t('invoices.title') }}</h3>
+      <h3 class="page-title">{{ $t('invoices.title') }}</h3>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="dashboard">
+          <router-link slot="item-title" to="dashboard">
             {{ $t('general.home') }}
           </router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="#">
+          <router-link slot="item-title" to="#">
             {{ $tc('invoices.invoice', 2) }}
           </router-link>
         </li>
@@ -32,7 +28,11 @@
             {{ $t('general.filter') }}
           </base-button>
         </div>
-        <router-link slot="item-title" class="col-xs-2" to="/admin/invoices/create">
+        <router-link
+          slot="item-title"
+          class="col-xs-2"
+          to="/admin/invoices/create"
+        >
           <base-button size="large" icon="plus" color="theme">
             {{ $t('invoices.new_invoice') }}
           </base-button>
@@ -44,7 +44,7 @@
       <div v-show="showFilters" class="filter-section">
         <div class="filter-container">
           <div class="filter-customer">
-            <label>{{ $tc('customers.customer',1) }} </label>
+            <label>{{ $tc('customers.customer', 1) }} </label>
             <base-customer-select
               ref="customerSelect"
               @select="onSelectCustomer"
@@ -88,22 +88,29 @@
           </div>
           <div class="filter-invoice">
             <label>{{ $t('invoices.invoice_number') }}</label>
-            <base-input
-              v-model="filters.invoice_number"
-              icon="hashtag"/>
+            <base-input v-model="filters.invoice_number" icon="hashtag" />
           </div>
         </div>
-        <label class="clear-filter" @click="clearFilter">{{ $t('general.clear_all') }}</label>
+        <label class="clear-filter" @click="clearFilter">{{
+          $t('general.clear_all')
+        }}</label>
       </div>
     </transition>
 
-    <div v-cloak v-show="showEmptyScreen" class="col-xs-1 no-data-info" align="center">
-      <moon-walker-icon class="mt-5 mb-4"/>
+    <div
+      v-cloak
+      v-show="showEmptyScreen"
+      class="col-xs-1 no-data-info"
+      align="center"
+    >
+      <moon-walker-icon class="mt-5 mb-4" />
       <div class="row" align="center">
         <label class="col title">{{ $t('invoices.no_invoices') }}</label>
       </div>
       <div class="row">
-        <label class="description col mt-1" align="center">{{ $t('invoices.list_of_invoices') }}</label>
+        <label class="description col mt-1" align="center">{{
+          $t('invoices.list_of_invoices')
+        }}</label>
       </div>
       <div class="btn-container">
         <base-button
@@ -120,28 +127,65 @@
 
     <div v-show="!showEmptyScreen" class="table-container">
       <div class="table-actions mt-5">
-        <p class="table-stats">{{ $t('general.showing') }}: <b>{{ invoices.length }}</b> {{ $t('general.of') }} <b>{{ totalInvoices }}</b></p>
+        <p class="table-stats">
+          {{ $t('general.showing') }}: <b>{{ invoices.length }}</b>
+          {{ $t('general.of') }} <b>{{ totalInvoices }}</b>
+        </p>
 
         <!-- Tabs -->
         <ul class="tabs">
           <li class="tab" @click="getStatus('UNPAID')">
-            <a :class="['tab-link', {'a-active': filters.status.value === 'UNPAID'}]" href="#" >{{ $t('general.due') }}</a>
+            <a
+              :class="[
+                'tab-link',
+                { 'a-active': filters.status.value === 'UNPAID' },
+              ]"
+              href="#"
+              >{{ $t('general.due') }}</a
+            >
           </li>
           <li class="tab" @click="getStatus('DRAFT')">
-            <a :class="['tab-link', {'a-active': filters.status.value === 'DRAFT'}]" href="#">{{ $t('general.draft') }}</a>
+            <a
+              :class="[
+                'tab-link',
+                { 'a-active': filters.status.value === 'DRAFT' },
+              ]"
+              href="#"
+              >{{ $t('general.draft') }}</a
+            >
           </li>
           <li class="tab" @click="getStatus('')">
-            <a :class="['tab-link', {'a-active': filters.status.value === '' || filters.status.value === null || filters.status.value !== 'DRAFT' && filters.status.value !== 'UNPAID'}]" href="#">{{ $t('general.all') }}</a>
+            <a
+              :class="[
+                'tab-link',
+                {
+                  'a-active':
+                    filters.status.value === '' ||
+                    filters.status.value === null ||
+                    (filters.status.value !== 'DRAFT' &&
+                      filters.status.value !== 'UNPAID'),
+                },
+              ]"
+              href="#"
+              >{{ $t('general.all') }}</a
+            >
           </li>
         </ul>
         <transition name="fade">
           <v-dropdown v-if="selectedInvoices.length" :show-arrow="false">
-            <span slot="activator" href="#" class="table-actions-button dropdown-toggle">
+            <span
+              slot="activator"
+              href="#"
+              class="table-actions-button dropdown-toggle"
+            >
               {{ $t('general.actions') }}
             </span>
             <v-dropdown-item>
               <div class="dropdown-item" @click="removeMultipleInvoices">
-                <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+                <font-awesome-icon
+                  :icon="['fas', 'trash']"
+                  class="dropdown-item-icon"
+                />
                 {{ $t('general.delete') }}
               </div>
             </v-dropdown-item>
@@ -155,8 +199,12 @@
           type="checkbox"
           class="custom-control-input"
           @change="selectAllInvoices"
+        />
+        <label
+          v-show="!isRequestOngoing"
+          for="select-all"
+          class="custom-control-label selectall"
         >
-        <label v-show="!isRequestOngoing" for="select-all" class="custom-control-label selectall">
           <span class="select-all-label">{{ $t('general.select_all') }} </span>
         </label>
       </div>
@@ -180,8 +228,8 @@
                 :value="row.id"
                 type="checkbox"
                 class="custom-control-input"
-              >
-              <label :for="row.id" class="custom-control-label"/>
+              />
+              <label :for="row.id" class="custom-control-label" />
             </div>
           </template>
         </table-column>
@@ -195,35 +243,33 @@
           width="20%"
           show="name"
         />
-        <table-column
-          :label="$t('invoices.status')"
-          sort-as="status"
-        >
-          <template slot-scope="row" >
+        <table-column :label="$t('invoices.status')" sort-as="status">
+          <template slot-scope="row">
             <span> {{ $t('invoices.status') }}</span>
-            <span :class="'inv-status-'+row.status.toLowerCase()">{{ (row.status != 'PARTIALLY_PAID')? row.status : row.status.replace('_', ' ') }}</span>
+            <span :class="'inv-status-' + row.status.toLowerCase()">{{
+              row.status != 'PARTIALLY_PAID'
+                ? row.status
+                : row.status.replace('_', ' ')
+            }}</span>
           </template>
         </table-column>
-        <table-column
-          :label="$t('invoices.paid_status')"
-          sort-as="paid_status"
-        >
+        <table-column :label="$t('invoices.paid_status')" sort-as="paid_status">
           <template slot-scope="row">
             <span>{{ $t('invoices.paid_status') }}</span>
-            <span :class="'inv-status-'+row.paid_status.toLowerCase()">{{ (row.paid_status != 'PARTIALLY_PAID')? row.paid_status : row.paid_status.replace('_', ' ') }}</span>
+            <span :class="'inv-status-' + row.paid_status.toLowerCase()">{{
+              row.paid_status != 'PARTIALLY_PAID'
+                ? row.paid_status
+                : row.paid_status.replace('_', ' ')
+            }}</span>
           </template>
         </table-column>
-        <table-column
-          :label="$t('invoices.number')"
-          show="invoice_number"
-        />
-        <table-column
-          :label="$t('invoices.amount_due')"
-          sort-as="due_amount"
-        >
+        <table-column :label="$t('invoices.number')" show="invoice_number" />
+        <table-column :label="$t('invoices.amount_due')" sort-as="due_amount">
           <template slot-scope="row">
             <span>{{ $t('invoices.amount_due') }}</span>
-            <div v-html="$utils.formatMoney(row.due_amount, row.user.currency)"/>
+            <div
+              v-html="$utils.formatMoney(row.due_amount, row.user.currency)"
+            />
           </template>
         </table-column>
         <table-column
@@ -238,42 +284,91 @@
                 <dot-icon />
               </a>
               <v-dropdown-item>
-                <router-link :to="{path: `invoices/${row.id}/edit`}" class="dropdown-item">
-                  <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon"/>
+                <router-link
+                  :to="{ path: `invoices/${row.id}/edit` }"
+                  class="dropdown-item"
+                >
+                  <font-awesome-icon
+                    :icon="['fas', 'pencil-alt']"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('general.edit') }}
                 </router-link>
-                <router-link :to="{path: `invoices/${row.id}/view`}" class="dropdown-item">
+                <router-link
+                  :to="{ path: `invoices/${row.id}/view` }"
+                  class="dropdown-item"
+                >
                   <font-awesome-icon icon="eye" class="dropdown-item-icon" />
                   {{ $t('invoices.view') }}
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)" >
-                  <font-awesome-icon icon="paper-plane" class="dropdown-item-icon" />
+                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)">
+                  <font-awesome-icon
+                    icon="paper-plane"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('invoices.send_invoice') }}
                 </a>
               </v-dropdown-item>
+              <v-dropdown-item
+                v-if="row.status === 'SENT' || row.status === 'VIEWED'"
+              >
+                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)">
+                  <font-awesome-icon
+                    icon="paper-plane"
+                    class="dropdown-item-icon"
+                  />
+                  {{ $t('invoices.resend_invoice') }}
+                </a>
+              </v-dropdown-item>
               <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#/" @click="markInvoiceAsSent(row.id)">
-                  <font-awesome-icon icon="check-circle" class="dropdown-item-icon" />
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click="markInvoiceAsSent(row.id)"
+                >
+                  <font-awesome-icon
+                    icon="check-circle"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('invoices.mark_as_sent') }}
                 </a>
               </v-dropdown-item>
-              <v-dropdown-item v-if="row.status === 'SENT' || row.status === 'VIEWED' || row.status === 'OVERDUE'">
-                <router-link :to="`/admin/payments/${row.id}/create`" class="dropdown-item">
-                  <font-awesome-icon :icon="['fas', 'credit-card']" class="dropdown-item-icon"/>
+              <v-dropdown-item
+                v-if="
+                  row.status === 'SENT' ||
+                  row.status === 'VIEWED' ||
+                  row.status === 'OVERDUE'
+                "
+              >
+                <router-link
+                  :to="`/admin/payments/${row.id}/create`"
+                  class="dropdown-item"
+                >
+                  <font-awesome-icon
+                    :icon="['fas', 'credit-card']"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('payments.record_payment') }}
                 </router-link>
               </v-dropdown-item>
               <v-dropdown-item>
-                <a class="dropdown-item" href="#/" @click="onCloneInvoice(row.id)">
+                <a
+                  class="dropdown-item"
+                  href="#/"
+                  @click="onCloneInvoice(row.id)"
+                >
                   <font-awesome-icon icon="copy" class="dropdown-item-icon" />
                   {{ $t('invoices.clone_invoice') }}
                 </a>
               </v-dropdown-item>
               <v-dropdown-item>
                 <div class="dropdown-item" @click="removeInvoice(row.id)">
-                  <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+                  <font-awesome-icon
+                    :icon="['fas', 'trash']"
+                    class="dropdown-item-icon"
+                  />
                   {{ $t('general.delete') }}
                 </div>
               </v-dropdown-item>

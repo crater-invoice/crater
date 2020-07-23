@@ -1,5 +1,5 @@
 {
-  "_comment": "Italian - IT translation - by Alessandro Fuda - Milan, Italy - 20/03/2020 - Coronavirus's times But towards spring :-) ",  
+  "_comment": "Italian - IT translation - by Alessandro Fuda - Milan, Italy - 20/03/2020 - Coronavirus's times But towards spring :-) ",
   "navigation": {
     "dashboard": "Dashboard",
     "customers": "Clienti",
@@ -71,14 +71,14 @@
     "go_home": "Vai alla Home",
     "test_mail_conf": "Configurazione della mail di test",
     "send_mail_successfully": "Mail inviata con successo",
-
     "setting_updated": "Configurazioni aggiornate con successo",
     "select_state": "Seleziona lo Stato",
     "select_country": "Seleziona Paese",
     "select_city": "Seleziona Città",
     "street_1": "Indirizzo 1",
     "street_2": "Indirizzo 2",
-    "action_failed": "Errore"
+    "action_failed": "Errore",
+    "retry": "Retry"
   },
   "dashboard": {
     "select_year": "Seleziona anno",
@@ -164,7 +164,7 @@
     "select_a_customer": "Seleziona Cliente",
     "type_or_click": "Scrivi o clicca per selezionare",
 
-    "confirm_delete": "Non potrai più recuperare il cliente cancellato | Non potrai più recuperare i clienti cancellati",
+    "confirm_delete": "Non sarai in grado di recuperare questo cliente e tutte le relative fatture, stime e pagamenti. | Non sarai in grado di recuperare questi clienti e tutte le relative fatture, stime e pagamenti.",
     "created_message": "Cliente creato con successo",
     "updated_message": "Cliente aggiornato con successo",
     "deleted_message": "Cliente cancellato con successo | Clienti cancellati con successo"
@@ -430,6 +430,7 @@
     "expense_title": "Titolo",
     "contact": "Contatto",
     "category": "Categoria",
+    "customer": "Cliente",
     "from_date": "Dalla Data",
     "to_date": "Alla Data",
     "expense_date": "Data",
@@ -617,85 +618,87 @@
       "updated_message": "Informazioni Azienda aggiornate con successo."
     },
     "customization": {
-        "customization": "personalizzazione",
-        "save": "Salva",
-        "addresses": {
-            "title": "Indirizzi",
-            "section_description": "Puoi settare l'indirizzo di fatturazione del Cliente e/o il formato dell'indirizzo di spedizione (Mostrato solo sul PDF). ",
-            "customer_billing_address": "Indirizzo Fatturazione Cliente",
-            "customer_shipping_address": "Indirizzo spedizione Cliente",
-            "company_address": "Indirizzo Azienda",
-            "insert_fields": "Inserisci Campi",
-            "contact": "Contatto",
-            "address": "Indirizzo",
-            "display_name": "Mostra nome",
-            "primary_contact_name": "Nome contatto primario",
-            "email": "Email",
-            "website": "Sito web",
-            "name": "Nome",
-            "country": "Paese",
-            "state": "Stato",
-            "city": "Città",
-            "company_name": "Nome Azienda",
-            "address_street_1": "Indirizzo 1",
-            "address_street_2": "Indirizzo 2",
-            "phone": "Telefono",
-            "zip_code": "CAP/ZIP Code",
-            "address_setting_updated": "Indirizzo aggiornato con Successo"
-        },
-        "updated_message": "Info azienda aggiornate con successo",
+      "customization": "personalizzazione",
+      "save": "Salva",
+      "addresses": {
+        "title": "Indirizzi",
+        "section_description": "Puoi settare l'indirizzo di fatturazione del Cliente e/o il formato dell'indirizzo di spedizione (Mostrato solo sul PDF). ",
+        "customer_billing_address": "Indirizzo Fatturazione Cliente",
+        "customer_shipping_address": "Indirizzo spedizione Cliente",
+        "company_address": "Indirizzo Azienda",
+        "insert_fields": "Inserisci Campi",
+        "contact": "Contatto",
+        "address": "Indirizzo",
+        "display_name": "Mostra nome",
+        "primary_contact_name": "Nome contatto primario",
+        "email": "Email",
+        "website": "Sito web",
+        "name": "Nome",
+        "country": "Paese",
+        "state": "Stato",
+        "city": "Città",
+        "company_name": "Nome Azienda",
+        "address_street_1": "Indirizzo 1",
+        "address_street_2": "Indirizzo 2",
+        "phone": "Telefono",
+        "zip_code": "CAP/ZIP Code",
+        "address_setting_updated": "Indirizzo aggiornato con Successo"
+      },
+      "updated_message": "Info azienda aggiornate con successo",
 
-        "invoices": {
-            "title": "Fatture",
-            "notes": "Note",
-            "invoice_prefix": "Prefisso Fattura",
-            "invoice_settings": "Impostazioni fattura",
-            "autogenerate_invoice_number": "Auto genera numero di fattura",
-            "invoice_setting_description": "Disabilita, se non vuoi auto-generare i numeri delle fatture ogni volta che crei una nuova fattura.",
-            "enter_invoice_prefix": "Inserisci prefisso fattura",
-            "terms_and_conditions": "Termini e Condizioni",
-            "invoice_setting_updated": "Impostazioni fatture aggiornate con successo"
-        },
+      "invoices": {
+        "title": "Fatture",
+        "notes": "Note",
+        "invoice_prefix": "Prefisso Fattura",
+        "invoice_settings": "Impostazioni fattura",
+        "autogenerate_invoice_number": "Auto genera numero di fattura",
+        "invoice_setting_description": "Disabilita, se non vuoi auto-generare i numeri delle fatture ogni volta che crei una nuova fattura.",
+        "enter_invoice_prefix": "Inserisci prefisso fattura",
+        "terms_and_conditions": "Termini e Condizioni",
+        "invoice_setting_updated": "Impostazioni fatture aggiornate con successo"
+      },
 
-        "estimates": {
-            "title": "Preventivi",
-            "estimate_prefix": "Prefisso Preventivi",
-            "estimate_settings": "Impostazioni Preventivi",
-            "autogenerate_estimate_number": "Auto-genera Numero di preventivo",
-            "estimate_setting_description": "Disabilita, se non vuoi autogenerare il numero di preventivo ogni volta che ne viene creato uno nuovo.",
-            "enter_estimate_prefix": "Inserisci prefisso preventivo",
-            "estimate_setting_updated": "Impostazioni preventivi aggiornate con successo"
-        },
+      "estimates": {
+        "title": "Preventivi",
+        "estimate_prefix": "Prefisso Preventivi",
+        "estimate_settings": "Impostazioni Preventivi",
+        "autogenerate_estimate_number": "Auto-genera Numero di preventivo",
+        "estimate_setting_description": "Disabilita, se non vuoi autogenerare il numero di preventivo ogni volta che ne viene creato uno nuovo.",
+        "enter_estimate_prefix": "Inserisci prefisso preventivo",
+        "estimate_setting_updated": "Impostazioni preventivi aggiornate con successo"
+      },
 
-        "payments": {
-            "title": "Pagamenti",
-            "payment_prefix": "Prefisso Pagamento",
-            "payment_settings": "Impostazioni Pagamento",
-            "autogenerate_payment_number": "Auto genera il numero di Pagamento",
-            "payment_setting_description": "Disabilita, se non vuoi autogenerare il numero di pagamento ogni volta che ne viene creato uno nuovo.",
-            "enter_payment_prefix": "Inserisci prefisso di pagamento",
-            "payment_setting_updated": "Impostazioni di pagamento aggiornate con successo",
-            "payment_mode": "Modalità di pagamento",
-            "add_payment_mode": "Aggiungi modalità di pagamento",
-            "mode_name": "Nome modalità",
-            "payment_mode_added": "Modalità di pagamento aggiunta",
-            "payment_mode_updated": "Modalità di pagamento aggiornata",
-            "payment_mode_confirm_delete":"Non potrai ripristinare la modalità di pagamento",
-            "already_in_use": "Modalità di pagamento già in uso",
-            "deleted_message": "Payment Mode deleted successfully"
-        },
+      "payments": {
+        "title": "Pagamenti",
+        "payment_prefix": "Prefisso Pagamento",
+        "payment_settings": "Impostazioni Pagamento",
+        "autogenerate_payment_number": "Auto genera il numero di Pagamento",
+        "payment_setting_description": "Disabilita, se non vuoi autogenerare il numero di pagamento ogni volta che ne viene creato uno nuovo.",
+        "enter_payment_prefix": "Inserisci prefisso di pagamento",
+        "payment_setting_updated": "Impostazioni di pagamento aggiornate con successo",
+        "payment_mode": "Modalità di pagamento",
+        "add_payment_mode": "Aggiungi modalità di pagamento",
+        "edit_payment_mode": "Modifica modalità di pagamento",
+        "mode_name": "Nome modalità",
+        "payment_mode_added": "Modalità di pagamento aggiunta",
+        "payment_mode_updated": "Modalità di pagamento aggiornata",
+        "payment_mode_confirm_delete": "Non potrai ripristinare la modalità di pagamento",
+        "already_in_use": "Modalità di pagamento già in uso",
+        "deleted_message": "Payment Mode deleted successfully"
+      },
 
-        "items": {
-            "title": "Items",
-            "units": "unità",
-            "add_item_unit": "Aggiungi Unità Item",
-            "unit_name": "Nome",
-            "item_unit_added": "Unità aggiunta",
-            "item_unit_updated": "Unità aggiornata",
-            "item_unit_confirm_delete":"Non potrai ripristinare questa unità Item",
-            "already_in_use": "Unità Item già in uso",
-            "deleted_message": "Unità item eliminata con successo"
-        }
+      "items": {
+        "title": "Items",
+        "units": "unità",
+        "add_item_unit": "Aggiungi Unità Item",
+        "edit_item_unit": "Modifica unità articolo",
+        "unit_name": "Nome",
+        "item_unit_added": "Unità aggiunta",
+        "item_unit_updated": "Unità aggiornata",
+        "item_unit_confirm_delete": "Non potrai ripristinare questa unità Item",
+        "already_in_use": "Unità Item già in uso",
+        "deleted_message": "Unità item eliminata con successo"
+      }
     },
     "account_settings": {
       "profile_picture": "Immagine profilo",
@@ -729,6 +732,7 @@
     "tax_types": {
       "title": "Tipi di Imposta",
       "add_tax": "Aggiungi Imposta",
+      "edit_tax": "Modifica imposta",
       "description": "Puoi aggiongere e rimuovere imposte a piacimento. Vengono supportate Tasse differenti per prodotti/servizi specifici esattamento come per le fatture.",
       "add_new_tax": "Aggiungi nuova imposta",
       "tax_settings": "Impostazioni Imposte",
@@ -749,6 +753,8 @@
       "action": "Azione",
       "description": "Le categorie sono necessarie per aggiungere delle voci di spesa. Puoi aggiungere o eliminare queste categorie in base alle tue preferenze.",
       "add_new_category": "Aggiungi nuova categoria",
+      "add_category": "Aggiungi categoria",
+      "edit_category": "Modifica categoria",
       "category_name": "Nome Categoria",
       "category_description": "Descrizione",
       "created_message": "Categoria di spesa creata con successo",
@@ -786,7 +792,14 @@
       "progress_text": "Sarà necessario qualche minuto. Per favore non aggiornare la pagina e non chiudere la finestra prima che l'aggiornamento sia completato",
       "update_success": "L'App è aggiornata! Attendi che la pagina venga ricaricata automaticamente.",
       "latest_message": "Nessun aggiornamneto disponibile! Sei già alla versione più recente.",
-      "current_version": "Versione corrente"
+      "current_version": "Versione corrente",
+      "download_zip_file": "Scarica il file ZIP",
+      "unzipping_package": "Pacchetto di decompressione",
+      "copying_files": "Copia dei file",
+      "running_migrations": "Esecuzione delle migrazioni",
+      "finishing_update": "Aggiornamento di finitura",
+      "update_failed": "Aggiornamento non riuscito",
+      "update_failed_text": "Scusate! L'aggiornamento non è riuscito il: passaggio {step}"
     }
   },
   "wizard": {

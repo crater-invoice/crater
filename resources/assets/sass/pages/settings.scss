@@ -122,6 +122,84 @@
 
     }
 
+    .update-container {
+
+        .update-spinner {
+            font-size: 30px;
+            color: $ls-color-gray--dark;
+        }
+
+        .update-steps-container {
+            list-style-type: none;
+            width: 100%;
+            padding: 0px;
+
+            .update-step {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding: 10px 0px;
+                border-bottom: 1px solid $ls-color-gray--light;
+
+                &:last-child {
+                    border-bottom: 0px solid;
+                }
+
+            }
+
+        }
+
+        .update-step-text {
+            font-size: $font-size-base;
+            margin: 0px;
+            line-height: 2rem;
+        }
+
+        .update-status-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .update-time {
+                font-size: 10px;
+                color: $ls-color-gray--dark;
+                margin-right: 10px;
+            }
+    
+            .update-status {
+                font-size: 13px;
+                width: 88px;
+                height: 28px;
+                display: block;
+                text-align: center;
+                border-radius: 30px;
+                text-transform: uppercase;
+                line-height: 2rem;
+            }
+    
+            .status-pending {
+                background-color: #EAF1FB;
+                color: $ls-color-secondary;
+            }
+    
+            .status-running {
+                background-color: rgba(21, 178, 236, 0.15);
+                color: $ls-color-light-blue;
+            }
+    
+            .status-finished {
+                background-color: #D4F6EE;
+                color: $ls-color-green;
+            }
+    
+            .status-error {
+                background-color: rgba(251, 113, 120, 0.22);
+                color: $ls-color-red;
+            }
+        }
+
+    }
+
     .add-new-tax {
         height: 45px;
         white-space: nowrap;

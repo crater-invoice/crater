@@ -18,6 +18,22 @@
         transform: translate(-50%,-50%);
     }
 
+    .right-input-group-text {
+        position: absolute;
+        width: 13px;
+        height: 18px;
+        min-width: 18px;
+        color: $ls-color-gray;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 16px;
+        top: 50%;
+        right: 0px;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+    }
+
     .right-icon {
         position: absolute;
         width: 13px;

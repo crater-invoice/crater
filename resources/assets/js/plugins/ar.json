@@ -22,6 +22,11 @@
     "to_date": "إلى تاريخ",
     "from": "من",
     "to": "إلى",
+    "sort_by": "ترتيب حسب",
+    "ascending": "تصاعدي",
+    "descending": "تنازلي",
+    "subject": "موضوع",
+    "message": "رسالة",
     "go_back": "إلى الخلف",
     "back_to_login": "العودة إلى تسجيل الدخول؟",
     "home": "الرئيسية",
@@ -62,14 +67,14 @@
     "four_zero_four": "404",
     "you_got_lost": "عفواً! يبدو أنك قد تهت!",
     "go_home": "عودة إلى الرئيسية",
-
     "setting_updated": "تم تحديث الإعدادات بنجاح",
     "select_state": "اختر الولاية/المنطقة",
     "select_country": "اختر الدولة",
     "select_city": "اختر المدينة",
     "street_1": "عنوان الشارع 1",
     "street_2": "عنوان الشارع 2",
-    "action_failed": "فشلت العملية"
+    "action_failed": "فشلت العملية",
+    "retry": "أعد المحاولة"
   },
   "dashboard": {
     "select_year": "اختر السنة",
@@ -112,8 +117,8 @@
   "tax_types": {
     "name": "الاسم",
     "description": "الوصف",
-    "percent": "Percent",
-    "compound_tax": "Compound Tax"
+    "percent": "نسبه مئويه",
+    "compound_tax": "الضريبة المركبة"
   },
   "customers": {
     "title": "العملاء",
@@ -155,7 +160,7 @@
     "select_a_customer": "اختر العميل",
     "type_or_click": "اكتب أو اضغط للاختيار",
 
-    "confirm_delete": "لن تكون قادراً على استرجاع هذا العميل | لن تكون قادراً على استرجاع هؤلاء العملاء",
+    "confirm_delete": "لن تتمكن من استرداد هذا العميل وجميع الفواتير والتقديرات والمدفوعات ذات الصلة. | لن تتمكن من استرداد هؤلاء العملاء وجميع الفواتير والتقديرات والمدفوعات ذات الصلة.",
     "created_message": "تم إنشاء العملاء بنجاح",
     "updated_message": "تم تحديث العملاء بنجاح",
     "deleted_message": "تم حذف العملاء بنجاح | تم حذف العميل بنجاح"
@@ -329,6 +334,9 @@
     "no_matching_invoices": "لا يوجد فواتير مطابقة!",
     "mark_as_sent_successfully": "تم تحديد الفاتورة كمرسلة بنجاح",
     "send_invoice_successfully": "تم إرسال الفاتورة بنجاح",
+    "cloned_successfully": "تم استنساخ الفاتورة بنجاح",
+    "clone_invoice": "استنساخ الفاتورة",
+    "confirm_clone": "سيتم استنساخ هذه الفاتورة في فاتورة جديدة",
     "item": {
       "title": "اسم الصنف",
       "description": "الوصف",
@@ -370,7 +378,7 @@
       "description": "الوصف",
       "quantity": "الكمية",
       "price": "السعر",
-          "discount": "الخصم",
+      "discount": "الخصم",
       "total": "الإجمالي",
       "total_discount": "إجمالي الخصم",
       "sub_total": "حاصل الجمع",
@@ -412,6 +420,8 @@
     "title": "النفقات",
     "expenses_list": "قائمة النفقات",
     "expense_title": "Title",
+    "select_a_customer": "حدد عميلاً",
+    "customer": "العميل",
     "contact": "تواصل",
     "category": "الفئة",
     "from_date": "من تاريخ",
@@ -601,65 +611,87 @@
       "updated_message": "تم تحديث معلومات الشركة بنجاح"
     },
     "customization": {
-        "customization": "التخصيص",
-        "save": "حفظ",
-        "addresses": {
-            "title": "العنوان",
-            "section_description": "يمكنك ضبط عنوان إرسال فواتير العملاء وتنسيق عنوان شحن العملاء (معروض في PDF فقط).",
-            "customer_billing_address": "عنوان فواتير العميل",
-            "customer_shipping_address": "عنوان الشحن للعميل",
-            "company_address": "عنوان الشركة",
-            "insert_fields": "أضف حقل",
-            "contact": "تواصل",
-            "address": "العنوان",
-            "display_name": "الاسم الظاهر",
-            "primary_contact_name": "مسؤول التواصل الرئيسي",
-            "email": "البريد الإلكتروني",
-            "website": "موقع الإنترنت",
-            "name": "الاسم",
-            "country": "الدولة",
-            "state": "الولاية/المنطقة",
-            "city": "المدينة",
-            "company_name": "اسم الشركة",
-            "address_street_1": "عنوان الشارع 1",
-            "address_street_2": "عنوان الشارع 2",
-            "phone": "الهاتف",
-            "zip_code": "الرمز البريدي",
-            "address_setting_updated": "تم تحديث العنوان بنجاح"
-        },
-        "updated_message": "تم تحديث معلومات الشركة بنجاح",
+      "customization": "التخصيص",
+      "save": "حفظ",
+      "addresses": {
+        "title": "العنوان",
+        "section_description": "يمكنك ضبط عنوان إرسال فواتير العملاء وتنسيق عنوان شحن العملاء (معروض في PDF فقط).",
+        "customer_billing_address": "عنوان فواتير العميل",
+        "customer_shipping_address": "عنوان الشحن للعميل",
+        "company_address": "عنوان الشركة",
+        "insert_fields": "أضف حقل",
+        "contact": "تواصل",
+        "address": "العنوان",
+        "display_name": "الاسم الظاهر",
+        "primary_contact_name": "مسؤول التواصل الرئيسي",
+        "email": "البريد الإلكتروني",
+        "website": "موقع الإنترنت",
+        "name": "الاسم",
+        "country": "الدولة",
+        "state": "الولاية/المنطقة",
+        "city": "المدينة",
+        "company_name": "اسم الشركة",
+        "address_street_1": "عنوان الشارع 1",
+        "address_street_2": "عنوان الشارع 2",
+        "phone": "الهاتف",
+        "zip_code": "الرمز البريدي",
+        "address_setting_updated": "تم تحديث العنوان بنجاح"
+      },
+      "updated_message": "تم تحديث معلومات الشركة بنجاح",
 
-        "invoices": {
-            "title": "الفواتير",
-            "notes": "ملاحظات",
-            "invoice_prefix": "بادئة رقم الفاتورة",
-            "invoice_settings": "إعدادات الفاتورة",
-            "autogenerate_invoice_number": "ترقيم آلي للفاتورة",
-            "invoice_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام الفاتورة تلقائيًا في كل مرة تقوم فيها بإنشاء فاتورة جديدة.",
-            "enter_invoice_prefix": "أدخل بادئة رقم الفاتورة",
-            "terms_and_conditions": "الأحكام والشروط",
-            "invoice_setting_updated": "تم تحديث إعداد الفاتورة بنجاح"
-        },
+      "invoices": {
+        "title": "الفواتير",
+        "notes": "ملاحظات",
+        "invoice_prefix": "بادئة رقم الفاتورة",
+        "invoice_settings": "إعدادات الفاتورة",
+        "autogenerate_invoice_number": "ترقيم آلي للفاتورة",
+        "invoice_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام الفاتورة تلقائيًا في كل مرة تقوم فيها بإنشاء فاتورة جديدة.",
+        "enter_invoice_prefix": "أدخل بادئة رقم الفاتورة",
+        "terms_and_conditions": "الأحكام والشروط",
+        "invoice_setting_updated": "تم تحديث إعداد الفاتورة بنجاح"
+      },
 
-        "estimates": {
-            "title": "التقديرات",
-            "estimate_prefix": "بادئة رقم التقدير",
-            "estimate_settings": "إعدادت التقدير",
-            "autogenerate_estimate_number": "ترقيم آلي للتقدير",
-            "estimate_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام التقديرات تلقائيًا في كل مرة تقوم فيها بإنشاء تقدير جديد.",
-            "enter_estimate_prefix": "أدخل بادئة رقم التقدير",
-            "estimate_setting_updated": "تم تحديث إعدادات التقدير بنجاح"
-        },
+      "estimates": {
+        "title": "التقديرات",
+        "estimate_prefix": "بادئة رقم التقدير",
+        "estimate_settings": "إعدادت التقدير",
+        "autogenerate_estimate_number": "ترقيم آلي للتقدير",
+        "estimate_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام التقديرات تلقائيًا في كل مرة تقوم فيها بإنشاء تقدير جديد.",
+        "enter_estimate_prefix": "أدخل بادئة رقم التقدير",
+        "estimate_setting_updated": "تم تحديث إعدادات التقدير بنجاح"
+      },
 
-        "payments": {
-            "title": "المدفوعات",
-            "payment_prefix": "بادئة رقم الدفعة",
-            "payment_settings": "إعدادات الدفعة",
-            "autogenerate_payment_number": "ترقيم آلي للمدفوعات",
-            "payment_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام الدفعة تلقائيًا في كل مرة تقوم فيها بإنشاء دفعة جديدة.",
-            "enter_payment_prefix": "أدخل بادئة رقم الدفعة",
-            "payment_setting_updated": "تم تحديث إعدادات الدفعة بنجاح"
-        }
+      "payments": {
+        "title": "المدفوعات",
+        "payment_prefix": "بادئة رقم الدفعة",
+        "payment_settings": "إعدادات الدفعة",
+        "autogenerate_payment_number": "ترقيم آلي للمدفوعات",
+        "payment_setting_description": "تعطيل الترقيم الآلي ، إذا كنت لا ترغب في إنشاء أرقام الدفعة تلقائيًا في كل مرة تقوم فيها بإنشاء دفعة جديدة.",
+        "enter_payment_prefix": "أدخل بادئة رقم الدفعة",
+        "payment_setting_updated": "تم تحديث إعدادات الدفعة بنجاح",
+        "payment_mode": "طريقة الدفع",
+        "add_payment_mode": "أضف وضع الدفع",
+        "edit_payment_mode": "تحرير وضع الدفع",
+        "mode_name": "اسم الوضع",
+        "payment_mode_added": "تمت إضافة وضع الدفع",
+        "payment_mode_updated": "تم تحديث وضع الدفع",
+        "payment_mode_confirm_delete": "لن تتمكن من استعادة وضع الدفع هذا",
+        "already_in_use": "وضع الدفع قيد الاستخدام بالفعل",
+        "deleted_message": "تم حذف وضع الدفع بنجاح"
+      },
+
+      "items": {
+        "title": "العناصر",
+        "units": "الوحدات",
+        "add_item_unit": "إضافة وحدة عنصر",
+        "edit_item_unit": "تحرير وحدة العناصر",
+        "unit_name": "إسم الوحدة",
+        "item_unit_added": "تمت إضافة وحدة العنصر",
+        "item_unit_updated": "تم تحديث وحدة العنصر",
+        "item_unit_confirm_delete": "لن تتمكن من استرداد وحدة العنصر هذه",
+        "already_in_use": "وحدة العنصر قيد الاستخدام بالفعل",
+        "deleted_message": "تم حذف وحدة العنصر بنجاح"
+      }
     },
     "account_settings": {
       "profile_picture": "صورة الملف الشخصي",
@@ -693,6 +725,7 @@
     "tax_types": {
       "title": "أنواع الضرائب",
       "add_tax": "أضف ضريبة",
+      "edit_tax": "تحرير الضريبة",
       "description": "يمكنك إضافة أو إزالة الضرائب كما يحلو لك. النظام يدعم الضرائب على العناصر الفردية وكذلك على الفاتورة.",
       "add_new_tax": "إضافة ضريبة جديدة",
       "tax_settings": "إعدادات الضريبة",
@@ -713,6 +746,8 @@
       "action": "إجراء",
       "description": "الفئات مطلوبة لإضافة إدخالات النفقات. يمكنك إضافة أو إزالة هذه الفئات وفقًا لتفضيلاتك.",
       "add_new_category": "إضافة فئة جديدة",
+      "add_category": "إضافة فئة",
+      "edit_category": "تحرير الفئة",
       "category_name": "اسم الفئة",
       "category_description": "الوصف",
       "created_message": "تم إنشاء نوع النفقات بنجاح",
@@ -750,7 +785,14 @@
       "progress_text": "سوف يستغرق التحديث بضع دقائق. يرجى عدم تحديث الشاشة أو إغلاق النافذة قبل انتهاء التحديث",
       "update_success": "تم تحديث النظام! يرجى الانتظار حتى يتم إعادة تحميل نافذة المتصفح تلقائيًا.",
       "latest_message": "لا يوجد تحديثات متوفرة! لديك حالياً أحدث نسخة.",
-      "current_version": "النسخة الحالية"
+      "current_version": "النسخة الحالية",
+      "download_zip_file": "تنزيل ملف ZIP",
+      "unzipping_package": "حزمة فك الضغط",
+      "copying_files": "نسخ الملفات",
+      "running_migrations": "إدارة عمليات الترحيل",
+      "finishing_update": "تحديث التشطيب",
+      "update_failed": "فشل التحديث",
+      "update_failed_text": "آسف! فشل التحديث الخاص بك في: {step} خطوة"     
     }
   },
   "wizard": {
@@ -804,22 +846,22 @@
       "permission_desc": "فيما يلي قائمة أذونات المجلد المطلوبة حتى يعمل التطبيق. في حالة فشل فحص الإذن ، تأكد من تحديث أذونات المجلد."
     },
     "mail": {
-        "host": "خادم البريد",
-        "port": "منفذ البريد",
-        "driver": "مشغل البريد",
-        "secret": "سري",
-        "mailgun_secret": "الرمز السري لـ Mailgun",
-        "mailgun_domain": "المجال",
-        "mailgun_endpoint": "النهاية الطرفية لـ Mailgun",
-        "ses_secret": "SES الرمز السري",
-        "ses_key": "SES مفتاح",
-        "password": "كلمة مرور البريد الالكتروني",
-        "username": "اسم المستخدم للبريد الإلكتروني",
-        "mail_config": "إعدادات البريد الالكتروني",
-        "from_name": "اسم المرسل",
-        "from_mail": "عنوان البريد الالكتروني للمرسل",
-        "encryption": "صيغة ا لتشفير",
-        "mail_config_desc": "أدناه هو نموذج لتكوين برنامج تشغيل البريد الإلكتروني لإرسال رسائل البريد الإلكتروني من التطبيق. يمكنك أيضًا تهيئة موفري الجهات الخارجية مثل Sendgrid و SES إلخ."
+      "host": "خادم البريد",
+      "port": "منفذ البريد",
+      "driver": "مشغل البريد",
+      "secret": "سري",
+      "mailgun_secret": "الرمز السري لـ Mailgun",
+      "mailgun_domain": "المجال",
+      "mailgun_endpoint": "النهاية الطرفية لـ Mailgun",
+      "ses_secret": "SES الرمز السري",
+      "ses_key": "SES مفتاح",
+      "password": "كلمة مرور البريد الالكتروني",
+      "username": "اسم المستخدم للبريد الإلكتروني",
+      "mail_config": "إعدادات البريد الالكتروني",
+      "from_name": "اسم المرسل",
+      "from_mail": "عنوان البريد الالكتروني للمرسل",
+      "encryption": "صيغة ا لتشفير",
+      "mail_config_desc": "أدناه هو نموذج لتكوين برنامج تشغيل البريد الإلكتروني لإرسال رسائل البريد الإلكتروني من التطبيق. يمكنك أيضًا تهيئة موفري الجهات الخارجية مثل Sendgrid و SES إلخ."
     },
     "req": {
       "system_req": "متطلبات النظام",

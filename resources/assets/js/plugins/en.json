@@ -13,6 +13,7 @@
   },
   "general": {
     "view_pdf": "View PDF",
+    "copy_pdf_url": "Copy PDF Url",
     "download_pdf": "Download PDF",
     "save": "Save",
     "cancel": "Cancel",
@@ -70,14 +71,14 @@
     "go_home": "Go Home",
     "test_mail_conf": "Test Mail Configuration",
     "send_mail_successfully": "Mail sent successfully",
-
     "setting_updated": "Setting updated successfully",
     "select_state": "Select state",
     "select_country": "Select Country",
     "select_city": "Select City",
     "street_1": "Street 1",
     "street_2": "Street 2",
-    "action_failed": "Action Failed"
+    "action_failed": "Action Failed",
+    "retry": "Retry"
   },
   "dashboard": {
     "select_year": "Select year",
@@ -163,7 +164,7 @@
     "select_a_customer": "Select a customer",
     "type_or_click": "Type or click to select",
 
-    "confirm_delete": "You will not be able to recover this Customer | You will not be able to recover these Customers",
+    "confirm_delete": "You will not be able to recover this customer and all the related Invoices, Estimates and Payments. | You will not be able to recover these customers and all the related Invoices, Estimates and Payments.",
     "created_message": "Customer created successfully",
     "updated_message": "Customer updated successfully",
     "deleted_message": "Customer deleted successfully | Customers deleted successfully"
@@ -230,6 +231,7 @@
     "convert_to_invoice": "Convert to Invoice",
     "mark_as_sent": "Mark as Sent",
     "send_estimate": "Send Estimate",
+    "resend_estimate": "Resend Estimate",
     "record_payment": "Record Payment",
     "add_estimate": "Add Estimate",
     "save_estimate": "Save Estimate",
@@ -316,6 +318,7 @@
     "notes": "Notes",
     "view": "View",
     "send_invoice": "Send Invoice",
+    "resend_invoice": "Resend Invoice",
     "invoice_template": "Invoice Template",
     "template": "Template",
     "mark_as_sent": "Mark as sent",
@@ -426,7 +429,9 @@
   "expenses": {
     "title": "Expenses",
     "expenses_list": "Expenses List",
+    "select_a_customer": "Select a customer",
     "expense_title": "Title",
+    "customer": "Customer",
     "contact": "Contact",
     "category": "Category",
     "from_date": "From Date",
@@ -616,85 +621,87 @@
       "updated_message": "Company information updated successfully"
     },
     "customization": {
-        "customization": "customization",
-        "save": "Save",
-        "addresses": {
-            "title": "Addresses",
-            "section_description": "You can set Customer Billing Address and Customer Shipping Address Format (Displayed in PDF only). ",
-            "customer_billing_address": "Customer Billing Address",
-            "customer_shipping_address": "Customer Shipping Address",
-            "company_address": "Company Address",
-            "insert_fields": "Insert Fields",
-            "contact": "Contact",
-            "address": "Address",
-            "display_name": "Display Name",
-            "primary_contact_name": "Primary Contact Name",
-            "email": "Email",
-            "website": "Website",
-            "name": "Name",
-            "country": "Country",
-            "state": "State",
-            "city": "City",
-            "company_name": "Company Name",
-            "address_street_1": "Address Street 1",
-            "address_street_2": "Address Street 2",
-            "phone": "Phone",
-            "zip_code": "Zip Code",
-            "address_setting_updated": "Address Setting updated successfully"
-        },
-        "updated_message": "Company information updated successfully",
+      "customization": "customization",
+      "save": "Save",
+      "addresses": {
+        "title": "Addresses",
+        "section_description": "You can set Customer Billing Address and Customer Shipping Address Format (Displayed in PDF only). ",
+        "customer_billing_address": "Customer Billing Address",
+        "customer_shipping_address": "Customer Shipping Address",
+        "company_address": "Company Address",
+        "insert_fields": "Insert Fields",
+        "contact": "Contact",
+        "address": "Address",
+        "display_name": "Display Name",
+        "primary_contact_name": "Primary Contact Name",
+        "email": "Email",
+        "website": "Website",
+        "name": "Name",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "company_name": "Company Name",
+        "address_street_1": "Address Street 1",
+        "address_street_2": "Address Street 2",
+        "phone": "Phone",
+        "zip_code": "Zip Code",
+        "address_setting_updated": "Address Setting updated successfully"
+      },
+      "updated_message": "Company information updated successfully",
 
-        "invoices": {
-            "title": "Invoices",
-            "notes": "Notes",
-            "invoice_prefix": "Invoice Prefix",
-            "invoice_settings": "Invoice Settings",
-            "autogenerate_invoice_number": "Auto-generate Invoice Number",
-            "invoice_setting_description": "Disable this, If you don't wish to auto-generate invoice numbers each time you create a new invoice.",
-            "enter_invoice_prefix": "Enter invoice prefix",
-            "terms_and_conditions": "Terms and Conditions",
-            "invoice_setting_updated": "Invoice Setting updated successfully"
-        },
+      "invoices": {
+        "title": "Invoices",
+        "notes": "Notes",
+        "invoice_prefix": "Invoice Prefix",
+        "invoice_settings": "Invoice Settings",
+        "autogenerate_invoice_number": "Auto-generate Invoice Number",
+        "invoice_setting_description": "Disable this, If you don't wish to auto-generate invoice numbers each time you create a new invoice.",
+        "enter_invoice_prefix": "Enter invoice prefix",
+        "terms_and_conditions": "Terms and Conditions",
+        "invoice_setting_updated": "Invoice Setting updated successfully"
+      },
 
-        "estimates": {
-            "title": "Estimates",
-            "estimate_prefix": "Estimate Prefix",
-            "estimate_settings": "Estimate Settings",
-            "autogenerate_estimate_number": "Auto-generate Estimate Number",
-            "estimate_setting_description": "Disable this, If you don't wish to auto-generate estimate numbers each time you create a new estimate.",
-            "enter_estimate_prefix": "Enter estmiate prefix",
-            "estimate_setting_updated": "Estimate Setting updated successfully"
-        },
+      "estimates": {
+        "title": "Estimates",
+        "estimate_prefix": "Estimate Prefix",
+        "estimate_settings": "Estimate Settings",
+        "autogenerate_estimate_number": "Auto-generate Estimate Number",
+        "estimate_setting_description": "Disable this, If you don't wish to auto-generate estimate numbers each time you create a new estimate.",
+        "enter_estimate_prefix": "Enter estmiate prefix",
+        "estimate_setting_updated": "Estimate Setting updated successfully"
+      },
 
-        "payments": {
-            "title": "Payments",
-            "payment_prefix": "Payment Prefix",
-            "payment_settings": "Payment Settings",
-            "autogenerate_payment_number": "Auto-generate Payment Number",
-            "payment_setting_description": "Disable this, If you don't wish to auto-generate payment numbers each time you create a new payment.",
-            "enter_payment_prefix": "Enter Payment Prefix",
-            "payment_setting_updated": "Payment Setting updated successfully",
-            "payment_mode": "Payment Mode",
-            "add_payment_mode": "Add Payment Mode",
-            "mode_name": "Mode Name",
-            "payment_mode_added": "Payment Mode Added",
-            "payment_mode_updated": "Payment Mode Updated",
-            "payment_mode_confirm_delete":"You will not be able to recover this Payment Mode",
-            "already_in_use": "Payment Mode is already in use",
-            "deleted_message": "Payment Mode deleted successfully"
-        },
+      "payments": {
+        "title": "Payments",
+        "payment_prefix": "Payment Prefix",
+        "payment_settings": "Payment Settings",
+        "autogenerate_payment_number": "Auto-generate Payment Number",
+        "payment_setting_description": "Disable this, If you don't wish to auto-generate payment numbers each time you create a new payment.",
+        "enter_payment_prefix": "Enter Payment Prefix",
+        "payment_setting_updated": "Payment Setting updated successfully",
+        "payment_mode": "Payment Mode",
+        "add_payment_mode": "Add Payment Mode",
+        "edit_payment_mode": "Edit Payment Mode",
+        "mode_name": "Mode Name",
+        "payment_mode_added": "Payment Mode Added",
+        "payment_mode_updated": "Payment Mode Updated",
+        "payment_mode_confirm_delete": "You will not be able to recover this Payment Mode",
+        "already_in_use": "Payment Mode is already in use",
+        "deleted_message": "Payment Mode deleted successfully"
+      },
 
-        "items": {
-            "title": "Items",
-            "units": "units",
-            "add_item_unit": "Add Item Unit",
-            "unit_name": "Unit Name",
-            "item_unit_added": "Item Unit Added",
-            "item_unit_updated": "Item Unit Updated",
-            "item_unit_confirm_delete":"You will not be able to recover this Item unit",
-            "already_in_use": "Item Unit is already in use",
-            "deleted_message": "Item Unit deleted successfully"
-        }
+      "items": {
+        "title": "Items",
+        "units": "units",
+        "add_item_unit": "Add Item Unit",
+        "edit_item_unit": "Edit Item Unit",
+        "unit_name": "Unit Name",
+        "item_unit_added": "Item Unit Added",
+        "item_unit_updated": "Item Unit Updated",
+        "item_unit_confirm_delete": "You will not be able to recover this Item unit",
+        "already_in_use": "Item Unit is already in use",
+        "deleted_message": "Item Unit deleted successfully"
+      }
     },
     "account_settings": {
       "profile_picture": "Profile Picture",
@@ -728,6 +735,7 @@
     "tax_types": {
       "title": "Tax Types",
       "add_tax": "Add Tax",
+      "edit_tax": "Edit Tax",
       "description": "You can add or Remove Taxes as you please. Crater supports Taxes on Individual Items as well as on the invoice.",
       "add_new_tax": "Add New Tax",
       "tax_settings": "Tax Settings",
@@ -748,6 +756,8 @@
       "action": "Action",
       "description": "Categories are required for adding expense entries. You can Add or Remove these categories according to your preference.",
       "add_new_category": "Add New Category",
+      "add_category": "Add Category",
+      "edit_category": "Edit Category",
       "category_name": "Category Name",
       "category_description": "Description",
       "created_message": "Expense Category created successfully",
@@ -785,7 +795,14 @@
       "progress_text": "It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes",
       "update_success": "App has been updated! Please wait while your browser window gets reloaded automatically.",
       "latest_message": "No update available! You are on the latest version.",
-      "current_version": "Current Version"
+      "current_version": "Current Version",
+      "download_zip_file": "Download ZIP file",
+      "unzipping_package": "Unzipping Package",
+      "copying_files": "Copying Files",
+      "running_migrations": "Running Migrations",
+      "finishing_update": "Finishing Update",
+      "update_failed": "Update Failed",
+      "update_failed_text": "Sorry! Your update failed on : {step} step"   
     }
   },
   "wizard": {

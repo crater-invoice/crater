@@ -121,7 +121,7 @@ export default {
     },
     openCategoryModal () {
       this.openModal({
-        'title': 'Add Category',
+        'title': this.$t('settings.expense_category.add_category'),
         'componentName': 'CategoryModal'
       })
       this.$refs.table.refresh()
@@ -129,7 +129,7 @@ export default {
     async EditCategory (id) {
       let response = await this.fetchCategory(id)
       this.openModal({
-        'title': 'Edit Category',
+        'title': this.$t('settings.expense_category.edit_category'),
         'componentName': 'CategoryModal',
         'id': id,
         'data': response.data.category

@@ -1,7 +1,7 @@
 <template>
   <div v-if="estimate" class="main-content estimate-view-page">
     <div class="page-header">
-      <h3 class="page-title"> {{ estimate.estimate_number }}</h3>
+      <h3 class="page-title">{{ estimate.estimate_number }}</h3>
       <div class="page-actions row">
         <div class="col-xs-2 mr-3">
           <base-button
@@ -26,19 +26,42 @@
             {{ $t('estimates.send_estimate') }}
           </base-button>
         </div>
-        <v-dropdown :close-on-select="false" align="left" class="filter-container">
+        <v-dropdown
+          :close-on-select="true"
+          align="left"
+          class="filter-container"
+        >
           <a slot="activator" href="#">
             <base-button color="theme">
               <font-awesome-icon icon="ellipsis-h" />
             </base-button>
           </a>
           <v-dropdown-item>
-            <router-link :to="{path: `/admin/estimates/${$route.params.id}/edit`}" class="dropdown-item">
-              <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon"/>
+            <div class="dropdown-item" @click="copyPdfUrl()">
+              <font-awesome-icon
+                :icon="['fas', 'link']"
+                class="dropdown-item-icon"
+              />
+              {{ $t('general.copy_pdf_url') }}
+            </div>
+            <router-link
+              :to="{ path: `/admin/estimates/${$route.params.id}/edit` }"
+              class="dropdown-item"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'pencil-alt']"
+                class="dropdown-item-icon"
+              />
               {{ $t('general.edit') }}
             </router-link>
-            <div class="dropdown-item" @click="removeEstimate($route.params.id)">
-              <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
+            <div
+              class="dropdown-item"
+              @click="removeEstimate($route.params.id)"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'trash']"
+                class="dropdown-item-icon"
+              />
               {{ $t('general.delete') }}
             </div>
           </v-dropdown-item>
@@ -57,14 +80,18 @@
           align-icon="right"
           @input="onSearched()"
         />
-        <div
-          class="btn-group ml-3"
-          role="group"
-          aria-label="First group"
-        >
-          <v-dropdown :close-on-select="false" align="left" class="filter-container">
+        <div class="btn-group ml-3" role="group" aria-label="First group">
+          <v-dropdown
+            :close-on-select="false"
+            align="left"
+            class="filter-container"
+          >
             <a slot="activator" href="#">
-              <base-button class="inv-button inv-filter-fields-btn" color="default" size="medium">
+              <base-button
+                class="inv-button inv-filter-fields-btn"
+                color="default"
+                size="medium"
+              >
                 <font-awesome-icon icon="filter" />
               </base-button>
             </a>
@@ -80,8 +107,10 @@
                 class="inv-radio"
                 value="estimate_date"
                 @change="onSearched"
-              >
-              <label class="inv-label" for="filter_estimate_date">{{ $t('reports.estimates.estimate_date') }}</label>
+              />
+              <label class="inv-label" for="filter_estimate_date">{{
+                $t('reports.estimates.estimate_date')
+              }}</label>
             </div>
             <div class="filter-items">
               <input
@@ -92,8 +121,10 @@
                 class="inv-radio"
                 value="expiry_date"
                 @change="onSearched"
-              >
-              <label class="inv-label" for="filter_due_date">{{ $t('estimates.due_date') }}</label>
+              />
+              <label class="inv-label" for="filter_due_date">{{
+                $t('estimates.due_date')
+              }}</label>
             </div>
             <div class="filter-items">
               <input
@@ -104,11 +135,19 @@
                 class="inv-radio"
                 value="estimate_number"
                 @change="onSearched"
-              >
-              <label class="inv-label" for="filter_estimate_number">{{ $t('estimates.estimate_number') }}</label>
+              />
+              <label class="inv-label" for="filter_estimate_number">{{
+                $t('estimates.estimate_number')
+              }}</label>
             </div>
           </v-dropdown>
-          <base-button v-tooltip.top-center="{ content: getOrderName }" class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
+          <base-button
+            v-tooltip.top-center="{ content: getOrderName }"
+            class="inv-button inv-filter-sorting-btn"
+            color="default"
+            size="medium"
+            @click="sortData"
+          >
             <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
             <font-awesome-icon v-else icon="sort-amount-down" />
           </base-button>
@@ -116,7 +155,7 @@
       </div>
       <div class="side-content">
         <router-link
-          v-for="(estimate,index) in estimates"
+          v-for="(estimate, index) in estimates"
           :to="`/admin/estimates/${estimate.id}/view`"
           :key="index"
           class="side-estimate"
@@ -124,10 +163,20 @@
           <div class="left">
             <div class="inv-name">{{ estimate.user.name }}</div>
             <div class="inv-number">{{ estimate.estimate_number }}</div>
-            <div :class="'est-status-'+estimate.status.toLowerCase()" class="inv-status">{{ estimate.status }}</div>
+            <div
+              :class="'est-status-' + estimate.status.toLowerCase()"
+              class="inv-status"
+            >
+              {{ estimate.status }}
+            </div>
           </div>
           <div class="right">
-            <div class="inv-amount" v-html="$utils.formatMoney(estimate.total, estimate.user.currency)" />
+            <div
+              class="inv-amount"
+              v-html="
+                $utils.formatMoney(estimate.total, estimate.user.currency)
+              "
+            />
             <div class="inv-date">{{ estimate.formattedEstimateDate }}</div>
           </div>
         </router-link>
@@ -137,7 +186,7 @@
       </div>
     </div>
     <div class="estimate-view-page-container">
-      <iframe :src="`${shareableLink}`" class="frame-style"/>
+      <iframe :src="`${shareableLink}`" class="frame-style" />
     </div>
   </div>
 </template>
@@ -288,6 +337,13 @@ export default {
           window.toastr['error'](this.$tc('estimates.something_went_wrong'))
         }
       })
+    },
+    copyPdfUrl () {
+      let pdfUrl = `${window.location.origin}/estimates/pdf/${this.estimate.unique_hash}`
+
+      let response = this.$utils.copyTextToClipboard(pdfUrl)
+
+      window.toastr['success'](this.$tc('Copied PDF url to clipboard!'))
     },
     async removeEstimate (id) {
       window.swal({

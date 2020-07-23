@@ -12,6 +12,7 @@
       ref="baseSelect"
       v-model="itemSelect"
       :options="items"
+      :loading="loading"
       :show-labels="false"
       :preserve-search="true"
       :initial-search="item.name"
@@ -20,7 +21,7 @@
       label="name"
       class="multi-select-item"
       @value="onTextChange"
-      @select="(val) => $emit('select', val)"
+      @select="onSelect"
     >
       <div slot="afterList">
         <button type="button" class="list-add-button" @click="openItemModal">
@@ -126,10 +127,14 @@ export default {
     openItemModal () {
       this.$emit('onSelectItem')
       this.openModal({
-        'title': 'Add Item',
+        'title': this.$t('items.add_item'),
         'componentName': 'ItemModal',
         'data': {taxPerItem: this.taxPerItem, taxes: this.taxes}
       })
+    },
+    onSelect(val) {
+      this.$emit('select', val)
+      this.fetchItems()
     },
     deselectItem () {
       this.itemSelect = null

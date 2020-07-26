@@ -8,7 +8,6 @@ import de from './de.json'
 import pt_BR from './pt-br.json'
 import it from './it.json'
 import sr_LA from './sr-latn.json'
-import sr_CY from './sr-cyrl.json'
 
 Vue.use(VueI18n)
 
@@ -22,8 +21,7 @@ const i18n = new VueI18n({
     de,
     pt_BR,
     it,
-    sr_LA, // Serbian Latin
-    sr_CY, // Serbian Cyrilic
+    sr_LA,
   },
 })
 

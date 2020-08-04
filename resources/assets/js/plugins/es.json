@@ -13,6 +13,7 @@
   },
   "general": {
     "view_pdf": "Ver PDF",
+    "copy_pdf_url": "Copiar URL del PDF",      
     "download_pdf": "Descargar PDF",
     "save": "Guardar",
     "cancel": "Cancelar",

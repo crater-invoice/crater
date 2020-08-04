@@ -316,6 +316,7 @@
     "notes": "Notas",
     "view": "Ver",
     "send_invoice": "Enviar la factura",
+    "resend_invoice": "Reenviar la factura",
     "invoice_template": "Plantilla de factura",
     "template": "Modelo",
     "mark_as_sent": "Marcar como enviada",

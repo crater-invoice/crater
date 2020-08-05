@@ -62,14 +62,7 @@ class FrontendController extends Controller
         }
 
         $estimateTemplate = EstimateTemplate::find($estimate->estimate_template_id);
-
-        $company = Company::find($estimate->company_id);
-
-        $logo = $company->getMedia('logo')->first();
-
-        if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $this->resolveLogo($estimate);
 
         if ($estimate && ($estimate->status == Estimate::STATUS_SENT || $estimate->status == Estimate::STATUS_DRAFT)) {
             $estimate->status = Estimate::STATUS_VIEWED;
@@ -108,7 +101,7 @@ class FrontendController extends Controller
 
         view()->share([
             'estimate' => $estimate,
-            'logo' => $logo ?? null,
+            'logo' => $logo,
             'company_address' => $companyAddress,
             'colors' => $colorSettings,
             'labels' => $labels,
@@ -166,13 +159,7 @@ class FrontendController extends Controller
         }
 
         $invoiceTemplate = InvoiceTemplate::find($invoice->invoice_template_id);
-
-        $company = Company::find($invoice->company_id);
-        $logo = $company->getMedia('logo')->first();
-
-        if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $this->resolveLogo($invoice);
 
         if ($invoice && ($invoice->status == Invoice::STATUS_SENT || $invoice->status == Invoice::STATUS_DRAFT)) {
             $invoice->status = Invoice::STATUS_VIEWED;
@@ -214,7 +201,7 @@ class FrontendController extends Controller
             'invoice' => $invoice,
             'colors' => $colorSettings,
             'company_address' => $companyAddress,
-            'logo' => $logo ?? null,
+            'logo' => $logo,
             'labels' => $labels,
             'taxes' => $taxes
         ]);
@@ -266,14 +253,8 @@ class FrontendController extends Controller
         }
 
         $estimateTemplate = EstimateTemplate::find($estimate->estimate_template_id);
-
-        $company = Company::find($estimate->company_id);
         $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
-        $logo = $company->getMedia('logo')->first();
-
-        if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $this->resolveLogo($estimate);
 
         $colors = [
             'invoice_primary_color',
@@ -290,7 +271,7 @@ class FrontendController extends Controller
 
         view()->share([
             'estimate' => $estimate,
-            'logo' => $logo ?? null,
+            'logo' => $logo,
             'company_address' => $companyAddress,
             'colors' => $colorSettings,
             'labels' => $labels,
@@ -343,14 +324,8 @@ class FrontendController extends Controller
         }
 
         $invoiceTemplate = InvoiceTemplate::find($invoice->invoice_template_id);
-        $company = Company::find($invoice->company_id);
         $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
-
-        $logo = $company->getMedia('logo')->first();
-
-        if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $this->resolveLogo($invoice);
 
         $colors = [
             'invoice_primary_color',
@@ -368,7 +343,7 @@ class FrontendController extends Controller
         view()->share([
             'invoice' => $invoice,
             'company_address' => $companyAddress,
-            'logo' => $logo ?? null,
+            'logo' => $logo,
             'colors' => $colorSettings,
             'labels' => $labels,
             'taxes' => $taxes
@@ -388,23 +363,44 @@ class FrontendController extends Controller
             ->where('unique_hash', $id)
             ->first();
 
-        $company = Company::find($payment->company_id);
         $companyAddress = User::with(['addresses', 'addresses.country'])->find(1);
-
-        $logo = $company->getMedia('logo')->first();
-
-        if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $this->resolveLogo($payment);
 
         view()->share([
             'payment' => $payment,
             'company_address' => $companyAddress,
-            'logo' => $logo ?? null
+            'logo' => $logo
         ]);
 
         $pdf = PDF::loadView('app.pdf.payment.payment');
 
         return $pdf->stream();
+    }
+
+    /**
+     * Resolve logo as base64
+     *
+     * @param  \Illuminate\Database\Eloquent\Model $document
+     * @return string|null
+     */
+    protected function resolveLogo($document): ?string
+    {
+
+        $company = Company::find($document->company_id);
+
+        $logo = $company->getMedia('logo')->first();
+
+        if($logo) {
+            $logo = $logo->getFullUrl();
+            $path = parse_url($logo, PHP_URL_PATH);
+            $path = str_replace('/storage/', '/public/', $path);
+            $storage = \Storage::disk('local');
+            $type = mime_content_type($storage->path($path));
+            $content = base64_encode($storage->get($path));
+            $content = 'data:' . $type . ';base64,' . $content;
+            return $content;
+        }
+
+        return null;
     }
 }

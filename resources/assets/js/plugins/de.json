@@ -13,6 +13,7 @@
   },
   "general": {
     "view_pdf": "PDF anzeigen",
+    "copy_pdf_url": "PDF URL kopieren",
     "download_pdf": "PDF herunterladen",
     "save": "Speichern",
     "cancel": "Abrechen",
@@ -42,12 +43,12 @@
     "actions": "Aktionen",
     "subtotal": "ZWISCHENSUMME",
     "discount": "RABATT",
-    "fixed": "Behoben",
+    "fixed": "Fest",
     "percentage": "Prozentsatz",
     "tax": "Steuer",
     "total_amount": "GESAMTSUMME",
-    "bill_to": "Rechnungsempfänger",
-    "ship_to": "Versand ein",
+    "bill_to": "Rechnung für",
+    "ship_to": "Versand an",
     "due": "Fällig",
     "draft": "Entwurf",
     "sent": "Gesendet",
@@ -313,6 +314,7 @@
     "notes": "Hinweise",
     "view": "Anzeigen",
     "send_invoice": "Rechnung senden",
+    "resend_invoice": "Rechnung erneut senden",
     "invoice_template": "Rechnungs-Vorlage",
     "template": "Vorlage",
     "mark_as_sent": "Als gesendet markieren",
@@ -789,7 +791,7 @@
       "running_migrations": "Ausführen von Migrationen",
       "finishing_update": "Update beenden",
       "update_failed": "Update fehlgeschlagen",
-      "update_failed_text": "Es tut uns leid! Ihr Update ist am folgenden Schritt fehlgeschlagen: {step}"      
+      "update_failed_text": "Es tut uns leid! Ihr Update ist am folgenden Schritt fehlgeschlagen: {step}"
     }
   },
   "wizard": {

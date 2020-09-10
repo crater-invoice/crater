@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrapThree();
+        $this->loadJsonTranslationsFrom(resource_path('assets/js/plugins'));
     }
 
     /**

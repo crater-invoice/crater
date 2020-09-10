@@ -1,13 +1,13 @@
 <table width="100%" class="items-table" cellspacing="0" border="0">
     <tr class="item-table-heading-row">
         <th width="2%" class="item-table-heading text-right pr-20">#</th>
-        <th width="40%" class="item-table-heading text-left pl-0">Items</th>
-        <th class="item-table-heading text-right pr-20">Quantity</th>
-        <th class="item-table-heading pr-20 text-right">Price</th>
+        <th width="40%" class="item-table-heading text-left pl-0">@lang('invoices.item.title')</th>
+        <th class="item-table-heading text-right pr-20">@lang('invoices.item.quantity')</th>
+        <th class="item-table-heading text-right pr-20">@lang('invoices.item.price')</th>
         @if($invoice->discount_per_item === 'YES')
-        <th class="item-table-heading text-right pl-10">Discount</th>
+        <th class="item-table-heading text-right pl-10">@lang('invoices.item.discount')</th>
         @endif
-        <th class="item-table-heading text-right">Amount</th>
+        <th class="item-table-heading text-right">@lang('invoices.item.amount')</th>
     </tr>
     @php
         $index = 1
@@ -70,7 +70,7 @@
 <div class="total-display-container">
     <table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($invoice->items) > 12) page-break @endif">
         <tr>
-            <td class="border-0 total-table-attribute-label">Subtotal</td>
+            <td class="border-0 total-table-attribute-label">@lang('invoices.sub_total')</td>
             <td class="border-0 item-cell py-2 total-table-attribute-value">
                 {!! format_money_pdf($invoice->sub_total, $invoice->user->currency) !!}
             </td>
@@ -104,10 +104,10 @@
             <tr>
                 <td class="border-0 total-table-attribute-label">
                     @if($invoice->discount_type === 'fixed')
-                        Discount
+                        @lang('invoices.discount')
                     @endif
                     @if($invoice->discount_type === 'percentage')
-                        Discount ({{$invoice->discount}}%)
+                        @lang('invoices.discount') ({{$invoice->discount}}%)
                     @endif
                 </td>
                 <td class="border-0 item-cell py-2 total-table-attribute-value" >
@@ -126,7 +126,7 @@
         </tr>
         <tr>
             <td class="border-0 total-border-left total-table-attribute-label">
-                Total
+                @lang('invoices.total')
             </td>
             <td
                 class="border-0 total-border-right item-cell py-8 total-table-attribute-value text-primary"

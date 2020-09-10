@@ -1,5 +1,5 @@
 @if($invoice->user->shippingaddress)
-    <p class="shipping-address-label">Ship To,</p>
+    <p class="shipping-address-label">@lang('general.ship_to'),</p>
     @if($invoice->user->shippingaddress->name)
         <p class="shipping-address-name">
             {{$invoice->user->shippingaddress->name}}
@@ -32,7 +32,7 @@
 
         @if($invoice->user->shippingaddress->phone)
             <p class="shipping-address">
-                Phone :{{$invoice->user->shippingaddress->phone}}
+                @lang('customers.phone') :{{$invoice->user->shippingaddress->phone}}
             </p>
         @endif
 

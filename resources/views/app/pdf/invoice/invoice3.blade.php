@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Invoice</title>
+    <title>@lang('payments.invoice')</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
@@ -416,15 +416,15 @@
                 <div class="invoice-details-container">
                     <table>
                         <tr>
-                            <td class="attribute-label">Invoice Number</td>
+                            <td class="attribute-label">@lang('invoices.invoice_number')</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->invoice_number}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label">Invoice Date </td>
+                            <td class="attribute-label">@lang('invoices.invoice_date')</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->formattedInvoiceDate}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label">Due date</td>
+                            <td class="attribute-label">@lang('invoices.due_date')</td>
                             <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
                         </tr>
                     </table>

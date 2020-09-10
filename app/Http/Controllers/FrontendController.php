@@ -1,6 +1,7 @@
 <?php
 namespace Crater\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use Crater\Invoice;
 use PDF;
@@ -364,6 +365,8 @@ class FrontendController extends Controller
         $colorSettings = CompanySetting::whereIn('option', $colors)
             ->whereCompany($invoice->company_id)
             ->get();
+
+        App::setLocale(CompanySetting::getSetting('language', $invoice->company_id));
 
         view()->share([
             'invoice' => $invoice,

@@ -45,6 +45,7 @@ class OnboardingController extends Controller
         $time_zones = TimeZones::get_list();
         $languages = [
             ["code"=>"ar", "name" => "Arabic"],
+            ["code"=>"cs", "name" => "Czech"],
             ["code"=>"en", "name" => "English"],
             ["code"=>"fr", "name" => "French"],
             ["code"=>"es", "name" => "Spanish"],

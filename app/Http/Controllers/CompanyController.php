@@ -145,6 +145,7 @@ class CompanyController extends Controller
 
         $languages = [  // alphabetical order
             ["code"=>"pt_BR", "name" => "Brazilian Portuguese"],
+            ["code"=>"cs", "name" => "Czech"],
             ["code"=>"en", "name" => "English"],
             ["code"=>"nl", "name" => "Dutch"],
             ["code"=>"fr", "name" => "French"],

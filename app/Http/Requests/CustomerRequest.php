@@ -25,17 +25,19 @@ class CustomerRequest extends FormRequest
         switch ($this->getMethod()) {
             case 'POST':
                 return [
-                    'name' => 'required',
+                    'name'                         => 'required',
                     'addresses.*.address_street_1' => 'max:255',
                     'addresses.*.address_street_2' => 'max:255',
-                    'email' => 'email|nullable|unique:users,email',
+                    'email'                        => 'email|nullable|unique:users,email',
+                    'backup'                       => 'array',
                 ];
                 break;
             case 'PUT':
                 return [
-                    'name' => 'required',
+                    'name'                         => 'required',
                     'addresses.*.address_street_1' => 'max:255',
                     'addresses.*.address_street_2' => 'max:255',
+                    'backup'                       => 'array',
                 ];
                 break;
             default:

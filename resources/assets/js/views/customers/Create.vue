@@ -333,6 +333,25 @@
               </div>
             </div>
           </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="section-title col-sm-2">
+              {{ $t('customers.backup_section') }}
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label class="form-label">{{ $t('customers.google_drive_folder') }}</label>
+                <base-input
+                  v-model.trim="formData.backup.google_drive"
+                  type="text"
+                  name="backup[google_drive]"
+                  tab-index="23"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </form>
@@ -360,7 +379,10 @@ export default {
         phone: null,
         currency_id: null,
         website: null,
-        addresses: []
+        addresses: [],
+        backup: {
+          google_drive: null
+        }
       },
       currency: null,
       billing: {
@@ -526,6 +548,10 @@ export default {
         if (customer.shipping_address.country_id) {
           this.shipping_country = this.shippingCountries.find((c) => c.id === customer.shipping_address.country_id)
         }
+      }
+
+      for (let backupFolder of customer.invoice_backup_folders) {
+        this.formData.backup[backupFolder.service] = backupFolder.folder
       }
 
       this.currencyList = currencies

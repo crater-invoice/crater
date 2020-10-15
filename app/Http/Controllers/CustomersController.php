@@ -59,7 +59,6 @@ class CustomersController extends Controller
     {
         $verifyEmail = User::where('email', $request->email)->first();
 
-
         $customer = new User();
         $customer->name = $request->name;
         $customer->currency_id = $request->currency_id;
@@ -73,6 +72,12 @@ class CustomersController extends Controller
         $customer->role = 'customer';
         $customer->password = Hash::make($request->password);
         $customer->save();
+
+        foreach ($request->backup as $service => $folder) {
+            $customer->invoiceBackupFolders()->create([
+                'service' => $service, 'folder' => $folder
+            ]);
+        }
 
         if ($request->addresses) {
             foreach ($request->addresses as $address) {
@@ -128,7 +133,7 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        $customer = User::with('billingAddress', 'shippingAddress')->findOrFail($id);
+        $customer = User::with('billingAddress', 'shippingAddress', 'invoiceBackupFolders')->findOrFail($id);
         $currency = $customer->currency;
         $currencies = Currency::all();
 
@@ -176,6 +181,13 @@ class CustomersController extends Controller
         $customer->website = $request->website;
         $customer->enable_portal = $request->enable_portal;
         $customer->save();
+
+        $customer->invoiceBackupFolders()->delete();
+        foreach ($request->backup as $service => $folder) {
+            $customer->invoiceBackupFolders()->create([
+                'service' => $service, 'folder' => $folder
+            ]);
+        }
 
         $customer->addresses()->delete();
         if ($request->addresses) {

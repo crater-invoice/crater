@@ -13,6 +13,7 @@
         "barryvdh/laravel-dompdf": "^0.8.1",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
         "laravel/framework": "^6.0",

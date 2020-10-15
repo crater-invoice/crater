@@ -131,6 +131,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Invoice::class);
     }
 
+    public function invoiceBackupFolders()
+    {
+        return $this->hasMany(InvoiceBackupFolder::class);
+    }
+
     /**
      * Override the mail body for reset password notification mail.
      */

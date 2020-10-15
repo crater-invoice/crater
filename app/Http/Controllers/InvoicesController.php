@@ -1,26 +1,27 @@
 <?php
 namespace Crater\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Crater\CompanySetting;
+use Carbon\Carbon;
 use Crater\Company;
-use Illuminate\Support\Collection;
+use Crater\CompanySetting;
 use Crater\Currency;
-use Crater\InvoiceTemplate;
 use Crater\Http\Requests;
 use Crater\Invoice;
 use Crater\InvoiceItem;
-use Carbon\Carbon;
+use Crater\InvoiceTemplate;
 use Crater\Item;
+use Crater\Jobs\BackupInvoice;
 use Crater\Mail\InvoicePdf;
-use function MongoDB\BSON\toJSON;
-use Illuminate\Support\Facades\Log;
+use Crater\Tax;
+use Crater\TaxType;
 use Crater\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Mailgun\Mailgun;
 use PDF;
 use Validator;
-use Crater\TaxType;
-use Crater\Tax;
+use function MongoDB\BSON\toJSON;
 
 class InvoicesController extends Controller
 {
@@ -178,7 +179,11 @@ class InvoicesController extends Controller
             \Mail::to($email)->send(new InvoicePdf($data));
         }
 
-        $invoice = Invoice::with(['items', 'user', 'invoiceTemplate', 'taxes'])->find($invoice->id);
+        $invoice = Invoice::with(['items', 'user.invoiceBackupFolders', 'invoiceTemplate', 'taxes'])->find($invoice->id);
+
+        if ($invoice->user->invoiceBackupFolders->isNotEmpty()) {
+            BackupInvoice::dispatch($invoice);
+        }
 
         return response()->json([
             'url' => url('/invoices/pdf/'.$invoice->unique_hash),

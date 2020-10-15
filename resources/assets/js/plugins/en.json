@@ -163,6 +163,8 @@
     "select_currency": "Select currency",
     "select_a_customer": "Select a customer",
     "type_or_click": "Type or click to select",
+    "backup_section": "Backup",
+    "google_drive_folder": "Google Drive Folder ID",
 
     "confirm_delete": "You will not be able to recover this customer and all the related Invoices, Estimates and Payments. | You will not be able to recover these customers and all the related Invoices, Estimates and Payments.",
     "created_message": "Customer created successfully",
@@ -802,7 +804,7 @@
       "running_migrations": "Running Migrations",
       "finishing_update": "Finishing Update",
       "update_failed": "Update Failed",
-      "update_failed_text": "Sorry! Your update failed on : {step} step"   
+      "update_failed_text": "Sorry! Your update failed on : {step} step"
     }
   },
   "wizard": {

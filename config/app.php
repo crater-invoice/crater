@@ -216,8 +216,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Flash' => Laracasts\Flash\Flash::class,
         // 'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'Pusher' => Pusher\Pusher::class,
     ],
 ];

@@ -3,18 +3,10 @@ namespace Crater;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Crater\Conversation;
-use carbon\carbon;
-use Crater\MemberLoan;
-use Crater\Address;
-use Crater\Payment;
-use Crater\Expense;
-use Crater\Company;
+use Carbon\Carbon;
 use Crater\Notifications\MailResetPasswordNotification;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Illuminate\Support\Facades\DB;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements HasMedia

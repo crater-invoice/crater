@@ -33,6 +33,7 @@
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0",
+		"imanghafoori/laravel-microscope": "^1.0",
         "laravel/browser-kit-testing": "1.*"
     },
     "autoload": {

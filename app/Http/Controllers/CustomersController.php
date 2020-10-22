@@ -2,15 +2,10 @@
 namespace Crater\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Crater\Conversation;
-use Crater\Group;
 use Crater\Http\Requests;
-use Crater\Notifications\CustomerAdded;
 use Crater\User;
 use Illuminate\Support\Facades\Hash;
 use Crater\Currency;
-use Crater\CompanySetting;
 use Crater\Address;
 use Illuminate\Support\Facades\DB;
 

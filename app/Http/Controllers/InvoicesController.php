@@ -4,8 +4,6 @@ namespace Crater\Http\Controllers;
 use Illuminate\Http\Request;
 use Crater\CompanySetting;
 use Crater\Company;
-use Illuminate\Support\Collection;
-use Crater\Currency;
 use Crater\InvoiceTemplate;
 use Crater\Http\Requests;
 use Crater\Invoice;
@@ -14,12 +12,9 @@ use Carbon\Carbon;
 use Crater\Item;
 use Crater\Mail\InvoicePdf;
 use function MongoDB\BSON\toJSON;
-use Illuminate\Support\Facades\Log;
 use Crater\User;
-use Mailgun\Mailgun;
 use PDF;
 use Validator;
-use Crater\TaxType;
 use Crater\Tax;
 
 class InvoicesController extends Controller

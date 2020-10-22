@@ -11,8 +11,6 @@ use Crater\Http\Requests\SettingKeyRequest;
 use Crater\Http\Requests\ProfileRequest;
 use Crater\Http\Requests\CompanyRequest;
 use Crater\Http\Requests\CompanySettingRequest;
-use Crater\Http\Requests\NotificationSettingsRequest;
-use Crater\Space\CurrencyFormatter;
 use Crater\Space\DateFormatter;
 use Crater\Space\TimeZones;
 use Crater\Currency;

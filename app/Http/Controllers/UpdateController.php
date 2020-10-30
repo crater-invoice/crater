@@ -88,6 +88,16 @@ class UpdateController extends Controller
 
         $json = Updater::checkForUpdate(Setting::getSetting('version'));
 
+        if ($json->success) {
+            $extensions = $json->version->extensions;
+            $data = [];
+            foreach ($extensions as $extension) {
+                $data[$extension] = phpversion($extension);
+            }
+            $data['php'] = phpversion();
+            $json->version->extensions = $data;
+        }
+
         return response()->json($json);
     }
 }

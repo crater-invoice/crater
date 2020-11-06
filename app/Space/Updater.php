@@ -33,10 +33,10 @@ class Updater
         if ($data->success && $data->version) {
             $extensions = $data->version->extensions;
             $extensionData = [];
-            foreach ($extensions as $extension) {
-                $extensionData[$extension] = phpversion($extension);
+            foreach (json_decode($extensions) as $extension) {
+                $extensionData[$extension] = phpversion($extension) ? true : false;
             }
-            $extensionData['php'] = phpversion();
+            $extensionData['php'. '('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, ">=");
             $data->version->extensions = $extensionData;
         }
 

@@ -48,15 +48,7 @@
             class="col-md-8 p-0"
           >
             <div class="update-requirements">
-              <div v-if="i == 'php'" class="d-flex justify-content-between">
-                <span>{{ i }}({{ minPhpVesrion }})</span>
-                <span
-                  v-if="$utils.compareVersion(ext, minPhpVesrion) != -1"
-                  class="verified"
-                />
-                <span v-else class="not-verified" />
-              </div>
-              <div v-else class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between">
                 <span>{{ i }}</span>
                 <span v-if="ext" class="verified" />
                 <span v-else class="not-verified" />
@@ -163,6 +155,15 @@ export default {
       minPhpVesrion: null,
     }
   },
+  computed: {
+    allowToUpdate() {
+      if (this.requiredExtentions !== null) {
+        return Object.keys(this.requiredExtentions).every((k) => {
+          return this.requiredExtentions[k]
+        })
+      }
+    },
+  },
   created() {
     window.addEventListener('beforeunload', (event) => {
       if (this.isUpdating) {
@@ -218,12 +219,7 @@ export default {
     },
     async onUpdateApp() {
       let path = null
-      if (
-        this.$utils.compareVersion(
-          this.requiredExtentions.php,
-          this.minPhpVesrion
-        ) == -1
-      ) {
+      if (!this.allowToUpdate) {
         window.toastr['error'](
           'Your current configuration does not match the update requirements. Please try again after all the requirements are fulfilled.  '
         )

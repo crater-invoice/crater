@@ -790,6 +790,7 @@
       "check_update": "Check for updates",
       "avail_update": "New Update available",
       "next_version": "Next version",
+      "requirements": "Requirements",
       "update": "Update Now",
       "update_progress": "Update in progress...",
       "progress_text": "It will just take a few minutes. Please do not refresh the screen or close the window before the update finishes",
@@ -802,7 +803,7 @@
       "running_migrations": "Running Migrations",
       "finishing_update": "Finishing Update",
       "update_failed": "Update Failed",
-      "update_failed_text": "Sorry! Your update failed on : {step} step"   
+      "update_failed_text": "Sorry! Your update failed on : {step} step"
     }
   },
   "wizard": {

@@ -36,16 +36,36 @@
           }}</label
           ><br />
           <label class="version">{{ updateData.version }}</label>
-          <p class="page-sub-title" style="white-space: pre-wrap;">{{ description }}</p>
+          <p class="page-sub-title" style="white-space: pre-wrap;">
+            {{ description }}
+          </p>
+          <label class="input-label">
+            {{ $t('settings.update_app.requirements') }}
+          </label>
+          <div
+            v-for="(ext, i) in requiredExtentions"
+            :key="i"
+            class="col-md-8 p-0"
+          >
+            <div class="update-requirements">
+              <div class="d-flex justify-content-between">
+                <span>{{ i }}</span>
+                <span v-if="ext" class="verified" />
+                <span v-else class="not-verified" />
+              </div>
+            </div>
+          </div>
           <base-button
             size="large"
             icon="rocket"
             color="theme"
+            class="mt-5"
             @click="onUpdateApp"
           >
             {{ $t('settings.update_app.update') }}
           </base-button>
         </div>
+
         <div v-if="isUpdating" class="mt-4 content">
           <div class="d-flex flex-row justify-content-between">
             <div>
@@ -131,7 +151,18 @@ export default {
         installed: '',
         version: '',
       },
+      requiredExtentions: null,
+      minPhpVesrion: null,
     }
+  },
+  computed: {
+    allowToUpdate() {
+      if (this.requiredExtentions !== null) {
+        return Object.keys(this.requiredExtentions).every((k) => {
+          return this.requiredExtentions[k]
+        })
+      }
+    },
   },
   created() {
     window.addEventListener('beforeunload', (event) => {
@@ -177,6 +208,8 @@ export default {
           this.updateData.version = response.data.version.version
           this.description = response.data.version.description
           this.isUpdateAvailable = true
+          this.requiredExtentions = response.data.version.extensions
+          this.minPhpVesrion = response.data.version.minimum_php_version
         }
       } catch (e) {
         this.isUpdateAvailable = false
@@ -186,7 +219,12 @@ export default {
     },
     async onUpdateApp() {
       let path = null
-
+      if (!this.allowToUpdate) {
+        window.toastr['error'](
+          'Your current configuration does not match the update requirements. Please try again after all the requirements are fulfilled.  '
+        )
+        return true
+      }
       for (let index = 0; index < this.updateSteps.length; index++) {
         let currentStep = this.updateSteps[index]
         try {
@@ -230,15 +268,17 @@ export default {
       }
     },
     onUpdateFailed(translationKey) {
-      let stepName = this.$t(translationKey) 
+      let stepName = this.$t(translationKey)
       swal({
         title: this.$t('settings.update_app.update_failed'),
-        text: this.$tc('settings.update_app.update_failed_text', stepName, {step: stepName}),
+        text: this.$tc('settings.update_app.update_failed_text', stepName, {
+          step: stepName,
+        }),
         buttons: [this.$t('general.cancel'), this.$t('general.retry')],
       }).then(async (value) => {
         if (value) {
           this.onUpdateApp()
-          return 
+          return
         }
         this.isUpdating = false
       })
@@ -248,6 +288,12 @@ export default {
 </script>
 
 <style scoped>
+.update-requirements {
+  /* display: flex;
+  justify-content: space-between; */
+  padding: 10px;
+  border: 1px solid #eaf1fb;
+}
 .update {
   transform: rotate(360deg);
   animation: rotating 1s linear infinite;

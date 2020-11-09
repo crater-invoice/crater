@@ -28,7 +28,19 @@ class Updater
             $data = $response->getBody()->getContents();
         }
 
-        return json_decode($data);
+        $data = json_decode($data);
+
+        if ($data->success && $data->version) {
+            $extensions = $data->version->extensions;
+            $extensionData = [];
+            foreach (json_decode($extensions) as $extension) {
+                $extensionData[$extension] = phpversion($extension) ? true : false;
+            }
+            $extensionData['php'. '('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, ">=");
+            $data->version->extensions = $extensionData;
+        }
+
+        return $data;
     }
 
     public static function download($new_version)

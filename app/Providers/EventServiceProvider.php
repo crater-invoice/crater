@@ -14,6 +14,7 @@ use Crater\Listeners\Updates\v2\Version210;
 use Crater\Listeners\Updates\v3\Version300;
 use Crater\Listeners\Updates\v3\Version310;
 use Crater\Listeners\Updates\v3\Version311;
+use Crater\Listeners\Updates\v3\Version320;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
             Version300::class,
             Version310::class,
             Version311::class,
+            Version320::class
         ],
         Registered::class => [
             SendEmailVerificationNotification::class,

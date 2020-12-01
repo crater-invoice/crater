@@ -36,8 +36,11 @@
           }}</label
           ><br />
           <label class="version">{{ updateData.version }}</label>
-          <p class="page-sub-title" style="white-space: pre-wrap;">
-            {{ description }}
+          <p
+            class="page-sub-title"
+            style="white-space: pre-wrap;"
+            v-html="description"
+          >
           </p>
           <label class="input-label">
             {{ $t('settings.update_app.requirements') }}
@@ -60,6 +63,7 @@
             icon="rocket"
             color="theme"
             class="mt-5"
+            v-if="hasUiUpdate"
             @click="onUpdateApp"
           >
             {{ $t('settings.update_app.update') }}
@@ -82,12 +86,12 @@
             <li class="update-step" v-for="step in updateSteps">
               <p class="update-step-text">{{ $t(step.translationKey) }}</p>
               <div class="update-status-container">
-                <span v-if="step.time" class="update-time">{{
-                  step.time
-                }}</span>
-                <span :class="'update-status status-' + getStatus(step)">{{
-                  getStatus(step)
-                }}</span>
+                <span v-if="step.time" class="update-time">
+                  {{step.time}}
+                </span>
+                <span :class="'update-status status-' + getStatus(step)">
+                  {{getStatus(step)}}
+                </span>
               </div>
             </li>
           </ul>
@@ -163,6 +167,9 @@ export default {
         })
       }
     },
+    hasUiUpdate() {
+      return this.updateData.version != '4.0.0'
+    }
   },
   created() {
     window.addEventListener('beforeunload', (event) => {

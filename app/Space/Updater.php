@@ -30,7 +30,7 @@ class Updater
 
         $data = json_decode($data);
 
-        if ($data->success && $data->version) {
+        if ($data->success && $data->version && $data->version->extensions) {
             $extensions = $data->version->extensions;
             $extensionData = [];
             foreach (json_decode($extensions) as $extension) {

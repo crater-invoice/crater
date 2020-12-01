@@ -60,6 +60,7 @@
             icon="rocket"
             color="theme"
             class="mt-5"
+            v-if="hasUiUpdate"
             @click="onUpdateApp"
           >
             {{ $t('settings.update_app.update') }}
@@ -163,6 +164,9 @@ export default {
         })
       }
     },
+    hasUiUpdate() {
+      return this.updateData.version != '4.0.0'
+    }
   },
   created() {
     window.addEventListener('beforeunload', (event) => {

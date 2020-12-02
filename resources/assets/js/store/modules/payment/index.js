@@ -7,7 +7,8 @@ const initialState = {
   totalPayments: 0,
   selectAllField: false,
   selectedPayments: [],
-  paymentModes: []
+  paymentModes: [],
+  selectedNote: null,
 }
 
 export default {
@@ -19,5 +20,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

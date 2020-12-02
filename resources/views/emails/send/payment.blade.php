@@ -16,14 +16,15 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new payment from <b>{{$data['company']['name']}}</b>
+            {!! $data['body'] !!}
             @component('mail::button', ['url' => url('/payments/pdf/'.$data['payment']['unique_hash'])])
                 View Payment
             @endcomponent
         @endcomponent
     @endslot
-     {{-- Footer --}}
-     @slot('footer')
+
+    {{-- Footer --}}
+    @slot('footer')
         @component('mail::footer')
             Powered by <a class="footer-link" href="https://craterapp.com">Crater</a>
         @endcomponent

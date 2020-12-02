@@ -147,11 +147,11 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="sub-heading-text">EXPENSES REPORT</p>
+                    <p class="sub-heading-text">@lang('pdf_expense_report_label')</p>
                 </td>
             </tr>
         </table>
-        <p class="expenses-title">Expenses</p>
+        <p class="expenses-title">@lang('pdf_expenses_label')</p>
         <div class="expenses-table-container">
             <table class="expenses-table">
                 @foreach ($expenseCategories as $expenseCategory)
@@ -182,7 +182,7 @@
     <table class="report-footer">
         <tr>
             <td>
-                <p class="report-footer-label">TOTAL EXPENSE</p>
+                <p class="report-footer-label">@lang('pdf_total_expenses_label')</p>
             </td>
             <td>
                 <p class="report-footer-value">{!! format_money_pdf($totalExpense) !!}</p>

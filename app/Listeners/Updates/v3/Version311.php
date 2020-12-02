@@ -4,8 +4,8 @@ namespace Crater\Listeners\Updates\v3;
 
 use Crater\Listeners\Updates\Listener;
 use Crater\Events\UpdateFinished;
-use Crater\Setting;
-use Crater\Currency;
+use Crater\Models\Setting;
+use Crater\Models\Currency;
 use Artisan;
 
 class Version311 extends Listener

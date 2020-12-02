@@ -1,5 +1,19 @@
 <?php
 
+use Crater\Http\Controllers\V1\Auth\LoginController;
+use Crater\Http\Controllers\V1\Estimate\EstimatePdfController;
+use Crater\Http\Controllers\V1\Expense\DownloadReceiptController;
+use Crater\Http\Controllers\V1\Invoice\InvoicePdfController;
+use Crater\Http\Controllers\V1\Mobile\Customer\EstimatePdfController as CustomerEstimatePdfController;
+use Crater\Http\Controllers\V1\Mobile\Customer\InvoicePdfController as CustomerInvoicePdfController;
+use Crater\Http\Controllers\V1\Payment\PaymentPdfController;
+use Crater\Http\Controllers\V1\Report\CustomerSalesReportController;
+use Crater\Http\Controllers\V1\Report\ExpensesReportController;
+use Crater\Http\Controllers\V1\Report\ItemSalesReportController;
+use Crater\Http\Controllers\V1\Report\ProfitLossReportController;
+use Crater\Http\Controllers\V1\Report\TaxSummaryReportController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Frontend Routes
@@ -7,95 +21,90 @@
 |
 */
 
-Route::group(['prefix' => 'reports'], function () {
+Route::post('login', [LoginController::class, 'login']);
+
+
+Route::prefix('reports')->group(function () {
 
     // sales report by customer
     //----------------------------------
-    Route::get('/sales/customers/{hash}', [
-        'as' => 'get.sales.customers',
-        'uses' => 'ReportController@customersSalesReport'
-    ]);
-
+    Route::get('/sales/customers/{hash}', CustomerSalesReportController::class);
 
     // sales report by items
     //----------------------------------
-    Route::get('/sales/items/{hash}', [
-        'as' => 'get.sales.items',
-        'uses' => 'ReportController@itemsSalesReport'
-    ]);
-
+    Route::get('/sales/items/{hash}', ItemSalesReportController::class);
 
     // report for expenses
     //----------------------------------
-    Route::get('/expenses/{hash}', [
-        'as' => 'get.expenses.reports',
-        'uses' => 'ReportController@expensesReport'
-    ]);
-
+    Route::get('/expenses/{hash}', ExpensesReportController::class);
 
     // report for tax summary
     //----------------------------------
-    Route::get('/tax-summary/{hash}', [
-        'as' => 'get.tax.summary',
-        'uses' => 'ReportController@taxSummery'
-    ]);
-
+    Route::get('/tax-summary/{hash}', TaxSummaryReportController::class);
 
     // report for profit and loss
     //----------------------------------
-    Route::get('/profit-loss/{hash}', [
-        'as' => 'get.profit.loss',
-        'uses' => 'ReportController@profitLossReport'
-    ]);
+    Route::get('/profit-loss/{hash}', ProfitLossReportController::class);
+
 });
 
 
-// download invoice pdf with a unique_hash $id
+// download invoice pdf
 // -------------------------------------------------
-Route::get('/invoices/pdf/{id}', [
-    'as' => 'get.invoice.pdf',
-    'uses' => 'FrontendController@getInvoicePdf'
-]);
+
+Route::get('/invoices/pdf/{invoice:unique_hash}', InvoicePdfController::class);
 
 
-// download estimate pdf with a unique_hash $id
+// download estimate pdf
 // -------------------------------------------------
-Route::get('/estimates/pdf/{id}', [
-    'as' => 'get.estimate.pdf',
-    'uses' => 'FrontendController@getEstimatePdf'
-]);
+
+Route::get('/estimates/pdf/{estimate:unique_hash}', EstimatePdfController::class);
 
 
-// download payment pdf with a unique_hash $id
+// download payment pdf
 // -------------------------------------------------
-Route::get('/payments/pdf/{id}', [
-    'as' => 'get.payment.pdf',
-    'uses' => 'FrontendController@getPaymentPdf'
-]);
 
-Route::get('/customer/invoices/pdf/{id}', [
-    'as' => 'get.invoice.pdf',
-    'uses' => 'FrontendController@getCustomerInvoicePdf'
-]);
+Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
 
-Route::get('/customer/estimates/pdf/{id}', [
-    'as' => 'get.estimate.pdf',
-    'uses' => 'FrontendController@getCustomerEstimatePdf'
-]);
 
-Route::get('/expenses/{id}/receipt/{hash}', [
-    'as' => 'download.expense.receipt',
-    'uses' => 'ExpensesController@downloadReceipt'
-]);
+// download expense receipt
+// -------------------------------------------------
+
+Route::get('/expenses/{expense}/receipt', DownloadReceiptController::class);
+
+
+// customer pdf endpoints for invoice and estimate
+// -------------------------------------------------
+
+Route::get('/customer/invoices/pdf/{invoice:unique_hash}', CustomerInvoicePdfController::class);
+
+Route::get('/customer/estimates/pdf/{estimate:unique_hash}', CustomerEstimatePdfController::class);
+
+
+Route::get('auth/logout', function () {
+    Auth::guard('web')->logout();
+});
+
 
 // Setup for installation of app
 // ----------------------------------------------
+
 Route::get('/on-boarding', function () {
     return view('app');
 })->name('install')->middleware('redirect-if-installed');
 
+
 // Move other http requests to the Vue App
 // -------------------------------------------------
+
+Route::get('/admin/{vue?}', function () {
+    return view('app');
+})->where('vue', '[\/\w\.-]*')->name('admin')->middleware(['install', 'redirect-if-unauthenticated']);
+
+
+// Move other http requests to the Vue App
+// -------------------------------------------------
+
 Route::get('/{vue?}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('home')->middleware('install');
+})->where('vue', '[\/\w\.-]*')->name('login')->middleware(['install', 'guest']);

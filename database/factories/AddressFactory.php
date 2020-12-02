@@ -1,21 +1,39 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\Address;
-use Faker\Generator as Faker;
+use Crater\Models\Address;
+use Crater\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Address::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'address_street_1' => $faker->streetAddress,
-        'address_street_2' => $faker->streetAddress,
-        'city' => $faker->city,
-        'state' => $faker->state,
-        'country_id' => 231,
-        'zip' => $faker->postcode,
-        'phone' => $faker->phoneNumber,
-        'fax' => $faker->phoneNumber,
-        'type' => Address::BILLING_TYPE
-    ];
-});
+class AddressFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Address::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'address_street_1' => $this->faker->streetAddress,
+            'address_street_2' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
+            'state' => $this->faker->state,
+            'country_id' => 231,
+            'zip' => $this->faker->postcode,
+            'phone' => $this->faker->phoneNumber,
+            'fax' => $this->faker->phoneNumber,
+            'type' => $this->faker->randomElement([Address::BILLING_TYPE, Address::SHIPPING_TYPE]),
+            'user_id' => User::factory()
+        ];
+    }
+}

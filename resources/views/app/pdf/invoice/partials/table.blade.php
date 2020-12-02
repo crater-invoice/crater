@@ -1,13 +1,13 @@
 <table width="100%" class="items-table" cellspacing="0" border="0">
     <tr class="item-table-heading-row">
-        <th width="2%" class="item-table-heading text-right pr-20">#</th>
-        <th width="40%" class="item-table-heading text-left pl-0">Items</th>
-        <th class="item-table-heading text-right pr-20">Quantity</th>
-        <th class="item-table-heading pr-20 text-right">Price</th>
+        <th width="2%" class="pr-20 text-right item-table-heading">#</th>
+        <th width="40%" class="pl-0 text-left item-table-heading">@lang('pdf_items_label')</th>
+        <th class="pr-20 text-right item-table-heading">@lang('pdf_quantity_label')</th>
+        <th class="pr-20 text-right item-table-heading">@lang('pdf_price_label')</th>
         @if($invoice->discount_per_item === 'YES')
-        <th class="item-table-heading text-right pl-10">Discount</th>
+        <th class="pl-10 text-right item-table-heading">@lang('pdf_discount_label')</th>
         @endif
-        <th class="item-table-heading text-right">Amount</th>
+        <th class="text-right item-table-heading">@lang('pdf_amount_label')</th>
     </tr>
     @php
         $index = 1
@@ -15,33 +15,33 @@
     @foreach ($invoice->items as $item)
         <tr class="item-row">
             <td
-                class="item-cell text-right pr-20"
+                class="pr-20 text-right item-cell"
                 style="vertical-align: top;"
             >
                 {{$index}}
             </td>
             <td
-                class="item-cell text-left pl-0"
+                class="pl-0 text-left item-cell"
                 style="vertical-align: top;"
             >
                 <span>{{ $item->name }}</span><br>
                 <span class="item-description">{!! nl2br(htmlspecialchars($item->description)) !!}</span>
             </td>
             <td
-                class="item-cell pr-20 text-right"
+                class="pr-20 text-right item-cell"
                 style="vertical-align: top;"
             >
                 {{$item->quantity}}
             </td>
             <td
-                class="item-cell text-right pr-20"
+                class="pr-20 text-right item-cell"
                 style="vertical-align: top;"
             >
                 {!! format_money_pdf($item->price, $invoice->user->currency) !!}
             </td>
             @if($invoice->discount_per_item === 'YES')
                 <td
-                    class="item-cell text-right pl-10"
+                    class="pl-10 text-right item-cell"
                     style="vertical-align: top;"
                 >
                     @if($item->discount_type === 'fixed')
@@ -53,7 +53,7 @@
                 </td>
             @endif
             <td
-                class="item-cell text-right"
+                class="text-right item-cell"
                 style="vertical-align: top;"
             >
                 {!! format_money_pdf($item->total, $invoice->user->currency) !!}
@@ -70,8 +70,8 @@
 <div class="total-display-container">
     <table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($invoice->items) > 12) page-break @endif">
         <tr>
-            <td class="border-0 total-table-attribute-label">Subtotal</td>
-            <td class="border-0 item-cell py-2 total-table-attribute-value">
+            <td class="border-0 total-table-attribute-label">@lang('pdf_subtotal')</td>
+            <td class="py-2 border-0 item-cell total-table-attribute-value">
                 {!! format_money_pdf($invoice->sub_total, $invoice->user->currency) !!}
             </td>
         </tr>
@@ -82,7 +82,7 @@
                     <td class="border-0 total-table-attribute-label">
                         {{$labels[$i]}}
                     </td>
-                    <td class="border-0 item-cell py-2 total-table-attribute-value">
+                    <td class="py-2 border-0 item-cell total-table-attribute-value">
                         {!! format_money_pdf($taxes[$i], $invoice->user->currency) !!}
                     </td>
                 </tr>
@@ -93,7 +93,7 @@
                     <td class="border-0 total-table-attribute-label">
                         {{$tax->name.' ('.$tax->percent.'%)'}}
                     </td>
-                    <td class="border-0 item-cell py-2 total-table-attribute-value">
+                    <td class="py-2 border-0 item-cell total-table-attribute-value">
                         {!! format_money_pdf($tax->amount, $invoice->user->currency) !!}
                     </td>
                 </tr>
@@ -104,13 +104,13 @@
             <tr>
                 <td class="border-0 total-table-attribute-label">
                     @if($invoice->discount_type === 'fixed')
-                        Discount
+                        @lang('pdf_discount_label')
                     @endif
                     @if($invoice->discount_type === 'percentage')
-                        Discount ({{$invoice->discount}}%)
+                        @lang('pdf_discount_label') ({{$invoice->discount}}%)
                     @endif
                 </td>
-                <td class="border-0 item-cell py-2 total-table-attribute-value" >
+                <td class="py-2 border-0 item-cell total-table-attribute-value" >
                     @if($invoice->discount_type === 'fixed')
                         {!! format_money_pdf($invoice->discount_val, $invoice->user->currency) !!}
                     @endif
@@ -126,10 +126,11 @@
         </tr>
         <tr>
             <td class="border-0 total-border-left total-table-attribute-label">
-                Total
+                @lang('pdf_total')
             </td>
             <td
-                class="border-0 total-border-right item-cell py-8 total-table-attribute-value text-primary"
+                class="py-8 border-0 total-border-right item-cell total-table-attribute-value"
+                style="color: #5851D8"
             >
                 {!! format_money_pdf($invoice->total, $invoice->user->currency)!!}
             </td>

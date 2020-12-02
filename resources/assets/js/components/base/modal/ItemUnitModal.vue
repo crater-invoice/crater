@@ -1,78 +1,85 @@
 <template>
-  <div class="item-unit-modal">
-    <form action="" @submit.prevent="submitItemUnit">
-      <div class="card-body">
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label input-label">{{ $t('settings.customization.items.unit_name') }} <span class="required"> *</span></label>
-          <div class="col-sm-7">
-            <base-input
-              ref="name"
-              :invalid="$v.formData.name.$error"
-              v-model="formData.name"
-              type="text"
-              @input="$v.formData.name.$touch()"
-            />
-            <div v-if="$v.formData.name.$error">
-              <span v-if="!$v.formData.name.required" class="form-group__message text-danger">{{ $tc('validation.required') }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <base-button
-          :outline="true"
-          class="mr-3"
-          color="theme"
-          type="button"
-          @click="closePaymentModeModal"
-        >
-          {{ $t('general.cancel') }}
-        </base-button>
-        <base-button
-          :loading="isLoading"
-          color="theme"
-          icon="save"
-          type="submit"
-        >
-          {{ !isEdit ? $t('general.save') : $t('general.update') }}
-        </base-button>
-      </div>
-    </form>
-  </div>
+  <form action="" @submit.prevent="submitItemUnit">
+    <div class="p-8 sm:p-6">
+      <sw-input-group
+        :label="$t('settings.customization.items.unit_name')"
+        :error="nameError"
+        variant="horizontal"
+        required
+      >
+        <sw-input
+          ref="name"
+          :invalid="$v.formData.name.$error"
+          v-model="formData.name"
+          type="text"
+          @input="$v.formData.name.$touch()"
+        />
+      </sw-input-group>
+    </div>
+    <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid">
+      <sw-button
+        class="mr-3"
+        variant="primary-outline"
+        type="button"
+        @click="closeItemUnitModal"
+      >
+        {{ $t('general.cancel') }}
+      </sw-button>
+      <sw-button
+        :loading="isLoading"
+        variant="primary"
+        icon="save"
+        type="submit"
+      >
+        <save-icon v-if="!isLoading" class="mr-2" />
+        {{ !isEdit ? $t('general.save') : $t('general.update') }}
+      </sw-button>
+    </div>
+  </form>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { validationMixin } from 'vuelidate'
 const { required, minLength } = require('vuelidate/lib/validators')
+
 export default {
-  mixins: [validationMixin],
-  data () {
+  data() {
     return {
       isEdit: false,
       isLoading: false,
       formData: {
         id: null,
-        name: null
-      }
+        name: null,
+      },
     }
   },
   computed: {
     ...mapGetters('modal', [
       'modalDataID',
       'modalData',
-      'modalActive'
-    ])
+      'modalActive',
+      'refreshData',
+    ]),
+    nameError() {
+      if (!this.$v.formData.name.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.name.required) {
+        return this.$tc('validation.required')
+      }
+    },
   },
   validations: {
     formData: {
       name: {
         required,
-        minLength: minLength(2)
-      }
-    }
+        minLength: minLength(2),
+      },
+    },
   },
-  async mounted () {
+
+  async mounted() {
     this.$refs.name.focus = true
     if (this.modalDataID) {
       this.isEdit = true
@@ -80,69 +87,62 @@ export default {
     }
   },
   methods: {
-    ...mapActions('modal', [
-      'closeModal',
-      'resetModalData'
-    ]),
-    ...mapActions('item', [
-      'addItemUnit',
-      'updateItemUnit',
-      'fatchItemUnit'
-    ]),
-    resetFormData () {
+    ...mapActions('modal', ['closeModal', 'resetModalData']),
+    ...mapActions('item', ['addItemUnit', 'updateItemUnit', 'fatchItemUnit']),
+    resetFormData() {
       this.formData = {
         id: null,
-        name: null
+        name: null,
       }
       this.$v.formData.$reset()
     },
-    async submitItemUnit () {
+    async submitItemUnit() {
       this.$v.formData.$touch()
       if (this.$v.$invalid) {
         return true
       }
-      this.isLoading = true
 
+      this.isLoading = true
       let response
 
-      if (this.isEdit) {
-        response = await this.updateItemUnit(this.formData)
+      try {
+        if (!this.isEdit) {
+          response = await this.addItemUnit(this.formData)
+        } else {
+          response = await this.updateItemUnit(this.formData)
+        }
 
         if (response.data) {
-          window.toastr['success'](this.$t('settings.customization.items.item_unit_updated'))
-          this.closePaymentModeModal()
+          this.isLoading = false
+          if (!this.isEdit) {
+            window.toastr['success'](
+              this.$t('settings.customization.items.item_unit_added')
+            )
+          } else {
+            window.toastr['success'](
+              this.$t('settings.customization.items.item_unit_updated')
+            )
+          }
+          this.refreshData ? this.refreshData() : ''
+          this.closeItemUnitModal()
           return true
         }
-
+      } catch (error) {
+        this.isLoading = false
         window.toastr['error'](response.data.error)
-      } else {
-        try {
-          response = await this.addItemUnit(this.formData)
-          if (response.data) {
-            this.isLoading = false
-            window.toastr['success'](this.$t('settings.customization.items.item_unit_added'))
-            this.closePaymentModeModal()
-            return true
-          } window.toastr['error'](response.data.error)
-        } catch (err) {
-          if (err.response.data.errors.name) {
-            this.isLoading = true
-            window.toastr['error'](this.$t('validation.item_unit_already_taken'))
-          }
-        }
       }
     },
-    async setData () {
+    async setData() {
       this.formData = {
         id: this.modalData.id,
-        name: this.modalData.name
+        name: this.modalData.name,
       }
     },
-    closePaymentModeModal () {
+    closeItemUnitModal() {
       this.resetModalData()
       this.resetFormData()
       this.closeModal()
-    }
-  }
+    },
+  },
 }
 </script>

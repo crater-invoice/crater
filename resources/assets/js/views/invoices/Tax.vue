@@ -1,10 +1,10 @@
 <template>
-  <div class="tax-row">
-    <div class="d-flex align-items-center tax-select">
-      <label class="bd-highlight pr-2 mb-0" align="right">
+  <div class="flex items-center justify-between mb-3">
+    <div class="flex items-center" style="flex: 4">
+      <label class="pr-2 mb-0" align="right">
         {{ $t('general.tax') }}
       </label>
-      <base-select
+      <sw-select
         v-model="selectedTax"
         :options="filteredTypes"
         :allow-empty="false"
@@ -16,19 +16,29 @@
         @select="(val) => onSelectTax(val)"
       >
         <div slot="afterList">
-          <button type="button" class="list-add-button" @click="openTaxModal">
-            <font-awesome-icon class="icon" icon="check-circle" />
-            <label>{{ $t('invoices.add_new_tax') }}</label>
+          <button
+            type="button"
+            class="flex items-center justify-center w-full px-2 py-2 bg-gray-200 border-none outline-none"
+            @click="openTaxModal"
+          >
+            <check-circle-icon class="h-5 text-primary-400" />
+            <label class="ml-2 text-sm leading-none text-primary-400">{{
+              $t('invoices.add_new_tax')
+            }}</label>
           </button>
         </div>
-      </base-select> <br>
+      </sw-select>
+      <br />
     </div>
-    <div class="text-right tax-amount" v-html="$utils.formatMoney(taxAmount, currency)" />
-    <div class="remove-icon-wrapper">
-      <font-awesome-icon
+    <div
+      class="text-sm text-right"
+      style="flex: 3"
+      v-html="$utils.formatMoney(taxAmount, currency)"
+    />
+    <div class="flex items-center justify-center w-6 h-10 mx-2 cursor-pointer">
+      <trash-icon
         v-if="taxes.length && index !== taxes.length - 1"
-        class="remove-icon"
-        icon="trash-alt"
+        class="h-5 text-gray-700"
         @click="removeTax"
       />
     </div>
@@ -37,49 +47,52 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { CheckCircleIcon, TrashIcon } from '@vue-hero-icons/solid'
 
 export default {
+  components: {
+    CheckCircleIcon,
+    TrashIcon,
+  },
   props: {
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     taxData: {
       type: Object,
-      required: true
+      required: true,
     },
     taxes: {
       type: Array,
-      default: []
+      default: [],
     },
     total: {
       type: Number,
-      default: 0
+      default: 0,
     },
     totalTax: {
       type: Number,
-      default: 0
+      default: 0,
     },
     currency: {
       type: [Object, String],
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      tax: {...this.taxData},
-      selectedTax: null
+      tax: { ...this.taxData },
+      selectedTax: null,
     }
   },
   computed: {
-    ...mapGetters('taxType', [
-      'taxTypes'
-    ]),
-    filteredTypes () {
-      const clonedTypes = this.taxTypes.map(a => ({...a}))
+    ...mapGetters('taxType', ['taxTypes']),
+    filteredTypes() {
+      const clonedTypes = this.taxTypes.map((a) => ({ ...a }))
 
       return clonedTypes.map((taxType) => {
-        let found = this.taxes.find(tax => tax.tax_type_id === taxType.id)
+        let found = this.taxes.find((tax) => tax.tax_type_id === taxType.id)
 
         if (found) {
           taxType.$isDisabled = true
@@ -90,7 +103,7 @@ export default {
         return taxType
       })
     },
-    taxAmount () {
+    taxAmount() {
       if (this.tax.compound_tax && this.total) {
         return ((this.total + this.totalTax) * this.tax.percent) / 100
       }
@@ -100,19 +113,21 @@ export default {
       }
 
       return 0
-    }
+    },
   },
   watch: {
     total: {
-      handler: 'updateTax'
+      handler: 'updateTax',
     },
     totalTax: {
-      handler: 'updateTax'
-    }
+      handler: 'updateTax',
+    },
   },
-  created () {
+  created() {
     if (this.taxData.tax_type_id > 0) {
-      this.selectedTax = this.taxTypes.find(_type => _type.id === this.taxData.tax_type_id)
+      this.selectedTax = this.taxTypes.find(
+        (_type) => _type.id === this.taxData.tax_type_id
+      )
     }
 
     this.updateTax()
@@ -124,13 +139,11 @@ export default {
     })
   },
   methods: {
-    ...mapActions('modal', [
-      'openModal'
-    ]),
-    customLabel ({ name, percent }) {
+    ...mapActions('modal', ['openModal']),
+    customLabel({ name, percent }) {
       return `${name} - ${percent}%`
     },
-    onSelectTax (val) {
+    onSelectTax(val) {
       this.tax.percent = val.percent
       this.tax.tax_type_id = val.id
       this.tax.compound_tax = val.compound_tax
@@ -138,28 +151,28 @@ export default {
 
       this.updateTax()
     },
-    updateTax () {
+    updateTax() {
       if (this.tax.tax_type_id === 0) {
         return
       }
 
       this.$emit('update', {
-        'index': this.index,
-        'item': {
+        index: this.index,
+        item: {
           ...this.tax,
-          amount: this.taxAmount
-        }
+          amount: this.taxAmount,
+        },
       })
     },
-    removeTax () {
+    removeTax() {
       this.$emit('remove', this.index, this.tax)
     },
-    openTaxModal () {
+    openTaxModal() {
       this.openModal({
-        'title': this.$t('settings.tax_types.add_tax'),
-        'componentName': 'TaxTypeModal'
+        title: this.$t('settings.tax_types.add_tax'),
+        componentName: 'TaxTypeModal',
       })
-    }
-  }
+    },
+  },
 }
 </script>

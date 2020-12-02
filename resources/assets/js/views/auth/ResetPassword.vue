@@ -1,10 +1,7 @@
 <template>
-  <form
-    id="loginForm"
-    @submit.prevent="validateBeforeSubmit"
-  >
+  <form id="loginForm" @submit.prevent="validateBeforeSubmit">
     <div class="form-group">
-      <base-input
+      <sw-input
         v-model.trim="formData.email"
         :invalid="$v.formData.email.$error"
         :placeholder="$t('login.enter_email')"
@@ -22,7 +19,7 @@
       </div>
     </div>
     <div class="form-group">
-      <base-input
+      <sw-input
         id="password"
         v-model.trim="formData.password"
         :invalid="$v.formData.password.$error"
@@ -32,16 +29,28 @@
         @input="$v.formData.password.$touch()"
       />
       <div v-if="$v.formData.password.$error">
-        <span v-if="!$v.formData.password.required" class="help-block text-danger">
+        <span
+          v-if="!$v.formData.password.required"
+          class="help-block text-danger"
+        >
           {{ $t('validation.required') }}
         </span>
-        <span v-if="!$v.formData.password.minLength" class="help-block text-danger">
-          {{ $tc('validation.password_length', $v.formData.password.minLength.min, { count: $v.formData.password.$params.minLength.min }) }}
+        <span
+          v-if="!$v.formData.password.minLength"
+          class="help-block text-danger"
+        >
+          {{
+            $tc(
+              'validation.password_length',
+              $v.formData.password.minLength.min,
+              { count: $v.formData.password.$params.minLength.min }
+            )
+          }}
         </span>
       </div>
     </div>
     <div class="form-group">
-      <base-input
+      <sw-input
         v-model.trim="formData.password_confirmation"
         :invalid="$v.formData.password_confirmation.$error"
         :placeholder="$t('login.retype_password')"
@@ -50,50 +59,56 @@
         @input="$v.formData.password_confirmation.$touch()"
       />
       <div v-if="$v.formData.password_confirmation.$error">
-        <span v-if="!$v.formData.password_confirmation.sameAsPassword" class="help-block text-danger">
+        <span
+          v-if="!$v.formData.password_confirmation.sameAsPassword"
+          class="help-block text-danger"
+        >
           {{ $t('validation.password_incorrect') }}
         </span>
       </div>
     </div>
-    <base-button :loading="isLoading" type="submit" color="theme">
+    <sw-button type="submit" variant="primary">
       {{ $t('login.reset_password') }}
-    </base-button>
+    </sw-button>
   </form>
 </template>
 
 <script type="text/babel">
-import { validationMixin } from 'vuelidate'
-const { required, email, sameAs, minLength } = require('vuelidate/lib/validators')
+const {
+  required,
+  email,
+  sameAs,
+  minLength,
+} = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [validationMixin],
-  data () {
+  data() {
     return {
       formData: {
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
       },
-      isLoading: false
+      isLoading: false,
     }
   },
   validations: {
     formData: {
       email: {
         required,
-        email
+        email,
       },
       password: {
         required,
-        minLength: minLength(8)
+        minLength: minLength(8),
       },
       password_confirmation: {
-        sameAsPassword: sameAs('password')
-      }
-    }
+        sameAsPassword: sameAs('password'),
+      },
+    },
   },
   methods: {
-    async validateBeforeSubmit (e) {
+    async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
 
       if (!this.$v.formData.$invalid) {
@@ -102,23 +117,29 @@ export default {
             email: this.formData.email,
             password: this.formData.password,
             password_confirmation: this.formData.password_confirmation,
-            token: this.$route.params.token
+            token: this.$route.params.token,
           }
           this.isLoading = true
-          let res = await axios.post('/api/auth/reset/password', data)
+          let res = await axios.post('/api/v1/auth/reset/password', data)
           this.isLoading = false
           if (res.data) {
-            toastr['success'](this.$t('login.password_reset_successfully'), 'Success')
+            toastr['success'](
+              this.$t('login.password_reset_successfully'),
+              'Success'
+            )
             this.$router.push('/login')
           }
         } catch (err) {
           if (err.response && err.response.status === 403) {
-            toastr['error'](err.response.data, this.$t('validation.email_incorrect'))
+            toastr['error'](
+              err.response.data,
+              this.$t('validation.email_incorrect')
+            )
             this.isLoading = false
           }
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>

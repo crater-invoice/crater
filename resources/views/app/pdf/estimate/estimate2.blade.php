@@ -103,6 +103,7 @@
         .address-container {
             display: block;
             padding-top: 20px;
+            margin-top: 10px;
         }
 
         /* -- Company Address -- */
@@ -127,14 +128,12 @@
             line-height: 22px;
             letter-spacing: 0.05em;
             margin-bottom: 0px;
-            margin-top: 10px;
         }
 
         .company-address {
             margin-top: 2px;
             text-align: left;
-
-
+            word-wrap: break-word;
             font-size: 12px;
             line-height: 15px;
             color: #595959;
@@ -172,6 +171,7 @@
             padding: 0px;
             margin: 0px;
             width: 170px;
+            word-wrap: break-word;
         }
 
         /* -- Shipping -- */
@@ -202,9 +202,10 @@
             font-size: 10px;
             line-height: 15px;
             color: #595959;
-            padding: 0px;
+            padding: 0px 30px 0px 20px;
             margin: 0px;
             width: 170px;
+            word-wrap: break-word;
         }
 
         .attribute-label {
@@ -407,7 +408,7 @@
                     @endif
                 </td>
                 <td width="40%" class="header-section-right estimate-details-container">
-                    <h1>Estimate</h1>
+                    <h1>@lang('pdf_estimate_label')</h1>
                     <h4>{{$estimate->estimate_number}}</h4>
                     <h4>{{$estimate->formattedEstimateDate}}</h4>
                 </td>
@@ -417,22 +418,38 @@
     <hr>
     <div class="wrapper">
         <div class="address-container">
-            <div class="company-address-container">
-                @include('app.pdf.estimate.partials.company-address')
+            <div class="company-address-container company-address">
+                {!! $company_address !!}
             </div>
-            <div class="shipping-address-container">
-                @include('app.pdf.estimate.partials.shipping-address')
+            @if($shipping_address !== '</br>')
+            <div class="shipping-address-container shipping-address">
+                @if($shipping_address)
+                    @lang('pdf_ship_to')
+                    {!! $shipping_address !!}
+                @endif
             </div>
-            @if($estimate->user->shippingaddress)
-            <div class="billing-address-container">
-            @else
-            <div class="billing-address-container" style="float:right; padding-right:0px;">
             @endif
-                @include('app.pdf.estimate.partials.billing-address')
+            @if($shipping_address !== '</br>')
+            <div class="billing-address-container billing-address">
+            @else
+            <div class="billing-address-container billing-address" style="float:right; margin-right:30px;">
+            @endif
+                @if($billing_address)
+                    @lang('pdf_bill_to')
+                    {!! $billing_address !!}
+                @endif
             </div>
             <div style="clear: both;"></div>
+            </div>
             @include('app.pdf.estimate.partials.table')
-            @include('app.pdf.estimate.partials.notes')
+            <div class="notes">
+                @if($notes)
+                    <div class="notes-label">
+                        @lang('pdf_notes')
+                    </div>
+                    {!! $notes !!}
+                @endif
+            </div>
         </div>
 </body>
 

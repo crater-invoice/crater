@@ -4,4 +4,3 @@ docker-compose exec app composer install --no-interaction --prefer-dist --optimi
 
 docker-compose exec app php artisan storage:link || true
 docker-compose exec app php artisan key:generate
-docker-compose exec app php artisan passport:keys || true

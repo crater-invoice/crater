@@ -1,123 +1,89 @@
 <?php
-namespace Tests\Feature;
+use Crater\Models\User;
+use Crater\Models\ExpenseCategory;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use Crater\Http\Requests\ExpenseCategoryRequest;
+use Crater\Http\Controllers\V1\Expense\ExpenseCategoriesController;
+use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\User;
-use Crater\ExpenseCategory;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-class ExpenseCategoryTest extends TestCase
-{
-    use RefreshDatabase;
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-    protected $user;
+test('get categories', function () {
+    $response = getJson('api/v1/categories');
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
-        ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
-    }
+    $response->assertOk();
+});
 
-    /** @test */
-    public function testGetCategories()
-    {
-        $response = $this->json('GET', 'api/categories');
+test('create category', function () {
+    $category = ExpenseCategory::factory()->raw();
 
-        $response->assertOk();
-    }
+    $response = postJson('api/v1/categories', $category);
 
-    /** @test */
-    public function testCreateCategory()
-    {
-        $category = factory(ExpenseCategory::class)->raw();
+    $response->assertStatus(200);
 
-        $response = $this->json('POST', 'api/categories', $category);
+    $this->assertDatabaseHas('expense_categories', [
+        'name' => $category['name'],
+        'description' => $category['description'],
+    ]);
+});
 
-        $category2 = $response->decodeResponseJson()['category'];
+test('store validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        ExpenseCategoriesController::class,
+        'store',
+        ExpenseCategoryRequest::class
+    );
+});
 
-        $response->assertOk();
-        $this->assertEquals($category['name'], $category2['name']);
-        $this->assertEquals($category['description'], $category2['description']);
-    }
+test('get category', function () {
+    $category = ExpenseCategory::factory()->create();
 
-    /** @test */
-    public function testCreateCategoryRequiresName()
-    {
-        $category = factory(ExpenseCategory::class)->raw([
-            'name' => ''
-        ]);
+    getJson("api/v1/categories/{$category->id}")->assertOk();
+});
 
-        $response = $this->json('POST', 'api/categories', $category);
+test('update category', function () {
+    $category = ExpenseCategory::factory()->create();
 
-        $response->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
+    $category2 = ExpenseCategory::factory()->raw();
 
-    /** @test */
-    public function testGetEditCategoryData()
-    {
-        $category = factory(ExpenseCategory::class)->create();
+    putJson('api/v1/categories/'.$category->id, $category2)->assertOk();
 
-        $response = $this->json('GET', 'api/categories/'.$category->id.'/edit');
+    $this->assertDatabaseHas('expense_categories', [
+        'id' => $category->id,
+        'name' => $category2['name'],
+        'description' => $category2['description'],
+    ]);
+});
 
-        $category2 = $response->decodeResponseJson()['category'];
+test('update validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        ExpenseCategoriesController::class,
+        'update',
+        ExpenseCategoryRequest::class
+    );
+});
 
-        $response->assertOk();
-        $this->assertEquals($category->toArray(), $category2);
-    }
+test('delete category', function () {
+    $category = ExpenseCategory::factory()->create();
 
-    /** @test */
-    public function testUpdateCategory()
-    {
-        $category = factory(ExpenseCategory::class)->create();
-
-        $category2 = factory(ExpenseCategory::class)->raw();
-
-        $response = $this->json('PUT', 'api/categories/'.$category->id, $category2);
-
-        $category3 = $response->decodeResponseJson()['category'];
-
-        $response->assertOk();
-        $this->assertEquals($category3['name'], $category2['name']);
-        $this->assertEquals($category3['description'], $category2['description']);
-    }
-
-    /** @test */
-    public function testUpdateCategoryRequiresName()
-    {
-        $category = factory(ExpenseCategory::class)->create();
-
-        $category2 = factory(ExpenseCategory::class)->raw([
-            'name' => ''
+    deleteJson('api/v1/categories/'.$category->id)
+        ->assertOk()
+        ->assertJson([
+            'success' => true
         ]);
 
-        $response = $this->json('PUT', 'api/categories/'.$category->id, $category2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
-
-    /** @test */
-    public function testDeleteCategory()
-    {
-        $category = factory(ExpenseCategory::class)->create();
-
-        $response = $this->json('DELETE', 'api/categories/'.$category->id);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-}
+    $this->assertDeleted($category);
+});

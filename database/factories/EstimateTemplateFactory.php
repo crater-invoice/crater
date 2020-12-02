@@ -1,14 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\EstimateTemplate;
-use Faker\Generator as Faker;
+use Crater\Models\EstimateTemplate;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(EstimateTemplate::class, function (Faker $faker) {
-    return [
-        'path' => $faker->word,
-        'view' => $faker->word,
-        'name' => $faker->word,
-    ];
-});
+class EstimateTemplateFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = EstimateTemplate::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'path' => $this->faker->word,
+            'view' => $this->faker->word,
+            'name' => $this->faker->word,
+        ];
+    }
+}

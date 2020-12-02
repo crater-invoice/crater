@@ -166,9 +166,8 @@ return [
         Crater\Providers\BroadcastServiceProvider::class,
         Crater\Providers\EventServiceProvider::class,
         Crater\Providers\RouteServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class
+        Crater\Providers\DropboxServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
     ],
 
     /*
@@ -207,6 +206,7 @@ return [
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,

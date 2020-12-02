@@ -27,6 +27,7 @@
     "ascending": "Crescente",
     "descending": "Descendente",
     "subject": "Sujeita",
+    "body": "Corpo",
     "message": "Mensagem",
     "go_back": "Voltar",
     "back_to_login": "Voltar ao Login",
@@ -162,7 +163,10 @@
     "select_currency": "Selecione o tipo de moeda",
     "select_a_customer": "Selecione um cliente",
     "type_or_click": "Digite ou clique para selecionar",
-
+    "new_transaction": "Nova transação",
+    "no_matching_customers": "Não há clientes correspondentes!",
+    "phone_number": "Número de telefone",
+    "create_date": "Criar Data",
     "confirm_delete": "Você não poderá recuperar este cliente e todas as faturas, estimativas e pagamentos relacionados. | Você não poderá recuperar esses clientes e todas as faturas, estimativas e pagamentos relacionados.",
     "created_message": "Cliente criado com sucesso",
     "updated_message": "Cliente atualizado com sucesso",
@@ -260,7 +264,6 @@
     "list_of_estimates": "Esta seção contém a lista de orçamentos.",
     "mark_as_rejected": "Marcar como rejeitado",
     "mark_as_accepted": "Marcar como aceito",
-
     "marked_as_accepted_message": "Orçamento marcado como aceito",
     "marked_as_rejected_message": "Orçamento marcado como rejeitado",
     "confirm_delete": "Não poderá recuperar este orçamento | Não poderá recuperar estes orçamentos",
@@ -354,7 +357,6 @@
       "select_an_item": "Digite ou clique para selecionar um item",
       "type_item_description": "Tipo Descrição do item (opcional)"
     },
-
     "payment_attached_message": "Uma das faturas selecionadas já possui um pagamento anexado. Certifique-se de excluir os pagamentos anexados primeiro, a fim de prosseguir com a remoção",
     "confirm_delete": "Você não poderá recuperar esta fatura | Você não poderá recuperar essas faturas",
     "created_message": "Fatura criada com sucesso",
@@ -407,13 +409,13 @@
     "add_new_payment": "Adicionar novo Pagamento",
     "send_payment_receipt": "Enviar recibo de pagamento",
     "save_payment": "Salvar Pagamento",
+    "send_payment": "Mande o pagamento",
     "update_payment": "Atualizar Pagamento",
     "payment": "Pagamento | Pagamentos",
     "no_payments": "Ainda sem pagamentos!",
     "no_matching_payments": "Não há pagamentos correspondentes!",
     "list_of_payments": "Esta seção conterá a lista de pagamentos.",
     "select_payment_mode": "Selecione a forma de pagamento",
-
     "confirm_delete": "Você não poderá recuperar este Pagamento | Você não poderá recuperar esses Pagamentos",
     "created_message": "Pagamento criado com sucesso",
     "updated_message": "Pagamento atualizado com sucesso",
@@ -447,7 +449,6 @@
     "expense": "Despesa | Despesas",
     "no_expenses": "Ainda sem Despesas!",
     "list_of_expenses": "Esta seção conterá a lista de despesas.",
-
     "confirm_delete": "Você não poderá recuperar esta despesa | Você não poderá recuperar essas despesas",
     "created_message": "Despesa criada com sucesso",
     "updated_message": "Despesa atualizada com sucesso",
@@ -549,7 +550,8 @@
       "notifications": "Notificações",
       "tax_types": "Tipos de Impostos",
       "expense_category": "Categorias de Despesas",
-      "update_app": "Atualizar Aplicativo"
+      "update_app": "Atualizar Aplicativo",
+      "custom_fields": "Os campos personalizados"
     },
     "title": "Configurações",
     "setting": "Configuração | Configurações",
@@ -613,6 +615,41 @@
       "save": "Salvar",
       "updated_message": "Informações da Empresa atualizadas com sucesso"
     },
+    "custom_fields": {
+      "title": "Os campos personalizados",
+      "add_custom_field": "Adicionar campo personalizado",
+      "edit_custom_field": "Editar campo personalizado",
+      "field_name": "Nome do campo",
+      "type": "Tipo",
+      "name": "Nome",
+      "required": "Requeridas",
+      "label": "Rótulo",
+      "placeholder": "Placeholder",
+      "help_text": "Texto de ajuda",
+      "default_value": "Valor padrão",
+      "prefix": "Prefixo",
+      "starting_number": "Número inicial",
+      "model": "Modelo",
+      "help_text_description": "Digite algum texto para ajudar os usuários a entender a finalidade desse campo personalizado.",
+      "suffix": "Sufixo",
+      "yes": "sim",
+      "no": "Não",
+      "order": "Ordem",
+      "custom_field_confirm_delete": "Você não poderá recuperar este campo personalizado",
+      "already_in_use": "O campo personalizado já está em uso",
+      "deleted_message": "Campo personalizado excluído com sucesso",
+      "options": "opções",
+      "add_option": "Adicionar opções",
+      "add_another_option": "Adicione outra opção",
+      "sort_in_alphabetical_order": "Classificar em ordem alfabética",
+      "add_options_in_bulk": "Adicionar opções em massa",
+      "use_predefined_options": "Use Predefined Options",
+      "select_custom_date": "Selecionar data personalizada",
+      "select_relative_date": "Selecionar data relativa",
+      "ticked_by_default": "Marcado por padrão",
+      "updated_message": "Campo personalizado atualizado com sucesso",
+      "added_message": "Campo personalizado adicionado com sucesso"
+    },
     "customization": {
       "customization": "Personalizar",
       "save": "Salvar",
@@ -641,7 +678,6 @@
         "address_setting_updated": "Configuração de Endereço Atualizada com Sucesso"
       },
       "updated_message": "Informações da Empresa atualizadas com sucesso",
-
       "invoices": {
         "title": "Faturas",
         "notes": "Notas",
@@ -653,7 +689,6 @@
         "terms_and_conditions": "Termos e Condições",
         "invoice_setting_updated": "Configuração da Fatura atualizada com sucesso"
       },
-
       "estimates": {
         "title": "Orçamentos",
         "estimate_prefix": "Orçamento Prefixo",
@@ -663,7 +698,6 @@
         "enter_estimate_prefix": "Digite o prefixo do Orçamento",
         "estimate_setting_updated": "Configuração do Orçamento atualizada com sucesso"
       },
-
       "payments": {
         "title": "Pagamentos",
         "payment_prefix": "Pagamento Prefixo",
@@ -892,6 +926,7 @@
     "invoices_and_estimates": "Faturas e Orçamentos com capacidade de escolher vários modelos."
   },
   "validation": {
+    "invalid_phone": "Número de telefone inválido",
     "invalid_url": "url inválidas (ex: http://www.crater.com)",
     "required": "Campo obrigatório",
     "email_incorrect": "E-mail incorreto",

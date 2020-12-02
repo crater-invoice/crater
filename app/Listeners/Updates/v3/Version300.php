@@ -4,13 +4,13 @@ namespace Crater\Listeners\Updates\v3;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Crater\Setting;
-use Crater\Unit;
-use Crater\PaymentMethod;
-use Crater\Currency;
-use Crater\Payment;
-use Crater\Item;
-use Crater\User;
+use Crater\Models\Setting;
+use Crater\Models\Unit;
+use Crater\Models\PaymentMethod;
+use Crater\Models\Currency;
+use Crater\Models\Payment;
+use Crater\Models\Item;
+use Crater\Models\User;
 use Crater\Listeners\Updates\Listener;
 use Illuminate\Database\Schema\Blueprint;
 

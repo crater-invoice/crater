@@ -1,23 +1,22 @@
 <template>
-  <tr class="item-row invoice-item-row">
-    <td colspan="5">
-      <table class="full-width">
+  <tr class="box-border bg-white border border-gray-200 border-solid rounded-b">
+    <td colspan="5" class="p-0 text-left align-top">
+      <table class="w-full">
         <colgroup>
-          <col style="width: 40%;">
-          <col style="width: 10%;">
-          <col style="width: 15%;">
-          <col v-if="discountPerItem === 'YES'" style="width: 15%;">
-          <col style="width: 15%;">
+          <col style="width: 40%" />
+          <col style="width: 10%" />
+          <col style="width: 15%" />
+          <col v-if="discountPerItem === 'YES'" style="width: 15%" />
+          <col style="width: 15%" />
         </colgroup>
         <tbody>
           <tr>
-            <td class="">
-              <div class="item-select-wrapper">
-                <div class="sort-icon-wrapper handle">
-                  <font-awesome-icon
-                    class="sort-icon"
-                    icon="grip-vertical"
-                  />
+            <td class="px-5 py-4 text-left align-top">
+              <div class="flex justify-start">
+                <div
+                  class="flex items-center justify-center w-12 h-5 mt-2 text-gray-400 cursor-move handle"
+                >
+                  <drag-icon />
                 </div>
                 <item-select
                   ref="itemSelect"
@@ -34,88 +33,94 @@
                 />
               </div>
             </td>
-            <td class="text-right">
-              <base-input
+            <td class="px-5 py-4 text-right align-top">
+              <sw-input
                 v-model="item.quantity"
                 :invalid="$v.item.quantity.$error"
-                :is-input-group="!!item.unit_name"
-                :input-group-text="item.unit_name"
                 type="text"
                 small
                 @keyup="updateItem"
                 @input="$v.item.quantity.$touch()"
               />
               <div v-if="$v.item.quantity.$error">
-                <span v-if="!$v.item.quantity.maxLength" class="text-danger">{{ $t('validation.quantity_maxlength') }}</span>
+                <span v-if="!$v.item.quantity.maxLength" class="text-danger">
+                  {{ $t('validation.quantity_maxlength') }}
+                </span>
               </div>
             </td>
-            <td class="text-left">
-              <div class="d-flex flex-column">
-                <div class="flex-fillbd-highlight">
-                  <div class="base-input">
-                    <money
+            <td class="px-5 py-4 text-left align-top">
+              <div class="flex flex-col">
+                <div class="flex-auto flex-fill bd-highlight">
+                  <div class="relative w-full">
+                    <sw-money
                       v-model="price"
-                      v-bind="customerCurrency"
-                      class="input-field"
+                      :currency="customerCurrency"
+                      :invalid="$v.item.price.$error"
                       @input="$v.item.price.$touch()"
                     />
                   </div>
                   <div v-if="$v.item.price.$error">
-                    <span v-if="!$v.item.price.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
+                    <span v-if="!$v.item.price.maxLength" class="text-danger">
+                      {{ $t('validation.price_maxlength') }}
+                    </span>
                   </div>
                 </div>
-
               </div>
             </td>
-            <td v-if="discountPerItem === 'YES'" class="">
-              <div class="d-flex flex-column bd-highlight">
-                <div
-                  class="btn-group flex-fill bd-highlight"
-                  role="group"
-                >
-                  <base-input
+            <td
+              v-if="discountPerItem === 'YES'"
+              class="px-5 py-4 text-left align-top"
+            >
+              <div class="flex flex-col">
+                <div class="flex flex-auto" role="group">
+                  <sw-input
                     v-model="discount"
                     :invalid="$v.item.discount_val.$error"
-                    input-class="item-discount"
+                    class="border-r-0 rounded-tr-none rounded-br-none"
                     @input="$v.item.discount_val.$touch()"
                   />
-                  <v-dropdown :show-arrow="false" theme-light>
-                    <button
+                  <sw-dropdown>
+                    <sw-button
                       slot="activator"
                       type="button"
-                      class="btn item-dropdown dropdown-toggle"
+                      class="flex items-center px-5 py-1 text-sm font-medium leading-none text-center text-gray-500 whitespace-no-wrap border border-gray-300 border-solid rounded rounded-tl-none rounded-bl-none dropdown-toggle"
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
+                      style="height: 43px"
+                      variant="white"
                     >
-                      {{ item.discount_type == 'fixed' ? currency.symbol : '%' }}
-                    </button>
-                    <v-dropdown-item>
-                      <a class="dropdown-item" href="#" @click.prevent="selectFixed" >
-                        {{ $t('general.fixed') }}
-                      </a>
-                    </v-dropdown-item>
-                    <v-dropdown-item>
-                      <a class="dropdown-item" href="#" @click.prevent="selectPercentage">
-                        {{ $t('general.percentage') }}
-                      </a>
-                    </v-dropdown-item>
-                  </v-dropdown>
+                      <span class="flex items-center">
+                        {{
+                          item.discount_type == 'fixed' ? currency.symbol : '%'
+                        }}
+                        <chevron-down-icon class="h-5" />
+                      </span>
+                    </sw-button>
+
+                    <sw-dropdown-item @click="selectFixed">
+                      {{ $t('general.fixed') }}
+                    </sw-dropdown-item>
+
+                    <sw-dropdown-item @click="selectPercentage">
+                      {{ $t('general.percentage') }}
+                    </sw-dropdown-item>
+                  </sw-dropdown>
                 </div>
-                <!-- <div v-if="$v.item.discount.$error"> discount error </div> -->
               </div>
             </td>
-            <td class="text-right">
-              <div class="item-amount">
+            <td class="px-5 py-4 text-right align-top">
+              <div class="flex items-center justify-end text-sm">
                 <span>
                   <div v-html="$utils.formatMoney(total, currency)" />
                 </span>
 
-                <div class="remove-icon-wrapper">
-                  <font-awesome-icon
+                <div
+                  class="flex items-center justify-center w-6 h-10 mx-2 cursor-pointer"
+                >
+                  <trash-icon
                     v-if="showRemoveItemIcon"
-                    class="remove-icon"
-                    icon="trash-alt"
+                    class="h-5 text-gray-700"
                     @click="removeItem"
                   />
                 </div>
@@ -123,8 +128,8 @@
             </td>
           </tr>
           <tr v-if="taxPerItem === 'YES'" class="tax-tr">
-            <td />
-            <td colspan="4">
+            <td class="px-5 py-4 text-left align-top" />
+            <td colspan="4" class="px-5 py-4 text-left align-top">
               <tax
                 v-for="(tax, index) in item.taxes"
                 :key="tax.id"
@@ -145,98 +150,102 @@
     </td>
   </tr>
 </template>
+
 <script>
 import Guid from 'guid'
-import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
 import TaxStub from '../../stub/tax'
 import InvoiceStub from '../../stub/invoice'
 import ItemSelect from './ItemSelect'
 import Tax from './Tax'
-const { required, minValue, between, maxLength } = require('vuelidate/lib/validators')
+import { TrashIcon, ViewGridIcon, ChevronDownIcon } from '@vue-hero-icons/solid'
+import DragIcon from '@/components/icon/DragIcon'
+const {
+  required,
+  minValue,
+  between,
+  maxLength,
+} = require('vuelidate/lib/validators')
 
 export default {
   components: {
     Tax,
-    ItemSelect
+    ItemSelect,
+    TrashIcon,
+    ViewGridIcon,
+    ChevronDownIcon,
+    DragIcon,
   },
-  mixins: [validationMixin],
   props: {
     itemData: {
       type: Object,
-      default: null
+      default: null,
     },
     index: {
       type: Number,
-      default: null
+      default: null,
     },
     type: {
       type: String,
-      default: ''
+      default: '',
     },
     currency: {
       type: [Object, String],
-      required: true
+      required: true,
     },
     taxPerItem: {
       type: String,
-      default: ''
+      default: '',
     },
     discountPerItem: {
       type: String,
-      default: ''
+      default: '',
     },
     invoiceItems: {
       type: Array,
-      default: null
-    }
+      default: null,
+    },
   },
-  data () {
+  data() {
     return {
       isClosePopup: false,
       itemSelect: null,
-      item: {...this.itemData},
+      item: { ...this.itemData },
       maxDiscount: 0,
       money: {
         decimal: '.',
         thousands: ',',
         prefix: '$ ',
         precision: 2,
-        masked: false
+        masked: false,
       },
-      isSelected: false
+      isSelected: false,
     }
   },
   computed: {
-    ...mapGetters('item', [
-      'items'
-    ]),
-    ...mapGetters('modal', [
-      'modalActive'
-    ]),
-    ...mapGetters('currency', [
-      'defaultCurrencyForInput'
-    ]),
-    customerCurrency () {
+    ...mapGetters('item', ['items']),
+    ...mapGetters('modal', ['modalActive']),
+    ...mapGetters('company', ['defaultCurrencyForInput']),
+    customerCurrency() {
       if (this.currency) {
         return {
           decimal: this.currency.decimal_separator,
           thousands: this.currency.thousand_separator,
           prefix: this.currency.symbol + ' ',
           precision: this.currency.precision,
-          masked: false
+          masked: false,
         }
       } else {
         return this.defaultCurrenctForInput
       }
     },
-    showRemoveItemIcon () {
+    showRemoveItemIcon() {
       if (this.invoiceItems.length == 1) {
         return false
       }
       return true
     },
-    subtotal () {
+    subtotal() {
       return this.item.price * this.item.quantity
     },
     discount: {
@@ -251,12 +260,12 @@ export default {
         }
 
         this.item.discount = newValue
-      }
+      },
     },
-    total () {
+    total() {
       return this.subtotal - this.item.discount_val
     },
-    totalSimpleTax () {
+    totalSimpleTax() {
       return window._.sumBy(this.item.taxes, function (tax) {
         if (!tax.compound_tax) {
           return tax.amount
@@ -265,7 +274,7 @@ export default {
         return 0
       })
     },
-    totalCompoundTax () {
+    totalCompoundTax() {
       return window._.sumBy(this.item.taxes, function (tax) {
         if (tax.compound_tax) {
           return tax.amount
@@ -274,7 +283,7 @@ export default {
         return 0
       })
     },
-    totalTax () {
+    totalTax() {
       return this.totalSimpleTax + this.totalCompoundTax
     },
     price: {
@@ -292,51 +301,54 @@ export default {
         } else {
           this.item.price = newValue
         }
-      }
-    }
+      },
+    },
   },
   watch: {
     item: {
       handler: 'updateItem',
-      deep: true
+      deep: true,
     },
-    subtotal (newValue) {
+    subtotal(newValue) {
       if (this.item.discount_type === 'percentage') {
         this.item.discount_val = (this.item.discount * newValue) / 100
       }
     },
-    modalActive (val) {
+    modalActive(val) {
       if (!val) {
         this.isSelected = false
       }
-    }
+    },
   },
-  validations () {
+  validations() {
     return {
       item: {
         name: {
-          required
+          required,
         },
         quantity: {
           required,
-          minValue: minValue(1),
-          maxLength: maxLength(20)
+          minValue: minValue(0),
+          maxLength: maxLength(20),
         },
         price: {
           required,
           minValue: minValue(1),
-          maxLength: maxLength(20)
+          maxLength: maxLength(20),
         },
         discount_val: {
-          between: between(0, this.maxDiscount)
+          between: between(0, this.maxDiscount),
         },
         description: {
-          maxLength: maxLength(255)
-        }
-      }
+          maxLength: maxLength(255),
+        },
+      },
     }
   },
-  created () {
+  mounted() {
+    this.$v.item.$reset()
+  },
+  created() {
     window.hub.$on('checkItems', this.validateItem)
     window.hub.$on('newItem', (val) => {
       if (this.taxPerItem === 'YES') {
@@ -348,52 +360,54 @@ export default {
     })
   },
   methods: {
-    updateTax (data) {
+    updateTax(data) {
       this.$set(this.item.taxes, data.index, data.item)
 
       let lastTax = this.item.taxes[this.item.taxes.length - 1]
 
       if (lastTax.tax_type_id !== 0) {
-        this.item.taxes.push({...TaxStub, id: Guid.raw()})
+        this.item.taxes.push({ ...TaxStub, id: Guid.raw() })
       }
 
       this.updateItem()
     },
-    removeTax (index) {
+    removeTax(index) {
       this.item.taxes.splice(index, 1)
 
       this.updateItem()
     },
-    taxWithPercentage ({ name, percent }) {
+    taxWithPercentage({ name, percent }) {
       return `${name} (${percent}%)`
     },
-    searchVal (val) {
+    searchVal(val) {
       this.item.name = val
     },
-    deselectItem () {
-      this.item = {...InvoiceStub, id: this.item.id, taxes: [{...TaxStub, id: Guid.raw()}]}
+    deselectItem() {
+      this.item = {
+        ...InvoiceStub,
+        id: this.item.id,
+        taxes: [{ ...TaxStub, id: Guid.raw() }],
+      }
       this.$nextTick(() => {
         this.$refs.itemSelect.$refs.baseSelect.$refs.search.focus()
       })
     },
-    onSelectItem (item) {
+    onSelectItem(item) {
       this.item.name = item.name
       this.item.price = item.price
       this.item.item_id = item.id
       this.item.description = item.description
       this.item.unit_name = item.unit_name
+
       if (this.taxPerItem === 'YES' && item.taxes) {
         let index = 0
-        item.taxes.forEach(tax => {
-          this.updateTax({index, item: { ...tax }})
+        item.taxes.forEach((tax) => {
+          this.updateTax({ index, item: { ...tax } })
           index++
         })
       }
-      // if (this.item.taxes.length) {
-      //   this.item.taxes = {...item.taxes}
-      // }
     },
-    selectFixed () {
+    selectFixed() {
       if (this.item.discount_type === 'fixed') {
         return
       }
@@ -401,7 +415,7 @@ export default {
       this.item.discount_val = this.item.discount * 100
       this.item.discount_type = 'fixed'
     },
-    selectPercentage () {
+    selectPercentage() {
       if (this.item.discount_type === 'percentage') {
         return
       }
@@ -410,24 +424,24 @@ export default {
 
       this.item.discount_type = 'percentage'
     },
-    updateItem () {
+    updateItem() {
       this.$emit('update', {
-        'index': this.index,
-        'item': {
+        index: this.index,
+        item: {
           ...this.item,
           total: this.total,
           totalSimpleTax: this.totalSimpleTax,
           totalCompoundTax: this.totalCompoundTax,
           totalTax: this.totalTax,
           tax: this.totalTax,
-          taxes: [...this.item.taxes]
-        }
+          taxes: [...this.item.taxes],
+        },
       })
     },
-    removeItem () {
+    removeItem() {
       this.$emit('remove', this.index)
     },
-    validateItem () {
+    validateItem() {
       this.$v.item.$touch()
 
       if (this.item !== null) {
@@ -435,7 +449,7 @@ export default {
       } else {
         this.$emit('itemValidate', this.index, false)
       }
-    }
-  }
+    },
+  },
 }
 </script>

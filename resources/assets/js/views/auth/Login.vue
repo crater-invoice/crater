@@ -1,126 +1,168 @@
 <template>
-  <form
-    id="loginForm"
-    @submit.prevent="validateBeforeSubmit"
-  >
-    <div :class="{'form-group' : true }">
-      <p class="input-label">{{ $t('login.email') }} <span class="text-danger"> * </span></p>
-      <base-input
+  <form id="loginForm" @submit.prevent="validateBeforeSubmit">
+    <sw-input-group
+      :label="$t('login.email')"
+      :error="emailError"
+      class="mb-4"
+      required
+    >
+      <sw-input
         :invalid="$v.loginData.email.$error"
-        v-model="loginData.email"
         :placeholder="$t(login.login_placeholder)"
+        v-model="loginData.email"
         focus
         type="email"
         name="email"
         @input="$v.loginData.email.$touch()"
       />
-      <div v-if="$v.loginData.email.$error">
-        <span v-if="!$v.loginData.email.required" class="text-danger">
-          {{ $tc('validation.required') }}
-        </span>
-        <span v-if="!$v.loginData.email.email" class="text-danger">
-          {{ $tc('validation.email_incorrect') }}
-        </span>
-      </div>
-    </div>
-    <div class="form-group">
-      <p class="input-label">{{ $t('login.password') }} <span class="text-danger"> * </span></p>
-      <base-input
+    </sw-input-group>
+
+    <sw-input-group
+      :label="$t('login.password')"
+      :error="passwordError"
+      class="mb-4"
+      required
+    >
+      <sw-input
         v-model="loginData.password"
         :invalid="$v.loginData.password.$error"
-        type="password"
+        :type="getInputType"
         name="password"
-        show-password
         @input="$v.loginData.password.$touch()"
-      />
-      <div v-if="$v.loginData.password.$error">
-        <span v-if="!$v.loginData.password.required" class="text-danger">{{ $tc('validation.required') }}</span>
-        <span v-if="!$v.loginData.password.minLength" class="text-danger"> {{ $tc('validation.password_min_length', $v.loginData.password.$params.minLength.min, {count: $v.loginData.password.$params.minLength.min}) }} </span>
-      </div>
-    </div>
-    <div class="other-actions row">
-      <div class="col-sm-12 text-sm-left mb-4">
-        <router-link to="forgot-password" class="forgot-link">
+      >
+        <template v-slot:rightIcon>
+          <eye-off-icon
+            v-if="isShowPassword"
+            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
+            @click="isShowPassword = !isShowPassword"
+          />
+          <eye-icon
+            v-else
+            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
+            @click="isShowPassword = !isShowPassword"
+          />
+        </template>
+      </sw-input>
+    </sw-input-group>
+
+    <div class="mt-5 mb-8">
+      <div class="mb-4">
+        <router-link
+          to="forgot-password"
+          class="text-sm text-primary-400 hover:text-gray-700"
+        >
           {{ $t('login.forgot_password') }}
         </router-link>
       </div>
     </div>
 
-    <base-button :loading="isLoading" type="submit" color="theme">{{ $t('login.login') }}</base-button>
-
-    <!-- <div class="social-links">
-
-      <span class="link-text">{{ $t('login.or_signIn_with') }}</span>
-
-      <div class="social-logo">
-        <icon-facebook class="icon"/>
-        <icon-twitter class="icon"/>
-        <icon-google class="icon"/>
-      </div>
-
-    </div> -->
-
+    <sw-button
+      :loading="isLoading"
+      :disabled="isLoading"
+      type="submit"
+      variant="primary"
+    >
+      {{ $t('login.login') }}
+    </sw-button>
   </form>
 </template>
 
 <script type="text/babel">
 import { mapActions } from 'vuex'
-
+import { EyeIcon, EyeOffIcon } from '@vue-hero-icons/outline'
 import IconFacebook from '../../components/icon/facebook'
 import IconTwitter from '../../components/icon/twitter'
 import IconGoogle from '../../components/icon/google'
-import { validationMixin } from 'vuelidate'
 const { required, email, minLength } = require('vuelidate/lib/validators')
 
 export default {
-
   components: {
     IconFacebook,
     IconTwitter,
-    IconGoogle
+    IconGoogle,
+    EyeIcon,
+    EyeOffIcon,
   },
-  mixins: [validationMixin],
-  data () {
+  data() {
     return {
       loginData: {
         email: '',
         password: '',
-        remember: ''
+        remember: '',
       },
       submitted: false,
-      isLoading: false
+      isLoading: false,
+      isShowPassword: false,
     }
   },
   validations: {
     loginData: {
       email: {
         required,
-        email
+        email,
       },
       password: {
         required,
-        minLength: minLength(8)
+        minLength: minLength(8),
+      },
+    },
+  },
+  computed: {
+    emailError() {
+      if (!this.$v.loginData.email.$error) {
+        return ''
       }
-    }
+      if (!this.$v.loginData.email.required) {
+        return this.$tc('validation.required')
+      }
+      if (!this.$v.loginData.email.email) {
+        return this.$tc('validation.email_incorrect')
+      }
+    },
+
+    passwordError() {
+      if (!this.$v.loginData.password.$error) {
+        return ''
+      }
+      if (!this.$v.loginData.password.required) {
+        return this.$tc('validation.required')
+      }
+      if (!this.$v.loginData.password.minLength) {
+        return this.$tc(
+          'validation.password_min_length',
+          this.$v.loginData.password.$params.minLength.min,
+          { count: this.$v.loginData.password.$params.minLength.min }
+        )
+      }
+    },
+
+    getInputType() {
+      if (this.isShowPassword) {
+        return 'text'
+      }
+      return 'password'
+    },
   },
   methods: {
-    ...mapActions('auth', [
-      'login'
-    ]),
-    async validateBeforeSubmit () {
+    ...mapActions('auth', ['login']),
+    async validateBeforeSubmit() {
+      axios.defaults.withCredentials = true
+
       this.$v.loginData.$touch()
       if (this.$v.$invalid) {
         return true
       }
 
       this.isLoading = true
-      this.login(this.loginData).then((res) => {
+
+      try {
+        await this.login(this.loginData)
         this.$router.push('/admin/dashboard')
         this.isLoading = false
-      }).catch(() => {
+      } catch (error) {
         this.isLoading = false
-      })
-    }
-  }
+      }
+    },
+  },
 }
 </script>

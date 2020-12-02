@@ -11,7 +11,7 @@ Vue.directive('click-outside', {
   },
   unbind: function (el) {
     document.body.removeEventListener('click', el.event)
-  }
+  },
 })
 
 Vue.directive('autoresize', {
@@ -19,12 +19,12 @@ Vue.directive('autoresize', {
     el.style.height = el.scrollHeight + 'px'
     el.style.overflow.y = 'hidden'
     el.style.resize = 'none'
-    function OnInput () {
+    function OnInput() {
       this.style.height = 'auto'
-      this.style.height = (this.scrollHeight) + 'px'
+      this.style.height = this.scrollHeight + 'px'
       this.scrollTop = this.scrollHeight
-      window.scrollTo(window.scrollLeft, (this.scrollTop + this.scrollHeight))
+      window.scrollTo(window.scrollLeft, this.scrollTop + this.scrollHeight)
     }
     el.addEventListener('input', OnInput, false)
-  }
+  },
 })

@@ -1,176 +1,225 @@
 <template>
-  <div v-if="payment" class="main-content payment-view-page">
-    <div class="page-header">
-      <h3 class="page-title">{{ payment.payment_number }}</h3>
-      <div class="page-actions row">
-        <base-button
-          :loading="isSendingEmail"
+  <base-page v-if="payment" class="xl:pl-96">
+    <sw-page-header :title="pageTitle">
+      <template slot="actions">
+        <sw-button
           :disabled="isSendingEmail"
-          color="theme"
+          variant="primary"
           @click="onPaymentSend"
         >
           {{ $t('payments.send_payment_receipt') }}
-        </base-button>
-        <v-dropdown
-          :close-on-select="true"
-          align="left"
-          class="filter-container"
-        >
-          <a slot="activator" href="#">
-            <base-button color="theme">
-              <font-awesome-icon icon="ellipsis-h" />
-            </base-button>
-          </a>
-          <v-dropdown-item>
-            <div class="dropdown-item" @click="copyPdfUrl">
-              <font-awesome-icon
-                :icon="['fas', 'link']"
-                class="dropdown-item-icon"
-              />
-              {{ $t('general.copy_pdf_url') }}
-            </div>
-            <router-link
-              :to="{ path: `/admin/payments/${$route.params.id}/edit` }"
-              class="dropdown-item"
-            >
-              <font-awesome-icon
-                :icon="['fas', 'pencil-alt']"
-                class="dropdown-item-icon"
-              />
-              {{ $t('general.edit') }}
-            </router-link>
-            <div class="dropdown-item" @click="removePayment($route.params.id)">
-              <font-awesome-icon
-                :icon="['fas', 'trash']"
-                class="dropdown-item-icon"
-              />
-              {{ $t('general.delete') }}
-            </div>
-          </v-dropdown-item>
-        </v-dropdown>
-      </div>
-    </div>
-    <div class="payment-sidebar">
-      <div class="side-header">
-        <base-input
+        </sw-button>
+        <sw-dropdown class="ml-3">
+          <sw-button slot="activator" variant="primary" class="h-10">
+            <dots-horizontal-icon class="h-5" />
+          </sw-button>
+
+          <sw-dropdown-item @click="copyPdfUrl">
+            <link-icon class="h-5 mr-3 text-gray-600" />
+            {{ $t('general.copy_pdf_url') }}
+          </sw-dropdown-item>
+
+          <sw-dropdown-item
+            tag-name="router-link"
+            :to="`/admin/payments/${$route.params.id}/edit`"
+          >
+            <pencil-icon class="h-5 mr-3 text-gray-600" />
+            {{ $t('general.edit') }}
+          </sw-dropdown-item>
+
+          <sw-dropdown-item @click="removePayment($route.params.id)">
+            <trash-icon class="h-5 mr-3 text-gray-600" />
+            {{ $t('general.delete') }}
+          </sw-dropdown-item>
+        </sw-dropdown>
+      </template>
+    </sw-page-header>
+
+    <!-- sidebar -->
+    <div
+      class="fixed top-0 left-0 hidden h-full pt-16 pb-4 ml-56 bg-white xl:ml-64 w-88 xl:block"
+    >
+      <div
+        class="flex items-center justify-between px-4 pt-8 pb-2 border border-gray-200 border-solid height-full"
+      >
+        <sw-input
           v-model="searchData.searchText"
           :placeholder="$t('general.search')"
-          input-class="inv-search"
-          icon="search"
           type="text"
-          align-icon="right"
+          class="mb-6"
+          variant="gray"
           @input="onSearch"
-        />
-        <div class="btn-group ml-3" role="group" aria-label="First group">
-          <v-dropdown
-            :close-on-select="false"
-            align="left"
-            class="filter-container"
-          >
-            <a slot="activator" href="#">
-              <base-button
-                class="inv-button inv-filter-fields-btn"
-                color="default"
-                size="medium"
-              >
-                <font-awesome-icon icon="filter" />
-              </base-button>
-            </a>
-            <div class="filter-title">
+        >
+          <search-icon slot="rightIcon" class="h-5" />
+        </sw-input>
+
+        <div class="flex mb-6 ml-3" role="group" aria-label="First group">
+          <sw-dropdown position="bottom-start">
+            <sw-button slot="activator" size="md" variant="gray-light">
+              <filter-icon class="h-5" />
+            </sw-button>
+
+            <div
+              class="px-2 pb-2 mb-1 text-sm border-b border-gray-200 border-solid"
+            >
               {{ $t('general.sort_by') }}
             </div>
-            <div class="filter-items">
-              <input
-                id="filter_invoice_number"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="invoice_number"
-                @change="onSearch"
-              />
-              <label class="inv-label" for="filter_invoice_number">{{
-                $t('invoices.title')
-              }}</label>
-            </div>
-            <div class="filter-items">
-              <input
-                id="filter_payment_date"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="payment_date"
-                @change="onSearch"
-              />
-              <label class="inv-label" for="filter_payment_date">{{
-                $t('payments.date')
-              }}</label>
-            </div>
-            <div class="filter-items">
-              <input
-                id="filter_payment_number"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="payment_number"
-                @change="onSearch"
-              />
-              <label class="inv-label" for="filter_payment_number">{{
-                $t('payments.payment_number')
-              }}</label>
-            </div>
-          </v-dropdown>
-          <base-button
+
+            <sw-dropdown-item class="flex cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  :label="$t('invoices.title')"
+                  size="sm"
+                  id="filter_invoice_number"
+                  v-model="searchData.orderByField"
+                  name="filter"
+                  value="invoice_number"
+                  @change="onSearch"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+
+            <sw-dropdown-item class="flex cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  :label="$t('payments.date')"
+                  size="sm"
+                  id="filter_payment_date"
+                  v-model="searchData.orderByField"
+                  name="filter"
+                  value="payment_date"
+                  @change="onSearch"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+
+            <sw-dropdown-item class="flex cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  id="filter_payment_number"
+                  :label="$t('payments.payment_number')"
+                  v-model="searchData.orderByField"
+                  size="sm"
+                  name="filter"
+                  value="payment_number"
+                  @change="onSearch"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+          </sw-dropdown>
+
+          <sw-button
+            class="ml-1"
             v-tooltip.top-center="{ content: getOrderName }"
-            class="inv-button inv-filter-sorting-btn"
-            color="default"
-            size="medium"
+            size="md"
+            variant="gray-light"
             @click="sortData"
           >
-            <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
-            <font-awesome-icon v-else icon="sort-amount-down" />
-          </base-button>
+            <sort-ascending-icon v-if="getOrderBy" class="h-5" />
+            <sort-descending-icon v-else class="h-5" />
+          </sw-button>
         </div>
       </div>
-      <base-loader v-if="isSearching" />
-      <div v-else class="side-content">
+
+      <base-loader v-if="isSearching" :show-bg-overlay="true" />
+
+      <div
+        v-else
+        class="h-full pb-32 overflow-y-scroll border-l border-gray-200 border-solid sw-scroll"
+      >
         <router-link
           v-for="(payment, index) in payments"
           :to="`/admin/payments/${payment.id}/view`"
+          :id="'payment-' + payment.id"
           :key="index"
-          class="side-payment"
+          :class="[
+            'flex justify-between p-4 items-center cursor-pointer hover:bg-gray-100 border-l-4 border-transparent',
+            {
+              'bg-gray-100 border-l-4 border-primary-500 border-solid': hasActiveUrl(
+                payment.id
+              ),
+            },
+          ]"
+          style="border-bottom: 1px solid rgba(185, 193, 209, 0.41)"
         >
-          <div class="left">
-            <div class="inv-name">{{ payment.user.name }}</div>
-            <div class="inv-number">{{ payment.payment_number }}</div>
-            <div class="inv-number">{{ payment.invoice_number }}</div>
-          </div>
-          <div class="right">
+          <div class="flex-2">
             <div
-              class="inv-amount"
+              class="pr-2 mb-2 text-sm not-italic font-normal leading-5 text-black capitalize truncate"
+            >
+              {{ payment.user.name }}
+            </div>
+
+            <div
+              class="mb-1 text-xs not-italic font-medium leading-5 text-gray-500 capitalize"
+            >
+              {{ payment.payment_number }}
+            </div>
+
+            <div
+              class="mb-1 text-xs not-italic font-medium leading-5 text-gray-500 capitalize"
+            >
+              {{ payment.invoice_number }}
+            </div>
+          </div>
+
+          <div class="flex-1 whitespace-no-wrap right">
+            <div
+              class="mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
               v-html="$utils.formatMoney(payment.amount, payment.user.currency)"
             />
-            <div class="inv-date">{{ payment.formattedPaymentDate }}</div>
-            <!-- <div class="inv-number">{{ payment.payment_method.name }}</div> -->
+
+            <div class="text-sm text-right text-gray-500 non-italic">
+              {{ payment.formattedPaymentDate }}
+            </div>
           </div>
         </router-link>
-        <p v-if="!payments.length" class="no-result">
+
+        <p
+          v-if="!payments.length"
+          class="flex justify-center px-4 mt-5 text-sm text-gray-600"
+        >
           {{ $t('payments.no_matching_payments') }}
         </p>
       </div>
     </div>
-    <div class="payment-view-page-container">
-      <iframe :src="`${shareableLink}`" class="frame-style" />
+
+    <!-- pdf -->
+    <div
+      class="flex flex-col min-h-0 mt-8 overflow-hidden"
+      style="height: 75vh"
+    >
+      <iframe
+        :src="`${shareableLink}`"
+        class="flex-1 border border-gray-400 border-solid rounded-md"
+      />
     </div>
-  </div>
+  </base-page>
 </template>
 <script>
+import {
+  DotsHorizontalIcon,
+  FilterIcon,
+  SortAscendingIcon,
+  SortDescendingIcon,
+  SearchIcon,
+  LinkIcon,
+  TrashIcon,
+  PencilIcon,
+} from '@vue-hero-icons/solid'
 import { mapActions, mapGetters } from 'vuex'
 const _ = require('lodash')
 export default {
-  data () {
+  components: {
+    DotsHorizontalIcon,
+    FilterIcon,
+    SortAscendingIcon,
+    SortDescendingIcon,
+    SearchIcon,
+    TrashIcon,
+    PencilIcon,
+    LinkIcon,
+  },
+  data() {
     return {
       id: null,
       count: null,
@@ -180,82 +229,109 @@ export default {
       searchData: {
         orderBy: null,
         orderByField: null,
-        searchText: null
+        searchText: null,
       },
       isRequestOnGoing: false,
       isSearching: false,
       isSendingEmail: false,
-      isMarkingAsSent: false
+      isMarkingAsSent: false,
     }
   },
   computed: {
-    getOrderBy () {
-      if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
+    pageTitle() {
+      return this.payment.payment_number
+    },
+    getOrderBy() {
+      if (
+        this.searchData.orderBy === 'asc' ||
+        this.searchData.orderBy == null
+      ) {
         return true
       }
       return false
     },
-    getOrderName () {
+    getOrderName() {
       if (this.getOrderBy) {
         return this.$t('general.ascending')
       }
       return this.$t('general.descending')
     },
-    shareableLink () {
+    shareableLink() {
       return `/payments/pdf/${this.payment.unique_hash}`
-    }
+    },
   },
+
   watch: {
-    $route (to, from) {
+    $route(to, from) {
       this.loadPayment()
-    }
+    },
   },
-  created () {
+
+  created() {
     this.loadPayments()
     this.loadPayment()
     this.onSearch = _.debounce(this.onSearch, 500)
   },
+
   methods: {
-    // ...mapActions('invoice', [
-    //   'fetchInvoices',
-    //   'getRecord',
-    //   'searchInvoice',
-    //   'markAsSent',
-    //   'sendEmail',
-    //   'deleteInvoice',
-    //   'fetchViewInvoice'
-    // ]),
     ...mapActions('payment', [
       'fetchPayments',
       'fetchPayment',
       'sendEmail',
       'deletePayment',
-      'searchPayment'
+      'searchPayment',
     ]),
-    async loadPayments () {
-      let response = await this.fetchPayments()
+    ...mapActions('modal', ['openModal']),
+
+    hasActiveUrl(id) {
+      return this.$route.params.id == id
+    },
+
+    async loadPayments() {
+      let response = await this.fetchPayments({ limit: 'all' })
       if (response.data) {
         this.payments = response.data.payments.data
       }
+      setTimeout(() => {
+        this.scrollToPayment()
+      }, 500)
     },
-    async loadPayment () {
+    scrollToPayment() {
+      const el = document.getElementById(`payment-${this.$route.params.id}`)
+
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        el.classList.add('shake')
+      }
+    },
+    async loadPayment() {
       let response = await this.fetchPayment(this.$route.params.id)
 
       if (response.data) {
         this.payment = response.data.payment
       }
     },
-    async onSearch () {
+    async onSearch() {
       let data = ''
-      if (this.searchData.searchText !== '' && this.searchData.searchText !== null && this.searchData.searchText !== undefined) {
+      if (
+        this.searchData.searchText !== '' &&
+        this.searchData.searchText !== null &&
+        this.searchData.searchText !== undefined
+      ) {
         data += `search=${this.searchData.searchText}&`
       }
 
-      if (this.searchData.orderBy !== null && this.searchData.orderBy !== undefined) {
+      if (
+        this.searchData.orderBy !== null &&
+        this.searchData.orderBy !== undefined
+      ) {
         data += `orderBy=${this.searchData.orderBy}&`
       }
 
-      if (this.searchData.orderByField !== null && this.searchData.orderByField !== undefined) {
+      if (
+        this.searchData.orderByField !== null &&
+        this.searchData.orderByField !== undefined
+      ) {
         data += `orderByField=${this.searchData.orderByField}`
       }
       this.isSearching = true
@@ -265,7 +341,7 @@ export default {
         this.payments = response.data.payments.data
       }
     },
-    sortData () {
+    sortData() {
       if (this.searchData.orderBy === 'asc') {
         this.searchData.orderBy = 'desc'
         this.onSearch()
@@ -275,57 +351,44 @@ export default {
       this.onSearch()
       return true
     },
-    async onPaymentSend () {
-      window.swal({
-        title: this.$tc('general.are_you_sure'),
-        text: this.$tc('payments.confirm_send_payment'),
-        icon: '/assets/icon/paper-plane-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          this.isSendingEmail = true
-          let response = await this.sendEmail({id: this.payment.id})
-          this.isSendingEmail = false
-          if (response.data.success) {
-            window.toastr['success'](this.$tc('payments.send_payment_successfully'))
-            return true
-          }
-          if (response.data.error === 'user_email_does_not_exist') {
-            window.toastr['error'](this.$tc('payments.user_email_does_not_exist'))
-            return false
-          }
-          window.toastr['error'](this.$tc('payments.something_went_wrong'))
-        }
+    async onPaymentSend() {
+      this.openModal({
+        title: this.$t('payments.send_payment'),
+        componentName: 'SendPaymentModal',
+        id: this.payment.id,
+        data: this.payment,
+        variant: 'lg',
       })
     },
-    copyPdfUrl () {
+    copyPdfUrl() {
       let pdfUrl = `${window.location.origin}/payments/pdf/${this.payment.unique_hash}`
 
       let response = this.$utils.copyTextToClipboard(pdfUrl)
 
-      window.toastr['success'](this.$tc('Copied PDF url to clipboard!'))
+      window.toastr['success'](this.$t('general.copied_pdf_url_clipboard'))
     },
-    async removePayment (id) {
+    async removePayment(id) {
       this.id = id
-      window.swal({
-        title: 'Deleted',
-        text: 'you will not be able to recover this payment!',
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          let request = await this.deletePayment(this.id)
-          if (request.data.success) {
-            window.toastr['success'](this.$tc('payments.deleted_message', 1))
-            this.$router.push('/admin/payments')
-          } else if (request.data.error) {
-            window.toastr['error'](request.data.message)
+      window
+        .swal({
+          title: this.$t('general.are_you_sure'),
+          text: 'you will not be able to recover this payment!',
+          icon: '/assets/icon/trash-solid.svg',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(async (value) => {
+          if (value) {
+            let request = await this.deletePayment({ ids: [id] })
+            if (request.data.success) {
+              window.toastr['success'](this.$tc('payments.deleted_message', 1))
+              this.$router.push('/admin/payments')
+            } else if (request.data.error) {
+              window.toastr['error'](request.data.message)
+            }
           }
-        }
-      })
-    }
-  }
+        })
+    },
+  },
 }
 </script>

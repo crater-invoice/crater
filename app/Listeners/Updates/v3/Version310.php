@@ -7,8 +7,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Crater\Listeners\Updates\Listener;
 use Illuminate\Database\Schema\Blueprint;
 use Crater\Events\UpdateFinished;
-use Crater\Setting;
-use Crater\Currency;
+use Crater\Models\Setting;
+use Crater\Models\Currency;
 use Schema;
 use Artisan;
 

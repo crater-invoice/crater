@@ -1,181 +1,161 @@
 <?php
-namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\User;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
+use Crater\Models\User;
+use Crater\Models\Invoice;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use Crater\Http\Requests\CustomerRequest;
+use Crater\Http\Controllers\V1\Customer\CustomersController;
+use function Pest\Laravel\{postJson, putJson, getJson};
 
-class CustomerTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-    protected $user;
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
+test('get customers', function () {
+    $response = getJson('api/v1/customers?page=1');
+
+    $response->assertOk();
+});
+
+test('customer stats', function () {
+    $customer = User::factory()->create([
+        'role' => 'customer'
+    ]);
+
+    $invoice = Invoice::factory()->create([
+        'user_id' => $customer->id
+    ]);
+
+    $response = getJson("api/v1/customers/{$customer->id}/stats");
+
+    $response->assertStatus(200);
+});
+
+test('create customer', function () {
+    $customer = User::factory()->raw([
+        'password' => 'secret',
+        'role' => 'customer'
+    ]);
+
+    $response = postJson('api/v1/customers', $customer);
+
+    $this->assertDatabaseHas('users', [
+        'name' => $customer['name'],
+        'email' => $customer['email'],
+        'role' => $customer['role'],
+        'company_id' => $customer['company_id']
+    ]);
+
+    $response
+        ->assertOk()
+        ->assertJson([
+            'success' => true
         ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
-    }
+});
 
-    /** @test */
-    public function testGetCustomers()
-    {
-        $response = $this->json('GET', 'api/customers?page=1');
+test('store validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        CustomersController::class,
+        'store',
+        CustomerRequest::class
+    );
+});
 
-        $response->assertOk();
-    }
+test('get customer', function () {
+    $customer = User::factory()->create([
+        'role' => 'customer'
+    ]);
 
-    /** @test */
-    public function testCreateCustomer()
-    {
-        $customer = factory(User::class)->raw([
-            'password' => 'secret',
-            'role' => 'customer'
+    $response = getJson("api/v1/customers/{$customer->id}");
+
+    $this->assertDatabaseHas('users', [
+        'id' => $customer->id,
+        'name' => $customer['name'],
+        'email' => $customer['email'],
+        'role' => $customer['role'],
+        'company_id' => $customer['company_id']
+    ]);
+
+    $response->assertOk();
+});
+
+test('update customer', function () {
+    $customer = User::factory()->create([
+        'role' => 'customer'
+    ]);
+
+    $customer1  = User::factory()->raw([
+        'role' => 'customer',
+        'name' => 'new name'
+    ]);
+
+    $response = putJson('api/v1/customers/' . $customer->id, $customer1);
+
+    $this->assertDatabaseHas('users', [
+        'id' => $customer->id,
+        'name' => $customer1['name'],
+        'email' => $customer1['email'],
+        'role' => $customer1['role'],
+        'company_id' => $customer1['company_id']
+    ]);
+
+    $response
+        ->assertOk()
+        ->assertJson([
+            'success' => true
         ]);
+});
 
-        $response = $this->json('POST', 'api/customers', $customer);
+test('update validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        CustomersController::class,
+        'update',
+        CustomerRequest::class
+    );
+});
 
-        $newCustomer = $response->decodeResponseJson()['customer'];
+test('search customers', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'search' => 'doe',
+        'email' => '.com'
+    ];
 
-        $this->assertEquals($customer['name'], $newCustomer['name']);
-        $this->assertEquals($customer['email'], $newCustomer['email']);
-        $this->assertEquals($customer['role'], $newCustomer['role']);
-        $this->assertEquals($customer['phone'], $newCustomer['phone']);
-        $this->assertEquals($customer['company_name'], $newCustomer['company_name']);
-        $this->assertEquals($customer['contact_name'], $newCustomer['contact_name']);
-        $this->assertEquals($customer['website'], $newCustomer['website']);
-        $this->assertEquals($customer['enable_portal'], $newCustomer['enable_portal']);
+    $queryString = http_build_query($filters, '', '&');
 
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
+    $response = getJson('api/v1/customers?' . $queryString);
 
-    /** @test */
-    public function testCustomerNameRequired()
-    {
-        $customer = factory(User::class)->raw([
-            'name' => '',
-            'password' => 'secret',
-            'role' => 'customer'
+    $response->assertOk();
+});
+
+test('delete multiple customer', function () {
+    $customers = User::factory()->count(4)->create([
+        'role' => 'customer'
+    ]);
+
+    $ids = $customers->pluck('id');
+
+    $data = [
+        'ids' => $ids
+    ];
+
+    $response = postJson('api/v1/customers/delete', $data);
+
+    $response
+        ->assertOk()
+        ->assertJson([
+            'success' => true
         ]);
-
-        $response = $this->json('POST', 'api/customers', $customer);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
-
-    /** @test */
-    public function testGetUpdateCustomerData()
-    {
-        $customer = factory(User::class)->create(['role' => 'customer']);
-
-        $response = $this->json('GET', 'api/customers/'.$customer->id.'/edit');
-
-        $newCustomer = $response->decodeResponseJson()['customer'];
-
-        $this->assertEquals($customer->name, $newCustomer['name']);
-        $this->assertEquals($customer->email, $newCustomer['email']);
-        $this->assertEquals($customer->role, $newCustomer['role']);
-        $this->assertEquals($customer->phone, $newCustomer['phone']);
-        $this->assertEquals($customer->company_name, $newCustomer['company_name']);
-        $this->assertEquals($customer->contact_name, $newCustomer['contact_name']);
-        $this->assertEquals($customer->website, $newCustomer['website']);
-        $this->assertEquals($customer->enable_portal, $newCustomer['enable_portal']);
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testUpdateCustomer()
-    {
-        $customer = factory(User::class)->create(['role' => 'customer']);
-        $customer2 = factory(User::class)->raw(['role' => 'customer']);
-
-        $response = $this->json('PUT', 'api/customers/'.$customer->id, $customer2);
-
-        $newCustomer = $response->decodeResponseJson()['customer'];
-
-        $this->assertEquals($customer2['name'], $newCustomer['name']);
-        $this->assertEquals($customer2['email'], $newCustomer['email']);
-        $this->assertEquals($customer2['role'], $newCustomer['role']);
-        $this->assertEquals($customer2['phone'], $newCustomer['phone']);
-        $this->assertEquals($customer2['company_name'], $newCustomer['company_name']);
-        $this->assertEquals($customer2['contact_name'], $newCustomer['contact_name']);
-        $this->assertEquals($customer2['website'], $newCustomer['website']);
-        $this->assertEquals($customer2['enable_portal'], $newCustomer['enable_portal']);
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-
-    /** @test */
-    public function testDeleteCustomer()
-    {
-        $customer = factory(User::class)->create(['role' => 'customer']);
-
-        $response = $this->json('DELETE', 'api/customers/'.$customer->id);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-
-        $deletedCustomer = User::find($customer->id);
-
-        $this->assertNull($deletedCustomer);
-    }
-
-    /** @test */
-    public function testSearchCustomers()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'search' => 'doe',
-            'email' => '.com'
-        ];
-
-        $queryString = http_build_query($filters, '', '&');
-
-        $response = $this->json('GET', 'api/customers?'.$queryString);
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testDeleteMultipleCustomer()
-    {
-        $customers = factory(User::class, 3)->create(['role' => 'customer']);
-
-        $ids = $customers->pluck('id');
-
-        $data = [
-            'id' => $ids
-        ];
-
-        $response = $this->json('POST', 'api/customers/delete', $data);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-}
+});

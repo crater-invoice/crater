@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Crater\Http\Requests\DatabaseEnvironmentRequest;
 use Crater\Http\Requests\MailEnvironmentRequest;
+use Crater\Http\Requests\DiskEnvironmentRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 
@@ -25,7 +26,7 @@ class EnvironmentManager
     }
 
     /**
-     * Save the form content to the .env file.
+     * Save the database content to the .env file.
      *
      * @param DatabaseEnvironmentRequest $request
      * @return array
@@ -33,20 +34,47 @@ class EnvironmentManager
     public function saveDatabaseVariables(DatabaseEnvironmentRequest $request)
     {
         $oldDatabaseData =
-            'DB_CONNECTION='.config('database.default')."\n".
-            'DB_HOST='.config('database.connections.'.config('database.default').'.host')."\n".
-            'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
-            'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n".
-            'DB_USERNAME='.config('database.connections.'.config('database.default').'.username')."\n".
-            'DB_PASSWORD="'.config('database.connections.'.config('database.default').'.password')."\"\n\n";
+            'DB_CONNECTION='.config('database.default')."\n";
 
         $newDatabaseData =
-            'DB_CONNECTION='.$request->database_connection."\n".
-            'DB_HOST='.$request->database_hostname."\n".
-            'DB_PORT='.$request->database_port."\n".
-            'DB_DATABASE='.$request->database_name."\n".
-            'DB_USERNAME='.$request->database_username."\n".
-            'DB_PASSWORD="'.$request->database_password."\"\n\n";
+            'DB_CONNECTION='.$request->database_connection."\n";
+
+        if($request->has('database_username') && $request->has('database_password')) {
+            if(env('DB_USERNAME') && env('DB_HOST')){
+                $oldDatabaseData = $oldDatabaseData.
+                    'DB_HOST='.config('database.connections.'.config('database.default').'.host')."\n".
+                    'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
+                    'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n".
+                    'DB_USERNAME='.config('database.connections.'.config('database.default').'.username')."\n".
+                    'DB_PASSWORD="'.config('database.connections.'.config('database.default').'.password')."\"\n\n";
+            } else {
+                $oldDatabaseData = $oldDatabaseData.
+                    'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n\n";
+            }
+
+            $newDatabaseData = $newDatabaseData.
+                'DB_HOST='.$request->database_hostname."\n".
+                'DB_PORT='.$request->database_port."\n".
+                'DB_DATABASE='.$request->database_name."\n".
+                'DB_USERNAME='.$request->database_username."\n".
+                'DB_PASSWORD="'.$request->database_password."\"\n\n";
+        } else {
+
+            if(env('DB_USERNAME') && env('DB_HOST')){
+                $oldDatabaseData = $oldDatabaseData.
+                    'DB_HOST='.config('database.connections.'.config('database.default').'.host')."\n".
+                    'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
+                    'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n".
+                    'DB_USERNAME='.config('database.connections.'.config('database.default').'.username')."\n".
+                    'DB_PASSWORD="'.config('database.connections.'.config('database.default').'.password')."\"\n\n";
+            } else {
+                $oldDatabaseData = $oldDatabaseData.
+                    'DB_DATABASE='.config('database.connections.'.config('database.default').'.database')."\n\n";
+            }
+
+            $newDatabaseData = $newDatabaseData.
+                'DB_DATABASE='.$request->database_name."\n\n";
+        }
 
         try {
 
@@ -64,7 +92,6 @@ class EnvironmentManager
                 'error_message' => $e->getMessage()
             ];
         }
-
         try {
 
             file_put_contents($this->envPath, str_replace(
@@ -76,6 +103,19 @@ class EnvironmentManager
             file_put_contents($this->envPath, str_replace(
                 'APP_URL='.config('app.url'),
                 'APP_URL='.$request->app_url,
+                file_get_contents($this->envPath)
+            ));
+
+            file_put_contents($this->envPath, str_replace(
+                'SANCTUM_STATEFUL_DOMAINS='.env('SANCTUM_STATEFUL_DOMAINS'),
+                'SANCTUM_STATEFUL_DOMAINS='.$request->app_domain,
+                file_get_contents($this->envPath)
+            ));
+
+
+            file_put_contents($this->envPath, str_replace(
+                'SESSION_DOMAIN='.config('session.domain'),
+                'SESSION_DOMAIN='.explode(':',$request->app_domain)[0],
                 file_get_contents($this->envPath)
             ));
 
@@ -91,7 +131,43 @@ class EnvironmentManager
     }
 
     /**
-     * Save the form content to the .env file.
+     *
+     * @param DatabaseEnvironmentRequest $request
+     * @return bool
+     */
+    private function checkDatabaseConnection(DatabaseEnvironmentRequest $request)
+    {
+        $connection = $request->database_connection;
+
+        $settings = config("database.connections.$connection");
+
+        $connectionArray = array_merge($settings, [
+            'driver'   => $connection,
+            'database' => $request->database_name,
+        ]);
+
+        if($request->has('database_username') && $request->has('database_password')) {
+            $connectionArray = array_merge($connectionArray, [
+                'username' => $request->database_username,
+                'password' => $request->database_password,
+                'host'     => $request->database_hostname,
+                'port'     => $request->database_port,
+            ]);
+        }
+
+        config([
+            'database' => [
+                'migrations' => 'migrations',
+                'default' => $connection,
+                'connections' => [$connection => $connectionArray],
+            ],
+        ]);
+
+        return DB::connection()->getPdo();
+    }
+
+     /**
+     * Save the mail content to the .env file.
      *
      * @param Request $request
      * @return array
@@ -290,34 +366,135 @@ class EnvironmentManager
         ];
     }
 
-    /**
+     /**
+     * Save the disk content to the .env file.
      *
-     * @param DatabaseEnvironmentRequest $request
-     * @return bool
+     * @param Request $request
+     * @return array
      */
-    private function checkDatabaseConnection(DatabaseEnvironmentRequest $request)
+    public function saveDiskVariables(DiskEnvironmentRequest $request)
     {
-        $connection = $request->database_connection;
+        $diskData = $this->getDiskData($request);
 
-        $settings = config("database.connections.$connection");
+        try {
 
-        config([
-            'database' => [
-                'migrations' => 'migrations',
-                'default' => $connection,
-                'connections' => [
-                    $connection => array_merge($settings, [
-                        'driver'   => $connection,
-                        'host'     => $request->database_hostname,
-                        'port'     => $request->database_port,
-                        'database' => $request->database_name,
-                        'username' => $request->database_username,
-                        'password' => $request->database_password,
-                    ]),
-                ],
-            ],
-        ]);
+            if(!$diskData['old_default_driver']){
+                file_put_contents($this->envPath, $diskData['default_driver'], FILE_APPEND);
+            } else {
+                file_put_contents($this->envPath, str_replace(
+                    $diskData['old_default_driver'],
+                    $diskData['default_driver'],
+                    file_get_contents($this->envPath)
+                ));
+            }
 
-        return DB::connection()->getPdo();
+            if(!$diskData['old_disk_data']){
+                file_put_contents($this->envPath, $diskData['new_disk_data'], FILE_APPEND);
+            } else {
+
+                file_put_contents($this->envPath, str_replace(
+                    $diskData['old_disk_data'],
+                    $diskData['new_disk_data'],
+                    file_get_contents($this->envPath)
+                ));
+            }
+
+        } catch (Exception $e) {
+            return [
+                'error' => 'disk_variables_save_error'
+            ];
+        }
+
+        return [
+            'success' => 'disk_variables_save_successfully'
+        ];
+    }
+
+    private function getDiskData($request)
+    {
+        $oldDefaultDriver = "";
+        $defaultDriver = "";
+        $oldDiskData = "";
+        $newDiskData = "";
+
+        if($request->default_driver) {
+            if(env('FILESYSTEM_DRIVER') !== NULL) {
+                $defaultDriver = "\n".'FILESYSTEM_DRIVER='.$request->default_driver."\n";
+
+                $oldDefaultDriver =
+                    "\n".'FILESYSTEM_DRIVER='.config('filesystems.default')."\n";
+            } else {
+                $defaultDriver =
+                    "\n".'FILESYSTEM_DRIVER='.$request->default_driver."\n";
+            }
+        }
+
+        switch ($request->selected_driver) {
+            case 's3':
+                if(env('AWS_KEY') !== NULL){
+                    $oldDiskData = "\n".
+                        'AWS_KEY='.config('filesystems.disks.s3.key')."\n".
+                        'AWS_SECRET="'.config('filesystems.disks.s3.secret')."\"\n".
+                        'AWS_REGION='.config('filesystems.disks.s3.region')."\n".
+                        'AWS_BUCKET='.config('filesystems.disks.s3.bucket')."\n".
+                        'AWS_ROOT='.config('filesystems.disks.s3.root')."\n";
+                }
+
+                $newDiskData = "\n".
+                    'AWS_KEY='.$request->aws_key."\n".
+                    'AWS_SECRET="'.$request->aws_secret."\"\n".
+                    'AWS_REGION='.$request->aws_region."\n".
+                    'AWS_BUCKET='.$request->aws_bucket."\n".
+                    'AWS_ROOT='.$request->aws_root."\n";
+
+                break;
+
+            case 'doSpaces':
+                if(env('DO_SPACES_KEY') !== NULL){
+                    $oldDiskData = "\n".
+                        'DO_SPACES_KEY='.config('filesystems.disks.doSpaces.key')."\n".
+                        'DO_SPACES_SECRET="'.config('filesystems.disks.doSpaces.secret')."\"\n".
+                        'DO_SPACES_REGION='.config('filesystems.disks.doSpaces.region')."\n".
+                        'DO_SPACES_BUCKET='.config('filesystems.disks.doSpaces.bucket')."\n".
+                        'DO_SPACES_ENDPOINT='.config('filesystems.disks.doSpaces.endpoint')."\n";
+                        'DO_SPACES_ROOT='.config('filesystems.disks.doSpaces.root')."\n";
+                }
+
+                $newDiskData = "\n".
+                    'DO_SPACES_KEY='.$request->do_spaces_key."\n".
+                    'DO_SPACES_SECRET="'.$request->do_spaces_secret."\"\n".
+                    'DO_SPACES_REGION='.$request->do_spaces_region."\n".
+                    'DO_SPACES_BUCKET='.$request->do_spaces_bucket."\n".
+                    'DO_SPACES_ENDPOINT='.$request->do_spaces_endpoint."\n";
+                    'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
+
+                break;
+
+            case 'dropbox':
+                if(env('DROPBOX_TOKEN') !== NULL){
+                    $oldDiskData = "\n".
+                        'DROPBOX_TOKEN='.config('filesystems.disks.dropbox.token')."\n".
+                        'DROPBOX_KEY='.config('filesystems.disks.dropbox.key')."\n".
+                        'DROPBOX_SECRET="'.config('filesystems.disks.dropbox.secret')."\"\n".
+                        'DROPBOX_APP='.config('filesystems.disks.dropbox.app')."\n".
+                        'DROPBOX_ROOT='.config('filesystems.disks.dropbox.root')."\n";
+                }
+
+                $newDiskData = "\n".
+                    'DROPBOX_TOKEN='.$request->dropbox_token."\n".
+                    'DROPBOX_KEY='.$request->dropbox_key."\n".
+                    'DROPBOX_SECRET="'.$request->dropbox_secret."\"\n".
+                    'DROPBOX_APP='.$request->dropbox_app."\n".
+                    'DROPBOX_ROOT='.$request->dropbox_root."\n";
+
+                break;
+        }
+
+        return [
+            'old_disk_data' => $oldDiskData,
+            'new_disk_data' => $newDiskData,
+            'default_driver' => $defaultDriver,
+            'old_default_driver' => $oldDefaultDriver
+        ];
     }
 }

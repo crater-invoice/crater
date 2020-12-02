@@ -1,9 +1,5 @@
 <template>
-  <form
-    id="registerForm"
-    action=""
-    method="post"
-  >
+  <form id="registerForm" action="" method="post">
     <!-- {{ csrf_field() }} -->
     <div class="form-group">
       <input
@@ -11,7 +7,7 @@
         type="email"
         class="form-control form-control-danger"
         name="email"
-      >
+      />
     </div>
     <div class="form-group">
       <input
@@ -20,7 +16,7 @@
         class="form-control form-control-danger"
         placeholder="Enter Password"
         name="password"
-      >
+      />
     </div>
     <div class="form-group">
       <input
@@ -28,30 +24,32 @@
         class="form-control form-control-danger"
         placeholder="Retype Password"
         name="password_confirmation"
-      >
+      />
     </div>
-    <base-button class="btn btn-login btn-full">{{ $t('login.register') }}</base-button>
+    <sw-button class="btn btn-login btn-full">{{
+      $t('login.register')
+    }}</sw-button>
   </form>
 </template>
 <script type="text/babel">
 export default {
-  data () {
+  data() {
     return {
       name: '',
       email: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
     }
   },
   methods: {
-    validateBeforeSubmit (e) {
+    validateBeforeSubmit(e) {
       this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line
           alert('Form Submitted!')
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>

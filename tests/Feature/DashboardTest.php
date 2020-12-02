@@ -1,47 +1,23 @@
 <?php
-namespace Tests\Feature;
+use Crater\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use function Pest\Laravel\getJson;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\User;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-class DashboardTest extends TestCase
-{
-    use RefreshDatabase;
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-    protected $user;
+getJson('api/v1/dashboard')->assertOk();
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
-        ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
-    }
-
-    /** @test */
-    public function testDashboard()
-    {
-        $response = $this->json('GET', 'api/dashboard');
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testPieChartData()
-    {
-        $response = $this->json('GET', 'api/dashboard/expense/chart');
-
-        $response->assertOk();
-    }
-}
+getJson('api/v1/search?name=ab')->assertOk();

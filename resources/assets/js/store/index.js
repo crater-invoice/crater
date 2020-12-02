@@ -10,28 +10,41 @@ import user from './modules/user'
 import category from './modules/category'
 import customer from './modules/customer'
 import company from './modules/company'
-import companyInfo from './modules/settings/company-info'
 import dashboard from './modules/dashboard'
 import estimate from './modules/estimate'
 import expense from './modules/expense'
 import invoice from './modules/invoice'
-import userProfile from './modules/settings/user-profile'
 import payment from './modules/payment'
-import preferences from './modules/settings/preferences'
 import item from './modules/item'
 import modal from './modules/modal'
-import currency from './modules/currency'
-import general from './modules/settings/general'
+import customFields from './modules/custom-field'
 import taxType from './modules/tax-type'
-import profitLossReport from './modules/reports/profit-loss'
-import salesReport from './modules/reports/sales'
-import ExpensesReport from './modules/reports/expense'
-import TaxReport from './modules/reports/tax'
+import users from './modules/users'
+import backup from './modules/backup'
+import disks from './modules/disk'
+import estimateTemplate from './modules/estimate-template'
+import invoiceTemplate from './modules/invoice-template'
+import search from './modules/search'
+import notes from './modules/notes'
 
 Vue.use(Vuex)
 
 const initialState = {
-  isAppLoaded: false
+  languages: [],
+
+  timeZones: [],
+
+  dateFormats: [],
+
+  fiscalYears: [],
+
+  currencies: [],
+
+  countries: [],
+
+  isAppLoaded: false,
+
+  isSidebarOpen: false,
 }
 
 export default new Vuex.Store({
@@ -46,7 +59,6 @@ export default new Vuex.Store({
     user,
     category,
     company,
-    companyInfo,
     customer,
     dashboard,
     estimate,
@@ -54,15 +66,15 @@ export default new Vuex.Store({
     invoice,
     expense,
     modal,
-    userProfile,
-    currency,
+    customFields,
     payment,
-    preferences,
-    general,
     taxType,
-    profitLossReport,
-    salesReport,
-    ExpensesReport,
-    TaxReport
-  }
+    users,
+    backup,
+    disks,
+    estimateTemplate,
+    invoiceTemplate,
+    search,
+    notes,
+  },
 })

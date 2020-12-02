@@ -1,18 +1,18 @@
 <script>
 let mailgunComponent = {
-  template: '#mailgun-template'
+  template: '#mailgun-template',
 }
 
 let sendgridComponent = {
-  template: '#sendgrid-template'
+  template: '#sendgrid-template',
 }
 
 let sparkPostComponent = {
-  template: '#sparkpost-template'
+  template: '#sparkpost-template',
 }
 
 let smtpComponent = {
-  template: '#smtp-template'
+  template: '#smtp-template',
 }
 
 export default {
@@ -20,26 +20,26 @@ export default {
     mailgun: mailgunComponent,
     sendgrid: sendgridComponent,
     sparkpost: sparkPostComponent,
-    smtp: smtpComponent
+    smtp: smtpComponent,
   },
   props: {
     view: {
       type: Array,
       require: true,
-      default: Array
-    }
+      default: Array,
+    },
   },
-  data () {
+  data() {
     return {
-      currentView: 'mailgun'
+      currentView: 'mailgun',
     }
   },
-  mounted () {
+  mounted() {
     let views = ['mailgun', 'sendgrid', 'sparkpost', 'smtp']
 
     if (this.view && views.indexOf(this.view) > -1) {
       this.currentView = this.view
-    };
-  }
+    }
+  },
 }
 </script>

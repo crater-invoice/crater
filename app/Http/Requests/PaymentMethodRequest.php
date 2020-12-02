@@ -25,7 +25,10 @@ class PaymentMethodRequest extends FormRequest
     public function rules()
     {
         $data = [
-            'name' => 'required|unique:payment_methods,name'
+            'name' => [
+                'required',
+                'unique:payment_methods,name'
+            ]
         ];
 
         if ($this->getMethod() == 'PUT') {

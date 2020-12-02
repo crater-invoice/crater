@@ -13,6 +13,14 @@ export const openModal = ({ commit, dispatch, state }, payload) => {
     commit(types.SET_DATA, payload.data)
   }
 
+  if (payload.refreshData) {
+    commit(types.SET_REFRESH_DATA, payload.refreshData)
+  }
+
+  if (payload.variant) {
+    commit(types.SET_VARIANT, payload.variant)
+  }
+
   if (payload.size) {
     commit(types.SET_SIZE, payload.size)
   }

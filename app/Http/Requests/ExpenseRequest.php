@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,9 +24,21 @@ class ExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            'expense_date' => 'required',
-            'expense_category_id' => 'required',
-            'amount' => 'required'
+            'expense_date' => [
+                'required'
+            ],
+            'expense_category_id' => [
+                'required'
+            ],
+            'amount' => [
+                'required'
+            ],
+            'user_id' => [
+                'nullable'
+            ],
+            'notes' => [
+                'nullable'
+            ]
         ];
     }
 }

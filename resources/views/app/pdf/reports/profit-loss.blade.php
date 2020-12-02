@@ -172,7 +172,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="sub-heading-text">PROFIT & LOSS REPORT</p>
+                    <p class="sub-heading-text">@lang('pdf_profit_loss_label')</p>
                 </td>
             </tr>
         </table>
@@ -180,14 +180,14 @@
         <table class="income-table">
             <tr>
                 <td>
-                    <p class="income-title">Income</p>
+                    <p class="income-title">@lang("pdf_income_label")</p>
                 </td>
                 <td>
                     <p class="income-amount">{!! format_money_pdf($income) !!}</p>
                 </td>
             </tr>
         </table>
-        <p class="expenses-title">Expenses</p>
+        <p class="expenses-title">@lang('pdf_expenses_label')</p>
         <div class="expenses-table-container">
             <table class="expenses-table">
                 @foreach ($expenseCategories as $expenseCategory)
@@ -219,7 +219,7 @@
     <table class="report-footer">
         <tr>
             <td>
-                <p class="report-footer-label">NET PROFIT</p>
+                <p class="report-footer-label">@lang("pdf_net_profit_label")</p>
             </td>
             <td>
                 <p class="report-footer-value">{!! format_money_pdf(($income-$totalExpense)) !!}</p>

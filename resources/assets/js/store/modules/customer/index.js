@@ -6,7 +6,8 @@ const initialState = {
   customers: [],
   totalCustomers: 0,
   selectAllField: false,
-  selectedCustomers: []
+  selectedCustomers: [],
+  selectedViewCustomer: {},
 }
 
 export default {
@@ -18,5 +19,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

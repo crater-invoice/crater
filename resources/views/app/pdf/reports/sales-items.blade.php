@@ -150,12 +150,12 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="sub-heading-text text-center">Sales Report: By Item</p>
+                    <p class="sub-heading-text text-center">@lang('pdf_item_sales_label')</p>
                 </td>
             </tr>
         </table>
         
-        <p class="sales-items-title">Items</p>
+        <p class="sales-items-title">@lang('pdf_items_label')</p>
         @foreach ($items as $item)
             <div class="items-table-container">
                 <table class="items-table">
@@ -190,7 +190,7 @@
     <table class="report-footer">
         <tr>
             <td>
-                <p class="report-footer-label">TOTAL SALES</p>
+                <p class="report-footer-label">@lang('pdf_total_sales_label')</p>
             </td>
             <td>
                 <p class="report-footer-value">

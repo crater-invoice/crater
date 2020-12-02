@@ -6,7 +6,6 @@
 
 <script>
 import Chart from 'chart.js'
-import Utils from '../../helpers/utilities'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -54,7 +53,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('currency', ['defaultCurrency']),
+    ...mapGetters('company', ['defaultCurrency']),
   },
 
   watch: {

@@ -43,15 +43,15 @@ class Updater
         return $data;
     }
 
-    public static function download($new_version)
+    public static function download($new_version, $is_cmd = 0)
     {
         $data = null;
         $path = null;
 
         if (env('APP_ENV') === 'development') {
-            $url = 'downloads/file/' . $new_version . '?type=update&is_dev=1';
+            $url = 'downloads/file/' . $new_version . '?type=update&is_dev=1&is_cmd='. $is_cmd;
         } else {
-            $url = 'downloads/file/' . $new_version . '?type=update';
+            $url = 'downloads/file/' . $new_version . '?type=update&is_cmd='. $is_cmd;
         }
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);

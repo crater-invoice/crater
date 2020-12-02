@@ -1,12 +1,6 @@
 @component('mail::message')
-# Test Email
+# Test Email from Crater
 
 {{ $my_message }}
 
-@component('mail::button', ['url' => ''])
-Test
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
 @endcomponent

@@ -7,7 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Database\Schema\Blueprint;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
-use Crater\Setting;
+use Crater\Models\Setting;
 
 class Version201 extends Listener
 {

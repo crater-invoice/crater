@@ -1,96 +1,184 @@
 <template>
-  <div class="sidebar-left">
-    <div class="sidebar-body scroll-pane">
-      <div class="side-nav">
-        <div
-          v-for="(menuItems, index) in menu"
+  <div>
+    <!-- OVERLAY -->
+    <sw-transition type="fade">
+      <div
+        v-show="isSidebarOpen"
+        class="fixed top-0 left-0 z-20 w-full h-full"
+        style="background: rgba(48, 75, 88, 0.5)"
+        @click.prevent="toggleSidebar"
+      ></div>
+    </sw-transition>
+
+    <!-- DESKTOP MENU -->
+    <div
+      class="hidden w-56 h-screen pb-32 overflow-y-auto bg-white border-r border-gray-200 border-solid xl:w-64 sw-scroll md:block"
+    >
+      <sw-list
+        v-for="(menuItems, groupIndex) in menuItems"
+        :key="groupIndex"
+        variant="sidebar"
+      >
+        <sw-list-item
+          v-for="(item, index) in menuItems"
+          :title="$t(item.title)"
           :key="index"
-          class="menu-group"
+          :active="hasActiveUrl(item.route)"
+          :to="item.route"
+          tag-name="router-link"
         >
-          <router-link
-            v-for="(item, index1) in menuItems"
-            :key="index1"
-            :to="item.route"
-            class="menu-item"
-            @click.native="Toggle"
-          >
-            <font-awesome-icon :icon="item.icon" class="icon menu-icon" /> <span class="ml-3 menu-text">{{ $t(item.title) }}</span>
-          </router-link>
-        </div>
-      </div>
+          <component slot="icon" :is="item.icon" class="h-5" />
+        </sw-list-item>
+      </sw-list>
     </div>
+
+    <!-- MOBILE MENU -->
+    <transition
+      enter-class="-translate-x-full"
+      enter-active-class="transition duration-300 ease-in-out transform"
+      enter-to-class="translate-x-0"
+      leave-active-class="transition duration-300 ease-in-out transform"
+      leave-class="translate-x-0"
+      leave-to-class="-translate-x-full"
+    >
+      <div
+        v-show="isSidebarOpen"
+        class="fixed top-0 z-30 w-64 h-screen pt-16 pb-32 overflow-y-auto bg-white border-r border-gray-200 border-solid sw-scroll md:hidden"
+      >
+        <sw-list
+          v-for="(menuItems, groupIndex) in menuItems"
+          :key="groupIndex"
+          variant="sidebar"
+        >
+          <sw-list-item
+            v-for="(item, index) in menuItems"
+            :title="$t(item.title)"
+            :key="index"
+            :active="hasActiveUrl(item.route)"
+            :to="item.route"
+            tag-name="router-link"
+            @click.native="toggleSidebar"
+          >
+            <component slot="icon" :is="item.icon" class="h-5" />
+          </sw-list-item>
+        </sw-list>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script type="text/babel">
-export default {
-  data () {
-    return {
-      sidebar: 'sidebar',
-      menu: [
+import {
+  HomeIcon,
+  UserIcon,
+  StarIcon,
+  DocumentIcon,
+  DocumentTextIcon,
+  CreditCardIcon,
+  CalculatorIcon,
+  ChartBarIcon,
+  CogIcon,
+  UsersIcon,
+} from '@vue-hero-icons/outline'
+import { mapGetters, mapActions } from 'vuex'
 
+export default {
+  components: {
+    HomeIcon,
+    UserIcon,
+    StarIcon,
+    DocumentIcon,
+    DocumentTextIcon,
+    CreditCardIcon,
+    CalculatorIcon,
+    ChartBarIcon,
+    CogIcon,
+    UsersIcon,
+  },
+
+  computed: {
+    ...mapGetters(['isSidebarOpen']),
+    ...mapGetters('user', ['currentUser']),
+    menuItems() {
+      let menu = [
         [
           {
             title: 'navigation.dashboard',
-            icon: 'tachometer-alt',
-            route: '/admin/dashboard'
+            icon: 'home-icon',
+            route: '/admin/dashboard',
           },
           {
             title: 'navigation.customers',
-            icon: 'user',
-            route: '/admin/customers'
+            icon: 'user-icon',
+            route: '/admin/customers',
           },
           {
             title: 'navigation.items',
-            icon: 'star',
-            route: '/admin/items'
-          }
+            icon: 'star-icon',
+            route: '/admin/items',
+          },
         ],
-
         [
           {
             title: 'navigation.estimates',
-            icon: 'file',
-            route: '/admin/estimates'
+            icon: 'document-icon',
+            route: '/admin/estimates',
           },
           {
             title: 'navigation.invoices',
-            icon: 'file-alt',
-            route: '/admin/invoices'
+            icon: 'document-text-icon',
+            route: '/admin/invoices',
           },
           {
             title: 'navigation.payments',
-            icon: 'credit-card',
-            route: '/admin/payments'
+            icon: 'credit-card-icon',
+            route: '/admin/payments',
           },
           {
             title: 'navigation.expenses',
-            icon: 'space-shuttle',
-            route: '/admin/expenses'
-          }
+            icon: 'calculator-icon',
+            route: '/admin/expenses',
+          },
         ],
-
         [
           {
             title: 'navigation.reports',
-            icon: 'signal',
-            route: '/admin/reports'
+            icon: 'chart-bar-icon',
+            route: '/admin/reports',
           },
           {
             title: 'navigation.settings',
-            icon: 'cog',
-            route: '/admin/settings'
-          }
-        ]
-
+            icon: 'cog-icon',
+            route: '/admin/settings',
+          },
+        ],
       ]
-    }
+
+      if (this.currentUser.role == 'super admin') {
+        menu[2] = [
+          {
+            title: 'navigation.users',
+            icon: 'users-icon',
+            route: '/admin/users',
+          },
+          ...menu[2],
+        ]
+      }
+
+      return menu
+    },
   },
 
   methods: {
-    Toggle () {
-      this.$utils.toggleSidebar()
-    }
-  }
+    ...mapActions(['toggleSidebar']),
+
+    hasActiveUrl(url) {
+      this.isActive = true
+      return this.$route.path.indexOf(url) > -1
+    },
+    hasStaticUrl(url) {
+      return this.$route.path.indexOf(url)
+    },
+  },
 }
 </script>

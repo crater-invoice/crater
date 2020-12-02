@@ -9,7 +9,9 @@ const initialState = {
   componentName: '',
   id: '',
   size: 'md',
-  data: null
+  data: null,
+  refreshData: null,
+  variant: '',
 }
 
 export default {
@@ -21,5 +23,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

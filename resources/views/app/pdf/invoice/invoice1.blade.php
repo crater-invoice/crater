@@ -65,6 +65,7 @@
         }
 
         .company-address-container {
+            padding-top: 15px;
             padding-left: 30px;
             float: left;
             width: 30%;
@@ -86,6 +87,8 @@
             font-size: 12px;
             line-height: 15px;
             color: #595959;
+            width: 280px;
+            word-wrap: break-word;
         }
 
         .invoice-details-container {
@@ -111,37 +114,23 @@
 
         .shipping-address-container {
             float: right;
-            padding-left: 30px;
+            padding-left: 40px;
+            width: 160px;
         }
-
-        .shipping-address-label {
-            font-size: 12px;
-            line-height: 18px;
-            padding: 0px;
-            margin-top: 27px;
-            margin-bottom: 0px;
-        }
-
-        .shipping-address-name {
-            max-width: 160px;
-            font-size: 15px;
-            line-height: 22px;
-            padding: 0px;
-            margin: 0px;
-        }
-
         .shipping-address {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 15px;
             color: #595959;
-            padding: 0px;
+            padding: 45px 0px 0px 40px;
             margin: 0px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Billing -- */
 
         .billing-address-container {
+            padding-top: 50px;
             float: left;
             padding-left: 30px;
         }
@@ -163,12 +152,13 @@
         }
 
         .billing-address {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 15px;
             color: #595959;
-            padding: 0px;
+            padding: 45px 0px 0px 30px;
             margin: 0px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Items Table -- */
@@ -363,21 +353,21 @@
     </div>
     <div class="content-wrapper">
         <div style="padding-top: 30px">
-            <div class="company-address-container">
-                @include('app.pdf.invoice.partials.company-address')
+            <div class="company-address-container company-address">
+                {!! $company_address !!}
             </div>
             <div class="invoice-details-container">
                 <table>
                     <tr>
-                        <td class="attribute-label">Invoice Number</td>
+                        <td class="attribute-label">@lang('pdf_invoice_number')</td>
                         <td class="attribute-value"> &nbsp;{{$invoice->invoice_number}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label">Invoice Date </td>
+                        <td class="attribute-label">@lang('pdf_invoice_date')</td>
                         <td class="attribute-value"> &nbsp;{{$invoice->formattedInvoiceDate}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label">Due date</td>
+                        <td class="attribute-label">@lang('pdf_invoice_due_date')</td>
                         <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
                     </tr>
                 </table>
@@ -385,18 +375,30 @@
             <div style="clear: both;"></div>
         </div>
 
-        <div class="billing-address-container">
-            @include('app.pdf.invoice.partials.billing-address')
+        <div class="billing-address-container billing-address">
+            @if($billing_address)
+                @lang('pdf_bill_to')
+                {!! $billing_address !!}
+            @endif
         </div>
 
-        <div class="shipping-address-container" @if($invoice->user->billingaddress) style="float:left;" @else style="float:left: padding-left: 0px;" @endif>
-            @include('app.pdf.invoice.partials.shipping-address')
-            @if($invoice->user->billingaddress) <div style="clear: both;"></div> @endif
+        <div class="shipping-address-container shipping-address" @if($billing_address !== '</br>') style="float:left;" @else style="display:block; float:left: padding-left: 0px;" @endif>
+            @if($shipping_address)
+                @lang('pdf_ship_to')
+                {!! $shipping_address !!}
+            @endif
         </div>
         <div style="position: relative; clear: both;">
             @include('app.pdf.invoice.partials.table')
         </div>
-        @include('app.pdf.invoice.partials.notes')
+        <div class="notes">
+            @if($notes)
+                <div class="notes-label">
+                    @lang('pdf_notes')
+                </div>
+                {!! $notes !!}
+            @endif
+        </div>
 </body>
 
 </html>

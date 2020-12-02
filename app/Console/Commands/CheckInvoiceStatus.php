@@ -3,7 +3,7 @@ namespace Crater\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Crater\Invoice;
+use Crater\Models\Invoice;
 
 class CheckInvoiceStatus extends Command
 {

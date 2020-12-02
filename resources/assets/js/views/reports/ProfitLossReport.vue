@@ -1,55 +1,78 @@
 <template>
-  <div class="row">
-    <div class="col-md-4 reports-tab-container">
-      <div class="row">
-        <div class="col-md-8">
-          <label class="report-label">{{ $t('reports.profit_loss.date_range') }}</label>
-          <base-select
+  <div class="grid gap-8 md:grid-cols-12">
+    <div class="col-span-8 mt-12 md:col-span-4">
+      <div class="grid grid-cols-12">
+        <sw-input-group
+          :label="$t('reports.profit_loss.date_range')"
+          :error="dateRangeError"
+          class="col-span-12 md:col-span-8"
+        >
+          <sw-select
             v-model="selectedRange"
             :options="dateRange"
             :allow-empty="false"
             :show-labels="false"
+            class="mt-2"
             @input="onChangeDateRange"
           />
-          <span v-if="$v.range.$error && !$v.range.required" class="text-danger"> {{ $t('validation.required') }} </span>
-        </div>
+        </sw-input-group>
       </div>
-      <div class="row report-fields-container">
-        <div class="col-md-6 report-field-container">
-          <label class="report-label">{{ $t('reports.profit_loss.from_date') }}</label>
+
+      <div class="grid grid-cols-1 mt-6 md:gap-10 md:grid-cols-2">
+        <sw-input-group
+          :label="$t('reports.profit_loss.from_date')"
+          :error="fromDateError"
+        >
           <base-date-picker
             v-model="formData.from_date"
             :invalid="$v.formData.from_date.$error"
             :calendar-button="true"
             calendar-button-icon="calendar"
+            class="mt-2"
             @change="$v.formData.from_date.$touch()"
           />
-          <span v-if="$v.formData.from_date.$error && !$v.formData.from_date.required" class="text-danger"> {{ $t('validation.required') }} </span>
-        </div>
-        <div class="col-md-6 report-field-container">
-          <label class="report-label">{{ $t('reports.profit_loss.to_date') }}</label>
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('reports.profit_loss.to_date')"
+          :error="toDateError"
+          class="mt-5 md:mt-0"
+        >
           <base-date-picker
             v-model="formData.to_date"
             :invalid="$v.formData.to_date.$error"
             :calendar-button="true"
             calendar-button-icon="calendar"
+            class="mt-2"
             @change="$v.formData.to_date.$touch()"
           />
-          <span v-if="$v.formData.to_date.$error && !$v.formData.to_date.required" class="text-danger"> {{ $t('validation.required') }} </span>
-        </div>
+        </sw-input-group>
       </div>
-      <div class="row report-submit-button-container">
-        <div class="col-md-6">
-          <base-button outline color="theme" class="report-button" @click="getReports()">
-            {{ $t('reports.update_report') }}
-          </base-button>
-        </div>
+
+      <div class="mt-0 md:mt-8">
+        <sw-button
+          variant="primary-outline"
+          class="content-center hidden text-sm w-md md:flex"
+          @click="getReports()"
+        >
+          {{ $t('reports.update_report') }}
+        </sw-button>
       </div>
     </div>
-    <div class="col-sm-8 reports-tab-container">
-      <iframe :src="getReportUrl" class="reports-frame-style"/>
-      <a class="base-button btn btn-primary btn-lg report-view-button" @click="viewReportsPDF">
-        <font-awesome-icon icon="file-pdf" class="vue-icon icon-left svg-inline--fa fa-download fa-w-16 mr-2" /> <span>{{ $t('reports.view_pdf') }}</span>
+
+    <div class="col-span-8 mt-0 md:mt-12">
+      <iframe
+        :src="getReportUrl"
+        class="hidden w-full h-screen border-gray-100 border-solid rounded md:flex"
+      />
+
+      <a
+        class="flex items-center justify-center h-10 px-5 py-1 text-sm font-medium leading-none text-center text-white whitespace-no-wrap rounded md:hidden bg-primary-500"
+        @click="viewReportsPDF"
+      >
+        <document-text-icon />
+
+        <span>{{ $t('reports.view_pdf') }}</span>
       </a>
     </div>
   </div>
@@ -57,13 +80,16 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { DocumentTextIcon } from '@vue-hero-icons/solid'
+
 import moment from 'moment'
-import { validationMixin } from 'vuelidate'
 const { required } = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [validationMixin],
-  data () {
+  components: {
+    DocumentTextIcon,
+  },
+  data() {
     return {
       dateRange: [
         'Today',
@@ -75,62 +101,94 @@ export default {
         'Previous Month',
         'Previous Quarter',
         'Previous Year',
-        'Custom'
+        'Custom',
       ],
+
       selectedRange: 'This Month',
       range: new Date(),
       formData: {
         from_date: moment().startOf('month').toString(),
-        to_date: moment().endOf('month').toString()
+        to_date: moment().endOf('month').toString(),
       },
       url: null,
-      siteURL: null
+      siteURL: null,
     }
   },
+
   validations: {
     range: {
-      required
+      required,
     },
     formData: {
       from_date: {
-        required
+        required,
       },
       to_date: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
+
   computed: {
-    ...mapGetters('company', [
-      'getSelectedCompany'
-    ]),
-    getReportUrl () {
+    ...mapGetters('company', ['getSelectedCompany']),
+    getReportUrl() {
       return this.url
-    }
+    },
+    dateRangeError() {
+      if (!this.$v.range.$error) {
+        return ''
+      }
+
+      if (!this.$v.range.required) {
+        return this.$t('validation.required')
+      }
+    },
+
+    fromDateError() {
+      if (!this.$v.formData.from_date.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.from_date.required) {
+        return this.$t('validation.required')
+      }
+    },
+
+    toDateError() {
+      if (!this.$v.formData.to_date.$error) {
+      }
+
+      if (!this.$v.formData.to_date.required) {
+        return this.$t('validation.required')
+      }
+    },
   },
+
   watch: {
-    range (newRange) {
+    range(newRange) {
       this.formData.from_date = moment(newRange).startOf('year').toString()
       this.formData.to_date = moment(newRange).endOf('year').toString()
-    }
+    },
   },
-  mounted () {
-    this.siteURL = `/reports/profit-loss/${this.getSelectedCompany.unique_hash}`
-    this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
 
-    this.loadProfitLossLink(this.url + '&download=true')
+  mounted() {
+    this.siteURL = `/reports/profit-loss/${this.getSelectedCompany.unique_hash}`
+    this.url = `${this.siteURL}?from_date=${moment(
+      this.formData.from_date
+    ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
+      'YYYY-MM-DD'
+    )}`
   },
+
   methods: {
-    ...mapActions('profitLossReport', [
-      'loadProfitLossLink'
-    ]),
-    getThisDate (type, time) {
+    getThisDate(type, time) {
       return moment()[type](time).toString()
     },
-    getPreDate (type, time) {
+    getPreDate(type, time) {
       return moment().subtract(1, time)[type](time).toString()
     },
-    onChangeDateRange () {
+
+    onChangeDateRange() {
       switch (this.selectedRange) {
         case 'Today':
           this.formData.from_date = moment().toString()
@@ -181,34 +239,38 @@ export default {
           break
       }
     },
-    setRangeToCustom () {
+
+    setRangeToCustom() {
       this.selectedRange = 'Custom'
     },
-    async viewReportsPDF () {
+
+    async viewReportsPDF() {
       let data = await this.getReports()
       window.open(this.getReportUrl, '_blank')
       return data
     },
-    async getReports (isDownload = false) {
+
+    async getReports(isDownload = false) {
       this.$v.range.$touch()
       this.$v.formData.$touch()
       if (this.$v.$invalid) {
         return true
       }
 
-      this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
+      this.url = `${this.siteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
       return true
     },
-    downloadReport () {
+
+    downloadReport() {
       if (!this.getReports()) {
         return false
       }
 
       window.open(this.getReportUrl + '&download=true')
       setTimeout(() => {
-        this.url = `${this.siteURL}?from_date=${moment(this.formData.from_date).format('DD/MM/YYYY')}&to_date=${moment(this.formData.to_date).format('DD/MM/YYYY')}`
+        this.url = `${this.siteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
       }, 200)
-    }
-  }
+    },
+  },
 }
 </script>

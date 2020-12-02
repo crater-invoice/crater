@@ -1,132 +1,161 @@
 <template>
-  <div class="main-content item-create">
-    <div class="page-header">
-      <h3 class="page-title">{{ isEdit ? $t('items.edit_item') : $t('items.new_item') }}</h3>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/dashboard">{{ $t('general.home') }}</router-link></li>
-        <li class="breadcrumb-item"><router-link slot="item-title" to="/admin/items">{{ $tc('items.item',2) }}</router-link></li>
-        <li class="breadcrumb-item"><a href="#"> {{ isEdit ? $t('items.edit_item') : $t('items.new_item') }}</a></li>
-      </ol>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <form action="" @submit.prevent="submitItem">
-            <div class="card-body">
-              <div class="form-group">
-                <label class="control-label">{{ $t('items.name') }}</label><span class="text-danger"> *</span>
-                <base-input
-                  v-model.trim="formData.name"
-                  :invalid="$v.formData.name.$error"
-                  focus
-                  type="text"
-                  name="name"
-                  @input="$v.formData.name.$touch()"
-                />
-                <div v-if="$v.formData.name.$error">
-                  <span v-if="!$v.formData.name.required" class="text-danger">{{ $t('validation.required') }} </span>
-                  <span v-if="!$v.formData.name.minLength" class="text-danger">
-                    {{ $tc('validation.name_min_length', $v.formData.name.$params.minLength.min, { count: $v.formData.name.$params.minLength.min }) }}
-                  </span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{ $t('items.price') }}</label><span class="text-danger"> *</span>
-                <div class="base-input">
-                  <money
-                    :class="{'invalid' : $v.formData.price.$error}"
-                    v-model="price"
-                    v-bind="defaultCurrencyForInput"
-                    class="input-field"
+  <base-page>
+    <!-- Page Header -->
+    <sw-page-header class="mb-3" :title="pageTitle">
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item to="/admin/dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item to="/admin/items" :title="$tc('items.item', 2)" />
+        <sw-breadcrumb-item
+          v-if="$route.name === 'items.edit'"
+          to="#"
+          :title="$t('items.edit_item')"
+          active
+        />
+        <sw-breadcrumb-item
+          v-else
+          to="#"
+          :title="$t('items.new_item')"
+          active
+        />
+      </sw-breadcrumb>
+    </sw-page-header>
+
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-6">
+        <form action="" @submit.prevent="submitItem">
+          <sw-card>
+            <sw-input-group
+              :label="$t('items.name')"
+              :error="nameError"
+              class="mb-4"
+              required
+            >
+              <sw-input
+                v-model.trim="formData.name"
+                :invalid="$v.formData.name.$error"
+                class="mt-2"
+                focus
+                type="text"
+                name="name"
+                @input="$v.formData.name.$touch()"
+              />
+            </sw-input-group>
+
+            <sw-input-group
+              :label="$t('items.price')"
+              :error="priceError"
+              class="mb-4"
+              required
+            >
+              <sw-money
+                v-model.trim="price"
+                :invalid="$v.formData.price.$error"
+                :currency="defaultCurrencyForInput"
+                class="relative w-full focus:border focus:border-solid focus:border-primary-500"
+                @input="$v.formData.price.$touch()"
+              />
+            </sw-input-group>
+
+            <sw-input-group :label="$t('items.unit')" class="mb-4">
+              <sw-select
+                v-model="formData.unit"
+                class="mt-2"
+                :options="itemUnits"
+                :searchable="true"
+                :show-labels="false"
+                :placeholder="$t('items.select_a_unit')"
+                label="name"
+              >
+                <div
+                  slot="afterList"
+                  class="flex items-center justify-center w-full px-6 py-3 text-base bg-gray-200 cursor-pointer text-primary-400"
+                  @click="addItemUnit"
+                >
+                  <shopping-cart-icon
+                    class="h-5 mr-2 -ml-2 text-center text-primary-400"
                   />
+
+                  <label class="ml-2 text-sm leading-none text-primary-400">{{
+                    $t('settings.customization.items.add_item_unit')
+                  }}</label>
                 </div>
-                <div v-if="$v.formData.price.$error">
-                  <span v-if="!$v.formData.price.required" class="text-danger">{{ $t('validation.required') }} </span>
-                  <span v-if="!$v.formData.price.maxLength" class="text-danger">{{ $t('validation.price_maxlength') }}</span>
-                  <span v-if="!$v.formData.price.minValue" class="text-danger">{{ $t('validation.price_minvalue') }}</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>{{ $t('items.unit') }}</label>
-                <base-select
-                  v-model="formData.unit"
-                  :options="itemUnits"
-                  :searchable="true"
-                  :show-labels="false"
-                  :placeholder="$t('items.select_a_unit')"
-                  label="name"
-                >
-                  <div slot="afterList">
-                    <button type="button" class="list-add-button" @click="addItemUnit">
-                      <font-awesome-icon class="icon" icon="cart-plus" />
-                      <label>{{ $t('settings.customization.items.add_item_unit') }}</label>
-                    </button>
-                  </div>
-                </base-select>
-              </div>
-              <div v-if="isTaxPerItem" class="form-group">
-                <label>{{ $t('items.taxes') }}</label>
-                <base-select
-                  v-model="formData.taxes"
-                  :options="getTaxTypes"
-                  :searchable="true"
-                  :show-labels="false"
-                  :allow-empty="true"
-                  :multiple="true"
-                  track-by="tax_type_id"
-                  label="tax_name"
-                />
-              </div>
-              <div class="form-group">
-                <label for="description">{{ $t('items.description') }}</label>
-                <base-text-area
-                  v-model="formData.description"
-                  rows="2"
-                  name="description"
-                  @input="$v.formData.description.$touch()"
-                />
-                <div v-if="$v.formData.description.$error">
-                  <span v-if="!$v.formData.description.maxLength" class="text-danger">
-                    {{ $t('validation.description_maxlength') }}
-                  </span>
-                </div>
-              </div>
-              <div class="form-group">
-                <base-button
-                  :loading="isLoading"
-                  :disabled="isLoading"
-                  icon="save"
-                  color="theme"
-                  type="submit"
-                  class="collapse-button"
-                >
-                  {{ isEdit ? $t('items.update_item') : $t('items.save_item') }}
-                </base-button>
-              </div>
+              </sw-select>
+            </sw-input-group>
+
+            <sw-input-group
+              v-if="isTaxPerItem"
+              :label="$t('items.taxes')"
+              class="mb-4"
+            >
+              <sw-select
+                v-model="formData.taxes"
+                class="mt-2"
+                :options="getTaxTypes"
+                :searchable="true"
+                :show-labels="false"
+                :allow-empty="true"
+                :multiple="true"
+                track-by="tax_type_id"
+                label="tax_name"
+              />
+            </sw-input-group>
+
+            <sw-input-group
+              :label="$t('items.description')"
+              :error="descriptionError"
+              class="mb-4"
+            >
+              <sw-textarea
+                v-model="formData.description"
+                rows="2"
+                name="description"
+                @input="$v.formData.description.$touch()"
+              />
+            </sw-input-group>
+
+            <div class="mb-4">
+              <sw-button
+                :loading="isLoading"
+                variant="primary"
+                size="lg"
+                class="flex w-full justify-center md:w-auto"
+              >
+                <save-icon v-if="!isLoading" class="mr-2 -ml-1" />
+                {{ isEdit ? $t('items.update_item') : $t('items.save_item') }}
+              </sw-button>
             </div>
-          </form>
-        </div>
+          </sw-card>
+        </form>
       </div>
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters } from 'vuex'
-const { required, minLength, numeric, minValue, maxLength } = require('vuelidate/lib/validators')
+import { ShoppingCartIcon } from '@vue-hero-icons/solid'
+import TheSiteHeaderVue from '../layouts/partials/TheSiteHeader.vue'
+const {
+  required,
+  minLength,
+  numeric,
+  minValue,
+  maxLength,
+} = require('vuelidate/lib/validators')
 
 export default {
-  mixins: {
-    validationMixin
+  components: {
+    ShoppingCartIcon,
   },
-  data () {
+
+  data() {
     return {
       isLoading: false,
       title: 'Add Item',
       units: [],
       taxes: [],
       taxPerItem: '',
+
       formData: {
         name: '',
         description: '',
@@ -134,142 +163,246 @@ export default {
         unit_id: null,
         unit: null,
         taxes: [],
-        tax_per_item: false
       },
+
       money: {
         decimal: '.',
         thousands: ',',
         prefix: '$ ',
         precision: 2,
-        masked: false
-      }
+        masked: false,
+      },
     }
   },
+
   computed: {
-    ...mapGetters('currency', [
-      'defaultCurrencyForInput'
-    ]),
-    ...mapGetters('item', [
-      'itemUnits'
-    ]),
+    ...mapGetters('company', ['defaultCurrencyForInput']),
+
+    ...mapGetters('item', ['itemUnits']),
+
+    ...mapGetters('taxType', ['taxTypes']),
+
     price: {
       get: function () {
         return this.formData.price / 100
       },
       set: function (newValue) {
         this.formData.price = newValue * 100
-      }
+      },
     },
-    ...mapGetters('taxType', [
-      'taxTypes'
-    ]),
-    isEdit () {
+
+    pageTitle() {
+      if (this.$route.name === 'items.edit') {
+        return this.$t('items.edit_item')
+      }
+      return this.$t('items.new_item')
+    },
+
+    ...mapGetters('taxType', ['taxTypes']),
+
+    isEdit() {
       if (this.$route.name === 'items.edit') {
         return true
       }
       return false
     },
-    isTaxPerItem () {
+
+    isTaxPerItem() {
       return this.taxPerItem === 'YES' ? 1 : 0
     },
-    getTaxTypes () {
-      return this.taxTypes.map(tax => {
-        return {...tax, tax_type_id: tax.id, tax_name: tax.name + ' (' + tax.percent + '%)'}
+
+    getTaxTypes() {
+      return this.taxTypes.map((tax) => {
+        return {
+          ...tax,
+          tax_type_id: tax.id,
+          tax_name: tax.name + ' (' + tax.percent + '%)',
+        }
       })
-    }
+    },
+
+    nameError() {
+      if (!this.$v.formData.name.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.name.required) {
+        return this.$t('validation.required')
+      }
+
+      if (!this.$v.formData.name.minLength) {
+        return this.$tc(
+          'validation.name_min_length',
+          this.$v.formData.name.$params.minLength.min,
+          { count: this.$v.formData.name.$params.minLength.min }
+        )
+      }
+    },
+
+    priceError() {
+      if (!this.$v.formData.price.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.price.required) {
+        return this.$t('validation.required')
+      }
+
+      if (!this.$v.formData.price.maxLength) {
+        return this.$t('validation.price_maxlength')
+      }
+
+      if (!this.$v.formData.price.minValue) {
+        return this.$t('validation.price_minvalue')
+      }
+    },
+
+    descriptionError() {
+      if (!this.$v.formData.description.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.description.maxLength) {
+        return this.$t('validation.description_maxlength')
+      }
+    },
   },
-  created () {
+
+  created() {
+    this.loadData()
+  },
+
+  mounted() {
     this.setTaxPerItem()
-    if (this.isEdit) {
-      this.loadEditData()
-    }
+
+    this.$v.formData.$reset()
   },
+
   validations: {
     formData: {
       name: {
         required,
-        minLength: minLength(3)
+        minLength: minLength(3),
       },
+
       price: {
         required,
         numeric,
         maxLength: maxLength(20),
-        minValue: minValue(0.1)
+        minValue: minValue(0.1),
       },
+
       description: {
-        maxLength: maxLength(255)
-      }
-    }
+        maxLength: maxLength(255),
+      },
+    },
   },
+
   methods: {
     ...mapActions('item', [
       'addItem',
       'fetchItem',
-      'updateItem'
+      'updateItem',
+      'fetchItemUnits',
     ]),
-    ...mapActions('modal', [
-      'openModal'
-    ]),
-    async setTaxPerItem () {
-      let res = await axios.get('/api/settings/get-setting?key=tax_per_item')
-      if (res.data && res.data.tax_per_item === 'YES') {
-        this.taxPerItem = 'YES'
-      } else {
-        this.taxPerItem = 'FALSE'
+
+    ...mapActions('taxType', ['fetchTaxTypes']),
+
+    ...mapActions('company', ['fetchCompanySettings']),
+
+    ...mapActions('modal', ['openModal']),
+
+    async setTaxPerItem() {
+      let response = await this.fetchCompanySettings(['tax_per_item'])
+
+      if (response.data) {
+        response.data.tax_per_item === 'YES'
+          ? (this.taxPerItem = 'YES')
+          : (this.taxPerItem = 'NO')
       }
     },
-    async loadEditData () {
-      let response = await this.fetchItem(this.$route.params.id)
 
-      this.formData = {...response.data.item, unit: null}
-      this.formData.taxes = response.data.item.taxes.map(tax => {
-        return {...tax, tax_name: tax.name + ' (' + tax.percent + '%)'}
-      })
+    async loadData() {
+      if (this.isEdit) {
+        let response = await this.fetchItem(this.$route.params.id)
 
-      this.formData.unit = this.itemUnits.find(_unit => response.data.item.unit_id === _unit.id)
-      this.fractional_price = response.data.item.price
+        this.formData = { ...response.data.item, unit: null }
+
+        this.fractional_price = response.data.item.price
+
+        if (this.formData.unit_id) {
+          await this.fetchItemUnits({ limit: 'all' })
+          this.formData.unit = this.itemUnits.find(
+            (_unit) => response.data.item.unit_id === _unit.id
+          )
+        }
+
+        if (this.formData.taxes) {
+          await this.fetchTaxTypes({ limit: 'all' })
+          this.formData.taxes = response.data.item.taxes.map((tax) => {
+            return { ...tax, tax_name: tax.name + '(' + tax.percent + '%)' }
+          })
+        }
+      } else {
+        this.fetchItemUnits({ limit: 'all' })
+        this.fetchTaxTypes({ limit: 'all' })
+      }
     },
-    async submitItem () {
+
+    async submitItem() {
       this.$v.formData.$touch()
+
       if (this.$v.$invalid) {
         return false
       }
+
       if (this.formData.unit) {
         this.formData.unit_id = this.formData.unit.id
       }
+
       let response
+      this.isLoading = true
+
       if (this.isEdit) {
-        this.isLoading = true
         response = await this.updateItem(this.formData)
       } else {
         let data = {
           ...this.formData,
-          taxes: this.formData.taxes.map(tax => {
+          taxes: this.formData.taxes.map((tax) => {
             return {
               tax_type_id: tax.id,
-              amount: ((this.formData.price * tax.percent) / 100),
+              amount: (this.formData.price * tax.percent) / 100,
               percent: tax.percent,
               name: tax.name,
-              collective_tax: 0
+              collective_tax: 0,
             }
-          })
+          }),
         }
         response = await this.addItem(data)
       }
+
       if (response.data) {
         this.isLoading = false
-        window.toastr['success'](this.$tc('items.updated_message'))
-        this.$router.push('/admin/items')
-        return true
+
+        if (!this.isEdit) {
+          window.toastr['success'](this.$tc('items.created_message'))
+          this.$router.push('/admin/items')
+          return true
+        } else {
+          window.toastr['success'](this.$tc('items.updated_message'))
+          this.$router.push('/admin/items')
+          return true
+        }
+        window.toastr['error'](response.data.error)
       }
-      window.toastr['error'](response.data.error)
     },
-    async addItemUnit () {
+
+    async addItemUnit() {
       this.openModal({
-        'title': this.$t('settings.customization.items.add_item_unit'),
-        'componentName': 'ItemUnit'
+        title: this.$t('settings.customization.items.add_item_unit'),
+        componentName: 'ItemUnit',
       })
-    }
-  }
+    },
+  },
 }
 </script>

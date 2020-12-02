@@ -1,74 +1,63 @@
-import Ls from '@/services/ls'
 import * as types from './mutation-types'
 import * as userTypes from '../user/mutation-types'
 import * as rootTypes from '../../mutation-types'
 import router from '@/router.js'
 
-export const login = ({ commit, dispatch, state }, data) => {
-  let loginData = {
-    username: data.email,
-    password: data.password
-  }
+export const login = ({ commit }, data) => {
   return new Promise((resolve, reject) => {
-    axios.post('/api/auth/login', loginData).then((response) => {
-      let token = response.data.access_token
-      Ls.set('auth.token', token)
+    window.axios.get('/sanctum/csrf-cookie').then((response) => {
+      window.axios
+        .post('/login', data)
+        .then((response) => {
+          commit(types.SET_LOGOUT, false)
+          commit('user/' + userTypes.RESET_CURRENT_USER, null, { root: true })
+          commit(rootTypes.UPDATE_APP_LOADING_STATUS, false, { root: true })
 
-      commit('user/' + userTypes.RESET_CURRENT_USER, null, { root: true })
-      commit(rootTypes.UPDATE_APP_LOADING_STATUS, false, { root: true })
-
-      commit(types.AUTH_SUCCESS, token)
-      window.toastr['success']('Login Successful')
-      resolve(response)
-    }).catch(err => {
-      commit(types.AUTH_ERROR, err.response)
-      Ls.remove('auth.token')
-      reject(err)
+          window.toastr['success']('Login Successful')
+          resolve(response)
+        })
+        .catch((err) => {
+          commit(types.AUTH_ERROR, err.response)
+          reject(err)
+        })
     })
   })
 }
 
-export const refreshToken = ({ commit, dispatch, state }) => {
+export const setLogoutFalse = ({ state, commit }) => {
+  commit(types.SET_LOGOUT, false)
+}
+
+export const logout = ({ state, commit }) => {
   return new Promise((resolve, reject) => {
-    let data = {
-      token: Ls.get('auth.token')
+    if (state.isLoggedOut) {
+      resolve()
+      return true
     }
-    console.log('REFRESH ACTION')
-    axios.post('/api/auth/refresh_token', data).then((response) => {
-      let token = response.data.data.token
-      Ls.set('auth.token', token)
-      commit(types.REFRESH_SUCCESS, token)
-      resolve(response)
-    }).catch(err => {
-      reject(err)
-    })
+    commit(types.SET_LOGOUT, true)
+
+    window.axios
+      .get('/auth/logout')
+      .then(() => {
+        router.push('/login')
+        window.toastr['success']('Logged out!', 'Success')
+      })
+      .catch((err) => {
+        router.push('/login')
+        reject(err)
+      })
   })
 }
 
-export const logout = ({ commit, dispatch, state }, noRequest = false) => {
-  if (noRequest) {
-    commit(types.AUTH_LOGOUT)
-    Ls.remove('auth.token')
-    router.push('/login')
-
-    return true
-  }
-
+export const checkMail = ({ commit }, data) => {
   return new Promise((resolve, reject) => {
-    axios.get('/api/auth/logout').then((response) => {
-      commit(types.AUTH_LOGOUT)
-      Ls.remove('auth.token')
-      router.push('/login')
-      window.toastr['success']('Logged out!', 'Success')
-    }).catch(err => {
-      reject(err)
-      commit(types.AUTH_LOGOUT)
-      Ls.remove('auth.token')
-      router.push('/login')
-    })
+    window.axios
+      .post('/api/v1/is-registered', data)
+      .then((response) => {
+        resolve(response)
+      })
+      .catch((err) => {
+        reject(err)
+      })
   })
-}
-
-export const loginOnBoardingUser = ({ commit, dispatch, state }, token) => {
-  commit(types.AUTH_SUCCESS, token)
 }

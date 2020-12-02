@@ -1,13 +1,13 @@
 export default {
-  get (key) {
+  get(key) {
     return localStorage.getItem(key) ? localStorage.getItem(key) : null
   },
 
-  set (key, val) {
+  set(key, val) {
     localStorage.setItem(key, val)
   },
 
-  remove (key) {
+  remove(key) {
     localStorage.removeItem(key)
-  }
+  },
 }

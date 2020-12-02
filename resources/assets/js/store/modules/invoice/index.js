@@ -8,7 +8,9 @@ const initialState = {
   selectedInvoices: [],
   selectAllField: false,
   totalInvoices: 0,
-  selectedCustomer: null
+  selectedCustomer: null,
+  selectedNote: null,
+  selectedItem: null,
 }
 
 export default {
@@ -20,5 +22,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

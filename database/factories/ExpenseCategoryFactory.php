@@ -1,15 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\ExpenseCategory;
-use Faker\Generator as Faker;
-use Crater\User;
+use Crater\Models\ExpenseCategory;
+use Crater\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(ExpenseCategory::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        'company_id' => User::find(1)->company_id,
-        'description' => $faker->text
-    ];
-});
+class ExpenseCategoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ExpenseCategory::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->word,
+            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'description' => $this->faker->text
+        ];
+    }
+}

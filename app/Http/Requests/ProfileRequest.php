@@ -3,7 +3,7 @@ namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Crater\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileRequest extends FormRequest
 {
@@ -24,32 +24,19 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        $user = User::find(1);
-
-        switch ($this->getMethod()) {
-            case 'POST':
-                return [
-                    'name' => 'required',
-                    'password' => 'required|min:8',
-                    'address_street_1' => 'max:255',
-                    'address_street_2' => 'max:255',
-                    'email' => [
-                        'required',
-                        'email',
-                        Rule::unique('users')->ignore($user->id, 'id')
-                    ]
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'name' => 'required',
-                    'address_street_1' => 'max:255',
-                    'address_street_2' => 'max:255',
-                    'email' => 'required|email'
-                ];
-                break;
-            default:
-                break;
-        }
+        return [
+            'name' => [
+                'required'
+            ],
+            'password' => [
+                'nullable',
+                'min:8'
+            ],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore(Auth::id(), 'id')
+            ]
+        ];
     }
 }

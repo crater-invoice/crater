@@ -4,7 +4,7 @@ namespace Crater\Console\Commands;
 
 use Illuminate\Console\Command;
 use Crater\Space\Updater;
-use Crater\Setting;
+use Crater\Models\Setting;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class UpdateCommand extends Command
@@ -110,7 +110,7 @@ class UpdateCommand extends Command
         $this->info('Downloading update...');
 
         try {
-            $path = Updater::download($this->version);
+            $path = Updater::download($this->version, 1);
             if (!is_string($path)) {
                 $this->error('Download exception');
                 return false;

@@ -3,7 +3,7 @@ namespace Crater\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Crater\Estimate;
+use Crater\Models\Estimate;
 
 class CheckEstimateStatus extends Command
 {

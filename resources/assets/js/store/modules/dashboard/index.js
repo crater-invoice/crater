@@ -8,11 +8,11 @@ const initialState = {
   estimates: 0,
   expenses: 0,
   totalDueAmount: [],
-  isDataLoaded: false,
+  isDashboardDataLoaded: false,
 
   weeklyInvoices: {
     days: [],
-    counter: []
+    counter: [],
   },
 
   chartData: {
@@ -20,7 +20,7 @@ const initialState = {
     invoiceTotals: [],
     expenseTotals: [],
     netProfits: [],
-    receiptTotals: []
+    receiptTotals: [],
   },
 
   salesTotal: null,
@@ -30,7 +30,7 @@ const initialState = {
 
   dueInvoices: [],
   recentEstimates: [],
-  newContacts: []
+  newContacts: [],
 }
 
 export default {
@@ -42,5 +42,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="site-wrapper">
-    <div class="container">
+  <div class="site-wrapper h-full text-base">
+    <div class="container mx-auto">
       <router-view></router-view>
     </div>
   </div>
@@ -9,19 +9,7 @@
 <script type="text/babel">
 export default {
   watch: {
-    $route: 'onRouteChange'
+    $route: 'onRouteChange',
   },
-  mounted () {
-    this.setLayoutBackground()
-  },
-
-  destroyed () {
-    document.body.style.backgroundColor = '#EBF1FA'
-  },
-  methods: {
-    setLayoutBackground () {
-      document.body.style.backgroundColor = '#f9fbff'
-    }
-  }
 }
 </script>

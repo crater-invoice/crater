@@ -1,0 +1,4 @@
+export const SET_BACKUPS = 'SET_BACKUPS'
+export const ADD_BACKUPS = 'ADD_BACKUPS'
+export const DELETE_BACKUPS = 'DELETE_BACKUPS'
+export const SET_BACKUP_DISKS = 'SET_BACKUP_DISKS'

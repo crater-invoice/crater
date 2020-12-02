@@ -25,7 +25,10 @@ class UnitRequest extends FormRequest
     public function rules()
     {
         $data = [
-            'name' => 'required|unique:units,name'
+            'name' => [
+                'required',
+                'unique:units,name'
+            ]
         ];
 
         if ($this->getMethod() == 'PUT') {

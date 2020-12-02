@@ -1,398 +1,412 @@
 <template>
-  <div class="invoice-index-page invoices main-content">
-    <div class="page-header">
-      <h3 class="page-title">{{ $t('invoices.title') }}</h3>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <router-link slot="item-title" to="dashboard">
-            {{ $t('general.home') }}
-          </router-link>
-        </li>
-        <li class="breadcrumb-item">
-          <router-link slot="item-title" to="#">
-            {{ $tc('invoices.invoice', 2) }}
-          </router-link>
-        </li>
-      </ol>
-      <div class="page-actions row">
-        <div class="col-xs-2 mr-4">
-          <base-button
-            v-show="totalInvoices || filtersApplied"
-            :outline="true"
-            :icon="filterIcon"
-            size="large"
-            color="theme"
-            right-icon
-            @click="toggleFilter"
-          >
-            {{ $t('general.filter') }}
-          </base-button>
-        </div>
-        <router-link
-          slot="item-title"
-          class="col-xs-2"
-          to="/admin/invoices/create"
+  <base-page>
+    <sw-page-header :title="$t('invoices.title')">
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item to="#" :title="$tc('invoices.invoice', 2)" active />
+      </sw-breadcrumb>
+
+      <template slot="actions">
+        <sw-button
+          v-show="totalInvoices"
+          size="lg"
+          variant="primary-outline"
+          @click="toggleFilter"
         >
-          <base-button size="large" icon="plus" color="theme">
-            {{ $t('invoices.new_invoice') }}
-          </base-button>
-        </router-link>
-      </div>
-    </div>
+          {{ $t('general.filter') }}
+          <component :is="filterIcon" class="w-4 h-4 ml-2 -mr-1" />
+        </sw-button>
 
-    <transition name="fade">
-      <div v-show="showFilters" class="filter-section">
-        <div class="filter-container">
-          <div class="filter-customer">
-            <label>{{ $tc('customers.customer', 1) }} </label>
-            <base-customer-select
-              ref="customerSelect"
-              @select="onSelectCustomer"
-              @deselect="clearCustomerSearch"
-            />
-          </div>
-          <div class="filter-status">
-            <label>{{ $t('invoices.status') }}</label>
-            <base-select
-              v-model="filters.status"
-              :options="status"
-              :group-select="false"
-              :searchable="true"
-              :show-labels="false"
-              :placeholder="$t('general.select_a_status')"
-              group-values="options"
-              group-label="label"
-              track-by="name"
-              label="name"
-              @remove="clearStatusSearch()"
-            />
-          </div>
-          <div class="filter-date">
-            <div class="from pr-3">
-              <label>{{ $t('general.from') }}</label>
-              <base-date-picker
-                v-model="filters.from_date"
-                :calendar-button="true"
-                calendar-button-icon="calendar"
-              />
-            </div>
-            <div class="dashed" />
-            <div class="to pl-3">
-              <label>{{ $t('general.to') }}</label>
-              <base-date-picker
-                v-model="filters.to_date"
-                :calendar-button="true"
-                calendar-button-icon="calendar"
-              />
-            </div>
-          </div>
-          <div class="filter-invoice">
-            <label>{{ $t('invoices.invoice_number') }}</label>
-            <base-input v-model="filters.invoice_number" icon="hashtag" />
-          </div>
-        </div>
-        <label class="clear-filter" @click="clearFilter">{{
-          $t('general.clear_all')
-        }}</label>
-      </div>
-    </transition>
+        <sw-button
+          tag-name="router-link"
+          to="/admin/invoices/create"
+          class="ml-4"
+          size="lg"
+          variant="primary"
+        >
+          <plus-icon class="w-6 h-6 mr-1 -ml-2" />
+          {{ $t('invoices.new_invoice') }}
+        </sw-button>
+      </template>
+    </sw-page-header>
 
-    <div
-      v-cloak
+    <slide-y-up-transition>
+      <sw-filter-wrapper
+        v-show="showFilters"
+        class="relative grid grid-flow-col grid-rows"
+      >
+        <sw-input-group :label="$tc('customers.customer', 1)" class="mt-2">
+          <base-customer-select
+            ref="customerSelect"
+            @select="onSelectCustomer"
+            @deselect="clearCustomerSearch"
+          />
+        </sw-input-group>
+
+        <sw-input-group :label="$t('invoices.status')" class="mt-2 xl:mx-8">
+          <sw-select
+            v-model="filters.status"
+            :options="status"
+            :group-select="false"
+            :searchable="true"
+            :show-labels="false"
+            :placeholder="$t('general.select_a_status')"
+            :allow-empty="false"
+            group-values="options"
+            group-label="label"
+            track-by="name"
+            label="name"
+            @remove="clearStatusSearch()"
+            @select="setActiveTab"
+          />
+        </sw-input-group>
+
+        <sw-input-group :label="$t('general.from')" class="mt-2">
+          <base-date-picker
+            v-model="filters.from_date"
+            :calendar-button="true"
+            calendar-button-icon="calendar"
+          />
+        </sw-input-group>
+
+        <div
+          class="hidden w-8 h-0 mx-4 border border-gray-400 border-solid xl:block"
+          style="margin-top: 3.5rem"
+        />
+
+        <sw-input-group :label="$t('general.to')" class="mt-2">
+          <base-date-picker
+            v-model="filters.to_date"
+            :calendar-button="true"
+            calendar-button-icon="calendar"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('invoices.invoice_number')"
+          class="mt-2 xl:ml-8"
+        >
+          <sw-input v-model="filters.invoice_number">
+            <hashtag-icon slot="leftIcon" class="h-5 ml-1 text-gray-500" />
+          </sw-input>
+        </sw-input-group>
+
+        <label
+          class="absolute text-sm leading-snug text-black cursor-pointer"
+          @click="clearFilter"
+          style="top: 10px; right: 15px"
+          >{{ $t('general.clear_all') }}</label
+        >
+      </sw-filter-wrapper>
+    </slide-y-up-transition>
+
+    <sw-empty-table-placeholder
       v-show="showEmptyScreen"
-      class="col-xs-1 no-data-info"
-      align="center"
+      :title="$t('invoices.no_invoices')"
+      :description="$t('invoices.list_of_invoices')"
     >
       <moon-walker-icon class="mt-5 mb-4" />
-      <div class="row" align="center">
-        <label class="col title">{{ $t('invoices.no_invoices') }}</label>
-      </div>
-      <div class="row">
-        <label class="description col mt-1" align="center">{{
-          $t('invoices.list_of_invoices')
-        }}</label>
-      </div>
-      <div class="btn-container">
-        <base-button
-          :outline="true"
-          color="theme"
-          class="mt-3"
-          size="large"
-          @click="$router.push('invoices/create')"
-        >
-          {{ $t('invoices.new_invoice') }}
-        </base-button>
-      </div>
-    </div>
 
-    <div v-show="!showEmptyScreen" class="table-container">
-      <div class="table-actions mt-5">
-        <p class="table-stats">
+      <sw-button
+        slot="actions"
+        tag-name="router-link"
+        to="/admin/invoices/create"
+        size="lg"
+        variant="primary-outline"
+      >
+        <plus-icon class="w-6 h-6 mr-1 -ml-2" />
+        {{ $t('invoices.new_invoice') }}
+      </sw-button>
+    </sw-empty-table-placeholder>
+
+    <div v-show="!showEmptyScreen" class="relative">
+      <div class="relative mt-5">
+        <p class="absolute right-0 m-0 text-sm" style="top: 50px">
           {{ $t('general.showing') }}: <b>{{ invoices.length }}</b>
+
           {{ $t('general.of') }} <b>{{ totalInvoices }}</b>
         </p>
 
-        <!-- Tabs -->
-        <ul class="tabs">
-          <li class="tab" @click="getStatus('DUE')">
-            <a
-              :class="[
-                'tab-link',
-                { 'a-active': filters.status.value === 'DUE' },
-              ]"
-              href="#"
-              >{{ $t('general.due') }}</a
-            >
-          </li>
-          <li class="tab" @click="getStatus('DRAFT')">
-            <a
-              :class="[
-                'tab-link',
-                { 'a-active': filters.status.value === 'DRAFT' },
-              ]"
-              href="#"
-              >{{ $t('general.draft') }}</a
-            >
-          </li>
-          <li class="tab" @click="getStatus('')">
-            <a
-              :class="[
-                'tab-link',
-                {
-                  'a-active':
-                    filters.status.value === '' ||
-                    filters.status.value === null ||
-                    (filters.status.value !== 'DRAFT' &&
-                      filters.status.value !== 'DUE'),
-                },
-              ]"
-              href="#"
-              >{{ $t('general.all') }}</a
-            >
-          </li>
-        </ul>
-        <transition name="fade">
-          <v-dropdown v-if="selectedInvoices.length" :show-arrow="false">
+        <sw-tabs :active-tab="activeTab" @update="setStatusFilter">
+          <sw-tab-item :title="$t('general.due')" filter="DUE" />
+          <sw-tab-item :title="$t('general.draft')" filter="DRAFT" />
+          <sw-tab-item :title="$t('general.all')" filter="" />
+        </sw-tabs>
+
+        <sw-transition type="fade">
+          <sw-dropdown
+            v-if="selectedInvoices.length"
+            class="absolute float-right"
+            style="margin-top: -35px"
+          >
             <span
               slot="activator"
-              href="#"
-              class="table-actions-button dropdown-toggle"
+              class="flex block text-sm font-medium cursor-pointer select-none text-primary-400"
             >
               {{ $t('general.actions') }}
+              <chevron-down-icon class="h-5" />
             </span>
-            <v-dropdown-item>
-              <div class="dropdown-item" @click="removeMultipleInvoices">
-                <font-awesome-icon
-                  :icon="['fas', 'trash']"
-                  class="dropdown-item-icon"
-                />
-                {{ $t('general.delete') }}
-              </div>
-            </v-dropdown-item>
-          </v-dropdown>
-        </transition>
-      </div>
-      <div class="custom-control custom-checkbox">
-        <input
-          id="select-all"
-          v-model="selectAllFieldStatus"
-          type="checkbox"
-          class="custom-control-input"
-          @change="selectAllInvoices"
-        />
-        <label
-          v-show="!isRequestOngoing"
-          for="select-all"
-          class="custom-control-label selectall"
-        >
-          <span class="select-all-label">{{ $t('general.select_all') }} </span>
-        </label>
+
+            <sw-dropdown-item @click="removeMultipleInvoices">
+              <trash-icon class="h-5 mr-3 text-gray-600" />
+              {{ $t('general.delete') }}
+            </sw-dropdown-item>
+          </sw-dropdown>
+        </sw-transition>
       </div>
 
-      <table-component
+      <div
+        v-show="invoices && invoices.length"
+        class="absolute z-10 items-center pl-4 mt-2 select-none md:mt-12"
+      >
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          variant="primary"
+          size="sm"
+          class="hidden md:inline"
+          @change="selectAllInvoices"
+        />
+
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          :label="$t('general.select_all')"
+          variant="primary"
+          size="sm"
+          class="md:hidden"
+          @change="selectAllInvoices"
+        />
+      </div>
+
+      <sw-table-component
         ref="table"
         :show-filter="false"
         :data="fetchData"
         table-class="table"
       >
-        <table-column
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="no-click"
         >
-          <template slot-scope="row">
-            <div class="custom-control custom-checkbox">
-              <input
-                :id="row.id"
-                v-model="selectField"
-                :value="row.id"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label :for="row.id" class="custom-control-label" />
-            </div>
-          </template>
-        </table-column>
-        <table-column
+          <div slot-scope="row" class="relative block">
+            <sw-checkbox
+              :id="row.id"
+              v-model="selectField"
+              :value="row.id"
+              variant="primary"
+              size="sm"
+            />
+          </div>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('invoices.date')"
           sort-as="invoice_date"
           show="formattedInvoiceDate"
         />
-        <table-column
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('invoices.number')"
+          show="invoice_number"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('invoices.number') }}</span>
+            <router-link
+              :to="{ path: `invoices/${row.id}/view` }"
+              class="font-medium text-primary-500"
+            >
+              {{ row.invoice_number }}
+            </router-link>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('invoices.customer')"
           width="20%"
           show="name"
         />
-        <table-column :label="$t('invoices.status')" sort-as="status">
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('invoices.status')"
+          sort-as="status"
+        >
           <template slot-scope="row">
             <span> {{ $t('invoices.status') }}</span>
-            <span :class="'inv-status-' + row.status.toLowerCase()">{{
-              row.status != 'PARTIALLY_PAID'
-                ? row.status
-                : row.status.replace('_', ' ')
-            }}</span>
+
+            <sw-badge
+              :bg-color="$utils.getBadgeStatusColor(row.status).bgColor"
+              :color="$utils.getBadgeStatusColor(row.status).color"
+            >
+              {{ row.status.replace('_', ' ') }}
+            </sw-badge>
           </template>
-        </table-column>
-        <table-column :label="$t('invoices.paid_status')" sort-as="paid_status">
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('invoices.paid_status')"
+          sort-as="paid_status"
+        >
           <template slot-scope="row">
             <span>{{ $t('invoices.paid_status') }}</span>
-            <span :class="'inv-status-' + row.paid_status.toLowerCase()">{{
-              row.paid_status != 'PARTIALLY_PAID'
-                ? row.paid_status
-                : row.paid_status.replace('_', ' ')
-            }}</span>
+
+            <sw-badge
+              :bg-color="$utils.getBadgeStatusColor(row.status).bgColor"
+              :color="$utils.getBadgeStatusColor(row.status).color"
+            >
+              {{ row.paid_status.replace('_', ' ') }}
+            </sw-badge>
           </template>
-        </table-column>
-        <table-column :label="$t('invoices.number')" show="invoice_number" />
-        <table-column :label="$t('invoices.amount_due')" sort-as="due_amount">
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('invoices.amount_due')"
+          sort-as="due_amount"
+        >
           <template slot-scope="row">
             <span>{{ $t('invoices.amount_due') }}</span>
+
             <div
               v-html="$utils.formatMoney(row.due_amount, row.user.currency)"
             />
           </template>
-        </table-column>
-        <table-column
+        </sw-table-column>
+
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="action-dropdown no-click"
         >
           <template slot-scope="row">
             <span>{{ $t('invoices.action') }}</span>
-            <v-dropdown>
-              <a slot="activator" href="#">
-                <dot-icon />
-              </a>
-              <v-dropdown-item>
-                <router-link
-                  :to="{ path: `invoices/${row.id}/edit` }"
-                  class="dropdown-item"
-                >
-                  <font-awesome-icon
-                    :icon="['fas', 'pencil-alt']"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('general.edit') }}
-                </router-link>
-                <router-link
-                  :to="{ path: `invoices/${row.id}/view` }"
-                  class="dropdown-item"
-                >
-                  <font-awesome-icon icon="eye" class="dropdown-item-icon" />
-                  {{ $t('invoices.view') }}
-                </router-link>
-              </v-dropdown-item>
-              <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)">
-                  <font-awesome-icon
-                    icon="paper-plane"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('invoices.send_invoice') }}
-                </a>
-              </v-dropdown-item>
-              <v-dropdown-item
-                v-if="row.status === 'SENT' || row.status === 'VIEWED'"
+
+            <sw-dropdown>
+              <dot-icon slot="activator" />
+
+              <sw-dropdown-item
+                tag-name="router-link"
+                :to="`invoices/${row.id}/edit`"
               >
-                <a class="dropdown-item" href="#/" @click="sendInvoice(row.id)">
-                  <font-awesome-icon
-                    icon="paper-plane"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('invoices.resend_invoice') }}
-                </a>
-              </v-dropdown-item>
-              <v-dropdown-item v-if="row.status == 'DRAFT'">
-                <a
-                  class="dropdown-item"
-                  href="#/"
-                  @click="markInvoiceAsSent(row.id)"
-                >
-                  <font-awesome-icon
-                    icon="check-circle"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('invoices.mark_as_sent') }}
-                </a>
-              </v-dropdown-item>
-              <v-dropdown-item
+                <pencil-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.edit') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
+                tag-name="router-link"
+                :to="`invoices/${row.id}/view`"
+              >
+                <eye-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('invoices.view') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
+                v-if="row.status == 'DRAFT'"
+                @click="sendInvoice(row)"
+              >
+                <paper-airplane-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('invoices.send_invoice') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
+                v-if="row.status === 'SENT' || row.status === 'VIEWED'"
+                @click="sendInvoice(row)"
+              >
+                <paper-airplane-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('invoices.resend_invoice') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
+                v-if="row.status == 'DRAFT'"
+                @click="markInvoiceAsSent(row.id)"
+              >
+                <check-circle-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('invoices.mark_as_sent') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
                 v-if="
                   row.status === 'SENT' ||
                   row.status === 'VIEWED' ||
                   row.status === 'OVERDUE'
                 "
+                tag-name="router-link"
+                :to="`/admin/payments/${row.id}/create`"
               >
-                <router-link
-                  :to="`/admin/payments/${row.id}/create`"
-                  class="dropdown-item"
-                >
-                  <font-awesome-icon
-                    :icon="['fas', 'credit-card']"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('payments.record_payment') }}
-                </router-link>
-              </v-dropdown-item>
-              <v-dropdown-item>
-                <a
-                  class="dropdown-item"
-                  href="#/"
-                  @click="onCloneInvoice(row.id)"
-                >
-                  <font-awesome-icon icon="copy" class="dropdown-item-icon" />
-                  {{ $t('invoices.clone_invoice') }}
-                </a>
-              </v-dropdown-item>
-              <v-dropdown-item>
-                <div class="dropdown-item" @click="removeInvoice(row.id)">
-                  <font-awesome-icon
-                    :icon="['fas', 'trash']"
-                    class="dropdown-item-icon"
-                  />
-                  {{ $t('general.delete') }}
-                </div>
-              </v-dropdown-item>
-            </v-dropdown>
+                <credit-card-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('payments.record_payment') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item @click="onCloneInvoice(row.id)">
+                <document-duplicate-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('invoices.clone_invoice') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item @click="removeInvoice(row.id)">
+                <trash-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.delete') }}
+              </sw-dropdown-item>
+            </sw-dropdown>
           </template>
-        </table-column>
-      </table-component>
+        </sw-table-column>
+      </sw-table-component>
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import MoonWalkerIcon from '../../../js/components/icon/MoonwalkerIcon'
+import MoonWalkerIcon from '@/components/icon/MoonwalkerIcon'
 import moment from 'moment'
+
+import {
+  PencilIcon,
+  DocumentDuplicateIcon,
+  CreditCardIcon,
+  FilterIcon,
+  XIcon,
+  ChevronDownIcon,
+  EyeIcon,
+  PlusIcon,
+  DocumentTextIcon,
+  PaperAirplaneIcon,
+  CheckCircleIcon,
+  TrashIcon,
+  XCircleIcon,
+  HashtagIcon,
+} from '@vue-hero-icons/solid'
+
+import { DotsHorizontalIcon } from '@vue-hero-icons/outline'
 
 export default {
   components: {
-    'moon-walker-icon': MoonWalkerIcon
+    MoonWalkerIcon,
+    PlusIcon,
+    FilterIcon,
+    XIcon,
+    ChevronDownIcon,
+    DotsHorizontalIcon,
+    PencilIcon,
+    DocumentDuplicateIcon,
+    TrashIcon,
+    CheckCircleIcon,
+    PaperAirplaneIcon,
+    DocumentTextIcon,
+    XCircleIcon,
+    EyeIcon,
+    CreditCardIcon,
+    HashtagIcon,
   },
-  data () {
+
+  data() {
     return {
       showFilters: false,
       currency: null,
+
       status: [
         {
           label: 'Status',
@@ -403,77 +417,81 @@ export default {
             { name: 'SENT', value: 'SENT' },
             { name: 'VIEWED', value: 'VIEWED' },
             { name: 'OVERDUE', value: 'OVERDUE' },
-            { name: 'COMPLETED', value: 'COMPLETED' }
-          ]
+            { name: 'COMPLETED', value: 'COMPLETED' },
+          ],
         },
         {
           label: 'Paid Status',
           options: [
             { name: 'UNPAID', value: 'UNPAID' },
             { name: 'PAID', value: 'PAID' },
-            { name: 'PARTIALLY PAID', value: 'PARTIALLY_PAID' }
-          ]
-        }
+            { name: 'PARTIALLY PAID', value: 'PARTIALLY_PAID' },
+          ],
+        },
       ],
-      filtersApplied: false,
+
       isRequestOngoing: true,
+      activeTab: this.$t('general.due'),
       filters: {
         customer: '',
         status: { name: 'DUE', value: 'DUE' },
         from_date: '',
         to_date: '',
-        invoice_number: ''
-      }
+        invoice_number: '',
+      },
     }
   },
 
   computed: {
-    showEmptyScreen () {
-      return !this.totalInvoices && !this.isRequestOngoing && !this.filtersApplied
+    showEmptyScreen() {
+      return !this.totalInvoices && !this.isRequestOngoing
     },
-    filterIcon () {
-      return (this.showFilters) ? 'times' : 'filter'
+
+    filterIcon() {
+      return this.showFilters ? 'x-icon' : 'filter-icon'
     },
-    ...mapGetters('customer', [
-      'customers'
-    ]),
+
+    ...mapGetters('customer', ['customers']),
+
     ...mapGetters('invoice', [
       'selectedInvoices',
       'totalInvoices',
       'invoices',
-      'selectAllField'
+      'selectAllField',
     ]),
+
     selectField: {
       get: function () {
         return this.selectedInvoices
       },
       set: function (val) {
         this.selectInvoice(val)
-      }
+      },
     },
+
     selectAllFieldStatus: {
       get: function () {
         return this.selectAllField
       },
       set: function (val) {
         this.setSelectAllState(val)
-      }
-    }
+      },
+    },
   },
+
   watch: {
     filters: {
       handler: 'setFilters',
-      deep: true
-    }
+      deep: true,
+    },
   },
-  created () {
-    this.fetchCustomers()
-  },
-  destroyed () {
+
+  destroyed() {
     if (this.selectAllField) {
       this.selectAllInvoices()
     }
   },
+
   methods: {
     ...mapActions('invoice', [
       'fetchInvoices',
@@ -486,103 +504,118 @@ export default {
       'sendEmail',
       'markAsSent',
       'setSelectAllState',
-      'cloneInvoice'
+      'cloneInvoice',
     ]),
-    ...mapActions('customer', [
-      'fetchCustomers'
-    ]),
-    async sendInvoice (id) {
-      swal({
-        title: this.$t('general.are_you_sure'),
-        text: this.$t('invoices.confirm_send'),
-        icon: '/assets/icon/paper-plane-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          const data = {
-            id: id
-          }
-          let response = await this.sendEmail(data)
-          this.refreshTable()
-          if (response.data.success) {
-            window.toastr['success'](this.$tc('invoices.send_invoice_successfully'))
-            return true
-          }
-          if (response.data.error === 'user_email_does_not_exist') {
-            window.toastr['error'](this.$tc('invoices.user_email_does_not_exist'))
-            return false
-          }
-          window.toastr['error'](this.$tc('invoices.something_went_wrong'))
-        }
+    ...mapActions('customer', ['fetchCustomers']),
+
+    ...mapActions('modal', ['openModal']),
+
+    async sendInvoice(invoice) {
+      this.openModal({
+        title: this.$t('invoices.send_invoice'),
+        componentName: 'SendInvoiceModal',
+        id: invoice.id,
+        data: invoice,
+        variant: 'lg',
       })
     },
-    async markInvoiceAsSent (id) {
+
+    async markInvoiceAsSent(id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (value) => {
         if (value) {
           const data = {
-            id: id
+            id: id,
+            status: 'SENT',
           }
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.mark_as_sent_successfully'))
+            window.toastr['success'](
+              this.$tc('invoices.mark_as_sent_successfully')
+            )
           }
         }
       })
     },
-    async onCloneInvoice (id) {
+
+    async onCloneInvoice(id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.confirm_clone'),
         icon: '/assets/icon/check-circle-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (value) => {
         if (value) {
-          const data = {
-            id: id
-          }
-          let response = await this.cloneInvoice(data)
+          let response = await this.cloneInvoice({ id })
+
           this.refreshTable()
+
           if (response.data) {
             window.toastr['success'](this.$tc('invoices.cloned_successfully'))
-            this.$router.push(`/admin/invoices/${response.data.invoice.id}/edit`)
+            this.$router.push(
+              `/admin/invoices/${response.data.invoice.id}/edit`
+            )
           }
         }
       })
     },
-    getStatus (val) {
-      this.filters.status = {
-        name: val,
-        value: val
+
+    setStatusFilter(val) {
+      if (this.activeTab == val.title) {
+        return true
       }
+      this.activeTab = val.title
+      switch (val.title) {
+        case this.$t('general.due'):
+          this.filters.status = {
+            name: 'DUE',
+            value: 'DUE',
+          }
+          break
+
+        case this.$t('general.draft'):
+          this.filters.status = {
+            name: 'DRAFT',
+            value: 'DRAFT',
+          }
+          break
+
+        default:
+          this.filters.status = {
+            name: '',
+            value: '',
+          }
+          break
+      }
+      // this.refreshTable()
     },
-    refreshTable () {
+
+    refreshTable() {
       this.$refs.table.refresh()
     },
-    async fetchData ({ page, filter, sort }) {
+
+    async fetchData({ page, filter, sort }) {
       let data = {
-        customer_id: this.filters.customer === '' ? this.filters.customer : this.filters.customer.id,
+        customer_id: this.filters.customer ? this.filters.customer.id : '',
         status: this.filters.status.value,
-        from_date: this.filters.from_date === '' ? this.filters.from_date : moment(this.filters.from_date).format('DD/MM/YYYY'),
-        to_date: this.filters.to_date === '' ? this.filters.to_date : moment(this.filters.to_date).format('DD/MM/YYYY'),
+        from_date: this.filters.from_date,
+        to_date: this.filters.to_date,
         invoice_number: this.filters.invoice_number,
         orderByField: sort.fieldName || 'created_at',
         orderBy: sort.order || 'desc',
-        page
+        page,
       }
 
       this.isRequestOngoing = true
       let response = await this.fetchInvoices(data)
       this.isRequestOngoing = false
-
       this.currency = response.data.currency
 
       return {
@@ -590,53 +623,57 @@ export default {
         pagination: {
           totalPages: response.data.invoices.last_page,
           currentPage: page,
-          count: response.data.invoices.count
-        }
+          count: response.data.invoices.count,
+        },
       }
     },
-    setFilters () {
-      this.filtersApplied = true
+
+    setFilters() {
       this.resetSelectedInvoices()
       this.refreshTable()
     },
-    clearFilter () {
+
+    clearFilter() {
       if (this.filters.customer) {
-        this.$refs.customerSelect.$refs.baseSelect.removeElement(this.filters.customer)
+        this.$refs.customerSelect.$refs.baseSelect.removeElement(
+          this.filters.customer
+        )
       }
+
       this.filters = {
         customer: '',
         status: '',
         from_date: '',
         to_date: '',
-        invoice_number: ''
+        invoice_number: '',
       }
 
-      this.$nextTick(() => {
-        this.filtersApplied = false
-      })
+      this.activeTab = this.$t('general.all')
     },
-    toggleFilter () {
-      if (this.showFilters && this.filtersApplied) {
+
+    toggleFilter() {
+      if (this.showFilters) {
         this.clearFilter()
-        this.refreshTable()
       }
 
       this.showFilters = !this.showFilters
     },
-    onSelectCustomer (customer) {
+
+    onSelectCustomer(customer) {
       this.filters.customer = customer
     },
-    async removeInvoice (id) {
+
+    async removeInvoice(id) {
       this.id = id
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete'),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (value) => {
         if (value) {
-          let res = await this.deleteInvoice(this.id)
+          let res = await this.deleteInvoice({ ids: [id] })
 
           if (res.data.success) {
             window.toastr['success'](this.$tc('invoices.deleted_message'))
@@ -645,36 +682,41 @@ export default {
           }
 
           if (res.data.error === 'payment_attached') {
-            window.toastr['error'](this.$t('invoices.payment_attached_message'), this.$t('general.action_failed'))
+            window.toastr['error'](
+              this.$t('invoices.payment_attached_message'),
+              this.$t('general.action_failed')
+            )
             return true
           }
 
           window.toastr['error'](res.data.error)
           return true
         }
-
-        this.$refs.table.refresh()
-        this.filtersApplied = false
         this.resetSelectedInvoices()
       })
     },
-    async removeMultipleInvoices () {
+
+    async removeMultipleInvoices() {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete', 2),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (value) => {
         if (value) {
           let res = await this.deleteMultipleInvoices()
+
           if (res.data.error === 'payment_attached') {
-            window.toastr['error'](this.$t('invoices.payment_attached_message'), this.$t('general.action_failed'))
+            window.toastr['error'](
+              this.$t('invoices.payment_attached_message'),
+              this.$t('general.action_failed')
+            )
             return true
           }
+
           if (res.data) {
             this.$refs.table.refresh()
-            this.filtersApplied = false
             this.resetSelectedInvoices()
             window.toastr['success'](this.$tc('invoices.deleted_message', 2))
           } else if (res.data.error) {
@@ -683,14 +725,29 @@ export default {
         }
       })
     },
-    async clearCustomerSearch (removedOption, id) {
+
+    async clearCustomerSearch(removedOption, id) {
       this.filters.customer = ''
       this.refreshTable()
     },
-    async clearStatusSearch (removedOption, id) {
+
+    async clearStatusSearch(removedOption, id) {
       this.filters.status = ''
       this.refreshTable()
-    }
-  }
+    },
+    setActiveTab(val) {
+      switch (val.value) {
+        case 'DRAFT':
+          this.activeTab = this.$t('general.draft')
+          break
+        case 'DUE':
+          this.activeTab = this.$t('general.due')
+          break
+        default:
+          this.activeTab = this.$t('general.all')
+          break
+      }
+    },
+  },
 }
 </script>

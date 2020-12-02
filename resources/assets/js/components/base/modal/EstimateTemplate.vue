@@ -1,70 +1,66 @@
 <template>
   <div class="template-modal">
-    <div class="card-body">
-      <div class="template-container">
+    <div class="px-8 py-8 sm:p-6">
+      <div class="flex flex-wrap justify-start p-1 overflow-x-auto sw-scroll">
         <div
-          v-for="(template,index) in modalData"
+          v-for="(template, index) in modalData"
           :key="index"
-          :class="{'selected-template': selectedTemplate === template.id}"
-          class="template-img"
+          :class="{
+            'border border-solid border-primary-500':
+              selectedTemplate === template.id,
+          }"
+          class="relative m-2 border border-gray-200 border-solid"
         >
           <img
             :src="template.path"
             alt="template-image"
-            height="200" width="140"
+            height="200"
+            width="140"
             @click="selectedTemplate = template.id"
-          >
+          />
           <img
             v-if="selectedTemplate === template.id"
-            class="check-icon"
+            class="absolute z-10 w-5 h-5 text-primary-500"
+            style="top: -6px; right: -5px"
             src="/assets/img/tick.png"
-          >
+          />
         </div>
       </div>
     </div>
-    <div class="card-footer">
-      <base-button outline class="mr-3" color="theme" @click="closeEstimateModal">
-        {{ $t('general.cancel') }}
-      </base-button>
-      <base-button
-        :loading="isLoading"
-        color="theme"
-        @click="chooseTemplate()"
+    <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid">
+      <sw-button
+        class="mr-3"
+        variant="primary-outline"
+        @click="closeEstimateModal"
       >
+        {{ $t('general.cancel') }}
+      </sw-button>
+      <sw-button variant="primary" @click="chooseTemplate()">
         {{ $t('general.choose') }}
-      </base-button>
+      </sw-button>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  data () {
+  data() {
     return {
       selectedTemplate: 1,
-      isLoading: false
+      isLoading: false,
     }
   },
   computed: {
-    ...mapGetters('modal', [
-      'modalData'
-    ]),
-    ...mapGetters('estimate', [
-      'getTemplateId'
-    ])
+    ...mapGetters('modal', ['modalData']),
+    ...mapGetters('estimate', ['getTemplateId']),
   },
-  mounted () {
+  mounted() {
     this.selectedTemplate = this.getTemplateId
   },
   methods: {
-    ...mapActions('estimate', [
-      'setTemplate'
-    ]),
-    ...mapActions('modal', [
-      'closeModal',
-      'resetModalData'
-    ]),
-    async chooseTemplate () {
+    ...mapActions('estimate', ['setTemplate']),
+    ...mapActions('modal', ['closeModal', 'resetModalData']),
+    async chooseTemplate() {
       this.isLoading = true
       let resp = await this.setTemplate(this.selectedTemplate)
       if (resp) {
@@ -73,11 +69,11 @@ export default {
         this.closeModal()
       }
     },
-    closeEstimateModal () {
+    closeEstimateModal() {
       this.selectedTemplate = this.getTemplateId
       this.closeModal()
       this.resetModalData()
-    }
-  }
+    },
+  },
 }
 </script>

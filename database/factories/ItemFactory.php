@@ -1,23 +1,34 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\Item;
-use Crater\Tax;
-use Faker\Generator as Faker;
-use Crater\User;
+use Crater\Models\Item;
+use Crater\Models\User;
+use Crater\Models\Unit;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Item::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'description' => $faker->text,
-        'company_id' => User::find(1)->company_id,
-        'price' => $faker->randomDigitNotNull,
-        'unit' => 'kg'
-    ];
-});
+class ItemFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Item::class;
 
-$factory->afterCreating(Item::class, function ($item, $faker) {
-    $item->taxes()->save(factory(Tax::class)->make());
-    $item->taxes()->save(factory(Tax::class)->make());
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'price' => $this->faker->randomDigitNotNull,
+            'unit_id' => Unit::factory()
+        ];
+    }
+}

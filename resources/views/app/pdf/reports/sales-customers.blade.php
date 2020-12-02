@@ -150,7 +150,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="sub-heading-text text-center">Sales Report: By Customer</p>
+                    <p class="sub-heading-text text-center">@lang('pdf_customer_sales_report')</p>
                 </td>
             </tr>
         </table>
@@ -191,7 +191,7 @@
     <table class="report-footer">
         <tr>
             <td>
-                <p class="report-footer-label">TOTAL SALES</p>
+                <p class="report-footer-label">@lang('pdf_total_sales_label')</p>
             </td>
             <td>
                 <p class="report-footer-value">

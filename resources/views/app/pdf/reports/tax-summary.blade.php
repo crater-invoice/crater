@@ -152,11 +152,11 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="sub-heading-text">TAX REPORT</p>
+                    <p class="sub-heading-text">@lang('pdf_tax_report_label')</p>
                 </td>
             </tr>
         </table>
-        <p class="tax-types-title">Tax Types</p>
+        <p class="tax-types-title">@lang('pdf_tax_types_label')</p>
         <div class="tax-table-container">
             <table class="tax-table">
                 @foreach ($taxTypes as $tax)
@@ -190,7 +190,7 @@
     <table class="report-footer">
         <tr>
             <td>
-                <p class="report-footer-label">TOTAL TAX</p>
+                <p class="report-footer-label">@lang('pdf_total_tax_label')</p>
             </td>
             <td>
                 <p class="report-footer-value">

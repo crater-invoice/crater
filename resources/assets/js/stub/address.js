@@ -7,5 +7,5 @@ export default {
   state: null,
   country_id: null,
   zip: null,
-  type: null
+  type: null,
 }

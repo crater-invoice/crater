@@ -71,6 +71,7 @@
         }
 
         .company-address-container {
+            padding-top: 15px;
             float: left;
             padding-left: 30px;
             width: 30%;
@@ -100,6 +101,8 @@
             font-size: 12px;
             line-height: 15px;
             color: #595959;
+            width: 280px;
+            word-wrap: break-word;
         }
 
         .estimate-details-container {
@@ -132,7 +135,8 @@
 
         .shipping-address-container {
             float: right;
-            padding-left: 30px;
+            padding-left: 40px;
+            width: 160px;
         }
 
         .shipping-address-container--left {
@@ -157,17 +161,20 @@
         }
 
         .shipping-address {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 15px;
             color: #595959;
-            padding: 0px;
+            padding-top: 45px;
+            padding-left: 40px;
             margin: 0px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Billing -- */
 
         .billing-address-container {
+            padding-top: 50px;
             float: left;
             padding-left: 30px;
         }
@@ -189,12 +196,13 @@
         }
 
         .billing-address {
-            font-size: 10px;
+            font-size: 12px;
             line-height: 15px;
             color: #595959;
-            padding: 0px;
+            padding: 45px 0px 0px 30px;
             margin: 0px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Items Table -- */
@@ -394,21 +402,21 @@
     </div>
     <div class="wrapper">
         <div class="company-details-container">
-            <div class="company-address-container">
-                @include('app.pdf.estimate.partials.company-address')
+            <div class="company-address-container company-address">
+                {!! $company_address !!}
             </div>
             <div class="estimate-details-container">
                 <table class="estimate-details-table">
                     <tr>
-                        <td class="attribute-label">Estimate Number</td>
+                        <td class="attribute-label">@lang('pdf_estimate_number')</td>
                         <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label">Estimate Date </td>
+                        <td class="attribute-label">@lang('pdf_estimate_date')</td>
                         <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
                     </tr>
                     <tr>
-                        <td class="attribute-label">Expiry Date</td>
+                        <td class="attribute-label">@lang('pdf_estimate_expire_date')</td>
                         <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
                     </tr>
                 </table>
@@ -416,22 +424,37 @@
             <div style="clear: both;"></div>
         </div>
         <div class="customer-address-container">
-            <div class="billing-address-container">
-                @include('app.pdf.estimate.partials.billing-address')
-            </div>
-            @if($estimate->user->billingaddress)
-            <div class="shipping-address-container">
-            @else
-            <div class="shipping-address-container--left">
+            @if($billing_address !== '</br>')
+                <div class="billing-address-container billing-address">
+                    @if($billing_address)
+                        @lang('pdf_bill_to')
+                        {!! $billing_address !!}
+                    @endif
+                </div>
             @endif
-            @include('app.pdf.estimate.partials.shipping-address')
+            @if($billing_address !== '</br>')
+            <div class="shipping-address-container shipping-address">
+            @else
+            <div class="shipping-address-container--left shipping-address" style="padding-left:30px;">
+            @endif
+                @if($shipping_address)
+                    @lang('pdf_ship_to')
+                    {!! $shipping_address !!}
+                @endif
             </div>
             <div style="clear: both;"></div>
             </div>
             <div style="position:relative">
                 @include('app.pdf.estimate.partials.table')
             </div>
-            @include('app.pdf.estimate.partials.notes')
+            <div class="notes">
+                @if($notes)
+                    <div class="notes-label">
+                        @lang('pdf_notes')
+                    </div>
+                    {!! $notes !!}
+                @endif
+            </div>
         </div>
 </body>
 

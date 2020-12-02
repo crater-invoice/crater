@@ -7,12 +7,15 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "vue/max-attributes-per-line": ["error", {
-      "singleline": 10,
-      "multiline": {
-        "max": 1,
-        "allowFirstLine": false
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": 20,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
       }
-    }]    
+    ]
   }
 }

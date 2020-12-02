@@ -26,52 +26,128 @@ class MailEnvironmentRequest extends FormRequest
         switch ($this->get('mail_driver')) {
             case 'smtp':
                 return [
-                    'mail_driver'           => 'required|string',
-                    'mail_host'             => 'required|string',
-                    'mail_port'             => 'required',
-                    'mail_username'         => 'required|string',
-                    'mail_password'         => 'required|string',
-                    'mail_encryption'       => 'required|string',
-                    'from_name'             => 'required|string',
-                    'from_mail'             => 'required|string',
+                    'mail_driver' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_host' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_port' => [
+                        'required'
+                    ],
+                    'mail_username' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_password' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_encryption' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_name' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_mail' => [
+                        'required',
+                        'string'
+                    ],
                 ];
                 break;
 
             case 'mailgun':
                 return [
-                    'mail_driver'           => 'required|string',
-                    'mail_mailgun_domain'   => 'required|string',
-                    'mail_mailgun_secret'   => 'required|string',
-                    'mail_mailgun_endpoint' => 'required|string',
-                    'from_name'             => 'required|string',
-                    'from_mail'             => 'required|string',
+                    'mail_driver' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_mailgun_domain' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_mailgun_secret' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_mailgun_endpoint' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_name' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_mail' => [
+                        'required',
+                        'string'
+                    ],
                 ];
                 break;
 
             case 'ses':
                 return [
-                    'mail_driver'           => 'required|string',
-                    'mail_host'             => 'required|string',
-                    'mail_port'             => 'required',
-                    'mail_ses_key'          => 'required|string',
-                    'mail_ses_secret'       => 'required|string',
-                    'mail_encryption'       => 'required|string',
-                    'from_name'             => 'required|string',
-                    'from_mail'             => 'required|string',
+                    'mail_driver' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_host' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_port' => [
+                        'required'
+                    ],
+                    'mail_ses_key' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_ses_secret' => [
+                        'required',
+                        'string'
+                    ],
+                    'mail_encryption' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_name' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_mail' => [
+                        'required',
+                        'string'
+                    ],
                 ];
                 break;
 
             case 'mail':
                 return [
-                    'from_name'             => 'required|string',
-                    'from_mail'             => 'required|string',
+                    'from_name' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_mail' => [
+                        'required',
+                        'string'
+                    ]
                 ];
                 break;
 
             case 'sendmail':
                 return [
-                    'from_name'             => 'required|string',
-                    'from_mail'             => 'required|string',
+                    'from_name' => [
+                        'required',
+                        'string'
+                    ],
+                    'from_mail' => [
+                        'required',
+                        'string'
+                    ]
                 ];
                 break;
         }

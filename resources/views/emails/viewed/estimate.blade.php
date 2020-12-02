@@ -1,9 +1,8 @@
 @component('mail::message')
-# Introduction
 {{ $data['user']['name'] }} viewed this Estimate.
 
 @component('mail::button', ['url' => url('/admin/estimates/'.$data['estimate']['id'].'/view')])
-Estimate
+View Estimate
 @endcomponent
 
 Thanks,<br>

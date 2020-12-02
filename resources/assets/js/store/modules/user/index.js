@@ -4,9 +4,6 @@ import * as getters from './getters'
 
 const initialState = {
   currentUser: null,
-  roles: [],
-  permissions: [],
-  stations: []
 }
 
 export default {
@@ -18,5 +15,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

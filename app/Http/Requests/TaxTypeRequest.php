@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,8 +24,21 @@ class TaxTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'percent' => 'required'
+            'name' => [
+                'required'
+            ],
+            'percent' => [
+                'required'
+            ],
+            'description' => [
+                'nullable'
+            ],
+            'compound_tax' => [
+                'nullable'
+            ],
+            'collective_tax' => [
+                'nullable'
+            ]
         ];
     }
 }

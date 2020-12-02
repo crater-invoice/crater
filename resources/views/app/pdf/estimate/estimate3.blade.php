@@ -29,93 +29,48 @@
         /* -- Header -- */
 
         .header-container {
-            position: absolute;
+            margin-top: -30px;
             width: 100%;
-            height: 150px;
-            left: 0px;
-            top: -60px;
-        }
-
-        .header-section-left {
-            padding-top: 45px;
-            padding-bottom: 45px;
-            padding-left: 30px;
-            display: inline-block;
-            width: 30%;
-        }
-
-        .header-bottom-divider {
-            color: rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: 100px;
-            left: 0px;
-            width: 100%;
+            padding: 0px 30px;
         }
 
         .header-logo {
-            position: absolute;
             height: 50px;
             text-transform: capitalize;
             color: #817AE3;
-        }
-
-        .header-section-right {
-            display: inline-block;
-            position: absolute;
-            right: 0;
-            padding: 15px 30px 15px 0px;
-            float: right;
-        }
-
-        .header {
-            font-size: 20px;
-            color: rgba(0, 0, 0, 0.7);
+            padding-top: 0px;
         }
 
         /* -- Company Address -- */
 
         .company-address-container {
-            width: auto;
+            width: 50%;
             text-transform: capitalize;
+            padding-left: 80px;
             margin-bottom: 2px;
         }
 
-        .company-address-container h1 {
-
-
-            font-size: 15px;
-            line-height: 22px;
-            letter-spacing: 0.05em;
-            margin-bottom: 0px;
-            margin-top: 10px;
-        }
-
         .company-address {
-            margin-top: 2px;
-            text-align: left;
-
-
+            margin-top: 12px;
             font-size: 12px;
             line-height: 15px;
             color: #595959;
+            word-wrap: break-word;
         }
 
         /* -- Content Wrapper -- */
 
         .wrapper {
             display: block;
-            padding-top: 100px;
+            padding-top: 0px;
             padding-bottom: 20px;
         }
 
-        .main-content {
-        }
-
         .customer-address-container {
-            display: inline;
+            display: block;
             float: left;
-            width: 40%;
-            padding: 0 0 0 30px;
+            width: 45%;
+            padding: 10px 0 0 30px;
         }
 
         /* -- Shipping -- */
@@ -126,7 +81,8 @@
         }
 
         .shipping-address-container--left {
-            float: left;
+            float:left;
+            display: block;
             padding-left: 0;
         }
 
@@ -149,13 +105,15 @@
             font-size: 10px;
             line-height: 15px;
             color: #595959;
-            margin: 0px;
+            margin-top: 5px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Billing -- */
 
         .billing-address-container {
+            display: block;
             float: left;
         }
 
@@ -178,8 +136,9 @@
             font-size: 10px;
             line-height: 15px;
             color: #595959;
-            margin: 0px;
+            margin-top: 5px;
             width: 160px;
+            word-wrap: break-word;
         }
 
         /* -- Estimate Details -- */
@@ -187,7 +146,7 @@
         .estimate-details-container {
             display: block;
             float: right;
-            padding: 20px 30px 0 0;
+            padding: 10px 30px 0 0;
         }
 
         .attribute-label {
@@ -388,18 +347,15 @@
     <div class="header-container">
         <table width="100%">
             <tr>
-                @if($logo)
-                <td class="header-section-left">
-                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                <td width="50%" class="header-section-left">
+                    @if($logo)
+                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    @if($estimate->user->company)
-                <td class="header-section-left" style="padding-top:0px;">
-                    <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
-                    @endif
+                        <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
                     @endif
                 </td>
-                <td class="header-section-right company-address-container">
-                    @include('app.pdf.estimate.partials.company-address')
+                <td width="50%" class="company-address-container company-address">
+                    {!! $company_address !!}
                 </td>
             </tr>
         </table>
@@ -410,15 +366,21 @@
     <div class="wrapper">
         <div class="main-content">
             <div class="customer-address-container">
-                <div class="billing-address-container">
-                    @include('app.pdf.estimate.partials.billing-address')
+                <div class="billing-address-container billing-address">
+                    @if($billing_address)
+                        @lang('pdf_bill_to')
+                        {!! $billing_address !!}
+                    @endif
                 </div>
                 @if($estimate->user->billingaddress)
-                <div class="shipping-address-container">
+                <div class="shipping-address-container shipping-address">
                     @else
-                    <div class="shipping-address-container--left">
+                    <div class="shipping-address-container--left shipping-address">
                         @endif
-                        @include('app.pdf.estimate.partials.shipping-address')
+                        @if($shipping_address)
+                            @lang('pdf_ship_to')
+                            {!! $shipping_address !!}
+                        @endif
                     </div>
                     <div style="clear: both;"></div>
                 </div>
@@ -426,15 +388,15 @@
                 <div class="estimate-details-container">
                     <table>
                         <tr>
-                            <td class="attribute-label">Estimate Number</td>
+                            <td class="attribute-label">@lang('pdf_estimate_number')</td>
                             <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label">Estimate Date </td>
+                            <td class="attribute-label">@lang('pdf_estimate_date') </td>
                             <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
                         </tr>
                         <tr>
-                            <td class="attribute-label">Expiry Date</td>
+                            <td class="attribute-label">@lang('pdf_estimate_expire_date')</td>
                             <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
                         </tr>
                     </table>
@@ -442,7 +404,14 @@
                 <div style="clear: both;"></div>
             </div>
             @include('app.pdf.estimate.partials.table')
-            @include('app.pdf.estimate.partials.notes')
+            <div class="notes">
+                @if($notes)
+                    <div class="notes-label">
+                        @lang('pdf_notes')
+                    </div>
+                    {!! $notes !!}
+                @endif
+            </div>
         </div>
     </div>
 </body>

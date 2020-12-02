@@ -1,0 +1,1 @@
+<img{!! $attributeString !!} loading="{{ $loadingAttributeValue }}" srcset="{{ $media->getSrcset($conversion) }}" src="{{ $media->getUrl($conversion) }}" width="{{ $width }}">

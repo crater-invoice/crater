@@ -47,6 +47,13 @@ class UpdateCommand extends Command
         $this->installed = $this->getInstalledVersion();
         $this->version = $this->getLatestVersion();
 
+        if ($this->version == 'extension_required') {
+            $this->info('Sorry! Your system does not meet the minimum requirements for this update.');
+            $this->info('Please retry after installing the required version/extensions.');
+
+            return;
+        }
+
         if (!$this->version) {
             $this->info('No Update Available! You are already on the latest version.');
             return;
@@ -92,6 +99,24 @@ class UpdateCommand extends Command
 
         try {
             $response = Updater::checkForUpdate($this->installed);
+
+            $extensions = $response->version->extensions;
+
+            $is_required = false;
+
+            foreach ($extensions as $key => $extension) {
+
+                if(!$extension) {
+                    $is_required = true;
+                    $this->info('❌ '.$key);
+                }
+
+                $this->info('✅ '.$key);
+            }
+
+            if($is_required) {
+                return 'extension_required';
+            }
 
             if ($response->success) {
                 return $response->version->version;

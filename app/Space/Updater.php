@@ -137,8 +137,6 @@ class Updater
 
     public static function finishUpdate($installed, $version)
     {
-        Artisan::call('optimize:clear');
-
         event(new UpdateFinished($installed, $version));
 
         return [

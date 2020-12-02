@@ -17,9 +17,9 @@ class Updater
         $data = null;
         if(env('APP_ENV') === 'development')
         {
-            $url = 'https://craterapp.com/downloads/check/latest/'. $installed_version . '?type=update&is_dev=1';
+            $url = 'downloads/check/latest/'. $installed_version . '?type=update&is_dev=1';
         } else {
-            $url = 'https://craterapp.com/downloads/check/latest/'. $installed_version . '?type=update';
+            $url = 'downloads/check/latest/'. $installed_version . '?type=update';
         }
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
@@ -31,7 +31,7 @@ class Updater
         $data = json_decode($data);
 
         if ($data->success && $data->version && property_exists($data->version, 'extensions')) {
-            $extensions = $data->version->extensions ?? [];
+            $extensions = $data->version->extensions;
             $extensionData = [];
             foreach (json_decode($extensions) as $extension) {
                 $extensionData[$extension] = phpversion($extension) ? true : false;
@@ -49,9 +49,9 @@ class Updater
         $path = null;
 
         if (env('APP_ENV') === 'development') {
-            $url = 'https://craterapp.com/downloads/file/' . $new_version . '?type=update&is_dev=1';
+            $url = 'downloads/file/' . $new_version . '?type=update&is_dev=1';
         } else {
-            $url = 'https://craterapp.com/downloads/file/' . $new_version . '?type=update';
+            $url = 'downloads/file/' . $new_version . '?type=update';
         }
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);

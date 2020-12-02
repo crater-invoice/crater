@@ -30,8 +30,8 @@ class Updater
 
         $data = json_decode($data);
 
-        if ($data->success && $data->version && $data->version->extensions) {
-            $extensions = $data->version->extensions;
+        if ($data->success && $data->version && property_exists($data->version, 'extensions')) {
+            $extensions = $data->version->extensions ?? [];
             $extensionData = [];
             foreach (json_decode($extensions) as $extension) {
                 $extensionData[$extension] = phpversion($extension) ? true : false;
@@ -118,7 +118,6 @@ class Updater
 
     public static function copyFiles($temp_extract_dir)
     {
-
         if (!File::copyDirectory($temp_extract_dir . '/Crater', base_path())) {
             return false;
         }
@@ -138,6 +137,8 @@ class Updater
 
     public static function finishUpdate($installed, $version)
     {
+        Artisan::call('optimize:clear');
+
         event(new UpdateFinished($installed, $version));
 
         return [
@@ -146,5 +147,4 @@ class Updater
             'data' => []
         ];
     }
-
 }

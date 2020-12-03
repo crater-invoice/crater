@@ -128,6 +128,17 @@ class Updater
         return true;
     }
 
+    public static function deleteFiles($json)
+    {
+        $files = json_decode($json);
+
+        foreach($files as $file) {
+            \File::delete(base_path($file));
+        }
+
+        return true;
+    }
+
     public static function migrateUpdate()
     {
         Artisan::call('migrate --force');

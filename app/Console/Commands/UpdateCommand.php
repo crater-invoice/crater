@@ -13,6 +13,8 @@ class UpdateCommand extends Command
 
     public $version;
 
+    public $response;
+
     /**
      * The name and signature of the console command.
      *
@@ -45,9 +47,10 @@ class UpdateCommand extends Command
         set_time_limit(3600); // 1 hour
 
         $this->installed = $this->getInstalledVersion();
-        $this->version = $this->getLatestVersion();
+        $this->response = $this->getLatestVersionResponse();
+        $this->version = ($this->response) ? $this->response->version : false;
 
-        if ($this->version == 'extension_required') {
+        if ($this->response == 'extension_required') {
             $this->info('Sorry! Your system does not meet the minimum requirements for this update.');
             $this->info('Please retry after installing the required version/extensions.');
 
@@ -75,6 +78,12 @@ class UpdateCommand extends Command
             return;
         }
 
+        if(isset($this->response->deleted_files) && !empty($this->response->deleted_files)) {
+            if (!$this->deleteFiles($this->response->deleted_files)) {
+                return;
+            }
+        }
+
         if (!$this->migrateUpdate()) {
             return;
         }
@@ -91,7 +100,7 @@ class UpdateCommand extends Command
         return Setting::getSetting('version');
     }
 
-    public function getLatestVersion()
+    public function getLatestVersionResponse()
     {
         $this->info('Your currently installed version is ' . $this->installed);
         $this->line('');
@@ -100,26 +109,27 @@ class UpdateCommand extends Command
         try {
             $response = Updater::checkForUpdate($this->installed);
 
-            $extensions = $response->version->extensions;
+            if ($response->success) {
 
-            $is_required = false;
+                $extensions = $response->version->extensions;
 
-            foreach ($extensions as $key => $extension) {
+                $is_required = false;
 
-                if(!$extension) {
-                    $is_required = true;
-                    $this->info('❌ '.$key);
+                foreach ($extensions as $key => $extension) {
+
+                    if(!$extension) {
+                        $is_required = true;
+                        $this->info('❌ '.$key);
+                    }
+
+                    $this->info('✅ '.$key);
                 }
 
-                $this->info('✅ '.$key);
-            }
+                if($is_required) {
+                    return 'extension_required';
+                }
 
-            if($is_required) {
-                return 'extension_required';
-            }
-
-            if ($response->success) {
-                return $response->version->version;
+                return $response->version;
             }
 
             return false;
@@ -174,6 +184,21 @@ class UpdateCommand extends Command
 
         try {
             Updater::copyFiles($path);
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function deleteFiles($files)
+    {
+        $this->info('Deleting unused old files...');
+
+        try {
+            Updater::deleteFiles($files);
         } catch (\Exception $e) {
             $this->error($e->getMessage());
 

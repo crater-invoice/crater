@@ -1,49 +1,127 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\Invoice;
-use Crater\User;
-use Crater\Tax;
-use Crater\InvoiceItem;
-use Crater\InvoiceTemplate;
-use Faker\Generator as Faker;
+use Crater\Models\Invoice;
+use Crater\Models\User;
+use Crater\Models\InvoiceTemplate;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Invoice::class, function (Faker $faker) {
-    return [
-        'invoice_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'due_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber(),
-        'reference_number' => Invoice::getNextInvoiceNumber(),
-        'user_id' => function () {
-            return factory(User::class)->create(['role' => 'customer'])->id;
-        },
-        'invoice_template_id' => 1,
-        'status' => Invoice::STATUS_DRAFT,
-        'tax_per_item' => 'NO',
-        'discount_per_item' => 'NO',
-        'paid_status' => Invoice::STATUS_UNPAID,
-        'company_id' => User::find(1)->company_id,
-        'sub_total' => $faker->randomDigitNotNull,
-        'discount' => 0,
-        'discount_type' => 'fixed',
-        'discount_val' => 0,
-        'total' => $faker->randomDigitNotNull,
-        'tax' => $faker->randomDigitNotNull,
-        'due_amount' => function (array $invoice) {
-            return $invoice['total'];
-        },
-        'notes' => $faker->text(80),
-        'unique_hash' => str_random(60)
-    ];
-});
+class InvoiceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Invoice::class;
 
-$factory->afterCreating(Invoice::class, function ($invoice, $faker) {
-    $invoice->items()->save(factory(InvoiceItem::class)->make());
-    $invoice->items()->save(factory(InvoiceItem::class)->make());
-});
+    public function sent()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_SENT,
+            ];
+        });
+    }
 
-$factory->afterCreating(Invoice::class, function ($invoice, $faker) {
-    $invoice->taxes()->save(factory(Tax::class)->make());
-    $invoice->items()->save(factory(Tax::class)->make());
-});
+    public function viewed()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_VIEWED,
+            ];
+        });
+    }
+
+    public function overdue()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_OVERDUE,
+            ];
+        });
+    }
+
+    public function completed()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_COMPLETED,
+            ];
+        });
+    }
+
+    public function due()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_DUE,
+            ];
+        });
+    }
+
+    public function unpaid()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_UNPAID,
+            ];
+        });
+    }
+
+    public function partiallyPaid()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_PARTIALLY_PAID,
+            ];
+        });
+    }
+
+    public function paid()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => Invoice::STATUS_PAID,
+            ];
+        });
+    }
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'invoice_date' => $this->faker->date('Y-m-d', 'now'),
+            'due_date' => $this->faker->date('Y-m-d', 'now'),
+            'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber('INV'),
+            'reference_number' => Invoice::getNextInvoiceNumber('INV'),
+            'user_id' => User::factory()->create(['role' => 'customer'])->id,
+            'invoice_template_id' => InvoiceTemplate::find(1) ?? InvoiceTemplate::factory(),
+            'status' => Invoice::STATUS_DRAFT,
+            'tax_per_item' => 'NO',
+            'discount_per_item' => 'NO',
+            'paid_status' => Invoice::STATUS_UNPAID,
+            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'sub_total' => $this->faker->randomDigitNotNull,
+            'total' => $this->faker->randomDigitNotNull,
+            'discount_type' => $this->faker->randomElement(['percentage', 'fixed']),
+            'discount_val' => function (array $invoice) {
+                return $invoice['discount_type'] == 'percentage' ? $this->faker->numberBetween($min = 0, $max = 100) : $this->faker->randomDigitNotNull;
+            },
+            'discount' => function (array $invoice) {
+                return $invoice['discount_type'] == 'percentage' ? (($invoice['discount_val'] * $invoice['total']) / 100) : $invoice['discount_val'];
+            },
+            'tax' => $this->faker->randomDigitNotNull,
+            'due_amount' => function (array $invoice) {
+                return $invoice['total'];
+            },
+            'notes' => $this->faker->text(80),
+            'unique_hash' => str_random(60)
+        ];
+    }
+}

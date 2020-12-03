@@ -1,277 +1,146 @@
 <?php
-namespace Tests\Feature;
-
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\User;
-use Crater\Invoice;
-use Crater\Payment;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
-
-class PaymentTest extends TestCase
-{
-    use RefreshDatabase;
-
-    protected $user;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
-        ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
-    }
-
-    /** @test */
-    public function testGetPayments()
-    {
-        $response = $this->json('GET', 'api/payments?page=1');
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testGetCreatePaymentData()
-    {
-        $response = $this->json('GET', 'api/payments/create');
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testCreatePayment()
-    {
-        $payment = factory(Payment::class)->raw();
-
-        $response = $this->json('POST', 'api/payments', $payment);
-
-        $payment2 = $response->decodeResponseJson()['payment'];
-
-        $response->assertOk();
-        $this->assertEquals($payment['payment_number'], $payment2['payment_number']);
-        $this->assertEquals($payment['user_id'], $payment2['user_id']);
-        $this->assertEquals($payment['amount'], $payment2['amount']);
-    }
-
-    /** @test */
-    public function testCreatePaymentRequiresPaymentNumber()
-    {
-        $payment = factory(Payment::class)->raw([
-            'payment_number' => ''
-        ]);
-
-        $response = $this->json('POST', 'api/payments', $payment);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['payment_number']);
-    }
-
-    /** @test */
-    public function testCreatePaymentRequiresAmount()
-    {
-        $payment = factory(Payment::class)->raw([
-            'amount' => ''
-        ]);
-
-        $response = $this->json('POST', 'api/payments', $payment);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['amount']);
-    }
-
-    /** @test */
-    public function testCreatePaymentRequiresUser()
-    {
-        $payment = factory(Payment::class)->raw([
-            'user_id' => ''
-        ]);
-
-        $response = $this->json('POST', 'api/payments', $payment);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['user_id']);
-    }
-
-    /** @test */
-    public function testCreatePaymentRequiresPaymentDate()
-    {
-        $payment = factory(Payment::class)->raw([
-            'payment_date' => ''
-        ]);
 
-        $response = $this->json('POST', 'api/payments', $payment);
+use Crater\Models\User;
+use Crater\Models\Invoice;
+use Crater\Models\Payment;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use Crater\Http\Requests\PaymentRequest;
+use Crater\Http\Controllers\V1\Payment\PaymentsController;
+use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
+
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
+
+test('get payments', function () {
+    $response = getJson('api/v1/payments?page=1');
+
+    $response->assertOk();
+});
+
+test('get payment', function () {
+    $payment = Payment::factory()->create();
+
+    $response = getJson("api/v1/payments/{$payment->id}");
+
+    $response->assertStatus(200);
+});
+
+test('create payment', function () {
+    $invoice = Invoice::factory()->create([
+        'due_amount' => 100
+    ]);
+
+    $payment = Payment::factory()->raw([
+        'invoice_id' => $invoice->id,
+        'payment_number' => "PAY-000001"
+    ]);
+
+    $response = postJson('api/v1/payments', $payment);
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'user_id' => $payment['user_id'],
+        'amount' => $payment['amount'],
+        'company_id' => $payment['company_id'],
+    ]);
+});
+
+test('store validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        PaymentsController::class,
+        'store',
+        PaymentRequest::class
+    );
+});
+
+test('update payment', function () {
+    $payment = Payment::factory()->create([
+        'payment_date' => '1988-08-18'
+    ]);
+
+    $payment2 = Payment::factory()->raw([
+        'payment_number' => $payment->payment_number,
+    ]);
+
+    $response = putJson("api/v1/payments/{$payment->id}", $payment2);
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'id' => $payment->id,
+        'payment_number' => $payment2['payment_number'],
+        'user_id' => $payment2['user_id'],
+        'amount' => $payment2['amount'],
+    ]);
+});
+
+test('update validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        PaymentsController::class,
+        'update',
+        PaymentRequest::class
+    );
+});
+
+test('search payments', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'search' => 'doe',
+        'payment_number' => 'PAY-000001',
+        'payment_mode' => 'OTHER'
+    ];
 
-        $response->assertStatus(422)->assertJsonValidationErrors(['payment_date']);
-    }
+    $queryString = http_build_query($filters, '', '&');
 
-    /** @test */
-    public function testGetEditPaymentData()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
+    $response = getJson('api/v1/payments?' . $queryString);
 
-        $response = $this->json('GET', 'api/payments/'.$payment->id.'/edit');
+    $response->assertOk();
+});
 
-        $response->assertOk();
-    }
+test('send payment to customer', function () {
+    $payment = Payment::factory()->create();
 
-    /** @test */
-    public function testUpdateEstimate()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
-
-        $payment2 = factory(Payment::class)->raw([
-            'payment_number' => $payment->payment_number
-        ]);
-
-        $response = $this->json('PUT', 'api/payments/'.$payment->id, $payment2);
+    $data = [
+        'subject' => 'test',
+        'body' => 'test',
+        'from' => 'john@example.com',
+        'to' => 'doe@example.com'
+    ];
 
-        $payment3 = $response->decodeResponseJson()['payment'];
+    $response = postJson("api/v1/payments/{$payment->id}/send", $data) ;
 
-        $response->assertOk();
-        $this->assertEquals($payment3['payment_number'], $payment2['payment_number']);
-        $this->assertEquals($payment3['user_id'], $payment2['user_id']);
-        $this->assertEquals($payment3['amount'], $payment2['amount']);
-    }
+    $response->assertJson([
+        'success' => true
+    ]);
+});
 
-    /** @test */
-    public function testUpdatePaymentRequiresPaymentDate()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
+test('delete payment', function () {
+    $payments = Payment::factory()->count(5)->create();
 
-        $payment2 = factory(Payment::class)->raw(['payment_date' => '']);
+    $ids = $payments->pluck('id');
 
-        $response = $this->json('PUT', 'api/payments/'.$payment->id, $payment2);
+    $data = [
+        'ids' => $ids
+    ];
 
-        $response->assertStatus(422)->assertJsonValidationErrors(['payment_date']);
-    }
-
-    /** @test */
-    public function testUpdatePaymentRequiresPaymentNumber()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
+    $response = postJson('api/v1/payments/delete', $data);
 
-        $payment2 = factory(Payment::class)->raw(['payment_number' => '']);
-
-        $response = $this->json('PUT', 'api/payments/'.$payment->id, $payment2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['payment_number']);
-    }
-
-    /** @test */
-    public function testUpdatePaymentRequiresAmount()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
-
-        $payment2 = factory(Payment::class)->raw(['amount' => '']);
-
-        $response = $this->json('PUT', 'api/payments/'.$payment->id, $payment2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['amount']);
-    }
-
-    /** @test */
-    public function testUpdatePaymentRequiresUser()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
-
-        $payment2 = factory(Payment::class)->raw(['user_id' => '']);
-
-        $response = $this->json('PUT', 'api/payments/'.$payment->id, $payment2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['user_id']);
-    }
-
-    /** @test */
-    public function testDeletePayment()
-    {
-        $payment = factory(Payment::class)->create([
-            'payment_date' => '1988-07-18'
-        ]);
-
-        $response = $this->json('DELETE', 'api/payments/'.$payment->id);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-
-        $payment = Payment::find($payment->id);
-        $this->assertNull($payment);
-    }
-
-    /** @test */
-    public function testSearchPayments()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'search' => 'doe',
-            'payment_number' => 'PAY-000001',
-            'payment_mode' => 'OTHER'
-        ];
-
-        $queryString = http_build_query($filters, '', '&');
-
-        $response = $this->json('GET', 'api/payments?'.$queryString);
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function getUnpaidInvoicesOfUser()
-    {
-        $user = factory(User::class)->create();
-
-        $invoices = factory(Invoice::class, 2)->create([
-            'invoice_date' => '1988-07-18',
-            'due_date' => '1988-08-18',
-            'user_id' => $user->id
-        ]);
-
-        $response = $this->json('GET', 'api/invoices/unpaid/'.$user->id);
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testDeleteMultiplePayments()
-    {
-        $payments = factory(Payment::class, 3)->create([
-            'payment_date' => '1988-07-18'
-        ]);
-
-        $ids = $payments->pluck('id');
-
-        $data = [
-            'id' => $ids,
-            'type' => 'payment'
-        ];
-
-        $response = $this->json('POST', 'api/payments/delete', $data);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-}
+    $response->assertJson([
+        'success' => true
+    ]);
+});

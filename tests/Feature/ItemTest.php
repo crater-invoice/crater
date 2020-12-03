@@ -1,182 +1,140 @@
 <?php
-namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\Item;
-use Crater\User;
-use Crater\Tax;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
+use Crater\Models\User;
+use Crater\Models\Item;
+use Crater\Models\Tax;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use Crater\Http\Requests\ItemsRequest;
+use Crater\Http\Controllers\V1\Item\ItemsController;
+use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
 
-class ItemTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-    protected $user;
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
-        ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
+test('get items', function () {
+    $response = getJson('api/v1/items?page=1');
+
+    $response->assertOk();
+});
+
+test('create item', function () {
+    $item = Item::factory()->raw([
+        'taxes' => [
+            Tax::factory()->raw(),
+            Tax::factory()->raw()
+        ]
+    ]);
+
+    $response = postJson('api/v1/items', $item);
+
+    $this->assertDatabaseHas('items', [
+        'name' => $item['name'],
+        'description' => $item['description'],
+        'price' => $item['price'],
+        'company_id' => $item['company_id']
+    ]);
+
+    $this->assertDatabaseHas('taxes', [
+        'item_id' => $response->getData()->item->id,
+    ]);
+
+    $response->assertOk();
+});
+
+test('store validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        ItemsController::class,
+        'store',
+        ItemsRequest::class
+    );
+});
+
+test('get item', function () {
+    $item = Item::factory()->create();
+
+    $response = getJson("api/v1/items/{$item->id}");
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('items', [
+        'name' => $item['name'],
+        'description' => $item['description'],
+        'price' => $item['price'],
+        'company_id' => $item['company_id']
+    ]);
+});
+
+test('update item', function () {
+    $item = Item::factory()->create();
+
+    $update_item = Item::factory()->raw([
+        'taxes' => [
+            Tax::factory()->raw()
+        ]
+    ]);
+
+    $response = putJson('api/v1/items/' . $item->id, $update_item);
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('items', [
+        'name' => $update_item['name'],
+        'description' => $update_item['description'],
+        'price' => $update_item['price'],
+        'company_id' => $update_item['company_id']
+    ]);
+
+    $this->assertDatabaseHas('taxes', [
+        'item_id' => $item->id,
+    ]);
+});
+
+test('update validates using a form request', function () {
+    $this->assertActionUsesFormRequest(
+        ItemsController::class,
+        'update',
+        ItemsRequest::class
+    );
+});
+
+test('delete multiple items', function () {
+    $items = Item::factory()->count(5)->create();
+
+    $data = [
+        'ids' => $items->pluck('id')
+    ];
+
+    postJson("/api/v1/items/delete", $data)->assertOk();
+
+    foreach ($items as $item) {
+        $this->assertDeleted($item);
     }
+});
 
-    /** @test */
-    public function testGetItems()
-    {
-        $response = $this->json('GET', 'api/items?page=1');
+test('search items', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'search' => 'doe',
+        'price' => 6,
+        'unit' => 'kg'
+    ];
 
-        $response->assertOk();
-    }
+    $queryString = http_build_query($filters, '', '&');
 
-    /** @test */
-    public function testCreateItem()
-    {
-        $item = factory(Item::class)->raw([
-            'taxes' => [
-                factory(Tax::class)->raw(),
-                factory(Tax::class)->raw()
-            ]
-        ]);
-        $response = $this->json('POST', 'api/items', $item);
+    $response = getJson('api/v1/items?' . $queryString);
 
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testItemNameRequired()
-    {
-        $item = factory(Item::class)->raw(['name' => '']);
-
-        $response = $this->json('POST', 'api/items', $item);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
-
-    /** @test */
-    public function testItemPriceRequired()
-    {
-        $item = factory(Item::class)->raw(['price' => '']);
-
-        $response = $this->json('POST', 'api/items', $item);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['price']);
-    }
-
-    /** @test */
-    public function testGetEditItemData()
-    {
-        $item = factory(Item::class)->create();
-
-        $response = $this->json('GET', 'api/items/'.$item->id.'/edit');
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'item' => $item->toArray()
-            ]);
-    }
-
-    /** @test */
-    public function testUpdateItem()
-    {
-        $item = factory(Item::class)->create();
-        $item2 = factory(Item::class)->raw([
-            'taxes' => [
-                factory(Tax::class)->raw(['tax_type_id' => $item->taxes[0]->tax_type_id]),
-                factory(Tax::class)->raw(['tax_type_id' => $item->taxes[1]->tax_type_id])
-            ]
-        ]);
-
-        $response = $this->json('PUT', 'api/items/'.$item->id, $item2);
-
-        $item3 = $response->decodeResponseJson()['item'];
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testUpdateItemNameRequired()
-    {
-        $item = factory(Item::class)->create();
-        $item2 = factory(Item::class)->raw(['name' => '']);
-
-        $response = $this->json('PUT', 'api/items/'.$item->id, $item2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['name']);
-    }
-
-    /** @test */
-    public function testUpdateItemPriceRequired()
-    {
-        $item = factory(Item::class)->create();
-        $item2 = factory(Item::class)->raw(['price' => '']);
-
-        $response = $this->json('PUT', 'api/items/'.$item->id, $item2);
-
-        $response->assertStatus(422)->assertJsonValidationErrors(['price']);
-    }
-
-    /** @test */
-    public function testDeleteItem()
-    {
-        $item = factory(Item::class)->create();
-
-        $response = $this->json('DELETE', 'api/items/'.$item->id);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-
-    /** @test */
-    public function testSearchItems()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'search' => 'doe',
-            'price' => 6,
-            'unit' => 'kg'
-        ];
-
-        $queryString = http_build_query($filters, '', '&');
-
-        $response = $this->json('GET', 'api/items?'.$queryString);
-
-        $response->assertOk();
-    }
-
-    /** @test */
-    public function testDeleteMultipleItems()
-    {
-        $items = factory(Item::class, 3)->create();
-
-        $ids = $items->pluck('id');
-
-        $data = [
-            'id' => $ids,
-            'type' => 'item'
-        ];
-
-        $response = $this->json('POST', 'api/items/delete', $data);
-
-        $response
-            ->assertOk()
-            ->assertJson([
-                'success' => true
-            ]);
-    }
-}
+    $response->assertOk();
+});

@@ -14,5 +14,5 @@ export default {
   totalSimpleTax: 0,
   totalCompoundTax: 0,
   tax: 0,
-  taxes: []
+  taxes: [],
 }

@@ -1,4 +1,4 @@
-@component('mail::layout')
+    @component('mail::layout')
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => ''])
@@ -16,14 +16,15 @@
     {{-- Subcopy --}}
     @slot('subcopy')
         @component('mail::subcopy')
-            You have received a new invoice from <span class="company-name">{{$data['company']['name']}}</span>
+            {!! $data['body'] !!}
             @component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
                 View Invoice
             @endcomponent
         @endcomponent
     @endslot
-     {{-- Footer --}}
-     @slot('footer')
+
+    {{-- Footer --}}
+    @slot('footer')
         @component('mail::footer')
             Powered by <a class="footer-link" href="https://craterapp.com">Crater</a>
         @endcomponent

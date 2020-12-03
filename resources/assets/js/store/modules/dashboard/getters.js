@@ -9,7 +9,7 @@ export const getTotalDueAmount = (state) => state.totalDueAmount
 export const getDueInvoices = (state) => state.dueInvoices
 export const getRecentEstimates = (state) => state.recentEstimates
 
-export const getLoadedData = (state) => state.isDataLoaded
+export const getDashboardDataLoaded = (state) => state.isDashboardDataLoaded
 
 export const getWeeklyInvoicesCounter = (state) => state.weeklyInvoices.counter
 export const getWeeklyInvoicesDays = (state) => state.weeklyInvoices.days

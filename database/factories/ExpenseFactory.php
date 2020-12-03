@@ -1,21 +1,35 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\Expense;
-use Crater\ExpenseCategory;
-use Faker\Generator as Faker;
-use Crater\User;
+use Crater\Models\Expense;
+use Crater\Models\User;
+use Crater\Models\ExpenseCategory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Expense::class, function (Faker $faker) {
-    return [
-        'expense_date' => $faker->date($format = 'd/m/Y', $max = 'now'),
-        'expense_category_id' => function () {
-            return factory(ExpenseCategory::class)->create()->id;
-        },
-        'company_id' => User::find(1)->company_id,
-        'amount' => $faker->randomDigitNotNull,
-        'notes' => $faker->text,
-        'attachment_receipt' => null
-    ];
-});
+class ExpenseFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Expense::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'expense_date' => $this->faker->date('Y-m-d', 'now'),
+            'expense_category_id' => ExpenseCategory::factory(),
+            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'amount' => $this->faker->randomDigitNotNull,
+            'notes' => $this->faker->text,
+            'attachment_receipt' => null
+        ];
+    }
+}

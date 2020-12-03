@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -61,12 +61,50 @@ return [
             'secret' => env('AWS_SECRET'),
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
+            'root' => env('AWS_ROOT')
         ],
 
         'media' => [
             'driver' => 'local',
             'root'   => public_path('media'),
         ],
+
+        'doSpaces' => [
+            'type' => 'AwsS3',
+            'driver' => 's3',
+            'key' => env('DO_SPACES_KEY'),
+            'secret' => env('DO_SPACES_SECRET'),
+            'region' => env('DO_SPACES_REGION'),
+            'bucket' => env('DO_SPACES_BUCKET'),
+            'root' => env('DO_SPACES_ROOT'),
+            'endpoint' => env('DO_SPACES_ENDPOINT'),
+            'use_path_style_endpoint' => false,
+        ],
+
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'type' => 'DropboxV2',
+            'token' => env('DROPBOX_TOKEN'),
+            'key' => env('DROPBOX_KEY'),
+            'secret' => env('DROPBOX_SECRET'),
+            'app' => env('DROPBOX_APP'),
+            'root' => env('DROPBOX_ROOT'),
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Symbolic Links
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the symbolic links that will be created when the
+    | `storage:link` Artisan command is executed. The array keys should be
+    | the locations of the links and the values should be their targets.
+    |
+    */
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

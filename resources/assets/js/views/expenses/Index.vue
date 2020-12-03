@@ -1,183 +1,232 @@
 <template>
-  <div class="expenses main-content">
-    <div class="page-header">
-      <h3 class="page-title">{{ $t('expenses.title') }}</h3>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="dashboard">
-            {{ $t('general.home') }}
-          </router-link>
-        </li>
-        <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="#">
-            {{ $tc('expenses.expense',2) }}
-          </router-link>
-        </li>
-      </ol>
-      <div class="page-actions row">
-        <div class="col-xs-2 mr-4">
-          <base-button
-            v-show="totalExpenses || filtersApplied"
-            :outline="true"
-            :icon="filterIcon"
-            size="large"
-            right-icon
-            color="theme"
-            @click="toggleFilter"
-          >
-            {{ $t('general.filter') }}
-          </base-button>
-        </div>
-        <router-link slot="item-title" class="col-xs-2" to="expenses/create">
-          <base-button size="large" icon="plus" color="theme">
-            {{ $t('expenses.add_expense') }}
-          </base-button>
-        </router-link>
-      </div>
-    </div>
+  <base-page>
+    <!-- Page Header -->
+    <sw-page-header :title="$t('expenses.title')">
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
 
-    <transition name="fade">
-      <div v-show="showFilters" class="filter-section">
-        <div class="row">
-          <div class="col-md-4">
-            <label>{{ $t('expenses.category') }}</label>
-            <base-select
-              v-model="filters.category"
-              :options="categories"
-              :searchable="true"
-              :show-labels="false"
-              :placeholder="$t('expenses.categories.select_a_category')"
-              label="name"
-              @click="filter = ! filter"
-            />
-          </div>
-          <div class="col-md-4">
-            <label>{{ $t('expenses.from_date') }}</label>
-            <base-date-picker
-              v-model="filters.from_date"
-              :calendar-button="true"
-              calendar-button-icon="calendar"
-            />
-          </div>
-          <div class="col-md-4">
-            <label>{{ $t('expenses.to_date') }}</label>
-            <base-date-picker
-              v-model="filters.to_date"
-              :calendar-button="true"
-              calendar-button-icon="calendar"
-            />
-          </div>
-        </div>
-        <label class="clear-filter" @click="clearFilter">{{ $t('general.clear_all') }}</label>
-      </div>
-    </transition>
+        <sw-breadcrumb-item to="#" :title="$tc('expenses.expense', 2)" active />
+      </sw-breadcrumb>
 
-    <div v-cloak v-show="showEmptyScreen" class="col-xs-1 no-data-info" align="center">
-      <observatory-icon class="mt-5 mb-4"/>
-      <div class="row" align="center">
-        <label class="col title">{{ $t('expenses.no_expenses') }}</label>
-      </div>
-      <div class="row">
-        <label class="description col mt-1" align="center">{{ $t('expenses.list_of_expenses') }}</label>
-      </div>
-      <div class="row">
-        <div class="col">
-          <base-button
-            :outline="true"
-            color="theme"
-            class="mt-3"
-            size="large"
-            @click="$router.push('expenses/create')"
-          >
-            {{ $t('expenses.add_new_expense') }}
-          </base-button>
-        </div>
-      </div>
-    </div>
-
-    <div v-show="!showEmptyScreen" class="table-container">
-
-      <div class="table-actions mt-5">
-        <p class="table-stats">{{ $t('general.showing') }}: <b>{{ expenses.length }}</b> {{ $t('general.of') }} <b>{{ totalExpenses }}</b></p>
-        <transition name="fade">
-          <v-dropdown v-if="selectedExpenses.length" :show-arrow="false" theme-light class="action mr-5">
-            <span slot="activator" href="#" class="table-actions-button dropdown-toggle">
-              {{ $t('general.actions') }}
-            </span>
-            <v-dropdown-item>
-              <div class="dropdown-item" @click="removeMultipleExpenses">
-                <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
-                {{ $t('general.delete') }}
-              </div>
-            </v-dropdown-item>
-          </v-dropdown>
-        </transition>
-      </div>
-
-      <div class="custom-control custom-checkbox">
-        <input
-          id="select-all"
-          v-model="selectAllFieldStatus"
-          type="checkbox"
-          class="custom-control-input"
-          @change="selectAllExpenses"
+      <template slot="actions">
+        <sw-button
+          v-show="totalExpenses"
+          size="lg"
+          variant="primary-outline"
+          @click="toggleFilter"
         >
-        <label v-show="!isRequestOngoing" for="select-all" class="custom-control-label selectall">
-          <span class="select-all-label">{{ $t('general.select_all') }} </span>
-        </label>
+          {{ $t('general.filter') }}
+          <component :is="filterIcon" class="w-4 h-4 ml-2 -mr-1" />
+        </sw-button>
+
+        <sw-button
+          tag-name="router-link"
+          to="expenses/create"
+          class="ml-4"
+          size="lg"
+          variant="primary"
+        >
+          <plus-icon class="w-6 h-6 mr-1 -ml-2" />
+          {{ $t('expenses.add_expense') }}
+        </sw-button>
+      </template>
+    </sw-page-header>
+
+    <!--Filter Wrapper -->
+    <slide-y-up-transition>
+      <sw-filter-wrapper v-show="showFilters" class="mt-3">
+        <sw-input-group :label="$t('expenses.customer')" class="flex-1 mt-3">
+          <base-customer-select
+            ref="customerSelect"
+            @select="onSelectCustomer"
+            @deselect="clearCustomerSearch"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('expenses.category')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <sw-select
+            v-model="filters.category"
+            :options="categories"
+            :searchable="true"
+            :show-labels="false"
+            :placeholder="$t('expenses.categories.select_a_category')"
+            label="name"
+            class="mt-2"
+            @click="filter = !filter"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('expenses.from_date')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <base-date-picker
+            v-model="filters.from_date"
+            :calendar-button="true"
+            class="mt-2"
+            calendar-button-icon="calendar"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('expenses.to_date')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <base-date-picker
+            v-model="filters.to_date"
+            :calendar-button="true"
+            class="mt-2"
+            calendar-button-icon="calendar"
+          />
+        </sw-input-group>
+
+        <label
+          class="absolute text-sm leading-snug text-black cursor-pointer"
+          style="top: 10px; right: 15px"
+          @click="clearFilter"
+          >{{ $t('general.clear_all') }}</label
+        >
+      </sw-filter-wrapper>
+    </slide-y-up-transition>
+
+    <!-- Empty Table Placeholder -->
+    <sw-empty-table-placeholder
+      v-show="showEmptyScreen"
+      :title="$t('expenses.no_expenses')"
+      :description="$t('expenses.list_of_expenses')"
+    >
+      <observatory-icon class="mt-5 mb-4" />
+
+      <sw-button
+        slot="actions"
+        tag-name="router-link"
+        to="/admin/expenses/create"
+        size="lg"
+        variant="primary-outline"
+      >
+        <plus-icon class="w-6 h-6 mr-1 -ml-2" />
+        {{ $t('expenses.add_new_expense') }}
+      </sw-button>
+    </sw-empty-table-placeholder>
+
+    <div v-show="!showEmptyScreen" class="relative table-container">
+      <div
+        class="relative flex items-center justify-between h-10 mt-5 list-none border-b-2 border-gray-200 border-solid"
+      >
+        <p class="text-sm">
+          {{ $t('general.showing') }}: <b>{{ expenses.length }}</b>
+
+          {{ $t('general.of') }} <b>{{ totalExpenses }}</b>
+        </p>
+
+        <sw-transition type="fade">
+          <sw-dropdown v-if="selectedExpenses.length">
+            <span
+              slot="activator"
+              class="flex block text-sm font-medium cursor-pointer select-none text-primary-400"
+            >
+              {{ $t('general.actions') }}
+              <chevron-down-icon class="h-5" />
+            </span>
+
+            <sw-dropdown-item @click="removeMultipleExpenses">
+              <trash-icon class="h-5 mr-3 text-gray-600" />
+              {{ $t('general.delete') }}
+            </sw-dropdown-item>
+          </sw-dropdown>
+        </sw-transition>
       </div>
 
-      <table-component
-        ref="table"
-        :show-filter="false"
-        :data="fetchData"
-        table-class="table"
-      >
+      <div class="absolute z-10 items-center pl-4 mt-2 select-none md:mt-12">
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          variant="primary"
+          size="sm"
+          class="hidden md:inline"
+          @change="selectAllExpenses"
+        />
 
-        <table-column
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          :label="$t('general.select_all')"
+          variant="primary"
+          size="sm"
+          class="md:hidden"
+          @change="selectAllExpenses"
+        />
+      </div>
+
+      <sw-table-component ref="table" :show-filter="false" :data="fetchData">
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="no-click"
         >
-          <template slot-scope="row">
-            <div class="custom-control custom-checkbox">
-              <input
-                :id="row.id"
-                v-model="selectField"
-                :value="row.id"
-                type="checkbox"
-                class="custom-control-input"
-              >
-              <label :for="row.id" class="custom-control-label" />
-            </div>
-          </template>
-        </table-column>
-        <table-column
-          :label="$tc('expenses.categories.category', 1)"
-          sort-as="name"
-          show="category.name"
-        />
-        <table-column
+          <div slot-scope="row" class="relative block">
+            <sw-checkbox
+              :id="row.id"
+              v-model="selectField"
+              :value="row.id"
+              variant="primary"
+              size="sm"
+            />
+          </div>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('expenses.date')"
           sort-as="expense_date"
           show="formattedExpenseDate"
         />
-        <table-column
+
+        <sw-table-column
+          :sortable="true"
+          :label="$tc('expenses.categories.category', 1)"
+          sort-as="name"
+          show="category.name"
+        >
+          <template slot-scope="row">
+            <span>{{ $tc('expenses.categories.category', 1) }}</span>
+            <router-link
+              :to="{ path: `expenses/${row.id}/edit` }"
+              class="font-medium text-primary-500"
+            >
+              {{ row.category.name }}
+            </router-link>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :label="$t('expenses.customer')"
+          sort-as="user_name"
+          show="user_name"
+        >
+          <template slot-scope="row">
+            <span>{{ $t('expenses.customer') }}</span>
+            <span> {{ row.user_name ? row.user_name : 'Not selected' }} </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('expenses.note')"
           sort-as="expense_date"
         >
           <template slot-scope="row">
             <span>{{ $t('expenses.note') }}</span>
             <div class="notes">
-              <div class="note">{{ row.notes }}</div>
+              <div class="truncate note w-60">{{ row.notes }}</div>
             </div>
           </template>
-        </table-column>
-        <table-column
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('expenses.amount')"
           sort-as="amount"
           show="category.amount"
@@ -186,114 +235,133 @@
             <span>{{ $t('expenses.amount') }}</span>
             <div v-html="$utils.formatMoney(row.amount, defaultCurrency)" />
           </template>
-        </table-column>
-        <table-column
+        </sw-table-column>
+
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="action-dropdown no-click"
         >
           <template slot-scope="row">
             <span>{{ $t('expenses.action') }}</span>
-            <v-dropdown>
-              <a slot="activator" href="#">
-                <dot-icon />
-              </a>
-              <v-dropdown-item>
-                <router-link :to="{path: `expenses/${row.id}/edit`}" class="dropdown-item">
-                  <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon" />
-                  {{ $t('general.edit') }}
-                </router-link>
-              </v-dropdown-item>
-              <v-dropdown-item>
-                <div class="dropdown-item" @click="removeExpense(row.id)">
-                  <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
-                  {{ $t('general.delete') }}
-                </div>
-              </v-dropdown-item>
-            </v-dropdown>
+            <sw-dropdown>
+              <dot-icon slot="activator" />
+
+              <sw-dropdown-item
+                tag-name="router-link"
+                :to="`expenses/${row.id}/edit`"
+              >
+                <pencil-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.edit') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item @click="removeExpense(row.id)">
+                <trash-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.delete') }}
+              </sw-dropdown-item>
+            </sw-dropdown>
           </template>
-        </table-column>
-      </table-component>
+        </sw-table-column>
+      </sw-table-component>
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
-import { SweetModal, SweetModalTab } from 'sweet-modal-vue'
 import { mapActions, mapGetters } from 'vuex'
 import ObservatoryIcon from '../../components/icon/ObservatoryIcon'
-import MultiSelect from 'vue-multiselect'
 import moment, { invalid } from 'moment'
+import {
+  PencilIcon,
+  TrashIcon,
+  FilterIcon,
+  XIcon,
+  ChevronDownIcon,
+  PlusIcon,
+} from '@vue-hero-icons/solid'
 
 export default {
   components: {
-    MultiSelect,
-    'observatory-icon': ObservatoryIcon,
-    'SweetModal': SweetModal,
-    'SweetModalTab': SweetModalTab
+    ObservatoryIcon,
+    PlusIcon,
+    FilterIcon,
+    XIcon,
+    ChevronDownIcon,
+    PencilIcon,
+    TrashIcon,
   },
-  data () {
+
+  data() {
     return {
       showFilters: false,
-      filtersApplied: false,
       isRequestOngoing: true,
       filters: {
         category: null,
         from_date: '',
-        to_date: ''
-      }
+        to_date: '',
+        user: '',
+      },
     }
   },
+
   computed: {
-    showEmptyScreen () {
-      return !this.totalExpenses && !this.isRequestOngoing && !this.filtersApplied
+    showEmptyScreen() {
+      return !this.totalExpenses && !this.isRequestOngoing
     },
-    filterIcon () {
-      return (this.showFilters) ? 'times' : 'filter'
+
+    filterIcon() {
+      return this.showFilters ? 'x-icon' : 'filter-icon'
     },
-    ...mapGetters('category', [
-      'categories'
-    ]),
+
+    ...mapGetters('category', ['categories']),
+
     ...mapGetters('expense', [
       'selectedExpenses',
       'totalExpenses',
       'expenses',
-      'selectAllField'
+      'selectAllField',
     ]),
-    ...mapGetters('currency', [
-      'defaultCurrency'
-    ]),
+
+    ...mapGetters('company', ['defaultCurrency']),
+
+    ...mapGetters('customer', ['customers']),
+
     selectField: {
       get: function () {
         return this.selectedExpenses
       },
       set: function (val) {
         this.selectExpense(val)
-      }
+      },
     },
+
     selectAllFieldStatus: {
       get: function () {
         return this.selectAllField
       },
       set: function (val) {
         this.setSelectAllState(val)
-      }
-    }
+      },
+    },
   },
+
   watch: {
     filters: {
       handler: 'setFilters',
-      deep: true
-    }
+      deep: true,
+    },
   },
-  destroyed () {
+
+  destroyed() {
     if (this.selectAllField) {
       this.selectAllExpenses()
     }
   },
-  created () {
-    this.fetchCategories()
+
+  created() {
+    this.fetchCategories({ limit: 'all' })
   },
+
   methods: {
     ...mapActions('expense', [
       'fetchExpenses',
@@ -301,19 +369,33 @@ export default {
       'deleteExpense',
       'deleteMultipleExpenses',
       'selectAllExpenses',
-      'setSelectAllState'
+      'setSelectAllState',
     ]),
-    ...mapActions('category', [
-      'fetchCategories'
-    ]),
-    async fetchData ({ page, filter, sort }) {
+
+    ...mapActions('category', ['fetchCategories']),
+
+    async fetchData({ page, filter, sort }) {
       let data = {
-        expense_category_id: this.filters.category !== null ? this.filters.category.id : '',
-        from_date: this.filters.from_date === '' ? this.filters.from_date : moment(this.filters.from_date).format('DD/MM/YYYY'),
-        to_date: this.filters.to_date === '' ? this.filters.to_date : moment(this.filters.to_date).format('DD/MM/YYYY'),
+        user_id: this.filters.user ? this.filters.user.id : null,
+
+        expense_category_id:
+          this.filters.category !== null ? this.filters.category.id : '',
+
+        from_date:
+          this.filters.from_date === ''
+            ? this.filters.from_date
+            : this.filters.from_date,
+
+        to_date:
+          this.filters.to_date === ''
+            ? this.filters.to_date
+            : this.filters.to_date,
+
         orderByField: sort.fieldName || 'created_at',
+
         orderBy: sort.order || 'desc',
-        page
+
+        page,
       }
 
       this.isRequestOngoing = true
@@ -322,52 +404,69 @@ export default {
 
       return {
         data: response.data.expenses.data,
+
         pagination: {
           totalPages: response.data.expenses.last_page,
           currentPage: page,
-          count: response.data.expenses.count
-        }
+          count: response.data.expenses.count,
+        },
       }
     },
-    refreshTable () {
+
+    onSelectCustomer(customer) {
+      this.filters.user = customer
+    },
+
+    refreshTable() {
       this.$refs.table.refresh()
     },
-    setFilters () {
-      this.filtersApplied = true
+
+    setFilters() {
       this.refreshTable()
     },
-    clearFilter () {
+
+    clearFilter() {
+      if (this.filters.user) {
+        this.$refs.customerSelect.$refs.baseSelect.removeElement(
+          this.filters.user
+        )
+      }
+
       this.filters = {
         category: null,
         from_date: '',
-        to_date: ''
+        to_date: '',
+        user: null,
       }
-
-      this.$nextTick(() => {
-        this.filtersApplied = false
-      })
     },
-    toggleFilter () {
-      if (this.showFilters && this.filtersApplied) {
+
+    async clearCustomerSearch(removedOption, id) {
+      this.filters.user = ''
+      this.refreshTable()
+    },
+
+    toggleFilter() {
+      if (this.showFilters) {
         this.clearFilter()
-        this.refreshTable()
       }
 
       this.showFilters = !this.showFilters
     },
-    async removeExpense (id) {
+
+    async removeExpense(id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete'),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          let res = await this.deleteExpense(id)
+          let res = await this.deleteExpense({ ids: [id] })
+
           if (res.data.success) {
             window.toastr['success'](this.$tc('expenses.deleted_message', 1))
-            this.$refs.table.refresh()
+            this.refreshTable()
             return true
           } else if (res.data.error) {
             window.toastr['error'](res.data.message)
@@ -375,16 +474,18 @@ export default {
         }
       })
     },
-    async removeMultipleExpenses () {
+
+    async removeMultipleExpenses() {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete', 2),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
           let request = await this.deleteMultipleExpenses()
+
           if (request.data.success) {
             window.toastr['success'](this.$tc('expenses.deleted_message', 2))
             this.$refs.table.refresh()
@@ -393,7 +494,7 @@ export default {
           }
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>

@@ -1,3 +1,5 @@
+$pace-loader-color: #5851d8;
+
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -11,7 +13,7 @@
 }
 
 .pace .pace-progress {
-  background: darken($pace-loader-color,10%);
+  background: darken($pace-loader-color, 10%);
   position: fixed;
   z-index: 2000;
   top: 0;
@@ -27,7 +29,7 @@
   width: 100px;
   height: 100%;
   box-shadow: 0 0 10px $pace-loader-color, 0 0 5px $pace-loader-color;
-  opacity: 1.0;
+  opacity: 1;
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   -moz-transform: rotate(3deg) translate(0px, -4px);
   -ms-transform: rotate(3deg) translate(0px, -4px);
@@ -55,26 +57,56 @@
 }
 
 @-webkit-keyframes pace-spinner {
-  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @-moz-keyframes pace-spinner {
-  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
-  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @-o-keyframes pace-spinner {
-  0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
-  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @-ms-keyframes pace-spinner {
-  0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
-  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pace-spinner {
-  0% { transform: rotate(0deg); transform: rotate(0deg); }
-  100% { transform: rotate(360deg); transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

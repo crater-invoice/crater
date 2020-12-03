@@ -6,8 +6,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
-use Crater\Setting;
-use Crater\CompanySetting;
+use Crater\Models\Setting;
+use Crater\Models\CompanySetting;
 
 class Version210 extends Listener
 {

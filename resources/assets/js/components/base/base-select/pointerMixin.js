@@ -1,8 +1,10 @@
+import CraterTheme from '../theme/index'
+const { multiselectOption } = CraterTheme.BaseSelect
 export default {
-  data () {
+  data() {
     return {
       pointer: 0,
-      pointerDirty: false
+      pointerDirty: false,
     }
   },
   props: {
@@ -13,79 +15,106 @@ export default {
      */
     showPointer: {
       type: Boolean,
-      default: true
+      default: true,
     },
     optionHeight: {
       type: Number,
-      default: 40
-    }
+      default: 40,
+    },
   },
   computed: {
-    pointerPosition () {
+    pointerPosition() {
       return this.pointer * this.optionHeight
     },
-    visibleElements () {
+    visibleElements() {
       return this.optimizedHeight / this.optionHeight
-    }
+    },
   },
   watch: {
-    filteredOptions () {
+    filteredOptions() {
       this.pointerAdjust()
     },
-    isOpen () {
+    isOpen() {
       this.pointerDirty = false
     },
-    pointer () {
-      this.$refs.search.setAttribute('aria-activedescendant', this.id + '-' + this.pointer.toString())
-    }
+    pointer() {
+      this.$refs.search.setAttribute(
+        'aria-activedescendant',
+        this.id + '-' + this.pointer.toString()
+      )
+    },
   },
   methods: {
-    optionHighlight (index, option) {
-      return {
-        'multiselect__option--highlight': index === this.pointer && this.showPointer,
-        'multiselect__option--selected': this.isSelected(option)
-      }
+    optionHighlight(index, option) {
+      return [
+        {
+          'multiselect__option--highlight':
+            index === this.pointer && this.showPointer,
+          'multiselect__option--selected': this.isSelected(option),
+        },
+        multiselectOption,
+      ]
     },
-    groupHighlight (index, selectedGroup) {
+    groupHighlight(index, selectedGroup) {
       if (!this.groupSelect) {
-        return ['multiselect__option--group', 'multiselect__option--disabled']
+        return [
+          'multiselect__option--group',
+          'multiselect__option--disabled',
+          multiselectOption,
+        ]
       }
 
-      const group = this.options.find(option => {
+      const group = this.options.find((option) => {
         return option[this.groupLabel] === selectedGroup.$groupLabel
       })
 
-      return group && !this.wholeGroupDisabled(group) ? [
-        'multiselect__option--group',
-        { 'multiselect__option--highlight': index === this.pointer && this.showPointer },
-        { 'multiselect__option--group-selected': this.wholeGroupSelected(group) }
-      ] : 'multiselect__option--disabled'
+      return group && !this.wholeGroupDisabled(group)
+        ? [
+            'multiselect__option--group',
+            {
+              'multiselect__option--highlight':
+                index === this.pointer && this.showPointer,
+            },
+            {
+              'multiselect__option--group-selected': this.wholeGroupSelected(
+                group
+              ),
+            },
+            multiselectOption,
+          ]
+        : ['multiselect__option--disabled', multiselectOption]
     },
-    addPointerElement ({ key } = 'Enter') {
+    addPointerElement({ key } = 'Enter') {
       /* istanbul ignore else */
       if (this.filteredOptions.length > 0) {
         this.select(this.filteredOptions[this.pointer], key)
       }
       this.pointerReset()
     },
-    pointerForward () {
+    pointerForward() {
       /* istanbul ignore else */
       if (this.pointer < this.filteredOptions.length - 1) {
         this.pointer++
         /* istanbul ignore next */
-        if (this.$refs.list.scrollTop <= this.pointerPosition - (this.visibleElements - 1) * this.optionHeight) {
-          this.$refs.list.scrollTop = this.pointerPosition - (this.visibleElements - 1) * this.optionHeight
+        if (
+          this.$refs.list.scrollTop <=
+          this.pointerPosition - (this.visibleElements - 1) * this.optionHeight
+        ) {
+          this.$refs.list.scrollTop =
+            this.pointerPosition -
+            (this.visibleElements - 1) * this.optionHeight
         }
         /* istanbul ignore else */
         if (
           this.filteredOptions[this.pointer] &&
           this.filteredOptions[this.pointer].$isLabel &&
           !this.groupSelect
-        ) this.pointerForward()
+        )
+          this.pointerForward()
       }
       this.pointerDirty = true
     },
-    pointerBackward () {
+    pointerBackward() {
       if (this.pointer > 0) {
         this.pointer--
         /* istanbul ignore else */
@@ -97,18 +126,20 @@ export default {
           this.filteredOptions[this.pointer] &&
           this.filteredOptions[this.pointer].$isLabel &&
           !this.groupSelect
-        ) this.pointerBackward()
+        )
+          this.pointerBackward()
       } else {
         /* istanbul ignore else */
         if (
           this.filteredOptions[this.pointer] &&
           this.filteredOptions[0].$isLabel &&
           !this.groupSelect
-        ) this.pointerForward()
+        )
+          this.pointerForward()
       }
       this.pointerDirty = true
     },
-    pointerReset () {
+    pointerReset() {
       /* istanbul ignore else */
       if (!this.closeOnSelect) return
       this.pointer = 0
@@ -117,7 +148,7 @@ export default {
         this.$refs.list.scrollTop = 0
       }
     },
-    pointerAdjust () {
+    pointerAdjust() {
       /* istanbul ignore else */
       if (this.pointer >= this.filteredOptions.length - 1) {
         this.pointer = this.filteredOptions.length
@@ -125,16 +156,17 @@ export default {
           : 0
       }
 
-      if (this.filteredOptions.length > 0 &&
+      if (
+        this.filteredOptions.length > 0 &&
         this.filteredOptions[this.pointer].$isLabel &&
         !this.groupSelect
       ) {
         this.pointerForward()
       }
     },
-    pointerSet (index) {
+    pointerSet(index) {
       this.pointer = index
       this.pointerDirty = true
-    }
-  }
+    },
+  },
 }

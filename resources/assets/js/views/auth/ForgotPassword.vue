@@ -1,11 +1,7 @@
 <template>
-  <form
-    id="loginForm"
-    @submit.prevent="validateBeforeSubmit"
-  >
-
-    <div :class="{'form-group' : true }">
-      <base-input
+  <form id="loginForm" @submit.prevent="validateBeforeSubmit">
+    <div class="mb-4">
+      <sw-input
         :invalid="$v.formData.email.$error"
         v-model.lazy="formData.email"
         :disabled="isSent"
@@ -15,22 +11,27 @@
         @blur="$v.formData.email.$touch()"
       />
       <div v-if="$v.formData.email.$error">
-        <span v-if="!$v.formData.email.required" class="help-block text-danger">
+        <span v-if="!$v.formData.email.required" class="text-sm text-danger">
           {{ $t('validation.required') }}
         </span>
-        <span v-if="!$v.formData.email.email" class="help-block text-danger">
+        <span v-if="!$v.formData.email.email" class="text-sm text-danger">
           {{ $t('validation.email_incorrect') }}
         </span>
       </div>
     </div>
-    <base-button v-if="!isSent" :loading="isLoading" :disabled="isLoading" type="submit" color="theme">
+    <sw-button
+      v-if="!isSent"
+      :disabled="isLoading"
+      type="submit"
+      variant="primary"
+    >
       {{ $t('validation.send_reset_link') }}
-    </base-button>
-    <base-button v-else :loading="isLoading" :disabled="isLoading" color="theme" type="submit">
+    </sw-button>
+    <sw-button v-else :disabled="isLoading" variant="primary" type="submit">
       {{ $t('validation.not_yet') }}
-    </base-button>
+    </sw-button>
 
-    <div class="other-actions mb-4">
+    <div class="mt-4 mb-4 text-sm">
       <router-link to="/login">
         {{ $t('general.back_to_login') }}
       </router-link>
@@ -39,43 +40,45 @@
 </template>
 
 <script type="text/babel">
-import { validationMixin } from 'vuelidate'
 import { async } from 'q'
+import { mapActions } from 'vuex'
 const { required, email } = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [validationMixin],
-  data () {
+  data() {
     return {
       formData: {
-        email: ''
+        email: '',
       },
       isSent: false,
       isLoading: false,
-      isRegisteredUser: false
+      isRegisteredUser: false,
     }
   },
   validations: {
     formData: {
       email: {
         email,
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
-
-    async validateBeforeSubmit (e) {
+    ...mapActions('auth', ['checkMail']),
+    async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
-
-      if (await this.checkMail() === false) {
+      let { data } = await this.checkMail()
+      if (data === false) {
         toastr['error'](this.$t('validation.email_does_not_exist'))
         return
       }
       if (!this.$v.formData.$invalid) {
         try {
           this.isLoading = true
-          let res = await axios.post('/api/auth/password/email', this.formData)
+          let res = await axios.post(
+            '/api/v1/auth/password/email',
+            this.formData
+          )
 
           if (res.data) {
             toastr['success']('Mail sent successfuly!', 'Success')
@@ -90,10 +93,13 @@ export default {
         }
       }
     },
-    async checkMail () {
-      let response = await window.axios.post('/api/is-registered', this.formData)
-      return response.data
-    }
-  }
+    // async checkMail() {
+    //   let response = await window.axios.post(
+    //     '/api/v1/is-registered',
+    //     this.formData
+    //   )
+    //   return response.data
+    // },
+  },
 }
 </script>

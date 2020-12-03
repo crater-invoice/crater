@@ -1,5 +1,68 @@
 <?php
 
+use Crater\Http\Controllers\AppVersionController;
+use Crater\Http\Controllers\V1\Auth\ForgotPasswordController;
+use Crater\Http\Controllers\V1\Auth\IsRegisteredController;
+use Crater\Http\Controllers\V1\Auth\ResetPasswordController;
+use Crater\Http\Controllers\V1\Backup\BackupsController;
+use Crater\Http\Controllers\V1\Backup\DownloadBackupController;
+use Crater\Http\Controllers\V1\Customer\CustomersController;
+use Crater\Http\Controllers\V1\Customer\CustomerStatsController;
+use Crater\Http\Controllers\V1\CustomField\CustomFieldsController;
+use Crater\Http\Controllers\V1\Dashboard\DashboardController;
+use Crater\Http\Controllers\V1\Estimate\ChangeEstimateStatusController;
+use Crater\Http\Controllers\V1\Estimate\ConvertEstimateController;
+use Crater\Http\Controllers\V1\Estimate\EstimatesController;
+use Crater\Http\Controllers\V1\Estimate\EstimateTemplatesController;
+use Crater\Http\Controllers\V1\Estimate\SendEstimateController;
+use Crater\Http\Controllers\V1\Expense\ExpenseCategoriesController;
+use Crater\Http\Controllers\V1\Expense\ExpensesController;
+use Crater\Http\Controllers\V1\Expense\ShowReceiptController;
+use Crater\Http\Controllers\V1\Expense\UploadReceiptController;
+use Crater\Http\Controllers\V1\General\BootstrapController;
+use Crater\Http\Controllers\V1\General\CountriesController;
+use Crater\Http\Controllers\V1\General\CurrenciesController;
+use Crater\Http\Controllers\V1\General\NextNumberController;
+use Crater\Http\Controllers\V1\General\DateFormatsController;
+use Crater\Http\Controllers\V1\General\FiscalYearsController;
+use Crater\Http\Controllers\V1\General\LanguagesController;
+use Crater\Http\Controllers\V1\General\NotesController;
+use Crater\Http\Controllers\V1\General\SearchController;
+use Crater\Http\Controllers\V1\General\TimezonesController;
+use Crater\Http\Controllers\V1\Invoice\ChangeInvoiceStatusController;
+use Crater\Http\Controllers\V1\Invoice\CloneInvoiceController;
+use Crater\Http\Controllers\V1\Invoice\InvoicesController;
+use Crater\Http\Controllers\V1\Invoice\SendInvoiceController;
+use Crater\Http\Controllers\V1\Invoice\InvoiceTemplatesController;
+use Crater\Http\Controllers\V1\Item\ItemsController;
+use Crater\Http\Controllers\V1\Item\UnitsController;
+use Crater\Http\Controllers\V1\Mobile\AuthController;
+use Crater\Http\Controllers\V1\Onboarding\DatabaseConfigurationController;
+use Crater\Http\Controllers\V1\Settings\MailConfigurationController;
+use Crater\Http\Controllers\V1\Onboarding\PermissionsController;
+use Crater\Http\Controllers\V1\Onboarding\RequirementsController;
+use Crater\Http\Controllers\V1\Onboarding\OnboardingWizardController;
+use Crater\Http\Controllers\V1\Onboarding\FinishController;
+use Crater\Http\Controllers\V1\Payment\PaymentsController;
+use Crater\Http\Controllers\V1\Payment\PaymentMethodsController;
+use Crater\Http\Controllers\V1\Payment\SendPaymentController;
+use Crater\Http\Controllers\V1\Settings\CompanyController;
+use Crater\Http\Controllers\V1\Settings\DiskController;
+use Crater\Http\Controllers\V1\Settings\GetCompanySettingsController;
+use Crater\Http\Controllers\V1\Settings\GetUserSettingsController;
+use Crater\Http\Controllers\V1\Settings\TaxTypesController;
+use Crater\Http\Controllers\V1\Settings\UpdateCompanySettingsController;
+use Crater\Http\Controllers\V1\Settings\UpdateUserSettingsController;
+use Crater\Http\Controllers\V1\Update\CheckVersionController;
+use Crater\Http\Controllers\V1\Update\CopyFilesController;
+use Crater\Http\Controllers\V1\Update\DeleteFilesController;
+use Crater\Http\Controllers\V1\Update\DownloadUpdateController;
+use Crater\Http\Controllers\V1\Update\FinishUpdateController;
+use Crater\Http\Controllers\V1\Update\MigrateUpdateController;
+use Crater\Http\Controllers\V1\Update\UnzipUpdateController;
+use Crater\Http\Controllers\V1\Users\UsersController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,369 +75,279 @@
 */
 
 
-// Authentication & Password Reset
+// ping
 //----------------------------------
 
-Route::group(['prefix' => 'auth'], function () {
-
-    Route::post('login', 'Auth\AccessTokensController@store');
-    Route::get('logout', 'Auth\AccessTokensController@destroy');
-    Route::post('refresh_token', 'Auth\AccessTokensController@update');
-
-    // Send reset password mail
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-
-    // handle reset password form process
-    Route::post('reset/password', 'Auth\ResetPasswordController@reset');
-
-});
-
-Route::post('is-registered',[
-    'as' => 'is-registered','uses' => 'Auth\AccessTokensController@isRegistered'
-]);
-
-Route::get('/ping', [
-    'as' => 'ping',
-    'uses' => 'UsersController@ping'
-]);
-
-// Country, State & City
-//----------------------------------
-
-Route::get('/countries', [
-    'as' => 'countries',
-    'uses' => 'LocationController@getCountries'
-]);
-
-
-// Onboarding
-//----------------------------------
-Route::group(['middleware' => 'redirect-if-installed'], function () {
-
-    Route::get('/admin/onboarding', [
-        'as' => 'admin.onboarding',
-        'uses' => 'OnboardingController@getOnboardingData'
+Route::get('ping', function () {
+    return response()->json([
+        'success' => 'crater-self-hosted'
     ]);
-
-    Route::get('/admin/onboarding/requirements', [
-        'as' => 'admin.onboarding.requirements',
-        'uses' => 'RequirementsController@requirements'
-    ]);
-
-    Route::get('/admin/onboarding/permissions', [
-        'as' => 'admin.onboarding.permissions',
-        'uses' => 'PermissionsController@permissions'
-    ]);
-
-    Route::post('/admin/onboarding/environment/database', [
-        'as' => 'admin.onboarding.database',
-        'uses' => 'EnvironmentController@saveDatabaseEnvironment'
-    ]);
-
-    Route::get('/admin/onboarding/environment/mail', [
-        'as' => 'admin.onboarding.mail',
-        'uses' => 'EnvironmentController@getMailDrivers'
-    ]);
-
-    Route::post('/admin/onboarding/environment/mail', [
-        'as' => 'admin.onboarding.mail',
-        'uses' => 'EnvironmentController@saveMailEnvironment'
-    ]);
-
-    Route::post('/admin/onboarding/profile', [
-        'as' => 'admin.profile',
-        'uses' => 'OnboardingController@adminProfile'
-    ]);
-
-    Route::post('/admin/profile/upload-avatar', [
-        'as' => 'admin.on_boarding.avatar',
-        'uses' => 'OnboardingController@uploadAdminAvatar'
-    ]);
-
-    Route::post('/admin/onboarding/company', [
-        'as' => 'admin.company',
-        'uses' => 'OnboardingController@adminCompany'
-    ]);
-
-    Route::post('/admin/onboarding/company/upload-logo', [
-        'as' => 'upload.admin.company.logo',
-        'uses' => 'CompanyController@uploadCompanyLogo'
-    ]);
-
-    Route::post('/admin/onboarding/settings', [
-        'as' => 'admin.settings',
-        'uses' => 'OnboardingController@companySettings'
-    ]);
-});
+})->name('ping');
 
 
-// App version
-// ----------------------------------
-
-Route::get('/settings/app/version', [
-    'as' => 'settings.app.version',
-    'uses' => 'SettingsController@getAppVersion'
-]);
-
-Route::group(['middleware' => 'api'], function () {
-
-    Route::group([
-      'middleware' => 'admin'
-    ], function () {
+// Version 1 endpoints
+// --------------------------------------
+Route::prefix('/v1')->group(function () {
 
 
-        // Auto update routes
+    // App version
+    // ----------------------------------
+
+    Route::get('/app/version', AppVersionController::class);
+
+
+    // Email is registered
+    // ----------------------------------
+
+    Route::get('/is/registered', IsRegisteredController::class);
+
+
+    // Authentication & Password Reset
+    //----------------------------------
+
+    Route::group(['prefix' => 'auth'], function () {
+
+        Route::post('login', [AuthController::class, 'login']);
+
+        Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+        // Send reset password mail
+        Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
+        // handle reset password form process
+        Route::post('reset/password', [ResetPasswordController::class, 'reset']);
+
+    });
+
+
+    // Countries
+    //----------------------------------
+
+    Route::get('/countries', CountriesController::class);
+
+
+    // Onboarding
+    //----------------------------------
+
+    Route::middleware(['redirect-if-installed'])->group(function () {
+
+        Route::get('/onboarding/wizard-step', [OnboardingWizardController::class, 'getStep']);
+
+        Route::post('/onboarding/wizard-step', [OnboardingWizardController::class, 'updateStep']);
+
+        Route::get('/onboarding/requirements', [RequirementsController::class, 'requirements']);
+
+        Route::get('/onboarding/permissions', [PermissionsController::class, 'permissions']);
+
+        Route::post('/onboarding/database/config', [DatabaseConfigurationController::class, 'saveDatabaseEnvironment']);
+
+        Route::get('/onboarding/database/config', [DatabaseConfigurationController::class, 'getDatabaseEnvironment']);
+
+        Route::post('/onboarding/finish', FinishController::class);
+
+    });
+
+
+    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+
+        // Bootstrap
         //----------------------------------
-        Route::post('/update', [
-            'as' => 'auto.update',
-            'uses' => 'UpdateController@update'
-        ]);
 
-        Route::post('/update/finish', [
-            'as' => 'auto.update.finish',
-            'uses' => 'UpdateController@finishUpdate'
-        ]);
-
-        Route::get('/check/update', [
-            'as' => 'check.update',
-            'uses' => 'UpdateController@checkLatestVersion'
-        ]);
-
-        Route::get('/bootstrap', [
-            'as' => 'bootstrap',
-            'uses' => 'UsersController@getBootstrap'
-        ]);
+        Route::get('/bootstrap', BootstrapController::class);
 
 
         // Dashboard
         //----------------------------------
 
-        Route::get('/dashboard', [
-            'as' => 'dashboard',
-            'uses' => 'DashboardController@index'
-        ]);
+        Route::get('/dashboard', DashboardController::class);
+
+
+        // Search users
+        //----------------------------------
+
+        Route::get('/search', SearchController::class);
+
+
+        // MISC
+        //----------------------------------
+
+        Route::get('/currencies', CurrenciesController::class);
+
+        Route::get('/timezones', TimezonesController::class);
+
+        Route::get('/date/formats', DateFormatsController::class);
+
+        Route::get('/fiscal/years', FiscalYearsController::class);
+
+        Route::get('/languages', LanguagesController::class);
+
+        Route::get('/next-number', NextNumberController::class);
+
+
+        // Self Update
+        //----------------------------------
+
+        Route::get('/check/update', CheckVersionController::class);
+
+        Route::post('/update/download', DownloadUpdateController::class);
+
+        Route::post('/update/unzip', UnzipUpdateController::class);
+
+        Route::post('/update/copy', CopyFilesController::class);
+
+        Route::post('/update/delete', DeleteFilesController::class);
+
+        Route::post('/update/migrate', MigrateUpdateController::class);
+
+        Route::post('/update/finish', FinishUpdateController::class);
 
 
         // Customers
         //----------------------------------
 
-        Route::post('/customers/delete', [
-            'as' => 'customers.delete',
-            'uses' => 'CustomersController@delete'
-        ]);
+        Route::post('/customers/delete', [CustomersController::class, 'delete']);
 
-        Route::resource('customers', 'CustomersController');
+        Route::get('customers/{customer}/stats', CustomerStatsController::class);
+
+        Route::resource('customers', CustomersController::class);
 
 
         // Items
         //----------------------------------
 
-        Route::post('/items/delete', [
-            'as' => 'items.delete',
-            'uses' => 'ItemsController@delete'
-        ]);
+        Route::post('/items/delete', [ItemsController::class, 'delete']);
 
-        Route::resource('items', 'ItemsController');
+        Route::resource('items', ItemsController::class);
+
+        Route::resource('units', UnitsController::class);
 
 
         // Invoices
         //-------------------------------------------------
 
-        Route::post('/invoices/delete', [
-            'as' => 'invoices.delete',
-            'uses' => 'InvoicesController@delete'
-        ]);
+        Route::post('/invoices/{invoice}/send', SendInvoiceController::class);
 
-        Route::post('/invoices/send', [
-            'as' => 'invoices.send',
-            'uses' => 'InvoicesController@sendInvoice'
-        ]);
+        Route::post('/invoices/{invoice}/clone', CloneInvoiceController::class);
 
-        Route::post('/invoices/mark-as-paid', [
-            'as' => 'invoices.paid',
-            'uses' => 'InvoicesController@markAsPaid'
-        ]);
+        Route::post('/invoices/{invoice}/status', ChangeInvoiceStatusController::class);
 
-        Route::post('/invoices/mark-as-sent', [
-            'as' => 'invoices.sent',
-            'uses' => 'InvoicesController@markAsSent'
-        ]);
+        Route::post('/invoices/delete', [InvoicesController::class, 'delete']);
 
-        Route::get('/invoices/unpaid/{id}', [
-            'as' => 'bootstrap',
-            'uses' => 'InvoicesController@getCustomersUnpaidInvoices'
-        ]);
+        Route::get('/invoices/templates', InvoiceTemplatesController::class);
 
-        Route::resource('invoices', 'InvoicesController');
-
-
-        // Tax Types
-        //----------------------------------
-
-        Route::resource('tax-types', 'TaxTypeController');
+        Route::apiResource('invoices', InvoicesController::class);
 
 
         // Estimates
         //-------------------------------------------------
 
-        Route::post('/estimates/delete', [
-            'as' => 'estimates.delete',
-            'uses' => 'EstimatesController@delete'
-        ]);
+        Route::post('/estimates/{estimate}/send', SendEstimateController::class);
 
-        Route::post('/estimates/send', [
-            'as' => 'estimates.send',
-            'uses' => 'EstimatesController@sendEstimate'
-        ]);
+        Route::post('/estimates/{estimate}/status', ChangeEstimateStatusController::class);
 
-        Route::post('/estimates/mark-as-sent', [
-            'as' => 'estimates.send',
-            'uses' => 'EstimatesController@markEstimateSent'
-        ]);
+        Route::post('/estimates/{estimate}/convert-to-invoice', ConvertEstimateController::class);
 
-        Route::post('/estimates/accept', [
-            'as' => 'estimates.mark.accepted',
-            'uses' => 'EstimatesController@markEstimateAccepted'
-        ]);
+        Route::get('/estimates/templates', EstimateTemplatesController::class);
 
-        Route::post('/estimates/reject', [
-            'as' => 'estimates.mark.rejected',
-            'uses' => 'EstimatesController@markEstimateRejected'
-        ]);
+        Route::post('/estimates/delete', [EstimatesController::class, 'delete']);
 
-        Route::post('/estimates/{id}/convert-to-invoice', [
-            'as' => 'estimate.to.invoice',
-            'uses' => 'EstimatesController@estimateToInvoice'
-        ]);
-
-        Route::resource('estimates', 'EstimatesController');
+        Route::apiResource('estimates', EstimatesController::class);
 
 
         // Expenses
         //----------------------------------
 
-        Route::post('/expenses/delete', [
-            'as' => 'expenses.delete',
-            'uses' => 'ExpensesController@delete'
-        ]);
+        Route::get('/expenses/{expense}/show/receipt', ShowReceiptController::class);
 
-        Route::get('/expenses/{id}/show/receipt', [
-            'as' => 'expenses.show',
-            'uses' => 'ExpensesController@showReceipt',
-        ]);
+        Route::post('/expenses/{expense}/upload/receipts', UploadReceiptController::class);
 
-        Route::post('/expenses/{id}/upload/receipts', [
-            'as' => 'estimate.to.invoice',
-            'uses' => 'ExpensesController@uploadReceipts'
-        ]);
+        Route::post('/expenses/delete', [ExpensesController::class, 'delete']);
 
-        Route::resource('expenses', 'ExpensesController');
+        Route::apiResource('expenses', ExpensesController::class);
 
-
-        // Expenses Categories
-        //----------------------------------
-
-        Route::resource('categories', 'ExpenseCategoryController');
+        Route::apiResource('categories', ExpenseCategoriesController::class);
 
 
         // Payments
         //----------------------------------
 
-        Route::post('/payments/delete', [
-            'as' => 'payments.delete',
-            'uses' => 'PaymentController@delete'
-        ]);
+        Route::post('/payments/{payment}/send', SendPaymentController::class);
 
-        Route::resource('payments', 'PaymentController');
+        Route::post('/payments/delete', [PaymentsController::class, 'delete']);
+
+        Route::apiResource('payments', PaymentsController::class);
+
+        Route::apiResource('payment-methods', PaymentMethodsController::class);
+
+
+        // Custom fields
+        //----------------------------------
+
+        Route::resource('custom-fields', CustomFieldsController::class);
+
+
+        // Backup & Disk
+        //----------------------------------
+
+        Route::apiResource('backups', BackupsController::class);
+
+        Route::apiResource('/disks', DiskController::class);
+
+        Route::get('download-backup', DownloadBackupController::class);
+
+        Route::get('/disk/drivers', [DiskController::class, 'getDiskDrivers']);
 
 
         // Settings
         //----------------------------------
 
-        Route::group(['prefix' => 'settings'], function () {
+        Route::get('/me', [CompanyController::class, 'getUser']);
 
-            Route::get('/profile', [
-                'as' => 'get.admin.profile',
-                'uses' => 'CompanyController@getAdmin'
-            ]);
+        Route::put('/me', [CompanyController::class, 'updateProfile']);
 
-            Route::put('/profile', [
-                'as' => 'admin.profile',
-                'uses' => 'CompanyController@updateAdminProfile'
-            ]);
+        Route::get('/me/settings', GetUserSettingsController::class);
 
-            Route::post('/profile/upload-avatar', [
-                'as' => 'admin.profile.avatar',
-                'uses' => 'CompanyController@uploadAdminAvatar'
-            ]);
+        Route::put('/me/settings', UpdateUserSettingsController::class);
 
-            Route::post('/company/upload-logo', [
-                'as' => 'upload.admin.company.logo',
-                'uses' => 'CompanyController@uploadCompanyLogo'
-            ]);
+        Route::post('/me/upload-avatar', [CompanyController::class, 'uploadAvatar']);
 
-            Route::get('/company', [
-                'as' => 'get.admin.company',
-                'uses' => 'CompanyController@getAdminCompany'
-            ]);
 
-            Route::post('/company', [
-                'as' => 'admin.company',
-                'uses' => 'CompanyController@updateAdminCompany'
-            ]);
+        Route::put('/company', [CompanyController::class, 'updateCompany']);
 
-            Route::get('/general', [
-                'as' => 'get.admin.company.setting',
-                'uses' => 'CompanyController@getGeneralSettings'
-            ]);
+        Route::post('/company/upload-logo', [CompanyController::class, 'uploadCompanyLogo']);
 
-            Route::put('/general', [
-                'as' => 'admin.company.setting',
-                'uses' => 'CompanyController@updateGeneralSettings'
-            ]);
+        Route::get('/company/settings', GetCompanySettingsController::class);
 
-            Route::get('/colors', [
-                'as' => 'admin.colors.setting',
-                'uses' => 'CompanyController@getColors'
-            ]);
+        Route::post('/company/settings', UpdateCompanySettingsController::class);
 
-            Route::get('/get-setting', [
-                'as' => 'get.admin.setting',
-                'uses' => 'CompanyController@getSetting'
-            ]);
 
-            Route::put('/update-setting', [
-                'as' => 'admin.update.setting',
-                'uses' => 'CompanyController@updateSetting'
-            ]);
+        // Mails
+        //----------------------------------
 
-            Route::get('/get-customize-setting', [
-                'as' => 'admin.get.customize.setting',
-                'uses' => 'CompanyController@getCustomizeSetting'
-            ]);
+        Route::get('/mail/drivers', [MailConfigurationController::class, 'getMailDrivers']);
 
-            Route::put('/update-customize-setting', [
-                'as' => 'admin.update.customize.setting',
-                'uses' => 'CompanyController@updateCustomizeSetting'
-            ]);
+        Route::get('/mail/config', [MailConfigurationController::class, 'getMailEnvironment']);
 
-            Route::get('/environment/mail', [
-                'as' => 'admin.environment.mail',
-                'uses' => 'EnvironmentController@getMailDrivers'
-            ]);
+        Route::post('/mail/config', [MailConfigurationController::class, 'saveMailEnvironment']);
 
-            Route::get('/environment/mail-env', [
-                'as' => 'admin.mail.env',
-                'uses' => 'EnvironmentController@getMailEnvironment'
-            ]);
+        Route::post('/mail/test', [MailConfigurationController::class, 'testEmailConfig']);
 
-            Route::post('/environment/mail', [
-                'as' => 'admin.environment.mail.save',
-                'uses' => 'EnvironmentController@saveMailEnvironment'
-            ]);
 
-        });
+        Route::apiResource('notes', NotesController::class);
+
+
+        // Tax Types
+        //----------------------------------
+
+        Route::apiResource('tax-types', TaxTypesController::class);
+
+
+        // Users
+        //----------------------------------
+
+        Route::post('/users/delete', [UsersController::class, 'delete']);
+
+        Route::apiResource('/users', UsersController::class);
 
     });
-
 });

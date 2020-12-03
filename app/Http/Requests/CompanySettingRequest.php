@@ -23,12 +23,24 @@ class CompanySettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'currency' => 'required',
-            'time_zone' => 'required',
-            'language' => 'required',
-            'fiscal_year' => 'required',
-            'moment_date_format' => 'required',
-            'carbon_date_format' => 'required',
+            'currency' => [
+                'required'
+            ],
+            'time_zone' => [
+                'required'
+            ],
+            'language' => [
+                'required'
+            ],
+            'fiscal_year' => [
+                'required'
+            ],
+            'moment_date_format' => [
+                'required'
+            ],
+            'carbon_date_format' => [
+                'required'
+            ]
         ];
     }
 }

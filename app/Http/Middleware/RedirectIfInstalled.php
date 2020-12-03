@@ -3,7 +3,7 @@
 namespace Crater\Http\Middleware;
 
 use Closure;
-use Crater\Setting;
+use Crater\Models\Setting;
 
 class RedirectIfInstalled
 {
@@ -21,6 +21,7 @@ class RedirectIfInstalled
                 return redirect('login');
             }
         }
+
         return $next($request);
     }
 }

@@ -1,117 +1,96 @@
 <?php
-namespace Tests\Feature;
+use Crater\Models\User;
+use Crater\Models\Company;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use function Pest\Laravel\getJson;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Crater\User;
-use Crater\Company;
-use Laravel\Passport\Passport;
-use SettingsSeeder;
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-class ReportTest extends TestCase
-{
-    use RefreshDatabase;
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-    protected $user;
+test('get customer sales report', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'from_date' => '2020-07-18',
+        'to_date' => '2020-07-20',
+    ];
+    $queryString = http_build_query($filters, '', '&');
+    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-        $user = User::find(1);
-        $this->withHeaders([
-            'company' => $user->company_id,
-        ]);
-        Passport::actingAs(
-            $user,
-            ['*']
-        );
-    }
+    $response = getJson('reports/sales/customers/'. $queryString);
 
-    /** @test */
-    public function testGetCustomerSalesReport()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'from_date' => '01/02/2019',
-            'to_date' => '10/02/2019',
-        ];
-        $queryString = http_build_query($filters, '', '&');
-        $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $response->assertOk();
+});
 
-        $response = $this->json('GET', 'reports/sales/customers/'. $queryString);
+test('get item sales report', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'from_date' => '2020-07-18',
+        'to_date' => '2020-07-20',
+    ];
+    $queryString = http_build_query($filters, '', '&');
+    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
 
-        $response->assertOk();
-    }
+    $response = getJson('reports/sales/items/' . $queryString);
 
-    /** @test */
-    public function testGetItemSalesReport()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'from_date' => '01/02/2019',
-            'to_date' => '10/02/2019',
-        ];
-        $queryString = http_build_query($filters, '', '&');
-        $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $response->assertOk();
+});
 
-        $response = $this->json('GET', 'reports/sales/items/' . $queryString);
+test('get expenses report', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'from_date' => '2020-07-18',
+        'to_date' => '2020-07-20',
+    ];
+    $queryString = http_build_query($filters, '', '&');
+    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
 
-        $response->assertOk();
-    }
+    $response = getJson('reports/expenses/' . $queryString);
 
-    /** @test */
-    public function testGetExpensesReport()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'from_date' => '01/02/2019',
-            'to_date' => '10/02/2019',
-        ];
-        $queryString = http_build_query($filters, '', '&');
-        $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $response->assertOk();
+});
 
-        $response = $this->json('GET', 'reports/expenses/' . $queryString);
+test('get tax summary', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'from_date' => '2020-07-18',
+        'to_date' => '2020-07-20',
+    ];
+    $queryString = http_build_query($filters, '', '&');
+    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
 
-        $response->assertOk();
-    }
+    $response = getJson('reports/tax-summary/' . $queryString);
 
-    /** @test */
-    public function testGetTaxSummary()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'from_date' => '01/02/2019',
-            'to_date' => '10/02/2019',
-        ];
-        $queryString = http_build_query($filters, '', '&');
-        $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $response->assertOk();
+});
 
-        $response = $this->json('GET', 'reports/tax-summary/' . $queryString);
+test('get profit loss', function () {
+    $filters = [
+        'page' => 1,
+        'limit' => 15,
+        'from_date' => '2020-07-18',
+        'to_date' => '2020-07-20',
+    ];
+    $queryString = http_build_query($filters, '', '&');
+    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
 
-        $response->assertOk();
-    }
+    $response = getJson('reports/profit-loss/' . $queryString);
 
-    /** @test */
-    public function testGetProfitLoss()
-    {
-        $filters = [
-            'page' => 1,
-            'limit' => 15,
-            'from_date' => '01/02/2019',
-            'to_date' => '10/02/2019',
-        ];
-        $queryString = http_build_query($filters, '', '&');
-        $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $response->assertOk();
+});
 
-        $response = $this->json('GET', 'reports/profit-loss/' . $queryString);
-
-        $response->assertOk();
-    }
-}

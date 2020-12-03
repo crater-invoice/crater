@@ -1,258 +1,322 @@
 <template>
-  <div class="customer-create main-content">
-    <div class="page-header">
-      <h3 class="page-title">{{ $t('customers.title') }}</h3>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="dashboard">
-            {{ $t('general.home') }}
-          </router-link>
-        </li>
-        <li class="breadcrumb-item">
-          <router-link
-            slot="item-title"
-            to="#">
-            {{ $tc('customers.customer',2) }}
-          </router-link>
-        </li>
-      </ol>
-      <div class="page-actions row">
-        <div class="col-xs-2 mr-4">
-          <base-button
-            v-show="totalCustomers || filtersApplied"
-            :outline="true"
-            :icon="filterIcon"
-            size="large"
-            color="theme"
-            right-icon
-            @click="toggleFilter"
-          >
-            {{ $t('general.filter') }}
-          </base-button>
-        </div>
-        <router-link slot="item-title" class="col-xs-2" to="customers/create">
-          <base-button
-            size="large"
-            icon="plus"
-            color="theme">
-            {{ $t('customers.new_customer') }}
-          </base-button>
-        </router-link>
-      </div>
-    </div>
+  <base-page class="customer-create">
+    <sw-page-header :title="$t('customers.title')">
+      <sw-breadcrumb slot="breadcrumbs">
+        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item
+          to="#"
+          :title="$tc('customers.customer', 2)"
+          active
+        />
+      </sw-breadcrumb>
 
-    <transition name="fade">
-      <div v-show="showFilters" class="filter-section">
-        <div class="row">
-          <div class="col-sm-4">
-            <label class="form-label">{{ $t('customers.display_name') }}</label>
-            <base-input
-              v-model="filters.display_name"
-              type="text"
-              name="name"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-sm-4">
-            <label class="form-label">{{ $t('customers.contact_name') }}</label>
-            <base-input
-              v-model="filters.contact_name"
-              type="text"
-              name="address_name"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-sm-4">
-            <label class="form-label">{{ $t('customers.phone') }}</label>
-            <base-input
-              v-model="filters.phone"
-              type="text"
-              name="phone"
-              autocomplete="off"
-            />
-          </div>
-          <label class="clear-filter" @click="clearFilter">{{ $t('general.clear_all') }}</label>
-        </div>
-      </div>
-    </transition>
-
-    <div v-cloak v-show="showEmptyScreen" class="col-xs-1 no-data-info" align="center">
-      <astronaut-icon class="mt-5 mb-4"/>
-      <div class="row" align="center">
-        <label class="col title">{{ $t('customers.no_customers') }}</label>
-      </div>
-      <div class="row">
-        <label class="description col mt-1" align="center">{{ $t('customers.list_of_customers') }}</label>
-      </div>
-      <div class="btn-container">
-        <base-button
-          :outline="true"
-          color="theme"
-          class="mt-3"
-          size="large"
-          @click="$router.push('customers/create')"
+      <template slot="actions">
+        <sw-button
+          v-show="totalCustomers"
+          size="lg"
+          variant="primary-outline"
+          @click="toggleFilter"
         >
-          {{ $t('customers.add_new_customer') }}
-        </base-button>
-      </div>
-    </div>
+          {{ $t('general.filter') }}
+          <component :is="filterIcon" class="h-4 ml-1 -mr-1 font-bold" />
+        </sw-button>
 
-    <div v-show="!showEmptyScreen" class="table-container">
-      <div class="table-actions mt-5">
-        <p class="table-stats">{{ $t('general.showing') }}: <b>{{ customers.length }}</b> {{ $t('general.of') }} <b>{{ totalCustomers }}</b></p>
+        <sw-button
+          tag-name="router-link"
+          to="customers/create"
+          size="lg"
+          variant="primary"
+          class="ml-4"
+        >
+          <plus-sm-icon class="h-6 mr-1 -ml-2 font-bold" />
+          {{ $t('customers.new_customer') }}
+        </sw-button>
+      </template>
+    </sw-page-header>
 
-        <transition name="fade">
-          <v-dropdown v-if="selectedCustomers.length" :show-arrow="false">
-            <span slot="activator" href="#" class="table-actions-button dropdown-toggle">
+    <slide-y-up-transition>
+      <sw-filter-wrapper v-show="showFilters">
+        <sw-input-group
+          :label="$t('customers.display_name')"
+          class="flex-1 mt-2"
+        >
+          <sw-input
+            v-model="filters.display_name"
+            type="text"
+            name="name"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('customers.contact_name')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <sw-input
+            v-model="filters.contact_name"
+            type="text"
+            name="address_name"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('customers.phone')"
+          class="flex-1 mt-2 ml-0 lg:ml-6"
+        >
+          <sw-input
+            v-model="filters.phone"
+            type="text"
+            name="phone"
+            class="mt-2"
+            autocomplete="off"
+          />
+        </sw-input-group>
+
+        <label
+          class="absolute text-sm leading-snug text-black cursor-pointer"
+          style="top: 10px; right: 15px"
+          @click="clearFilter"
+          >{{ $t('general.clear_all') }}</label
+        >
+      </sw-filter-wrapper>
+    </slide-y-up-transition>
+
+    <sw-empty-table-placeholder
+      v-show="showEmptyScreen"
+      :title="$t('customers.no_customers')"
+      :description="$t('customers.list_of_customers')"
+    >
+      <astronaut-icon class="mt-5 mb-4" />
+
+      <sw-button
+        slot="actions"
+        tag-name="router-link"
+        to="/admin/customers/create"
+        size="lg"
+        variant="primary-outline"
+      >
+        {{ $t('customers.add_new_customer') }}
+      </sw-button>
+    </sw-empty-table-placeholder>
+
+    <div v-show="!showEmptyScreen" class="relative table-container">
+      <div
+        class="relative flex items-center justify-between h-10 mt-5 border-b-2 border-gray-200 border-solid"
+      >
+        <p class="text-sm">
+          {{ $t('general.showing') }}: <b>{{ customers.length }}</b>
+          {{ $t('general.of') }} <b>{{ totalCustomers }}</b>
+        </p>
+
+        <sw-transition type="fade">
+          <sw-dropdown v-if="selectedCustomers.length">
+            <span
+              slot="activator"
+              class="flex block text-sm font-medium cursor-pointer select-none text-primary-400"
+            >
               {{ $t('general.actions') }}
+              <chevron-down-icon class="h-5" />
             </span>
-            <v-dropdown-item>
-              <div class="dropdown-item" @click="removeMultipleCustomers">
-                <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
-                {{ $t('general.delete') }}
-              </div>
-            </v-dropdown-item>
-          </v-dropdown>
-        </transition>
+
+            <sw-dropdown-item @click="removeMultipleCustomers">
+              <trash-icon class="h-5 mr-3 text-gray-600" />
+              {{ $t('general.delete') }}
+            </sw-dropdown-item>
+          </sw-dropdown>
+        </sw-transition>
       </div>
 
-      <div class="custom-control custom-checkbox">
-        <input
-          id="select-all"
+      <div class="absolute z-10 items-center pl-4 mt-2 select-none md:mt-12">
+        <sw-checkbox
           v-model="selectAllFieldStatus"
-          type="checkbox"
-          class="custom-control-input"
+          variant="primary"
+          size="sm"
+          class="hidden md:inline"
           @change="selectAllCustomers"
-        >
-        <label for="select-all" class="custom-control-label selectall">
-          <span class="select-all-label">{{ $t('general.select_all') }} </span>
-        </label>
+        />
+
+        <sw-checkbox
+          v-model="selectAllFieldStatus"
+          :label="$t('general.select_all')"
+          variant="primary"
+          size="sm"
+          class="md:hidden"
+          @change="selectAllCustomers"
+        />
       </div>
 
-      <table-component
+      <sw-table-component
         ref="table"
         :show-filter="false"
         :data="fetchData"
         table-class="table"
       >
-        <table-column
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="no-click"
         >
-          <template slot-scope="row">
-            <div class="custom-control custom-checkbox">
-              <input
-                :id="row.id"
-                v-model="selectField"
-                :value="row.id"
-                type="checkbox"
-                class="custom-control-input"
-              >
-              <label :for="row.id" class="custom-control-label" />
-            </div>
-          </template>
-        </table-column>
-        <table-column
+          <div class="relative block" slot-scope="row">
+            <sw-checkbox
+              :id="row.id"
+              v-model="selectField"
+              :value="row.id"
+              variant="primary"
+              size="sm"
+            />
+          </div>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
+          :filterable="true"
           :label="$t('customers.display_name')"
           show="name"
-        />
-        <table-column
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.display_name') }}</span>
+            <router-link
+              :to="{ path: `customers/${row.id}/view` }"
+              class="font-medium text-primary-500"
+            >
+              {{ row.name }}
+            </router-link>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('customers.contact_name')"
           show="contact_name"
-        />
-        <table-column
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.contact_name') }}</span>
+            <span>
+              {{ row.contact_name ? row.contact_name : 'No Contact Name' }}
+            </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('customers.phone')"
           show="phone"
-        />
-        <table-column
+        >
+          <template slot-scope="row">
+            <span>{{ $t('customers.phone') }}</span>
+            <span>
+              {{ row.phone ? row.phone : 'No Contact' }}
+            </span>
+          </template>
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('customers.amount_due')"
           show="due_amount"
         >
           <template slot-scope="row">
             <span> {{ $t('customers.amount_due') }} </span>
-            <div v-html="$utils.formatMoney(row.due_amount, row.currency)"/>
+            <div v-html="$utils.formatMoney(row.due_amount, row.currency)" />
           </template>
-        </table-column>
-        <table-column
+        </sw-table-column>
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('customers.added_on')"
           sort-as="created_at"
           show="formattedCreatedAt"
         />
-        <table-column
+
+        <sw-table-column
           :sortable="false"
           :filterable="false"
           cell-class="action-dropdown"
         >
           <template slot-scope="row">
             <span> {{ $t('customers.action') }} </span>
-            <v-dropdown>
-              <a slot="activator" href="#">
-                <dot-icon />
-              </a>
-              <v-dropdown-item>
 
-                <router-link :to="{path: `customers/${row.id}/edit`}" class="dropdown-item">
-                  <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon"/>
-                  {{ $t('general.edit') }}
-                </router-link>
+            <sw-dropdown>
+              <dot-icon slot="activator" />
 
-              </v-dropdown-item>
-              <v-dropdown-item>
-                <div class="dropdown-item" @click="removeCustomer(row.id)">
-                  <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
-                  {{ $t('general.delete') }}
-                </div>
-              </v-dropdown-item>
-            </v-dropdown>
+              <sw-dropdown-item
+                tag-name="router-link"
+                :to="`customers/${row.id}/edit`"
+              >
+                <pencil-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.edit') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item
+                tag-name="router-link"
+                :to="`customers/${row.id}/view`"
+              >
+                <eye-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.view') }}
+              </sw-dropdown-item>
+
+              <sw-dropdown-item @click="removeCustomer(row.id)">
+                <trash-icon class="h-5 mr-3 text-gray-600" />
+                {{ $t('general.delete') }}
+              </sw-dropdown-item>
+            </sw-dropdown>
           </template>
-        </table-column>
-      </table-component>
+        </sw-table-column>
+      </sw-table-component>
     </div>
-  </div>
+  </base-page>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { SweetModal, SweetModalTab } from 'sweet-modal-vue'
-import DotIcon from '../../components/icon/DotIcon'
+import { PlusSmIcon } from '@vue-hero-icons/solid'
+import {
+  FilterIcon,
+  XIcon,
+  ChevronDownIcon,
+  TrashIcon,
+  PencilIcon,
+  EyeIcon,
+} from '@vue-hero-icons/solid'
 import AstronautIcon from '../../components/icon/AstronautIcon'
-import BaseButton from '../../../js/components/base/BaseButton'
 import { request } from 'http'
 
 export default {
   components: {
-    DotIcon,
     AstronautIcon,
-    SweetModal,
-    SweetModalTab,
-    BaseButton
+    ChevronDownIcon,
+    PlusSmIcon,
+    FilterIcon,
+    XIcon,
+    TrashIcon,
+    PencilIcon,
+    EyeIcon,
   },
-  data () {
+  data() {
     return {
       showFilters: false,
-      filtersApplied: false,
       isRequestOngoing: true,
       filters: {
         display_name: '',
         contact_name: '',
-        phone: ''
-      }
+        phone: '',
+      },
     }
   },
   computed: {
-    showEmptyScreen () {
-      return !this.totalCustomers && !this.isRequestOngoing && !this.filtersApplied
+    showEmptyScreen() {
+      return !this.totalCustomers && !this.isRequestOngoing
     },
-    filterIcon () {
-      return (this.showFilters) ? 'times' : 'filter'
+    filterIcon() {
+      return this.showFilters ? 'x-icon' : 'filter-icon'
     },
     ...mapGetters('customer', [
       'customers',
       'selectedCustomers',
       'totalCustomers',
-      'selectAllField'
+      'selectAllField',
     ]),
     selectField: {
       get: function () {
@@ -260,7 +324,7 @@ export default {
       },
       set: function (val) {
         this.selectCustomer(val)
-      }
+      },
     },
     selectAllFieldStatus: {
       get: function () {
@@ -268,16 +332,16 @@ export default {
       },
       set: function (val) {
         this.setSelectAllState(val)
-      }
-    }
+      },
+    },
   },
   watch: {
     filters: {
       handler: 'setFilters',
-      deep: true
-    }
+      deep: true,
+    },
   },
-  destroyed () {
+  destroyed() {
     if (this.selectAllField) {
       this.selectAllCustomers()
     }
@@ -289,19 +353,19 @@ export default {
       'selectCustomer',
       'deleteCustomer',
       'deleteMultipleCustomers',
-      'setSelectAllState'
+      'setSelectAllState',
     ]),
-    refreshTable () {
+    refreshTable() {
       this.$refs.table.refresh()
     },
-    async fetchData ({ page, filter, sort }) {
+    async fetchData({ page, filter, sort }) {
       let data = {
         display_name: this.filters.display_name,
         contact_name: this.filters.contact_name,
         phone: this.filters.phone,
         orderByField: sort.fieldName || 'created_at',
         orderBy: sort.order || 'desc',
-        page
+        page,
       }
 
       this.isRequestOngoing = true
@@ -312,60 +376,58 @@ export default {
         data: response.data.customers.data,
         pagination: {
           totalPages: response.data.customers.last_page,
-          currentPage: page
-        }
+          currentPage: page,
+        },
       }
     },
-    setFilters () {
-      this.filtersApplied = true
+    setFilters() {
       this.refreshTable()
     },
-    clearFilter () {
+    clearFilter() {
       this.filters = {
         display_name: '',
         contact_name: '',
-        phone: ''
+        phone: '',
       }
-
-      this.$nextTick(() => {
-        this.filtersApplied = false
-      })
     },
-    toggleFilter () {
-      if (this.showFilters && this.filtersApplied) {
+    toggleFilter() {
+      if (this.showFilters) {
         this.clearFilter()
-        this.refreshTable()
       }
 
       this.showFilters = !this.showFilters
     },
-    async removeCustomer (id) {
+
+    async removeCustomer(id) {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('customers.confirm_delete'),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          let res = await this.deleteCustomer(id)
+          let res = await this.deleteCustomer({ ids: [id] })
+
           if (res.data.success) {
-            window.toastr['success'](this.$tc('customers.deleted_message'))
-            this.refreshTable()
+            window.toastr['success'](this.$tc('customers.deleted_message', 1))
+            this.$refs.table.refresh()
             return true
-          } else if (request.data.error) {
-            window.toastr['error'](res.data.message)
           }
+
+          window.toastr['error'](res.data.message)
+          return true
         }
       })
     },
-    async removeMultipleCustomers () {
+
+    async removeMultipleCustomers() {
       swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('customers.confirm_delete', 2),
         icon: '/assets/icon/trash-solid.svg',
         buttons: true,
-        dangerMode: true
+        dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
           let request = await this.deleteMultipleCustomers()
@@ -377,7 +439,7 @@ export default {
           }
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>

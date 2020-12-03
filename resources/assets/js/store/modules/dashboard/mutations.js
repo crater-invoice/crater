@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 
 export default {
-  [types.SET_INITIAL_DATA] (state, data) {
+  [types.SET_INITIAL_DATA](state, data) {
     state.contacts = data.customersCount
     state.invoices = data.invoicesCount
     state.estimates = data.estimatesCount
@@ -30,33 +30,39 @@ export default {
     state.netProfit = data.netProfit
   },
 
-  [types.GET_INITIAL_DATA] (state, data) {
-    state.isDataLoaded = data
+  [types.SET_DASHBOARD_DATA_LOADED_STATE](state, data) {
+    state.isDashboardDataLoaded = data
   },
 
-  [types.UPDATE_INVOICE_STATUS] (state, data) {
-    let pos = state.dueInvoices.findIndex(invoice => invoice.id === data.id)
+  [types.UPDATE_INVOICE_STATUS](state, data) {
+    let pos = state.dueInvoices.findIndex((invoice) => invoice.id === data.id)
 
     if (state.dueInvoices[pos]) {
       state.dueInvoices[pos].status = data.status
     }
   },
 
-  [types.DELETE_INVOICE] (state, id) {
-    let index = state.dueInvoices.findIndex(invoice => invoice.id === id)
+  [types.DELETE_INVOICE](state, data) {
+    let index = state.dueInvoices.findIndex(
+      (invoice) => invoice.id === data.ids[0]
+    )
     state.dueInvoices.splice(index, 1)
   },
 
-  [types.DELETE_ESTIMATE] (state, id) {
-    let index = state.recentEstimates.findIndex(estimate => estimate.id === id)
+  [types.DELETE_ESTIMATE](state, data) {
+    let index = state.recentEstimates.findIndex(
+      (estimate) => estimate.id === data.ids[0]
+    )
     state.recentEstimates.splice(index, 1)
   },
 
-  [types.UPDATE_ESTIMATE_STATUS] (state, data) {
-    let pos = state.recentEstimates.findIndex(estimate => estimate.id === data.id)
+  [types.UPDATE_ESTIMATE_STATUS](state, data) {
+    let pos = state.recentEstimates.findIndex(
+      (estimate) => estimate.id === data.id
+    )
 
     if (state.recentEstimates[pos]) {
       state.recentEstimates[pos].status = data.status
     }
-  }
+  },
 }

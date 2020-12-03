@@ -1,50 +1,49 @@
 <template>
-  <div class="section mt-2">
-    <label class="invoice-label">
+  <div class="flex items-center justify-between w-full mt-2 text-sm">
+    <label class="font-semibold leading-5 text-gray-500 uppercase">
       {{ tax.name }} ({{ tax.percent }}%)
     </label>
-    <label class="invoice-amount">
+    <label class="flex items-center justify-center text-lg text-black">
       <div v-html="$utils.formatMoney(tax.amount, currency)" />
-
-      <font-awesome-icon
-        class="ml-2"
-        icon="trash-alt"
-        @click="$emit('remove', index)"
-      />
+      <trash-icon class="h-5 ml-2" @click="$emit('remove', index)" />
     </label>
   </div>
 </template>
 
 <script>
+import { TrashIcon } from '@vue-hero-icons/solid'
 export default {
+  components: {
+    TrashIcon,
+  },
   props: {
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     tax: {
       type: Object,
-      required: true
+      required: true,
     },
     taxes: {
       type: Array,
-      required: true
+      required: true,
     },
     total: {
       type: Number,
-      default: 0
+      default: 0,
     },
     totalTax: {
       type: Number,
-      default: 0
+      default: 0,
     },
     currency: {
       type: [Object, String],
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
-    taxAmount () {
+    taxAmount() {
       if (this.tax.compound_tax && this.total) {
         return ((this.total + this.totalTax) * this.tax.percent) / 100
       }
@@ -54,30 +53,26 @@ export default {
       }
 
       return 0
-    }
+    },
   },
   watch: {
     total: {
-      handler: 'updateTax'
+      handler: 'updateTax',
     },
     totalTax: {
-      handler: 'updateTax'
-    }
+      handler: 'updateTax',
+    },
   },
   methods: {
-    updateTax () {
+    updateTax() {
       this.$emit('update', {
-        'index': this.index,
-        'item': {
+        index: this.index,
+        item: {
           ...this.tax,
-          amount: this.taxAmount
-        }
+          amount: this.taxAmount,
+        },
       })
-    }
-  }
+    },
+  },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

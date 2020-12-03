@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
-use Crater\Setting;
+use Crater\Models\Setting;
 
 class Version202 extends Listener
 {

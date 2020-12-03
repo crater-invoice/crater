@@ -2,24 +2,57 @@
 namespace Crater\Space;
 
 use File;
-use ZipArchive;
 use Artisan;
 use GuzzleHttp\Exception\RequestException;
-use Crater\Space\SiteApi;
 use Crater\Events\UpdateFinished;
-use Crater\Setting;
-use Illuminate\Http\Request;
+use ZipArchive;
 
+// Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class Updater
 {
     use SiteApi;
 
-    public static function update($installed, $version)
+    public static function checkForUpdate($installed_version)
+    {
+        $data = null;
+        if(env('APP_ENV') === 'development')
+        {
+            $url = 'downloads/check/latest/'. $installed_version . '?type=update&is_dev=1';
+        } else {
+            $url = 'downloads/check/latest/'. $installed_version . '?type=update';
+        }
+
+        $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
+
+        if ($response && ($response->getStatusCode() == 200)) {
+            $data = $response->getBody()->getContents();
+        }
+
+        $data = json_decode($data);
+
+        if ($data->success && $data->version && property_exists($data->version, 'extensions')) {
+            $extensions = $data->version->extensions;
+            $extensionData = [];
+            foreach (json_decode($extensions) as $extension) {
+                $extensionData[$extension] = phpversion($extension) ? true : false;
+            }
+            $extensionData['php'. '('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, ">=");
+            $data->version->extensions = $extensionData;
+        }
+
+        return $data;
+    }
+
+    public static function download($new_version, $is_cmd = 0)
     {
         $data = null;
         $path = null;
 
-        $url = 'https://craterapp.com/downloads/file/'.$version.'?type=update';
+        if (env('APP_ENV') === 'development') {
+            $url = 'downloads/file/' . $new_version . '?type=update&is_dev=1&is_cmd='. $is_cmd;
+        } else {
+            $url = 'downloads/file/' . $new_version . '?type=update&is_cmd='. $is_cmd;
+        }
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -39,66 +72,78 @@ class Updater
         }
 
         // Create temp directory
-        $path = 'temp-' . md5(mt_rand());
-        $path2 = 'temp2-' . md5(mt_rand());
-        $temp_path = storage_path('app') . '/' . $path;
-        $temp_path2 = storage_path('app') . '/' . $path2;
+        $temp_dir = storage_path('app/temp-' . md5(mt_rand()));
 
-        if (!File::isDirectory($temp_path)) {
-            File::makeDirectory($temp_path);
-            File::makeDirectory($temp_path2);
+        if (!File::isDirectory($temp_dir)) {
+            File::makeDirectory($temp_dir);
         }
 
-        try {
+        $zip_file_path = $temp_dir . '/upload.zip';
 
-            $file = $temp_path . '/upload.zip';
+        // Add content to the Zip file
+        $uploaded = is_int(file_put_contents($zip_file_path, $data)) ? true : false;
 
-            // Add content to the Zip file
-            $uploaded = is_int(file_put_contents($file, $data)) ? true : false;
-
-            if (!$uploaded) {
-                return false;
-            }
-
-            // Unzip the file
-            $zip = new ZipArchive();
-
-            if ($zip->open($file)) {
-                $zip->extractTo($temp_path2);
-            }
-
-            $zip->close();
-
-            // Delete zip file
-            File::delete($file);
-
-            if (!File::copyDirectory($temp_path2.'/Crater', base_path())) {
-                return false;
-            }
-
-            // Delete temp directory
-            File::deleteDirectory($temp_path);
-            File::deleteDirectory($temp_path2);
-
-            return [
-                'success' => true,
-                'error' => false,
-                'data' => []
-            ];
-        } catch (\Exception $e) {
-
-            if (File::isDirectory($temp_path)) {
-                // Delete temp directory
-                File::deleteDirectory($temp_path);
-                File::deleteDirectory($temp_path2);
-            }
-
-            return [
-                'success' => false,
-                'error' => 'Update error',
-                'data' => []
-            ];
+        if (!$uploaded) {
+            return false;
         }
+
+        return $zip_file_path;
+    }
+
+    public static function unzip($zip_file_path)
+    {
+        if(!file_exists($zip_file_path)) {
+            throw new \Exception('Zip file not found');
+        }
+
+        $temp_extract_dir = storage_path('app/temp2-' . md5(mt_rand()));
+
+        if (!File::isDirectory($temp_extract_dir)) {
+            File::makeDirectory($temp_extract_dir);
+        }
+        // Unzip the file
+        $zip = new ZipArchive();
+
+        if ($zip->open($zip_file_path)) {
+            $zip->extractTo($temp_extract_dir);
+        }
+
+        $zip->close();
+
+        // Delete zip file
+        File::delete($zip_file_path);
+
+        return $temp_extract_dir;
+    }
+
+    public static function copyFiles($temp_extract_dir)
+    {
+        if (!File::copyDirectory($temp_extract_dir . '/Crater', base_path())) {
+            return false;
+        }
+
+        // Delete temp directory
+        File::deleteDirectory($temp_extract_dir);
+
+        return true;
+    }
+
+    public static function deleteFiles($json)
+    {
+        $files = json_decode($json);
+
+        foreach($files as $file) {
+            \File::delete(base_path($file));
+        }
+
+        return true;
+    }
+
+    public static function migrateUpdate()
+    {
+        Artisan::call('migrate --force');
+
+        return true;
     }
 
     public static function finishUpdate($installed, $version)
@@ -110,19 +155,5 @@ class Updater
             'error' => false,
             'data' => []
         ];
-    }
-
-    public static function checkForUpdate()
-    {
-        $data = null;
-        $url = 'https://craterapp.com/downloads/check/latest/'. Setting::getSetting('version') . '?type=update';
-
-        $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
-
-        if ($response && ($response->getStatusCode() == 200)) {
-            $data = $response->getBody()->getContents();
-        }
-
-        return json_decode($data);
     }
 }

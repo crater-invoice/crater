@@ -1,152 +1,244 @@
 <template>
-  <div v-if="estimate" class="main-content estimate-view-page">
-    <div class="page-header">
-      <h3 class="page-title"> {{ estimate.estimate_number }}</h3>
-      <div class="page-actions row">
-        <div class="col-xs-2 mr-3">
-          <base-button
+  <base-page v-if="estimate" class="xl:pl-96">
+    <sw-page-header :title="pageTitle">
+      <template slot="actions">
+        <div class="mr-3 text-sm">
+          <sw-button
             v-if="estimate.status === 'DRAFT'"
-            :loading="isMarkAsSent"
             :disabled="isMarkAsSent"
-            :outline="true"
-            color="theme"
+            variant="primary-outline"
             @click="onMarkAsSent"
           >
             {{ $t('estimates.mark_as_sent') }}
-          </base-button>
+          </sw-button>
         </div>
-        <div class="col-xs-2">
-          <base-button
-            v-if="estimate.status === 'DRAFT'"
-            :loading="isSendingEmail"
-            :disabled="isSendingEmail"
-            :outline="true"
-            color="theme"
-            @click="onSendEstimate"
+        <sw-button
+          v-if="estimate.status === 'DRAFT'"
+          :disabled="isSendingEmail"
+          variant="primary"
+          class="text-sm"
+          @click="onSendEstimate"
+        >
+          {{ $t('estimates.send_estimate') }}
+        </sw-button>
+        <sw-dropdown class="ml-3">
+          <sw-button slot="activator" variant="primary">
+            <dots-horizontal-icon class="h-5" />
+          </sw-button>
+
+          <sw-dropdown-item @click="copyPdfUrl">
+            <link-icon class="h-5 mr-3 text-primary-800" />
+            {{ $t('general.copy_pdf_url') }}
+          </sw-dropdown-item>
+
+          <sw-dropdown-item
+            tag-name="router-link"
+            :to="`/admin/estimates/${$route.params.id}/edit`"
           >
-            {{ $t('estimates.send_estimate') }}
-          </base-button>
-        </div>
-        <v-dropdown :close-on-select="false" align="left" class="filter-container">
-          <a slot="activator" href="#">
-            <base-button color="theme">
-              <font-awesome-icon icon="ellipsis-h" />
-            </base-button>
-          </a>
-          <v-dropdown-item>
-            <router-link :to="{path: `/admin/estimates/${$route.params.id}/edit`}" class="dropdown-item">
-              <font-awesome-icon :icon="['fas', 'pencil-alt']" class="dropdown-item-icon"/>
-              {{ $t('general.edit') }}
-            </router-link>
-            <div class="dropdown-item" @click="removeEstimate($route.params.id)">
-              <font-awesome-icon :icon="['fas', 'trash']" class="dropdown-item-icon" />
-              {{ $t('general.delete') }}
-            </div>
-          </v-dropdown-item>
-        </v-dropdown>
-      </div>
-    </div>
-    <div class="estimate-sidebar">
-      <base-loader v-if="isSearching" />
-      <div v-else class="side-header">
-        <base-input
+            <pencil-icon class="h-5 mr-3 text-primary-800" />
+            {{ $t('general.edit') }}
+          </sw-dropdown-item>
+
+          <sw-dropdown-item @click="removeEstimate($route.params.id)">
+            <trash-icon class="h-5 mr-3 text-primary-800" />
+            {{ $t('general.delete') }}
+          </sw-dropdown-item>
+        </sw-dropdown>
+      </template>
+    </sw-page-header>
+
+    <!-- sidebar -->
+    <div
+      class="fixed top-0 left-0 hidden h-full pt-16 pb-4 ml-56 bg-white xl:ml-64 w-88 xl:block"
+    >
+      <div
+        class="flex items-center justify-between px-4 pt-8 pb-2 border border-gray-200 border-solid height-full"
+      >
+        <sw-input
           v-model="searchData.searchText"
           :placeholder="$t('general.search')"
-          input-class="inv-search"
-          icon="search"
+          class="mb-6"
           type="text"
-          align-icon="right"
+          variant="gray"
           @input="onSearched()"
-        />
-        <div
-          class="btn-group ml-3"
-          role="group"
-          aria-label="First group"
         >
-          <v-dropdown :close-on-select="false" align="left" class="filter-container">
-            <a slot="activator" href="#">
-              <base-button class="inv-button inv-filter-fields-btn" color="default" size="medium">
-                <font-awesome-icon icon="filter" />
-              </base-button>
-            </a>
+          <search-icon slot="rightIcon" class="h-5" />
+        </sw-input>
 
-            <div class="filter-items">
-              <input
-                id="filter_estimate_date"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="estimate_date"
-                @change="onSearched"
-              >
-              <label class="inv-label" for="filter_estimate_date">{{ $t('reports.estimates.estimate_date') }}</label>
+        <div class="flex mb-6 ml-3" role="group" aria-label="First group">
+          <sw-dropdown class="ml-3" position="bottom-start">
+            <sw-button slot="activator" size="md" variant="gray-light">
+              <filter-icon class="h-5" />
+            </sw-button>
+
+            <div
+              class="px-2 py-1 pb-2 mb-1 mb-2 text-sm border-b border-gray-200 border-solid"
+            >
+              {{ $t('general.sort_by') }}
             </div>
-            <div class="filter-items">
-              <input
-                id="filter_due_date"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="expiry_date"
-                @change="onSearched"
-              >
-              <label class="inv-label" for="filter_due_date">{{ $t('estimates.due_date') }}</label>
-            </div>
-            <div class="filter-items">
-              <input
-                id="filter_estimate_number"
-                v-model="searchData.orderByField"
-                type="radio"
-                name="filter"
-                class="inv-radio"
-                value="estimate_number"
-                @change="onSearched"
-              >
-              <label class="inv-label" for="filter_estimate_number">{{ $t('estimates.estimate_number') }}</label>
-            </div>
-          </v-dropdown>
-          <base-button class="inv-button inv-filter-sorting-btn" color="default" size="medium" @click="sortData">
-            <font-awesome-icon v-if="getOrderBy" icon="sort-amount-up" />
-            <font-awesome-icon v-else icon="sort-amount-down" />
-          </base-button>
+
+            <sw-dropdown-item class="flex px-1 py-2 cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  id="filter_estimate_date"
+                  v-model="searchData.orderByField"
+                  :label="$t('reports.estimates.estimate_date')"
+                  size="sm"
+                  name="filter"
+                  value="estimate_date"
+                  @change="onSearched"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+
+            <sw-dropdown-item class="flex px-1 py-2 cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  id="filter_due_date"
+                  v-model="searchData.orderByField"
+                  value="expiry_date"
+                  :label="$t('estimates.due_date')"
+                  size="sm"
+                  name="filter"
+                  @change="onSearched"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+
+            <sw-dropdown-item class="flex px-1 py-2 cursor-pointer">
+              <sw-input-group class="-mt-3 font-normal">
+                <sw-radio
+                  id="filter_estimate_number"
+                  v-model="searchData.orderByField"
+                  value="estimate_number"
+                  :label="$t('estimates.estimate_number')"
+                  size="sm"
+                  name="filter"
+                  @change="onSearched"
+                />
+              </sw-input-group>
+            </sw-dropdown-item>
+          </sw-dropdown>
+
+          <sw-button
+            class="ml-1"
+            v-tooltip.top-center="{ content: getOrderName }"
+            size="md"
+            variant="gray-light"
+            @click="sortData"
+          >
+            <sort-ascending-icon v-if="getOrderBy" class="h-5" />
+            <sort-descending-icon v-else class="h-5" />
+          </sw-button>
         </div>
       </div>
-      <div class="side-content">
+
+      <base-loader v-if="isSearching" :show-bg-overlay="true" />
+
+      <div
+        v-else
+        class="h-full pb-32 overflow-y-scroll border-l border-gray-200 border-solid sw-scroll"
+      >
         <router-link
-          v-for="(estimate,index) in estimates"
+          v-for="(estimate, index) in estimates"
           :to="`/admin/estimates/${estimate.id}/view`"
+          :id="'estimate-' + estimate.id"
           :key="index"
-          class="side-estimate"
+          :class="[
+            'flex justify-between side-estimate p-4 cursor-pointer hover:bg-gray-100 items-center border-l-4 border-transparent',
+            {
+              'bg-gray-100 border-l-4 border-primary-500 border-solid': hasActiveUrl(
+                estimate.id
+              ),
+            },
+          ]"
+          style="border-bottom: 1px solid rgba(185, 193, 209, 0.41)"
         >
-          <div class="left">
-            <div class="inv-name">{{ estimate.user.name }}</div>
-            <div class="inv-number">{{ estimate.estimate_number }}</div>
-            <div :class="'est-status-'+estimate.status.toLowerCase()"class="inv-status">{{ estimate.status }}</div>
+          <div class="flex-2">
+            <div
+              class="pr-2 mb-2 text-sm not-italic font-normal leading-5 text-black capitalize truncate"
+            >
+              {{ estimate.user.name }}
+            </div>
+
+            <div
+              class="mt-1 mb-2 text-xs not-italic font-medium leading-5 text-gray-600"
+            >
+              {{ estimate.estimate_number }}
+            </div>
+
+            <sw-badge
+              class="px-1 text-xs"
+              :bg-color="$utils.getBadgeStatusColor(estimate.status).bgColor"
+              :color="$utils.getBadgeStatusColor(estimate.status).color"
+            >
+              {{ estimate.status }}
+            </sw-badge>
           </div>
-          <div class="right">
-            <div class="inv-amount" v-html="$utils.formatMoney(estimate.total, estimate.user.currency)" />
-            <div class="inv-date">{{ estimate.formattedEstimateDate }}</div>
+
+          <div class="flex-1 whitespace-no-wrap right">
+            <div
+              class="mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
+              v-html="
+                $utils.formatMoney(estimate.total, estimate.user.currency)
+              "
+            />
+
+            <div
+              class="text-sm not-italic font-normal leading-5 text-right text-gray-600 est-date"
+            >
+              {{ estimate.formattedEstimateDate }}
+            </div>
           </div>
         </router-link>
-        <p v-if="!estimates.length" class="no-result">
+
+        <p
+          v-if="!estimates.length"
+          class="flex justify-center px-4 mt-5 text-sm text-gray-600"
+        >
           {{ $t('estimates.no_matching_estimates') }}
         </p>
       </div>
     </div>
-    <div class="estimate-view-page-container">
-      <iframe :src="`${shareableLink}`" class="frame-style"/>
+
+    <div
+      class="flex flex-col min-h-0 mt-8 overflow-hidden sw-scroll"
+      style="height: 75vh"
+    >
+      <iframe
+        :src="`${shareableLink}`"
+        class="flex-1 border border-gray-400 border-solid rounded-md frame-style"
+      />
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import {
+  DotsHorizontalIcon,
+  FilterIcon,
+  SortAscendingIcon,
+  SortDescendingIcon,
+  SearchIcon,
+  LinkIcon,
+  TrashIcon,
+  PencilIcon,
+} from '@vue-hero-icons/solid'
 const _ = require('lodash')
 
 export default {
-  data () {
+  components: {
+    DotsHorizontalIcon,
+    FilterIcon,
+    SortAscendingIcon,
+    SortDescendingIcon,
+    SearchIcon,
+    LinkIcon,
+    TrashIcon,
+    PencilIcon,
+  },
+  data() {
     return {
       id: null,
       count: null,
@@ -156,33 +248,50 @@ export default {
       searchData: {
         orderBy: null,
         orderByField: null,
-        searchText: null
+        searchText: null,
       },
       status: ['DRAFT', 'SENT', 'VIEWED', 'EXPIRED', 'ACCEPTED', 'REJECTED'],
       isMarkAsSent: false,
       isSendingEmail: false,
       isRequestOnGoing: false,
-      isSearching: false
+      isSearching: false,
     }
   },
   computed: {
-    getOrderBy () {
-      if (this.searchData.orderBy === 'asc' || this.searchData.orderBy == null) {
+    pageTitle() {
+      return this.estimate.estimate_number
+    },
+    getOrderBy() {
+      if (
+        this.searchData.orderBy === 'asc' ||
+        this.searchData.orderBy == null
+      ) {
         return true
       }
       return false
     },
-
-    shareableLink () {
+    getOrderName() {
+      if (this.getOrderBy) {
+        return this.$t('general.ascending')
+      }
+      return this.$t('general.descending')
+    },
+    shareableLink() {
       return `/estimates/pdf/${this.estimate.unique_hash}`
-    }
+    },
+    getCurrentEstimateId() {
+      if (this.estimate && this.estimate.id) {
+        return this.estimate.id
+      }
+      return null
+    },
   },
   watch: {
-    $route (to, from) {
+    $route(to, from) {
       this.loadEstimate()
-    }
+    },
   },
-  created () {
+  created() {
     this.loadEstimates()
     this.loadEstimate()
     this.onSearched = _.debounce(this.onSearched, 500)
@@ -196,32 +305,67 @@ export default {
       'sendEmail',
       'deleteEstimate',
       'selectEstimate',
-      'fetchViewEstimate'
+      'fetchViewEstimate',
     ]),
-    async loadEstimates () {
-      let response = await this.fetchEstimates()
+
+    ...mapActions('modal', ['openModal']),
+
+    hasActiveUrl(id) {
+      return this.$route.params.id == id
+    },
+
+    async loadEstimates() {
+      let response = await this.fetchEstimates({ limit: 'all' })
       if (response.data) {
         this.estimates = response.data.estimates.data
       }
+      setTimeout(() => {
+        this.scrollToEstimate()
+      }, 500)
     },
-    async loadEstimate () {
+    scrollToEstimate() {
+      const el = document.getElementById(`estimate-${this.$route.params.id}`)
+
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        el.classList.add('shake')
+      }
+    },
+    async loadEstimate() {
       let response = await this.fetchViewEstimate(this.$route.params.id)
 
       if (response.data) {
-        this.estimate = response.data.estimate
+        this.estimate = { ...response.data.estimate }
       }
     },
-    async onSearched () {
+    copyPdfUrl() {
+      let pdfUrl = `${window.location.origin}/estimates/pdf/${this.estimate.unique_hash}`
+
+      let response = this.$utils.copyTextToClipboard(pdfUrl)
+
+      window.toastr['success'](this.$tc('general.copied_pdf_url_clipboard'))
+    },
+    async onSearched() {
       let data = ''
-      if (this.searchData.searchText !== '' && this.searchData.searchText !== null && this.searchData.searchText !== undefined) {
+      if (
+        this.searchData.searchText !== '' &&
+        this.searchData.searchText !== null &&
+        this.searchData.searchText !== undefined
+      ) {
         data += `search=${this.searchData.searchText}&`
       }
 
-      if (this.searchData.orderBy !== null && this.searchData.orderBy !== undefined) {
+      if (
+        this.searchData.orderBy !== null &&
+        this.searchData.orderBy !== undefined
+      ) {
         data += `orderBy=${this.searchData.orderBy}&`
       }
 
-      if (this.searchData.orderByField !== null && this.searchData.orderByField !== undefined) {
+      if (
+        this.searchData.orderByField !== null &&
+        this.searchData.orderByField !== undefined
+      ) {
         data += `orderByField=${this.searchData.orderByField}`
       }
       this.isSearching = true
@@ -231,7 +375,7 @@ export default {
         this.estimates = response.data.estimates.data
       }
     },
-    sortData () {
+    sortData() {
       if (this.searchData.orderBy === 'asc') {
         this.searchData.orderBy = 'desc'
         this.onSearched()
@@ -241,67 +385,68 @@ export default {
       this.onSearched()
       return true
     },
-    async onMarkAsSent () {
-      window.swal({
-        title: this.$t('general.are_you_sure'),
-        text: this.$t('estimates.confirm_mark_as_sent'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          this.isMarkAsSent = true
-          let response = await this.markAsSent({id: this.estimate.id})
-          this.isMarkAsSent = false
-          if (response.data) {
-            window.toastr['success'](this.$tc('estimates.mark_as_sent_successfully'))
+    async onMarkAsSent() {
+      window
+        .swal({
+          title: this.$t('general.are_you_sure'),
+          text: this.$t('estimates.confirm_mark_as_sent'),
+          icon: '/assets/icon/check-circle-solid.svg',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(async (value) => {
+          if (value) {
+            this.isMarkAsSent = true
+            let response = await this.markAsSent({
+              id: this.estimate.id,
+              status: 'SENT',
+            })
+            this.isMarkAsSent = false
+            if (response.data) {
+              this.estimate.status = 'SENT'
+              window.toastr['success'](
+                this.$tc('estimates.mark_as_sent_successfully')
+              )
+            }
           }
-        }
+        })
+    },
+    async onSendEstimate(id) {
+      this.openModal({
+        title: this.$t('estimates.send_estimate'),
+        componentName: 'SendEstimateModal',
+        id: this.estimate.id,
+        data: this.estimate,
       })
     },
-    async onSendEstimate (id) {
-      window.swal({
-        title: this.$t('general.are_you_sure'),
-        text: this.$t('estimates.confirm_send_estimate'),
-        icon: '/assets/icon/paper-plane-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          this.isSendingEmail = true
-          let response = await this.sendEmail({id: this.estimate.id})
-          this.isSendingEmail = false
-          if (response.data.success) {
-            window.toastr['success'](this.$tc('estimates.send_estimate_successfully'))
-            return true
-          }
-          if (response.data.error === 'user_email_does_not_exist') {
-            window.toastr['error'](this.$tc('estimates.user_email_does_not_exist'))
-            return true
-          }
-          window.toastr['error'](this.$tc('estimates.something_went_wrong'))
-        }
-      })
+    copyPdfUrl() {
+      let pdfUrl = `${window.location.origin}/estimates/pdf/${this.estimate.unique_hash}`
+
+      let response = this.$utils.copyTextToClipboard(pdfUrl)
+
+      window.toastr['success'](this.$tc('general.copied_pdf_url_clipboard'))
     },
-    async removeEstimate (id) {
-      window.swal({
-        title: 'Deleted',
-        text: 'you will not be able to recover this estimate!',
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true
-      }).then(async (value) => {
-        if (value) {
-          let request = await this.deleteEstimate(id)
-          if (request.data.success) {
-            window.toastr['success'](this.$tc('estimates.deleted_message', 1))
-            this.$router.push('/admin/estimates')
-          } else if (request.data.error) {
-            window.toastr['error'](request.data.message)
+    async removeEstimate(id) {
+      window
+        .swal({
+          title: this.$t('general.are_you_sure'),
+          text: 'you will not be able to recover this estimate!',
+          icon: '/assets/icon/trash-solid.svg',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(async (value) => {
+          if (value) {
+            let request = await this.deleteEstimate({ ids: [id] })
+            if (request.data.success) {
+              window.toastr['success'](this.$tc('estimates.deleted_message', 1))
+              this.$router.push('/admin/estimates')
+            } else if (request.data.error) {
+              window.toastr['error'](request.data.message)
+            }
           }
-        }
-      })
-    }
-  }
+        })
+    },
+  },
 }
 </script>

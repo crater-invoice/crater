@@ -1,186 +1,194 @@
 <template>
   <div class="tax-type-modal">
     <form action="" @submit.prevent="submitTaxTypeData">
-      <div class="card-body">
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label input-label">{{ $t('tax_types.name') }} <span class="required"> *</span></label>
-          <div class="col-sm-7">
-            <base-input
-              ref="name"
-              :invalid="$v.formData.name.$error"
-              v-model="formData.name"
-              type="text"
-              @input="$v.formData.name.$touch()"
-            />
-            <div v-if="$v.formData.name.$error">
-              <span v-if="!$v.formData.name.required" class="form-group__message text-danger">{{ $tc('validation.required') }}</span>
-              <span v-if="!$v.formData.name.minLength" class="form-group__message text-danger"> {{ $tc('validation.name_min_length', $v.formData.name.$params.minLength.min, { count: $v.formData.name.$params.minLength.min }) }} </span>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label input-label">{{ $t('tax_types.percent') }} <span class="required"> *</span></label>
-          <div class="col-sm-7">
-            <div class="base-input">
-              <money
-                :class="{'invalid' : $v.formData.percent.$error}"
-                v-model="formData.percent"
-                v-bind="defaultInput"
-                class="input-field"
-              />
-            </div>
-            <div v-if="$v.formData.percent.$error">
-              <span v-if="!$v.formData.percent.required" class="text-danger">{{ $t('validation.required') }}</span>
-              <span v-if="!$v.formData.percent.between" class="form-group__message text-danger">{{ $t('validation.enter_valid_tax_rate') }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label input-label">{{ $t('tax_types.description') }}</label>
-          <div class="col-sm-7">
-            <base-text-area
-              v-model="formData.description"
-              rows="4"
-              cols="50"
-              @input="$v.formData.description.$touch()"
-            />
-            <div v-if="$v.formData.description.$error">
-              <span v-if="!$v.formData.description.maxLength" class="text-danger">{{ $t('validation.description_maxlength') }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 col-form-label input-label">{{ $t('tax_types.compound_tax') }}</label>
-          <div class="col-sm-7 mr-4">
-            <base-switch
-              v-model="formData.compound_tax"
-              class="btn-switch compound-tax-toggle"
-            />
-          </div>
-        </div>
+      <div class="p-8 sm:p-6">
+        <sw-input-group
+          :label="$t('tax_types.name')"
+          :error="nameError"
+          class="mt-3"
+          variant="horizontal"
+          required
+        >
+          <sw-input
+            ref="name"
+            :invalid="$v.formData.name.$error"
+            v-model="formData.name"
+            type="text"
+            @input="$v.formData.name.$touch()"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('tax_types.percent')"
+          :error="percentError"
+          class="mt-3"
+          variant="horizontal"
+          required
+        >
+          <sw-money
+            v-model="formData.percent"
+            :currency="defaultInput"
+            :invalid="$v.formData.percent.$error"
+            class="relative w-full focus:border focus:border-solid focus:border-primary"
+            @input="$v.formData.percent.$touch()"
+          />
+        </sw-input-group>
+        <sw-input-group
+          :label="$t('tax_types.description')"
+          :error="descriptionError"
+          class="mt-3"
+          variant="horizontal"
+        >
+          <sw-textarea
+            v-model="formData.description"
+            rows="4"
+            cols="50"
+            @input="$v.formData.description.$touch()"
+          />
+        </sw-input-group>
+        <sw-input-group
+          :label="$t('tax_types.compound_tax')"
+          class="mt-3"
+          variant="horizontal"
+        >
+          <sw-switch
+            v-model="formData.compound_tax"
+            class="flex items-center mt-1"
+          />
+        </sw-input-group>
       </div>
-      <div class="card-footer">
-        <base-button
-          :outline="true"
-          class="mr-3"
-          color="theme"
+      <div
+        class="z-0 flex justify-end p-4 border-t border-solid border--200 border-modal-bg"
+      >
+        <sw-button
+          class="mr-3 text-sm"
+          variant="primary-outline"
           type="button"
           @click="closeTaxModal"
         >
           {{ $t('general.cancel') }}
-        </base-button>
-        <base-button
-          :loading="isLoading"
-          color="theme"
-          icon="save"
-          type="submit"
-        >
+        </sw-button>
+        <sw-button :loading="isLoading" variant="primary" type="submit">
+          <save-icon class="mr-2" v-if="!isLoading" />
           {{ !isEdit ? $t('general.save') : $t('general.update') }}
-        </base-button>
+        </sw-button>
       </div>
     </form>
   </div>
 </template>
-
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { validationMixin } from 'vuelidate'
-const { required, minLength, between, maxLength } = require('vuelidate/lib/validators')
+const {
+  required,
+  minLength,
+  between,
+  maxLength,
+} = require('vuelidate/lib/validators')
 export default {
-  mixins: [validationMixin],
-  data () {
+  data() {
     return {
       isEdit: false,
       isLoading: false,
       formData: {
         id: null,
         name: null,
-        percent: '',
+        percent: 0,
         description: null,
         compound_tax: false,
-        collective_tax: 0
+        collective_tax: 0,
       },
       defaultInput: {
         decimal: '.',
         thousands: ',',
         prefix: '% ',
         precision: 2,
-        masked: false
-      }
+        masked: false,
+      },
     }
   },
   computed: {
     ...mapGetters('modal', [
       'modalDataID',
       'modalData',
-      'modalActive'
-    ])
+      'modalActive',
+      'refreshData',
+    ]),
+    descriptionError() {
+      if (!this.$v.formData.description.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.description.maxLength) {
+        return this.$t('validation.description_maxlength')
+      }
+    },
+    nameError() {
+      if (!this.$v.formData.name.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.name.required) {
+        return this.$tc('validation.required')
+      } else {
+        return this.$tc(
+          'validation.name_min_length',
+          this.$v.formData.name.$params.minLength.min,
+          { count: this.$v.formData.name.$params.minLength.min }
+        )
+      }
+    },
+    percentError() {
+      if (!this.$v.formData.percent.$error) {
+        return ''
+      }
+
+      if (!this.$v.formData.percent.required) {
+        return this.$t('validation.required')
+      } else {
+        return this.$t('validation.enter_valid_tax_rate')
+      }
+    },
   },
   validations: {
     formData: {
       name: {
         required,
-        minLength: minLength(3)
+        minLength: minLength(3),
       },
       percent: {
         required,
-        between: between(0, 100)
+        between: between(0, 100),
       },
       description: {
-        maxLength: maxLength(255)
-      }
-    }
+        maxLength: maxLength(255),
+      },
+    },
   },
-  // watch: {
-  //   'modalDataID' (val) {
-  //     if (val) {
-  //       this.isEdit = true
-  //       this.setData()
-  //     } else {
-  //       this.isEdit = false
-  //     }
-  //   },
-  //   'modalActive' (val) {
-  //     if (!this.modalActive) {
-  //       this.resetFormData()
-  //     }
-  //   }
-  // },
-  async mounted () {
+  async mounted() {
     this.$refs.name.focus = true
     if (this.modalDataID) {
       this.isEdit = true
       this.setData()
-      // this.resetFormData()
     }
   },
   methods: {
-    ...mapActions('modal', [
-      'closeModal',
-      'resetModalData'
-    ]),
-    ...mapActions('taxType', [
-      'addTaxType',
-      'updateTaxType',
-      'fetchTaxType'
-    ]),
-    resetFormData () {
+    ...mapActions('modal', ['closeModal', 'resetModalData']),
+    ...mapActions('taxType', ['addTaxType', 'updateTaxType', 'fetchTaxType']),
+    resetFormData() {
       this.formData = {
         id: null,
         name: null,
-        percent: null,
+        percent: 0,
         description: null,
-        collective_tax: 0
+        collective_tax: 0,
       }
       this.$v.formData.$reset()
     },
-    async submitTaxTypeData () {
+    async submitTaxTypeData() {
       this.$v.formData.$touch()
-
       if (this.$v.$invalid) {
         return true
       }
-
       this.isLoading = true
       let response
       if (!this.isEdit) {
@@ -190,31 +198,36 @@ export default {
       }
       if (response.data) {
         if (!this.isEdit) {
-          window.toastr['success'](this.$t('settings.tax_types.created_message'))
+          window.toastr['success'](
+            this.$t('settings.tax_types.created_message')
+          )
         } else {
-          window.toastr['success'](this.$t('settings.tax_types.updated_message'))
+          window.toastr['success'](
+            this.$t('settings.tax_types.updated_message')
+          )
         }
         window.hub.$emit('newTax', response.data.taxType)
+        this.refreshData ? this.refreshData() : ''
         this.closeTaxModal()
         this.isLoading = false
         return true
       }
       window.toastr['error'](response.data.error)
     },
-    async setData () {
+    async setData() {
       this.formData = {
         id: this.modalData.id,
         name: this.modalData.name,
         percent: this.modalData.percent,
         description: this.modalData.description,
-        compound_tax: this.modalData.compound_tax ? true : false
+        compound_tax: this.modalData.compound_tax ? true : false,
       }
     },
-    closeTaxModal () {
+    closeTaxModal() {
       this.resetModalData()
       this.resetFormData()
       this.closeModal()
-    }
-  }
+    },
+  },
 }
 </script>

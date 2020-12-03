@@ -1,27 +1,26 @@
 <?php
-namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Crater\Country;
-use SettingsSeeder;
-class LocationTest extends TestCase
-{
-    use RefreshDatabase;
+use Crater\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
+use function Pest\Laravel\getJson;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->seed();
-        $this->seed(SettingsSeeder::class);
-    }
+beforeEach(function () {
+    Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
+    Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
 
-    /** @test */
-    public function testGetCountries()
-    {
-        $response = $this->json('GET', 'api/countries');
+    $user = User::find(1);
+    $this->withHeaders([
+        'company' => $user->company_id,
+    ]);
+    Sanctum::actingAs(
+        $user,
+        ['*']
+    );
+});
 
-        $response->assertOk();
-    }
-}
+test('get countries', function () {
+    $response = getJson('api/v1/countries');
+
+    $response->assertOk();
+});

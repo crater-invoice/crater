@@ -1,6 +1,6 @@
 <template>
   <div class="item-selector">
-    <base-select
+    <sw-select
       ref="baseSelect"
       v-model="customerSelect"
       :options="customers"
@@ -21,40 +21,41 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  data () {
+  data() {
     return {
       customerSelect: null,
-      loading: false
+      loading: false,
     }
   },
   computed: {
-    ...mapGetters('customer', [
-      'customers'
-    ])
+    ...mapGetters('customer', ['customers']),
   },
+
+  created() {
+    this.fetchCustomers()
+  },
+
   methods: {
-    ...mapActions('customer', [
-      'fetchCustomers'
-    ]),
-    async searchCustomers (search) {
+    ...mapActions('customer', ['fetchCustomers']),
+    async searchCustomers(search) {
       this.loading = true
 
-      await this.fetchCustomers({search})
+      await this.fetchCustomers({ search })
 
       this.loading = false
     },
-    onTextChange (val) {
+    onTextChange(val) {
       this.searchCustomers(val)
     },
-    checkCustomers (val) {
+    checkCustomers(val) {
       if (!this.customers.length) {
         this.fetchCustomers()
       }
     },
-    deselectCustomer () {
+    deselectCustomer() {
       this.customerSelect = null
       this.$emit('deselect')
-    }
-  }
+    },
+  },
 }
 </script>

@@ -3,8 +3,23 @@ import * as actions from './actions'
 import * as getters from './getters'
 
 const initialState = {
+  companies: [],
+
   selectedCompany: null,
-  companies: []
+
+  company: null,
+
+  momentDateFormat: null,
+
+  carbonDateFormat: null,
+
+  item_discount: false,
+
+  defaultFiscalYear: null,
+
+  defaultTimeZone: null,
+
+  defaultCurrency: null,
 }
 
 export default {
@@ -16,5 +31,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

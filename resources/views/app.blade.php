@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
+
 <head>
     <title>Crater - Self Hosted Invoicing Platform</title>
-    <script src="/assets/js/pace.js"></script>
+    <script src="/assets/js/pace/pace.js"></script>
     <link href="{{mix("/assets/css/crater.css")}}" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap" rel="stylesheet">
@@ -17,13 +18,12 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body class="layout-default skin-crater">
-<div id="app" class="template-container">
-    <div class="mobile-menu-overlay" @click.prevent="onOverlayClick"></div>
-    <transition name="fade" mode="out-in">
+
+<body class="h-full overflow-x-hidden bg-gray-100 layout-default skin-crater font-base">
+    <div id="app" class="h-full">
         <router-view></router-view>
-    </transition>
-</div>
-<script type="text/javascript" src="{{mix('/assets/js/app.js')}}"></script>
+    </div>
+    <script type="text/javascript" src="{{mix('/assets/js/app.js')}}"></script>
 </body>
+
 </html>

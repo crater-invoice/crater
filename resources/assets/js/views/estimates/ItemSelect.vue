@@ -1,17 +1,25 @@
 <template>
-  <div class="item-selector">
-    <div v-if="item.item_id" class="selected-item">
+  <div class="flex-1 text-sm">
+    <div
+      v-if="item.item_id"
+      class="relative flex items-center h-10 pl-2 bg-gray-200 border border-gray-200 border-solid rounded"
+    >
       {{ item.name }}
 
-      <span class="deselect-icon" @click="deselectItem">
-        <font-awesome-icon icon="times-circle" />
+      <span
+        class="absolute text-gray-400 cursor-pointer"
+        style="top: 8px; right: 10px"
+        @click="deselectItem"
+      >
+        <x-circle-icon class="h-5" />
       </span>
     </div>
-    <base-select
+    <sw-select
       v-else
       ref="baseSelect"
       v-model="itemSelect"
       :options="items"
+      :loading="loading"
       :show-labels="false"
       :preserve-search="true"
       :initial-search="item.name"
@@ -20,28 +28,37 @@
       label="name"
       class="multi-select-item"
       @value="onTextChange"
-      @select="(val) => $emit('select', val)"
+      @select="onSelect"
     >
       <div slot="afterList">
-        <button type="button" class="list-add-button" @click="openItemModal">
-          <font-awesome-icon class="icon" icon="cart-plus" />
-          <label>{{ $t('general.add_new_item') }}</label>
+        <button
+          type="button"
+          class="flex items-center justify-center w-full p-3 bg-gray-200 border-none outline-none"
+          @click="openItemModal"
+        >
+          <shopping-cart-icon class="h-5 text-primary-400" />
+          <label class="ml-2 text-sm leading-none text-primary-400">{{
+            $t('general.add_new_item')
+          }}</label>
         </button>
       </div>
-    </base-select>
-    <div class="item-description">
-      <base-text-area
+    </sw-select>
+    <div class="w-full pt-1 text-xs text-light">
+      <sw-textarea
         v-autoresize
         v-model.trim="item.description"
         :invalid-description="invalidDescription"
         :placeholder="$t('estimates.item.type_item_description')"
         type="text"
         rows="1"
-        class="description-input"
+        variant="inv-desc"
+        class="w-full text-gray-600 border-none resize-none"
         @input="$emit('onDesriptionInput')"
       />
       <div v-if="invalidDescription">
-        <span class="text-danger">{{ $tc('validation.description_maxlength') }}</span>
+        <span class="text-danger">{{
+          $tc('validation.description_maxlength')
+        }}</span>
       </div>
     </div>
   </div>
@@ -49,69 +66,79 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { validationMixin } from 'vuelidate'
+import { XCircleIcon, ShoppingCartIcon } from '@vue-hero-icons/solid'
 const { maxLength } = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [validationMixin],
+  components: {
+    XCircleIcon,
+    ShoppingCartIcon,
+  },
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     invalid: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     invalidDescription: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
+    taxPerItem: {
+      type: String,
+      default: '',
+    },
+    taxes: {
+      type: Array,
+      default: null,
+    },
   },
-  data () {
+  data() {
     return {
       itemSelect: null,
-      loading: false
+      loading: false,
     }
   },
-  validations () {
+  validations() {
     return {
       item: {
         description: {
-          maxLength: maxLength(255)
-        }
-      }
+          maxLength: maxLength(255),
+        },
+      },
     }
   },
   computed: {
-    ...mapGetters('item', [
-      'items'
-    ])
+    ...mapGetters('item', ['items']),
   },
   watch: {
-    invalidDescription (newValue) {
+    invalidDescription(newValue) {
       console.log(newValue)
-    }
+    },
   },
   methods: {
-    ...mapActions('modal', [
-      'openModal'
-    ]),
-    ...mapActions('item', [
-      'fetchItems'
-    ]),
-    async searchItems (search) {
+    ...mapActions('modal', ['openModal']),
+    ...mapActions('item', ['fetchItems']),
+    async searchItems(search) {
       let data = {
+        search,
         filter: {
           name: search,
           unit: '',
-          price: ''
+          price: '',
         },
         orderByField: '',
         orderBy: '',
-        page: 1
+        page: 1,
+      }
+
+      if (this.item) {
+        data.item_id = this.item.item_id
       }
 
       this.loading = true
@@ -120,22 +147,27 @@ export default {
 
       this.loading = false
     },
-    onTextChange (val) {
+    onTextChange(val) {
       this.searchItems(val)
 
       this.$emit('search', val)
     },
-    openItemModal () {
+    openItemModal() {
       this.$emit('onSelectItem')
       this.openModal({
-        'title': 'Add Item',
-        'componentName': 'ItemModal'
+        title: this.$t('items.add_item'),
+        componentName: 'ItemModal',
+        data: { taxPerItem: this.taxPerItem, taxes: this.taxes },
       })
     },
-    deselectItem () {
+    onSelect(val) {
+      this.$emit('select', val)
+      this.fetchItems()
+    },
+    deselectItem() {
       this.itemSelect = null
       this.$emit('deselect')
-    }
-  }
+    },
+  },
 }
 </script>

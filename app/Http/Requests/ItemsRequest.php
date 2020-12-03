@@ -23,8 +23,18 @@ class ItemsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'price' => 'required',
+            'name' => [
+                'required'
+            ],
+            'price' => [
+                'required'
+            ],
+            'unit_id' => [
+                'nullable'
+            ],
+            'description' => [
+                'nullable'
+            ]
         ];
     }
 }

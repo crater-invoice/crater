@@ -1,14 +1,11 @@
 <template>
   <div class="graph-container">
-    <canvas
-      id="graph"
-      ref="graph" />
+    <canvas id="graph" ref="graph" />
   </div>
 </template>
 
 <script>
 import Chart from 'chart.js'
-import Utils from '../../helpers/utilities'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -16,58 +13,56 @@ export default {
     labels: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     values: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     invoices: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     expenses: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     receipts: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     income: {
       type: Array,
       require: true,
-      default: Array
+      default: Array,
     },
     formatMoney: {
       type: Function,
       require: false,
-      default: Function
+      default: Function,
     },
     FormatGraphMoney: {
       type: Function,
       require: false,
-      default: Function
-    }
+      default: Function,
+    },
   },
 
   computed: {
-    ...mapGetters('currency', [
-      'defaultCurrency'
-    ])
+    ...mapGetters('company', ['defaultCurrency']),
   },
 
   watch: {
-    labels (val) {
+    labels(val) {
       this.update()
-    }
+    },
   },
 
-  mounted () {
+  mounted() {
     let self = this
     let context = this.$refs.graph.getContext('2d')
     let options = {
@@ -77,13 +72,16 @@ export default {
         enabled: true,
         callbacks: {
           label: function (tooltipItem, data) {
-            return self.FormatGraphMoney(tooltipItem.value, self.defaultCurrency)
-          }
-        }
+            return self.FormatGraphMoney(
+              tooltipItem.value * 100,
+              self.defaultCurrency
+            )
+          },
+        },
       },
       legend: {
-        display: false
-      }
+        display: false,
+      },
     }
     let data = {
       labels: this.labels,
@@ -107,7 +105,7 @@ export default {
           pointHoverBorderWidth: 2,
           pointRadius: 4,
           pointHitRadius: 10,
-          data: this.invoices
+          data: this.invoices.map((invoice) => invoice / 100),
         },
         {
           label: 'Receipts',
@@ -128,7 +126,7 @@ export default {
           pointHoverBorderWidth: 2,
           pointRadius: 4,
           pointHitRadius: 10,
-          data: this.receipts
+          data: this.receipts.map((receipt) => receipt / 100),
         },
         {
           label: 'Expenses',
@@ -149,7 +147,7 @@ export default {
           pointHoverBorderWidth: 2,
           pointRadius: 4,
           pointHitRadius: 10,
-          data: this.expenses
+          data: this.expenses.map((expense) => expense / 100),
         },
         {
           label: 'Net Income',
@@ -170,34 +168,40 @@ export default {
           pointHoverBorderWidth: 2,
           pointRadius: 4,
           pointHitRadius: 10,
-          data: this.income
-        }
-      ]
+          data: this.income.map((_i) => _i / 100),
+        },
+      ],
     }
 
     this.myLineChart = new Chart(context, {
       type: 'line',
       data: data,
-      options: options
+      options: options,
     })
   },
 
   methods: {
-    update () {
+    update() {
       this.myLineChart.data.labels = this.labels
-      this.myLineChart.data.datasets[0].data = this.invoices
-      this.myLineChart.data.datasets[1].data = this.receipts
-      this.myLineChart.data.datasets[2].data = this.expenses
-      this.myLineChart.data.datasets[3].data = this.income
+      this.myLineChart.data.datasets[0].data = this.invoices.map(
+        (invoice) => invoice / 100
+      )
+      this.myLineChart.data.datasets[1].data = this.receipts.map(
+        (receipt) => receipt / 100
+      )
+      this.myLineChart.data.datasets[2].data = this.expenses.map(
+        (expense) => expense / 100
+      )
+      this.myLineChart.data.datasets[3].data = this.income.map((_i) => _i / 100)
       this.myLineChart.update({
-        lazy: true
+        lazy: true,
       })
     },
 
-    beforeDestroy () {
+    beforeDestroy() {
       this.myLineChart.destroy()
-    }
-  }
+    },
+  },
 }
 </script>
 

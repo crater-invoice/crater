@@ -1,24 +1,38 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Crater\Tax;
-use Crater\TaxType;
-use Faker\Generator as Faker;
-use Crater\User;
+use Crater\Models\Tax;
+use Crater\Models\TaxType;
+use Crater\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Tax::class, function (Faker $faker) {
-    return [
-        'tax_type_id' => function () {
-            return factory(TaxType::class)->create()->id;
-        },
-        'percent' => function (array $item) {
-            return TaxType::find($item['tax_type_id'])->percent;
-        },
-        'name' => function (array $item) {
-            return TaxType::find($item['tax_type_id'])->name;
-        },
-        'company_id' => User::find(1)->company_id,
-        'amount' => $faker->randomDigitNotNull
-    ];
-});
+class TaxFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Tax::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'tax_type_id' => TaxType::factory(),
+            'percent' => function (array $item) {
+                return TaxType::find($item['tax_type_id'])->percent;
+            },
+            'name' => function (array $item) {
+                return TaxType::find($item['tax_type_id'])->name;
+            },
+            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'amount' => $this->faker->randomDigitNotNull
+        ];
+    }
+}

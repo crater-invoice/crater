@@ -4,21 +4,25 @@ import Ls from './services/ls'
 import store from './store/index.js'
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
-import VDropdown from './components/dropdown/VDropdown.vue'
-import VDropdownItem from './components/dropdown/VDropdownItem.vue'
-import VDropdownDivider from './components/dropdown/VDropdownDivider.vue'
-import DotIcon from './components/icon/DotIcon.vue'
-import CustomerModal from './components/base/modal/CustomerModal.vue'
-import TaxTypeModal from './components/base/modal/TaxTypeModal.vue'
-import CategoryModal from './components/base/modal/CategoryModal.vue'
 import money from 'v-money'
+import VTooltip from 'v-tooltip'
+import Transitions from 'vue2-transitions'
+import SpaceWind from '@bytefury/spacewind'
+
+/**
+ * Theme
+ */
+import theme from './components/theme'
 
 /**
  * Global css plugins
  */
-import 'vue-tabs-component/docs/resources/tabs-component.css'
+
+Vue.use(SpaceWind, { theme })
 
 Vue.use(Vuelidate)
+
+Vue.use(Transitions)
 
 window._ = require('lodash')
 /**
@@ -28,11 +32,6 @@ window._ = require('lodash')
  */
 
 window.Vue = require('vue')
-
-/**
- * Font Awesome
- */
-require('../plugins/vue-font-awesome/index')
 
 /**
  * Custom Directives
@@ -51,53 +50,82 @@ require('./components/base')
  */
 
 window.axios = require('axios')
+window.axios.defaults.withCredentials = true
 window.Ls = Ls
-global.$ = global.jQuery = require('jquery')
 
 window.axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest'
+  'X-Requested-With': 'XMLHttpRequest',
 }
 
 /**
  * Interceptors
  */
 
-window.axios.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  const AUTH_TOKEN = Ls.get('auth.token')
-  const companyId = Ls.get('selectedCompany')
+window.axios.interceptors.request.use(
+  function (config) {
+    if (store.getters['auth/isLoggedOut']) {
+      let source = window.axios.CancelToken.source()
+      config.cancelToken = source.token
+      setTimeout(() => {
+        store.dispatch('auth/setLogoutFalse')
+      }, 200)
 
-  if (AUTH_TOKEN) {
-    config.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
+      return config
+    }
+    // Do something before request is sent
+    const companyId = Ls.get('selectedCompany')
+
+    if (companyId) {
+      config.headers.common['company'] = companyId
+    }
+
+    return config
+  },
+  function (error) {
+    // Do something with request error
+    return Promise.reject(error)
   }
-
-  if (companyId) {
-    config.headers.common['company'] = companyId
-  }
-
-  return config
-}, function (error) {
-  // Do something with request error
-  return Promise.reject(error)
-})
+)
 
 /**
  * Global Axios Response Interceptor
  */
-
 global.axios.interceptors.response.use(undefined, function (err) {
   // Do something with request error
-  return new Promise((resolve, reject) => {
-    console.log(err.response)
-    if (err.response.data.error === 'invalid_credentials') {
-      window.toastr['error']('Invalid Credentials')
-    }
-    if (err.response.data && (err.response.statusText === 'Unauthorized' || err.response.data === ' Unauthorized.')) {
+  if (store.getters['auth/isLoggedOut']) {
+    return true
+  }
+  if (!err.response) {
+    window.toastr['error'](
+      'Network error: Please check your internet connection or wait until servers are back online'
+    )
+  } else {
+    if (
+      err.response.data &&
+      (err.response.statusText === 'Unauthorized' ||
+        err.response.data === ' Unauthorized.')
+    ) {
+      // Unauthorized and log out
+      window.toastr['error'](
+        err.response.data.message ? err.response.data.message : 'Unauthorized'
+      )
       store.dispatch('auth/logout', true)
+    } else if (err.response.data.errors) {
+      // Show a notification per error
+      const errors = JSON.parse(JSON.stringify(err.response.data.errors))
+      for (const i in errors) {
+        window.toastr['error'](errors[i])
+      }
     } else {
-      throw err
+      // Unknown error
+      window.toastr['error'](
+        err.response.data.message
+          ? err.response.data.message
+          : 'Unknown error occurred'
+      )
     }
-  })
+  }
+  return Promise.reject(err)
 })
 
 /**
@@ -107,15 +135,7 @@ window.toastr = require('toastr')
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VTooltip)
 
 // register directive v-money and component <money>
-Vue.use(money, {precision: 2})
-
-Vue.component('v-dropdown', VDropdown)
-Vue.component('v-dropdown-item', VDropdownItem)
-Vue.component('v-dropdown-divider', VDropdownDivider)
-
-Vue.component('dot-icon', DotIcon)
-Vue.component('customer-modal', CustomerModal)
-Vue.component('tax-type-modal', TaxTypeModal)
-Vue.component('category-modal', CategoryModal)
+Vue.use(money, { precision: 2 })

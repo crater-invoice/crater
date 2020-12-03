@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -42,8 +42,9 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -67,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Crater\User::class,
+            'model' => \Crater\Models\User::class,
         ],
 
         // 'users' => [
@@ -96,24 +97,21 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | OAuth Proxy Authentication
+    | Password Confirmation Timeout
     |--------------------------------------------------------------------------
     |
-    | If you are planning to use your application to self-authenticate as a
-    | proxy, you can define the client and grant type to use here. This is
-    | sometimes the case when a trusted Single Page Application doesn't
-    | use a backend to send the authentication request, but instead
-    | relies on the API to handle proxying the request to itself.
+    | Here you may define the amount of seconds before a password confirmation
+    | times out and the user is prompted to re-enter their password via the
+    | confirmation screen. By default, the timeout lasts for three hours.
     |
-     */
-    'proxy' => [
-        'client_id' => env('PROXY_OAUTH_CLIENT_ID'),
-        'client_secret' => env('PROXY_OAUTH_CLIENT_SECRET'),
-        'grant_type' => env('PROXY_OAUTH_GRANT_TYPE'),
-    ],
+    */
+
+    'password_timeout' => 10800,
+
 ];

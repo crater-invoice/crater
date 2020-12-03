@@ -1,54 +1,49 @@
-<table width="100%" class="table2" cellspacing="0" border="0">
-    <tr class="main-table-header">
-        <th class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">#</th>
-        @if($estimate->discount_per_item === 'NO')
-            <th width="80%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
-        @else
-            <th width="40%" class="ItemTableHeader" style="text-align: left; color: #55547A; padding-left: 0px">Items</th>
-        @endif
-        <th width="17%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 20px">Quantity</th>
-        <th width="18%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-right: 40px">Price</th>
+<table width="100%" class="items-table" cellspacing="0" border="0">
+    <tr class="item-table-heading-row">
+        <th width="2%" class="pr-20 text-right item-table-heading">#</th>
+        <th width="40%" class="pl-0 text-left item-table-heading">@lang('pdf_items_label')</th>
+        <th class="pr-20 text-right item-table-heading">@lang('pdf_quantity_label')</th>
+        <th class="pr-20 text-right item-table-heading">@lang('pdf_price_label')</th>
         @if($estimate->discount_per_item === 'YES')
-            <th width="10%" class="ItemTableHeader" style="text-align: right; color: #55547A; padding-left: 10px">Discount</th>
+        <th class="pl-10 text-right item-table-heading">@lang('pdf_discount_label')</th>
         @endif
-        <th width="15%" class="ItemTableHeader" style="text-align: right; color: #55547A;">Amount</th>
+        <th class="text-right item-table-heading">@lang('pdf_amount_label')</th>
     </tr>
     @php
         $index = 1
     @endphp
     @foreach ($estimate->items as $item)
-        <tr class="item-details">
+        <tr class="item-row">
             <td
-                class="inv-item items"
-                style="text-align: right; color: #040405; padding-right: 20px; vertical-align: top;"
+                class="pr-20 text-right item-cell"
+                style="vertical-align: top;"
             >
                 {{$index}}
             </td>
             <td
-                class="inv-item items"
-                style="text-align: left; color: #040405;padding-left: 0px"
+                class="pl-0 text-left item-cell"
             >
                 <span>{{ $item->name }}</span><br>
                 <span
-                    style="text-align: left; color: #595959; font-size: 9px; font-weight:300; line-height: 12px;"
+                    class="item-description"
                 >
-                    {{ $item->description }}
+                    {!! nl2br(htmlspecialchars($item->description)) !!}
                 </span>
             </td>
             <td
-                class="inv-item items"
-                style="text-align: right; color: #040405; padding-right: 20px"
+                class="pr-20 text-right item-cell"
+                style="vertical-align: top;"
             >
                 {{$item->quantity}}
             </td>
             <td
-                class="inv-item items"
-                style="text-align: right; color: #040405; padding-right: 40px"
+                class="pr-20 text-right item-cell"
+                style="vertical-align: top;"
             >
                 {!! format_money_pdf($item->price, $estimate->user->currency) !!}
             </td>
             @if($estimate->discount_per_item === 'YES')
-                <td class="inv-item items" style="text-align: right; color: #040405; padding-left: 10px">
+                <td class="pl-10 text-right item-cell" style="vertical-align: top;">
                     @if($item->discount_type === 'fixed')
                         {!! format_money_pdf($item->discount_val, $estimate->user->currency) !!}
                     @endif
@@ -57,7 +52,7 @@
                     @endif
                 </td>
             @endif
-            <td class="inv-item items" style="text-align: right; color: #040405;">
+            <td class="text-right item-cell" style="vertical-align: top;">
                 {!! format_money_pdf($item->total, $estimate->user->currency) !!}
             </td>
         </tr>
@@ -67,72 +62,68 @@
     @endforeach
 </table>
 
-<table width="100%" cellspacing="0px" style="margin-left:420px" border="0" class="table3 @if(count($estimate->items) > 12) page-break @endif">
-    <tr>
-        <td class="no-borde" style="color: #55547A; padding-left:10px;  font-size:12px;">Subtotal</td>
-        <td class="no-border items"
-            style="padding-right:10px; text-align: right;  font-size:12px; color: #040405; font-weight: 500;">{!! format_money_pdf($estimate->sub_total, $estimate->user->currency) !!}</td>
-    </tr>
+<hr class="item-cell-table-hr">
 
-    @if ($estimate->tax_per_item === 'YES')
-        @for ($i = 0; $i < count($labels); $i++)
-            <tr>
-                <td class="no-border" style="padding-left:10px; text-align:left; font-size:12px;  color: #55547A;">
-                    {{$labels[$i]}}
-                </td>
-                <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
-                    {!! format_money_pdf($taxes[$i], $estimate->user->currency) !!}
-                </td>
-            </tr>
-        @endfor
-    @else
-        @foreach ($estimate->taxes as $tax)
-            <tr>
-                <td class="no-border" style="padding-left:10px; text-align:left; font-size:12px;  color: #55547A;">
-                    {{$tax->name.' ('.$tax->percent.'%)'}}
-                </td>
-                <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
-                    {!! format_money_pdf($tax->amount, $estimate->user->currency) !!}
-                </td>
-            </tr>
-        @endforeach
-    @endif
-
-    @if ($estimate->discount_per_item === 'NO')
+<div class="total-display-container">
+    <table width="100%" cellspacing="0px" border="0" class="total-display-table @if(count($estimate->items) > 12) page-break @endif">
         <tr>
-            <td class="no-border" style="padding-left:10px; text-align:left; font-size:12px; color: #55547A;">
-                @if($estimate->discount_type === 'fixed')
-                    Discount
-                @endif
-                @if($estimate->discount_type === 'percentage')
-                    Discount ({{$estimate->discount}}%)
-                @endif
-            </td>
-            <td class="no-border items padd2" style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  color: #040405">
-                @if($estimate->discount_type === 'fixed')
-                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                @endif
-                @if($estimate->discount_type === 'percentage')
-                    {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                @endif
+            <td class="border-0 total-table-attribute-label">@lang('pdf_subtotal')</td>
+            <td class="border-0 item-cell total-table-attribute-value ">{!! format_money_pdf($estimate->sub_total, $estimate->user->currency) !!}</td>
+        </tr>
+
+        @if ($estimate->tax_per_item === 'YES')
+            @for ($i = 0; $i < count($labels); $i++)
+                <tr>
+                    <td class="border-0 total-table-attribute-label">
+                        {{$labels[$i]}}
+                    </td>
+                    <td class="border-0 item-cell total-table-attribute-value">
+                        {!! format_money_pdf($taxes[$i], $estimate->user->currency) !!}
+                    </td>
+                </tr>
+            @endfor
+        @else
+            @foreach ($estimate->taxes as $tax)
+                <tr>
+                    <td class="border-0 total-table-attribute-label">
+                        {{$tax->name.' ('.$tax->percent.'%)'}}
+                    </td>
+                    <td class="border-0 item-cell total-table-attribute-value" >
+                        {!! format_money_pdf($tax->amount, $estimate->user->currency) !!}
+                    </td>
+                </tr>
+            @endforeach
+        @endif
+
+        @if ($estimate->discount_per_item === 'NO')
+            <tr>
+                <td class="pl-10 border-0 total-table-attribute-label">
+                    @if($estimate->discount_type === 'fixed')
+                        @lang('pdf_discount_label')
+                    @endif
+                    @if($estimate->discount_type === 'percentage')
+                        @lang('pdf_discount_label') ({{$estimate->discount}}%)
+                    @endif
+                </td>
+                <td class="text-right border-0 item-cell total-table-attribute-value">
+                    @if($estimate->discount_type === 'fixed')
+                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                    @endif
+                    @if($estimate->discount_type === 'percentage')
+                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                    @endif
+                </td>
+            </tr>
+        @endif
+        <tr>
+            <td class="py-3"></td>
+            <td class="py-3"></td>
+        </tr>
+        <tr>
+            <td class="border-0 total-border-left total-table-attribute-label">@lang('pdf_total')</td>
+            <td class="py-8 border-0 total-border-right item-cell total-table-attribute-value" style="color: #5851D8">
+                {!! format_money_pdf($estimate->total, $estimate->user->currency)!!}
             </td>
         </tr>
-    @endif
-    <tr>
-        <td style="padding:3px 0px"></td>
-        <td style="padding:3px 0px"></td>
-    </tr>
-    <tr>
-        <td class="no-border total-border-left"
-            style="padding-left:10px; padding-bottom:10px; text-align:left; padding-top:20px; font-size:12px;  color: #55547A;"
-        >
-            <label class="total-bottom"> Total </label>
-        </td>
-        <td
-            class="no-border total-border-right items padd8"
-            style="padding-right:10px; font-weight: 500; text-align: right; font-size:12px;  padding-top:20px; color: #5851DB"
-        >
-            {!! format_money_pdf($estimate->total, $estimate->user->currency)!!}
-        </td>
-    </tr>
-</table>
+    </table>
+</div>

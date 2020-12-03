@@ -1,13 +1,10 @@
 import mutations from './mutations'
 import * as actions from './actions'
 import * as getters from './getters'
-import Ls from '@/services/ls'
 
 const initialState = {
-  token: Ls.get('auth.token'),
   status: '',
-  validateTokenError: '',
-  validateTokenSuccess: ''
+  isLoggedOut: false,
 }
 
 export default {
@@ -19,5 +16,5 @@ export default {
 
   actions: actions,
 
-  mutations: mutations
+  mutations: mutations,
 }

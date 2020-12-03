@@ -15,7 +15,7 @@
   "general": {
     "add_company": "Add Company",
     "view_pdf": "Ver PDF",
-    "copy_pdf_url": "Copy PDF Url",
+    "copy_pdf_url": "Copiar URL del PDF",
     "download_pdf": "Descargar PDF",
     "save": "Guardar",
     "create": "Create",
@@ -339,7 +339,7 @@
     "notes": "Notas",
     "view": "Ver",
     "send_invoice": "Enviar la factura",
-    "resend_invoice": "Resend Invoice",
+    "resend_invoice": "Reenviar la factura",
     "invoice_template": "Plantilla de factura",
     "template": "Modelo",
     "mark_as_sent": "Marcar como enviada",

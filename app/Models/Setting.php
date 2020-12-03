@@ -3,6 +3,7 @@ namespace Crater\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Exception;
 
 class Setting extends Model
 {
@@ -26,7 +27,11 @@ class Setting extends Model
 
     public static function getSetting($key)
     {
-        $setting = static::whereOption($key)->first();
+        try{
+            $setting = static::whereOption($key)->first();
+        }catch (Exception $exception){
+            $setting = null;
+        }
 
         if ($setting) {
             return $setting->value;

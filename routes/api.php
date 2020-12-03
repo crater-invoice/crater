@@ -55,6 +55,7 @@ use Crater\Http\Controllers\V1\Settings\UpdateCompanySettingsController;
 use Crater\Http\Controllers\V1\Settings\UpdateUserSettingsController;
 use Crater\Http\Controllers\V1\Update\CheckVersionController;
 use Crater\Http\Controllers\V1\Update\CopyFilesController;
+use Crater\Http\Controllers\V1\Update\DeleteFilesController;
 use Crater\Http\Controllers\V1\Update\DownloadUpdateController;
 use Crater\Http\Controllers\V1\Update\FinishUpdateController;
 use Crater\Http\Controllers\V1\Update\MigrateUpdateController;
@@ -193,6 +194,8 @@ Route::prefix('/v1')->group(function () {
         Route::post('/update/unzip', UnzipUpdateController::class);
 
         Route::post('/update/copy', CopyFilesController::class);
+
+        Route::post('/update/delete', DeleteFilesController::class);
 
         Route::post('/update/migrate', MigrateUpdateController::class);
 

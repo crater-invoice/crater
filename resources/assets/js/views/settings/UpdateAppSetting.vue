@@ -147,6 +147,7 @@ export default {
       description: '',
       currentVersion: '',
       requiredExtentions: null,
+      deletedFiles: null,
       updateSteps: [
         {
           translationKey: 'settings.update_app.download_zip_file',
@@ -165,6 +166,13 @@ export default {
         {
           translationKey: 'settings.update_app.copying_files',
           stepUrl: '/api/v1/update/copy',
+          time: null,
+          started: false,
+          completed: false,
+        },
+        {
+          translationKey: 'settings.update_app.deleting_files',
+          stepUrl: '/api/v1/update/delete',
           time: null,
           started: false,
           completed: false,
@@ -270,6 +278,7 @@ export default {
           this.isUpdateAvailable = true
           this.requiredExtentions = response.data.version.extensions
           this.minPhpVesrion = response.data.version.minimum_php_version
+          this.deletedFiles = response.data.version.deleted_files
         }
       } catch (e) {
         this.isUpdateAvailable = false
@@ -294,6 +303,7 @@ export default {
           let updateParams = {
             version: this.updateData.version,
             installed: this.currentVersion,
+            deleted_files: this.deletedFiles,
             path: path || null,
           }
 

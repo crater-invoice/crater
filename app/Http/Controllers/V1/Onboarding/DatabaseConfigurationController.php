@@ -35,6 +35,7 @@ class DatabaseConfigurationController extends Controller
         $results = $this->environmentManager->saveDatabaseVariables($request);
 
         if (array_key_exists("success", $results)) {
+            Artisan::call('key:generate');
             Artisan::call('config:clear');
             Artisan::call('cache:clear');
             Artisan::call('storage:link');

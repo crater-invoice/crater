@@ -163,6 +163,14 @@ export default {
         return this.$t('validation.required')
       }
     },
+
+    dateRangeUrl () {
+      return `${this.siteURL}?from_date=${moment(
+        this.formData.from_date
+      ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
+        'YYYY-MM-DD'
+      )}`
+    }
   },
 
   watch: {
@@ -174,11 +182,7 @@ export default {
 
   mounted() {
     this.siteURL = `/reports/expenses/${this.getSelectedCompany.unique_hash}`
-    this.url = `${this.siteURL}?from_date=${moment(
-      this.formData.from_date
-    ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
-      'YYYY-MM-DD'
-    )}`
+    this.url = this.dateRangeUrl
   },
 
   methods: {
@@ -243,6 +247,7 @@ export default {
     setRangeToCustom() {
       this.selectedRange = 'Custom'
     },
+
     async viewReportsPDF() {
       let data = await this.getReports()
       window.open(this.getReportUrl, '_blank')
@@ -257,7 +262,7 @@ export default {
         return true
       }
 
-      this.url = `${this.siteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+      this.url = this.dateRangeUrl
       return true
     },
 
@@ -269,7 +274,7 @@ export default {
       window.open(this.getReportUrl + '&download=true')
 
       setTimeout(() => {
-        this.url = `${this.siteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+        this.url = this.dateRangeUrl
       }, 200)
     },
   },

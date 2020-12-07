@@ -147,6 +147,7 @@ export default {
 
   computed: {
     ...mapGetters('company', ['getSelectedCompany']),
+
     getReportUrl() {
       return this.url
     },
@@ -180,6 +181,22 @@ export default {
         return this.$t('validation.required')
       }
     },
+
+    customerDateRangeUrl () {
+      return `${this.customerSiteURL}?from_date=${moment(
+          this.formData.from_date
+        ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
+          'YYYY-MM-DD'
+        )}`
+    },
+
+    itemDateRangeUrl () {
+      return `${this.itemsSiteURL}?from_date=${moment(
+        this.formData.from_date
+      ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
+        'YYYY-MM-DD'
+      )}`
+    }
   },
 
   watch: {
@@ -197,6 +214,7 @@ export default {
 
   methods: {
     ...mapActions('salesReport', ['loadLinkByCustomer', 'loadLinkByItems']),
+
     getThisDate(type, time) {
       return moment()[type](time).toString()
     },
@@ -263,18 +281,10 @@ export default {
 
     async getInitialReport() {
       if (this.selectedType === 'By Customer') {
-        this.url = `${this.customerSiteURL}?from_date=${moment(
-          this.formData.from_date
-        ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
-          'YYYY-MM-DD'
-        )}`
+        this.url = this.customerDateRangeUrl
         return true
       }
-      this.url = `${this.itemsSiteURL}?from_date=${moment(
-        this.formData.from_date
-      ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
-        'YYYY-MM-DD'
-      )}`
+      this.url = this.itemDateRangeUrl
       return true
     },
 
@@ -291,10 +301,10 @@ export default {
         return true
       }
       if (this.selectedType === 'By Customer') {
-        this.url = `${this.customerSiteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+        this.url = this.customerDateRangeUrl
         return true
       }
-      this.url = `${this.itemsSiteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+      this.url = this.itemDateRangeUrl
       return true
     },
 
@@ -306,10 +316,10 @@ export default {
       window.open(this.getReportUrl + '&download=true')
       setTimeout(() => {
         if (this.selectedType === 'By Customer') {
-          this.url = `${this.customerSiteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+          this.url = this.customerDateRangeUrl
           return true
         }
-        this.url = `${this.itemsSiteURL}?from_date=${this.formData.from_date}&to_date=${this.formData.to_date}`
+        this.url = this.itemDateRangeUrl
         return true
       }, 200)
     },

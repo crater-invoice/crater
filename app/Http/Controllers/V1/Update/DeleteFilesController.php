@@ -16,9 +16,6 @@ class DeleteFilesController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $request->validate([
-            'deleted_files' => 'required',
-        ]);
 
         if(isset($request->deleted_files) && !empty($request->deleted_files)) {
             Updater::deleteFiles($request->deleted_files);

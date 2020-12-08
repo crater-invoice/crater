@@ -23,6 +23,7 @@ class ConfigMiddleware
 
             if ($setting && $setting != null && $setting != $timezone) {
                 config(['app.timezone' => $setting]);
+                date_default_timezone_set($setting);
             }
 
             if($request->has('file_disk_id')) {

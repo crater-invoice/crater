@@ -375,10 +375,10 @@ class Payment extends Model implements HasMedia
 
         $logo = $company->getMedia('logo')->first();
 
-        $isLocal = $logo->disk == 'local' || $logo->disk == 'public';
+        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem() ;
         $isLocalhost = config('session.domain') === 'localhost';
 
-        if ($logo && $isLocalhost && $isLocal) {
+        if ($logo && $isLocalhost && $isSystem) {
             $logo = $logo->getPath();
         } else if($logo) {
             $logo = $logo->getFullUrl();

@@ -14,11 +14,10 @@ trait GeneratesPdfTrait
     public function getGeneratedPDFOrStream($collection_name)
     {
         $pdf = $this->getGeneratedPDF($collection_name);
-
         if($pdf && file_exists($pdf['path'])) {
             return response()->make(file_get_contents($pdf['path']), 200, [
                 'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'"'
+                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'.pdf"'
             ]);
         }
 
@@ -30,7 +29,7 @@ trait GeneratesPdfTrait
 
         return response()->make($pdf->stream(), 200, [
             'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.$this[$collection_name.'_number'].'"'
+            'Content-Disposition' => 'inline; filename="'.$this[$collection_name.'_number'].'.pdf"'
         ]);
     }
 

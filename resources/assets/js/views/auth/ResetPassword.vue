@@ -51,7 +51,7 @@
         >
           {{
             $tc(
-              'validation.password_length ',
+              'validation.password_length',
               $v.formData.password.minLength.min,
               { count: $v.formData.password.$params.minLength.min }
             )

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FileDisk extends Model
 {
+    CONST DISK_TYPE_SYSTEM = 'SYSTEM';
+    CONST DISK_TYPE_REMOTE = 'REMOTE';
+
     use HasFactory;
 
     protected $guarded = [
@@ -183,5 +186,15 @@ class FileDisk extends Model
         $this->save();
 
         return $this;
+    }
+
+    public function isSystem()
+    {
+        return $this->type === self::DISK_TYPE_SYSTEM;
+    }
+
+    public function isRemote()
+    {
+        return $this->type === self::DISK_TYPE_REMOTE;
     }
 }

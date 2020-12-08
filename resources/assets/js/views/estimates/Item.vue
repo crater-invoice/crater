@@ -340,7 +340,7 @@ export default {
           between: between(0, this.maxDiscount),
         },
         description: {
-          maxLength: maxLength(255),
+          maxLength: maxLength(65000),
         },
       },
     }

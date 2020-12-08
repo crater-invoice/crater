@@ -514,7 +514,11 @@ class Invoice extends Model implements HasMedia
 
         $logo = $company->getMedia('logo')->first();
 
-        if ($logo) {
+        $isLocal = $logo->disk == 'local' || $logo->disk == 'public';
+
+        if ($logo && env('SESSION_DOMAIN') === 'localhost' && $isLocal) {
+            $logo = $logo->getPath();
+        } else if($logo) {
             $logo = $logo->getFullUrl();
         }
 
@@ -528,7 +532,6 @@ class Invoice extends Model implements HasMedia
             'labels' => $labels,
             'taxes' => $taxes
         ]);
-
         return PDF::loadView('app.pdf.invoice.' . $invoiceTemplate->view);
     }
 

@@ -375,9 +375,15 @@ class Payment extends Model implements HasMedia
 
         $logo = $company->getMedia('logo')->first();
 
-        if ($logo) {
+        $isLocal = $logo->disk == 'local' || $logo->disk == 'public';
+        $isLocalhost = env('SESSION_DOMAIN') === 'localhost';
+
+        if ($logo && $isLocalhost && $isLocal) {
+            $logo = $logo->getPath();
+        } else if($logo) {
             $logo = $logo->getFullUrl();
         }
+
 
         view()->share([
             'payment' => $this,

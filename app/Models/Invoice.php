@@ -515,8 +515,9 @@ class Invoice extends Model implements HasMedia
         $logo = $company->getMedia('logo')->first();
 
         $isLocal = $logo->disk == 'local' || $logo->disk == 'public';
+        $isLocalhost = config('session.domain') === 'localhost';
 
-        if ($logo && env('SESSION_DOMAIN') === 'localhost' && $isLocal) {
+        if ($logo && $isLocalhost && $isLocal) {
             $logo = $logo->getPath();
         } else if($logo) {
             $logo = $logo->getFullUrl();

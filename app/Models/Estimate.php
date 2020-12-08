@@ -431,7 +431,7 @@ class Estimate extends Model implements HasMedia
         $logo = $company->getMedia('logo')->first();
 
        $isLocal = $logo->disk == 'local' || $logo->disk == 'public';
-       $isLocalhost = env('SESSION_DOMAIN') === 'localhost';
+       $isLocalhost = config('session.domain') === 'localhost';
 
         if ($logo && $isLocalhost && $isLocal) {
             $logo = $logo->getPath();

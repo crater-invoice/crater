@@ -47,12 +47,12 @@
         >
           {{ updateData.version }}
         </label>
-        <p
-          class="mb-8 text-sm leading-snug text-gray-500"
+        <div
+          class="pl-5 mt-4 mb-8 text-sm leading-snug text-gray-500 update-description"
           style="white-space: pre-wrap; max-width: 480px"
           v-html="description"
-        >
-        </p>
+        ></div>
+
         <label class="text-sm not-italic font-medium input-label">
           {{ $t('settings.update_app.requirements') }}
         </label>
@@ -211,7 +211,7 @@ export default {
     },
     hasUiUpdate() {
       return this.updateData.version != '4.0.0'
-    }
+    },
   },
   created() {
     window.addEventListener('beforeunload', (event) => {
@@ -358,3 +358,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.update-description ul li {
+  list-style: disc !important;
+  margin-bottom: 4px;
+}
+</style>

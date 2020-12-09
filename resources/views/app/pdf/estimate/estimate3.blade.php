@@ -354,7 +354,7 @@
                         <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
                     @endif
                 </td>
-                <td width="50%" class="company-address-container company-address">
+                <td width="50%" class="company-address-container company-address text-right">
                     {!! $company_address !!}
                 </td>
             </tr>

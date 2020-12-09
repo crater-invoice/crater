@@ -375,7 +375,7 @@ class Payment extends Model implements HasMedia
 
         $logo = $company->getMedia('logo')->first();
 
-        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem() ;
+        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
         $isLocalhost = config('session.domain') === 'localhost';
 
         if ($logo && $isLocalhost && $isSystem) {
@@ -383,7 +383,6 @@ class Payment extends Model implements HasMedia
         } else if($logo) {
             $logo = $logo->getFullUrl();
         }
-
 
         view()->share([
             'payment' => $this,

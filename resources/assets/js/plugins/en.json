@@ -912,6 +912,7 @@
       "download_zip_file": "Download ZIP file",
       "unzipping_package": "Unzipping Package",
       "copying_files": "Copying Files",
+      "deleting_files": "Deleting Unused files",
       "running_migrations": "Running Migrations",
       "finishing_update": "Finishing Update",
       "update_failed": "Update Failed",

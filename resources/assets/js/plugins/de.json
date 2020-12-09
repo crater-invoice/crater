@@ -980,7 +980,6 @@
       "default_driver": "Default Driver",
       "is_default": "IS DEFAULT",
       "set_default_disk": "Set Default Disk",
-      "set_default_disk_confirm": "This disk will be set as default and all the new PDFs will be saved on this disk",
       "success_set_default_disk": "Disk set as default successfully",
       "save_pdf_to_disk": "Save PDFs to Disk",
       "disk_setting_description": " Enable this, if you wish to save a copy of each Invoice, Estimate & Payment Receipt PDF on your default disk automatically. Turning this option will decrease the load-time when viewing the PDFs.",
@@ -1130,7 +1129,7 @@
     "address_maxlength": "Die Adresse sollte nicht länger als 255 Zeichen sein.",
     "ref_number_maxlength": "Ref Number sollte nicht länger als 255 Zeichen sein.",
     "prefix_maxlength": "Das Präfix sollte nicht länger als 5 Zeichen sein.",
-    "something_went_wrong": "Etwas ist falsch gelaufen"
+    "something_went_wrong": "Da ist etwas schief gelaufen"
   },
   "pdf_estimate_label": "Kostenvoranschlag",
   "pdf_estimate_number": "Kostenvoran. Nummer",
@@ -1166,6 +1165,6 @@
   "pdf_tax_types_label": "Steuersätze",
   "pdf_expenses_label": "Gesamtausgaben",
   "pdf_bill_to": "Rechnungsempfänger,",
-  "pdf_ship_to": "Versand ein,",
+  "pdf_ship_to": "Versand an,",
   "pdf_received_from": "Received from:"
 }

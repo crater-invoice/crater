@@ -68,12 +68,21 @@ Crater is a product of [Bytefury](https://bytefury.com)
 **Special thanks to:**
 
 - [Birkhoff Lee](https://github.com/BirkhoffLee)
-- [Hassan A. Ba Abdullah](https://github.com/hsnapps)
 - [Akaunting](https://github.com/akaunting/akaunting)
+- [MakerLab](https://github.com/MakerLab-Dev)
 
 ## Translate
 
 Help us translate on https://crowdin.com/project/crater-invoice
+
+**Thanks to Translation Contributors:**
+- [Hassan A. Ba Abdullah (Arabic)](https://github.com/hsnapps)
+- [Clément de Louvencourt (French)](https://github.com/PHClement)
+- [Robin Delattre (French)](https://github.com/RobinDev)
+- [René Loos (Dutch)](https://github.com/Loosie94)
+- [Stefan Azarić (Serbian)](https://github.com/azaricstefan)
+- [Emmanuel Lampe (German)](https://github.com/rexlManu)
+- [edevrob (Latvian)](https://github.com/edevrob)
 
 ## License
 

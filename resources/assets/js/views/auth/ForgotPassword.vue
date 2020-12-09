@@ -46,7 +46,6 @@
 
 <script type="text/babel">
 import { async } from 'q'
-import { mapActions } from 'vuex'
 const { required, email } = require('vuelidate/lib/validators')
 
 export default {
@@ -68,7 +67,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions('auth'),
     async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
       if (!this.$v.formData.$invalid) {

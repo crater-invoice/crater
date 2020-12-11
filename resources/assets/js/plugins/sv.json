@@ -379,15 +379,15 @@
       "select_an_item": "Skriv eller klicka för att välja artikel",
       "type_item_description": "Artikeltypsbeskrivning (frivillig)"
     },
-    "payment_attached_message": "One of the selected invoices already have a payment attached to it. Make sure to delete the attached payments first in order to go ahead with the removal",
-    "confirm_delete": "You will not be able to recover this Invoice | You will not be able to recover these Invoices",
-    "created_message": "Invoice created successfully",
-    "updated_message": "Invoice updated successfully",
-    "deleted_message": "Invoice deleted successfully | Invoices deleted successfully",
-    "marked_as_sent_message": "Invoice marked as sent successfully",
-    "user_email_does_not_exist": "User email does not exist",
-    "something_went_wrong": "something went wrong",
-    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue."
+    "payment_attached_message": "En av dom valda fakturorna har redan en betalning kopplad till sig. Du måste radera dom kopplade betalningarna först för att kunna fortsätta raderingen",
+    "confirm_delete": "Du kommer inte kunna återställa denna faktura | Du kommer inte kunna återställa dessa fakturor",
+    "created_message": "Faktura skapades",
+    "updated_message": "Faktura uppdaterades",
+    "deleted_message": "Faktura raderades | fakturor raderades",
+    "marked_as_sent_message": "Faktura markerad som skickad",
+    "user_email_does_not_exist": "Användaren saknar epostadress",
+    "something_went_wrong": "något blev fel",
+    "invalid_due_amount_message": "Totalsumman för fakturan kan inte vara lägra än den betalda summan. Vänligen uppdatera fakturan eller radera dom kopplade betalningarna."
   },
   "credit_notes": {
     "title": "Kreditnoteringar",

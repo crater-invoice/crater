@@ -20,7 +20,7 @@ return [
         ["code"=>"pt_BR", "name" => "Portuguese (Brazilian)"],
         ["code"=>"es", "name" => "Spanish"],
         ["code"=>"lv", "name" => "Latvian"],
-        ["code"=>"sr_LA", "name" => "Serbian Latin"],
+        ["code"=>"sr", "name" => "Serbian Latin"],
     ],
 
     /*

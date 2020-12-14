@@ -546,7 +546,7 @@
     "update_report": "Uppdatera rapport",
     "report": "Rapport | Rapporter",
     "profit_loss": {
-      "profit_loss": "Vinst och förlust",
+      "profit_loss": "Inkomst och utgifter",
       "to_date": "Till datum",
       "from_date": "Från datum",
       "date_range": "Välj datumintervall"

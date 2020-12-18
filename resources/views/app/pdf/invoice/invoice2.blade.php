@@ -273,7 +273,7 @@
         }
 
         .total-table-attribute-value {
-            font-weight: 500;
+            font-weight: bold;
             text-align: right;
             font-size: 12px;
             color: #040405;

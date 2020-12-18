@@ -65,6 +65,10 @@
             float: right;
         } */
 
+        .header-section-right {
+            text-align: right;
+        }
+
         .header {
             font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
@@ -226,7 +230,7 @@
         }
 
         .content-heading span {
-            font-weight: 400;
+            font-weight: normal;
             font-size: 14px;
             line-height: 25px;
             padding-bottom: 5px;
@@ -248,7 +252,7 @@
 
         .total-display-label {
             display: inline;
-            font-weight: 600;
+            font-weight: bold;
             font-size: 14px;
             line-height: 21px;
             color: #595959;
@@ -256,7 +260,7 @@
 
         .total-display-box span {
             float: right;
-            font-weight: 500;
+            font-weight: bold;
             font-size: 14px;
             line-height: 21px;
             text-align: right;

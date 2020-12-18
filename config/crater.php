@@ -19,9 +19,9 @@ return [
         ["code"=>"it", "name" => "Italian"],
         ["code"=>"lv", "name" => "Latvian"],
         ["code"=>"pt_BR", "name" => "Portuguese (Brazilian)"],
-        ["code"=>"sr_LA", "name" => "Serbian Latin"],
+        ["code"=>"sr", "name" => "Serbian Latin"],
         ["code"=>"es", "name" => "Spanish"],
-        ["code"=>"sv", "name"=>"Svenska"]
+        ["code"=>"sv", "name"=> "Svenska"]
     ],
 
     /*

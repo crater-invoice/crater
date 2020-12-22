@@ -288,7 +288,7 @@ export default {
         return this.formData.amount / 100
       },
       set: function (newValue) {
-        this.formData.amount = newValue * 100
+        this.formData.amount = (newValue * 100).toFixed(2)
       },
     },
     pageTitle() {

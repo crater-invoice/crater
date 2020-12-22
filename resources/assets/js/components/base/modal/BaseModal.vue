@@ -15,6 +15,7 @@
     </sw-modal>
   </div>
 </template>
+
 <script>
 import { XIcon } from '@vue-hero-icons/solid'
 import { mapActions, mapGetters } from 'vuex'

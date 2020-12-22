@@ -74,15 +74,17 @@ export default {
     }),
   },
   watch: {
-    value(val) {
-      if (val && !this.enableTime) {
-        this.date = moment(new Date(val), 'YYYY-MM-DD').format('YYYY-MM-DD')
-      } else {
-        this.date = moment(new Date(val), 'YYYY-MM-DD').format(
-          'YYYY-MM-DD H:m:s'
-        )
-      }
-    },
+    // value(val) {
+    //   console.log(val)
+
+    //   if (val && !this.enableTime) {
+    //     this.date = moment(new Date(val), 'YYYY-MM-DD').format('YYYY-MM-DD')
+    //   } else {
+    //     this.date = moment(new Date(val), 'YYYY-MM-DD').format(
+    //       'YYYY-MM-DD H:m:s'
+    //     )
+    //   }
+    // },
     enableTime(val) {
       this.$set(this.config, 'enableTime', this.enableTime)
     },
@@ -104,6 +106,7 @@ export default {
   },
   mounted() {
     this.$set(this.config, 'enableTime', this.enableTime)
+
     if (!this.enableTime) {
       this.$set(
         this.config,
@@ -117,12 +120,14 @@ export default {
         this.carbonFormat ? `${this.carbonFormat} H:i ` : 'd M Y H:i'
       )
     }
+
     if (this.value && !this.enableTime) {
       this.date = moment(new Date(this.value), 'YYYY-MM-DD').format(
         'YYYY-MM-DD'
       )
       return true
     }
+
     if (this.value) {
       this.date = moment(new Date(this.value), 'YYYY-MM-DD').format(
         'YYYY-MM-DD HH:mm:SS'

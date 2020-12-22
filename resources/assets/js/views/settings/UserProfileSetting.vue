@@ -313,59 +313,53 @@ export default {
         name: this.formData.name,
         email: this.formData.email,
       }
-
-      if (
-        this.formData.password != null &&
-        this.formData.password !== undefined &&
-        this.formData.password !== ''
-      ) {
-        data = { ...data, password: this.formData.password }
-      }
-
-      let response = await this.updateCurrentUser(data)
-
-      let languageData = {
-        settings: {
-          language: this.language.code,
-        },
-      }
-
-      let languageRes = await this.updateUserSettings(languageData)
-
-      // if(languageRes) {
-      //   window.i18n.locale = this.language.code
-      // }
-
-      if (response.data.success) {
-        this.isLoading = false
-
-        if (this.fileObject && this.previewAvatar) {
-          let avatarData = new FormData()
-
-          avatarData.append(
-            'admin_avatar',
-            JSON.stringify({
-              name: this.fileObject.name,
-              data: this.previewAvatar,
-            })
-          )
-          this.uploadAvatar(avatarData)
+      try {
+        if (
+          this.formData.password != null &&
+          this.formData.password !== undefined &&
+          this.formData.password !== ''
+        ) {
+          data = { ...data, password: this.formData.password }
         }
 
-        window.toastr['success'](
-          this.$t('settings.account_settings.updated_message')
-        )
+        let response = await this.updateCurrentUser(data)
 
-        this.formData.password = ''
-        this.formData.confirm_password = ''
+        let languageData = {
+          settings: {
+            language: this.language.code,
+          },
+        }
+
+        let languageRes = await this.updateUserSettings(languageData)
+
+        if (response.data.success) {
+          this.isLoading = false
+
+          if (this.fileObject && this.previewAvatar) {
+            let avatarData = new FormData()
+
+            avatarData.append(
+              'admin_avatar',
+              JSON.stringify({
+                name: this.fileObject.name,
+                data: this.previewAvatar,
+              })
+            )
+
+            this.uploadAvatar(avatarData)
+          }
+
+          window.toastr['success'](
+            this.$t('settings.account_settings.updated_message')
+          )
+
+          this.formData.password = ''
+          this.formData.confirm_password = ''
+        }
+      } catch (error) {
+        this.isLoading = false
         return true
       }
-
-      window.toastr['error'](response.data.error)
-
-      this.isLoading = false
-
-      return true
     },
   },
 }

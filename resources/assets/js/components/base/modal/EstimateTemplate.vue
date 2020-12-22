@@ -9,7 +9,7 @@
             'border border-solid border-primary-500':
               selectedTemplate === template.id,
           }"
-          class="relative m-2 border border-gray-200 border-solid"
+          class="relative m-2 border border-gray-200 border-solid flex flex-col"
         >
           <img
             :src="template.path"
@@ -24,6 +24,17 @@
             style="top: -6px; right: -5px"
             src="/assets/img/tick.png"
           />
+          <span
+            :class="[
+              'w-full p-0.5 bg-primary-100 text-xs text-center font-thin',
+              {
+                'text-primary-500': selectedTemplate === template.id,
+                'text-gray-600': selectedTemplate != template.id,
+              },
+            ]"
+          >
+            {{ template.name }}
+          </span>
         </div>
       </div>
     </div>

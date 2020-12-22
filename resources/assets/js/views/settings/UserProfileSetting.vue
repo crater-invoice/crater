@@ -332,10 +332,6 @@ export default {
 
         let languageRes = await this.updateUserSettings(languageData)
 
-        // if(languageRes) {
-        //   window.i18n.locale = this.language.code
-        // }
-
         if (response.data.success) {
           this.isLoading = false
 
@@ -349,6 +345,7 @@ export default {
                 data: this.previewAvatar,
               })
             )
+
             this.uploadAvatar(avatarData)
           }
 

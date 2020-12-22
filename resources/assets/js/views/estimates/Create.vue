@@ -77,7 +77,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @change="$v.newEstimate.estimate_date.$touch()"
+              @input="$v.newEstimate.estimate_date.$touch()"
             />
           </sw-input-group>
 
@@ -92,7 +92,7 @@
               :calendar-button="true"
               calendar-button-icon="calendar"
               class="mt-2"
-              @change="$v.newEstimate.expiry_date.$touch()"
+              @input="$v.newEstimate.expiry_date.$touch()"
             />
           </sw-input-group>
 

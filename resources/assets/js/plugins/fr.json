@@ -153,7 +153,7 @@
     "address": "Adresse",
     "phone": "Téléphone",
     "website": "Site Internet",
-    "overview": "Overview",
+    "overview": "Aperçu",
     "enable_portal": "Activer le portail",
     "country": "Pays",
     "state": "Etat",
@@ -1078,7 +1078,7 @@
       "database_variables_save_error": "Impossible de se connecter à la base de données avec les valeurs fournies.",
       "mail_variables_save_error": "La configuration du courrier électronique a échoué.",
       "connection_failed": "La connexion à la base de données a échoué",
-      "database_should_be_empty": "Database should be empty"
+      "database_should_be_empty": "La base de données devrait être vide"
     },
     "success": {
       "mail_variables_save_successfully": "Email configuré avec succès",

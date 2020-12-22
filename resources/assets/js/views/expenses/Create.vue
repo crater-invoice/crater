@@ -110,7 +110,7 @@
               :calendar-button="true"
               class="mt-2"
               calendar-button-icon="calendar"
-              @change="$v.formData.expense_date.$touch()"
+              @input="$v.formData.expense_date.$touch()"
             />
           </sw-input-group>
 

@@ -28,7 +28,7 @@
             :calendar-button="true"
             calendar-button-icon="calendar"
             class="mt-2"
-            @change="$v.formData.from_date.$touch()"
+            @input="$v.formData.from_date.$touch()"
           />
         </sw-input-group>
 
@@ -43,7 +43,7 @@
             :calendar-button="true"
             calendar-button-icon="calendar"
             class="mt-2"
-            @change="$v.formData.to_date.$touch()"
+            @input="$v.formData.to_date.$touch()"
           />
         </sw-input-group>
       </div>
@@ -182,21 +182,21 @@ export default {
       }
     },
 
-    customerDateRangeUrl () {
+    customerDateRangeUrl() {
       return `${this.customerSiteURL}?from_date=${moment(
-          this.formData.from_date
-        ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
-          'YYYY-MM-DD'
-        )}`
+        this.formData.from_date
+      ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
+        'YYYY-MM-DD'
+      )}`
     },
 
-    itemDateRangeUrl () {
+    itemDateRangeUrl() {
       return `${this.itemsSiteURL}?from_date=${moment(
         this.formData.from_date
       ).format('YYYY-MM-DD')}&to_date=${moment(this.formData.to_date).format(
         'YYYY-MM-DD'
       )}`
-    }
+    },
   },
 
   watch: {

@@ -36,12 +36,12 @@
 
     <button
       type="button"
-      class="flex items-center justify-center w-full px-2 py-3 bg-gray-200 border-none outline-none"
+      class="flex items-center justify-center w-full px-2 py-3 bg-gray-200 border-none outline-none hover:bg-gray-300"
       @click="openNoteModal"
     >
       <check-circle-icon class="h-5" />
       <label
-        class="m-0 ml-3 text-sm leading-none cursor-pointer font-base text-primary-400"
+        class="m-0 ml-1 text-sm leading-none cursor-pointer font-base text-primary-400"
       >
         {{ $t('settings.customization.notes.add_new_note') }}
       </label>

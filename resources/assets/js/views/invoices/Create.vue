@@ -254,7 +254,7 @@
           >
             <sw-button
               type="button"
-              class="flex justify-center w-full text-sm lg:w-auto"
+              class="flex justify-center w-full text-sm text-black lg:w-auto hover:bg-gray-400"
               variant="gray"
               @click="openTemplateModal"
             >

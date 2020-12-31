@@ -77,7 +77,7 @@ class Estimate extends Model implements HasMedia
     {
         // Get the last created order
         $lastOrder = Estimate::where('estimate_number', 'LIKE', $value . '-%')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('estimate_number', 'desc')
             ->first();
 
         if (!$lastOrder) {
@@ -435,7 +435,7 @@ class Estimate extends Model implements HasMedia
 
         if ($logo && $isLocalhost && $isSystem) {
             $logo = $logo->getPath();
-        } else if($logo) {
+        } else if ($logo) {
             $logo = $logo->getFullUrl();
         }
 

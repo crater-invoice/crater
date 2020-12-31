@@ -81,7 +81,7 @@ class Invoice extends Model implements HasMedia
     {
         // Get the last created order
         $lastOrder = Invoice::where('invoice_number', 'LIKE', $value . '-%')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('invoice_number', 'desc')
             ->first();
 
 
@@ -363,11 +363,11 @@ class Invoice extends Model implements HasMedia
         }
 
         $invoice = Invoice::with([
-                'items',
-                'user',
-                'invoiceTemplate',
-                'taxes'
-            ])
+            'items',
+            'user',
+            'invoiceTemplate',
+            'taxes'
+        ])
             ->find($invoice->id);
 
         return $invoice;
@@ -519,7 +519,7 @@ class Invoice extends Model implements HasMedia
 
         if ($logo && $isLocalhost && $isSystem) {
             $logo = $logo->getPath();
-        } else if($logo) {
+        } else if ($logo) {
             $logo = $logo->getFullUrl();
         }
 

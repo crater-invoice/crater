@@ -73,7 +73,7 @@ export default {
         callbacks: {
           label: function (tooltipItem, data) {
             return self.FormatGraphMoney(
-              tooltipItem.value * 100,
+              Math.round(tooltipItem.value * 100),
               self.defaultCurrency
             )
           },

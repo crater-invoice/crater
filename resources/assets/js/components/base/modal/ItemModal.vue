@@ -43,7 +43,7 @@
             :options="itemUnits"
             :searchable="true"
             :show-labels="false"
-            :maxHeight="200"
+            :max-height="200"
             label="name"
           >
           </sw-select>
@@ -160,7 +160,7 @@ export default {
         return this.formData.price / 100
       },
       set: function (newValue) {
-        this.formData.price = newValue * 100
+        this.formData.price = Math.round(newValue * 100)
       },
     },
 

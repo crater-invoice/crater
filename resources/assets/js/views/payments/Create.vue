@@ -1,26 +1,26 @@
 <template>
   <base-page class="relative payment-create">
     <form action="" @submit.prevent="submitPaymentData">
-      <sw-page-header class="mb-5" :title="pageTitle">
+      <sw-page-header :title="pageTitle" class="mb-5">
         <sw-breadcrumb slot="breadcrumbs">
           <sw-breadcrumb-item
-            to="/admin/dashboard"
             :title="$t('general.home')"
+            to="/admin/dashboard"
           />
           <sw-breadcrumb-item
-            to="/admin/payments"
             :title="$tc('payments.payment', 2)"
+            to="/admin/payments"
           />
           <sw-breadcrumb-item
             v-if="$route.name === 'payments.edit'"
-            to="#"
             :title="$t('payments.edit_payment')"
+            to="#"
             active
           />
           <sw-breadcrumb-item
             v-else
-            to="#"
             :title="$t('payments.new_payment')"
+            to="#"
             active
           />
         </sw-breadcrumb>
@@ -134,8 +134,8 @@
               :searchable="true"
               :show-labels="false"
               :placeholder="$t('payments.select_payment_mode')"
+              :max-height="150"
               label="name"
-              :maxHeight="150"
               class="mt-1"
             >
               <div slot="afterList">
@@ -165,7 +165,7 @@
               <component
                 :type="field.type.label"
                 :field="field"
-                :isEdit="isEdit"
+                :is-edit="isEdit"
                 :is="field.type + 'Field'"
                 :invalid-fields="invalidFields"
                 @update="setCustomFieldValue"
@@ -218,9 +218,8 @@ import CustomFieldsMixin from '../../mixins/customFields'
 const { required, between, numeric } = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [CustomFieldsMixin],
-
   components: { ShoppingCartIcon },
+  mixins: [CustomFieldsMixin],
 
   data() {
     return {
@@ -288,7 +287,7 @@ export default {
         return this.formData.amount / 100
       },
       set: function (newValue) {
-        this.formData.amount = (newValue * 100).toFixed(2)
+        this.formData.amount = Math.round(newValue * 100)
       },
     },
     pageTitle() {
@@ -552,9 +551,11 @@ export default {
           },
           id: this.$route.params.id,
         }
+
         try {
           this.isLoading = true
           let response = await this.updatePayment(data)
+
           if (response.data.success) {
             this.isLoading = false
             this.$router.push(
@@ -563,17 +564,21 @@ export default {
             window.toastr['success'](this.$t('payments.updated_message'))
             return true
           }
+
           if (response.data.error === 'invalid_amount') {
             window.toastr['error'](this.$t('invalid_amount_message'))
             return false
           }
+
           window.toastr['error'](response.data.error)
         } catch (err) {
           this.isLoading = false
+
           if (err.response.data.errors.payment_number) {
             window.toastr['error'](err.response.data.errors.payment_number)
             return true
           }
+
           window.toastr['error'](err.response.data.message)
         }
       } else {
@@ -584,9 +589,12 @@ export default {
             : null,
           payment_date: moment(this.formData.payment_date).format('YYYY-MM-DD'),
         }
+
         this.isLoading = true
+
         try {
           let response = await this.addPayment(data)
+
           if (response.data.success) {
             this.$router.push(
               `/admin/payments/${response.data.payment.id}/view`
@@ -595,17 +603,21 @@ export default {
             this.isLoading = true
             return true
           }
+
           if (response.data.error === 'invalid_amount') {
             window.toastr['error'](this.$t('invalid_amount_message'))
             return false
           }
+
           window.toastr['error'](response.data.error)
         } catch (err) {
           this.isLoading = false
+
           if (err.response.data.errors.payment_number) {
             window.toastr['error'](err.response.data.errors.payment_number)
             return true
           }
+
           window.toastr['error'](err.response.data.message)
         }
       }

@@ -7,23 +7,23 @@
       <sw-page-header :title="pageTitle">
         <sw-breadcrumb slot="breadcrumbs">
           <sw-breadcrumb-item
-            to="/admin/dashboard"
             :title="$t('general.home')"
+            to="/admin/dashboard"
           />
           <sw-breadcrumb-item
-            to="/admin/estimates"
             :title="$tc('estimates.estimate', 2)"
+            to="/admin/estimates"
           />
           <sw-breadcrumb-item
             v-if="$route.name === 'estimates.edit'"
-            to="#"
             :title="$t('estimates.edit_estimate')"
+            to="#"
             active
           />
           <sw-breadcrumb-item
             v-else
-            to="#"
             :title="$t('estimates.new_estimate')"
+            to="#"
             active
           />
         </sw-breadcrumb>
@@ -31,8 +31,8 @@
         <template slot="actions">
           <sw-button
             v-if="$route.name === 'estimates.edit'"
-            tag-name="a"
             :href="`/estimates/pdf/${newEstimate.unique_hash}`"
+            tag-name="a"
             target="_blank"
             class="mr-3"
             variant="primary-outline"
@@ -59,9 +59,9 @@
       <!-- Select Customer & Basic Fields  -->
       <div class="grid-cols-12 gap-8 mt-6 mb-8 lg:grid">
         <customer-select
-          class="col-span-5 pr-0"
           :valid="$v.selectedCustomer"
           :customer-id="customerId"
+          class="col-span-5 pr-0"
         />
 
         <div
@@ -235,8 +235,8 @@
           </div>
 
           <div
-            class="grid gap-x-4 gap-y-2 md:gap-x-8 md:gap-y-4 grid-col-1 md:grid-cols-2"
             v-if="customFields.length > 0"
+            class="grid gap-x-4 gap-y-2 md:gap-x-8 md:gap-y-4 grid-col-1 md:grid-cols-2"
           >
             <sw-input-group
               v-for="(field, index) in customFields"
@@ -247,7 +247,7 @@
               <component
                 :type="field.type.label"
                 :field="field"
-                :isEdit="isEdit"
+                :is-edit="isEdit"
                 :is="field.type + 'Field'"
                 :invalid-fields="invalidFields"
                 @update="setCustomFieldValue"
@@ -366,8 +366,8 @@
           </div>
 
           <sw-popup
-            ref="taxModal"
             v-if="taxPerItem === 'NO' || taxPerItem === null"
+            ref="taxModal"
             class="my-3 text-sm font-semibold leading-5 text-primary-400"
           >
             <div slot="activator" class="float-right pt-2 pb-4">
@@ -425,8 +425,6 @@ const {
 } = require('vuelidate/lib/validators')
 
 export default {
-  mixins: [CustomFieldsMixin],
-
   components: {
     EstimateItem,
     CustomerSelect,
@@ -438,6 +436,7 @@ export default {
     PlusSmIcon,
     HashtagIcon,
   },
+  mixins: [CustomFieldsMixin],
 
   data() {
     return {
@@ -563,7 +562,7 @@ export default {
         if (this.newEstimate.discount_type === 'percentage') {
           this.newEstimate.discount_val = (this.subtotal * newValue) / 100
         } else {
-          this.newEstimate.discount_val = newValue * 100
+          this.newEstimate.discount_val = Math.round(newValue * 100)
         }
 
         this.newEstimate.discount = newValue
@@ -727,7 +726,9 @@ export default {
         return
       }
 
-      this.newEstimate.discount_val = this.newEstimate.discount * 100
+      this.newEstimate.discount_val = Math.round(
+        this.newEstimate.discount * 100
+      )
       this.newEstimate.discount_type = 'fixed'
     },
 

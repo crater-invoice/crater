@@ -2,8 +2,8 @@
   <base-page>
     <sw-page-header :title="$t('items.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
-        <sw-breadcrumb-item to="#" :title="$tc('items.item', 2)" active />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
+        <sw-breadcrumb-item :title="$tc('items.item', 2)" to="#" active />
       </sw-breadcrumb>
 
       <template slot="actions">
@@ -50,9 +50,9 @@
             v-model="filters.unit"
             :options="itemUnits"
             :searchable="true"
-            class="mt-2"
             :show-labels="false"
             :placeholder="$t('items.select_a_unit')"
+            class="mt-2"
             label="name"
             autocomplete="off"
           />
@@ -225,8 +225,8 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`items/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
@@ -356,7 +356,7 @@ export default {
       let data = {
         search: this.filters.name !== null ? this.filters.name : '',
         unit_id: this.filters.unit !== null ? this.filters.unit.id : '',
-        price: this.filters.price * 100,
+        price: Math.round(this.filters.price * 100),
         orderByField: sort.fieldName || 'created_at',
         orderBy: sort.order || 'desc',
         page,

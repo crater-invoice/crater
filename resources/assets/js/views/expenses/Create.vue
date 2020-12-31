@@ -2,29 +2,29 @@
   <base-page class="relative">
     <form action="" @submit.prevent="sendData">
       <!-- Page Header -->
-      <sw-page-header class="mb-5" :title="pageTitle">
+      <sw-page-header :title="pageTitle" class="mb-5">
         <sw-breadcrumb slot="breadcrumbs">
           <sw-breadcrumb-item
-            to="/admin/dashboard"
             :title="$t('general.home')"
+            to="/admin/dashboard"
           />
 
           <sw-breadcrumb-item
-            to="/admin/expenses"
             :title="$tc('expenses.expense', 2)"
+            to="/admin/expenses"
           />
 
           <sw-breadcrumb-item
             v-if="$route.name === 'expenses.edit'"
-            to="#"
             :title="$t('expenses.edit_expense')"
+            to="#"
             active
           />
 
           <sw-breadcrumb-item
             v-else
-            to="#"
             :title="$t('expenses.new_expense')"
+            to="#"
             active
           />
         </sw-breadcrumb>
@@ -32,8 +32,8 @@
         <template slot="actions">
           <sw-button
             v-if="isReceiptAvailable"
-            tag-name="a"
             :href="getReceiptUrl"
+            tag-name="a"
             variant="primary"
             outline
             size="lg"
@@ -122,8 +122,8 @@
             <sw-money
               v-model="amount"
               :currency="defaultCurrencyForInput"
-              class="focus:border focus:border-solid focus:border-primary-500"
               :invalid="$v.formData.amount.$error"
+              class="focus:border focus:border-solid focus:border-primary-500"
               @input="$v.formData.amount.$touch()"
             />
           </sw-input-group>
@@ -176,9 +176,9 @@
             </div>
 
             <sw-avatar
-              trigger="#receipt-box"
               :preview-avatar="previewReceipt"
               :enable-cropper="false"
+              trigger="#receipt-box"
               @changed="onChange"
             >
               <template v-slot:icon>
@@ -201,7 +201,7 @@
               <component
                 :type="field.type.label"
                 :field="field"
-                :isEdit="isEdit"
+                :is-edit="isEdit"
                 :is="field.type + 'Field'"
                 :invalid-fields="invalidFields"
                 @update="setCustomFieldValue"
@@ -242,13 +242,12 @@ import { CloudUploadIcon, ShoppingCartIcon } from '@vue-hero-icons/solid'
 import CustomFieldsMixin from '../../mixins/customFields'
 
 export default {
-  mixins: [CustomFieldsMixin],
-
   components: {
     CloudUploadIcon,
     ShoppingCartIcon,
     DownloadIcon,
   },
+  mixins: [CustomFieldsMixin],
 
   props: {
     addname: {
@@ -315,7 +314,7 @@ export default {
         return this.formData.amount / 100
       },
       set: function (newValue) {
-        this.formData.amount = newValue * 100
+        this.formData.amount = Math.round(newValue * 100)
       },
     },
 

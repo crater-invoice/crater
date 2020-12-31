@@ -1,20 +1,20 @@
 <template>
   <base-page>
     <!-- Page Header -->
-    <sw-page-header class="mb-3" :title="pageTitle">
+    <sw-page-header :title="pageTitle" class="mb-3">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="/admin/dashboard" :title="$t('general.home')" />
-        <sw-breadcrumb-item to="/admin/items" :title="$tc('items.item', 2)" />
+        <sw-breadcrumb-item :title="$t('general.home')" to="/admin/dashboard" />
+        <sw-breadcrumb-item :title="$tc('items.item', 2)" to="/admin/items" />
         <sw-breadcrumb-item
           v-if="$route.name === 'items.edit'"
-          to="#"
           :title="$t('items.edit_item')"
+          to="#"
           active
         />
         <sw-breadcrumb-item
           v-else
-          to="#"
           :title="$t('items.new_item')"
+          to="#"
           active
         />
       </sw-breadcrumb>
@@ -59,11 +59,11 @@
             <sw-input-group :label="$t('items.unit')" class="mb-4">
               <sw-select
                 v-model="formData.unit"
-                class="mt-2"
                 :options="itemUnits"
                 :searchable="true"
                 :show-labels="false"
                 :placeholder="$t('items.select_a_unit')"
+                class="mt-2"
                 label="name"
               >
                 <div
@@ -89,12 +89,12 @@
             >
               <sw-select
                 v-model="formData.taxes"
-                class="mt-2"
                 :options="getTaxTypes"
                 :searchable="true"
                 :show-labels="false"
                 :allow-empty="true"
                 :multiple="true"
+                class="mt-2"
                 track-by="tax_type_id"
                 label="tax_name"
               />
@@ -187,7 +187,7 @@ export default {
         return this.formData.price / 100
       },
       set: function (newValue) {
-        this.formData.price = newValue * 100
+        this.formData.price = Math.round(newValue * 100)
       },
     },
 

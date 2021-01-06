@@ -25,13 +25,6 @@ Vue.use(Vuelidate)
 Vue.use(Transitions)
 
 window._ = require('lodash')
-/**
- * Vue is a modern JavaScript library for building interactive web interfaces
- * using reactive data binding and reusable components. Vue's API is clean
- * and simple, leaving you to focus on building your next great project.
- */
-
-window.Vue = require('vue')
 
 /**
  * Custom Directives
@@ -97,7 +90,8 @@ global.axios.interceptors.response.use(undefined, function (err) {
   }
   if (!err.response) {
     window.toastr['error'](
-      'Please check your internet connection or wait until servers are back online', 'Network Error'
+      'Please check your internet connection or wait until servers are back online',
+      'Network Error'
     )
   } else {
     if (
@@ -121,7 +115,8 @@ global.axios.interceptors.response.use(undefined, function (err) {
       window.toastr['error'](
         err.response.data.message
           ? err.response.data.message
-          : err.response.data || 'Unknown error occurred', 'Error'
+          : err.response.data || 'Unknown error occurred',
+        'Error'
       )
     }
   }

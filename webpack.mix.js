@@ -1,5 +1,6 @@
 const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
+const path = require('path')
 
 mix.webpackConfig({
   resolve: {
@@ -9,17 +10,14 @@ mix.webpackConfig({
   },
 })
 
-/*
- |--------------------------------------------------------------------------
- | Admin
- |--------------------------------------------------------------------------
- */
-
 mix
   .js('resources/assets/js/app.js', 'public/assets/js/')
+  .vue({
+    version: 2,
+    extractVueStyles: true,
+  })
   .sass('resources/assets/sass/crater.scss', 'public/assets/css/')
   .options({
-    processCssUrls: false,
     postCss: [tailwindcss('./tailwind.config.js')],
   })
 

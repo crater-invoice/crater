@@ -2,10 +2,10 @@
   <base-page class="customer-create">
     <sw-page-header :title="$t('customers.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
         <sw-breadcrumb-item
-          to="#"
           :title="$tc('customers.customer', 2)"
+          to="#"
           active
         />
       </sw-breadcrumb>
@@ -159,7 +159,7 @@
           :filterable="false"
           cell-class="no-click"
         >
-          <div class="relative block" slot-scope="row">
+          <div slot-scope="row" class="relative block">
             <sw-checkbox
               :id="row.id"
               v-model="selectField"
@@ -243,16 +243,16 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`customers/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`customers/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.view') }}
@@ -281,7 +281,6 @@ import {
   EyeIcon,
 } from '@vue-hero-icons/solid'
 import AstronautIcon from '../../components/icon/AstronautIcon'
-import { request } from 'http'
 
 export default {
   components: {

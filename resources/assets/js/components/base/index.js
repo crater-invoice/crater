@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import BaseModal from './modal/BaseModal.vue'
 import BaseLoader from './BaseLoader.vue'
 import BaseCustomerSelect from './BaseCustomerSelect.vue'

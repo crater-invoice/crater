@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-wrap justify-end mt-8 lg:flex-no-wrap">
+    <div class="flex flex-wrap justify-end mt-8 lg:flex-nowrap">
       <sw-button size="lg" variant="primary-outline" @click="addItemUnit">
         <plus-icon class="w-6 h-6 mr-1 -ml-2" />
         {{ $t('settings.customization.items.add_item_unit') }}

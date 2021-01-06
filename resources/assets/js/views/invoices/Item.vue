@@ -83,7 +83,7 @@
                     <sw-button
                       slot="activator"
                       type="button"
-                      class="flex items-center px-5 py-1 text-sm font-medium leading-none text-center text-gray-500 whitespace-no-wrap border border-gray-300 border-solid rounded rounded-tl-none rounded-bl-none dropdown-toggle"
+                      class="flex items-center px-5 py-1 text-sm font-medium leading-none text-center text-gray-500 whitespace-nowrap border border-gray-300 border-solid rounded rounded-tl-none rounded-bl-none dropdown-toggle"
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"

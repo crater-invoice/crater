@@ -32,8 +32,8 @@
           </sw-dropdown-item>
 
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/estimates/${$route.params.id}/edit`"
+            tag-name="router-link"
           >
             <pencil-icon class="h-5 mr-3 text-primary-800" />
             {{ $t('general.edit') }}
@@ -96,8 +96,8 @@
                 <sw-radio
                   id="filter_due_date"
                   v-model="searchData.orderByField"
-                  value="expiry_date"
                   :label="$t('estimates.due_date')"
+                  value="expiry_date"
                   size="sm"
                   name="filter"
                   @change="onSearched"
@@ -110,8 +110,8 @@
                 <sw-radio
                   id="filter_estimate_number"
                   v-model="searchData.orderByField"
-                  value="estimate_number"
                   :label="$t('estimates.estimate_number')"
+                  value="estimate_number"
                   size="sm"
                   name="filter"
                   @change="onSearched"
@@ -121,8 +121,8 @@
           </sw-dropdown>
 
           <sw-button
-            class="ml-1"
             v-tooltip.top-center="{ content: getOrderName }"
+            class="ml-1"
             size="md"
             variant="gray-light"
             @click="sortData"
@@ -168,15 +168,15 @@
             </div>
 
             <sw-badge
-              class="px-1 text-xs"
               :bg-color="$utils.getBadgeStatusColor(estimate.status).bgColor"
               :color="$utils.getBadgeStatusColor(estimate.status).color"
+              class="px-1 text-xs"
             >
               {{ estimate.status }}
             </sw-badge>
           </div>
 
-          <div class="flex-1 whitespace-no-wrap right">
+          <div class="flex-1 whitespace-nowrap right">
             <div
               class="mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
               v-html="

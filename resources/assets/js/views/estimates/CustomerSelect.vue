@@ -25,7 +25,7 @@
         <div v-if="selectedCustomer.billing_address">
           <div class="flex flex-col">
             <label
-              class="mb-1 text-sm font-medium text-gray-500 uppercase whitespace-no-wrap"
+              class="mb-1 text-sm font-medium text-gray-500 uppercase whitespace-nowrap"
             >
               {{ $t('general.bill_to') }}
             </label>
@@ -77,7 +77,7 @@
         <div v-if="selectedCustomer.shipping_address">
           <div class="flex flex-col">
             <label
-              class="mb-1 text-sm font-medium text-gray-500 uppercase whitespace-no-wrap"
+              class="mb-1 text-sm font-medium text-gray-500 uppercase whitespace-nowrap"
             >
               {{ $t('general.ship_to') }}
             </label>

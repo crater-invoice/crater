@@ -35,10 +35,10 @@
           <sw-dropdown-item class="flex cursor-pointer">
             <sw-input-group class="-mt-3 font-normal">
               <sw-radio
-                :label="$t('customers.create_date')"
-                size="sm"
                 id="filter_create_date"
+                :label="$t('customers.create_date')"
                 v-model="searchData.orderByField"
+                size="sm"
                 name="filter"
                 value="invoices.created_at"
                 @change="onSearch"
@@ -49,10 +49,10 @@
           <sw-dropdown-item class="flex cursor-pointer">
             <sw-input-group class="-mt-3 font-normal">
               <sw-radio
-                :label="$t('customers.display_name')"
-                size="sm"
                 id="filter_display_name"
+                :label="$t('customers.display_name')"
                 v-model="searchData.orderByField"
+                size="sm"
                 name="filter"
                 value="users.name"
                 @change="onSearch"
@@ -62,8 +62,8 @@
         </sw-dropdown>
 
         <sw-button
-          class="ml-1"
           v-tooltip.top-center="{ content: getOrderName }"
+          class="ml-1"
           size="md"
           variant="gray-light"
           @click="sortData"
@@ -102,13 +102,13 @@
             {{ customer.name }}
           </div>
           <div
-            class="mt-1 text-xs not-italic font-medium leading-5 text-gray-600"
             v-if="customer.contact_name"
+            class="mt-1 text-xs not-italic font-medium leading-5 text-gray-600"
           >
             {{ customer.contact_name }}
           </div>
         </div>
-        <div class="flex-1 whitespace-no-wrap right">
+        <div class="flex-1 whitespace-nowrap right">
           <div
             class="text-xl not-italic font-semibold leading-8 text-right text-gray-900"
             v-html="$utils.formatMoney(customer.due_amount, customer.currency)"

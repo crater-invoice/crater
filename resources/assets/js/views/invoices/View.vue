@@ -27,8 +27,8 @@
             invoice.status === 'OVERDUE' ||
             invoice.status === 'VIEWED'
           "
-          tag-name="router-link"
           :to="`/admin/payments/${$route.params.id}/create`"
+          tag-name="router-link"
           variant="primary"
           class="text-sm"
         >
@@ -45,8 +45,8 @@
           </sw-dropdown-item>
 
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/invoices/${$route.params.id}/edit`"
+            tag-name="router-link"
           >
             <pencil-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('general.edit') }}
@@ -125,10 +125,10 @@
                 <sw-radio
                   id="filter_invoice_number"
                   v-model="searchData.orderByField"
+                  :label="$t('invoices.invoice_number')"
                   size="sm"
                   type="radio"
                   name="filter"
-                  :label="$t('invoices.invoice_number')"
                   value="invoice_number"
                   @change="onSearch"
                 />
@@ -137,8 +137,8 @@
           </sw-dropdown>
 
           <sw-button
-            class="ml-1"
             v-tooltip.top-center="{ content: getOrderName }"
+            class="ml-1"
             size="md"
             variant="gray-light"
             @click="sortData"
@@ -184,16 +184,16 @@
             </div>
 
             <sw-badge
-              class="px-1 text-xs"
               :bg-color="$utils.getBadgeStatusColor(invoice.status).bgColor"
               :color="$utils.getBadgeStatusColor(invoice.status).color"
               :font-size="$utils.getBadgeStatusColor(invoice.status).fontSize"
+              class="px-1 text-xs"
             >
               {{ invoice.status }}
             </sw-badge>
           </div>
 
-          <div class="flex-1 whitespace-no-wrap right">
+          <div class="flex-1 whitespace-nowrap right">
             <div
               class="mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
               v-html="

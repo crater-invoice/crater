@@ -1,6 +1,6 @@
 <template>
   <sw-card variant="setting-card">
-    <div slot="header" class="flex flex-wrap justify-between lg:flex-no-wrap">
+    <div slot="header" class="flex flex-wrap justify-between lg:flex-nowrap">
       <div>
         <h6 class="sw-section-title">
           {{ $t('settings.expense_category.title') }}
@@ -51,7 +51,7 @@
           }}</span>
           <div class="w-48 overflow-hidden notes">
             <div
-              class="overflow-hidden whitespace-no-wrap"
+              class="overflow-hidden whitespace-nowrap"
               style="text-overflow: ellipsis"
             >
               {{ row.description }}

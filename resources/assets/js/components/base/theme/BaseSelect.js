@@ -12,7 +12,7 @@ export default {
   disabledMultiSelectTags: 'bg-gray-200 text-gray-400',
   multiselectTagsWrap: 'multiselect__tags-wrap inline',
   multiselectTag:
-    'multiselect__tag relative inline-block pt-1 pr-6 pb-1 pl-2 rounded mr-2 text-white leading-none mb-1 whitespace-no-wrap overflow-hidden max-w-full',
+    'multiselect__tag relative inline-block pt-1 pr-6 pb-1 pl-2 rounded mr-2 text-white leading-none mb-1 whitespace-nowrap overflow-hidden max-w-full',
   multiselectTagIcon:
     'multiselect__tag-icon cursor-pointer ml-2 absolute right-0 top-0 bottom-0 font-bold w-5 text-center leading-5 delay-200 transition-all ease-linear rounded',
   multiselectStrong: 'mb-2 leading-5 inline-block align-top',
@@ -26,6 +26,6 @@ export default {
   multiselectContent:
     'multiselect__content list-none inline-block p-0 m-0 min-w-full align-top',
   multiselectOption:
-    'multiselect__option block p-3 no-underline leading-4 normal-case align-middle relative cursor-pointer whitespace-no-wrap text-sm',
+    'multiselect__option block p-3 no-underline leading-4 normal-case align-middle relative cursor-pointer whitespace-nowrap text-sm',
   multiselectElement: 'multiselect__element block',
 }

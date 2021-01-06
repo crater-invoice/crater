@@ -94,26 +94,27 @@
                 </tr>
             @endforeach
         @endif
-
-        @if ($estimate->discount_per_item === 'NO')
-            <tr>
-                <td class="pl-10 border-0 total-table-attribute-label">
-                    @if($estimate->discount_type === 'fixed')
-                        @lang('pdf_discount_label')
-                    @endif
-                    @if($estimate->discount_type === 'percentage')
-                        @lang('pdf_discount_label') ({{$estimate->discount}}%)
-                    @endif
-                </td>
-                <td class="text-right border-0 item-cell total-table-attribute-value">
-                    @if($estimate->discount_type === 'fixed')
-                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                    @endif
-                    @if($estimate->discount_type === 'percentage')
-                        {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
-                    @endif
-                </td>
-            </tr>
+        @if($estimate->discount > 0)
+            @if ($estimate->discount_per_item === 'NO')
+                <tr>
+                    <td class="pl-10 border-0 total-table-attribute-label">
+                        @if($estimate->discount_type === 'fixed')
+                            @lang('pdf_discount_label')
+                        @endif
+                        @if($estimate->discount_type === 'percentage')
+                            @lang('pdf_discount_label') ({{$estimate->discount}}%)
+                        @endif
+                    </td>
+                    <td class="text-right border-0 item-cell total-table-attribute-value">
+                        @if($estimate->discount_type === 'fixed')
+                            {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                        @endif
+                        @if($estimate->discount_type === 'percentage')
+                            {!! format_money_pdf($estimate->discount_val, $estimate->user->currency) !!}
+                        @endif
+                    </td>
+                </tr>
+            @endif
         @endif
         <tr>
             <td class="py-3"></td>

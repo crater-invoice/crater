@@ -31,7 +31,7 @@ class Payment extends Model implements HasMedia
     const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at', 'payment_date'];
+    protected $dates = ['created_at', 'updated_at'];
 
     protected $guarded = ['id'];
 

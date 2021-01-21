@@ -1,24 +1,24 @@
 /*!
-    * tiptap v1.29.6
-    * (c) 2020 überdosis GbR (limited liability)
+    * tiptap v1.30.0
+    * (c) 2021 überdosis GbR (limited liability)
     * @license MIT
     */
 
 /*!
-    * tiptap-commands v1.14.6
-    * (c) 2020 überdosis GbR (limited liability)
+    * tiptap-commands v1.15.0
+    * (c) 2021 überdosis GbR (limited liability)
     * @license MIT
     */
 
 /*!
-    * tiptap-extensions v1.33.1
-    * (c) 2020 überdosis GbR (limited liability)
+    * tiptap-extensions v1.33.2
+    * (c) 2021 überdosis GbR (limited liability)
     * @license MIT
     */
 
 /*!
-    * tiptap-utils v1.10.4
-    * (c) 2020 überdosis GbR (limited liability)
+    * tiptap-utils v1.11.0
+    * (c) 2021 überdosis GbR (limited liability)
     * @license MIT
     */
 
@@ -68,13 +68,6 @@
  */
 
 /*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <http://feross.org>
- * @license  MIT
- */
-
-/*!
  * Vue.js v2.6.12
  * (c) 2014-2020 Evan You
  * Released under the MIT License.
@@ -95,6 +88,12 @@
  */
 
 /*!
+ * vue-i18n v8.22.2 
+ * (c) 2020 kazuya kawaguchi
+ * Released under the MIT License.
+ */
+
+/*!
  * vue2-transitions v0.3.0
  * (c) 2019-present cristij <joracristi@gmail.com>
  * Released under the MIT License.
@@ -107,18 +106,6 @@
  */
 
 /*! For license information please see index.js.LICENSE.txt */
-
-/*! https://mths.be/punycode v1.4.1 by @mathias */
-
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-/**
-  * vue-router v2.7.0
-  * (c) 2017 Evan You
-  * @license MIT
-  */
 
 /**
  * @license

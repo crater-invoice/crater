@@ -25,7 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@bytefury/spacewind": "^0.4.0",
+        "@bytefury/spacewind": "../spacewind",
         "@vue-hero-icons/outline": "^1.6.3",
         "@vue-hero-icons/solid": "^1.6.3",
         "axios": "^0.19",

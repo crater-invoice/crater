@@ -216,10 +216,10 @@ class Payment extends Model implements HasMedia
         }
 
         $payment = Payment::with([
-                'user',
-                'invoice',
-                'paymentMethod',
-            ])
+            'user',
+            'invoice',
+            'paymentMethod',
+        ])
             ->find($this->id);
 
         return $payment;
@@ -373,7 +373,7 @@ class Payment extends Model implements HasMedia
     {
         $company = Company::find($this->company_id);
 
-        $logo = $company->logo;
+        $logo = $company->logo_path;
 
         view()->share([
             'payment' => $this,

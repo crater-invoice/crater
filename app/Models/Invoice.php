@@ -510,7 +510,7 @@ class Invoice extends Model implements HasMedia
 
         $company = Company::find($this->company_id);
 
-        $logo = $company->logo;
+        $logo = $company->logo_path;
 
         view()->share([
             'invoice' => $this,

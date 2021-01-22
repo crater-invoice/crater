@@ -426,7 +426,7 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
-        $logo = $company->logo;
+        $logo = $company->logo_path;
 
         view()->share([
             'estimate' => $this,

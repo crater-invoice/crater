@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Models;
 
 use Crater\Models\Address;
@@ -17,9 +18,9 @@ class Company extends Model implements HasMedia
 
     protected $fillable = ['name', 'logo', 'unique_hash'];
 
-    protected $appends=['logo'];
+    protected $appends = ['logo', 'logo_path'];
 
-    public function getLogoAttribute()
+    public function getLogoPathAttribute()
     {
         $logo = $this->getMedia('logo')->first();
 
@@ -28,10 +29,22 @@ class Company extends Model implements HasMedia
         if ($logo) {
             if ($isSystem) {
                 return $logo->getPath();
-            } else  {
+            } else {
                 return $logo->getFullUrl();
             }
         }
+
+        return null;
+    }
+
+    public function getLogoAttribute()
+    {
+        $logo = $this->getMedia('logo')->first();
+
+        if ($logo) {
+            return $logo->getFullUrl();
+        }
+
         return null;
     }
 

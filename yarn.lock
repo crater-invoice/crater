@@ -908,8 +908,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bytefury/spacewind@../spacewind":
-  version "0.4.2"
+"@bytefury/spacewind@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@bytefury/spacewind/-/spacewind-0.5.0.tgz#ce09cd8dc586e3c99155b8dc828e19f2836b864d"
+  integrity sha512-5tDrrR3+YtXKIjKFpWCSurDdtNG0uz9svUHBR9JoP5dtoVwuOITObMygisOKABFkFUiL9dQb+0Pg+oVdDPK97w==
   dependencies:
     "@popperjs/core" "^2.5.3"
     autoprefixer "^10.2.3"

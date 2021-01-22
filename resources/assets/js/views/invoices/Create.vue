@@ -315,8 +315,8 @@
                 <sw-button
                   slot="activator"
                   type="button"
-                  class="flex items-center justify-center w-12 border border-gray-300 border-solid rounded-tl-none rounded-bl-none font-base"
                   data-toggle="dropdown"
+                  size="discount"
                   aria-haspopup="true"
                   aria-expanded="false"
                   style="height: 43px"
@@ -565,23 +565,27 @@ export default {
     },
 
     totalSimpleTax() {
-      return window._.sumBy(this.newInvoice.taxes, function (tax) {
-        if (!tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.newInvoice.taxes, function (tax) {
+          if (!tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
 
     totalCompoundTax() {
-      return window._.sumBy(this.newInvoice.taxes, function (tax) {
-        if (tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.newInvoice.taxes, function (tax) {
+          if (tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
 
     totalTax() {
@@ -589,9 +593,11 @@ export default {
         return this.totalSimpleTax + this.totalCompoundTax
       }
 
-      return window._.sumBy(this.newInvoice.items, function (tax) {
-        return tax.tax
-      })
+      return Math.round(
+        window._.sumBy(this.newInvoice.items, function (tax) {
+          return tax.tax
+        })
+      )
     },
 
     allTaxes() {

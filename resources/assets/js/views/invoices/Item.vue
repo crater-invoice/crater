@@ -83,8 +83,8 @@
                     <sw-button
                       slot="activator"
                       type="button"
-                      class="flex items-center px-5 py-1 text-sm font-medium leading-none text-center text-gray-500 whitespace-nowrap border border-gray-300 border-solid rounded rounded-tl-none rounded-bl-none dropdown-toggle"
                       data-toggle="dropdown"
+                      size="discount"
                       aria-haspopup="true"
                       aria-expanded="false"
                       style="height: 43px"
@@ -266,22 +266,26 @@ export default {
       return this.subtotal - this.item.discount_val
     },
     totalSimpleTax() {
-      return window._.sumBy(this.item.taxes, function (tax) {
-        if (!tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.item.taxes, function (tax) {
+          if (!tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
     totalCompoundTax() {
-      return window._.sumBy(this.item.taxes, function (tax) {
-        if (tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.item.taxes, function (tax) {
+          if (tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
     totalTax() {
       return this.totalSimpleTax + this.totalCompoundTax

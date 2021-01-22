@@ -85,9 +85,10 @@
                       slot="activator"
                       type="button"
                       data-toggle="dropdown"
+                      size="discount"
                       aria-haspopup="true"
                       aria-expanded="false"
-                      style="height: 43px; padding: 6px"
+                      style="height: 43px"
                       variant="white"
                     >
                       <span class="flex">
@@ -266,22 +267,26 @@ export default {
       return this.subtotal - this.item.discount_val
     },
     totalSimpleTax() {
-      return window._.sumBy(this.item.taxes, function (tax) {
-        if (!tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.item.taxes, function (tax) {
+          if (!tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
     totalCompoundTax() {
-      return window._.sumBy(this.item.taxes, function (tax) {
-        if (tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.item.taxes, function (tax) {
+          if (tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
     totalTax() {
       return this.totalSimpleTax + this.totalCompoundTax

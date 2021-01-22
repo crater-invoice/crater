@@ -19,7 +19,9 @@ Vue.directive('click-outside', {
 Vue.directive('autoresize', {
   inserted: function (el) {
     el.style.height = el.scrollHeight + 'px'
-    el.style.overflow.y = 'hidden'
+    if (el.style.overflow && el.style.overflow.y) {
+      el.style.overflow.y = 'hidden'
+    }
     el.style.resize = 'none'
     function OnInput() {
       this.style.height = 'auto'

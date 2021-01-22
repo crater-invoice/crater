@@ -14,7 +14,7 @@ class UpdateCraterVersion404 extends Migration
      */
     public function up()
     {
-        Setting::setSetting('version', '4.0.3');
+        Setting::setSetting('version', '4.0.4');
     }
 
     /**

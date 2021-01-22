@@ -45,11 +45,13 @@ export default {
   computed: {
     taxAmount() {
       if (this.tax.compound_tax && this.total) {
-        return ((this.total + this.totalTax) * this.tax.percent) / 100
+        return Math.round(
+          ((this.total + this.totalTax) * this.tax.percent) / 100
+        )
       }
 
       if (this.total && this.tax.percent) {
-        return (this.total * this.tax.percent) / 100
+        return Math.round((this.total * this.tax.percent) / 100)
       }
 
       return 0

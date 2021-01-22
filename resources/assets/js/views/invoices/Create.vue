@@ -957,12 +957,15 @@ export default {
       let amount = 0
 
       if (selectedTax.compound_tax && this.subtotalWithDiscount) {
-        amount =
+        amount = Math.round(
           ((this.subtotalWithDiscount + this.totalSimpleTax) *
             selectedTax.percent) /
-          100
+            100
+        )
       } else if (this.subtotalWithDiscount && selectedTax.percent) {
-        amount = (this.subtotalWithDiscount * selectedTax.percent) / 100
+        amount = Math.round(
+          (this.subtotalWithDiscount * selectedTax.percent) / 100
+        )
       }
 
       this.newInvoice.taxes.push({

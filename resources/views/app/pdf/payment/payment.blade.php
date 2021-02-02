@@ -258,7 +258,7 @@
             color: #595959;
         }
 
-        .total-display-box span {
+        .total-display-box .total-color {
             float: right;
             font-weight: bold;
             font-size: 14px;
@@ -336,7 +336,7 @@
     </div>
     <div class="total-display-box">
         <p class="total-display-label">@lang('pdf_payment_amount_received_label')</p>
-        <span>{!! format_money_pdf($payment->amount, $payment->user->currency) !!}</span>
+        <span class="total-color">{!! format_money_pdf($payment->amount, $payment->user->currency) !!}</span>
     </div>
 </body>
 </html>

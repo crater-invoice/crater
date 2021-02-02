@@ -301,7 +301,7 @@ export default {
       set: function (newValue) {
         if (parseFloat(newValue) > 0) {
           this.item.price = Math.round(newValue * 100)
-          this.maxDiscount = this.item.price
+          this.maxDiscount = this.item.price * this.item.quantity
         } else {
           this.item.price = newValue
         }

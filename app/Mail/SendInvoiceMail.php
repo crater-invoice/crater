@@ -1,6 +1,7 @@
 <?php
 namespace Crater\Mail;
 
+use Config;
 use Crater\Models\EmailLog;
 use Crater\Models\Invoice;
 use Illuminate\Bus\Queueable;
@@ -40,7 +41,7 @@ class SendInvoiceMail extends Mailable
             'mailable_id' => $this->data['invoice']['id']
         ]);
 
-        return $this->from($this->data['from'], env('MAIL_FROM_NAME'))
+        return $this->from($this->data['from'], config('mail.from.name'))
                     ->subject($this->data['subject'])
                     ->markdown('emails.send.invoice', ['data', $this->data]);
     }

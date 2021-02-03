@@ -40,7 +40,7 @@ class SendInvoiceMail extends Mailable
             'mailable_id' => $this->data['invoice']['id']
         ]);
 
-        return $this->from($this->data['from'])
+        return $this->from($this->data['from'], env('MAIL_FROM_NAME'))
                     ->subject($this->data['subject'])
                     ->markdown('emails.send.invoice', ['data', $this->data]);
     }

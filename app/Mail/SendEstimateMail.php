@@ -40,7 +40,7 @@ class SendEstimateMail extends Mailable
             'mailable_id' => $this->data['estimate']['id']
         ]);
 
-        return $this->from($this->data['from'])
+        return $this->from($this->data['from'], config('mail.from.name'))
                     ->subject($this->data['subject'])
                     ->markdown('emails.send.estimate', ['data', $this->data]);
 

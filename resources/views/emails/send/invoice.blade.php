@@ -17,9 +17,11 @@
     @slot('subcopy')
         @component('mail::subcopy')
             {!! $data['body'] !!}
-            @component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
-                View Invoice
-            @endcomponent
+            @if(!$pdfData)
+                @component('mail::button', ['url' => url('/customer/invoices/pdf/'.$data['invoice']['unique_hash'])])
+                    View Invoice
+                @endcomponent
+            @endif
         @endcomponent
     @endslot
 

@@ -13,15 +13,17 @@ class SendInvoiceMail extends Mailable
     use Queueable, SerializesModels;
 
     public $data = [];
+    public $pdfData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $pdfData)
     {
         $this->data = $data;
+        $this->pdfData = $pdfData;
     }
 
     /**
@@ -39,9 +41,18 @@ class SendInvoiceMail extends Mailable
             'mailable_type' => Invoice::class,
             'mailable_id' => $this->data['invoice']['id']
         ]);
+        
+        $mailContent = $this->from($this->data['from'])
+            ->subject($this->data['subject'])
+            ->markdown('emails.send.invoice', ['data', $this->data]);
 
-        return $this->from($this->data['from'])
-                    ->subject($this->data['subject'])
-                    ->markdown('emails.send.invoice', ['data', $this->data]);
+        if ($this->pdfData) {
+            $mailContent->attachData(
+                $this->pdfData->output(), 
+                $this->data['invoice']['invoice_number'] . '.pdf'
+            );
+        }
+        
+        return $mailContent;
     }
 }

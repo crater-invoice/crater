@@ -429,6 +429,7 @@ class Invoice extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
+        $pdfData = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         if ($this->status == Invoice::STATUS_DRAFT) {
             $this->status = Invoice::STATUS_SENT;
@@ -436,7 +437,7 @@ class Invoice extends Model implements HasMedia
             $this->save();
         }
 
-        \Mail::to($data['to'])->send(new SendInvoiceMail($data));
+        \Mail::to($data['to'])->send(new SendInvoiceMail($data, $pdfData));
 
         return [
             'success' => true
@@ -524,6 +525,17 @@ class Invoice extends Model implements HasMedia
         ]);
 
         return PDF::loadView('app.pdf.invoice.' . $invoiceTemplate->view);
+    }
+
+    public function getEmailAttachmentSetting()
+    {
+        $invoiceAsAttachment = CompanySetting::getSetting('invoice_email_attachment', $this->company_id);
+
+        if($invoiceAsAttachment == 'NO') {
+            return false;
+        }
+
+        return true;
     }
 
     public function getCompanyAddress()

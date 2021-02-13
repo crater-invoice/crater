@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'company_id' => User::find(1)->company_id,
             'role' => 'super admin',
-            'password' => Hash::make('secret'),
+            'password' => Hash::make('password'),
             'currency_id' => Currency::first()->id
         ];
     }

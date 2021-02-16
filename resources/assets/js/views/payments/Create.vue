@@ -522,7 +522,7 @@ export default {
     async fetchCustomerInvoices(userId) {
       let data = {
         customer_id: userId,
-        status: 'UNPAID',
+        status: 'DUE',
       }
       let response = await this.fetchInvoices(data)
       this.invoiceList = response.data.invoices.data

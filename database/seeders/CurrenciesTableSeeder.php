@@ -550,6 +550,15 @@ class CurrenciesTableSeeder extends Seeder
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'
             ],
+            [
+                'name' => 'Peruvian Soles',
+                'code' => 'PEN',
+                'symbol' => 'S/',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.'
+            ],
+            
         ];
 
         foreach ($currencies as $currency) {

@@ -42,9 +42,15 @@ class SendEstimateMail extends Mailable
             'mailable_id' => $this->data['estimate']['id']
         ]);
 
+<<<<<<< HEAD
         $mailContent = $this->from($this->data['from'])
             ->subject($this->data['subject'])
             ->markdown('emails.send.estimate', ['data', $this->data]);
+=======
+        return $this->from($this->data['from'], config('mail.from.name'))
+                    ->subject($this->data['subject'])
+                    ->markdown('emails.send.estimate', ['data', $this->data]);
+>>>>>>> master
 
         if ($this->pdfData) {
             $mailContent->attachData(

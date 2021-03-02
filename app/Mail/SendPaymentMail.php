@@ -43,6 +43,7 @@ class SendPaymentMail extends Mailable
             'mailable_id' => $this->data['payment']['id']
         ]);
 
+<<<<<<< HEAD
         $mailContent = $this->from($this->data['from'])
             ->subject($this->data['subject'])
             ->markdown('emails.send.payment', ['data', $this->data]);
@@ -55,5 +56,11 @@ class SendPaymentMail extends Mailable
         }
         
         return $mailContent;
+=======
+        return $this->from($this->data['from'], config('mail.from.name'))
+                    ->subject($this->data['subject'])
+                    ->markdown('emails.send.payment', ['data', $this->data]);
+
+>>>>>>> master
     }
 }

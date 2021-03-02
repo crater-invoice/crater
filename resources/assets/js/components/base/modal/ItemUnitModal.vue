@@ -68,6 +68,14 @@ export default {
       if (!this.$v.formData.name.required) {
         return this.$tc('validation.required')
       }
+
+      if (!this.$v.formData.name.minLength) {
+        return this.$tc(
+          'validation.name_min_length',
+          this.$v.formData.name.$params.minLength.min,
+          { count: this.$v.formData.name.$params.minLength.min }
+        )
+      }
     },
   },
   validations: {

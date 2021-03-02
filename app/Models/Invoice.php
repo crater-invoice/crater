@@ -429,7 +429,7 @@ class Invoice extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
-        $pdfData = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         if ($this->status == Invoice::STATUS_DRAFT) {
             $this->status = Invoice::STATUS_SENT;
@@ -437,7 +437,7 @@ class Invoice extends Model implements HasMedia
             $this->save();
         }
 
-        \Mail::to($data['to'])->send(new SendInvoiceMail($data, $pdfData));
+        \Mail::to($data['to'])->send(new SendInvoiceMail($data));
 
         return [
             'success' => true

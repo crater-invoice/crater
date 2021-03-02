@@ -124,9 +124,9 @@ class Payment extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
-        $pdfData = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
-        \Mail::to($data['to'])->send(new SendPaymentMail($data, $pdfData));
+        \Mail::to($data['to'])->send(new SendPaymentMail($data));
 
         return [
             'success' => true

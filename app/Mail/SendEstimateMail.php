@@ -13,17 +13,15 @@ class SendEstimateMail extends Mailable
     use Queueable, SerializesModels;
 
     public $data = [];
-    public $pdfData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $pdfData)
+    public function __construct($data)
     {
         $this->data = $data;
-        $this->pdfData = $pdfData;
     }
 
     /**
@@ -42,22 +40,15 @@ class SendEstimateMail extends Mailable
             'mailable_id' => $this->data['estimate']['id']
         ]);
 
-<<<<<<< HEAD
-        $mailContent = $this->from($this->data['from'])
-            ->subject($this->data['subject'])
-            ->markdown('emails.send.estimate', ['data', $this->data]);
-=======
-        return $this->from($this->data['from'], config('mail.from.name'))
+        $mailContent = $this->from($this->data['from'], config('mail.from.name'))
                     ->subject($this->data['subject'])
                     ->markdown('emails.send.estimate', ['data', $this->data]);
->>>>>>> master
 
-        if ($this->pdfData) {
+        if ($this->data['attach']['data'])
             $mailContent->attachData(
-                $this->pdfData->output(), 
+                $this->data['attach']['data']->output(), 
                 $this->data['estimate']['estimate_number'] . '.pdf'
             );
-        }
         
         return $mailContent;
     }

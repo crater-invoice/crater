@@ -216,9 +216,9 @@ export default {
       this.payment_email_attachment = val ? val.payment_email_attachment : ''
 
       if (this.payment_email_attachment === 'YES') {
-        this.payment_email_attachment = true
+        this.paymentAsAttachment = true
       } else {
-        this.payment_email_attachment = false
+        this.paymentAsAttachment = false
       }
     },
   },

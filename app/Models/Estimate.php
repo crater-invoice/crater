@@ -379,9 +379,9 @@ class Estimate extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = $this->company->toArray();
         $data['body'] = $this->getEmailBody($data['body']);
-        $pdfData = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
-        \Mail::to($data['to'])->send(new SendEstimateMail($data, $pdfData));
+        \Mail::to($data['to'])->send(new SendEstimateMail($data));
 
         if ($this->status == Estimate::STATUS_DRAFT) {
             $this->status = Estimate::STATUS_SENT;

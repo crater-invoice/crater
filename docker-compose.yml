@@ -46,6 +46,23 @@ services:
     networks:
       - crater
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - 8088:80
+    environment:
+      MYSQL_USER: crater
+      MYSQL_PASSWORD: crater
+      MYSQL_DATABASE: crater
+      MYSQL_ROOT_PASSWORD: crater
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - crater
+
+
 volumes:
   db:
 

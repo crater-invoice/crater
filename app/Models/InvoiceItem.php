@@ -25,7 +25,8 @@ class InvoiceItem extends Model
         'discount_val',
         'total',
         'tax',
-        'discount'
+        'discount',
+        'unit_name',
     ];
 
     protected $casts = [

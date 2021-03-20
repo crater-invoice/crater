@@ -274,6 +274,7 @@
       "required": "Fältet är tvingande"
     },
     "accepted": "Accepterad",
+    "rejected": "Rejected",
     "sent": "Skickat",
     "draft": "Utkast",
     "declined": "Avvisad",
@@ -320,6 +321,9 @@
     "all": "Alla",
     "paid": "Betalda",
     "unpaid": "Obetalda",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "KUNDER",
     "paid_status": "BETALSTATUS",
     "ref_no": "REF NR.",

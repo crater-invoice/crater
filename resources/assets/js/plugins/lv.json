@@ -273,6 +273,7 @@
       "required": "Šis lauks ir obligāts"
     },
     "accepted": "Apstiprināts",
+    "rejected": "Rejected",
     "sent": "Nosūtīts",
     "draft": "Melnraksts",
     "declined": "Noraidīts",
@@ -319,6 +320,9 @@
     "all": "Visi",
     "paid": "Apmaksāts",
     "unpaid": "Neapmaksāts",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "KLIENTS",
     "paid_status": "APMAKSAS STATUS",
     "ref_no": "REF NR.",

@@ -273,6 +273,7 @@
       "required": "Champ requis"
     },
     "accepted": "Accepté",
+    "rejected": "Rejected",
     "sent": "Envoyé",
     "draft": "Brouillon",
     "declined": "Refusé",
@@ -319,6 +320,9 @@
     "all": "Toutes",
     "paid": "Payé",
     "unpaid": "Non payé",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "CLIENT",
     "paid_status": "STATUT DU PAIEMENT",
     "ref_no": "Réf.",

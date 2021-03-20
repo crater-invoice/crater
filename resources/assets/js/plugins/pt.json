@@ -273,6 +273,7 @@
       "required": "Campo obrigatório"
     },
     "accepted": "Aceito",
+    "rejected": "Rejected",
     "sent": "Enviado",
     "draft": "Rascunho",
     "declined": "Rejeitado",
@@ -319,6 +320,9 @@
     "all": "Todas",
     "paid": "Paga",
     "unpaid": "Não Paga",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "CLIENTE",
     "paid_status": "STATUS PAGAMENTO",
     "ref_no": "REFERÊNCIA",

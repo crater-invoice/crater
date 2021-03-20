@@ -274,6 +274,7 @@
       "required": "Polje je obavezno"
     },
     "accepted": "Prihvaćeno",
+    "rejected": "Rejected",
     "sent": "Poslato",
     "draft": "U izradi",
     "declined": "Odbijeno",
@@ -320,6 +321,9 @@
     "all": "Sve",
     "paid": "Plaćeno",
     "unpaid": "Neplaćeno",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "KLIJENT",
     "paid_status": "STATUS UPLATE",
     "ref_no": "POZIV NA BROJ",

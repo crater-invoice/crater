@@ -273,6 +273,7 @@
       "required": "حقل مطلوب"
     },
     "accepted": "مقبول",
+    "rejected": "Rejected",
     "sent": "مرسل",
     "draft": "مسودة",
     "declined": "مرفوض",
@@ -319,6 +320,9 @@
     "all": "الكل",
     "paid": "مدفوع",
     "unpaid": "غير مدفوع",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "العميل",
     "paid_status": "حالة الدفع",
     "ref_no": "رقم المرجع.",

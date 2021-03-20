@@ -273,6 +273,7 @@
       "required": "Veld is vereist"
     },
     "accepted": "Geaccepteerd",
+    "rejected": "Rejected",
     "sent": "Verzonden",
     "draft": "Concept",
     "declined": "Geweigerd",
@@ -319,6 +320,9 @@
     "all": "Allemaal",
     "paid": "Betaald",
     "unpaid": "Onbetaald",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "Klant",
     "paid_status": "Betaling",
     "ref_no": "REF NR.",

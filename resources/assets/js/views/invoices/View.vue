@@ -189,7 +189,7 @@
               :font-size="$utils.getBadgeStatusColor(invoice.status).fontSize"
               class="px-1 text-xs"
             >
-              {{ invoice.status }}
+              {{ $utils.getStatusTranslation(invoice.status) }}
             </sw-badge>
           </div>
 

@@ -273,6 +273,7 @@
       "required": "Campo obbligatorio"
     },
     "accepted": "Accettato",
+    "rejected": "Rejected",
     "sent": "Inviato",
     "draft": "Bozza",
     "declined": "Rifiutato",
@@ -319,6 +320,9 @@
     "all": "Tutti",
     "paid": "Pagato",
     "unpaid": "Insoluto",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "CLIENTE",
     "paid_status": "STATO DI PAGAMENTO",
     "ref_no": "RIF N.",

@@ -273,6 +273,7 @@
       "required": "Se requiere campo"
     },
     "accepted": "Aceptado",
+    "rejected": "Rejected",
     "sent": "Enviado",
     "draft": "Borrador",
     "declined": "Rechazado",
@@ -319,6 +320,9 @@
     "all": "Todas",
     "paid": "Pagada",
     "unpaid": "No pagado",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "CLIENTE",
     "paid_status": "ESTADO PAGADO",
     "ref_no": "NÚMERO DE REFERENCIA.",

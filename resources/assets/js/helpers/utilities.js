@@ -1,3 +1,5 @@
+import i18n from '../plugins/i18n';
+
 export default {
   addClass(el, className) {
     if (el.classList) el.classList.add(className)
@@ -243,6 +245,36 @@ export default {
           bgColor: '#FED7D7',
           color: '#c53030',
         }
+    }
+  },
+  getStatusTranslation(status) {
+    switch (status) {
+      case 'DRAFT':
+        return i18n.t('general.draft')
+      case 'PAID':
+        return i18n.t('invoices.paid')
+      case 'UNPAID':
+        return i18n.t('invoices.unpaid')
+      case 'SENT':
+        return i18n.t('general.paid')
+      case 'REJECTED':
+        return i18n.t('estimates.rejected')
+      case 'ACCEPTED':
+        return i18n.t('estimates.accepted')
+      case 'VIEWED':
+        return i18n.t('invoices.viewed')
+      case 'EXPIRED':
+        return i18n.t('estimates.expired')
+      case 'PARTIALLY PAID':
+        return i18n.t('estimates.accepted')
+      case 'OVERDUE':
+        return i18n.t('invoices.overdue')
+      case 'COMPLETED':
+        return i18n.t('invoices.completed')
+      case 'DUE':
+        return i18n.t('general.due')
+      default:
+        return status
     }
   },
   compareVersion(v1, v2, options) {

@@ -274,6 +274,7 @@
       "required": "Field is required"
     },
     "accepted": "Accepted",
+    "rejected": "Rejected",
     "sent": "Sent",
     "draft": "Draft",
     "declined": "Declined",
@@ -320,6 +321,9 @@
     "all": "All",
     "paid": "Paid",
     "unpaid": "Unpaid",
+    "viewed": "Viewed",
+    "overdue": "Overdue",
+    "completed": "Completed",
     "customer": "CUSTOMER",
     "paid_status": "PAID STATUS",
     "ref_no": "REF NO.",

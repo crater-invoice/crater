@@ -208,7 +208,7 @@
         >
           <template slot-scope="row">
             <span>{{ $t('expenses.customer') }}</span>
-            <span> {{ row.user_name ? row.user_name : 'Not selected' }} </span>
+            <span> {{ row.user_name ? row.user_name : $t('expenses.not_selected') }} </span>
           </template>
         </sw-table-column>
 

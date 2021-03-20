@@ -195,7 +195,7 @@
           <template slot-scope="row">
             <span>{{ $t('customers.contact_name') }}</span>
             <span>
-              {{ row.contact_name ? row.contact_name : 'No Contact Name' }}
+              {{ row.contact_name ? row.contact_name : $t('customers.no_contact_name') }}
             </span>
           </template>
         </sw-table-column>
@@ -208,7 +208,7 @@
           <template slot-scope="row">
             <span>{{ $t('customers.phone') }}</span>
             <span>
-              {{ row.phone ? row.phone : 'No Contact' }}
+              {{ row.phone ? row.phone : $t('customers.no_contact') }}
             </span>
           </template>
         </sw-table-column>

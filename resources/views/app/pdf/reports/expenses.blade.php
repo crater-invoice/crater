@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Expenses Report</title>
+    <title>@lang('pdf_expense_report_label')</title>
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";

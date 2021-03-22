@@ -22,7 +22,8 @@ class EstimateItem extends Model
         'discount_val',
         'tax',
         'total',
-        'discount'
+        'discount',
+        'unit_name',
     ];
 
     protected $casts = [

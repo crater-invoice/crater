@@ -469,7 +469,6 @@ export default {
       isLoadingEstimate: false,
       isLoadingData: false,
       isLoading: false,
-      maxDiscount: 0,
       estimateNumAttribute: null,
       estimatePrefix: null,
       EstimateFields: [

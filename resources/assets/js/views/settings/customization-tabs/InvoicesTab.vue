@@ -74,7 +74,7 @@
 
     <sw-divider class="mt-6 mb-8" />
 
-    <div class="flex">
+    <div class="flex mt-3 mb-4">
       <div class="relative w-12">
         <sw-switch
           v-model="invoiceAutogenerate"
@@ -101,6 +101,33 @@
         </p>
       </div>
     </div>
+    <div class="flex mb-2">
+      <div class="relative w-12">
+        <sw-switch
+          v-model="invoiceAsAttachment"
+          class="absolute"
+          style="top: -20px"
+          @change="setInvoiceSetting"
+        />
+      </div>
+
+      <div class="ml-4">
+        <p class="p-0 mb-1 text-base leading-snug text-black">
+          {{
+            $t('settings.customization.invoices.invoice_email_attachment')
+          }}
+        </p>
+
+        <p
+          class="p-0 m-0 text-xs leading-tight text-gray-500"
+          style="max-width: 480px"
+        >
+          {{
+            $t('settings.customization.invoices.invoice_email_attachment_setting_description')
+          }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -120,6 +147,7 @@ export default {
   data() {
     return {
       invoiceAutogenerate: false,
+      invoiceAsAttachment: false,
 
       invoices: {
         invoice_prefix: null,
@@ -189,6 +217,14 @@ export default {
       } else {
         this.invoiceAutogenerate = false
       }
+
+      this.invoice_email_attachment = val ? val.invoice_email_attachment : ''
+
+      if (this.invoice_email_attachment === 'YES') {
+        this.invoiceAsAttachment = true
+      } else {
+        this.invoiceAsAttachment = false
+      }
     },
   },
 
@@ -209,6 +245,7 @@ export default {
       let data = {
         settings: {
           invoice_auto_generate: this.invoiceAutogenerate ? 'YES' : 'NO',
+          invoice_email_attachment: this.invoiceAsAttachment ? 'YES' : 'NO',
         },
       }
 

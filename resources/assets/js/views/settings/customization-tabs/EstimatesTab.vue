@@ -70,7 +70,7 @@
 
     <sw-divider class="mt-6 mb-8" />
 
-    <div class="flex">
+    <div class="flex mt-3 mb-4">
       <div class="relative w-12">
         <sw-switch
           v-model="estimateAutogenerate"
@@ -96,6 +96,32 @@
         </p>
       </div>
     </div>
+    <div class="flex mb-2">
+      <div class="relative w-12">
+        <sw-switch
+          v-model="estimateAsAttachment"
+          class="absolute"
+          style="top: -20px"
+          @change="setEstimateSetting"
+        />
+      </div>
+      <div class="ml-4">
+        <p class="p-0 mb-1 text-base leading-snug text-black">
+          {{
+            $t('settings.customization.estimates.estimate_email_attachment')
+          }}
+        </p>
+
+        <p
+          class="p-0 m-0 text-xs leading-tight text-gray-500"
+          style="max-width: 480px"
+        >
+          {{
+            $t('settings.customization.estimates.estimate_email_attachment_setting_description')
+          }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -115,6 +141,7 @@ export default {
   data() {
     return {
       estimateAutogenerate: false,
+      estimateAsAttachment: false,
 
       estimates: {
         estimate_prefix: null,
@@ -204,6 +231,14 @@ export default {
       } else {
         this.estimateAutogenerate = false
       }
+
+      this.estimate_email_attachment = val ? val.estimate_email_attachment : ''
+
+      if (this.estimate_email_attachment === 'YES') {
+        this.estimateAsAttachment = true
+      } else {
+        this.estimateAsAttachment = false
+      }
     },
   },
 
@@ -214,6 +249,7 @@ export default {
       let data = {
         settings: {
           estimate_auto_generate: this.estimateAutogenerate ? 'YES' : 'NO',
+          estimate_email_attachment: this.estimateAsAttachment ? 'YES' : 'NO',
         },
       }
       let response = await this.updateCompanySettings(data)

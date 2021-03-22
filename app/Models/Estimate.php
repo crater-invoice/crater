@@ -379,6 +379,7 @@ class Estimate extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = $this->company->toArray();
         $data['body'] = $this->getEmailBody($data['body']);
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         \Mail::to($data['to'])->send(new SendEstimateMail($data));
 
@@ -466,6 +467,17 @@ class Estimate extends Model implements HasMedia
     public function getNotes()
     {
         return $this->getFormattedString($this->notes);
+    }
+
+    public function getEmailAttachmentSetting()
+    {
+        $estimateAsAttachment = CompanySetting::getSetting('estimate_email_attachment', $this->company_id);
+
+        if($estimateAsAttachment == 'NO') {
+            return false;
+        }
+
+        return true;
     }
 
     public function getEmailBody($body)

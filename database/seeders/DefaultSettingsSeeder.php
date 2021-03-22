@@ -60,6 +60,9 @@ class DefaultSettingsSeeder extends Seeder
             'payment_prefix' => 'PAY',
             'payment_auto_generate' => 'YES',
             'save_pdf_to_disk' => 'NO',
+            'invoice_email_attachment' => 'NO',
+            'estimate_email_attachment' => 'NO',
+            'payment_email_attachment' => 'NO',
         ];
 
         CompanySetting::setSettings($settings, $user->company_id);

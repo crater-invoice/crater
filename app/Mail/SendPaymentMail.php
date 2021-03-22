@@ -41,9 +41,16 @@ class SendPaymentMail extends Mailable
             'mailable_id' => $this->data['payment']['id']
         ]);
 
-        return $this->from($this->data['from'], config('mail.from.name'))
+        $mailContent = $this->from($this->data['from'], config('mail.from.name'))
                     ->subject($this->data['subject'])
                     ->markdown('emails.send.payment', ['data', $this->data]);
 
+        if ($this->data['attach']['data'])
+            $mailContent->attachData(
+                $this->data['attach']['data']->output(), 
+                $this->data['payment']['payment_number'] . '.pdf'
+            );
+        
+        return $mailContent;
     }
 }

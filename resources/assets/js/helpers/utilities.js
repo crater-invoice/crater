@@ -256,7 +256,7 @@ export default {
       case 'UNPAID':
         return i18n.t('invoices.unpaid')
       case 'SENT':
-        return i18n.t('general.paid')
+        return i18n.t('general.sent')
       case 'REJECTED':
         return i18n.t('estimates.rejected')
       case 'ACCEPTED':
@@ -266,7 +266,7 @@ export default {
       case 'EXPIRED':
         return i18n.t('estimates.expired')
       case 'PARTIALLY PAID':
-        return i18n.t('estimates.accepted')
+        return i18n.t('estimates.partially_paid')
       case 'OVERDUE':
         return i18n.t('invoices.overdue')
       case 'COMPLETED':

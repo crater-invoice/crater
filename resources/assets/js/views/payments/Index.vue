@@ -202,7 +202,7 @@
           <template slot-scope="row">
             <span>{{ $t('payments.payment_mode') }}</span>
             <span>
-              {{ row.payment_mode ? row.payment_mode : 'Not selected' }}
+              {{ row.payment_mode ? row.payment_mode : $t('payments.not_selected') }}
             </span>
           </template>
         </sw-table-column>
@@ -216,7 +216,7 @@
           <template slot-scope="row">
             <span>{{ $t('invoices.invoice_number') }}</span>
             <span>
-              {{ row.invoice_number ? row.invoice_number : 'No Invoice' }}
+              {{ row.invoice_number ? row.invoice_number : $t('payments.no_invoice') }}
             </span>
           </template>
         </sw-table-column>

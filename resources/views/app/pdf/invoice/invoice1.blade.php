@@ -69,7 +69,6 @@
             padding-left: 30px;
             float: left;
             width: 30%;
-            text-transform: capitalize;
             margin-bottom: 2px;
         }
 

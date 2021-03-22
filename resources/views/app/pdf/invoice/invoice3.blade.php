@@ -42,7 +42,6 @@
         }
         .company-address-container {
             width: 50%;
-            text-transform: capitalize;
             padding-left: 80px;
             margin-bottom: 2px;
         }

@@ -92,19 +92,19 @@ export default {
   data() {
     return {
       dateRange: [
-        'Today',
-        'This Week',
-        'This Month',
-        'This Quarter',
-        'This Year',
-        'Previous Week',
-        'Previous Month',
-        'Previous Quarter',
-        'Previous Year',
-        'Custom',
+        'Dnes',
+        'Tento týždeň',
+        'Tento mesiac',
+        'Tento štvrťrok',
+        'Tento rok',
+        'Minulý týždeň',
+        'Minulý mesiac',
+        'Minulý štvrťrok',
+        'Minulý rok',
+        'Vlastný dátum',
       ],
 
-      selectedRange: 'This Month',
+      selectedRange: 'Tento mesiac',
       range: new Date(),
       formData: {
         from_date: moment().startOf('month').toString(),

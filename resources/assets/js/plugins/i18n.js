@@ -11,6 +11,7 @@ import sr from './sr.json'
 import nl from './nl.json'
 import lv from './lv.json'
 import sv from './sv.json'
+import sk from './sk.json'
 
 Vue.use(VueI18n)
 
@@ -28,6 +29,7 @@ const i18n = new VueI18n({
     nl,
     lv,
     sv,
+    sk,
   },
 })
 

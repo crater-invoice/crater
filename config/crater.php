@@ -22,7 +22,9 @@ return [
         ["code"=>"sr", "name" => "Serbian Latin"],
         ["code"=>"es", "name" => "Spanish"],
         ["code"=>"sv", "name"=> "Svenska"],
+        ["code"=>"sk", "name"=> "Slovak"],
         ["code"=>"vi", "name"=> "Tiếng Việt"]
+
     ],
 
     /*

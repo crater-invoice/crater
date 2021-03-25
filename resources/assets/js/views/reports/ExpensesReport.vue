@@ -65,7 +65,7 @@
       />
 
       <a
-        class="flex items-center justify-center h-10 px-5 py-1 text-sm font-medium leading-none text-center text-white whitespace-no-wrap rounded md:hidden bg-primary-500"
+        class="flex items-center justify-center h-10 px-5 py-1 text-sm font-medium leading-none text-center text-white whitespace-nowrap rounded md:hidden bg-primary-500"
         @click="viewReportsPDF"
       >
         <document-text-icon />

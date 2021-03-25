@@ -39,9 +39,7 @@ class Invoice extends Model implements HasMedia
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
-        'invoice_date',
-        'due_date'
+        'deleted_at'
     ];
 
     protected $casts = [
@@ -431,6 +429,7 @@ class Invoice extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         if ($this->status == Invoice::STATUS_DRAFT) {
             $this->status = Invoice::STATUS_SENT;
@@ -512,16 +511,7 @@ class Invoice extends Model implements HasMedia
 
         $company = Company::find($this->company_id);
 
-        $logo = $company->getMedia('logo')->first();
-
-        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
-        $isLocalhost = config('session.domain') === 'localhost';
-
-        if ($logo && $isLocalhost && $isSystem) {
-            $logo = $logo->getPath();
-        } else if ($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $company->logo_path;
 
         view()->share([
             'invoice' => $this,
@@ -535,6 +525,17 @@ class Invoice extends Model implements HasMedia
         ]);
 
         return PDF::loadView('app.pdf.invoice.' . $invoiceTemplate->view);
+    }
+
+    public function getEmailAttachmentSetting()
+    {
+        $invoiceAsAttachment = CompanySetting::getSetting('invoice_email_attachment', $this->company_id);
+
+        if($invoiceAsAttachment == 'NO') {
+            return false;
+        }
+
+        return true;
     }
 
     public function getCompanyAddress()

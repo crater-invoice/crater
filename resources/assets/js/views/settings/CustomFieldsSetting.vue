@@ -1,6 +1,6 @@
 <template>
   <sw-card variant="setting-card">
-    <div slot="header" class="flex flex-wrap justify-between lg:flex-no-wrap">
+    <div slot="header" class="flex flex-wrap justify-between lg:flex-nowrap">
       <div>
         <h6 class="sw-section-title">
           {{ $t('settings.menu_title.custom_fields') }}

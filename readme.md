@@ -70,6 +70,8 @@ Crater is a product of [Bytefury](https://bytefury.com)
 - [Birkhoff Lee](https://github.com/BirkhoffLee)
 - [Akaunting](https://github.com/akaunting/akaunting)
 - [MakerLab](https://github.com/MakerLab-Dev)
+- [Sebastian Cretu](https://github.com/sebastiancretu)
+- [Florian Gareis](https://github.com/TheZoker)
 
 ## Translate
 

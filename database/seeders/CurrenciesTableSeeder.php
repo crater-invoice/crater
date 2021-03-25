@@ -37,7 +37,8 @@ class CurrenciesTableSeeder extends Seeder
                 'symbol' => '€',
                 'precision' => '2',
                 'thousand_separator' => '.',
-                'decimal_separator' => ','
+                'decimal_separator' => ',',
+                'swap_currency_symbol' => true
             ],
             [
                 'name' => 'South African Rand',
@@ -546,6 +547,22 @@ class CurrenciesTableSeeder extends Seeder
                 'name' => 'Iraqi Dinar',
                 'code' => 'IQD',
                 'symbol' => 'ع.د',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.'
+            ],
+            [
+                'name' => 'Peruvian Soles',
+                'code' => 'PEN',
+                'symbol' => 'S/',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.'
+            ],
+            [
+                'name' => 'Moroccan Dirham',
+                'code' => 'MAD',
+                'symbol' => 'DH',
                 'precision' => '2',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.'

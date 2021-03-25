@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sales Customer Report</title>
+    <title>@lang('pdf_sales_customers_label')</title>
     <style type="text/css">
         body {
             font-family: "DejaVu Sans";

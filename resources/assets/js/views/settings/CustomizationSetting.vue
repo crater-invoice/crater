@@ -59,12 +59,15 @@ export default {
       this.isRequestOnGoing = true
       let res = await this.fetchCompanySettings([
         'payment_auto_generate',
+        'payment_email_attachment',
         'payment_prefix',
         'payment_mail_body',
         'invoice_auto_generate',
+        'invoice_email_attachment',
         'invoice_prefix',
         'invoice_mail_body',
         'estimate_auto_generate',
+        'estimate_email_attachment',
         'estimate_prefix',
         'estimate_mail_body',
         'invoice_billing_address_format',

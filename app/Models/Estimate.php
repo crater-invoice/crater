@@ -33,9 +33,7 @@ class Estimate extends Model implements HasMedia
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
-        'estimate_date',
-        'expiry_date'
+        'deleted_at'
     ];
 
     protected $appends = [
@@ -381,6 +379,7 @@ class Estimate extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = $this->company->toArray();
         $data['body'] = $this->getEmailBody($data['body']);
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         \Mail::to($data['to'])->send(new SendEstimateMail($data));
 
@@ -428,16 +427,7 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
-        $logo = $company->getMedia('logo')->first();
-
-        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
-        $isLocalhost = config('session.domain') === 'localhost';
-
-        if ($logo && $isLocalhost && $isSystem) {
-            $logo = $logo->getPath();
-        } else if ($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $company->logo_path;
 
         view()->share([
             'estimate' => $this,
@@ -477,6 +467,17 @@ class Estimate extends Model implements HasMedia
     public function getNotes()
     {
         return $this->getFormattedString($this->notes);
+    }
+
+    public function getEmailAttachmentSetting()
+    {
+        $estimateAsAttachment = CompanySetting::getSetting('estimate_email_attachment', $this->company_id);
+
+        if($estimateAsAttachment == 'NO') {
+            return false;
+        }
+
+        return true;
     }
 
     public function getEmailBody($body)

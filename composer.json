@@ -8,9 +8,9 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.3",
+        "php": "^7.4 || ^8.0",
         "aws/aws-sdk-php": "^3.142",
-        "barryvdh/laravel-dompdf": "^0.8.1",
+        "barryvdh/laravel-dompdf": "^0.9.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",

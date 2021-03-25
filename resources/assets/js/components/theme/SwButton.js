@@ -13,4 +13,10 @@ export default {
         'inline-flex items-center justify-center text-black transition px-2 duration-150 ease-in-out border border-gray-300 border-solid focus:outline-none bg-white',
     },
   },
+  sizes: {
+    discount: {
+      button: 'py-2 px-2 text-sm leading-5 rounded',
+      loadingIcon: 'w-4 h-4 -ml-2',
+    },
+  },
 }

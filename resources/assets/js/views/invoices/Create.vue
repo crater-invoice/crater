@@ -15,7 +15,7 @@
             to="/admin/invoices"
           />
           <sw-breadcrumb-item
-            v-if="$route.name === 'invoice.edit'"
+            v-if="$route.name === 'invoices.edit'"
             :title="$t('invoices.edit_invoice')"
             to="#"
             active
@@ -211,7 +211,7 @@
           <div class="mb-6">
             <sw-popup
               ref="notePopup"
-              class="text-sm font-semibold leading-5 text-primary-400"
+              class="z-10 text-sm font-semibold leading-5 text-primary-400"
             >
               <div slot="activator" class="float-right mt-1">
                 + {{ $t('general.insert_note') }}
@@ -315,8 +315,8 @@
                 <sw-button
                   slot="activator"
                   type="button"
-                  class="flex items-center justify-center w-12 border border-gray-300 border-solid rounded-tl-none rounded-bl-none font-base"
                   data-toggle="dropdown"
+                  size="discount"
                   aria-haspopup="true"
                   aria-expanded="false"
                   style="height: 43px"
@@ -565,23 +565,27 @@ export default {
     },
 
     totalSimpleTax() {
-      return window._.sumBy(this.newInvoice.taxes, function (tax) {
-        if (!tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.newInvoice.taxes, function (tax) {
+          if (!tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
 
     totalCompoundTax() {
-      return window._.sumBy(this.newInvoice.taxes, function (tax) {
-        if (tax.compound_tax) {
-          return tax.amount
-        }
+      return Math.round(
+        window._.sumBy(this.newInvoice.taxes, function (tax) {
+          if (tax.compound_tax) {
+            return tax.amount
+          }
 
-        return 0
-      })
+          return 0
+        })
+      )
     },
 
     totalTax() {
@@ -589,9 +593,11 @@ export default {
         return this.totalSimpleTax + this.totalCompoundTax
       }
 
-      return window._.sumBy(this.newInvoice.items, function (tax) {
-        return tax.tax
-      })
+      return Math.round(
+        window._.sumBy(this.newInvoice.items, function (tax) {
+          return tax.tax
+        })
+      )
     },
 
     allTaxes() {
@@ -951,12 +957,15 @@ export default {
       let amount = 0
 
       if (selectedTax.compound_tax && this.subtotalWithDiscount) {
-        amount =
+        amount = Math.round(
           ((this.subtotalWithDiscount + this.totalSimpleTax) *
             selectedTax.percent) /
-          100
+            100
+        )
       } else if (this.subtotalWithDiscount && selectedTax.percent) {
-        amount = (this.subtotalWithDiscount * selectedTax.percent) / 100
+        amount = Math.round(
+          (this.subtotalWithDiscount * selectedTax.percent) / 100
+        )
       }
 
       this.newInvoice.taxes.push({

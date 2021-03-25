@@ -20,8 +20,8 @@
           </sw-dropdown-item>
 
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/payments/${$route.params.id}/edit`"
+            tag-name="router-link"
           >
             <pencil-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('general.edit') }}
@@ -68,10 +68,10 @@
             <sw-dropdown-item class="flex cursor-pointer">
               <sw-input-group class="-mt-3 font-normal">
                 <sw-radio
-                  :label="$t('invoices.title')"
-                  size="sm"
                   id="filter_invoice_number"
+                  :label="$t('invoices.title')"
                   v-model="searchData.orderByField"
+                  size="sm"
                   name="filter"
                   value="invoice_number"
                   @change="onSearch"
@@ -82,10 +82,10 @@
             <sw-dropdown-item class="flex cursor-pointer">
               <sw-input-group class="-mt-3 font-normal">
                 <sw-radio
-                  :label="$t('payments.date')"
-                  size="sm"
                   id="filter_payment_date"
+                  :label="$t('payments.date')"
                   v-model="searchData.orderByField"
+                  size="sm"
                   name="filter"
                   value="payment_date"
                   @change="onSearch"
@@ -109,8 +109,8 @@
           </sw-dropdown>
 
           <sw-button
-            class="ml-1"
             v-tooltip.top-center="{ content: getOrderName }"
+            class="ml-1"
             size="md"
             variant="gray-light"
             @click="sortData"
@@ -162,7 +162,7 @@
             </div>
           </div>
 
-          <div class="flex-1 whitespace-no-wrap right">
+          <div class="flex-1 whitespace-nowrap right">
             <div
               class="mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
               v-html="$utils.formatMoney(payment.amount, payment.user.currency)"

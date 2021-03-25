@@ -31,7 +31,7 @@ class Payment extends Model implements HasMedia
     const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at', 'payment_date'];
+    protected $dates = ['created_at', 'updated_at'];
 
     protected $guarded = ['id'];
 
@@ -124,6 +124,7 @@ class Payment extends Model implements HasMedia
         $data['user'] = $this->user->toArray();
         $data['company'] = Company::find($this->company_id);
         $data['body'] = $this->getEmailBody($data['body']);
+        $data['attach']['data'] = ($this->getEmailAttachmentSetting()) ? $this->getPDFData() : null;  
 
         \Mail::to($data['to'])->send(new SendPaymentMail($data));
 
@@ -216,10 +217,10 @@ class Payment extends Model implements HasMedia
         }
 
         $payment = Payment::with([
-                'user',
-                'invoice',
-                'paymentMethod',
-            ])
+            'user',
+            'invoice',
+            'paymentMethod',
+        ])
             ->find($this->id);
 
         return $payment;
@@ -268,7 +269,7 @@ class Payment extends Model implements HasMedia
     {
         // Get the last created order
         $payment = Payment::where('payment_number', 'LIKE', $value . '-%')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('payment_number', 'desc')
             ->first();
         if (!$payment) {
             // We get here if there is no order at all
@@ -373,16 +374,7 @@ class Payment extends Model implements HasMedia
     {
         $company = Company::find($this->company_id);
 
-        $logo = $company->getMedia('logo')->first();
-
-        $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
-        $isLocalhost = config('session.domain') === 'localhost';
-
-        if ($logo && $isLocalhost && $isSystem) {
-            $logo = $logo->getPath();
-        } else if($logo) {
-            $logo = $logo->getFullUrl();
-        }
+        $logo = $company->logo_path;
 
         view()->share([
             'payment' => $this,
@@ -407,6 +399,17 @@ class Payment extends Model implements HasMedia
         $format = CompanySetting::getSetting('payment_from_customer_address_format', $this->company_id);
 
         return $this->getFormattedString($format);
+    }
+
+    public function getEmailAttachmentSetting()
+    {
+        $paymentAsAttachment = CompanySetting::getSetting('payment_email_attachment', $this->company_id);
+
+        if($paymentAsAttachment == 'NO') {
+            return false;
+        }
+
+        return true;
     }
 
     public function getNotes()

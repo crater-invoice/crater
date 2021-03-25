@@ -9,7 +9,7 @@
           {{ $t('general.you_got_lost') }}
         </h5>
         <router-link
-          class="flex items-center w-32 h-12 px-2 py-1 text-base font-medium leading-none text-center text-white whitespace-no-wrap rounded bg-primary-500 btn-lg hover:text-white"
+          class="flex items-center w-32 h-12 px-2 py-1 text-base font-medium leading-none text-center text-white whitespace-nowrap rounded bg-primary-500 btn-lg hover:text-white"
           to="/admin/dashboard"
         >
           <arrow-left-icon class="mr-2 text-white icon" />

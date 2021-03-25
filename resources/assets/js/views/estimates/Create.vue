@@ -218,7 +218,7 @@
           <div class="mb-6">
             <sw-popup
               ref="notePopup"
-              class="text-sm font-semibold leading-5 text-primary-400"
+              class="z-10 text-sm font-semibold leading-5 text-primary-400"
             >
               <div slot="activator" class="float-right mt-1">
                 + {{ $t('general.insert_note') }}
@@ -322,8 +322,8 @@
                 <sw-button
                   slot="activator"
                   type="button"
-                  class="flex items-center justify-center w-12 border border-gray-300 border-solid rounded-tl-none rounded-bl-none font-base"
                   data-toggle="dropdown"
+                  size="discount"
                   aria-haspopup="true"
                   aria-expanded="false"
                   style="height: 43px"
@@ -469,7 +469,6 @@ export default {
       isLoadingEstimate: false,
       isLoadingData: false,
       isLoading: false,
-      maxDiscount: 0,
       estimateNumAttribute: null,
       estimatePrefix: null,
       EstimateFields: [
@@ -954,12 +953,15 @@ export default {
       let amount = 0
 
       if (selectedTax.compound_tax && this.subtotalWithDiscount) {
-        amount =
+        amount = Math.round(
           ((this.subtotalWithDiscount + this.totalSimpleTax) *
             selectedTax.percent) /
-          100
+            100
+        )
       } else if (this.subtotalWithDiscount && selectedTax.percent) {
-        amount = (this.subtotalWithDiscount * selectedTax.percent) / 100
+        amount = Math.round(
+          (this.subtotalWithDiscount * selectedTax.percent) / 100
+        )
       }
 
       this.newEstimate.taxes.push({
@@ -972,7 +974,7 @@ export default {
         amount,
       })
 
-      if (this.$$refs) {
+      if (this.$refs) {
         this.$refs.taxModal.close()
       }
     },

@@ -63,7 +63,7 @@
 
     <sw-divider class="mt-6 mb-8" />
 
-    <div class="flex">
+    <div class="flex mt-3 mb-4">
       <div class="relative w-12">
         <sw-switch
           v-model="paymentAutogenerate"
@@ -90,6 +90,33 @@
         </p>
       </div>
     </div>
+    <div class="flex mb-2">
+      <div class="relative w-12">
+        <sw-switch
+          v-model="paymentAsAttachment"
+          class="absolute"
+          style="top: -20px"
+          @change="setPaymentSetting"
+        />
+      </div>
+
+      <div class="ml-4">
+        <p class="p-0 mb-1 text-base leading-snug text-black">
+          {{
+            $t('settings.customization.payments.payment_email_attachment')
+          }}
+        </p>
+
+        <p
+          class="p-0 m-0 text-xs leading-tight text-gray-500"
+          style="max-width: 480px"
+        >
+          {{
+            $t('settings.customization.payments.payment_email_attachment_setting_description')
+          }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -108,6 +135,7 @@ export default {
   data() {
     return {
       paymentAutogenerate: false,
+      paymentAsAttachment: false,
 
       payments: {
         payment_prefix: null,
@@ -184,6 +212,14 @@ export default {
       } else {
         this.paymentAutogenerate = false
       }
+
+      this.payment_email_attachment = val ? val.payment_email_attachment : ''
+
+      if (this.payment_email_attachment === 'YES') {
+        this.paymentAsAttachment = true
+      } else {
+        this.paymentAsAttachment = false
+      }
     },
   },
 
@@ -203,6 +239,7 @@ export default {
       let data = {
         settings: {
           payment_auto_generate: this.paymentAutogenerate ? 'YES' : 'NO',
+          payment_email_attachment: this.paymentAsAttachment ? 'YES' : 'NO',
         },
       }
       let response = await this.updateCompanySettings(data)

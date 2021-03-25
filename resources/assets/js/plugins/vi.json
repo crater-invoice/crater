@@ -39,7 +39,7 @@
         "home": "Trang Chủ",
         "filter": "Bộ lọc",
         "delete": "Xóa bỏ",
-        "edit": "Biên tập",
+        "edit": "Chỉnh sửa",
         "view": "Lượt xem",
         "add_new_item": "Thêm mục mới",
         "clear_all": "Làm sạch tất cả",
@@ -271,7 +271,7 @@
         "mark_as_sent_successfully": "Ước tính được đánh dấu là đã gửi thành công",
         "send_estimate_successfully": "Ước tính đã được gửi thành công",
         "errors": {
-            "required": "Lĩnh vực được yêu cầu"
+            "required": "Trường không được bỏ trống."
         },
         "accepted": "Đã được chấp nhận",
         "rejected": "Từ chối",
@@ -296,7 +296,7 @@
         "updated_message": "Đã cập nhật ước tính thành công",
         "deleted_message": "Đã xóa ước tính thành công | Đã xóa ước tính thành công",
         "user_email_does_not_exist": "Email người dùng không tồn tại",
-        "something_went_wrong": "có gì đó không ổn",
+        "something_went_wrong": "Có gì đó không ổn",
         "item": {
             "title": "Danh mục",
             "description": "Miêu tả",
@@ -451,7 +451,7 @@
         "confirm_send_payment": "Khoản thanh toán này sẽ được gửi qua email cho khách hàng",
         "send_payment_successfully": "Thanh toán đã được gửi thành công",
         "user_email_does_not_exist": "Email người dùng không tồn tại",
-        "something_went_wrong": "có gì đó không ổn",
+        "something_went_wrong": "Có gì đó không ổn",
         "confirm_delete": "Bạn sẽ không thể khôi phục Thanh toán này | Bạn sẽ không thể khôi phục các Khoản thanh toán này",
         "created_message": "Thanh toán được tạo thành công",
         "updated_message": "Đã cập nhật thanh toán thành công",

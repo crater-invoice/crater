@@ -751,6 +751,7 @@
         "title": "Invoices",
         "notes": "Notes",
         "invoice_prefix": "Invoice Prefix",
+        "invoice_number_length": "Invoice number length",
         "default_invoice_email_body": "Default Invoice Email Body",
         "invoice_settings": "Invoice Settings",
         "autogenerate_invoice_number": "Auto-generate Invoice Number",
@@ -767,6 +768,7 @@
       "estimates": {
         "title": "Estimates",
         "estimate_prefix": "Estimate Prefix",
+        "estimate_number_length": "Estimate number length",
         "default_estimate_email_body": "Default Estimate Email Body",
         "estimate_settings": "Estimate Settings",
         "autogenerate_estimate_number": "Auto-generate Estimate Number",
@@ -783,6 +785,7 @@
         "title": "Payments",
         "description": "Modes of transaction for payments",
         "payment_prefix": "Payment Prefix",
+        "payment_number_length": "Payment number lenght",
         "default_payment_email_body": "Default Payment Email Body",
         "payment_settings": "Payment Settings",
         "autogenerate_payment_number": "Auto-generate Payment Number",
@@ -1148,7 +1151,8 @@
     "address_maxlength": "Address should not be greater than 255 characters.",
     "ref_number_maxlength": "Ref Number should not be greater than 255 characters.",
     "prefix_maxlength": "Prefix should not be greater than 5 characters.",
-    "something_went_wrong": "something went wrong"
+    "something_went_wrong": "something went wrong",
+    "number_length_minvalue": "Number lenght should be greater than 0"
   },
   "pdf_estimate_label": "Estimate",
   "pdf_estimate_number": "Estimate Number",

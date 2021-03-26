@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\EstimateTemplate;
 use Crater\Models\Company;
 use Crater\Models\Tax;
@@ -431,6 +432,10 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
+        $locale = CompanySetting::getSetting('language',  $company->id);
+
+        App::setLocale($locale);
+
         $logo = $company->logo_path;
 
         view()->share([

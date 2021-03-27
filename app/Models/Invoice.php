@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
@@ -513,6 +514,9 @@ class Invoice extends Model implements HasMedia
         $invoiceTemplate = InvoiceTemplate::find($this->invoice_template_id);
 
         $company = Company::find($this->company_id);
+        $locale = CompanySetting::getSetting('language',  $company->id);
+
+        App::setLocale($locale);
 
         $logo = $company->logo_path;
 

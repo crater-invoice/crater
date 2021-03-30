@@ -750,6 +750,7 @@
         "title": "Rechnungen",
         "notes": "Hinweise",
         "invoice_prefix": "Rechnung Präfix",
+        "invoice_number_length": "Rechnungsnummerlänge",
         "default_invoice_email_body": "Standard Rechnung E-Mail Inhalt",
         "invoice_settings": "Rechnungseinstellungen",
         "autogenerate_invoice_number": "Rechnungsnummer automatisch generieren",
@@ -764,6 +765,7 @@
       "estimates": {
         "title": "Kostenvoranschläge",
         "estimate_prefix": "Kostenvoranschlag Präfix",
+        "estimate_number_length": "Angebotsnummerlänge",
         "default_estimate_email_body": "Rechnung - E-Mail Text",
         "estimate_settings": "Einstellungen Kostenvoranschlag",
         "autogenerate_estimate_number": "Kostenvoranschlagsnummer automatisch generieren",
@@ -778,6 +780,7 @@
         "title": "Zahlungen",
         "description": "Transaktionsmodi für Zahlungen",
         "payment_prefix": "Zahlung Präfix",
+        "payment_number_length": "Zahlungsnummerlänge",
         "default_payment_email_body": "Zahlung - E-Mail Text",
         "payment_settings": "Zahlung Einstellungen",
         "autogenerate_payment_number": "Zahlungsnummer automatisch generieren",
@@ -1139,7 +1142,8 @@
     "address_maxlength": "Die Adresse sollte nicht länger als 255 Zeichen sein.",
     "ref_number_maxlength": "Ref Number sollte nicht länger als 255 Zeichen sein.",
     "prefix_maxlength": "Das Präfix sollte nicht länger als 5 Zeichen sein.",
-    "something_went_wrong": "Da ist etwas schief gelaufen"
+    "something_went_wrong": "Da ist etwas schief gelaufen",
+    "number_length_minvalue": "Nummernlänge sollte größer als 0 sein"
   },
   "pdf_estimate_label": "Kostenvoranschlag",
   "pdf_estimate_number": "Kostenvoran. Nummer",

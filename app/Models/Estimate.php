@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\EstimateTemplate;
 use Crater\Models\Company;
 use Crater\Models\Tax;
@@ -78,6 +79,10 @@ class Estimate extends Model implements HasMedia
             ->orderBy('estimate_number', 'desc')
             ->first();
 
+        // Get number length config
+        $numberLength = CompanySetting::getSetting('estimate_number_length', request()->header('company'));
+        $numberLengthText = "%0{$numberLength}d";
+
         if (!$lastOrder) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
@@ -94,7 +99,7 @@ class Estimate extends Model implements HasMedia
         // the %05d part makes sure that there are always 6 numbers in the string.
         // so it adds the missing zero's when needed.
 
-        return sprintf('%06d', intval($number) + 1);
+        return sprintf($numberLengthText, intval($number) + 1);
     }
 
     public function emailLogs()
@@ -427,6 +432,10 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
+        $locale = CompanySetting::getSetting('language',  $company->id);
+
+        App::setLocale($locale);
+
         $logo = $company->logo_path;
 
         view()->share([

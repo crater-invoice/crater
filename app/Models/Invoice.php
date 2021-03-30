@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
@@ -82,6 +83,9 @@ class Invoice extends Model implements HasMedia
             ->orderBy('invoice_number', 'desc')
             ->first();
 
+        // Get number length config
+        $numberLength = CompanySetting::getSetting('invoice_number_length', request()->header('company'));
+        $numberLengthText = "%0{$numberLength}d";
 
         if (!$lastOrder) {
             // We get here if there is no order at all
@@ -98,7 +102,7 @@ class Invoice extends Model implements HasMedia
         // the %06d part makes sure that there are always 6 numbers in the string.
         // so it adds the missing zero's when needed.
 
-        return sprintf('%06d', intval($number) + 1);
+        return sprintf($numberLengthText, intval($number) + 1);
     }
 
     public function emailLogs()
@@ -510,6 +514,9 @@ class Invoice extends Model implements HasMedia
         $invoiceTemplate = InvoiceTemplate::find($this->invoice_template_id);
 
         $company = Company::find($this->company_id);
+        $locale = CompanySetting::getSetting('language',  $company->id);
+
+        App::setLocale($locale);
 
         $logo = $company->logo_path;
 

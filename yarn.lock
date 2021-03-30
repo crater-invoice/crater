@@ -908,10 +908,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bytefury/spacewind@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@bytefury/spacewind/-/spacewind-0.5.0.tgz#ce09cd8dc586e3c99155b8dc828e19f2836b864d"
-  integrity sha512-5tDrrR3+YtXKIjKFpWCSurDdtNG0uz9svUHBR9JoP5dtoVwuOITObMygisOKABFkFUiL9dQb+0Pg+oVdDPK97w==
+"@bytefury/spacewind@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@bytefury/spacewind/-/spacewind-0.5.3.tgz#4f20f445a4d84005080e7f40f4a8458930ae4a4d"
+  integrity sha512-wvYytoM1n5OQsxmkBtUorxkOl8iCaO0tIrpNH/383U5btylt1nFDI5TUG1mbN5fdFphHx2R0XZTU/MjCeos5nQ==
   dependencies:
     "@popperjs/core" "^2.5.3"
     autoprefixer "^10.2.3"
@@ -926,8 +926,8 @@
     v-tooltip "^2.0.3"
     vue "^2.6.11"
     vue-avatar-cropper "^1.0.7"
+    vue-click-outside "^1.1.0"
     vue-flatpickr-component "^8.1.6"
-    vue-outside-events "^1.1.3"
     vue2-dropzone "^3.6.0"
 
 "@discoveryjs/json-ext@^0.5.0":
@@ -7975,6 +7975,11 @@ vue-avatar-cropper@^1.0.7:
   resolved "https://registry.yarnpkg.com/vue-avatar-cropper/-/vue-avatar-cropper-1.0.9.tgz#b4e04cdb407fe16d159a7b2d0db6cb170ab1bf80"
   integrity sha512-qTHlx+PLtU/iZc9Pu6muP2hGrBbL0CpaBDGsenRvS7qKDsV/WzWQSM8z8CD5XpBWXm7l2toNAYwkhmWepk0YMg==
 
+vue-click-outside@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.1.0.tgz#48b7680b518923e701643cccb3e165854aad99eb"
+  integrity sha512-pNyvAA9mRXJwPHlHJyjMb4IONSc7khS5lxGcMyE2EIKgNMAO279PWM9Hyq0d5J4FkiSRdmFLwnbjDd5UtPizHQ==
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -8014,11 +8019,6 @@ vue-loader@^15.9.3:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-outside-events@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/vue-outside-events/-/vue-outside-events-1.1.3.tgz#75b3e3b7856590fbe4455c87075b54f92b2a9654"
-  integrity sha512-8FZqTRy3JUd1L/CFDoUPpuk4uM3piWFX1EixgKp4E3iOwDZfDHZVsnPYORbazs41XFB5u1EVPUOzbrR8iI4ImQ==
 
 vue-resize@^1.0.0:
   version "1.0.0"

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="updateCompanyData" class="relative h-full">
+  <form class="relative h-full" @submit.prevent="updateCompanyData">
     <base-loader v-if="isRequestOnGoing" :show-bg-overlay="true" />
     <sw-card variant="setting-card">
       <template slot="header">
@@ -41,8 +41,8 @@
           </div>
 
           <sw-avatar
-            trigger="#logo-box"
             :preview-avatar="previewLogo"
+            trigger="#logo-box"
             @changed="onChange"
             @uploadHandler="onUploadHandler"
             @handleUploadError="onHandleUploadError"
@@ -74,8 +74,8 @@
         <sw-input-group :label="$tc('settings.company_info.phone')">
           <sw-input
             v-model="formData.phone"
-            class="mt-2"
             :placeholder="$t('settings.company_info.phone')"
+            class="mt-2"
           />
         </sw-input-group>
 
@@ -153,9 +153,9 @@
       </div>
 
       <sw-button
-        class="mt-4"
         :loading="isLoading"
         :disabled="isLoading"
+        class="mt-4"
         variant="primary"
       >
         <save-icon v-if="!isLoading" class="mr-2 -ml-1" />
@@ -269,13 +269,17 @@ export default {
   methods: {
     ...mapActions('company', ['updateCompany', 'updateCompanyLogo']),
     ...mapActions('user', ['fetchCurrentUser']),
+    ...mapActions('notification', ['showNotification']),
     onUploadHandler(cropper) {
       this.previewLogo = cropper
         .getCroppedCanvas()
         .toDataURL(this.cropperOutputMime)
     },
     onHandleUploadError() {
-      window.toastr['error']('Oops! Something went wrong...')
+      this.showNotification({
+        type: 'error',
+        message: 'Oops! Something went wrong...',
+      })
     },
     onChange(file) {
       this.cropperOutputMime = file.type
@@ -322,13 +326,17 @@ export default {
           await this.updateCompanyLogo(logoData)
         }
         this.isLoading = false
-        window.toastr['success'](
-          this.$t('settings.company_info.updated_message')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t('settings.company_info.updated_message'),
+        })
         return true
       }
       this.isLoading = false
-      window.toastr['error'](response.data.error)
+      this.showNotification({
+        type: 'error',
+        message: response.data.error,
+      })
       return true
     },
   },

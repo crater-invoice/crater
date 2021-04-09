@@ -8,6 +8,8 @@ import money from 'v-money'
 import VTooltip from 'v-tooltip'
 import Transitions from 'vue2-transitions'
 import SpaceWind from '@bytefury/spacewind'
+import swal from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 /**
  * Theme
@@ -21,6 +23,33 @@ import theme from './components/theme'
 Vue.use(SpaceWind, { theme })
 
 Vue.use(Vuelidate)
+
+Vue.use(swal, {
+  customClass: {
+    container:
+      'fixed z-50 inset-0 overflow-y-auto bg-black bg-opacity-25 flex justify-center min-h-screen items-center sm:p-0 swal2-container',
+    popup:
+      'flex items-center flex-col justify-center align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6',
+    header: 'swal2-header',
+    title: 'swal2-title',
+    closeButton: '',
+    icon: 'swal2-icon',
+    image: '',
+    content: 'swal2-content',
+    input: '',
+    inputLabel: '',
+    validationMessage: '',
+    actions: 'swal2-actions',
+    confirmButton:
+      'w-full inline-flex py-2 px-4 text-sm leading-5 rounded items-center justify-center text-white font-normal transition duration-150 ease-in-out border border-transparent focus:outline-none bg-primary-500 hover:bg-opacity-75 whitespace-nowrap',
+    denyButton: '',
+    cancelButton:
+      'w-full inline-flex py-2 px-4 text-sm leading-5 rounded justify-center items-center focus:outline-none font-normal transition ease-in-out duration-150 border border-transparent border border-solid border-primary-500 text-primary-500 hover:bg-primary-200 shadow-inner whitespace-nowrap',
+    loader: '',
+    footer: '',
+  },
+  buttonsStyling: false,
+})
 
 Vue.use(Transitions)
 
@@ -89,10 +118,11 @@ global.axios.interceptors.response.use(undefined, function (err) {
     return true
   }
   if (!err.response) {
-    window.toastr['error'](
-      'Please check your internet connection or wait until servers are back online',
-      'Network Error'
-    )
+    store.dispatch('notification/showNotification', {
+      type: 'error',
+      message:
+        'Please check your internet connection or wait until servers are back online.',
+    })
   } else {
     if (
       err.response.data &&
@@ -100,24 +130,30 @@ global.axios.interceptors.response.use(undefined, function (err) {
         err.response.data === ' Unauthorized.')
     ) {
       // Unauthorized and log out
-      window.toastr['error'](
-        err.response.data.message ? err.response.data.message : 'Unauthorized'
-      )
+      store.dispatch('notification/showNotification', {
+        type: 'error',
+        message: err.response.data.message
+          ? err.response.data.message
+          : 'Unauthorized',
+      })
       store.dispatch('auth/logout', true)
     } else if (err.response.data.errors) {
       // Show a notification per error
       const errors = JSON.parse(JSON.stringify(err.response.data.errors))
       for (const i in errors) {
-        window.toastr['error'](errors[i])
+        store.dispatch('notification/showNotification', {
+          type: 'error',
+          message: errors[i],
+        })
       }
     } else {
       // Unknown error
-      window.toastr['error'](
-        err.response.data.message
+      store.dispatch('notification/showNotification', {
+        type: 'error',
+        message: err.response.data.message
           ? err.response.data.message
           : err.response.data || 'Unknown error occurred',
-        'Error'
-      )
+      })
     }
   }
   return Promise.reject(err)
@@ -126,8 +162,6 @@ global.axios.interceptors.response.use(undefined, function (err) {
 /**
  * Global plugins
  */
-window.toastr = require('toastr')
-
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VTooltip)

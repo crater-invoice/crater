@@ -41,7 +41,7 @@
       >
         {{ $t('general.cancel') }}
       </sw-button>
-      <sw-button variant="primary" type="submit" :loading="isLoading">
+      <sw-button :loading="isLoading" variant="primary" type="submit">
         <save-icon v-if="!isLoading" class="mr-2" />
         {{ !isEdit ? $t('general.save') : $t('general.update') }}
       </sw-button>
@@ -135,6 +135,8 @@ export default {
   methods: {
     ...mapActions('modal', ['closeModal']),
     ...mapActions('category', ['addCategory', 'updateCategory']),
+    ...mapActions('notification', ['showNotification']),
+
     resetFormData() {
       this.formData = {
         id: null,
@@ -159,13 +161,15 @@ export default {
 
       if (response.data) {
         if (!this.isEdit) {
-          window.toastr['success'](
-            this.$t('settings.expense_category.created_message')
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.expense_category.created_message'),
+          })
         } else {
-          window.toastr['success'](
-            this.$t('settings.expense_category.updated_message')
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.expense_category.updated_message'),
+          })
         }
         window.hub.$emit('newCategory', response.data.category)
         this.refreshData ? this.refreshData() : ''
@@ -173,7 +177,10 @@ export default {
         this.isLoading = false
         return true
       }
-      window.toastr['error'](response.data.error)
+      this.showNotification({
+        type: 'error',
+        message: response.data.error,
+      })
     },
     async setData() {
       this.formData = {

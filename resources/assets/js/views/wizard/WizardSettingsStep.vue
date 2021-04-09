@@ -211,6 +211,7 @@ export default {
   },
   methods: {
     ...mapActions('company', ['updateCompanySettings', 'setSelectedCompany']),
+    ...mapActions('notification', ['showNotification']),
     ...mapActions([
       'fetchLanguages',
       'fetchCurrencies',
@@ -288,7 +289,10 @@ export default {
 
       if (response.data) {
         this.$emit('next', 'COMPLETED')
-        window.toastr['success']('Login Successful')
+        this.showNotification({
+          type: 'success',
+          message: 'Login Successful',
+        })
         this.$router.push('/admin/dashboard')
       }
     },

@@ -98,16 +98,16 @@
             <sw-dropdown slot-scope="row">
               <dot-icon slot="activator" />
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`invoices/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`invoices/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('invoices.view') }}
@@ -227,16 +227,16 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`estimates/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`estimates/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.view') }}
@@ -350,6 +350,8 @@ export default {
       'convertToInvoice',
     ]),
 
+    ...mapActions('notification', ['showNotification']),
+
     ...mapActions('estimate', {
       sendEstimateEmail: 'sendEmail',
       markEstimateAsSent: 'markAsSent',
@@ -362,25 +364,32 @@ export default {
 
     async removeEstimate(id) {
       this.id = id
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$tc('estimates.confirm_delete', 1),
-          icon: '/assets/icon/trash-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willDelete) => {
-          if (willDelete) {
-            let res = await this.deleteEstimate({ ids: [this.id] })
-            if (res.data.success) {
-              window.toastr['success'](this.$tc('estimates.deleted_message', 1))
-              this.refreshEstTable()
-            } else if (res.data.error) {
-              window.toastr['error'](res.data.message)
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$tc('estimates.confirm_delete', 1),
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          let res = await this.deleteEstimate({ ids: [this.id] })
+          if (res.data.success) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.deleted_message', 1),
+            })
+            this.refreshEstTable()
+          } else if (res.data.error) {
+            this.showToaster({
+              type: 'error',
+              message: res.data.message,
+            })
           }
-        })
+        }
+      })
     },
 
     refreshInvTable() {
@@ -392,229 +401,355 @@ export default {
     },
 
     async convertInToinvoice(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_conversion'),
-          icon: '/assets/icon/file-alt-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willDelete) => {
-          if (willDelete) {
-            let res = await this.convertToInvoice(id)
-            this.selectAllField = false
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_conversion'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            viewBox="0 0 384 512"
+            class="w-6 h-6"
+            data-prefix="fas"
+            data-icon="file-alt"
+            class="svg-inline--fa fa-file-alt fa-w-12"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="#55547A"
+              d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          let res = await this.convertToInvoice(id)
+          this.selectAllField = false
 
-            if (res.data) {
-              window.toastr['success'](this.$t('estimates.conversion_message'))
-              this.$router.push(`invoices/${res.data.invoice.id}/edit`)
-            } else if (res.data.error) {
-              window.toastr['error'](res.data.message)
-            }
+          if (res.data) {
+            this.showToaster({
+              type: 'success',
+              message: this.$t('estimates.conversion_message'),
+            })
+            this.$router.push(`invoices/${res.data.invoice.id}/edit`)
+          } else if (res.data.error) {
+            this.showToaster({
+              type: 'error',
+              message: res.data.message,
+            })
           }
-        })
+        }
+      })
     },
 
     async onMarkAsSent(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_mark_as_sent'),
-          icon: '/assets/icon/check-circle-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willMarkAsSent) => {
-          if (willMarkAsSent) {
-            const data = {
-              id: id,
-              status: 'SENT',
-            }
-
-            let response = await this.markEstimateAsSent(data)
-            this.refreshEstTable()
-
-            if (response.data) {
-              window.toastr['success'](
-                this.$tc('estimates.mark_as_sent_successfully')
-              )
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_sent'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
+            status: 'SENT',
           }
-        })
+
+          let response = await this.markEstimateAsSent(data)
+          this.refreshEstTable()
+
+          if (response.data) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.mark_as_sent_successfully'),
+            })
+          }
+        }
+      })
     },
 
     async removeInvoice(id) {
       this.id = id
       window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$tc('invoices.confirm_delete'),
-          icon: '/assets/icon/trash-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willDelete) => {
-          if (willDelete) {
-            let res = await this.deleteInvoice({ ids: [this.id] })
-            if (res.data.success) {
-              window.toastr['success'](this.$tc('invoices.deleted_message'))
-              this.refreshInvTable()
-            } else if (res.data.error) {
-              window.toastr['error'](res.data.message)
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$tc('invoices.confirm_delete'),
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          let res = await this.deleteInvoice({ ids: [this.id] })
+          if (res.data.success) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('invoices.deleted_message'),
+            })
+            this.refreshInvTable()
+          } else if (res.data.error) {
+            this.showToaster({
+              type: 'error',
+              message: res.data.message,
+            })
           }
-        })
+        }
+      })
     },
 
     async sendInvoice(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('invoices.confirm_send'),
-          icon: '/assets/icon/paper-plane-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willSendInvoice) => {
-          if (willSendInvoice) {
-            const data = {
-              id: id,
-            }
-            let response = await this.sendEmail(data)
-            this.refreshInvTable()
-
-            if (response.data.success) {
-              window.toastr['success'](
-                this.$tc('invoices.send_invoice_successfully')
-              )
-              return true
-            }
-
-            if (response.data.error === 'user_email_does_not_exist') {
-              window.toastr['error'](
-                this.$tc('invoices.user_email_does_not_exist')
-              )
-              return false
-            }
-            window.toastr['error'](this.$tc('invoices.something_went_wrong'))
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.confirm_send'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            focusable="false"
+            class="w-6 h-6"
+            data-prefix="fas"
+            data-icon="paper-plane"
+            class="svg-inline--fa fa-paper-plane fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
           }
-        })
+          let response = await this.sendEmail(data)
+          this.refreshInvTable()
+
+          if (response.data.success) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('invoices.send_invoice_successfully'),
+            })
+            return true
+          }
+
+          if (response.data.error === 'user_email_does_not_exist') {
+            this.showToaster({
+              type: 'error',
+              message: this.$tc('invoices.user_email_does_not_exist'),
+            })
+            return false
+          }
+          this.showToaster({
+            type: 'error',
+            message: this.$tc('invoices.something_went_wrong'),
+          })
+        }
+      })
     },
 
     async sentInvoice(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('invoices.invoice_mark_as_sent'),
-          icon: '/assets/icon/check-circle-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willMarkAsSend) => {
-          if (willMarkAsSend) {
-            const data = {
-              id: id,
-              status: 'SENT',
-            }
-            let response = await this.markAsSent(data)
-
-            this.refreshInvTable()
-            if (response.data) {
-              window.toastr['success'](
-                this.$tc('invoices.mark_as_sent_successfully')
-              )
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('invoices.invoice_mark_as_sent'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
+            status: 'SENT',
           }
-        })
+          let response = await this.markAsSent(data)
+
+          this.refreshInvTable()
+          if (response.data) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('invoices.mark_as_sent_successfully'),
+            })
+          }
+        }
+      })
     },
 
     async onMarkAsAccepted(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_mark_as_accepted'),
-          icon: '/assets/icon/check-circle-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (markedAsRejected) => {
-          if (markedAsRejected) {
-            const data = {
-              id: id,
-            }
-            let response = await this.markAsAccepted(data)
-            this.refreshEstTable()
-
-            if (response.data) {
-              this.refreshEstTable()
-              window.toastr['success'](
-                this.$tc('estimates.marked_as_accepted_message')
-              )
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_accepted'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
           }
-        })
+          let response = await this.markAsAccepted(data)
+          this.refreshEstTable()
+
+          if (response.data) {
+            this.refreshEstTable()
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.marked_as_accepted_message'),
+            })
+          }
+        }
+      })
     },
 
     async onMarkAsRejected(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_mark_as_rejected'),
-          icon: '/assets/icon/times-circle-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (markedAsRejected) => {
-          if (markedAsRejected) {
-            const data = {
-              id: id,
-            }
-            let response = await this.markAsRejected(data)
-            this.refreshEstTable()
-
-            if (response.data) {
-              this.refreshEstTable()
-              window.toastr['success'](
-                this.$tc('estimates.marked_as_rejected_message')
-              )
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_rejected'),
+        icon: 'error',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#DC2626"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
           }
-        })
+          let response = await this.markAsRejected(data)
+          this.refreshEstTable()
+
+          if (response.data) {
+            this.refreshEstTable()
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.marked_as_rejected_message'),
+            })
+          }
+        }
+      })
     },
 
     async sendEstimate(id) {
       window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_send_estimate'),
-          icon: '/assets/icon/paper-plane-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (willSendEstimate) => {
-          if (willSendEstimate) {
-            const data = {
-              id: id,
-            }
-            let response = await this.sendEstimateEmail(data)
-            this.refreshEstTable()
-
-            if (response.data.success) {
-              window.toastr['success'](
-                this.$tc('estimates.send_estimate_successfully')
-              )
-              return true
-            }
-
-            if (response.data.error === 'user_email_does_not_exist') {
-              window.toastr['error'](
-                this.$tc('estimates.user_email_does_not_exist')
-              )
-              return true
-            }
-            window.toastr['error'](this.$tc('estimates.something_went_wrong'))
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_send_estimate'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            focusable="false"
+            class="w-6 h-6"
+            data-prefix="fas"
+            data-icon="paper-plane"
+            class="svg-inline--fa fa-paper-plane fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          const data = {
+            id: id,
           }
-        })
+          let response = await this.sendEstimateEmail(data)
+          this.refreshEstTable()
+
+          if (response.data.success) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.send_estimate_successfully'),
+            })
+            return true
+          }
+
+          if (response.data.error === 'user_email_does_not_exist') {
+            this.showToaster({
+              type: 'error',
+              message: this.$tc('estimates.user_email_does_not_exist'),
+            })
+            return true
+          }
+          this.showToaster({
+            type: 'error',
+            message: this.$tc('estimates.something_went_wrong'),
+          })
+        }
+      })
     },
   },
 }

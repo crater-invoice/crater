@@ -3,8 +3,8 @@
     <sw-page-header :title="pageTitle">
       <template slot="actions">
         <sw-button
-          tag-name="router-link"
           :to="`/admin/customers/${$route.params.id}/edit`"
+          tag-name="router-link"
           class="mr-3"
           variant="primary-outline"
         >
@@ -15,29 +15,29 @@
             {{ $t('customers.new_transaction') }}
           </sw-button>
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/estimates/create?customer=${$route.params.id}`"
+            tag-name="router-link"
           >
             <document-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('estimates.new_estimate') }}
           </sw-dropdown-item>
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/invoices/create?customer=${$route.params.id}`"
+            tag-name="router-link"
           >
             <document-text-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('invoices.new_invoice') }}
           </sw-dropdown-item>
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/payments/create?customer=${$route.params.id}`"
+            tag-name="router-link"
           >
             <credit-card-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('payments.new_payment') }}
           </sw-dropdown-item>
           <sw-dropdown-item
-            tag-name="router-link"
             :to="`/admin/expenses/create?customer=${$route.params.id}`"
+            tag-name="router-link"
           >
             <calculator-icon class="h-5 mr-3 text-gray-600" />
             {{ $t('expenses.new_expense') }}
@@ -112,25 +112,48 @@ export default {
       'selectCustomer',
       'deleteMultipleCustomers',
     ]),
+    ...mapActions('notification', ['showNotification']),
 
     async removeCustomer(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('customers.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="trash"
+            class="svg-inline--fa fa-trash fa-w-14"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path
+              fill="#55547A"
+              d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let data = [id]
           this.selectCustomer(data)
           let res = await this.deleteMultipleCustomers()
           if (res.data.success) {
-            window.toastr['success'](this.$tc('customers.deleted_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('customers.deleted_message'),
+            })
             this.$router.push('/admin/customers')
             return true
           } else if (request.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })

@@ -348,6 +348,8 @@ export default {
       'fetchItemUnits',
     ]),
 
+    ...mapActions('notification', ['showNotification']),
+
     refreshTable() {
       this.$refs.table.refresh()
     },
@@ -397,52 +399,71 @@ export default {
 
     async removeItems(id) {
       this.id = id
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('items.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteItem({ ids: [id] })
 
           if (res.data.success) {
-            window.toastr['success'](this.$tc('items.deleted_message', 1))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('items.deleted_message'),
+            })
             this.$refs.table.refresh()
             return true
           }
 
           if (res.data.error === 'item_attached') {
-            window.toastr['error'](
-              this.$tc('items.item_attached_message'),
-              this.$t('general.action_failed')
-            )
+            this.showNotification({
+              type: 'error',
+              message:
+                (this.$tc('items.item_attached_message'),
+                this.$t('general.action_failed')),
+            })
             return true
           }
-
-          window.toastr['error'](res.data.message)
+          this.showNotification({
+            type: 'error',
+            message: res.data.message,
+          })
           return true
         }
       })
     },
 
     async removeMultipleItems() {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('items.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteMultipleItems()
 
           if (res.data.success || res.data.items) {
-            window.toastr['success'](this.$tc('items.deleted_message', 2))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('items.deleted_message', 2),
+            })
             this.$refs.table.refresh()
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })

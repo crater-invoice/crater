@@ -1,5 +1,6 @@
 <template>
   <div class="grid h-full grid-cols-12 overflow-y-hidden bg-gray-100">
+    <base-notification />
     <div
       class="flex items-center justify-center w-full max-w-sm col-span-12 p-4 mx-auto text-gray-900 md:p-8 md:col-span-6 lg:col-span-4 flex-2 md:pb-48 md:pt-40"
     >

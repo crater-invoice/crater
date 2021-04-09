@@ -2,8 +2,8 @@
   <base-page class="payments">
     <sw-page-header :title="$t('payments.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
-        <sw-breadcrumb-item to="#" :title="$tc('payments.payment', 2)" active />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
+        <sw-breadcrumb-item :title="$tc('payments.payment', 2)" to="#" active />
       </sw-breadcrumb>
 
       <template slot="actions">
@@ -202,7 +202,11 @@
           <template slot-scope="row">
             <span>{{ $t('payments.payment_mode') }}</span>
             <span>
-              {{ row.payment_mode ? row.payment_mode : $t('payments.not_selected') }}
+              {{
+                row.payment_mode
+                  ? row.payment_mode
+                  : $t('payments.not_selected')
+              }}
             </span>
           </template>
         </sw-table-column>
@@ -216,7 +220,11 @@
           <template slot-scope="row">
             <span>{{ $t('invoices.invoice_number') }}</span>
             <span>
-              {{ row.invoice_number ? row.invoice_number : $t('payments.no_invoice') }}
+              {{
+                row.invoice_number
+                  ? row.invoice_number
+                  : $t('payments.no_invoice')
+              }}
             </span>
           </template>
         </sw-table-column>
@@ -239,16 +247,16 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`payments/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`payments/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.view') }}
@@ -371,6 +379,8 @@ export default {
       'fetchPaymentModes',
     ]),
 
+    ...mapActions('notification', ['showNotification']),
+
     async fetchData({ page, filter, sort }) {
       let data = {
         customer_id: this.filters.customer ? this.filters.customer.id : '',
@@ -433,43 +443,60 @@ export default {
     },
 
     async removePayment(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('payments.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deletePayment({ ids: [id] })
 
           if (res.data.success) {
-            window.toastr['success'](this.$tc('payments.deleted_message', 1))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('payments.deleted_message', 1),
+            })
             this.$refs.table.refresh()
             return true
           }
-
-          window.toastr['error'](res.data.message)
+          this.showNotification({
+            type: 'error',
+            message: res.data.message,
+          })
           return true
         }
       })
     },
 
     async removeMultiplePayments() {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('payments.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let request = await this.deleteMultiplePayments()
           if (request.data.success) {
-            window.toastr['success'](this.$tc('payments.deleted_message', 2))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('payments.deleted_message', 2),
+            })
             this.$refs.table.refresh()
           } else if (request.data.error) {
-            window.toastr['error'](request.data.message)
+            this.showNotification({
+              type: 'error',
+              message: request.data.message,
+            })
           }
         }
       })

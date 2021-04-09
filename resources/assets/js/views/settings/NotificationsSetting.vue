@@ -133,6 +133,7 @@ export default {
   },
   methods: {
     ...mapActions('company', ['fetchCompanySettings', 'updateCompanySettings']),
+    ...mapActions('notification', ['showNotification']),
 
     async fetchData() {
       this.isRequestOnGoing = true
@@ -176,9 +177,10 @@ export default {
       if (response.data.success) {
         this.isLoading = false
 
-        window.toastr['success'](
-          this.$tc('settings.notification.email_save_message')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$tc('settings.notification.email_save_message'),
+        })
       }
     },
 
@@ -199,7 +201,10 @@ export default {
       let response = await this.updateCompanySettings(data)
 
       if (response.data.success) {
-        window.toastr['success'](this.$tc('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$tc('general.setting_updated'),
+        })
       }
     },
 
@@ -220,7 +225,10 @@ export default {
       let response = await this.updateCompanySettings(data)
 
       if (response.data) {
-        window.toastr['success'](this.$tc('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$tc('general.setting_updated'),
+        })
       }
     },
   },

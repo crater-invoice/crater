@@ -1,6 +1,7 @@
 <template>
   <div v-if="isAppLoaded" class="h-full">
     <base-modal />
+    <base-notification />
     <site-header />
     <div class="flex h-screen pt-16 pb-10 overflow-hidden">
       <site-sidebar />
@@ -20,6 +21,7 @@ import SiteSidebar from './partials/TheSiteSidebar.vue'
 import BaseModal from '../../components/base/modal/BaseModal'
 import { RefreshIcon } from '@vue-hero-icons/solid'
 import { mapActions, mapGetters } from 'vuex'
+import BaseNotification from '../../components/base/BaseNotification.vue'
 
 export default {
   components: {
@@ -28,6 +30,7 @@ export default {
     SiteFooter,
     BaseModal,
     RefreshIcon,
+    BaseNotification,
   },
 
   computed: {

@@ -22,9 +22,9 @@
 
     <sw-table-component
       ref="table"
-      variant="gray"
       :show-filter="false"
       :data="fetchData"
+      variant="gray"
     >
       <sw-table-column
         :label="$t('settings.customization.payments.mode_name')"
@@ -79,6 +79,8 @@ export default {
 
     ...mapActions('payment', ['deletePaymentMode', 'fetchPaymentModes']),
 
+    ...mapActions('notification', ['showNotification']),
+
     async fetchData({ page, filter, sort }) {
       let data = {
         orderByField: sort.fieldName || 'created_at',
@@ -117,29 +119,36 @@ export default {
     },
 
     removePaymentMode(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t(
           'settings.customization.payments.payment_mode_confirm_delete'
         ),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let response = await this.deletePaymentMode(id)
 
           if (response.data.success) {
-            window.toastr['success'](
-              this.$t('settings.customization.payments.deleted_message')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$t(
+                'settings.customization.payments.deleted_message'
+              ),
+            })
             this.id = null
             this.$refs.table.refresh()
             return true
           }
-          window.toastr['error'](
-            this.$t('settings.customization.payments.already_in_use')
-          )
+          this.showNotification({
+            type: 'error',
+            message: this.$t('settings.customization.payments.already_in_use'),
+          })
         }
       })
     },

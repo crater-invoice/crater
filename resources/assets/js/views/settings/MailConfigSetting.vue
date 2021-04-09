@@ -76,6 +76,7 @@ export default {
       'fetchMailConfig',
       'updateMailConfig',
     ]),
+    ...mapActions('notification', ['showNotification']),
 
     async loadData() {
       this.isRequestOnGoing = true
@@ -100,17 +101,22 @@ export default {
         let response = await this.updateMailConfig(mailConfigData)
         if (response.data.success) {
           this.isLoading = false
-          window.toastr['success'](
-            this.$t('wizard.success.' + response.data.success)
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('wizard.success.' + response.data.success),
+          })
         } else {
-          window.toastr['error'](
-            this.$t('wizard.errors.' + response.data.error)
-          )
+          this.showNotification({
+            type: 'error',
+            message: this.$t('wizard.errors.' + response.data.error),
+          })
         }
         return true
       } catch (e) {
-        window.toastr['error']('Something went wrong')
+        this.showNotification({
+          type: 'error',
+          message: 'Something went wrong',
+        })
       }
     },
 

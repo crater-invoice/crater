@@ -1,26 +1,26 @@
 <template>
   <base-page class="customer-create">
     <form v-if="!initLoad" @submit.prevent="submitCustomerData">
-      <sw-page-header class="mb-5" :title="pageTitle">
+      <sw-page-header :title="pageTitle" class="mb-5">
         <sw-breadcrumb slot="breadcrumbs">
           <sw-breadcrumb-item
-            to="/admin/dashboard"
             :title="$t('general.home')"
+            to="/admin/dashboard"
           />
           <sw-breadcrumb-item
-            to="/admin/customers"
             :title="$tc('customers.customer', 2)"
+            to="/admin/customers"
           />
           <sw-breadcrumb-item
             v-if="$route.name === 'customers.edit'"
-            to="#"
             :title="$t('customers.edit_customer')"
+            to="#"
             active
           />
           <sw-breadcrumb-item
             v-else
-            to="#"
             :title="$t('customers.new_customer')"
+            to="#"
             active
           />
         </sw-breadcrumb>
@@ -56,8 +56,8 @@
           >
             <sw-input-group
               :label="$t('customers.display_name')"
-              class="md:col-span-3"
               :error="displayNameError"
+              class="md:col-span-3"
               required
             >
               <sw-input
@@ -85,8 +85,8 @@
 
             <sw-input-group
               :label="$t('customers.email')"
-              class="md:col-span-3"
               :error="emailError"
+              class="md:col-span-3"
             >
               <sw-input
                 :invalid="$v.formData.email.$error"
@@ -243,8 +243,8 @@
 
               <sw-input-group :label="$t('customers.zip_code')">
                 <sw-input
-                  tabindex="14"
                   v-model.trim="billing.zip"
+                  tabindex="14"
                   type="text"
                   name="zip"
                 />
@@ -406,16 +406,16 @@
             class="grid col-span-5 lg:col-span-4 gap-y-6 gap-x-4 md:grid-cols-6"
           >
             <sw-input-group
-              class="md:col-span-3"
               v-for="(field, index) in customFields"
               :label="field.label"
               :required="field.is_required ? true : false"
               :key="index"
+              class="md:col-span-3"
             >
               <component
                 :type="field.type.label"
                 :field="field"
-                :isEdit="isEdit"
+                :is-edit="isEdit"
                 :is="field.type + 'Field'"
                 :invalid-fields="invalidFields"
                 :tabindex="23 + index"
@@ -694,7 +694,7 @@ export default {
       'updateCustomer',
       'fetchViewCustomer',
     ]),
-
+    ...mapActions('notification', ['showNotification']),
     ...mapActions('customFields', ['fetchCustomFields']),
 
     currencyNameWithCode({ name, code }) {
@@ -786,10 +786,16 @@ export default {
             this.$router.push(
               `/admin/customers/${response.data.customer.id}/view`
             )
-            window.toastr['success'](this.$t('customers.updated_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$t('customers.updated_message'),
+            })
           }
           if (response.data.error) {
-            window.toastr['error'](this.$t('validation.email_already_taken'))
+            this.showNotification({
+              type: 'error',
+              message: this.$t('validation.email_already_taken'),
+            })
           }
         } else {
           response = await this.addCustomer(this.formData)
@@ -797,7 +803,10 @@ export default {
             this.$router.push(
               `/admin/customers/${response.data.customer.id}/view`
             )
-            window.toastr['success'](this.$t('customers.created_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$t('customers.created_message'),
+            })
           }
         }
 
@@ -806,7 +815,10 @@ export default {
       } catch (error) {
         this.isLoading = false
         if (err.response.data.errors.email) {
-          window.toastr['error'](this.$t('validation.email_already_taken'))
+          this.showNotification({
+            type: 'error',
+            message: this.$t('validation.email_already_taken'),
+          })
         }
       }
     },

@@ -33,8 +33,8 @@
             </div>
 
             <sw-avatar
-              trigger="#logo-box"
               :preview-avatar="previewLogo"
+              trigger="#logo-box"
               @changed="onChange"
               @uploadHandler="onUploadHandler"
               @handleUploadError="onHandleUploadError"
@@ -156,7 +156,7 @@ const { required, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   components: {
-    CloudUploadIcon
+    CloudUploadIcon,
   },
   data() {
     return {
@@ -197,12 +197,6 @@ export default {
       },
     },
   },
-  watch: {
-    country({ id }) {
-      this.companyData.country_id = id
-      return true
-    },
-  },
   computed: {
     companyNameError() {
       if (!this.$v.companyData.name.$error) {
@@ -241,12 +235,18 @@ export default {
       }
     },
   },
+  watch: {
+    country({ id }) {
+      this.companyData.country_id = id
+      return true
+    },
+  },
   mounted() {
     this.fetchCountries()
   },
   methods: {
     ...mapActions('company', ['setSelectedCompany']),
-
+    ...mapActions('notification', ['showNotification']),
     onUploadHandler(cropper) {
       this.previewLogo = cropper
         .getCroppedCanvas()
@@ -254,7 +254,10 @@ export default {
     },
 
     onHandleUploadError() {
-      window.toastr['error']('Oops! Something went wrong...')
+      this.showNotification({
+        type: 'error',
+        message: 'Oops! Something went wrong...',
+      })
     },
 
     onChange(file) {

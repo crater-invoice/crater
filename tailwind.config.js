@@ -10,7 +10,6 @@ module.exports = {
     './node_modules/\\@bytefury/spacewind/src/**/*.vue',
     './node_modules/\\@bytefury/spacewind/plugin/**/*.js',
     'flatpickr/**/*.js',
-    'toastr/**/*.js',
     './public/js/pace/**/*.js',
   ],
   theme: {

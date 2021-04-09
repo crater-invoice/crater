@@ -26,6 +26,7 @@ import estimateTemplate from './modules/estimate-template'
 import invoiceTemplate from './modules/invoice-template'
 import search from './modules/search'
 import notes from './modules/notes'
+import notification from './modules/notification'
 
 Vue.use(Vuex)
 
@@ -76,5 +77,6 @@ export default new Vuex.Store({
     invoiceTemplate,
     search,
     notes,
+    notification,
   },
 })

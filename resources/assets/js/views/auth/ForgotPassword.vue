@@ -45,9 +45,8 @@
 </template>
 
 <script type="text/babel">
-import { async } from 'q'
 const { required, email } = require('vuelidate/lib/validators')
-
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -67,6 +66,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('notification', ['showNotification']),
     async validateBeforeSubmit(e) {
       this.$v.formData.$touch()
       if (!this.$v.formData.$invalid) {
@@ -78,7 +78,10 @@ export default {
           )
 
           if (res.data) {
-            toastr['success']('Mail sent successfuly!', 'Success')
+            this.showNotification({
+              type: 'success',
+              message: 'Mail sent successfuly!',
+            })
           }
 
           this.isSent = true

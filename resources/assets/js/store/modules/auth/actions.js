@@ -13,7 +13,6 @@ export const login = ({ commit }, data) => {
           commit('user/' + userTypes.RESET_CURRENT_USER, null, { root: true })
           commit(rootTypes.UPDATE_APP_LOADING_STATUS, false, { root: true })
 
-          window.toastr['success']('Login Successful')
           resolve(response)
         })
         .catch((err) => {
@@ -28,7 +27,7 @@ export const setLogoutFalse = ({ state, commit }) => {
   commit(types.SET_LOGOUT, false)
 }
 
-export const logout = ({ state, commit }) => {
+export const logout = ({ state, commit, dispatch }) => {
   return new Promise((resolve, reject) => {
     if (state.isLoggedOut) {
       resolve()
@@ -40,7 +39,14 @@ export const logout = ({ state, commit }) => {
       .get('/auth/logout')
       .then(() => {
         router.push('/login')
-        window.toastr['success']('Logged out!', 'Success')
+        dispatch(
+          'notification/showNotification',
+          {
+            type: 'success',
+            message: 'Logged out successfully.',
+          },
+          { root: true }
+        )
       })
       .catch((err) => {
         router.push('/login')

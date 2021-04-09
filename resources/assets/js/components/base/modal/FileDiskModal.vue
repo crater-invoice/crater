@@ -5,9 +5,9 @@
         :is="selected_disk"
         :loading="isLoading"
         :disks="getDiskDrivers"
+        :is-edit="isEdit"
         @on-change-disk="(disk) => (selected_disk = disk.value)"
         @submit="createNewDisk"
-        :is-edit="isEdit"
       >
         <template v-slot="slotProps">
           <div
@@ -16,15 +16,15 @@
             <sw-button
               class="mr-3 text-sm"
               variant="primary-outline"
-              @click="closeDisk"
               type="button"
+              @click="closeDisk"
             >
               {{ $t('general.cancel') }}
             </sw-button>
             <sw-button
               :loading="isRequestFire(slotProps)"
-              variant="primary"
               :disabled="isRequestFire(slotProps)"
+              variant="primary"
               type="submit"
             >
               <save-icon v-if="!isRequestFire(slotProps)" class="mr-2" />
@@ -96,6 +96,8 @@ export default {
 
     ...mapActions('modal', ['closeModal']),
 
+    ...mapActions('notification', ['showNotification']),
+
     isRequestFire(slotProps) {
       return slotProps && (slotProps.diskData.isLoading || this.isLoading)
     },
@@ -131,14 +133,21 @@ export default {
         this.refreshData()
         this.closeDisk()
         if (this.isEdit) {
-          window.toastr['success'](this.$t('settings.disk.success_update'))
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.disk.success_update'),
+          })
         } else {
-          window.toastr['success'](this.$t('settings.disk.success_create'))
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.disk.success_create'),
+          })
         }
       } else {
-        window.toastr['error'](
-          this.$t('settings.disk.invalid_disk_credentials')
-        )
+        this.showNotification({
+          type: 'error',
+          message: this.$t('settings.disk.invalid_disk_credentials'),
+        })
       }
       this.isLoading = false
     },

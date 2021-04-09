@@ -102,9 +102,7 @@
 
       <div class="ml-4">
         <p class="p-0 mb-1 text-base leading-snug text-black">
-          {{
-            $t('settings.customization.payments.payment_email_attachment')
-          }}
+          {{ $t('settings.customization.payments.payment_email_attachment') }}
         </p>
 
         <p
@@ -112,7 +110,9 @@
           style="max-width: 480px"
         >
           {{
-            $t('settings.customization.payments.payment_email_attachment_setting_description')
+            $t(
+              'settings.customization.payments.payment_email_attachment_setting_description'
+            )
           }}
         </p>
       </div>
@@ -228,6 +228,8 @@ export default {
 
     ...mapActions('company', ['updateCompanySettings']),
 
+    ...mapActions('notification', ['showNotification']),
+
     changeToUppercase(currentTab) {
       if (currentTab === 'PAYMENTS') {
         this.payments.payment_prefix = this.payments.payment_prefix.toUpperCase()
@@ -244,7 +246,10 @@ export default {
       }
       let response = await this.updateCompanySettings(data)
       if (response.data) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
     },
 
@@ -266,9 +271,12 @@ export default {
       }
 
       if (this.updateSetting(data)) {
-        window.toastr['success'](
-          this.$t('settings.customization.payments.payment_setting_updated')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t(
+            'settings.customization.payments.payment_setting_updated'
+          ),
+        })
       }
     },
 

@@ -97,6 +97,7 @@ export default {
   methods: {
     ...mapActions('modal', ['closeModal', 'resetModalData']),
     ...mapActions('item', ['addItemUnit', 'updateItemUnit', 'fatchItemUnit']),
+    ...mapActions('notification', ['showNotification']),
     resetFormData() {
       this.formData = {
         id: null,
@@ -123,13 +124,17 @@ export default {
         if (response.data) {
           this.isLoading = false
           if (!this.isEdit) {
-            window.toastr['success'](
-              this.$t('settings.customization.items.item_unit_added')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$t('settings.customization.items.item_unit_added'),
+            })
           } else {
-            window.toastr['success'](
-              this.$t('settings.customization.items.item_unit_updated')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$t(
+                'settings.customization.items.item_unit_updated'
+              ),
+            })
           }
           this.refreshData ? this.refreshData() : ''
           this.closeItemUnitModal()
@@ -137,7 +142,10 @@ export default {
         }
       } catch (error) {
         this.isLoading = false
-        window.toastr['error'](response.data.error)
+        this.showNotification({
+          type: 'error',
+          message: response.data.error,
+        })
       }
     },
     async setData() {

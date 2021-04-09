@@ -27,9 +27,9 @@
 
       <sw-table-component
         ref="table"
-        variant="gray"
         :show-filter="false"
         :data="fetchData"
+        variant="gray"
         table-class="table tax-table"
         class="mt-0 mb-3"
       >
@@ -173,6 +173,8 @@ export default {
 
     ...mapActions('company', ['updateCompanySettings', 'fetchCompanySettings']),
 
+    ...mapActions('notification', ['showNotification']),
+
     async fetchData({ page, filter, sort }) {
       let data = {
         orderByField: sort.fieldName || 'created_at',
@@ -243,20 +245,39 @@ export default {
       let response = await this.updateCompanySettings(data)
 
       if (response.data.success) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
       this.$refs.table.refresh()
     },
 
     async setDefaultDiskData(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('settings.disk.set_default_disk_confirm'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           this.loading = true
           let data = {
             set_as_default: true,
@@ -266,26 +287,33 @@ export default {
 
           if (response.data.success) {
             this.refreshTable()
-            window.toastr['success'](
-              this.$t('settings.disk.success_set_default_disk')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$t('settings.disk.success_set_default_disk'),
+            })
           }
         }
       })
     },
 
     async removeDisk(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('settings.disk.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let response = await this.deleteFileDisk(id)
           if (response.data.success) {
-            window.toastr['success'](this.$t('settings.disk.deleted_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$t('settings.disk.deleted_message'),
+            })
             this.refreshTable()
             return true
           }

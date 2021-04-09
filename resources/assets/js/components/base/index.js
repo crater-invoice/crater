@@ -13,6 +13,7 @@ import NoteSelectPopup from './popup/NoteSelectPopup.vue'
 import BaseDatePicker from '../base/BaseDatePicker.vue'
 import BaseTimePicker from './BaseTimePicker.vue'
 import BasePage from './BasePage.vue'
+import BaseNotification from './BaseNotification.vue'
 
 import GlobalSearch from '../GlobalSearch.vue'
 
@@ -39,6 +40,7 @@ Vue.component('tax-select-popup', TaxSelectPopup)
 Vue.component('note-select-popup', NoteSelectPopup)
 
 Vue.component('base-time-picker', BaseTimePicker)
+Vue.component('base-notification', BaseNotification)
 
 Vue.component('dot-icon', DotIcon)
 Vue.component('save-icon', SaveIcon)

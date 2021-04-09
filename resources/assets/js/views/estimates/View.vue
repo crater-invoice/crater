@@ -310,6 +310,8 @@ export default {
 
     ...mapActions('modal', ['openModal']),
 
+    ...mapActions('notification', ['showNotification']),
+
     hasActiveUrl(id) {
       return this.$route.params.id == id
     },
@@ -342,8 +344,10 @@ export default {
       let pdfUrl = `${window.location.origin}/estimates/pdf/${this.estimate.unique_hash}`
 
       let response = this.$utils.copyTextToClipboard(pdfUrl)
-
-      window.toastr['success'](this.$tc('general.copied_pdf_url_clipboard'))
+      this.showNotification({
+        type: 'success',
+        message: this.$tc('general.copied_pdf_url_clipboard'),
+      })
     },
     async onSearched() {
       let data = ''
@@ -386,30 +390,45 @@ export default {
       return true
     },
     async onMarkAsSent() {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: this.$t('estimates.confirm_mark_as_sent'),
-          icon: '/assets/icon/check-circle-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (value) => {
-          if (value) {
-            this.isMarkAsSent = true
-            let response = await this.markAsSent({
-              id: this.estimate.id,
-              status: 'SENT',
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: this.$t('estimates.confirm_mark_as_sent'),
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          this.isMarkAsSent = true
+          let response = await this.markAsSent({
+            id: this.estimate.id,
+            status: 'SENT',
+          })
+          this.isMarkAsSent = false
+          if (response.data) {
+            this.estimate.status = 'SENT'
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.mark_as_sent_successfully'),
             })
-            this.isMarkAsSent = false
-            if (response.data) {
-              this.estimate.status = 'SENT'
-              window.toastr['success'](
-                this.$tc('estimates.mark_as_sent_successfully')
-              )
-            }
           }
-        })
+        }
+      })
     },
     async onSendEstimate(id) {
       this.openModal({
@@ -423,29 +442,38 @@ export default {
       let pdfUrl = `${window.location.origin}/estimates/pdf/${this.estimate.unique_hash}`
 
       let response = this.$utils.copyTextToClipboard(pdfUrl)
-
-      window.toastr['success'](this.$tc('general.copied_pdf_url_clipboard'))
+      this.showNotification({
+        type: 'success',
+        message: this.$tc('general.copied_pdf_url_clipboard'),
+      })
     },
     async removeEstimate(id) {
-      window
-        .swal({
-          title: this.$t('general.are_you_sure'),
-          text: 'you will not be able to recover this estimate!',
-          icon: '/assets/icon/trash-solid.svg',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then(async (value) => {
-          if (value) {
-            let request = await this.deleteEstimate({ ids: [id] })
-            if (request.data.success) {
-              window.toastr['success'](this.$tc('estimates.deleted_message', 1))
-              this.$router.push('/admin/estimates')
-            } else if (request.data.error) {
-              window.toastr['error'](request.data.message)
-            }
+      this.$swal({
+        title: this.$t('general.are_you_sure'),
+        text: 'you will not be able to recover this estimate!',
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
+          let request = await this.deleteEstimate({ ids: [id] })
+          if (request.data.success) {
+            this.showToaster({
+              type: 'success',
+              message: this.$tc('estimates.deleted_message', 1),
+            })
+            this.$router.push('/admin/estimates')
+          } else if (request.data.error) {
+            this.showToaster({
+              type: 'error',
+              message: request.data.message,
+            })
           }
-        })
+        }
+      })
     },
   },
 }

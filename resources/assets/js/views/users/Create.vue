@@ -1,19 +1,19 @@
 <template>
   <base-page v-if="isSuperAdmin" class="item-create">
-    <sw-page-header class="mb-3" :title="pageTitle">
+    <sw-page-header :title="pageTitle" class="mb-3">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="/admin/dashboard" :title="$t('general.home')" />
-        <sw-breadcrumb-item to="/admin/users" :title="$tc('users.user', 2)" />
+        <sw-breadcrumb-item :title="$t('general.home')" to="/admin/dashboard" />
+        <sw-breadcrumb-item :title="$tc('users.user', 2)" to="/admin/users" />
         <sw-breadcrumb-item
           v-if="$route.name === 'users.edit'"
-          to="#"
           :title="$t('users.edit_user')"
+          to="#"
           active
         />
         <sw-breadcrumb-item
           v-else
-          to="#"
           :title="$t('users.new_user')"
+          to="#"
           active
         />
       </sw-breadcrumb>
@@ -43,8 +43,8 @@
 
             <sw-input-group
               :label="$t('users.email')"
-              class="mt-4"
               :error="emailError"
+              class="mt-4"
               required
             >
               <sw-input
@@ -229,6 +229,8 @@ export default {
   methods: {
     ...mapActions('users', ['addUser', 'fetchUser', 'updateUser']),
 
+    ...mapActions('notification', ['showNotification']),
+
     async loadEditData() {
       let response = await this.fetchUser(this.$route.params.id)
 
@@ -251,12 +253,18 @@ export default {
           response = await this.updateUser(this.formData)
           let data
           if (response.data.success) {
-            window.toastr['success'](this.$tc('users.updated_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('users.updated_message'),
+            })
             this.$router.push('/admin/users')
             this.isLoading = false
           }
           if (response.data.error) {
-            window.toastr['error'](this.$t('validation.email_already_taken'))
+            this.showNotification({
+              type: 'error',
+              message: this.$t('validation.email_already_taken'),
+            })
           }
         } else {
           response = await this.addUser(this.formData)
@@ -264,7 +272,10 @@ export default {
           if (response.data.success) {
             this.isLoading = false
             if (!this.isEdit) {
-              window.toastr['success'](this.$tc('users.created_message'))
+              this.showNotification({
+                type: 'success',
+                message: this.$tc('users.created_message'),
+              })
               this.$router.push('/admin/users')
               return true
             }

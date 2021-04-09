@@ -75,14 +75,14 @@ export default {
         let self = this
 
         if (this.errors) {
-          swal({
+          this.$swal({
             title: this.$t('wizard.permissions.permission_confirm_title'),
             text: this.$t('wizard.permissions.permission_confirm_desc'),
             icon: 'warning',
-            buttons: true,
-            dangerMode: true,
-          }).then(async (willConfirm) => {
-            if (willConfirm) {
+            showCancelButton: true,
+            showConfirmButton: true,
+          }).then(async (result) => {
+            if (result.value) {
               self.isLoading = this.isFetching = false
             }
           })

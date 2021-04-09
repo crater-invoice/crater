@@ -145,6 +145,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['login']),
+    ...mapActions('notification', ['showNotification']),
     async validateBeforeSubmit() {
       axios.defaults.withCredentials = true
 
@@ -158,6 +159,10 @@ export default {
       try {
         await this.login(this.loginData)
         this.$router.push('/admin/dashboard')
+        this.showNotification({
+          type: 'success',
+          message: 'Logged in successfully.',
+        })
         this.isLoading = false
       } catch (error) {
         this.isLoading = false

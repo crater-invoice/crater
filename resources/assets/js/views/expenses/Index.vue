@@ -3,9 +3,9 @@
     <!-- Page Header -->
     <sw-page-header :title="$t('expenses.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
 
-        <sw-breadcrumb-item to="#" :title="$tc('expenses.expense', 2)" active />
+        <sw-breadcrumb-item :title="$tc('expenses.expense', 2)" to="#" active />
       </sw-breadcrumb>
 
       <template slot="actions">
@@ -208,7 +208,9 @@
         >
           <template slot-scope="row">
             <span>{{ $t('expenses.customer') }}</span>
-            <span> {{ row.user_name ? row.user_name : $t('expenses.not_selected') }} </span>
+            <span>
+              {{ row.user_name ? row.user_name : $t('expenses.not_selected') }}
+            </span>
           </template>
         </sw-table-column>
 
@@ -248,8 +250,8 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`expenses/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
@@ -374,6 +376,8 @@ export default {
 
     ...mapActions('category', ['fetchCategories']),
 
+    ...mapActions('notification', ['showNotification']),
+
     async fetchData({ page, filter, sort }) {
       let data = {
         user_id: this.filters.user ? this.filters.user.id : null,
@@ -454,43 +458,61 @@ export default {
     },
 
     async removeExpense(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteExpense({ ids: [id] })
 
           if (res.data.success) {
-            window.toastr['success'](this.$tc('expenses.deleted_message', 1))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('expenses.deleted_message', 1),
+            })
             this.refreshTable()
             return true
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'success',
+              message: res.data.message,
+            })
           }
         }
       })
     },
 
     async removeMultipleExpenses() {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('expenses.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let request = await this.deleteMultipleExpenses()
 
           if (request.data.success) {
-            window.toastr['success'](this.$tc('expenses.deleted_message', 2))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('expenses.deleted_message', 2),
+            })
             this.$refs.table.refresh()
           } else if (request.data.error) {
-            window.toastr['error'](request.data.message)
+            this.showNotification({
+              type: 'error',
+              message: request.data.message,
+            })
           }
         }
       })

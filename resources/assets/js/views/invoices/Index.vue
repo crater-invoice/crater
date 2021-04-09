@@ -2,8 +2,8 @@
   <base-page>
     <sw-page-header :title="$t('invoices.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
-        <sw-breadcrumb-item to="#" :title="$tc('invoices.invoice', 2)" active />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
+        <sw-breadcrumb-item :title="$tc('invoices.invoice', 2)" to="#" active />
       </sw-breadcrumb>
 
       <template slot="actions">
@@ -93,8 +93,8 @@
 
         <label
           class="absolute text-sm leading-snug text-black cursor-pointer"
-          @click="clearFilter"
           style="top: 10px; right: 15px"
+          @click="clearFilter"
           >{{ $t('general.clear_all') }}</label
         >
       </sw-filter-wrapper>
@@ -258,7 +258,9 @@
               :bg-color="$utils.getBadgeStatusColor(row.status).bgColor"
               :color="$utils.getBadgeStatusColor(row.status).color"
             >
-              {{ $utils.getStatusTranslation(row.paid_status.replace('_', ' ')) }}
+              {{
+                $utils.getStatusTranslation(row.paid_status.replace('_', ' '))
+              }}
             </sw-badge>
           </template>
         </sw-table-column>
@@ -289,16 +291,16 @@
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`invoices/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`invoices/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('invoices.view') }}
@@ -334,8 +336,8 @@
                   row.status === 'VIEWED' ||
                   row.status === 'OVERDUE'
                 "
-                tag-name="router-link"
                 :to="`/admin/payments/${row.id}/create`"
+                tag-name="router-link"
               >
                 <credit-card-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('payments.record_payment') }}
@@ -510,6 +512,8 @@ export default {
 
     ...mapActions('modal', ['openModal']),
 
+    ...mapActions('notification', ['showNotification']),
+
     async sendInvoice(invoice) {
       this.openModal({
         title: this.$t('invoices.send_invoice'),
@@ -521,14 +525,30 @@ export default {
     },
 
     async markInvoiceAsSent(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.invoice_mark_as_sent'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           const data = {
             id: id,
             status: 'SENT',
@@ -536,29 +556,49 @@ export default {
           let response = await this.markAsSent(data)
           this.refreshTable()
           if (response.data) {
-            window.toastr['success'](
-              this.$tc('invoices.mark_as_sent_successfully')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('invoices.mark_as_sent_successfully'),
+            })
           }
         }
       })
     },
 
     async onCloneInvoice(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('invoices.confirm_clone'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let response = await this.cloneInvoice({ id })
 
           this.refreshTable()
 
           if (response.data) {
-            window.toastr['success'](this.$tc('invoices.cloned_successfully'))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('invoices.cloned_successfully'),
+            })
             this.$router.push(
               `/admin/invoices/${response.data.invoice.id}/edit`
             )
@@ -665,31 +705,43 @@ export default {
 
     async removeInvoice(id) {
       this.id = id
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete'),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteInvoice({ ids: [id] })
 
           if (res.data.success) {
-            window.toastr['success'](this.$tc('invoices.deleted_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('invoices.deleted_message'),
+            })
             this.$refs.table.refresh()
             return true
           }
 
           if (res.data.error === 'payment_attached') {
-            window.toastr['error'](
-              this.$t('invoices.payment_attached_message'),
-              this.$t('general.action_failed')
-            )
+            this.showNotification({
+              type: 'error',
+              message:
+                (this.$t('invoices.payment_attached_message'),
+                this.$t('general.action_failed')),
+            })
             return true
           }
 
-          window.toastr['error'](res.data.error)
+          this.showNotification({
+            type: 'error',
+            message: res.data.error,
+          })
+
           return true
         }
         this.resetSelectedInvoices()
@@ -697,30 +749,41 @@ export default {
     },
 
     async removeMultipleInvoices() {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('invoices.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (value) => {
-        if (value) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteMultipleInvoices()
 
           if (res.data.error === 'payment_attached') {
-            window.toastr['error'](
-              this.$t('invoices.payment_attached_message'),
-              this.$t('general.action_failed')
-            )
+            this.showNotification({
+              type: 'error',
+              message:
+                (this.$t('invoices.payment_attached_message'),
+                this.$t('general.action_failed')),
+            })
             return true
           }
 
           if (res.data) {
             this.$refs.table.refresh()
             this.resetSelectedInvoices()
-            window.toastr['success'](this.$tc('invoices.deleted_message', 2))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('invoices.deleted_message', 2),
+            })
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })

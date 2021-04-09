@@ -1,5 +1,5 @@
 <template>
-  <form action="" @submit.prevent="updatePreferencesData" class="relative">
+  <form action="" class="relative" @submit.prevent="updatePreferencesData">
     <base-loader v-if="isRequestOnGoing" :show-bg-overlay="true" />
     <sw-card variant="setting-card">
       <template slot="header">
@@ -113,11 +113,11 @@
       </div>
 
       <sw-button
+        :disabled="isLoading"
+        :loading="isLoading"
         class="mt-6"
         variant="primary"
         type="submit"
-        :disabled="isLoading"
-        :loading="isLoading"
       >
         <save-icon v-if="!isLoading" class="mr-2 -ml-1" />
         {{ $tc('settings.company_info.save') }}
@@ -267,6 +267,8 @@ export default {
       'fetchTimeZones',
     ]),
 
+    ...mapActions('notification', ['showNotification']),
+
     currencyNameWithCode({ name, code }) {
       return `${code} - ${name}`
     },
@@ -340,12 +342,16 @@ export default {
         this.isLoading = false
         // window.i18n.locale = this.formData.language.code
         this.setDefaultCurrency(this.formData.currency)
-        window.toastr['success'](
-          this.$t('settings.preferences.updated_message')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$t('settings.preferences.updated_message'),
+        })
         return true
       }
-      window.toastr['error'](response.data.error)
+      this.showNotification({
+        type: 'error',
+        message: response.data.error,
+      })
       return true
     },
 
@@ -357,7 +363,10 @@ export default {
       }
       let response = await this.updateCompanySettings(data)
       if (response.data.success) {
-        window.toastr['success'](this.$t('general.setting_updated'))
+        this.showNotification({
+          type: 'success',
+          message: this.$t('general.setting_updated'),
+        })
       }
     },
   },

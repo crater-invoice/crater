@@ -78,9 +78,9 @@
           />
         </sw-input-group>
         <sw-input-group
+          v-if="isDropdownSelected"
           :label="$t('settings.custom_fields.options')"
           class="mt-5"
-          v-if="isDropdownSelected"
           horizontal
         >
           <option-create @onAdd="addNewOptions" />
@@ -92,28 +92,28 @@
           >
             <sw-input v-model="option.name" type="text" style="width: 90%" />
             <minus-circle-icon
-              @click="removeOption(index)"
               class="ml-1 cursor-pointer icon text-danger"
+              @click="removeOption(index)"
             />
           </div>
         </sw-input-group>
         <sw-input-group
+          v-if="formData.type"
           :label="$t('settings.custom_fields.default_value')"
           horizontal
           class="relative mt-5"
-          v-if="formData.type"
         >
           <component
             :value="formData.default_answer"
             :is="formData.type + 'Type'"
             :options="formData.options"
-            :defaultDateTime="formData.dateTimeValue"
+            :default-date-time="formData.dateTimeValue"
             v-model="formData.default_answer"
           />
         </sw-input-group>
         <sw-input-group
-          :label="$t('settings.custom_fields.placeholder')"
           v-if="!isSwitchTypeSelected"
+          :label="$t('settings.custom_fields.placeholder')"
           class="mt-5"
           horizontal
         >
@@ -376,6 +376,7 @@ export default {
       'fetchCustomField',
     ]),
     ...mapActions('modal', ['closeModal']),
+    ...mapActions('notification', ['showNotification']),
     resetFormData() {
       this.formData = {
         label: null,
@@ -433,9 +434,10 @@ export default {
       if (this.isEdit) {
         this.isLoading = true
         response = await this.updateCustomField(data)
-        window.toastr['success'](
-          this.$tc('settings.custom_fields.updated_message')
-        )
+        this.showNotification({
+          type: 'success',
+          message: this.$tc('settings.custom_fields.updated_message'),
+        })
         this.refreshData()
         this.closeCategoryModal()
         return true
@@ -444,7 +446,10 @@ export default {
       this.isLoading = true
       response = await this.addCustomField(data)
 
-      window.toastr['success'](this.$tc('settings.custom_fields.added_message'))
+      this.showNotification({
+        type: 'success',
+        message: this.$tc('settings.custom_fields.added_message'),
+      })
       this.refreshData()
       this.closeCategoryModal()
       return true

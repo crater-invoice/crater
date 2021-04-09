@@ -56,6 +56,7 @@
   </transition>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -134,13 +135,17 @@ export default {
   },
 
   methods: {
+    ...mapActions('notification', ['showNotification']),
     async updateAddressSetting() {
       let data = { type: 'ADDRESSES', ...this.addresses, large: true }
 
       // if (this.updateSetting(data)) {
-      window.toastr['success'](
-        this.$t('settings.customization.addresses.address_setting_updated')
-      )
+      this.showNotification({
+        type: 'success',
+        message: this.$t(
+          'settings.customization.addresses.address_setting_updated'
+        ),
+      })
       // }
     },
   },

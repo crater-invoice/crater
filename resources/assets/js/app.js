@@ -8,7 +8,6 @@ import router from './router.js'
 import store from './store/index'
 import utils from './helpers/utilities'
 import i18n from './plugins/i18n'
-import swal from 'sweetalert'
 
 require('./bootstrap')
 
@@ -27,5 +26,4 @@ new Vue({
   router,
   store,
   i18n,
-  swal,
 }).$mount('#app')

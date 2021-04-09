@@ -69,7 +69,7 @@
           {{ $t('general.cancel') }}
         </sw-button>
         <sw-button :loading="isLoading" variant="primary" type="submit">
-          <save-icon class="mr-2" v-if="!isLoading" />
+          <save-icon v-if="!isLoading" class="mr-2" />
           {{ !isEdit ? $t('general.save') : $t('general.update') }}
         </sw-button>
       </div>
@@ -174,6 +174,7 @@ export default {
   methods: {
     ...mapActions('modal', ['closeModal', 'resetModalData']),
     ...mapActions('taxType', ['addTaxType', 'updateTaxType', 'fetchTaxType']),
+    ...mapActions('notification', ['showNotification']),
     resetFormData() {
       this.formData = {
         id: null,
@@ -198,13 +199,15 @@ export default {
       }
       if (response.data) {
         if (!this.isEdit) {
-          window.toastr['success'](
-            this.$t('settings.tax_types.created_message')
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.tax_types.created_message'),
+          })
         } else {
-          window.toastr['success'](
-            this.$t('settings.tax_types.updated_message')
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('settings.tax_types.updated_message'),
+          })
         }
         window.hub.$emit('newTax', response.data.taxType)
         this.refreshData ? this.refreshData() : ''
@@ -212,7 +215,10 @@ export default {
         this.isLoading = false
         return true
       }
-      window.toastr['error'](response.data.error)
+      this.showNotification({
+        type: 'error',
+        message: response.data.error,
+      })
     },
     async setData() {
       this.formData = {

@@ -2,11 +2,11 @@
   <base-page>
     <sw-page-header :title="$t('estimates.title')">
       <sw-breadcrumb slot="breadcrumbs">
-        <sw-breadcrumb-item to="dashboard" :title="$t('general.home')" />
+        <sw-breadcrumb-item :title="$t('general.home')" to="dashboard" />
 
         <sw-breadcrumb-item
-          to="#"
           :title="$tc('estimates.estimate', 2)"
+          to="#"
           active
         />
       </sw-breadcrumb>
@@ -277,12 +277,12 @@
         >
           <template slot-scope="row">
             <span> {{ $t('estimates.action') }} </span>
-            <sw-dropdown containerClass="w-56">
+            <sw-dropdown container-class="w-56">
               <dot-icon slot="activator" />
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`estimates/${row.id}/edit`"
+                tag-name="router-link"
               >
                 <pencil-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.edit') }}
@@ -294,8 +294,8 @@
               </sw-dropdown-item>
 
               <sw-dropdown-item
-                tag-name="router-link"
                 :to="`estimates/${row.id}/view`"
+                tag-name="router-link"
               >
                 <eye-icon class="h-5 mr-3 text-gray-600" />
                 {{ $t('general.view') }}
@@ -481,6 +481,8 @@ export default {
 
     ...mapActions('modal', ['openModal']),
 
+    ...mapActions('notification', ['showNotification']),
+
     refreshTable() {
       this.$refs.table.refresh()
     },
@@ -536,14 +538,30 @@ export default {
     },
 
     async onMarkAsAccepted(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_accepted'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (markedAsRejected) => {
-        if (markedAsRejected) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           const data = {
             id: id,
             status: 'ACCEPTED',
@@ -553,23 +571,40 @@ export default {
 
           if (response.data) {
             this.$refs.table.refresh()
-            window.toastr['success'](
-              this.$tc('estimates.marked_as_accepted_message')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('estimates.marked_as_accepted_message'),
+            })
           }
         }
       })
     },
 
     async onMarkAsRejected(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_rejected'),
-        icon: '/assets/icon/times-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (markedAsRejected) => {
-        if (markedAsRejected) {
+        icon: 'error',
+        iconHtml: `<svg
+            aria-hidden="true"
+            focusable="false"
+            class="w-6 h-6"
+            data-prefix="fas"
+            data-icon="times-circle"
+            class="svg-inline--fa fa-times-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#DC2626"
+              d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           const data = {
             id: id,
             status: 'REJECTED',
@@ -579,9 +614,10 @@ export default {
 
           if (response.data) {
             this.$refs.table.refresh()
-            window.toastr['success'](
-              this.$tc('estimates.marked_as_rejected_message')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('estimates.marked_as_rejected_message'),
+            })
           }
         }
       })
@@ -624,65 +660,104 @@ export default {
 
     async removeEstimate(id) {
       this.id = id
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 1),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteEstimate({ ids: [this.id] })
 
           if (res.data.success) {
             this.$refs.table.refresh()
             this.resetSelectedEstimates()
-            window.toastr['success'](this.$tc('estimates.deleted_message', 1))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('estimates.deleted_message', 1),
+            })
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })
     },
 
     async convertInToinvoice(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_conversion'),
-        icon: '/assets/icon/file-alt-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willConvertInToinvoice) => {
-        if (willConvertInToinvoice) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            viewBox="0 0 384 512"
+            class="w-6 h-6"
+            data-prefix="fas"
+            data-icon="file-alt"
+            class="svg-inline--fa fa-file-alt fa-w-12"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="#55547A"
+              d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.convertToInvoice(id)
 
           if (res.data) {
-            window.toastr['success'](this.$t('estimates.conversion_message'))
+            this.showNotification({
+              type: 'success',
+              message: this.$t('estimates.conversion_message'),
+            })
             this.$router.push(`invoices/${res.data.invoice.id}/edit`)
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })
     },
 
     async removeMultipleEstimates() {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$tc('estimates.confirm_delete', 2),
-        icon: '/assets/icon/trash-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willDelete) => {
-        if (willDelete) {
+        icon: 'error',
+        iconHtml: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600"fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           let res = await this.deleteMultipleEstimates()
 
           if (res.data.success) {
             this.$refs.table.refresh()
             this.resetSelectedEstimates()
-            window.toastr['success'](this.$tc('estimates.deleted_message', 2))
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('estimates.deleted_message', 2),
+            })
           } else if (res.data.error) {
-            window.toastr['error'](res.data.message)
+            this.showNotification({
+              type: 'error',
+              message: res.data.message,
+            })
           }
         }
       })
@@ -699,14 +774,30 @@ export default {
     },
 
     async onMarkAsSent(id) {
-      swal({
+      this.$swal({
         title: this.$t('general.are_you_sure'),
         text: this.$t('estimates.confirm_mark_as_sent'),
-        icon: '/assets/icon/check-circle-solid.svg',
-        buttons: true,
-        dangerMode: true,
-      }).then(async (willMarkAsSent) => {
-        if (willMarkAsSent) {
+        icon: 'question',
+        iconHtml: `<svg
+            aria-hidden="true"
+            class="w-6 h-6"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="check-circle"
+            class="svg-inline--fa fa-check-circle fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#55547A"
+              d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+            ></path>
+          </svg>`,
+        showCancelButton: true,
+        showConfirmButton: true,
+      }).then(async (result) => {
+        if (result.value) {
           const data = {
             id: id,
             status: 'SENT',
@@ -716,9 +807,10 @@ export default {
           this.refreshTable()
 
           if (response.data) {
-            window.toastr['success'](
-              this.$tc('estimates.mark_as_sent_successfully')
-            )
+            this.showNotification({
+              type: 'success',
+              message: this.$tc('estimates.mark_as_sent_successfully'),
+            })
           }
         }
       })

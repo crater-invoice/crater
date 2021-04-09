@@ -21,7 +21,7 @@ import Mysql from './database/MysqlDatabase'
 import Pgsql from './database/PgsqlDatabase'
 import Sqlite from './database/SqliteDatabase'
 import Sqlsrv from './database/SqlsrvDatabase'
-
+import { mapActions } from 'vuex'
 export default {
   components: {
     Mysql,
@@ -44,6 +44,7 @@ export default {
     this.getDatabaseConfig(this.database_connection)
   },
   methods: {
+    ...mapActions('notification', ['showNotification']),
     async getDatabaseConfig(connection) {
       this.isLoading = this.isFetching = true
 
@@ -80,20 +81,28 @@ export default {
 
           this.$emit('next', 3)
 
-          window.toastr['success'](
-            this.$t('wizard.success.' + response.data.success)
-          )
+          this.showNotification({
+            type: 'success',
+            message: this.$t('wizard.success.' + response.data.success),
+          })
 
           return true
         } else if (response.data.error) {
-          window.toastr['error'](
-            this.$t('wizard.errors.' + response.data.error)
-          )
+          this.showNotification({
+            type: 'error',
+            message: this.$t('wizard.errors.' + response.data.error),
+          })
         } else if (response.data.error_message) {
-          window.toastr['error'](response.data.error_message)
+          this.showNotification({
+            type: 'error',
+            message: response.data.error_message,
+          })
         }
       } catch (e) {
-        window.toastr['error'](e.response.data.message)
+        this.showNotification({
+          type: 'error',
+          message: e.response.data.message,
+        })
       } finally {
         this.isLoading = this.isFetching = false
       }

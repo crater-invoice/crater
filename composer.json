@@ -24,7 +24,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/flysystem-dropbox": "^1.2",
         "spatie/laravel-backup": "^6.11",
-        "spatie/laravel-medialibrary": "^8.7",
+        "spatie/laravel-medialibrary": "^9.5",
         "vinkla/hashids": "^9.0"
     },
     "require-dev": {

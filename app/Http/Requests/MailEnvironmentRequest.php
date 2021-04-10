@@ -37,14 +37,6 @@ class MailEnvironmentRequest extends FormRequest
                     'mail_port' => [
                         'required'
                     ],
-                    'mail_username' => [
-                        'required',
-                        'string'
-                    ],
-                    'mail_password' => [
-                        'required',
-                        'string'
-                    ],
                     'mail_encryption' => [
                         'required',
                         'string'

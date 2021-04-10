@@ -33,31 +33,19 @@
     </div>
 
     <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 md:mb-6">
-      <sw-input-group
-        :label="$t('wizard.mail.username')"
-        :error="usernameError"
-        required
-      >
+      <sw-input-group :label="$t('wizard.mail.username')">
         <sw-input
-          :invalid="$v.mailConfigData.mail_username.$error"
           v-model.trim="mailConfigData.mail_username"
           type="text"
           name="db_name"
-          @input="$v.mailConfigData.mail_username.$touch()"
         />
       </sw-input-group>
 
-      <sw-input-group
-        :label="$t('wizard.mail.password')"
-        :error="passwordError"
-        required
-      >
+      <sw-input-group :label="$t('wizard.mail.password')">
         <sw-input
-          :invalid="$v.mailConfigData.mail_password.$error"
           v-model.trim="mailConfigData.mail_password"
           :type="getInputType"
           name="password"
-          @input="$v.mailConfigData.mail_password.$touch()"
         >
           <template v-slot:rightIcon>
             <eye-off-icon
@@ -154,6 +142,10 @@ const { required, email, numeric } = require('vuelidate/lib/validators')
 import { EyeIcon, EyeOffIcon } from '@vue-hero-icons/outline'
 
 export default {
+  components: {
+    EyeIcon,
+    EyeOffIcon,
+  },
   props: {
     configData: {
       type: Object,
@@ -170,10 +162,6 @@ export default {
       require: true,
       default: Array,
     },
-  },
-  components: {
-    EyeIcon,
-    EyeOffIcon,
   },
   data() {
     return {
@@ -203,12 +191,6 @@ export default {
         required,
         numeric,
       },
-      mail_username: {
-        required,
-      },
-      mail_password: {
-        required,
-      },
       mail_encryption: {
         required,
       },
@@ -236,24 +218,6 @@ export default {
         return ''
       }
       if (!this.$v.mailConfigData.mail_host.required) {
-        return this.$tc('validation.required')
-      }
-    },
-    usernameError() {
-      if (!this.$v.mailConfigData.mail_username.$error) {
-        return ''
-      }
-
-      if (!this.$v.mailConfigData.mail_username.required) {
-        return this.$tc('validation.required')
-      }
-    },
-    passwordError() {
-      if (!this.$v.mailConfigData.mail_password.$error) {
-        return ''
-      }
-
-      if (!this.$v.mailConfigData.mail_password.required) {
         return this.$tc('validation.required')
       }
     },

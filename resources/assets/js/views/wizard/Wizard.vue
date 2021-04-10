@@ -10,7 +10,7 @@
     />
     <sw-wizard
       :steps="7"
-      :currentStep.sync="step"
+      :current-step.sync="step"
       :allow-navigation-redirect="false"
     >
       <component :is="tab" @next="setTab" />

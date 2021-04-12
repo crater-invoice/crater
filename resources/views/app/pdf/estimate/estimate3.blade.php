@@ -354,7 +354,7 @@
                         <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
                     @endif
                 </td>
-                <td width="50%" class="company-address-container company-address text-right">
+                <td width="50%" class="text-right company-address-container company-address">
                     {!! $company_address !!}
                 </td>
             </tr>
@@ -368,42 +368,41 @@
             <div class="customer-address-container">
                 <div class="billing-address-container billing-address">
                     @if($billing_address)
-                        @lang('pdf_bill_to')
+                        <b>@lang('pdf_bill_to')</b> <br>
                         {!! $billing_address !!}
                     @endif
                 </div>
-                @if($estimate->user->billingaddress)
-                <div class="shipping-address-container shipping-address">
-                    @else
-                    <div class="shipping-address-container--left shipping-address">
-                        @endif
-                        @if($shipping_address)
-                            @lang('pdf_ship_to')
-                            {!! $shipping_address !!}
-                        @endif
-                    </div>
-                    <div style="clear: both;"></div>
+
+                <div @if($estimate->user->billingaddress) class="shipping-address-container shipping-address" @else class="shipping-address-container--left shipping-address" @endif>
+                    @if($shipping_address)
+                        <b>@lang('pdf_ship_to')</b> <br>
+                        {!! $shipping_address !!}
+                    @endif
                 </div>
 
-                <div class="estimate-details-container">
-                    <table>
-                        <tr>
-                            <td class="attribute-label">@lang('pdf_estimate_number')</td>
-                            <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
-                        </tr>
-                        <tr>
-                            <td class="attribute-label">@lang('pdf_estimate_date') </td>
-                            <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
-                        </tr>
-                        <tr>
-                            <td class="attribute-label">@lang('pdf_estimate_expire_date')</td>
-                            <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
-                        </tr>
-                    </table>
-                </div>
                 <div style="clear: both;"></div>
             </div>
+
+            <div class="estimate-details-container">
+                <table>
+                    <tr>
+                        <td class="attribute-label">@lang('pdf_estimate_number')</td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->estimate_number}}</td>
+                    </tr>
+                    <tr>
+                        <td class="attribute-label">@lang('pdf_estimate_date') </td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->formattedEstimateDate}}</td>
+                    </tr>
+                    <tr>
+                        <td class="attribute-label">@lang('pdf_estimate_expire_date')</td>
+                        <td class="attribute-value"> &nbsp;{{$estimate->formattedExpiryDate}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear: both;"></div>
+
             @include('app.pdf.estimate.partials.table')
+
             <div class="notes">
                 @if($notes)
                     <div class="notes-label">

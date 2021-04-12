@@ -389,22 +389,24 @@
             <tr>
                 <td class="text-center">
                     @if($logo)
-                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    @if($estimate->user->company)
-                    <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
-                    @endif
+                        @if($estimate->user->company)
+                            <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
+                        @endif
                     @endif
                 </td>
             </tr>
         </table>
         <hr class="header-bottom-divider" />
     </div>
+
     <div class="wrapper">
         <div class="company-details-container">
             <div class="company-address-container company-address">
                 {!! $company_address !!}
             </div>
+
             <div class="estimate-details-container">
                 <table class="estimate-details-table">
                     <tr>
@@ -423,39 +425,43 @@
             </div>
             <div style="clear: both;"></div>
         </div>
+
         <div class="customer-address-container">
             @if($billing_address !== '</br>')
                 <div class="billing-address-container billing-address">
                     @if($billing_address)
-                        @lang('pdf_bill_to')
+                        <b>@lang('pdf_bill_to')</b> <br>
                         {!! $billing_address !!}
                     @endif
                 </div>
             @endif
-            @if($billing_address !== '</br>')
-            <div class="shipping-address-container shipping-address">
-            @else
-            <div class="shipping-address-container--left shipping-address" style="padding-left:30px;">
-            @endif
+
+
+            <div @if($billing_address !== '</br>') class="shipping-address-container shipping-address" @else class="shipping-address-container--left shipping-address" style="padding-left:30px;" @endif>
+
                 @if($shipping_address)
-                    @lang('pdf_ship_to')
+                     <b>@lang('pdf_ship_to') </b> <br>
                     {!! $shipping_address !!}
                 @endif
             </div>
+
             <div style="clear: both;"></div>
-            </div>
-            <div style="position:relative">
-                @include('app.pdf.estimate.partials.table')
-            </div>
-            <div class="notes">
-                @if($notes)
-                    <div class="notes-label">
-                        @lang('pdf_notes')
-                    </div>
-                    {!! $notes !!}
-                @endif
-            </div>
         </div>
+
+        <div style="position:relative">
+            @include('app.pdf.estimate.partials.table')
+        </div>
+
+        <div class="notes">
+            @if($notes)
+                <div class="notes-label">
+                    @lang('pdf_notes')
+                </div>
+
+                {!! $notes !!}
+            @endif
+        </div>
+    </div>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\EstimateTemplate;
 use Crater\Models\Company;
 use Crater\Models\Tax;

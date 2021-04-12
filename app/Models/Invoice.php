@@ -2,6 +2,7 @@
 
 namespace Crater\Models;
 
+use App;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;

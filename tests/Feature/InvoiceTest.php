@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use Crater\Http\Requests\InvoicesRequest;
 use Crater\Http\Controllers\V1\Invoice\InvoicesController;
+use Crater\Mail\SendInvoiceMail;
 
 use function Pest\Laravel\{postJson, putJson, getJson};
 
@@ -129,6 +130,8 @@ test('update validates using a form request', function () {
 });
 
 test('send invoice to customer', function () {
+    Mail::fake();
+
     $invoices = Invoice::factory()->create([
         'invoice_date' => '1988-07-18',
         'due_date' => '1988-08-18',
@@ -150,7 +153,9 @@ test('send invoice to customer', function () {
         ]);
 
     $invoice2 = Invoice::find($invoices->id);
+
     $this->assertEquals($invoice2->status, Invoice::STATUS_SENT);
+    Mail::assertSent(SendInvoiceMail::class);
 });
 
 test('invoice mark as paid', function () {

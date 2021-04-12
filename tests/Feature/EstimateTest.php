@@ -11,6 +11,8 @@ use Crater\Http\Controllers\V1\Estimate\EstimatesController;
 use Crater\Http\Controllers\V1\Estimate\SendEstimateController;
 use Crater\Http\Requests\DeleteEstimatesRequest;
 use Crater\Http\Requests\SendEstimatesRequest;
+use Crater\Mail\SendEstimateMail;
+
 use function Pest\Laravel\{postJson, putJson, getJson};
 
 beforeEach(function () {
@@ -150,6 +152,8 @@ test('send estimate using a form request', function () {
 });
 
 test('send estimate to customer', function () {
+    Mail::fake();
+
     $estimate = Estimate::factory()->create([
         'estimate_date' => '1988-07-18',
         'expiry_date' => '1988-08-18',
@@ -167,6 +171,8 @@ test('send estimate to customer', function () {
         ->assertJson([
             'success' => true
         ]);
+
+    Mail::assertSent(SendEstimateMail::class);
 });
 
 test('estimate mark as accepted', function () {

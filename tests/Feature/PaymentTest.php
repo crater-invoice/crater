@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use Crater\Http\Requests\PaymentRequest;
 use Crater\Http\Controllers\V1\Payment\PaymentsController;
+use Crater\Mail\SendPaymentMail;
+
 use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
 
 beforeEach(function () {
@@ -113,6 +115,9 @@ test('search payments', function () {
 });
 
 test('send payment to customer', function () {
+
+    Mail::fake();
+
     $payment = Payment::factory()->create();
 
     $data = [
@@ -122,11 +127,13 @@ test('send payment to customer', function () {
         'to' => 'doe@example.com'
     ];
 
-    $response = postJson("api/v1/payments/{$payment->id}/send", $data) ;
+    $response = postJson("api/v1/payments/{$payment->id}/send", $data);
 
     $response->assertJson([
         'success' => true
     ]);
+
+    Mail::assertSent(SendPaymentMail::class);
 });
 
 test('delete payment', function () {

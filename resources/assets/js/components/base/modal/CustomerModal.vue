@@ -444,7 +444,6 @@ export default {
     ...mapGetters(['currencies', 'countries']),
     ...mapGetters('company', ['defaultCurrency']),
     ...mapGetters('modal', ['modalDataID', 'modalData', 'modalActive']),
-    ...mapActions('notification', ['showNotification']),
 
     nameError() {
       if (!this.$v.formData.name.$error) {

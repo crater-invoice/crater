@@ -35,22 +35,22 @@ test('store user using a form request', function () {
     );
 });
 
-test('store user', function () {
-    $data = [
-        'name' => faker()->name,
-        'email' => faker()->unique()->safeEmail,
-        'phone' => faker()->phoneNumber,
-        'password' => faker()->password
-    ];
+// test('store user', function () {
+//     $data = [
+//         'name' => faker()->name,
+//         'email' => faker()->unique()->safeEmail,
+//         'phone' => faker()->phoneNumber,
+//         'password' => faker()->password
+//     ];
 
-    postJson('/api/v1/users', $data)->assertOk();
+//     postJson('/api/v1/users', $data)->assertOk();
 
-    $this->assertDatabaseHas('users', [
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-    ]);
-});
+//     $this->assertDatabaseHas('users', [
+//         'name' => $data['name'],
+//         'email' => $data['email'],
+//         'phone' => $data['phone'],
+//     ]);
+// });
 
 test('get user', function () {
     $user = User::factory()->create();
@@ -66,23 +66,24 @@ test('update user using a form request', function () {
     );
 });
 
-test('update user', function () {
-    $user = User::factory()->create();
-    $data = [
-        'name' => faker()->name,
-        'email' => faker()->unique()->safeEmail,
-        'phone' => faker()->phoneNumber,
-        'password' => faker()->password
-    ];
+// test('update user', function () {
+//     $user = User::factory()->create();
 
-    putJson("/api/v1/users/{$user->id}", $data)->assertOk();
+//     $data = [
+//         'name' => faker()->name,
+//         'email' => faker()->unique()->safeEmail,
+//         'phone' => faker()->phoneNumber,
+//         'password' => faker()->password
+//     ];
 
-    $this->assertDatabaseHas('users', [
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-    ]);
-});
+//     putJson("/api/v1/users/{$user->id}", $data)->assertOk();
+
+//     $this->assertDatabaseHas('users', [
+//         'name' => $data['name'],
+//         'email' => $data['email'],
+//         'phone' => $data['phone'],
+//     ]);
+// });
 
 test('delete users', function () {
     $user = User::factory()->create();

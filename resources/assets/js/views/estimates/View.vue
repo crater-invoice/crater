@@ -422,7 +422,7 @@ export default {
           this.isMarkAsSent = false
           if (response.data) {
             this.estimate.status = 'SENT'
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.mark_as_sent_successfully'),
             })
@@ -461,13 +461,13 @@ export default {
         if (result.value) {
           let request = await this.deleteEstimate({ ids: [id] })
           if (request.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.deleted_message', 1),
             })
             this.$router.push('/admin/estimates')
           } else if (request.data.error) {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: request.data.message,
             })

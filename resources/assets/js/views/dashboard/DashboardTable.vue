@@ -377,13 +377,13 @@ export default {
         if (result.value) {
           let res = await this.deleteEstimate({ ids: [this.id] })
           if (res.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.deleted_message', 1),
             })
             this.refreshEstTable()
           } else if (res.data.error) {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: res.data.message,
             })
@@ -428,13 +428,13 @@ export default {
           this.selectAllField = false
 
           if (res.data) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$t('estimates.conversion_message'),
             })
             this.$router.push(`invoices/${res.data.invoice.id}/edit`)
           } else if (res.data.error) {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: res.data.message,
             })
@@ -477,7 +477,7 @@ export default {
           this.refreshEstTable()
 
           if (response.data) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.mark_as_sent_successfully'),
             })
@@ -502,13 +502,13 @@ export default {
         if (result.value) {
           let res = await this.deleteInvoice({ ids: [this.id] })
           if (res.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('invoices.deleted_message'),
             })
             this.refreshInvTable()
           } else if (res.data.error) {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: res.data.message,
             })
@@ -549,7 +549,7 @@ export default {
           this.refreshInvTable()
 
           if (response.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('invoices.send_invoice_successfully'),
             })
@@ -557,13 +557,13 @@ export default {
           }
 
           if (response.data.error === 'user_email_does_not_exist') {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: this.$tc('invoices.user_email_does_not_exist'),
             })
             return false
           }
-          this.showToaster({
+          this.showNotification({
             type: 'error',
             message: this.$tc('invoices.something_went_wrong'),
           })
@@ -604,7 +604,7 @@ export default {
 
           this.refreshInvTable()
           if (response.data) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('invoices.mark_as_sent_successfully'),
             })
@@ -646,7 +646,7 @@ export default {
 
           if (response.data) {
             this.refreshEstTable()
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.marked_as_accepted_message'),
             })
@@ -688,7 +688,7 @@ export default {
 
           if (response.data) {
             this.refreshEstTable()
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.marked_as_rejected_message'),
             })
@@ -730,7 +730,7 @@ export default {
           this.refreshEstTable()
 
           if (response.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('estimates.send_estimate_successfully'),
             })
@@ -738,13 +738,13 @@ export default {
           }
 
           if (response.data.error === 'user_email_does_not_exist') {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: this.$tc('estimates.user_email_does_not_exist'),
             })
             return true
           }
-          this.showToaster({
+          this.showNotification({
             type: 'error',
             message: this.$tc('estimates.something_went_wrong'),
           })

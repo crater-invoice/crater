@@ -426,7 +426,7 @@ export default {
           this.isMarkingAsSent = false
           if (response.data) {
             this.invoice.status = 'SENT'
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('invoices.marked_as_sent_message'),
             })
@@ -465,13 +465,13 @@ export default {
         if (result.value) {
           let request = await this.deleteInvoice({ ids: [id] })
           if (request.data.success) {
-            this.showToaster({
+            this.showNotification({
               type: 'success',
               message: this.$tc('invoices.deleted_message', 1),
             })
             this.$router.push('/admin/invoices')
           } else if (request.data.error) {
-            this.showToaster({
+            this.showNotification({
               type: 'error',
               message: request.data.message,
             })

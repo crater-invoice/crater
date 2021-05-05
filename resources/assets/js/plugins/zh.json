@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "dashboard": "डैशबोर्ड",
+    "dashboard": "Dashboard",
     "customers": "Customers",
     "items": "Items",
     "invoices": "Invoices",
@@ -1143,11 +1143,11 @@
     "price_minvalue": "Price should be greater than 0.",
     "amount_maxlength": "Amount should not be greater than 20 digits.",
     "amount_minvalue": "Amount should be greater than 0.",
-    "description_maxlength": "Description should not be greater than 255 characters.",
+    "description_maxlength": "Description should not be greater than 65,000 characters.",
     "subject_maxlength": "Subject should not be greater than 100 characters.",
     "message_maxlength": "Message should not be greater than 255 characters.",
     "maximum_options_error": "Maximum  of {max} options selected. First remove a selected option to select another.",
-    "notes_maxlength": "Notes should not be greater than 255 characters.",
+    "notes_maxlength": "Notes should not be greater than 65,000 characters.",
     "address_maxlength": "Address should not be greater than 255 characters.",
     "ref_number_maxlength": "Ref Number should not be greater than 255 characters.",
     "prefix_maxlength": "Prefix should not be greater than 5 characters.",

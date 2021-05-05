@@ -28,7 +28,7 @@
         "@bytefury/spacewind": "^0.5.3",
         "@vue-hero-icons/outline": "^1.6.3",
         "@vue-hero-icons/solid": "^1.6.3",
-        "axios": "^0.19",
+        "axios": "^0.21",
         "chart.js": "^2.7.3",
         "guid": "0.0.12",
         "lodash": "^4.17.13",

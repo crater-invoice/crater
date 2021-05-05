@@ -177,7 +177,7 @@ public function run()
 		array('id' => 159,'code' => 'NI','name' => "Nicaragua",'phonecode' => 505),
 		array('id' => 160,'code' => 'NE','name' => "Niger",'phonecode' => 227),
 		array('id' => 161,'code' => 'NG','name' => "Nigeria",'phonecode' => 234),
-		array('id' => 163,'code' => 'NU','name' => "Niue",'phonecode' => 683),
+		array('id' => 162,'code' => 'NU','name' => "Niue",'phonecode' => 683),
 		array('id' => 163,'code' => 'NF','name' => "Norfolk Island",'phonecode' => 672),
 		array('id' => 164,'code' => 'MP','name' => "Northern Mariana Islands",'phonecode' => 1670),
 		array('id' => 165,'code' => 'NO','name' => "Norway",'phonecode' => 47),

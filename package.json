@@ -31,7 +31,7 @@
         "axios": "^0.21",
         "chart.js": "^2.7.3",
         "guid": "0.0.12",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.21",
         "moment": "^2.29.1",
         "sweet-modal-vue": "^2.0.0",
         "tailwindcss": "^2.0.1",

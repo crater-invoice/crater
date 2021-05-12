@@ -16,7 +16,7 @@
         "eslint-plugin-prettier": "^3.3.0",
         "eslint-plugin-vue": "^4.7.1",
         "laravel-mix": "^6.0.6",
-        "postcss": "^8.1",
+        "postcss": "^8.2",
         "prettier": "^2.2.1",
         "resolve-url-loader": "3.1.0",
         "sass": "^1.29.0",

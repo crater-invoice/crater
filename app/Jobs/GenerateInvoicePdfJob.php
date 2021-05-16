@@ -10,9 +10,13 @@ use Illuminate\Queue\SerializesModels;
 
 class GenerateInvoicePdfJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public $invoice;
+
     public $deleteExistingFile;
 
     /**
@@ -34,7 +38,7 @@ class GenerateInvoicePdfJob implements ShouldQueue
     public function handle()
     {
         $this->invoice->generatePDF('invoice', $this->invoice->invoice_number, $this->deleteExistingFile);
-        
+
         return 0;
     }
 }

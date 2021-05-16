@@ -1,13 +1,16 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Settings\TaxTypesController;
+use Crater\Http\Requests\TaxTypeRequest;
 use Crater\Models\TaxType;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\TaxTypeRequest;
-use Crater\Http\Controllers\V1\Settings\TaxTypesController;
 
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -52,7 +55,7 @@ test('get tax type', function () {
 
     $response->assertOk()
         ->assertJson([
-            'taxType' => $taxType->toArray()
+            'taxType' => $taxType->toArray(),
         ]);
 });
 
@@ -65,7 +68,7 @@ test('update tax type', function () {
 
     $response->assertOk()
         ->assertJson([
-            'taxType' => $taxType1
+            'taxType' => $taxType1,
         ]);
 });
 
@@ -84,7 +87,7 @@ test('delete tax type', function () {
 
     $response->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDeleted($taxType);

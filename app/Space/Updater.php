@@ -1,10 +1,11 @@
 <?php
+
 namespace Crater\Space;
 
-use File;
 use Artisan;
-use GuzzleHttp\Exception\RequestException;
 use Crater\Events\UpdateFinished;
+use File;
+use GuzzleHttp\Exception\RequestException;
 use ZipArchive;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
@@ -15,8 +16,7 @@ class Updater
     public static function checkForUpdate($installed_version)
     {
         $data = null;
-        if(env('APP_ENV') === 'development')
-        {
+        if (env('APP_ENV') === 'development') {
             $url = 'downloads/check/latest/'. $installed_version . '?type=update&is_dev=1';
         } else {
             $url = 'downloads/check/latest/'. $installed_version . '?type=update';
@@ -62,8 +62,8 @@ class Updater
                 'success' => false,
                 'error' => 'Download Exception',
                 'data' => [
-                    'path' => $path
-                ]
+                    'path' => $path,
+                ],
             ];
         }
 
@@ -74,7 +74,7 @@ class Updater
         // Create temp directory
         $temp_dir = storage_path('app/temp-' . md5(mt_rand()));
 
-        if (!File::isDirectory($temp_dir)) {
+        if (! File::isDirectory($temp_dir)) {
             File::makeDirectory($temp_dir);
         }
 
@@ -83,7 +83,7 @@ class Updater
         // Add content to the Zip file
         $uploaded = is_int(file_put_contents($zip_file_path, $data)) ? true : false;
 
-        if (!$uploaded) {
+        if (! $uploaded) {
             return false;
         }
 
@@ -92,13 +92,13 @@ class Updater
 
     public static function unzip($zip_file_path)
     {
-        if(!file_exists($zip_file_path)) {
+        if (! file_exists($zip_file_path)) {
             throw new \Exception('Zip file not found');
         }
 
         $temp_extract_dir = storage_path('app/temp2-' . md5(mt_rand()));
 
-        if (!File::isDirectory($temp_extract_dir)) {
+        if (! File::isDirectory($temp_extract_dir)) {
             File::makeDirectory($temp_extract_dir);
         }
         // Unzip the file
@@ -118,7 +118,7 @@ class Updater
 
     public static function copyFiles($temp_extract_dir)
     {
-        if (!File::copyDirectory($temp_extract_dir . '/Crater', base_path())) {
+        if (! File::copyDirectory($temp_extract_dir . '/Crater', base_path())) {
             return false;
         }
 
@@ -132,7 +132,7 @@ class Updater
     {
         $files = json_decode($json);
 
-        foreach($files as $file) {
+        foreach ($files as $file) {
             \File::delete(base_path($file));
         }
 
@@ -153,7 +153,7 @@ class Updater
         return [
             'success' => true,
             'error' => false,
-            'data' => []
+            'data' => [],
         ];
     }
 }

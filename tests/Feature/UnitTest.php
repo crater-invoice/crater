@@ -1,12 +1,15 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Item\UnitsController;
+use Crater\Http\Requests\UnitRequest;
 use Crater\Models\Unit;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\UnitRequest;
-use Crater\Http\Controllers\V1\Item\UnitsController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -31,7 +34,7 @@ test('get units', function () {
 test('create unit', function () {
     $data = [
         'name' => 'unit name',
-        'company_id' => User::find(1)->company_id
+        'company_id' => User::find(1)->company_id,
     ];
 
     $response = postJson('api/v1/units', $data);

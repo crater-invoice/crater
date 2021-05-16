@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\ExpenseCategory;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 

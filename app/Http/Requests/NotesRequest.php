@@ -26,7 +26,7 @@ class NotesRequest extends FormRequest
         return [
             'type' => ['required'],
             'name' => ['required'],
-            'notes' => ['required']
+            'notes' => ['required'],
         ];
     }
 }

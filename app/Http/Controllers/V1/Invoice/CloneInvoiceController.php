@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Invoice;
 
-use Illuminate\Http\Request;
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Invoice;
 use Carbon\Carbon;
+use Crater\Http\Controllers\Controller;
 use Crater\Models\CompanySetting;
+use Crater\Models\Invoice;
+use Illuminate\Http\Request;
 
 class CloneInvoiceController extends Controller
 {
@@ -45,7 +45,7 @@ class CloneInvoiceController extends Controller
             'discount_per_item' => $invoice->discount_per_item,
             'tax' => $invoice->tax,
             'notes' => $invoice->notes,
-            'unique_hash' => str_random(60)
+            'unique_hash' => str_random(60),
         ]);
 
         $invoice->load('items.taxes');
@@ -79,13 +79,13 @@ class CloneInvoiceController extends Controller
                 'items',
                 'user',
                 'invoiceTemplate',
-                'taxes'
+                'taxes',
             ])
             ->find($newInvoice->id);
 
         return response()->json([
             'invoice' => $newInvoice,
-            'success' => true
+            'success' => true,
         ]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ResetApp::class,
-        Commands\UpdateCommand::class
+        Commands\UpdateCommand::class,
     ];
 
     /**

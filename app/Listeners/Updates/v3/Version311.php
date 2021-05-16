@@ -2,15 +2,14 @@
 
 namespace Crater\Listeners\Updates\v3;
 
-use Crater\Listeners\Updates\Listener;
-use Crater\Events\UpdateFinished;
-use Crater\Models\Setting;
-use Crater\Models\Currency;
 use Artisan;
+use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\Listener;
+use Crater\Models\Setting;
 
 class Version311 extends Listener
 {
-    const VERSION = '3.1.1';
+    public const VERSION = '3.1.1';
 
     /**
      * Handle the event.

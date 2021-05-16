@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,23 +25,23 @@ class CompanySettingRequest extends FormRequest
     {
         return [
             'currency' => [
-                'required'
+                'required',
             ],
             'time_zone' => [
-                'required'
+                'required',
             ],
             'language' => [
-                'required'
+                'required',
             ],
             'fiscal_year' => [
-                'required'
+                'required',
             ],
             'moment_date_format' => [
-                'required'
+                'required',
             ],
             'carbon_date_format' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

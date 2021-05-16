@@ -3,8 +3,8 @@
 namespace Crater\Http\Controllers\V1\Invoice;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Models\Invoice;
 use Crater\Http\Requests\SendInvoiceRequest;
+use Crater\Models\Invoice;
 
 class SendInvoiceController extends Controller
 {
@@ -19,7 +19,7 @@ class SendInvoiceController extends Controller
         $invoice->send($request->all());
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

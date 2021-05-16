@@ -4,8 +4,8 @@ namespace Crater\Http\Requests;
 
 use Crater\Models\Invoice;
 use Crater\Rules\RelationNotExist;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DeleteInvoiceRequest extends FormRequest
 {
@@ -28,13 +28,13 @@ class DeleteInvoiceRequest extends FormRequest
     {
         return [
             'ids' => [
-                'required'
+                'required',
             ],
             'ids.*' => [
                 'required',
                 Rule::exists('invoices', 'id'),
-                new RelationNotExist(Invoice::class, 'payments')
-            ]
+                new RelationNotExist(Invoice::class, 'payments'),
+            ],
         ];
     }
 }

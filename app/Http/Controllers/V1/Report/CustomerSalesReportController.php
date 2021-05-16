@@ -2,14 +2,14 @@
 
 namespace Crater\Http\Controllers\V1\Report;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Http\Request;
-use Crater\Models\Company;
-use PDF;
 use Carbon\Carbon;
-use Crater\Models\User;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Company;
+use Crater\Models\CompanySetting;
+use Crater\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use PDF;
 
 class CustomerSalesReportController extends Controller
 {
@@ -32,11 +32,11 @@ class CustomerSalesReportController extends Controller
         $end = Carbon::createFromFormat('Y-m-d', $request->to_date);
 
         $customers = User::with(['invoices' => function ($query) use ($start, $end) {
-                $query->whereBetween(
-                    'invoice_date',
-                    [$start->format('Y-m-d'), $end->format('Y-m-d')]
-                );
-            }])
+            $query->whereBetween(
+                'invoice_date',
+                [$start->format('Y-m-d'), $end->format('Y-m-d')]
+            );
+        }])
             ->customer()
             ->whereCompany($company->id)
             ->applyInvoiceFilters($request->only(['from_date', 'to_date']))
@@ -65,7 +65,7 @@ class CustomerSalesReportController extends Controller
             'footer_text_color',
             'footer_total_color',
             'footer_bg_color',
-            'date_text_color'
+            'date_text_color',
         ];
 
         $colorSettings = CompanySetting::whereIn('option', $colors)
@@ -78,7 +78,7 @@ class CustomerSalesReportController extends Controller
             'colorSettings' => $colorSettings,
             'company' => $company,
             'from_date' => $from_date,
-            'to_date' => $to_date
+            'to_date' => $to_date,
         ]);
 
         $pdf = PDF::loadView('app.pdf.reports.sales-customers');

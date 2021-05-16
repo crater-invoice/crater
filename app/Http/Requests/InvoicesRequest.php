@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Crater\Models\Invoice;
@@ -26,62 +27,62 @@ class InvoicesRequest extends FormRequest
     {
         $rules = [
             'invoice_date' => [
-                'required'
+                'required',
             ],
             'due_date' => [
-                'required'
+                'required',
             ],
             'user_id' => [
-                'required'
+                'required',
             ],
             'invoice_number' => [
                 'required',
-                new UniqueNumber(Invoice::class)
+                new UniqueNumber(Invoice::class),
             ],
             'discount' => [
-                'required'
+                'required',
             ],
             'discount_val' => [
-                'required'
+                'required',
             ],
             'sub_total' => [
-                'required'
+                'required',
             ],
             'total' => [
-                'required'
+                'required',
             ],
             'tax' => [
-                'required'
+                'required',
             ],
             'invoice_template_id' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
-                'array'
+                'array',
             ],
             'items.*' => [
                 'required',
-                'max:255'
+                'max:255',
             ],
             'items.*.description' => [
-                'max:255'
+                'max:255',
             ],
             'items.*.name' => [
-                'required'
+                'required',
             ],
             'items.*.quantity' => [
-                'required'
+                'required',
             ],
             'items.*.price' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
 
         if ($this->isMethod('PUT')) {
             $rules['invoice_number'] = [
                 'required',
-                new UniqueNumber(Invoice::class, $this->route('invoice')->id)
+                new UniqueNumber(Invoice::class, $this->route('invoice')->id),
             ];
         }
 

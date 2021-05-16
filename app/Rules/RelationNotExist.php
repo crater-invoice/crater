@@ -2,12 +2,12 @@
 
 namespace Crater\Rules;
 
-
 use Illuminate\Contracts\Validation\Rule;
 
 class RelationNotExist implements Rule
 {
     public $class;
+
     public $relation;
 
     /**

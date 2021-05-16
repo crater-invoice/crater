@@ -13,7 +13,7 @@ class CreateUnitsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('units')) {
+        if (! Schema::hasTable('units')) {
             Schema::create('units', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');

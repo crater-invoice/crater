@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\Estimate;
 
-use Crater\Models\EstimateTemplate;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\EstimateTemplate;
 use Illuminate\Http\Request;
 
 class EstimateTemplatesController extends Controller
@@ -17,7 +17,7 @@ class EstimateTemplatesController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'templates' => EstimateTemplate::all()
+            'templates' => EstimateTemplate::all(),
         ]);
     }
 }

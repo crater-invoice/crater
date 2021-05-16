@@ -1,4 +1,5 @@
 <?php
+
 // Implementation taken from nova-backup-tool - https://github.com/spatie/nova-backup-tool/
 
 namespace Crater\Http\Controllers\V1\Backup;
@@ -12,12 +13,10 @@ class ApiController extends Controller
      *
      * @return JsonResponse
      */
-
     public function respondSuccess(): JsonResponse
     {
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
-
 }

@@ -32,7 +32,7 @@ class EmailLogFactory extends Factory
             'mailable_type' => $this->faker->randomElement([Invoice::class, Estimate::class, Payment::class]),
             'mailable_id' => function (array $log) {
                 return $log['mailable_type']::factory();
-            }
+            },
         ];
     }
 }

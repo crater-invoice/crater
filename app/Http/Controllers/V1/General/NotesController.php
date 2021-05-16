@@ -23,7 +23,7 @@ class NotesController extends Controller
             ->paginate($limit);
 
         return response()->json([
-            'notes' => $notes
+            'notes' => $notes,
         ]);
     }
 
@@ -38,7 +38,7 @@ class NotesController extends Controller
         $note = Note::create($request->validated());
 
         return response()->json([
-            'note' => $note
+            'note' => $note,
         ]);
     }
 
@@ -51,7 +51,7 @@ class NotesController extends Controller
     public function show(Note $note)
     {
         return response()->json([
-            'note' => $note
+            'note' => $note,
         ]);
     }
 
@@ -67,7 +67,7 @@ class NotesController extends Controller
         $note->update($request->validated());
 
         return response()->json([
-            'note' => $note
+            'note' => $note,
         ]);
     }
 
@@ -82,7 +82,7 @@ class NotesController extends Controller
         $note->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

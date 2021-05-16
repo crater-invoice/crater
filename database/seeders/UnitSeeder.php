@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Crater\Models\Unit;
+use Illuminate\Database\Seeder;
 
 class UnitSeeder extends Seeder
 {

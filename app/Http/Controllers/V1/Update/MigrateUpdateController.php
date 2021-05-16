@@ -19,7 +19,7 @@ class MigrateUpdateController extends Controller
         Updater::migrateUpdate();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

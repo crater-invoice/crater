@@ -26,12 +26,12 @@ class DeleteEstimatesRequest extends FormRequest
     {
         return [
             'ids' => [
-                'required'
+                'required',
             ],
             'ids.*' => [
                 'required',
-                Rule::exists('estimates', 'id')
-            ]
+                Rule::exists('estimates', 'id'),
+            ],
         ];
     }
 }

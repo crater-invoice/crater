@@ -3,16 +3,17 @@
 use Crater\Http\Requests\GetSettingsRequest;
 
 test('get settings request rules', function () {
-    $request = new GetSettingsRequest;
+    $request = new GetSettingsRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'settings' => [
-                'required'
+                'required',
             ],
             'settings.*' => [
                 'required',
-                'string'
-            ]
+                'string',
+            ],
         ],
         $request->rules()
     );
@@ -20,7 +21,7 @@ test('get settings request rules', function () {
 
 
 test('get settings request authorize', function () {
-    $request = new GetSettingsRequest;
+    $request = new GetSettingsRequest();
 
     $this->assertTrue($request->authorize());
 });

@@ -2,15 +2,13 @@
 
 namespace Crater\Listeners\Updates\v2;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
 use Crater\Models\Setting;
 
 class Version202 extends Listener
 {
-    const VERSION = '2.0.2';
+    public const VERSION = '2.0.2';
 
     /**
      * Create the event listener.

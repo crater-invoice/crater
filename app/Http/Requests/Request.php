@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

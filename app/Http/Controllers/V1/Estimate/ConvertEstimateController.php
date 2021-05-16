@@ -2,12 +2,12 @@
 
 namespace Crater\Http\Controllers\V1\Estimate;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\CompanySetting;
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
-use Carbon\Carbon;
-use Crater\Models\CompanySetting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ConvertEstimateController extends Controller
@@ -52,7 +52,7 @@ class ConvertEstimateController extends Controller
             'discount_per_item' => $estimate->discount_per_item,
             'tax' => $estimate->tax,
             'notes' => $estimate->notes,
-            'unique_hash' => str_random(60)
+            'unique_hash' => str_random(60),
         ]);
 
         $invoiceItems = $estimate->items->toArray();
@@ -85,11 +85,11 @@ class ConvertEstimateController extends Controller
             'items',
             'user',
             'invoiceTemplate',
-            'taxes'
+            'taxes',
         ])->find($invoice->id);
 
         return response()->json([
-            'invoice' => $invoice
+            'invoice' => $invoice,
         ]);
     }
 }

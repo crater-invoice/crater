@@ -2,10 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Payment;
 
+use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\PaymentMethodRequest;
 use Crater\Models\PaymentMethod;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\PaymentMethodRequest;
-use Crater\Http\Controllers\Controller;
 
 class PaymentMethodsController extends Controller
 {
@@ -21,13 +21,13 @@ class PaymentMethodsController extends Controller
         $paymentMethods = PaymentMethod::whereCompany($request->header('company'))
             ->applyFilters($request->only([
                 'method_id',
-                'search'
+                'search',
             ]))
             ->latest()
             ->paginateData($limit);
 
         return response()->json([
-            'paymentMethods' => $paymentMethods
+            'paymentMethods' => $paymentMethods,
         ]);
     }
 
@@ -42,7 +42,7 @@ class PaymentMethodsController extends Controller
         $paymentMethod = PaymentMethod::createPaymentMethod($request);
 
         return response()->json([
-            'paymentMethod' => $paymentMethod
+            'paymentMethod' => $paymentMethod,
         ]);
     }
 
@@ -55,7 +55,7 @@ class PaymentMethodsController extends Controller
     public function show(PaymentMethod $paymentMethod)
     {
         return response()->json([
-            'paymentMethod' => $paymentMethod
+            'paymentMethod' => $paymentMethod,
         ]);
     }
 
@@ -71,7 +71,7 @@ class PaymentMethodsController extends Controller
         $paymentMethod->update($request->validated());
 
         return response()->json([
-            'paymentMethod' => $paymentMethod
+            'paymentMethod' => $paymentMethod,
         ]);
     }
 
@@ -87,14 +87,14 @@ class PaymentMethodsController extends Controller
 
         if ($payments->count() > 0) {
             return response()->json([
-                'error' => 'payments_attached'
+                'error' => 'payments_attached',
             ]);
         }
 
         $paymentMethod->delete();
 
         return response()->json([
-            'success' => 'Payment method deleted successfully'
+            'success' => 'Payment method deleted successfully',
         ]);
     }
 }

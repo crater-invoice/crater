@@ -1,7 +1,7 @@
 <?php
+
 namespace Crater\Models;
 
-use Crater\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +32,7 @@ class CompanySetting extends Model
                 [
                     'option' => $key,
                     'company_id' => $company_id,
-                    'value' => $value
+                    'value' => $value,
                 ]
             );
         }

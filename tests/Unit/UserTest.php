@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\Address;
+use Crater\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
@@ -84,32 +84,32 @@ test('user has many invoices', function () {
 
 test('create customer', function () {
     $customer = User::factory()->raw([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
-    $request = new Request;
+    $request = new Request();
 
     $request->replace($customer);
 
     $response = User::createCustomer($request);
 
-     $this->assertDatabaseHas('users', [
+    $this->assertDatabaseHas('users', [
         'name' => $customer['name'],
         'email' => $customer['email'],
-        'role' => $customer['role']
+        'role' => $customer['role'],
     ]);
 });
 
 test('update customer', function () {
     $customer = User::factory()->create([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
     $customer2 = User::factory()->raw([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
-    $request = new Request;
+    $request = new Request();
 
     $request->replace($customer2);
 
@@ -121,6 +121,6 @@ test('update customer', function () {
         'id' => $customer->id,
         'name' => $customer2['name'],
         'email' => $customer2['email'],
-        'role' => $customer2['role']
+        'role' => $customer2['role'],
     ]);
 });

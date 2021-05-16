@@ -4,9 +4,8 @@ namespace Crater\Traits;
 
 use Carbon\Carbon;
 use Crater\Models\Address;
-use Crater\Models\FileDisk;
 use Crater\Models\CompanySetting;
-use Illuminate\Support\Facades\Auth;
+use Crater\Models\FileDisk;
 use Illuminate\Support\Facades\App;
 
 trait GeneratesPdfTrait
@@ -14,10 +13,10 @@ trait GeneratesPdfTrait
     public function getGeneratedPDFOrStream($collection_name)
     {
         $pdf = $this->getGeneratedPDF($collection_name);
-        if($pdf && file_exists($pdf['path'])) {
+        if ($pdf && file_exists($pdf['path'])) {
             return response()->make(file_get_contents($pdf['path']), 200, [
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'.pdf"'
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'.pdf"',
             ]);
         }
 
@@ -28,8 +27,8 @@ trait GeneratesPdfTrait
         $pdf = $this->getPDFData();
 
         return response()->make($pdf->stream(), 200, [
-            'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.$this[$collection_name.'_number'].'.pdf"'
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$this[$collection_name.'_number'].'.pdf"',
         ]);
     }
 
@@ -41,7 +40,7 @@ trait GeneratesPdfTrait
             if ($media) {
                 $file_disk = FileDisk::find($media->custom_properties['file_disk_id']);
 
-                if (!$file_disk) {
+                if (! $file_disk) {
                     return false;
                 }
 
@@ -49,7 +48,7 @@ trait GeneratesPdfTrait
 
                 $path = null;
 
-                if($file_disk->driver == 'local'){
+                if ($file_disk->driver == 'local') {
                     $path = $media->getPath();
                 } else {
                     $path = $media->getTemporaryUrl(Carbon::now()->addMinutes(5));
@@ -57,22 +56,21 @@ trait GeneratesPdfTrait
 
                 return collect([
                     'path' => $path,
-                    'file_name' => $media->file_name
+                    'file_name' => $media->file_name,
                 ]);
             }
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return false;
         }
 
         return false;
     }
 
-
     public function generatePDF($collection_name, $file_name, $deleteExistingFile = false)
     {
         $save_pdf_to_disk = CompanySetting::getSetting('save_pdf_to_disk',  $this->company_id);
 
-        if($save_pdf_to_disk == 'NO') {
+        if ($save_pdf_to_disk == 'NO') {
             return 0;
         }
 
@@ -84,7 +82,7 @@ trait GeneratesPdfTrait
 
         \Storage::disk('local')->put('temp/'.$collection_name.'/'.$this->id.'/temp.pdf', $pdf->output());
 
-        if($deleteExistingFile) {
+        if ($deleteExistingFile) {
             $this->clearMediaCollection($collection_name);
         }
 

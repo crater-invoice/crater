@@ -25,12 +25,12 @@ class GetSettingsRequest extends FormRequest
     {
         return [
             'settings' => [
-                'required'
+                'required',
             ],
             'settings.*' => [
                 'required',
-                'string'
-            ]
+                'string',
+            ],
         ];
     }
 }

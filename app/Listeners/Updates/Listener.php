@@ -5,13 +5,13 @@ namespace Crater\Listeners\Updates;
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class Listener
 {
-    const VERSION = '';
+    public const VERSION = '';
 
     /**
      * Check if should listen.
      *
      * @param  $event
-     * @return boolean
+     * @return bool
      */
     protected function isListenerFired($event)
     {

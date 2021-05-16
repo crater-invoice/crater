@@ -6,7 +6,9 @@ use Crater\Http\Requests\ProfileRequest;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use function Pest\Laravel\{postJson, getJson, putJson};
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -41,7 +43,7 @@ test('update profile', function () {
     $user = [
         'name' => 'John Doe',
         'password' => 'admin@123',
-        'email' => 'admin@crater.in'
+        'email' => 'admin@crater.in',
     ];
 
     $response = putJson('api/v1/me', $user);
@@ -50,7 +52,7 @@ test('update profile', function () {
 
     $this->assertDatabaseHas('users', [
         'name' => $user['name'],
-        'email' => $user['email']
+        'email' => $user['email'],
     ]);
 });
 
@@ -71,7 +73,7 @@ test('update company', function () {
         'address_street_1' => 'test1',
         'address_street_2' => 'test2',
         'phone' => '1234567890',
-        'zip' => '112233'
+        'zip' => '112233',
     ];
 
     $response = putJson('api/v1/company', $company);
@@ -79,7 +81,7 @@ test('update company', function () {
     $response->assertOk();
 
     $this->assertDatabaseHas('companies', [
-        'name' => $company['name']
+        'name' => $company['name'],
     ]);
 
     $this->assertDatabaseHas('addresses', [
@@ -89,13 +91,13 @@ test('update company', function () {
         'address_street_1' => $company['address_street_1'],
         'address_street_2' => $company['address_street_2'],
         'phone' => $company['phone'],
-        'zip' => $company['zip']
+        'zip' => $company['zip'],
     ]);
 });
 
 test('update settings', function () {
     $settings = [
-        'currency'=> 1,
+        'currency' => 1,
         'time_zone' => 'Asia/Kolkata',
         'language' => 'en',
         'fiscal_year' => '1-12',
@@ -105,20 +107,20 @@ test('update settings', function () {
         'notify_invoice_viewed' => 'YES',
         'notify_estimate_viewed' => 'YES',
         'tax_per_item' => 'YES',
-        'discount_per_item' => 'YES'
+        'discount_per_item' => 'YES',
     ];
 
     $response = postJson('/api/v1/company/settings', ['settings' => $settings]);
 
     $response->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     foreach ($settings as $key => $value) {
         $this->assertDatabaseHas('company_settings', [
             'option' => $key,
-            'value' => $value
+            'value' => $value,
         ]);
     }
 });
@@ -135,7 +137,7 @@ test('get notification email settings', function () {
         'notify_invoice_viewed',
         'notify_estimate_viewed',
         'tax_per_item',
-        'discount_per_item'
+        'discount_per_item',
     ];
 
     $response = getJson('/api/v1/company/settings?'.http_build_query($data));

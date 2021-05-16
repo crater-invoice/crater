@@ -2,10 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Item;
 
+use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\UnitRequest;
 use Crater\Models\Unit;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\UnitRequest;
-use Crater\Http\Controllers\Controller;
 
 class UnitsController extends Controller
 {
@@ -20,13 +20,13 @@ class UnitsController extends Controller
 
         $units = Unit::whereCompany($request->header('company'))
             ->applyFilters($request->only([
-                'unit_id'
+                'unit_id',
             ]))
             ->latest()
             ->paginateData($limit);
 
         return response()->json([
-            'units' => $units
+            'units' => $units,
         ]);
     }
 
@@ -53,7 +53,7 @@ class UnitsController extends Controller
         $unit = Unit::create($data);
 
         return response()->json([
-            'unit' => $unit
+            'unit' => $unit,
         ]);
     }
 
@@ -66,7 +66,7 @@ class UnitsController extends Controller
     public function show(Unit $unit)
     {
         return response()->json([
-            'unit' => $unit
+            'unit' => $unit,
         ]);
     }
 
@@ -82,7 +82,7 @@ class UnitsController extends Controller
         $unit->update($request->validated());
 
         return response()->json([
-            'unit' => $unit
+            'unit' => $unit,
         ]);
     }
 
@@ -96,14 +96,14 @@ class UnitsController extends Controller
     {
         if ($unit->items()->exists()) {
             return response()->json([
-                'error' => 'items_attached'
+                'error' => 'items_attached',
             ]);
         }
 
         $unit->delete();
 
         return response()->json([
-            'success' => 'Unit deleted successfully'
+            'success' => 'Unit deleted successfully',
         ]);
     }
 }

@@ -24,7 +24,7 @@ class CopyFilesController extends Controller
 
         return response()->json([
             'success' => true,
-            'path' => $path
+            'path' => $path,
         ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\Expense;
 
-use Crater\Models\Expense;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Expense;
 
 class DownloadReceiptController extends Controller
 {
@@ -23,12 +23,13 @@ class DownloadReceiptController extends Controller
                 $imagePath = $media->getPath();
                 $response = \Response::download($imagePath, $media->file_name);
                 ob_end_clean();
+
                 return $response;
             }
         }
 
         return response()->json([
-            'error' => 'receipt_not_found'
+            'error' => 'receipt_not_found',
         ]);
     }
 }

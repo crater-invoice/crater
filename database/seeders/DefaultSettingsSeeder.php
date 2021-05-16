@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Crater\Models\CompanySetting;
-use Crater\Models\Setting;
 use Crater\Models\User;
 use Illuminate\Database\Seeder;
 

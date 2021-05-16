@@ -13,7 +13,7 @@ class CreatePaymentMethodsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('payment_methods')) {
+        if (! Schema::hasTable('payment_methods')) {
             Schema::create('payment_methods', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');

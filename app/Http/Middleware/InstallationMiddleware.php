@@ -16,7 +16,7 @@ class InstallationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!\Storage::disk('local')->has('database_created')) {
+        if (! \Storage::disk('local')->has('database_created')) {
             return redirect('/on-boarding');
         }
 

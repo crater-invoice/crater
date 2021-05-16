@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Onboarding;
 
+use Crater\Http\Controllers\Controller;
 use Crater\Space\PermissionsChecker;
 use Illuminate\Http\JsonResponse;
-use Crater\Http\Controllers\Controller;
 
 class PermissionsController extends Controller
 {
@@ -33,7 +33,7 @@ class PermissionsController extends Controller
         );
 
         return response()->json([
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 }

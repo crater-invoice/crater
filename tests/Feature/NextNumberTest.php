@@ -25,7 +25,7 @@ test('next number', function () {
     $response = getJson('api/v1/next-number?key=' . $key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 
     $key = 'estimate';
@@ -33,7 +33,7 @@ test('next number', function () {
     $response = getJson('api/v1/next-number?key=' . $key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 
     $key = 'payment';
@@ -41,6 +41,6 @@ test('next number', function () {
     $response = getJson('api/v1/next-number?key=' . $key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 });

@@ -2,13 +2,13 @@
 
 namespace Crater\Http\Controllers\V1\Customer;
 
+use Carbon\Carbon;
 use Crater\Http\Controllers\Controller;
-use Crater\Models\Invoice;
+use Crater\Models\CompanySetting;
 use Crater\Models\Expense;
+use Crater\Models\Invoice;
 use Crater\Models\Payment;
 use Crater\Models\User;
-use Crater\Models\CompanySetting;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CustomerStatsController extends Controller
@@ -118,15 +118,15 @@ class CustomerStatsController extends Controller
         $netProfit = (int) $totalReceipts - (int) $totalExpenses;
 
         $chartData = [
-            'months'        => $months,
+            'months' => $months,
             'invoiceTotals' => $invoiceTotals,
             'expenseTotals' => $expenseTotals,
             'receiptTotals' => $receiptTotals,
-            'netProfit'     => $netProfit,
-            'netProfits'     => $netProfits,
-            'salesTotal'    => $salesTotal,
+            'netProfit' => $netProfit,
+            'netProfits' => $netProfits,
+            'salesTotal' => $salesTotal,
             'totalReceipts' => $totalReceipts,
-            'totalExpenses' => $totalExpenses
+            'totalExpenses' => $totalExpenses,
         ];
 
         $customer = User::with([
@@ -135,7 +135,7 @@ class CustomerStatsController extends Controller
             'billingAddress.country',
             'shippingAddress.country',
             'currency',
-            'fields.customField'
+            'fields.customField',
         ])->find($customer->id);
 
         return response()->json([

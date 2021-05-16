@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Estimate;
 
-use Illuminate\Http\Request;
 use Crater\Http\Controllers\Controller;
 use Crater\Models\Estimate;
+use Illuminate\Http\Request;
 
 class ChangeEstimateStatusController extends Controller
 {
@@ -15,12 +15,12 @@ class ChangeEstimateStatusController extends Controller
     * @param  Estimate $estimate
     * @return \Illuminate\Http\Response
     */
-   public function __invoke(Request $request, Estimate $estimate)
-   {
+    public function __invoke(Request $request, Estimate $estimate)
+    {
         $estimate->update($request->only('status'));
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

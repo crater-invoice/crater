@@ -21,7 +21,7 @@ class UpdateUserSettingsController extends Controller
         $user->setSettings($request->settings);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

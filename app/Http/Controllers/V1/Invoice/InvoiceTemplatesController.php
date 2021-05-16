@@ -19,7 +19,7 @@ class InvoiceTemplatesController extends Controller
         $invoiceTemplates = InvoiceTemplate::all();
 
         return response()->json([
-            'invoiceTemplates' => $invoiceTemplates
+            'invoiceTemplates' => $invoiceTemplates,
         ]);
     }
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileRequest extends FormRequest
 {
@@ -26,17 +27,17 @@ class ProfileRequest extends FormRequest
     {
         return [
             'name' => [
-                'required'
+                'required',
             ],
             'password' => [
                 'nullable',
-                'min:8'
+                'min:8',
             ],
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->ignore(Auth::id(), 'id')
-            ]
+                Rule::unique('users')->ignore(Auth::id(), 'id'),
+            ],
         ];
     }
 }

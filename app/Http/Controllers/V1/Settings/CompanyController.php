@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Settings;
 
-use Illuminate\Http\Request;
-use Crater\Models\Company;
-use Crater\Http\Requests\ProfileRequest;
-use Crater\Http\Requests\CompanyRequest;
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\CompanyRequest;
+use Crater\Http\Requests\ProfileRequest;
+use Crater\Models\Company;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
@@ -24,11 +24,11 @@ class CompanyController extends Controller
             'addresses.country',
             'company',
             'company.address',
-            'company.address.country'
+            'company.address.country',
         ]);
 
         return response()->json([
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -47,7 +47,7 @@ class CompanyController extends Controller
 
         return response()->json([
             'user' => $user,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -66,7 +66,7 @@ class CompanyController extends Controller
 
         return response()->json([
             'company' => $company,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -93,7 +93,7 @@ class CompanyController extends Controller
         }
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -121,7 +121,7 @@ class CompanyController extends Controller
 
         return response()->json([
             'user' => $user,
-            'success' => true
+            'success' => true,
         ]);
     }
 }

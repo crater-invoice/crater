@@ -1,6 +1,7 @@
 <?php
-use Crater\Models\User;
+
 use Crater\Models\Company;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;
@@ -93,4 +94,3 @@ test('get profit loss', function () {
 
     $response->assertOk();
 });
-

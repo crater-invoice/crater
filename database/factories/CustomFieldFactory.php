@@ -27,7 +27,7 @@ class CustomFieldFactory extends Factory
             'label' => $this->faker->name,
             'order' => $this->faker->randomDigitNotNull,
             'is_required' => $this->faker->randomElement([true, false]),
-            'model_type'=> $this->faker->randomElement(['Customer', 'Invoice', 'Estimate', 'Expense', 'Payment']),
+            'model_type' => $this->faker->randomElement(['Customer', 'Invoice', 'Estimate', 'Expense', 'Payment']),
             'slug' => function (array $item) {
                 return clean_slug($item['model_type'], $item['label']);
             },

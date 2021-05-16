@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\Unit;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
@@ -21,7 +21,6 @@ beforeEach(function () {
 });
 
 test('unit has many items', function () {
-
     $unit = Unit::factory()->hasItems(5)->create();
 
     $this->assertCount(5, $unit->items);

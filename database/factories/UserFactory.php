@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'company_id' => User::find(1)->company_id,
             'role' => 'super admin',
             'password' => Hash::make('secret'),
-            'currency_id' => Currency::first()->id
+            'currency_id' => Currency::first()->id,
         ];
     }
 }

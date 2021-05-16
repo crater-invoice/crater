@@ -3,28 +3,29 @@
 use Crater\Http\Requests\ItemsRequest;
 
 test('items request validation rules', function () {
-    $request = new ItemsRequest;
+    $request = new ItemsRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'name' => [
-                'required'
+                'required',
             ],
             'price' => [
-                'required'
+                'required',
             ],
             'unit_id' => [
-                'nullable'
+                'nullable',
             ],
             'description' => [
-                'nullable'
-            ]
+                'nullable',
+            ],
         ],
         $request->rules()
     );
 });
 
 test('item request authorize', function () {
-    $request = new ItemsRequest;
+    $request = new ItemsRequest();
 
     $this->assertTrue($request->authorize());
 });

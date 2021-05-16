@@ -2,14 +2,14 @@
 
 namespace Crater\Http\Controllers\V1\Report;
 
-use Illuminate\Http\Request;
-use Crater\Models\Company;
-use PDF;
 use Carbon\Carbon;
-use Crater\Models\InvoiceItem;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Company;
+use Crater\Models\CompanySetting;
+use Crater\Models\InvoiceItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use PDF;
 
 class ItemSalesReportController extends Controller
 {
@@ -51,7 +51,7 @@ class ItemSalesReportController extends Controller
             'footer_text_color',
             'footer_total_color',
             'footer_bg_color',
-            'date_text_color'
+            'date_text_color',
         ];
         $colorSettings = CompanySetting::whereIn('option', $colors)
             ->whereCompany($company->id)
@@ -63,7 +63,7 @@ class ItemSalesReportController extends Controller
             'totalAmount' => $totalAmount,
             'company' => $company,
             'from_date' => $from_date,
-            'to_date' => $to_date
+            'to_date' => $to_date,
         ]);
         $pdf = PDF::loadView('app.pdf.reports.sales-items');
 

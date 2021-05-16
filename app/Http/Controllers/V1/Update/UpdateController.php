@@ -2,12 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Update;
 
-use Crater\Models\Setting;
-use Illuminate\Http\Request;
-use Crater\Space\Updater;
-use Crater\Space\SiteApi;
-use Illuminate\Support\Facades\Artisan;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Setting;
+use Crater\Space\Updater;
+use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {
@@ -21,7 +19,7 @@ class UpdateController extends Controller
 
         return response()->json([
             'success' => true,
-            'path' => $path
+            'path' => $path,
         ]);
     }
 
@@ -36,13 +34,12 @@ class UpdateController extends Controller
 
             return response()->json([
                 'success' => true,
-                'path' => $path
+                'path' => $path,
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -57,7 +54,7 @@ class UpdateController extends Controller
 
         return response()->json([
             'success' => true,
-            'path' => $path
+            'path' => $path,
         ]);
     }
 
@@ -66,7 +63,7 @@ class UpdateController extends Controller
         Updater::migrateUpdate();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 

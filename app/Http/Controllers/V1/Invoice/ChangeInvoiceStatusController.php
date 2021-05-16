@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Invoice;
 
-use Illuminate\Http\Request;
 use Crater\Http\Controllers\Controller;
 use Crater\Models\Invoice;
+use Illuminate\Http\Request;
 
 class ChangeInvoiceStatusController extends Controller
 {
@@ -14,8 +14,8 @@ class ChangeInvoiceStatusController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\JsonResponse
     */
-   public function __invoke(Request $request, Invoice $invoice)
-   {
+    public function __invoke(Request $request, Invoice $invoice)
+    {
         if ($request->status == Invoice::STATUS_SENT) {
             $invoice->status = Invoice::STATUS_SENT;
             $invoice->sent = true;
@@ -28,7 +28,7 @@ class ChangeInvoiceStatusController extends Controller
         }
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

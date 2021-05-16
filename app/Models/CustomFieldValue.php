@@ -3,21 +3,19 @@
 namespace Crater\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Company;
-use Crater\Models\CustomField;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class CustomFieldValue extends Model
 {
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $appends = [
-        'defaultAnswer'
+        'defaultAnswer',
     ];
 
     public function setDateAnswerAttribute($value)

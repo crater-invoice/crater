@@ -2,13 +2,13 @@
 
 namespace Crater\Http\Controllers\V1\Settings;
 
-use Crater\Models\Setting;
-use Illuminate\Http\Request;
-use Crater\Space\EnvironmentManager;
-use Crater\Http\Requests\MailEnvironmentRequest;
-use Illuminate\Http\JsonResponse;
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\MailEnvironmentRequest;
 use Crater\Mail\TestMail;
+use Crater\Models\Setting;
+use Crater\Space\EnvironmentManager;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Mail;
 
 class MailConfigurationController extends Controller
@@ -36,8 +36,7 @@ class MailConfigurationController extends Controller
         $setting = Setting::getSetting('profile_complete');
         $results = $this->environmentManager->saveMailVariables($request);
 
-        if ($setting !== 'COMPLETED')
-        {
+        if ($setting !== 'COMPLETED') {
             Setting::setSetting('profile_complete', 4);
         }
 
@@ -77,7 +76,7 @@ class MailConfigurationController extends Controller
             'mail',
             'sendmail',
             'mailgun',
-            'ses'
+            'ses',
         ];
 
         return response()->json($drivers);
@@ -88,13 +87,13 @@ class MailConfigurationController extends Controller
         $this->validate($request, [
             'to' => 'required|email',
             'subject' => 'required',
-            'message' => 'required'
+            'message' => 'required',
         ]);
 
         Mail::to($request->to)->send(new TestMail($request->subject, $request->message));
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

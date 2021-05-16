@@ -2,8 +2,8 @@
 
 namespace Crater\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
 use Spatie\Dropbox\Client as DropboxClient;
 use Spatie\FlysystemDropbox\DropboxAdapter;
@@ -34,6 +34,5 @@ class DropboxServiceProvider extends ServiceProvider
 
             return new Filesystem(new DropboxAdapter($client));
         });
-
     }
 }

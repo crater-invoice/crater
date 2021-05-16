@@ -12,7 +12,10 @@ use Spatie\Backup\Tasks\Backup\BackupJobFactory;
 
 class CreateBackupJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $data;
 
@@ -23,7 +26,7 @@ class CreateBackupJob implements ShouldQueue
      */
     public function __construct($data = '')
     {
-       $this->data = $data;
+        $this->data = $data;
     }
 
     /**

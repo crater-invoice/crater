@@ -25,11 +25,11 @@ class SettingRequest extends FormRequest
     {
         return [
             'key' => [
-                'required'
+                'required',
             ],
             'value' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

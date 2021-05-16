@@ -1,13 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Crater\Models\Setting;
+use Illuminate\Database\Migrations\Migration;
 
 class UpdateCraterVersion320 extends Migration
 {
-    const VERSION = '3.2.0';
+    public const VERSION = '3.2.0';
 
     /**
      * Run the migrations.

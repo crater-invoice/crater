@@ -25,10 +25,10 @@ class FileDiskFactory extends Factory
             'name' => $this->faker->word,
             'driver' => 'local',
             'set_as_default' => false,
-            'credentials' =>  [
+            'credentials' => [
                 'driver' => 'local',
                 'root' => storage_path('app'),
-            ]
+            ],
 
         ];
     }

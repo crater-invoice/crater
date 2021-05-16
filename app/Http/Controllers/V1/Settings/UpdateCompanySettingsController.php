@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Settings;
 
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\UpdateSettingsRequest;
+use Crater\Models\CompanySetting;
 
 class UpdateCompanySettingsController extends Controller
 {
@@ -19,7 +19,7 @@ class UpdateCompanySettingsController extends Controller
         CompanySetting::setSettings($request->settings, $request->header('company'));
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

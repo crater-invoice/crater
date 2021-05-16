@@ -5,59 +5,60 @@ use Crater\Models\Invoice;
 use Crater\Rules\UniqueNumber;
 
 test('invoice request validation rules', function () {
-    $request = new InvoicesRequest;
+    $request = new InvoicesRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'invoice_date' => [
-                'required'
+                'required',
             ],
             'due_date' => [
-                'required'
+                'required',
             ],
             'user_id' => [
-                'required'
+                'required',
             ],
             'discount' => [
-                'required'
+                'required',
             ],
             'discount_val' => [
-                'required'
+                'required',
             ],
             'sub_total' => [
-                'required'
+                'required',
             ],
             'total' => [
-                'required'
+                'required',
             ],
             'tax' => [
-                'required'
+                'required',
             ],
             'invoice_template_id' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
-                'array'
+                'array',
             ],
             'items.*' => [
                 'required',
-                'max:255'
+                'max:255',
             ],
             'items.*.description' => [
-                'max:255'
+                'max:255',
             ],
             'items.*.name' => [
-                'required'
+                'required',
             ],
             'items.*.quantity' => [
-                'required'
+                'required',
             ],
             'items.*.price' => [
-                'required'
+                'required',
             ],
             'invoice_number' => [
                 'required',
-                new UniqueNumber(Invoice::class)
+                new UniqueNumber(Invoice::class),
             ],
         ],
         $request->rules()
@@ -65,7 +66,7 @@ test('invoice request validation rules', function () {
 });
 
 test('invoices request authorize', function () {
-    $request = new InvoicesRequest;
+    $request = new InvoicesRequest();
 
     $this->assertTrue($request->authorize());
 });

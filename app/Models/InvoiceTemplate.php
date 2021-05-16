@@ -1,9 +1,9 @@
 <?php
+
 namespace Crater\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Invoice;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class InvoiceTemplate extends Model
 {

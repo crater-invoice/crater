@@ -4,7 +4,10 @@ use Crater\Models\Note;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use function Pest\Laravel\{getJson, postJson, putJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -38,7 +41,7 @@ test('retrieve note', function () {
     getJson("/api/v1/notes/{$note->id}")
         ->assertStatus(200)
         ->assertJson([
-            'note' => $note->toArray()
+            'note' => $note->toArray(),
         ]);
 });
 
@@ -59,7 +62,7 @@ test('delete note', function () {
     deleteJson("/api/v1/notes/{$note->id}")
         ->assertStatus(200)
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDeleted($note);

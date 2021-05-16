@@ -1,20 +1,16 @@
 <?php
+
 namespace Crater\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\TaxType;
-use Crater\Models\Invoice;
-use Crater\Models\Estimate;
-use Crater\Models\Item;
-use Crater\Models\InvoiceItem;
-use Crater\Models\EstimateItem;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Tax extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'amount',
@@ -24,12 +20,12 @@ class Tax extends Model
         'invoice_id',
         'estimate_id',
         'item_id',
-        'compound_tax'
+        'compound_tax',
     ];
 
     protected $casts = [
         'amount' => 'integer',
-        'percent' => 'float'
+        'percent' => 'float',
     ];
 
     public function taxType()
@@ -82,7 +78,7 @@ class Tax extends Model
                     'invoice_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
                 );
-            })
+        })
             ->orWhereHas('invoiceItem.invoice', function ($query) use ($start, $end) {
                 $query->where('paid_status', Invoice::STATUS_PAID)
                     ->whereBetween(

@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Expense;
 
-use Crater\Models\Expense;
-use Illuminate\Http\Request;
-use Crater\Http\Requests\ExpenseRequest;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\DeleteExpensesRequest;
+use Crater\Http\Requests\ExpenseRequest;
+use Crater\Models\Expense;
+use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
 {
@@ -30,7 +30,7 @@ class ExpensesController extends Controller
                 'from_date',
                 'to_date',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->whereCompany($request->header('company'))
             ->select('expenses.*', 'expense_categories.name', 'users.name as user_name')
@@ -38,7 +38,7 @@ class ExpensesController extends Controller
 
         return response()->json([
             'expenses' => $expenses,
-            'expenseTotalCount' => Expense::count()
+            'expenseTotalCount' => Expense::count(),
         ]);
     }
 
@@ -54,7 +54,7 @@ class ExpensesController extends Controller
 
         return response()->json([
             'expense' => $expense,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -69,7 +69,7 @@ class ExpensesController extends Controller
         $expense->load('creator', 'fields.customField');
 
         return response()->json([
-            'expense' => $expense
+            'expense' => $expense,
         ]);
     }
 
@@ -86,7 +86,7 @@ class ExpensesController extends Controller
 
         return response()->json([
             'expense' => $expense,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -95,7 +95,7 @@ class ExpensesController extends Controller
         Expense::destroy($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

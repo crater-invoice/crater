@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,6 @@ class Currency extends Model
         'precision',
         'thousand_separator',
         'decimal_separator',
-        'position'
+        'position',
     ];
 }

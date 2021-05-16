@@ -26,31 +26,31 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'name' => [
-                'required'
+                'required',
             ],
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')
+                Rule::unique('users'),
             ],
             'phone' => [
-                'nullable'
+                'nullable',
             ],
             'password' => [
                 'required',
-                'min:8'
-            ]
+                'min:8',
+            ],
         ];
 
         if ($this->getMethod() == 'PUT') {
             $rules['email'] = [
                 'required',
                 'email',
-                Rule::unique('users')->ignore($this->user)
+                Rule::unique('users')->ignore($this->user),
             ];
             $rules['password'] = [
                 'nullable',
-                'min:8'
+                'min:8',
             ];
         }
 

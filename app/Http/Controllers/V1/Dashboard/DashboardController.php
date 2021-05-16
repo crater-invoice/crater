@@ -1,15 +1,16 @@
 <?php
+
 namespace Crater\Http\Controllers\V1\Dashboard;
 
-use Illuminate\Http\Request;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Models\CompanySetting;
-use Crater\Models\Expense;
-use Crater\Models\Payment;
 use Carbon\Carbon;
-use Crater\Models\User;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\CompanySetting;
+use Crater\Models\Estimate;
+use Crater\Models\Expense;
+use Crater\Models\Invoice;
+use Crater\Models\Payment;
+use Crater\Models\User;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -113,11 +114,11 @@ class DashboardController extends Controller
         $netProfit = (int)$totalReceipts - (int)$totalExpenses;
 
         $chartData = [
-            'months'        => $months,
+            'months' => $months,
             'invoiceTotals' => $invoiceTotals,
             'expenseTotals' => $expenseTotals,
             'receiptTotals' => $receiptTotals,
-            'netProfits'    => $netProfits
+            'netProfits' => $netProfits,
         ];
 
         $customersCount = User::customer()->whereCompany($request->header('company'))->get()->count();
@@ -138,7 +139,7 @@ class DashboardController extends Controller
             'salesTotal' => $salesTotal,
             'totalReceipts' => $totalReceipts,
             'totalExpenses' => $totalExpenses,
-            'netProfit' => $netProfit
+            'netProfit' => $netProfit,
         ]);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Middleware;
 
 use Closure;
@@ -26,13 +27,13 @@ class ConfigMiddleware
                 date_default_timezone_set($setting);
             }
 
-            if($request->has('file_disk_id')) {
+            if ($request->has('file_disk_id')) {
                 $file_disk = FileDisk::find($request->file_disk_id);
             } else {
                 $file_disk = FileDisk::whereSetAsDefault(true)->first();
             }
 
-            if($file_disk) {
+            if ($file_disk) {
                 $file_disk->setConfig();
             }
         }

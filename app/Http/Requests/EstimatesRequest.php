@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Crater\Models\Estimate;
@@ -26,62 +27,62 @@ class EstimatesRequest extends FormRequest
     {
         $rules = [
             'estimate_date' => [
-                'required'
+                'required',
             ],
             'expiry_date' => [
-                'required'
+                'required',
             ],
             'user_id' => [
-                'required'
+                'required',
             ],
             'estimate_number' => [
                 'required',
-                new UniqueNumber(Estimate::class)
+                new UniqueNumber(Estimate::class),
             ],
             'discount' => [
-                'required'
+                'required',
             ],
             'discount_val' => [
-                'required'
+                'required',
             ],
             'sub_total' => [
-                'required'
+                'required',
             ],
             'total' => [
-                'required'
+                'required',
             ],
             'tax' => [
-                'required'
+                'required',
             ],
             'estimate_template_id' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
-                'array'
+                'array',
             ],
             'items.*.description' => [
-                'max:255'
+                'max:255',
             ],
             'items.*' => [
                 'required',
-                'max:255'
+                'max:255',
             ],
             'items.*.name' => [
-                'required'
+                'required',
             ],
             'items.*.quantity' => [
-                'required'
+                'required',
             ],
             'items.*.price' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
 
         if ($this->isMethod('PUT')) {
             $rules['estimate_number'] = [
                 'required',
-                new UniqueNumber(Estimate::class, $this->route('estimate')->id)
+                new UniqueNumber(Estimate::class, $this->route('estimate')->id),
             ];
         }
 

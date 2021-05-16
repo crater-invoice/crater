@@ -2,9 +2,6 @@
 
 namespace Crater\Providers;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\v1\Version110;
 use Crater\Listeners\Updates\v2\Version200;
@@ -14,6 +11,9 @@ use Crater\Listeners\Updates\v2\Version210;
 use Crater\Listeners\Updates\v3\Version300;
 use Crater\Listeners\Updates\v3\Version310;
 use Crater\Listeners\Updates\v3\Version311;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

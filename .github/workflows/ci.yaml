@@ -30,5 +30,8 @@ jobs:
       run: composer update --ignore-platform-req=php --no-interaction --no-progress
       if: "matrix.php >= 8"
 
+    - name: Check coding style
+      run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no
+
     - name: Unit Tests
       run: php ./vendor/bin/pest

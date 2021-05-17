@@ -73,8 +73,8 @@ class CustomField extends Model
     public function scopeWhereSearch($query, $search)
     {
         $query->where(function ($query) use ($search) {
-            $query->where('label', 'LIKE', '%' . $search . '%')
-                ->orWhere('name', 'LIKE', '%' . $search . '%');
+            $query->where('label', 'LIKE', '%'.$search.'%')
+                ->orWhere('name', 'LIKE', '%'.$search.'%');
         });
     }
 

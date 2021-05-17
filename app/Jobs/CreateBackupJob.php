@@ -41,7 +41,7 @@ class CreateBackupJob implements ShouldQueue
 
         $prefix = env('DYNAMIC_DISK_PREFIX', 'temp_');
 
-        config(['backup.backup.destination.disks' => [$prefix . $fileDisk->driver]]);
+        config(['backup.backup.destination.disks' => [$prefix.$fileDisk->driver]]);
 
         $backupJob = BackupJobFactory::createFromArray(config('backup'));
 

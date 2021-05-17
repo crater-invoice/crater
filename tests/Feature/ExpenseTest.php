@@ -70,7 +70,7 @@ test('update expense', function () {
 
     $expense2 = Expense::factory()->raw();
 
-    putJson('api/v1/expenses/' . $expense->id, $expense2)->assertOk();
+    putJson('api/v1/expenses/'.$expense->id, $expense2)->assertOk();
 
     $this->assertDatabaseHas('expenses', [
         'id' => $expense->id,
@@ -100,7 +100,7 @@ test('search expenses', function () {
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/expenses?' . $queryString);
+    $response = getJson('api/v1/expenses?'.$queryString);
 
     $response->assertOk();
 });

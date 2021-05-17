@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-use Crater\Models\User;
 
-Broadcast::channel('conversation.{cid}', function ($user,$cid) {
+Broadcast::channel('conversation.{cid}', function ($user, $cid) {
     return true; //(int) $user->conversation_id === (int) $cid
 });
 
 Broadcast::channel('user.{uid}', function () {
-  return true; //(int) $user->conversation_id === (int) $cid
+    return true; //(int) $user->conversation_id === (int) $cid
 });
 
 Broadcast::channel('company.{companyId}', function ($user, $companyId) {

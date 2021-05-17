@@ -67,7 +67,7 @@ class TaxType extends Model
 
     public function scopeWhereSearch($query, $search)
     {
-        $query->where('name', 'LIKE', '%' . $search . '%');
+        $query->where('name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopePaginateData($query, $limit)

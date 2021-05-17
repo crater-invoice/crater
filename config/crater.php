@@ -11,21 +11,21 @@ return [
     * List of languages supported by Crater.
     */
     'languages' => [
-        ["code"=>"ar", "name" => "Arabic"],
-        ["code"=>"nl", "name" => "Dutch"],
-        ["code"=>"en", "name" => "English"],
-        ["code"=>"fr", "name" => "French"],
-        ["code"=>"de", "name" => "German"],
-        ["code"=>"ja", "name" => "Japanese"],
-        ["code"=>"it", "name" => "Italian"],
-        ["code"=>"lv", "name" => "Latvian"],
-        ["code"=>"pt_BR", "name" => "Portuguese (Brazilian)"],
-        ["code"=>"sr", "name" => "Serbian Latin"],
-        ["code"=>"ko", "name" => "Korean"],
-        ["code"=>"es", "name" => "Spanish"],
-        ["code"=>"sv", "name"=> "Svenska"],
-        ["code"=>"sk", "name"=> "Slovak"],
-        ["code"=>"vi", "name"=> "Tiếng Việt"]
+        ["code" => "ar", "name" => "Arabic"],
+        ["code" => "nl", "name" => "Dutch"],
+        ["code" => "en", "name" => "English"],
+        ["code" => "fr", "name" => "French"],
+        ["code" => "de", "name" => "German"],
+        ["code" => "ja", "name" => "Japanese"],
+        ["code" => "it", "name" => "Italian"],
+        ["code" => "lv", "name" => "Latvian"],
+        ["code" => "pt_BR", "name" => "Portuguese (Brazilian)"],
+        ["code" => "sr", "name" => "Serbian Latin"],
+        ["code" => "ko", "name" => "Korean"],
+        ["code" => "es", "name" => "Spanish"],
+        ["code" => "sv", "name" => "Svenska"],
+        ["code" => "sk", "name" => "Slovak"],
+        ["code" => "vi", "name" => "Tiếng Việt"],
     ],
 
     /*
@@ -44,5 +44,5 @@ return [
         ['key' => 'october-september', 'value' => '10-9'],
         ['key' => 'november-october' , 'value' => '11-10'],
         ['key' => 'december-november', 'value' => '12-11'],
-    ]
+    ],
 ];

@@ -102,7 +102,7 @@ test('update customer', function () {
         'name' => 'new name',
     ]);
 
-    $response = putJson('api/v1/customers/' . $customer->id, $customer1);
+    $response = putJson('api/v1/customers/'.$customer->id, $customer1);
 
     $this->assertDatabaseHas('users', [
         'id' => $customer->id,
@@ -137,7 +137,7 @@ test('search customers', function () {
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/customers?' . $queryString);
+    $response = getJson('api/v1/customers?'.$queryString);
 
     $response->assertOk();
 });

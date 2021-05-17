@@ -1,6 +1,8 @@
 <?php
+
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ return [
             'level' => 'critical',
         ],
         'papertrail' => [
-            'driver'  => 'monolog',
+            'driver' => 'monolog',
             'level' => 'debug',
             'handler' => SyslogUdpHandler::class,
             'handler_with' => [

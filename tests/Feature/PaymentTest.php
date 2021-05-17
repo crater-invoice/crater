@@ -111,7 +111,7 @@ test('search payments', function () {
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/payments?' . $queryString);
+    $response = getJson('api/v1/payments?'.$queryString);
 
     $response->assertOk();
 });

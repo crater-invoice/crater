@@ -99,7 +99,7 @@ test('update validates using a form request', function () {
 test('delete payment method', function () {
     $method = PaymentMethod::factory()->create();
 
-    $response = deleteJson('api/v1/payment-methods/' . $method->id);
+    $response = deleteJson('api/v1/payment-methods/'.$method->id);
 
     $response->assertOk();
 

@@ -87,7 +87,7 @@ test('update item', function () {
         ],
     ]);
 
-    $response = putJson('api/v1/items/' . $item->id, $update_item);
+    $response = putJson('api/v1/items/'.$item->id, $update_item);
 
     $response->assertOk();
 
@@ -136,7 +136,7 @@ test('search items', function () {
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/items?' . $queryString);
+    $response = getJson('api/v1/items?'.$queryString);
 
     $response->assertOk();
 });

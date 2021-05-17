@@ -93,7 +93,7 @@ class UpdateCommand extends Command
             return;
         }
 
-        $this->info('Successfully updated to ' . $this->version);
+        $this->info('Successfully updated to '.$this->version);
     }
 
     public function getInstalledVersion()
@@ -103,7 +103,7 @@ class UpdateCommand extends Command
 
     public function getLatestVersionResponse()
     {
-        $this->info('Your currently installed version is ' . $this->installed);
+        $this->info('Your currently installed version is '.$this->installed);
         $this->line('');
         $this->info('Checking for update...');
 

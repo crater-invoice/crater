@@ -45,7 +45,6 @@ Route::prefix('reports')->group(function () {
     // report for profit and loss
     //----------------------------------
     Route::get('/profit-loss/{hash}', ProfitLossReportController::class);
-
 });
 
 

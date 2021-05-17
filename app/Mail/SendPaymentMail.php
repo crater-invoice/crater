@@ -48,7 +48,7 @@ class SendPaymentMail extends Mailable
         if ($this->data['attach']['data']) {
             $mailContent->attachData(
                 $this->data['attach']['data']->output(),
-                $this->data['payment']['payment_number'] . '.pdf'
+                $this->data['payment']['payment_number'].'.pdf'
             );
         }
 

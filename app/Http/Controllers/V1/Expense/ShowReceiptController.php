@@ -30,7 +30,7 @@ class ShowReceiptController extends Controller
 
         $type = \File::mimeType($imagePath);
 
-        $image = 'data:' . $type . ';base64,' . base64_encode(file_get_contents($imagePath));
+        $image = 'data:'.$type.';base64,'.base64_encode(file_get_contents($imagePath));
 
         return response()->json([
             'image' => $image,

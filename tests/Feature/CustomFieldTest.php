@@ -64,7 +64,7 @@ test('update custom field', function () {
         'is_required' => false,
     ]);
 
-    putJson('api/v1/custom-fields/' . $customField->id, $newCustomField)
+    putJson('api/v1/custom-fields/'.$customField->id, $newCustomField)
         ->assertStatus(200)
         ->assertJson([
             'success' => true,
@@ -90,7 +90,7 @@ test('update validates using a form request', function () {
 test('delete custom field', function () {
     $customField = CustomField::factory()->create();
 
-    $response = deleteJson('api/v1/custom-fields/' . $customField->id);
+    $response = deleteJson('api/v1/custom-fields/'.$customField->id);
 
     $response
         ->assertOk()

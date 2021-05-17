@@ -21,7 +21,7 @@ class NextNumberController extends Controller
     {
         $key = $request->key;
 
-        $val = $key . '_prefix';
+        $val = $key.'_prefix';
 
         $prefix = CompanySetting::getSetting(
             $val,

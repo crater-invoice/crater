@@ -43,17 +43,17 @@ return [
         Invoice::class => [
             'salt' => Invoice::class.config('app.key'),
             'length' => '20',
-            'alphabet' => 'XKyIAR7mgt8jD2vbqPrOSVenNGpiYLx4M61T'
+            'alphabet' => 'XKyIAR7mgt8jD2vbqPrOSVenNGpiYLx4M61T',
         ],
         Estimate::class => [
             'salt' => Estimate::class.config('app.key'),
             'length' => '20',
-            'alphabet' => 'yLJWP79M8rYVqbn1NXjulO6IUDdvekRQGo40'
+            'alphabet' => 'yLJWP79M8rYVqbn1NXjulO6IUDdvekRQGo40',
         ],
         Payment::class => [
             'salt' => Payment::class.config('app.key'),
             'length' => '20',
-            'alphabet' => 'asqtW3eDRIxB65GYl7UVLS1dybn9XrKTZ4zO'
+            'alphabet' => 'asqtW3eDRIxB65GYl7UVLS1dybn9XrKTZ4zO',
         ],
     ],
 

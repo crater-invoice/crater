@@ -49,7 +49,7 @@ class SendInvoiceMail extends Mailable
         if ($this->data['attach']['data']) {
             $mailContent->attachData(
                 $this->data['attach']['data']->output(),
-                $this->data['invoice']['invoice_number'] . '.pdf'
+                $this->data['invoice']['invoice_number'].'.pdf'
             );
         }
 

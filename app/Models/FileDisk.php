@@ -37,8 +37,8 @@ class FileDisk extends Model
     public function scopeWhereSearch($query, $search)
     {
         foreach (explode(' ', $search) as $term) {
-            $query->where('name', 'LIKE', '%' . $term . '%')
-                ->orWhere('driver', 'LIKE', '%' . $term . '%');
+            $query->where('name', 'LIKE', '%'.$term.'%')
+                ->orWhere('driver', 'LIKE', '%'.$term.'%');
         }
     }
 
@@ -89,9 +89,9 @@ class FileDisk extends Model
     {
         $prefix = env('DYNAMIC_DISK_PREFIX', 'temp_');
 
-        config(['filesystems.default' => $prefix . $driver]);
+        config(['filesystems.default' => $prefix.$driver]);
 
-        $disks = config('filesystems.disks.' . $driver);
+        $disks = config('filesystems.disks.'.$driver);
 
         foreach ($disks as $key => $value) {
             if ($credentials->has($key)) {
@@ -99,7 +99,7 @@ class FileDisk extends Model
             }
         }
 
-        config(['filesystems.disks.' . $prefix . $driver => $disks]);
+        config(['filesystems.disks.'.$prefix.$driver => $disks]);
     }
 
     public static function validateCredentials($credentials, $disk)
@@ -115,11 +115,11 @@ class FileDisk extends Model
             if ($disk == 'dropbox') {
                 $root = $credentials['root'].'/';
             }
-            \Storage::disk($prefix . $disk)->put($root.'crater_temp.text', 'Check Credentials');
+            \Storage::disk($prefix.$disk)->put($root.'crater_temp.text', 'Check Credentials');
 
-            if (\Storage::disk($prefix . $disk)->exists($root.'crater_temp.text')) {
+            if (\Storage::disk($prefix.$disk)->exists($root.'crater_temp.text')) {
                 $exists = true;
-                \Storage::disk($prefix . $disk)->delete($root.'crater_temp.text');
+                \Storage::disk($prefix.$disk)->delete($root.'crater_temp.text');
             }
         } catch (\Exception $e) {
             $exists = false;

@@ -35,7 +35,7 @@ class ConvertEstimateController extends Controller
             'creator_id' => Auth::id(),
             'invoice_date' => $invoice_date->format('Y-m-d'),
             'due_date' => $due_date->format('Y-m-d'),
-            'invoice_number' => $invoice_prefix . "-" . Invoice::getNextInvoiceNumber($invoice_prefix),
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

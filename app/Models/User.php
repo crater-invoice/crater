@@ -176,31 +176,31 @@ class User extends Authenticatable implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->where(function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('email', 'LIKE', '%' . $term . '%')
-                    ->orWhere('phone', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('email', 'LIKE', '%'.$term.'%')
+                    ->orWhere('phone', 'LIKE', '%'.$term.'%');
             });
         }
     }
 
     public function scopeWhereContactName($query, $contactName)
     {
-        return $query->where('contact_name', 'LIKE', '%' . $contactName . '%');
+        return $query->where('contact_name', 'LIKE', '%'.$contactName.'%');
     }
 
     public function scopeWhereDisplayName($query, $displayName)
     {
-        return $query->where('name', 'LIKE', '%' . $displayName . '%');
+        return $query->where('name', 'LIKE', '%'.$displayName.'%');
     }
 
     public function scopeWherePhone($query, $phone)
     {
-        return $query->where('phone', 'LIKE', '%' . $phone . '%');
+        return $query->where('phone', 'LIKE', '%'.$phone.'%');
     }
 
     public function scopeWhereEmail($query, $email)
     {
-        return $query->where('email', 'LIKE', '%' . $email . '%');
+        return $query->where('email', 'LIKE', '%'.$email.'%');
     }
 
     public function scopeCustomer($query)

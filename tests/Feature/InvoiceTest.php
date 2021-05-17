@@ -106,7 +106,7 @@ test('update invoice', function () {
             'items' => [InvoiceItem::factory()->raw()],
         ]);
 
-    putJson('api/v1/invoices/' . $invoice->id, $invoice2)->assertOk();
+    putJson('api/v1/invoices/'.$invoice->id, $invoice2)->assertOk();
 
     $this->assertDatabaseHas('invoices', [
         'invoice_number' => $invoice2['invoice_number'],
@@ -146,7 +146,7 @@ test('send invoice to customer', function () {
         'body' => 'email body',
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoices->id . '/send', $data);
+    $response = postJson('api/v1/invoices/'.$invoices->id.'/send', $data);
 
     $response
         ->assertOk()
@@ -170,7 +170,7 @@ test('invoice mark as paid', function () {
         'status' => Invoice::STATUS_COMPLETED,
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoice->id . '/status', $data);
+    $response = postJson('api/v1/invoices/'.$invoice->id.'/status', $data);
 
     $response
         ->assertOk()
@@ -191,7 +191,7 @@ test('invoice mark as sent', function () {
         'status' => Invoice::STATUS_SENT,
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoice->id . '/status', $data);
+    $response = postJson('api/v1/invoices/'.$invoice->id.'/status', $data);
 
     $response
         ->assertOk()
@@ -215,7 +215,7 @@ test('search invoices', function () {
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/invoices?' . $queryString);
+    $response = getJson('api/v1/invoices?'.$queryString);
 
     $response->assertOk();
 });

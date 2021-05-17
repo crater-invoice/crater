@@ -48,7 +48,7 @@ class SendEstimateMail extends Mailable
         if ($this->data['attach']['data']) {
             $mailContent->attachData(
                 $this->data['attach']['data']->output(),
-                $this->data['estimate']['estimate_number'] . '.pdf'
+                $this->data['estimate']['estimate_number'].'.pdf'
             );
         }
 

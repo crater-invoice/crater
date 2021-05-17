@@ -51,7 +51,7 @@ test('store validates using a form request', function () {
 test('get tax type', function () {
     $taxType = TaxType::factory()->create();
 
-    $response = getJson('api/v1/tax-types/' . $taxType->id);
+    $response = getJson('api/v1/tax-types/'.$taxType->id);
 
     $response->assertOk()
         ->assertJson([
@@ -64,7 +64,7 @@ test('update tax type', function () {
 
     $taxType1 = TaxType::factory()->raw();
 
-    $response = putJson('api/v1/tax-types/' . $taxType->id, $taxType1);
+    $response = putJson('api/v1/tax-types/'.$taxType->id, $taxType1);
 
     $response->assertOk()
         ->assertJson([
@@ -83,7 +83,7 @@ test('update validates using a form request', function () {
 test('delete tax type', function () {
     $taxType = TaxType::factory()->create();
 
-    $response = deleteJson('api/v1/tax-types/' . $taxType->id);
+    $response = deleteJson('api/v1/tax-types/'.$taxType->id);
 
     $response->assertOk()
         ->assertJson([

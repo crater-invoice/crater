@@ -75,7 +75,7 @@ class Invoice extends Model implements HasMedia
     public static function getNextInvoiceNumber($value)
     {
         // Get the last created order
-        $lastOrder = Invoice::where('invoice_number', 'LIKE', $value . '-%')
+        $lastOrder = Invoice::where('invoice_number', 'LIKE', $value.'-%')
             ->orderBy('invoice_number', 'desc')
             ->first();
 
@@ -148,7 +148,7 @@ class Invoice extends Model implements HasMedia
 
     public function getInvoicePdfUrlAttribute()
     {
-        return url('/invoices/pdf/' . $this->unique_hash);
+        return url('/invoices/pdf/'.$this->unique_hash);
     }
 
     public function getPreviousStatus()
@@ -234,7 +234,7 @@ class Invoice extends Model implements HasMedia
 
     public function scopeWhereInvoiceNumber($query, $invoiceNumber)
     {
-        return $query->where('invoices.invoice_number', 'LIKE', '%' . $invoiceNumber . '%');
+        return $query->where('invoices.invoice_number', 'LIKE', '%'.$invoiceNumber.'%');
     }
 
     public function scopeInvoicesBetween($query, $start, $end)
@@ -249,9 +249,9 @@ class Invoice extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('user', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('contact_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('company_name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
             });
         }
     }
@@ -492,7 +492,7 @@ class Invoice extends Model implements HasMedia
                 foreach ($item->taxes as $tax) {
                     if (! in_array($tax->name, $taxTypes)) {
                         array_push($taxTypes, $tax->name);
-                        array_push($labels, $tax->name . ' (' . $tax->percent . '%)');
+                        array_push($labels, $tax->name.' ('.$tax->percent.'%)');
                     }
                 }
             }
@@ -532,7 +532,7 @@ class Invoice extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
-        return PDF::loadView('app.pdf.invoice.' . $invoiceTemplate->view);
+        return PDF::loadView('app.pdf.invoice.'.$invoiceTemplate->view);
     }
 
     public function getEmailAttachmentSetting()
@@ -588,7 +588,7 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_DUE_DATE}' => $this->formattedDueDate,
             '{INVOICE_NUMBER}' => $this->invoice_number,
             '{INVOICE_REF_NUMBER}' => $this->reference_number,
-            '{INVOICE_LINK}' => url('/customer/invoices/pdf/' . $this->unique_hash),
+            '{INVOICE_LINK}' => url('/customer/invoices/pdf/'.$this->unique_hash),
         ];
     }
 }

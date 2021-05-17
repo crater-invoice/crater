@@ -28,7 +28,7 @@ class CloneInvoiceController extends Controller
         $newInvoice = Invoice::create([
             'invoice_date' => $date->format('Y-m-d'),
             'due_date' => $date->format('Y-m-d'),
-            'invoice_number' => $invoice_prefix . "-" . Invoice::getNextInvoiceNumber($invoice_prefix),
+            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
             'reference_number' => $invoice->reference_number,
             'user_id' => $invoice->user_id,
             'company_id' => $request->header('company'),

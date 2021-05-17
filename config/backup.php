@@ -29,7 +29,7 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
-                    base_path('.git')
+                    base_path('.git'),
                 ],
 
                 /*
@@ -102,7 +102,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local'
+                'local',
             ],
         ],
 
@@ -235,7 +235,7 @@ return [
     ],
 
     'queue' => [
-        'name' => env('BACKUP_QUEUE_NAME', 'backup')
-    ]
+        'name' => env('BACKUP_QUEUE_NAME', 'backup'),
+    ],
 
 ];

@@ -67,13 +67,13 @@ class Estimate extends Model implements HasMedia
 
     public function getEstimatePdfUrlAttribute()
     {
-        return url('/estimates/pdf/' . $this->unique_hash);
+        return url('/estimates/pdf/'.$this->unique_hash);
     }
 
     public static function getNextEstimateNumber($value)
     {
         // Get the last created order
-        $lastOrder = Estimate::where('estimate_number', 'LIKE', $value . '-%')
+        $lastOrder = Estimate::where('estimate_number', 'LIKE', $value.'-%')
             ->orderBy('estimate_number', 'desc')
             ->first();
 
@@ -205,9 +205,9 @@ class Estimate extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('user', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('contact_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('company_name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
             });
         }
     }
@@ -411,7 +411,7 @@ class Estimate extends Model implements HasMedia
                 foreach ($item->taxes as $tax) {
                     if (! in_array($tax->name, $taxTypes)) {
                         array_push($taxTypes, $tax->name);
-                        array_push($labels, $tax->name . ' (' . $tax->percent . '%)');
+                        array_push($labels, $tax->name.' ('.$tax->percent.'%)');
                     }
                 }
             }
@@ -451,7 +451,7 @@ class Estimate extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
-        return PDF::loadView('app.pdf.estimate.' . $estimateTemplate->view);
+        return PDF::loadView('app.pdf.estimate.'.$estimateTemplate->view);
     }
 
     public function getCompanyAddress()
@@ -507,7 +507,7 @@ class Estimate extends Model implements HasMedia
             '{ESTIMATE_EXPIRY_DATE}' => $this->formattedExpiryDate,
             '{ESTIMATE_NUMBER}' => $this->estimate_number,
             '{ESTIMATE_REF_NUMBER}' => $this->reference_number,
-            '{ESTIMATE_LINK}' => url('/customer/estimates/pdf/' . $this->unique_hash),
+            '{ESTIMATE_LINK}' => url('/customer/estimates/pdf/'.$this->unique_hash),
         ];
     }
 }

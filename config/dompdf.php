@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ return array(
     */
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
     'orientation' => 'portrait',
-    'defines' => array(
+    'defines' => [
         /**
          * The location of the DOMPDF font directory
          *
@@ -238,7 +238,7 @@ return array(
          * Use the more-than-experimental HTML5 Lib parser
          */
         "enable_html5_parser" => true,
-    ),
+    ],
 
 
-);
+];

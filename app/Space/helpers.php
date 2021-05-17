@@ -117,7 +117,7 @@ function clean_slug($model, $title, $id = 0)
 
     // Just append numbers like a savage until we find not used.
     for ($i = 1; $i <= 10; $i++) {
-        $newSlug = $slug . '_' . $i;
+        $newSlug = $slug.'_'.$i;
         if (! $allSlugs->contains('slug', $newSlug)) {
             return $newSlug;
         }
@@ -128,7 +128,7 @@ function clean_slug($model, $title, $id = 0)
 
 function getRelatedSlugs($type, $slug, $id = 0)
 {
-    return CustomField::select('slug')->where('slug', 'like', $slug . '%')
+    return CustomField::select('slug')->where('slug', 'like', $slug.'%')
         ->where('model_type', $type)
         ->where('id', '<>', $id)
         ->get();

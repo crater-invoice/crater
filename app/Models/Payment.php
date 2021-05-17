@@ -79,7 +79,7 @@ class Payment extends Model implements HasMedia
 
     public function getPaymentPdfUrlAttribute()
     {
-        return url('/payments/pdf/' . $this->unique_hash);
+        return url('/payments/pdf/'.$this->unique_hash);
     }
 
     public function getPaymentNumAttribute()
@@ -270,7 +270,7 @@ class Payment extends Model implements HasMedia
     public static function getNextPaymentNumber($value)
     {
         // Get the last created order
-        $payment = Payment::where('payment_number', 'LIKE', $value . '-%')
+        $payment = Payment::where('payment_number', 'LIKE', $value.'-%')
             ->orderBy('payment_number', 'desc')
             ->first();
 
@@ -300,16 +300,16 @@ class Payment extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('user', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('contact_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('company_name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
             });
         }
     }
 
     public function scopePaymentNumber($query, $paymentNumber)
     {
-        return $query->where('payments.payment_number', 'LIKE', '%' . $paymentNumber . '%');
+        return $query->where('payments.payment_number', 'LIKE', '%'.$paymentNumber.'%');
     }
 
     public function scopePaymentMethod($query, $paymentMethodId)

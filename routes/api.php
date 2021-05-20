@@ -53,6 +53,7 @@ use Crater\Http\Controllers\V1\Settings\GetUserSettingsController;
 use Crater\Http\Controllers\V1\Settings\TaxTypesController;
 use Crater\Http\Controllers\V1\Settings\UpdateCompanySettingsController;
 use Crater\Http\Controllers\V1\Settings\UpdateUserSettingsController;
+use Crater\Http\Controllers\V1\Settings\UserTokensController;
 use Crater\Http\Controllers\V1\Update\CheckVersionController;
 use Crater\Http\Controllers\V1\Update\CopyFilesController;
 use Crater\Http\Controllers\V1\Update\DeleteFilesController;
@@ -302,6 +303,14 @@ Route::prefix('/v1')->group(function () {
         Route::get('/me/settings', GetUserSettingsController::class);
 
         Route::put('/me/settings', UpdateUserSettingsController::class);
+
+        Route::get('/me/tokens', [UserTokensController::class, 'listUserTokens']);
+
+        Route::get('/me/tokens/{token_id}', [UserTokensController::class, 'getUserToken']);
+
+        Route::delete('/me/tokens/{token_id}', [UserTokensController::class, 'deleteUserToken']);
+
+        Route::post('/me/tokens', [UserTokensController::class, 'createUserToken']);
 
         Route::post('/me/upload-avatar', [CompanyController::class, 'uploadAvatar']);
 

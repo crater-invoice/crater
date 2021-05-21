@@ -1,12 +1,15 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Payment\PaymentMethodsController;
+use Crater\Http\Requests\PaymentMethodRequest;
 use Crater\Models\PaymentMethod;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\PaymentMethodRequest;
-use Crater\Http\Controllers\V1\Payment\PaymentMethodsController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -42,7 +45,7 @@ test('create payment method', function () {
 
     $this->assertDatabaseHas('payment_methods', [
         'name' => $data['name'],
-        'company_id' => $data['company_id']
+        'company_id' => $data['company_id'],
     ]);
 });
 
@@ -72,7 +75,7 @@ test('update payment method', function () {
     $method = PaymentMethod::factory()->create();
 
     $data = [
-        'name' => 'updated name'
+        'name' => 'updated name',
     ];
 
     $response = putJson("api/v1/payment-methods/{$method->id}", $data);
@@ -81,7 +84,7 @@ test('update payment method', function () {
 
     $this->assertDatabaseHas('payment_methods', [
         'id' => $method->id,
-        'name' => $data['name']
+        'name' => $data['name'],
     ]);
 });
 
@@ -96,7 +99,7 @@ test('update validates using a form request', function () {
 test('delete payment method', function () {
     $method = PaymentMethod::factory()->create();
 
-    $response = deleteJson('api/v1/payment-methods/' . $method->id);
+    $response = deleteJson('api/v1/payment-methods/'.$method->id);
 
     $response->assertOk();
 

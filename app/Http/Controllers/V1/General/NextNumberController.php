@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\General;
 
-use Crater\Models\Invoice;
-use Crater\Models\Estimate;
-use Crater\Models\Payment;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\CompanySetting;
+use Crater\Models\Estimate;
+use Crater\Models\Invoice;
+use Crater\Models\Payment;
 use Illuminate\Http\Request;
 
 class NextNumberController extends Controller
@@ -21,7 +21,7 @@ class NextNumberController extends Controller
     {
         $key = $request->key;
 
-        $val = $key . '_prefix';
+        $val = $key.'_prefix';
 
         $prefix = CompanySetting::getSetting(
             $val,
@@ -33,14 +33,17 @@ class NextNumberController extends Controller
         switch ($key) {
             case 'invoice':
                 $nextNumber = Invoice::getNextInvoiceNumber($prefix);
+
                 break;
 
             case 'estimate':
                 $nextNumber = Estimate::getNextEstimateNumber($prefix);
+
                 break;
 
             case 'payment':
                 $nextNumber = Payment::getNextPaymentNumber($prefix);
+
                 break;
 
             default:
@@ -49,7 +52,7 @@ class NextNumberController extends Controller
 
         return response()->json([
             'nextNumber' => $nextNumber,
-            'prefix' => $prefix
+            'prefix' => $prefix,
         ]);
     }
 }

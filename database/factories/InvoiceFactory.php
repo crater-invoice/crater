@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Crater\Models\Invoice;
-use Crater\Models\User;
 use Crater\Models\InvoiceTemplate;
+use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
@@ -121,7 +121,7 @@ class InvoiceFactory extends Factory
                 return $invoice['total'];
             },
             'notes' => $this->faker->text(80),
-            'unique_hash' => str_random(60)
+            'unique_hash' => str_random(60),
         ];
     }
 }

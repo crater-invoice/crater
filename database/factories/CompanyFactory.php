@@ -23,7 +23,7 @@ class CompanyFactory extends Factory
     {
         return [
             'unique_hash' => str_random(60),
-            'name' => $this->faker->name
+            'name' => $this->faker->name,
         ];
     }
 }

@@ -31,7 +31,7 @@ class SearchController extends Controller
 
         return response()->json([
             'customers' => $customers,
-            'users' => $users ?? []
+            'users' => $users ?? [],
         ]);
     }
 }

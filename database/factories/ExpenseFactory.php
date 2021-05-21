@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Crater\Models\Expense;
-use Crater\Models\User;
 use Crater\Models\ExpenseCategory;
+use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExpenseFactory extends Factory
@@ -29,7 +29,7 @@ class ExpenseFactory extends Factory
             'company_id' => User::where('role', 'super admin')->first()->company_id,
             'amount' => $this->faker->randomDigitNotNull,
             'notes' => $this->faker->text,
-            'attachment_receipt' => null
+            'attachment_receipt' => null,
         ];
     }
 }

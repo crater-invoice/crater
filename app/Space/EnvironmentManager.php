@@ -2,13 +2,12 @@
 
 namespace Crater\Space;
 
+use Crater\Http\Requests\DatabaseEnvironmentRequest;
+use Crater\Http\Requests\DiskEnvironmentRequest;
+use Crater\Http\Requests\MailEnvironmentRequest;
 use Exception;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\DatabaseEnvironmentRequest;
-use Crater\Http\Requests\MailEnvironmentRequest;
-use Crater\Http\Requests\DiskEnvironmentRequest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
 
 class EnvironmentManager
 {
@@ -39,8 +38,8 @@ class EnvironmentManager
         $newDatabaseData =
             'DB_CONNECTION='.$request->database_connection."\n";
 
-        if($request->has('database_username') && $request->has('database_password')) {
-            if(env('DB_USERNAME') && env('DB_HOST')){
+        if ($request->has('database_username') && $request->has('database_password')) {
+            if (env('DB_USERNAME') && env('DB_HOST')) {
                 $oldDatabaseData = $oldDatabaseData.
                     'DB_HOST='.config('database.connections.'.config('database.default').'.host')."\n".
                     'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
@@ -59,8 +58,7 @@ class EnvironmentManager
                 'DB_USERNAME='.$request->database_username."\n".
                 'DB_PASSWORD="'.$request->database_password."\"\n\n";
         } else {
-
-            if(env('DB_USERNAME') && env('DB_HOST')){
+            if (env('DB_USERNAME') && env('DB_HOST')) {
                 $oldDatabaseData = $oldDatabaseData.
                     'DB_HOST='.config('database.connections.'.config('database.default').'.host')."\n".
                     'DB_PORT='.config('database.connections.'.config('database.default').'.port')."\n".
@@ -77,23 +75,20 @@ class EnvironmentManager
         }
 
         try {
-
             $this->checkDatabaseConnection($request);
 
-            if(\Schema::hasTable('users') ) {
+            if (\Schema::hasTable('users')) {
                 return [
-                    'error' => 'database_should_be_empty'
+                    'error' => 'database_should_be_empty',
                 ];
             }
-
         } catch (Exception $e) {
-
             return [
-                'error_message' => $e->getMessage()
+                'error_message' => $e->getMessage(),
             ];
         }
-        try {
 
+        try {
             file_put_contents($this->envPath, str_replace(
                 $oldDatabaseData,
                 $newDatabaseData,
@@ -115,18 +110,17 @@ class EnvironmentManager
 
             file_put_contents($this->envPath, str_replace(
                 'SESSION_DOMAIN='.config('session.domain'),
-                'SESSION_DOMAIN='.explode(':',$request->app_domain)[0],
+                'SESSION_DOMAIN='.explode(':', $request->app_domain)[0],
                 file_get_contents($this->envPath)
             ));
-
         } catch (Exception $e) {
             return [
-                'error' => 'database_variables_save_error'
+                'error' => 'database_variables_save_error',
             ];
         }
 
         return [
-            'success' => 'database_variables_save_successfully'
+            'success' => 'database_variables_save_successfully',
         ];
     }
 
@@ -142,16 +136,16 @@ class EnvironmentManager
         $settings = config("database.connections.$connection");
 
         $connectionArray = array_merge($settings, [
-            'driver'   => $connection,
+            'driver' => $connection,
             'database' => $request->database_name,
         ]);
 
-        if($request->has('database_username') && $request->has('database_password')) {
+        if ($request->has('database_username') && $request->has('database_password')) {
             $connectionArray = array_merge($connectionArray, [
                 'username' => $request->database_username,
                 'password' => $request->database_password,
-                'host'     => $request->database_hostname,
-                'port'     => $request->database_port,
+                'host' => $request->database_hostname,
+                'port' => $request->database_port,
             ]);
         }
 
@@ -166,25 +160,24 @@ class EnvironmentManager
         return DB::connection()->getPdo();
     }
 
-     /**
-     * Save the mail content to the .env file.
-     *
-     * @param Request $request
-     * @return array
-     */
+    /**
+    * Save the mail content to the .env file.
+    *
+    * @param Request $request
+    * @return array
+    */
     public function saveMailVariables(MailEnvironmentRequest $request)
     {
         $mailData = $this->getMailData($request);
 
         try {
-
             file_put_contents($this->envPath, str_replace(
                 $mailData['old_mail_data'],
                 $mailData['new_mail_data'],
                 file_get_contents($this->envPath)
             ));
 
-            if($mailData['extra_old_mail_data']) {
+            if ($mailData['extra_old_mail_data']) {
                 file_put_contents($this->envPath, str_replace(
                     $mailData['extra_old_mail_data'],
                     $mailData['extra_mail_data'],
@@ -197,15 +190,14 @@ class EnvironmentManager
                     FILE_APPEND
                 );
             }
-
         } catch (Exception $e) {
             return [
-                'error' => 'mail_variables_save_error'
+                'error' => 'mail_variables_save_error',
             ];
         }
 
         return [
-            'success' => 'mail_variables_save_successfully'
+            'success' => 'mail_variables_save_successfully',
         ];
     }
 
@@ -217,7 +209,7 @@ class EnvironmentManager
         $oldMailData = "";
         $newMailData = "";
 
-        if(env('MAIL_FROM_ADDRESS') !== NULL && env('MAIL_FROM_NAME') !== NULL ) {
+        if (env('MAIL_FROM_ADDRESS') !== null && env('MAIL_FROM_NAME') !== null) {
             $mailFromCredential =
                 'MAIL_FROM_ADDRESS='.config('mail.from.address')."\n".
                 'MAIL_FROM_NAME="'.config('mail.from.name')."\"\n\n";
@@ -267,12 +259,12 @@ class EnvironmentManager
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
-                $extraMailData=
+                $extraMailData =
                     'MAILGUN_DOMAIN='.$request->mail_mailgun_domain."\n".
                     'MAILGUN_SECRET='.$request->mail_mailgun_secret."\n".
                     'MAILGUN_ENDPOINT='.$request->mail_mailgun_endpoint."\n";
 
-                if(env('MAILGUN_DOMAIN') !== NULL && env('MAILGUN_SECRET') !== NULL && env('MAILGUN_ENDPOINT') !== NULL) {
+                if (env('MAILGUN_DOMAIN') !== null && env('MAILGUN_SECRET') !== null && env('MAILGUN_ENDPOINT') !== null) {
                     $extraOldMailData =
                         'MAILGUN_DOMAIN='.config('services.mailgun.domain')."\n".
                         'MAILGUN_SECRET='.config('services.mailgun.secret')."\n".
@@ -301,11 +293,11 @@ class EnvironmentManager
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
-                $extraMailData=
+                $extraMailData =
                     'SES_KEY='.$request->mail_ses_key."\n".
                     'SES_SECRET='.$request->mail_ses_secret."\n";
 
-                if(env('SES_KEY') !== NULL  && env('SES_SECRET') !== NULL ) {
+                if (env('SES_KEY') !== null && env('SES_SECRET') !== null) {
                     $extraOldMailData =
                         'SES_KEY='.config('services.ses.key')."\n".
                         'SES_SECRET='.config('services.ses.secret')."\n";
@@ -362,23 +354,22 @@ class EnvironmentManager
             'old_mail_data' => $oldMailData,
             'new_mail_data' => $newMailData,
             'extra_mail_data' => $extraMailData,
-            'extra_old_mail_data' => $extraOldMailData
+            'extra_old_mail_data' => $extraOldMailData,
         ];
     }
 
-     /**
-     * Save the disk content to the .env file.
-     *
-     * @param Request $request
-     * @return array
-     */
+    /**
+    * Save the disk content to the .env file.
+    *
+    * @param Request $request
+    * @return array
+    */
     public function saveDiskVariables(DiskEnvironmentRequest $request)
     {
         $diskData = $this->getDiskData($request);
 
         try {
-
-            if(!$diskData['old_default_driver']){
+            if (! $diskData['old_default_driver']) {
                 file_put_contents($this->envPath, $diskData['default_driver'], FILE_APPEND);
             } else {
                 file_put_contents($this->envPath, str_replace(
@@ -388,25 +379,23 @@ class EnvironmentManager
                 ));
             }
 
-            if(!$diskData['old_disk_data']){
+            if (! $diskData['old_disk_data']) {
                 file_put_contents($this->envPath, $diskData['new_disk_data'], FILE_APPEND);
             } else {
-
                 file_put_contents($this->envPath, str_replace(
                     $diskData['old_disk_data'],
                     $diskData['new_disk_data'],
                     file_get_contents($this->envPath)
                 ));
             }
-
         } catch (Exception $e) {
             return [
-                'error' => 'disk_variables_save_error'
+                'error' => 'disk_variables_save_error',
             ];
         }
 
         return [
-            'success' => 'disk_variables_save_successfully'
+            'success' => 'disk_variables_save_successfully',
         ];
     }
 
@@ -417,8 +406,8 @@ class EnvironmentManager
         $oldDiskData = "";
         $newDiskData = "";
 
-        if($request->default_driver) {
-            if(env('FILESYSTEM_DRIVER') !== NULL) {
+        if ($request->default_driver) {
+            if (env('FILESYSTEM_DRIVER') !== null) {
                 $defaultDriver = "\n".'FILESYSTEM_DRIVER='.$request->default_driver."\n";
 
                 $oldDefaultDriver =
@@ -431,7 +420,7 @@ class EnvironmentManager
 
         switch ($request->selected_driver) {
             case 's3':
-                if(env('AWS_KEY') !== NULL){
+                if (env('AWS_KEY') !== null) {
                     $oldDiskData = "\n".
                         'AWS_KEY='.config('filesystems.disks.s3.key')."\n".
                         'AWS_SECRET="'.config('filesystems.disks.s3.secret')."\"\n".
@@ -450,14 +439,14 @@ class EnvironmentManager
                 break;
 
             case 'doSpaces':
-                if(env('DO_SPACES_KEY') !== NULL){
+                if (env('DO_SPACES_KEY') !== null) {
                     $oldDiskData = "\n".
                         'DO_SPACES_KEY='.config('filesystems.disks.doSpaces.key')."\n".
                         'DO_SPACES_SECRET="'.config('filesystems.disks.doSpaces.secret')."\"\n".
                         'DO_SPACES_REGION='.config('filesystems.disks.doSpaces.region')."\n".
                         'DO_SPACES_BUCKET='.config('filesystems.disks.doSpaces.bucket')."\n".
                         'DO_SPACES_ENDPOINT='.config('filesystems.disks.doSpaces.endpoint')."\n";
-                        'DO_SPACES_ROOT='.config('filesystems.disks.doSpaces.root')."\n";
+                    'DO_SPACES_ROOT='.config('filesystems.disks.doSpaces.root')."\n";
                 }
 
                 $newDiskData = "\n".
@@ -471,7 +460,7 @@ class EnvironmentManager
                 break;
 
             case 'dropbox':
-                if(env('DROPBOX_TOKEN') !== NULL){
+                if (env('DROPBOX_TOKEN') !== null) {
                     $oldDiskData = "\n".
                         'DROPBOX_TOKEN='.config('filesystems.disks.dropbox.token')."\n".
                         'DROPBOX_KEY='.config('filesystems.disks.dropbox.key')."\n".
@@ -494,7 +483,7 @@ class EnvironmentManager
             'old_disk_data' => $oldDiskData,
             'new_disk_data' => $newDiskData,
             'default_driver' => $defaultDriver,
-            'old_default_driver' => $oldDefaultDriver
+            'old_default_driver' => $oldDefaultDriver,
         ];
     }
 }

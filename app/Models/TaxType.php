@@ -2,24 +2,24 @@
 
 namespace Crater\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Tax;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class TaxType extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'percent',
         'company_id',
         'compound_tax',
         'collective_tax',
-        'description'
+        'description',
     ];
 
     protected $casts = [
-        'percent' => 'float'
+        'percent' => 'float',
     ];
 
     public function taxes()
@@ -67,7 +67,7 @@ class TaxType extends Model
 
     public function scopeWhereSearch($query, $search)
     {
-        $query->where('name', 'LIKE', '%' . $search . '%');
+        $query->where('name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopePaginateData($query, $limit)

@@ -1,13 +1,16 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Settings\TaxTypesController;
+use Crater\Http\Requests\TaxTypeRequest;
 use Crater\Models\TaxType;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\TaxTypeRequest;
-use Crater\Http\Controllers\V1\Settings\TaxTypesController;
 
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -48,11 +51,11 @@ test('store validates using a form request', function () {
 test('get tax type', function () {
     $taxType = TaxType::factory()->create();
 
-    $response = getJson('api/v1/tax-types/' . $taxType->id);
+    $response = getJson('api/v1/tax-types/'.$taxType->id);
 
     $response->assertOk()
         ->assertJson([
-            'taxType' => $taxType->toArray()
+            'taxType' => $taxType->toArray(),
         ]);
 });
 
@@ -61,11 +64,11 @@ test('update tax type', function () {
 
     $taxType1 = TaxType::factory()->raw();
 
-    $response = putJson('api/v1/tax-types/' . $taxType->id, $taxType1);
+    $response = putJson('api/v1/tax-types/'.$taxType->id, $taxType1);
 
     $response->assertOk()
         ->assertJson([
-            'taxType' => $taxType1
+            'taxType' => $taxType1,
         ]);
 });
 
@@ -80,11 +83,11 @@ test('update validates using a form request', function () {
 test('delete tax type', function () {
     $taxType = TaxType::factory()->create();
 
-    $response = deleteJson('api/v1/tax-types/' . $taxType->id);
+    $response = deleteJson('api/v1/tax-types/'.$taxType->id);
 
     $response->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDeleted($taxType);

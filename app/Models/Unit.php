@@ -2,14 +2,13 @@
 
 namespace Crater\Models;
 
-use Crater\Models\Company;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Item;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
     use HasFactory;
+
     protected $fillable = ['name', 'company_id'];
 
     public function items()

@@ -1,11 +1,15 @@
 <?php
-use Crater\Models\User;
+
+use Crater\Http\Controllers\V1\Expense\ExpenseCategoriesController;
+use Crater\Http\Requests\ExpenseCategoryRequest;
 use Crater\Models\ExpenseCategory;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\ExpenseCategoryRequest;
-use Crater\Http\Controllers\V1\Expense\ExpenseCategoriesController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -82,7 +86,7 @@ test('delete category', function () {
     deleteJson('api/v1/categories/'.$category->id)
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDeleted($category);

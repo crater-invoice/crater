@@ -2,12 +2,12 @@
 
 namespace Crater\Http\Controllers\V1\Estimate;
 
-use Illuminate\Http\Request;
-use Crater\Models\Estimate;
-use Crater\Http\Requests\EstimatesRequest;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\DeleteEstimatesRequest;
+use Crater\Http\Requests\EstimatesRequest;
 use Crater\Jobs\GenerateEstimatePdfJob;
+use Crater\Models\Estimate;
+use Illuminate\Http\Request;
 
 class EstimatesController extends Controller
 {
@@ -20,7 +20,7 @@ class EstimatesController extends Controller
                 'user',
                 'estimateTemplate',
                 'taxes',
-                'creator'
+                'creator',
             ])
             ->join('users', 'users.id', '=', 'estimates.user_id')
             ->applyFilters($request->only([
@@ -32,7 +32,7 @@ class EstimatesController extends Controller
                 'to_date',
                 'search',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->whereCompany($request->header('company'))
             ->select('estimates.*', 'users.name')
@@ -41,7 +41,7 @@ class EstimatesController extends Controller
 
         $siteData = [
             'estimates' => $estimates,
-            'estimateTotalCount' => Estimate::count()
+            'estimateTotalCount' => Estimate::count(),
         ];
 
         return response()->json($siteData);
@@ -58,7 +58,7 @@ class EstimatesController extends Controller
         GenerateEstimatePdfJob::dispatch($estimate);
 
         return response()->json([
-            'estimate' => $estimate
+            'estimate' => $estimate,
         ]);
     }
 
@@ -72,7 +72,7 @@ class EstimatesController extends Controller
             'creator',
             'taxes',
             'taxes.taxType',
-            'fields.customField'
+            'fields.customField',
         ]);
 
         return response()->json([
@@ -89,7 +89,7 @@ class EstimatesController extends Controller
         GenerateEstimatePdfJob::dispatch($estimate, true);
 
         return response()->json([
-            'estimate' => $estimate
+            'estimate' => $estimate,
         ]);
     }
 
@@ -98,7 +98,7 @@ class EstimatesController extends Controller
         Estimate::destroy($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

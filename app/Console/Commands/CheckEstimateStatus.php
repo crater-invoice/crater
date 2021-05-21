@@ -1,9 +1,10 @@
 <?php
+
 namespace Crater\Console\Commands;
 
-use Illuminate\Console\Command;
 use Carbon\Carbon;
 use Crater\Models\Estimate;
+use Illuminate\Console\Command;
 
 class CheckEstimateStatus extends Command
 {
@@ -39,7 +40,7 @@ class CheckEstimateStatus extends Command
     public function handle()
     {
         $date = Carbon::now();
-        $status = array(Estimate::STATUS_ACCEPTED, Estimate::STATUS_REJECTED, Estimate::STATUS_EXPIRED);
+        $status = [Estimate::STATUS_ACCEPTED, Estimate::STATUS_REJECTED, Estimate::STATUS_EXPIRED];
         $estimates = Estimate::whereNotIn('status', $status)->whereDate('expiry_date', '<', $date)->get();
 
         foreach ($estimates as $estimate) {

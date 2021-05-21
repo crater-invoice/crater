@@ -25,20 +25,20 @@ class ExpenseRequest extends FormRequest
     {
         return [
             'expense_date' => [
-                'required'
+                'required',
             ],
             'expense_category_id' => [
-                'required'
+                'required',
             ],
             'amount' => [
-                'required'
+                'required',
             ],
             'user_id' => [
-                'nullable'
+                'nullable',
             ],
             'notes' => [
-                'nullable'
-            ]
+                'nullable',
+            ],
         ];
     }
 }

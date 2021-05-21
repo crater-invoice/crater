@@ -1,6 +1,7 @@
 <?php
-use Crater\Models\User;
+
 use Crater\Models\Company;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;
@@ -27,9 +28,9 @@ test('get customer sales report', function () {
         'to_date' => '2020-07-20',
     ];
     $queryString = http_build_query($filters, '', '&');
-    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $queryString = Company::find(1)->unique_hash.'?'.$queryString;
 
-    $response = getJson('reports/sales/customers/'. $queryString);
+    $response = getJson('reports/sales/customers/'.$queryString);
 
     $response->assertOk();
 });
@@ -42,9 +43,9 @@ test('get item sales report', function () {
         'to_date' => '2020-07-20',
     ];
     $queryString = http_build_query($filters, '', '&');
-    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $queryString = Company::find(1)->unique_hash.'?'.$queryString;
 
-    $response = getJson('reports/sales/items/' . $queryString);
+    $response = getJson('reports/sales/items/'.$queryString);
 
     $response->assertOk();
 });
@@ -57,9 +58,9 @@ test('get expenses report', function () {
         'to_date' => '2020-07-20',
     ];
     $queryString = http_build_query($filters, '', '&');
-    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $queryString = Company::find(1)->unique_hash.'?'.$queryString;
 
-    $response = getJson('reports/expenses/' . $queryString);
+    $response = getJson('reports/expenses/'.$queryString);
 
     $response->assertOk();
 });
@@ -72,9 +73,9 @@ test('get tax summary', function () {
         'to_date' => '2020-07-20',
     ];
     $queryString = http_build_query($filters, '', '&');
-    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $queryString = Company::find(1)->unique_hash.'?'.$queryString;
 
-    $response = getJson('reports/tax-summary/' . $queryString);
+    $response = getJson('reports/tax-summary/'.$queryString);
 
     $response->assertOk();
 });
@@ -87,10 +88,9 @@ test('get profit loss', function () {
         'to_date' => '2020-07-20',
     ];
     $queryString = http_build_query($filters, '', '&');
-    $queryString = Company::find(1)->unique_hash . '?' . $queryString;
+    $queryString = Company::find(1)->unique_hash.'?'.$queryString;
 
-    $response = getJson('reports/profit-loss/' . $queryString);
+    $response = getJson('reports/profit-loss/'.$queryString);
 
     $response->assertOk();
 });
-

@@ -1,10 +1,11 @@
 <?php
+
 namespace Crater\Http\Controllers\V1\Expense;
 
+use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\ExpenseCategoryRequest;
 use Crater\Models\ExpenseCategory;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\ExpenseCategoryRequest;
-use Crater\Http\Controllers\Controller;
 
 class ExpenseCategoriesController extends Controller
 {
@@ -20,13 +21,13 @@ class ExpenseCategoriesController extends Controller
         $categories = ExpenseCategory::whereCompany($request->header('company'))
             ->applyFilters($request->only([
                 'category_id',
-                'search'
+                'search',
             ]))
             ->latest()
             ->paginateData($limit);
 
         return response()->json([
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -44,7 +45,7 @@ class ExpenseCategoriesController extends Controller
 
         return response()->json([
             'category' => $category,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -57,7 +58,7 @@ class ExpenseCategoriesController extends Controller
     public function show(ExpenseCategory $category)
     {
         return response()->json([
-            'category' => $category
+            'category' => $category,
         ]);
     }
 
@@ -74,7 +75,7 @@ class ExpenseCategoriesController extends Controller
 
         return response()->json([
             'category' => $category,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -88,14 +89,14 @@ class ExpenseCategoriesController extends Controller
     {
         if ($category->expenses() && $category->expenses()->count() > 0) {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
 
         $category->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

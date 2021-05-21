@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Settings;
 
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\GetSettingsRequest;
+use Crater\Models\CompanySetting;
 
 class GetCompanySettingsController extends Controller
 {

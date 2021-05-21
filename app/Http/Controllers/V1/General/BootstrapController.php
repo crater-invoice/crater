@@ -2,13 +2,12 @@
 
 namespace Crater\Http\Controllers\V1\General;
 
-use Crater\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Crater\Models\Currency;
-use Crater\Models\Country;
 use Auth;
+use Crater\Http\Controllers\Controller;
 use Crater\Models\CompanySetting;
-use Crater\Models\CustomField;
+use Crater\Models\Country;
+use Crater\Models\Currency;
+use Illuminate\Http\Request;
 
 class BootstrapController extends Controller
 {
@@ -29,7 +28,7 @@ class BootstrapController extends Controller
             'carbon_date_format',
             'fiscal_year',
             'time_zone',
-            'currency'
+            'currency',
         ];
 
         $settings = CompanySetting::getSettings($settings, $user->company_id);
@@ -46,7 +45,7 @@ class BootstrapController extends Controller
             'moment_date_format' => $settings['moment_date_format'],
             'carbon_date_format' => $settings['carbon_date_format'],
             'fiscal_year' => $settings['fiscal_year'],
-            'time_zone' => $settings['time_zone']
+            'time_zone' => $settings['time_zone'],
         ]);
     }
 }

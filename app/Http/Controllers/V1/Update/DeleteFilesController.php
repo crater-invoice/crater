@@ -3,8 +3,8 @@
 namespace Crater\Http\Controllers\V1\Update;
 
 use Crater\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Crater\Space\Updater;
+use Illuminate\Http\Request;
 
 class DeleteFilesController extends Controller
 {
@@ -16,8 +16,7 @@ class DeleteFilesController extends Controller
      */
     public function __invoke(Request $request)
     {
-
-        if(isset($request->deleted_files) && !empty($request->deleted_files)) {
+        if (isset($request->deleted_files) && ! empty($request->deleted_files)) {
             Updater::deleteFiles($request->deleted_files);
         }
 

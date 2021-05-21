@@ -34,6 +34,7 @@ class RequirementsChecker
                             $results['errors'] = true;
                         }
                     }
+
                     break;
                 // check apache requirements
                 case 'apache':
@@ -49,6 +50,7 @@ class RequirementsChecker
                             }
                         }
                     }
+
                     break;
             }
         }

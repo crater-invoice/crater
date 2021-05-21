@@ -2,12 +2,12 @@
 
 namespace Crater\Http\Controllers\V1\Invoice;
 
-use Illuminate\Http\Request;
-use Crater\Http\Requests;
-use Crater\Models\Invoice;
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests;
 use Crater\Http\Requests\DeleteInvoiceRequest;
 use Crater\Jobs\GenerateInvoicePdfJob;
+use Crater\Models\Invoice;
+use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
@@ -41,7 +41,7 @@ class InvoicesController extends Controller
 
         return response()->json([
             'invoices' => $invoices,
-            'invoiceTotalCount' => Invoice::count()
+            'invoiceTotalCount' => Invoice::count(),
         ]);
     }
 
@@ -62,7 +62,7 @@ class InvoicesController extends Controller
         GenerateInvoicePdfJob::dispatch($invoice);
 
         return response()->json([
-            'invoice' => $invoice
+            'invoice' => $invoice,
         ]);
     }
 
@@ -80,7 +80,7 @@ class InvoicesController extends Controller
             'user',
             'invoiceTemplate',
             'taxes.taxType',
-            'fields.customField'
+            'fields.customField',
         ]);
 
         $siteData = [
@@ -107,7 +107,7 @@ class InvoicesController extends Controller
 
         return response()->json([
             'invoice' => $invoice,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -122,7 +122,7 @@ class InvoicesController extends Controller
         Invoice::destroy($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

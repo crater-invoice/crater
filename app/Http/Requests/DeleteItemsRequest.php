@@ -28,15 +28,15 @@ class DeleteItemsRequest extends FormRequest
     {
         return [
             'ids' => [
-                'required'
+                'required',
             ],
             'ids.*' => [
                 'required',
                 Rule::exists('items', 'id'),
                 new RelationNotExist(Item::class, 'invoiceItems'),
                 new RelationNotExist(Item::class, 'estimateItems'),
-                new RelationNotExist(Item::class, 'taxes')
-            ]
+                new RelationNotExist(Item::class, 'taxes'),
+            ],
         ];
     }
 }

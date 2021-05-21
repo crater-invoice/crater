@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use Crater\Models\Company;
-use Illuminate\Database\Seeder;
-use Crater\Models\User;
 use Crater\Models\Setting;
-use Illuminate\Support\Facades\Hash;
+use Crater\Models\User;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,12 +20,12 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@craterapp.com',
             'name' => 'Jane Doe',
             'role' => 'super admin',
-            'password' => 'crater@123'
+            'password' => 'crater@123',
         ]);
 
         $company = Company::create([
             'name' => 'xyz',
-            'unique_hash' => str_random(20)
+            'unique_hash' => str_random(20),
         ]);
 
         $user->company_id = $company->id;

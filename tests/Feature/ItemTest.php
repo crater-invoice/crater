@@ -1,13 +1,15 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Item\ItemsController;
+use Crater\Http\Requests\ItemsRequest;
 use Crater\Models\Item;
 use Crater\Models\Tax;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\ItemsRequest;
-use Crater\Http\Controllers\V1\Item\ItemsController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -33,8 +35,8 @@ test('create item', function () {
     $item = Item::factory()->raw([
         'taxes' => [
             Tax::factory()->raw(),
-            Tax::factory()->raw()
-        ]
+            Tax::factory()->raw(),
+        ],
     ]);
 
     $response = postJson('api/v1/items', $item);
@@ -43,7 +45,7 @@ test('create item', function () {
         'name' => $item['name'],
         'description' => $item['description'],
         'price' => $item['price'],
-        'company_id' => $item['company_id']
+        'company_id' => $item['company_id'],
     ]);
 
     $this->assertDatabaseHas('taxes', [
@@ -72,7 +74,7 @@ test('get item', function () {
         'name' => $item['name'],
         'description' => $item['description'],
         'price' => $item['price'],
-        'company_id' => $item['company_id']
+        'company_id' => $item['company_id'],
     ]);
 });
 
@@ -81,11 +83,11 @@ test('update item', function () {
 
     $update_item = Item::factory()->raw([
         'taxes' => [
-            Tax::factory()->raw()
-        ]
+            Tax::factory()->raw(),
+        ],
     ]);
 
-    $response = putJson('api/v1/items/' . $item->id, $update_item);
+    $response = putJson('api/v1/items/'.$item->id, $update_item);
 
     $response->assertOk();
 
@@ -93,7 +95,7 @@ test('update item', function () {
         'name' => $update_item['name'],
         'description' => $update_item['description'],
         'price' => $update_item['price'],
-        'company_id' => $update_item['company_id']
+        'company_id' => $update_item['company_id'],
     ]);
 
     $this->assertDatabaseHas('taxes', [
@@ -113,7 +115,7 @@ test('delete multiple items', function () {
     $items = Item::factory()->count(5)->create();
 
     $data = [
-        'ids' => $items->pluck('id')
+        'ids' => $items->pluck('id'),
     ];
 
     postJson("/api/v1/items/delete", $data)->assertOk();
@@ -129,12 +131,12 @@ test('search items', function () {
         'limit' => 15,
         'search' => 'doe',
         'price' => 6,
-        'unit' => 'kg'
+        'unit' => 'kg',
     ];
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/items?' . $queryString);
+    $response = getJson('api/v1/items?'.$queryString);
 
     $response->assertOk();
 });

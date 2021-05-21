@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,17 +25,17 @@ class ItemsRequest extends FormRequest
     {
         return [
             'name' => [
-                'required'
+                'required',
             ],
             'price' => [
-                'required'
+                'required',
             ],
             'unit_id' => [
-                'nullable'
+                'nullable',
             ],
             'description' => [
-                'nullable'
-            ]
+                'nullable',
+            ],
         ];
     }
 }

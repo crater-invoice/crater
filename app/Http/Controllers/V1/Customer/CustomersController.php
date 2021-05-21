@@ -2,12 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Customer;
 
-use Illuminate\Http\Request;
+use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests;
 use Crater\Models\User;
-use Crater\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 
 class CustomersController extends Controller
 {
@@ -29,7 +28,7 @@ class CustomersController extends Controller
                 'phone',
                 'customer_id',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->whereCompany($request->header('company'))
             ->select(
@@ -42,7 +41,7 @@ class CustomersController extends Controller
 
         return response()->json([
             'customers' => $customers,
-            'customerTotalCount' => User::whereRole('customer')->count()
+            'customerTotalCount' => User::whereRole('customer')->count(),
         ]);
     }
 
@@ -58,7 +57,7 @@ class CustomersController extends Controller
 
         return response()->json([
             'customer' => $customer,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -74,7 +73,7 @@ class CustomersController extends Controller
             'billingAddress.country',
             'shippingAddress.country',
             'fields.customField',
-            'creator'
+            'creator',
         ]);
 
         $currency = $customer->currency;
@@ -84,7 +83,6 @@ class CustomersController extends Controller
             'currency' => $currency,
         ]);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -101,7 +99,7 @@ class CustomersController extends Controller
 
         return response()->json([
             'customer' => $customer,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -116,7 +114,7 @@ class CustomersController extends Controller
         User::deleteCustomers($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

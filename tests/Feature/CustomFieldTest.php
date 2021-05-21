@@ -1,12 +1,15 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\CustomField\CustomFieldsController;
+use Crater\Http\Requests\CustomFieldRequest;
 use Crater\Models\CustomField;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\CustomFieldRequest;
-use Crater\Http\Controllers\V1\CustomField\CustomFieldsController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\deleteJson;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -34,7 +37,7 @@ test('create custom field', function () {
     postJson('api/v1/custom-fields', $data)
         ->assertStatus(200)
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDatabaseHas('custom_fields', [
@@ -42,7 +45,7 @@ test('create custom field', function () {
         'label' => $data['label'],
         'type' => $data['type'],
         'model_type' => $data['model_type'],
-        'is_required' => $data['is_required']
+        'is_required' => $data['is_required'],
     ]);
 });
 
@@ -58,13 +61,13 @@ test('update custom field', function () {
     $customField = CustomField::factory()->create();
 
     $newCustomField = CustomField::factory()->raw([
-        'is_required' => false
+        'is_required' => false,
     ]);
 
-    putJson('api/v1/custom-fields/' . $customField->id, $newCustomField)
+    putJson('api/v1/custom-fields/'.$customField->id, $newCustomField)
         ->assertStatus(200)
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDatabaseHas('custom_fields', [
@@ -87,12 +90,12 @@ test('update validates using a form request', function () {
 test('delete custom field', function () {
     $customField = CustomField::factory()->create();
 
-    $response = deleteJson('api/v1/custom-fields/' . $customField->id);
+    $response = deleteJson('api/v1/custom-fields/'.$customField->id);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertDeleted($customField);

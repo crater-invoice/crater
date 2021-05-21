@@ -25,17 +25,17 @@ class SendPaymentRequest extends FormRequest
     {
         return [
             'subject' => [
-                'required'
+                'required',
             ],
             'body' => [
-                'required'
+                'required',
             ],
             'from' => [
-                'required'
+                'required',
             ],
             'to' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

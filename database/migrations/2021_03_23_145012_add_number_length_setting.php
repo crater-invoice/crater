@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Crater\Models\CompanySetting;
 use Crater\Models\User;
+use Illuminate\Database\Migrations\Migration;
 
 class AddNumberLengthSetting extends Migration
 {

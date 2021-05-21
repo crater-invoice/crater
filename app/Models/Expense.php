@@ -2,29 +2,27 @@
 
 namespace Crater\Models;
 
-use Crater\Models\CompanySetting;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Crater\Models\ExpenseCategory;
-use Crater\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Expense extends Model implements HasMedia
 {
     use HasFactory;
-    use InteractsWithMedia, HasCustomFieldsTrait;
+    use InteractsWithMedia;
+    use HasCustomFieldsTrait;
 
     protected $guarded = ['id'];
 
     protected $appends = [
         'formattedExpenseDate',
         'formattedCreatedAt',
-        'receipt'
+        'receipt',
     ];
 
     public function setExpenseDateAttribute($value)
@@ -52,12 +50,14 @@ class Expense extends Model implements HasMedia
     public function getFormattedExpenseDateAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->expense_date)->format($dateFormat);
     }
 
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
@@ -83,14 +83,14 @@ class Expense extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('category', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%');
             });
         }
     }
 
     public function scopeWhereNotes($query, $search)
     {
-        $query->where('notes', 'LIKE', '%' . $search . '%');
+        $query->where('notes', 'LIKE', '%'.$search.'%');
     }
 
     public function scopeWhereCategory($query, $categoryId)
@@ -145,9 +145,9 @@ class Expense extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('category', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%');
             })
-                ->orWhere('notes', 'LIKE', '%' . $term . '%');
+                ->orWhere('notes', 'LIKE', '%'.$term.'%');
         }
     }
 

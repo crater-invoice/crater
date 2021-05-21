@@ -27,14 +27,14 @@ class PaymentMethodRequest extends FormRequest
         $data = [
             'name' => [
                 'required',
-                'unique:payment_methods,name'
-            ]
+                'unique:payment_methods,name',
+            ],
         ];
 
         if ($this->getMethod() == 'PUT') {
             $data['name'] = [
                 'required',
-                Rule::unique('payment_methods')->ignore($this->route('payment_method'), 'id')
+                Rule::unique('payment_methods')->ignore($this->route('payment_method'), 'id'),
             ];
         }
 

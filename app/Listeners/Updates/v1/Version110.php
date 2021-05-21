@@ -2,16 +2,14 @@
 
 namespace Crater\Listeners\Updates\v1;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
-use Crater\Models\Setting;
 use Crater\Models\Currency;
+use Crater\Models\Setting;
 
 class Version110 extends Listener
 {
-    const VERSION = '1.1.0';
+    public const VERSION = '1.1.0';
 
     /**
      * Create the event listener.
@@ -42,59 +40,59 @@ class Version110 extends Listener
         Setting::setSetting('version', static::VERSION);
     }
 
-    private function addCurrencies() {
-
+    private function addCurrencies()
+    {
         $currencies = [
             '13' => [
-                'symbol' => 'S$'
+                'symbol' => 'S$',
             ],
             '16' => [
-                'symbol' => '₫'
+                'symbol' => '₫',
             ],
             '17' => [
-                'symbol' => 'Fr.'
+                'symbol' => 'Fr.',
             ],
             '21' => [
-                'symbol' => '฿'
+                'symbol' => '฿',
             ],
             '22' => [
-                'symbol' => '₦'
+                'symbol' => '₦',
             ],
             '26' => [
-                'symbol' => 'HK$'
+                'symbol' => 'HK$',
             ],
             '35' => [
-                'symbol' => 'NAƒ'
+                'symbol' => 'NAƒ',
             ],
             '38' => [
-                'symbol' => 'GH₵'
+                'symbol' => 'GH₵',
             ],
             '39' => [
-                'symbol' => 'Лв.'
+                'symbol' => 'Лв.',
             ],
             '42' => [
-                'symbol' => 'RON'
+                'symbol' => 'RON',
             ],
             '44' => [
-                'symbol' => 'SِAR'
+                'symbol' => 'SِAR',
             ],
             '46' => [
-                'symbol' => 'Rf'
+                'symbol' => 'Rf',
             ],
             '47' => [
-                'symbol' => '₡'
+                'symbol' => '₡',
             ],
             '54' => [
-                'symbol' => '‎د.ت'
+                'symbol' => '‎د.ت',
             ],
             '55' => [
-                'symbol' => '₽'
+                'symbol' => '₽',
             ],
             '57' => [
-                'symbol' => 'ر.ع.'
+                'symbol' => 'ر.ع.',
             ],
             '58' => [
-                'symbol' => '₴'
+                'symbol' => '₴',
             ],
 
         ];
@@ -109,7 +107,7 @@ class Version110 extends Listener
             'symbol' => 'KWD ',
             'precision' => '3',
             'thousand_separator' => ',',
-            'decimal_separator' => '.'
+            'decimal_separator' => '.',
         ]);
     }
 }

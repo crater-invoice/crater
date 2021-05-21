@@ -2,9 +2,9 @@
 
 namespace Crater\Console\Commands;
 
-use Illuminate\Console\Command;
-use Crater\Space\Updater;
 use Crater\Models\Setting;
+use Crater\Space\Updater;
+use Illuminate\Console\Command;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class UpdateCommand extends Command
@@ -57,42 +57,43 @@ class UpdateCommand extends Command
             return;
         }
 
-        if (!$this->version) {
+        if (! $this->version) {
             $this->info('No Update Available! You are already on the latest version.');
+
             return;
         }
 
-        if (!$this->confirm("Do you wish to update to {$this->version}?")) {
+        if (! $this->confirm("Do you wish to update to {$this->version}?")) {
             return;
         }
 
-        if (!$path = $this->download()) {
+        if (! $path = $this->download()) {
             return;
         }
 
-        if (!$path = $this->unzip($path)) {
+        if (! $path = $this->unzip($path)) {
             return;
         }
 
-        if (!$this->copyFiles($path)) {
+        if (! $this->copyFiles($path)) {
             return;
         }
 
-        if(isset($this->response->deleted_files) && !empty($this->response->deleted_files)) {
-            if (!$this->deleteFiles($this->response->deleted_files)) {
+        if (isset($this->response->deleted_files) && ! empty($this->response->deleted_files)) {
+            if (! $this->deleteFiles($this->response->deleted_files)) {
                 return;
             }
         }
 
-        if (!$this->migrateUpdate()) {
+        if (! $this->migrateUpdate()) {
             return;
         }
 
-        if (!$this->finish()) {
+        if (! $this->finish()) {
             return;
         }
 
-        $this->info('Successfully updated to ' . $this->version);
+        $this->info('Successfully updated to '.$this->version);
     }
 
     public function getInstalledVersion()
@@ -102,7 +103,7 @@ class UpdateCommand extends Command
 
     public function getLatestVersionResponse()
     {
-        $this->info('Your currently installed version is ' . $this->installed);
+        $this->info('Your currently installed version is '.$this->installed);
         $this->line('');
         $this->info('Checking for update...');
 
@@ -110,14 +111,12 @@ class UpdateCommand extends Command
             $response = Updater::checkForUpdate($this->installed);
 
             if ($response->success) {
-
                 $extensions = $response->version->extensions;
 
                 $is_required = false;
 
                 foreach ($extensions as $key => $extension) {
-
-                    if(!$extension) {
+                    if (! $extension) {
                         $is_required = true;
                         $this->info('❌ '.$key);
                     }
@@ -125,7 +124,7 @@ class UpdateCommand extends Command
                     $this->info('✅ '.$key);
                 }
 
-                if($is_required) {
+                if ($is_required) {
                     return 'extension_required';
                 }
 
@@ -146,8 +145,9 @@ class UpdateCommand extends Command
 
         try {
             $path = Updater::download($this->version, 1);
-            if (!is_string($path)) {
+            if (! is_string($path)) {
                 $this->error('Download exception');
+
                 return false;
             }
         } catch (\Exception $e) {
@@ -165,8 +165,9 @@ class UpdateCommand extends Command
 
         try {
             $path = Updater::unzip($path);
-            if (!is_string($path)) {
+            if (! is_string($path)) {
                 $this->error('Unzipping exception');
+
                 return false;
             }
         } catch (\Exception $e) {

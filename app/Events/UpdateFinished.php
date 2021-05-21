@@ -2,7 +2,7 @@
 
 namespace Crater\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;  
+use Illuminate\Foundation\Events\Dispatchable;
 
 class UpdateFinished
 {

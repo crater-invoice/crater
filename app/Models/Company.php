@@ -2,13 +2,10 @@
 
 namespace Crater\Models;
 
-use Crater\Models\Address;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Crater\Models\User;
-use Crater\Models\CompanySetting;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model implements HasMedia
 {

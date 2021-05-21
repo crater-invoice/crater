@@ -16,7 +16,7 @@ class LanguagesController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'languages' => config('crater.languages')
+            'languages' => config('crater.languages'),
         ]);
     }
 }

@@ -3,11 +3,11 @@
 namespace Crater\Http\Controllers\V1\Item;
 
 use Crater\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Crater\Http\Requests;
 use Crater\Http\Requests\DeleteItemsRequest;
 use Crater\Models\Item;
 use Crater\Models\TaxType;
+use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
@@ -29,7 +29,7 @@ class ItemsController extends Controller
                 'unit_id',
                 'item_id',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->whereCompany($request->header('company'))
             ->select('items.*', 'units.name as unit_name')
@@ -39,7 +39,7 @@ class ItemsController extends Controller
         return response()->json([
             'items' => $items,
             'taxTypes' => TaxType::latest()->get(),
-            'itemTotalCount' => Item::count()
+            'itemTotalCount' => Item::count(),
         ]);
     }
 
@@ -54,7 +54,7 @@ class ItemsController extends Controller
         $item = Item::createItem($request);
 
         return response()->json([
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -69,7 +69,7 @@ class ItemsController extends Controller
         $item->load('taxes');
 
         return response()->json([
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -85,7 +85,7 @@ class ItemsController extends Controller
         $item = $item->updateItem($request);
 
         return response()->json([
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -100,7 +100,7 @@ class ItemsController extends Controller
         Item::destroy($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

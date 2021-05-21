@@ -1,15 +1,18 @@
 <?php
+
 namespace Crater\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TestMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
+
     public $subject;
+
     public $message;
 
     /**
@@ -32,7 +35,7 @@ class TestMail extends Mailable
     public function build()
     {
         return $this->subject($this->subject)->markdown('emails.test')->with([
-            'my_message' => $this->message
+            'my_message' => $this->message,
         ]);
     }
 }

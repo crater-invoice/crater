@@ -16,7 +16,7 @@ class FiscalYearsController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'fiscal_years' => config('crater.fiscal_years')
+            'fiscal_years' => config('crater.fiscal_years'),
         ]);
     }
 }

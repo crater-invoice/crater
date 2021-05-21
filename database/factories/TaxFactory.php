@@ -32,7 +32,7 @@ class TaxFactory extends Factory
                 return TaxType::find($item['tax_type_id'])->name;
             },
             'company_id' => User::where('role', 'super admin')->first()->company_id,
-            'amount' => $this->faker->randomDigitNotNull
+            'amount' => $this->faker->randomDigitNotNull,
         ];
     }
 }

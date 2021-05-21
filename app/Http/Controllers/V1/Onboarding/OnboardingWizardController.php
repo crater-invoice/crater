@@ -16,15 +16,14 @@ class OnboardingWizardController extends Controller
      */
     public function getStep(Request $request)
     {
-        if (!\Storage::disk('local')->has('database_created')) {
-
+        if (! \Storage::disk('local')->has('database_created')) {
             return response()->json([
-                'profile_complete' => 0
+                'profile_complete' => 0,
             ]);
         }
 
         return response()->json([
-            'profile_complete' => Setting::getSetting('profile_complete')
+            'profile_complete' => Setting::getSetting('profile_complete'),
         ]);
     }
 
@@ -34,14 +33,14 @@ class OnboardingWizardController extends Controller
 
         if ($setting === 'COMPLETED') {
             return response()->json([
-                'profile_complete' => $setting
+                'profile_complete' => $setting,
             ]);
         }
 
         Setting::setSetting('profile_complete', $request->profile_complete);
 
         return response()->json([
-            'profile_complete' => Setting::getSetting('profile_complete')
+            'profile_complete' => Setting::getSetting('profile_complete'),
         ]);
     }
 }

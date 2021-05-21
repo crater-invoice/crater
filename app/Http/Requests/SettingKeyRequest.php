@@ -25,8 +25,8 @@ class SettingKeyRequest extends FormRequest
     {
         return [
             'key' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

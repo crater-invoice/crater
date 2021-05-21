@@ -2,13 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Mobile\Customer;
 
-use Barryvdh\DomPDF\PDF;
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
-use Crater\Models\Invoice;
-use Crater\Models\InvoiceTemplate;
 use Crater\Mail\InvoiceViewedMail;
+use Crater\Models\CompanySetting;
+use Crater\Models\Invoice;
 use Crater\Models\User;
 
 class InvoicePdfController extends Controller

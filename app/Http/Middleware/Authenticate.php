@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;

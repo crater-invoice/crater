@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\Expense;
 
-use Crater\Models\Expense;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Expense;
 use Illuminate\Http\Request;
 
 class UploadReceiptController extends Controller
@@ -30,7 +30,7 @@ class UploadReceiptController extends Controller
         }
 
         return response()->json([
-            'success' => 'Expense receipts uploaded successfully'
+            'success' => 'Expense receipts uploaded successfully',
         ]);
     }
 }

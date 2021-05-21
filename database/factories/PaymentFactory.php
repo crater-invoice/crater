@@ -28,7 +28,7 @@ class PaymentFactory extends Factory
             'payment_date' => $this->faker->date('Y-m-d', 'now'),
             'notes' => $this->faker->text(80),
             'amount' => $this->faker->randomDigitNotNull,
-            'payment_number' => 'PAY-' . Payment::getNextPaymentNumber('PAY'),
+            'payment_number' => 'PAY-'.Payment::getNextPaymentNumber('PAY'),
         ];
     }
 }

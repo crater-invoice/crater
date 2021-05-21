@@ -26,12 +26,12 @@ class DeleteExpensesRequest extends FormRequest
     {
         return [
             'ids' => [
-                'required'
+                'required',
             ],
             'ids.*' => [
                 'required',
-                Rule::exists('expenses', 'id')
-            ]
+                Rule::exists('expenses', 'id'),
+            ],
         ];
     }
 }

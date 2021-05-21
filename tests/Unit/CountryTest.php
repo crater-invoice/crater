@@ -1,8 +1,8 @@
 <?php
 
-use Crater\Models\User;
-use Crater\Models\Country;
 use Crater\Models\Address;
+use Crater\Models\Country;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
@@ -24,9 +24,8 @@ test('country has many addresses', function () {
     $country = Country::find(1);
 
     $address = Address::factory()->count(5)->create([
-        'country_id' => $country->id
+        'country_id' => $country->id,
     ]);
 
     $this->assertTrue($country->address()->exists());
 });
-

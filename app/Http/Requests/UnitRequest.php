@@ -27,14 +27,14 @@ class UnitRequest extends FormRequest
         $data = [
             'name' => [
                 'required',
-                'unique:units,name'
-            ]
+                'unique:units,name',
+            ],
         ];
 
         if ($this->getMethod() == 'PUT') {
             $data['name'] = [
                 'required',
-                Rule::unique('units')->ignore($this->route('unit'), 'id')
+                Rule::unique('units')->ignore($this->route('unit'), 'id'),
             ];
         }
 

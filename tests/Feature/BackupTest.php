@@ -1,12 +1,13 @@
 <?php
 
-use Crater\Models\User;
-use Crater\Models\FileDisk;
-use Illuminate\Support\Facades\Artisan;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Support\Facades\Queue;
 use Crater\Jobs\CreateBackupJob;
-use function Pest\Laravel\{postJson, getJson};
+use Crater\Models\FileDisk;
+use Crater\Models\User;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Queue;
+use Laravel\Sanctum\Sanctum;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -24,7 +25,7 @@ beforeEach(function () {
 
 test('get backups', function () {
     $disk = FileDisk::factory()->create([
-        'set_as_default' => true
+        'set_as_default' => true,
     ]);
 
     $response = getJson("/api/v1/backups?disk={$disk->driver}&&file_disk_id={$disk->id}");
@@ -50,7 +51,7 @@ test('create backup', function () {
 
     $response->assertStatus(200)->assertJson([
         "disks" => [
-            "local"
-        ]
+            "local",
+        ],
     ]);
 });

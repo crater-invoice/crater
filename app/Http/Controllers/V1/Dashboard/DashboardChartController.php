@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\Dashboard;
 
-use Crater\Models\Expense;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Expense;
 use Illuminate\Http\Request;
 
 class DashboardChartController extends Controller

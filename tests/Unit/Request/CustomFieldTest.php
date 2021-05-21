@@ -3,9 +3,10 @@
 use Crater\Http\Requests\CustomFieldRequest;
 
 test('custom field request validation rules', function () {
-    $request = new CustomFieldRequest;
+    $request = new CustomFieldRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'name' => 'required',
             'label' => 'required',
             'model_type' => 'required',
@@ -20,7 +21,7 @@ test('custom field request validation rules', function () {
 });
 
 test('custom field request authorize', function () {
-    $request = new CustomFieldRequest;
+    $request = new CustomFieldRequest();
 
     $this->assertTrue($request->authorize());
 });

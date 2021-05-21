@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\Address;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
@@ -30,4 +30,3 @@ test('an address belongs to country', function () {
 
     $this->assertTrue($address->country->exists());
 });
-

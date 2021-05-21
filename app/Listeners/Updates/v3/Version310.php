@@ -2,20 +2,15 @@
 
 namespace Crater\Listeners\Updates\v3;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Crater\Listeners\Updates\Listener;
-use Illuminate\Database\Schema\Blueprint;
-use Crater\Events\UpdateFinished;
-use Crater\Models\Setting;
-use Crater\Models\Currency;
-use Schema;
 use Artisan;
+use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\Listener;
+use Crater\Models\Currency;
+use Crater\Models\Setting;
 
 class Version310 extends Listener
 {
-    const VERSION = '3.1.0';
-
+    public const VERSION = '3.1.0';
 
     /**
      * Handle the event.
@@ -32,7 +27,7 @@ class Version310 extends Listener
         Currency::firstOrCreate(
             [
                 'name' => 'Kyrgyzstani som',
-                'code' => 'KGS'
+                'code' => 'KGS',
             ],
             [
                 'name' => 'Kyrgyzstani som',
@@ -40,7 +35,7 @@ class Version310 extends Listener
                 'symbol' => 'С̲ ',
                 'precision' => '2',
                 'thousand_separator' => '.',
-                'decimal_separator' => ','
+                'decimal_separator' => ',',
             ]
         );
 

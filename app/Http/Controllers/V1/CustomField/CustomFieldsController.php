@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\CustomField;
 
-use Crater\Models\CustomField;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\CustomFieldRequest;
+use Crater\Models\CustomField;
 use Illuminate\Http\Request;
 
 class CustomFieldsController extends Controller
@@ -16,19 +16,19 @@ class CustomFieldsController extends Controller
      */
     public function index(Request $request)
     {
-      $limit = $request->has('limit') ? $request->limit : 5;
+        $limit = $request->has('limit') ? $request->limit : 5;
 
-      $customFields = CustomField::whereCompany($request->header('company'))
+        $customFields = CustomField::whereCompany($request->header('company'))
             ->applyFilters($request->only([
                 'type',
-                'search'
+                'search',
             ]))
             ->latest()
             ->paginateData($limit);
 
 
         return response()->json([
-            'customFields' => $customFields
+            'customFields' => $customFields,
         ]);
     }
 
@@ -44,7 +44,7 @@ class CustomFieldsController extends Controller
 
         return response()->json([
             'customField' => $customField,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -58,7 +58,7 @@ class CustomFieldsController extends Controller
     {
         return response()->json([
             'customField' => $customField,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -75,7 +75,7 @@ class CustomFieldsController extends Controller
 
         return response()->json([
             'customField' => $customField,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -89,14 +89,14 @@ class CustomFieldsController extends Controller
     {
         if ($customField->customFieldValue()->exists()) {
             return response()->json([
-                'error' => 'values_attached'
+                'error' => 'values_attached',
             ]);
         }
 
         $customField->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

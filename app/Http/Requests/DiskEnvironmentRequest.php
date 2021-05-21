@@ -29,79 +29,82 @@ class DiskEnvironmentRequest extends FormRequest
                 $rules = [
                     'credentials.key' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.secret' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.region' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.bucket' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.root' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                 ];
+
                 break;
 
             case 'doSpaces':
                 $rules = [
                     'credentials.key' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.secret' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.region' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.bucket' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.endpoint' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.root' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                 ];
+
                 break;
 
             case 'dropbox':
                 $rules = [
                     'credentials.token' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.key' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.secret' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.app' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                     'credentials.root' => [
                         'required',
-                        'string'
+                        'string',
                     ],
                 ];
+
                 break;
         }
 
@@ -111,7 +114,7 @@ class DiskEnvironmentRequest extends FormRequest
             ],
             'driver' => [
                 'required',
-            ]
+            ],
         ];
 
         return array_merge($rules, $defaultRules);

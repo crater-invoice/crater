@@ -4,10 +4,10 @@ namespace Crater\Http\Controllers\V1\Auth;
 
 use Crater\Http\Controllers\Controller;
 use Crater\Providers\RouteServiceProvider;
-use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -31,7 +31,6 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-
     /**
      * Get the response for a successful password reset.
      *
@@ -42,7 +41,7 @@ class ResetPasswordController extends Controller
     protected function sendResetResponse(Request $request, $response)
     {
         return response()->json([
-            'message' => 'Password reset successfully.'
+            'message' => 'Password reset successfully.',
         ]);
     }
 

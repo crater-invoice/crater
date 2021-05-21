@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Crater\Models\CustomFieldValue;
 use Crater\Models\CustomField;
+use Crater\Models\CustomFieldValue;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

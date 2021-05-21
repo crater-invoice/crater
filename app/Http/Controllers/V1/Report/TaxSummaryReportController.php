@@ -2,14 +2,14 @@
 
 namespace Crater\Http\Controllers\V1\Report;
 
-use Illuminate\Http\Request;
-use Crater\Models\Company;
-use PDF;
 use Carbon\Carbon;
-use Crater\Models\Tax;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Company;
+use Crater\Models\CompanySetting;
+use Crater\Models\Tax;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use PDF;
 
 class TaxSummaryReportController extends Controller
 {
@@ -52,7 +52,7 @@ class TaxSummaryReportController extends Controller
             'footer_text_color',
             'footer_total_color',
             'footer_bg_color',
-            'date_text_color'
+            'date_text_color',
         ];
 
         $colorSettings = CompanySetting::whereIn('option', $colors)
@@ -65,7 +65,7 @@ class TaxSummaryReportController extends Controller
             'colorSettings' => $colorSettings,
             'company' => $company,
             'from_date' => $from_date,
-            'to_date' => $to_date
+            'to_date' => $to_date,
         ]);
 
         $pdf = PDF::loadView('app.pdf.reports.tax-summary');

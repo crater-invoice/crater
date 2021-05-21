@@ -1,63 +1,64 @@
 <?php
 
-use Crater\Models\Estimate;
 use Crater\Http\Requests\EstimatesRequest;
+use Crater\Models\Estimate;
 use Crater\Rules\UniqueNumber;
 
 test('estimate request validation rules', function () {
-    $request = new EstimatesRequest;
+    $request = new EstimatesRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'estimate_date' => [
-                'required'
+                'required',
             ],
             'expiry_date' => [
-                'required'
+                'required',
             ],
             'user_id' => [
-                'required'
+                'required',
             ],
             'discount' => [
-                'required'
+                'required',
             ],
             'discount_val' => [
-                'required'
+                'required',
             ],
             'sub_total' => [
-                'required'
+                'required',
             ],
             'total' => [
-                'required'
+                'required',
             ],
             'tax' => [
-                'required'
+                'required',
             ],
             'estimate_template_id' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
-                'array'
+                'array',
             ],
             'items.*.description' => [
-                'max:255'
+                'max:255',
             ],
             'items.*' => [
                 'required',
-                'max:255'
+                'max:255',
             ],
             'items.*.name' => [
-                'required'
+                'required',
             ],
             'items.*.quantity' => [
-                'required'
+                'required',
             ],
             'items.*.price' => [
-                'required'
+                'required',
             ],
             'estimate_number' => [
                 'required',
-                new UniqueNumber(Estimate::class)
+                new UniqueNumber(Estimate::class),
             ],
         ],
         $request->rules()
@@ -65,7 +66,7 @@ test('estimate request validation rules', function () {
 });
 
 test('estimate request authorize', function () {
-    $request = new EstimatesRequest;
+    $request = new EstimatesRequest();
 
     $this->assertTrue($request->authorize());
 });

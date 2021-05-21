@@ -46,7 +46,7 @@ class EstimateItemFactory extends Factory
             },
             'discount' => function (array $estimate) {
                 return $estimate['discount_type'] == 'percentage' ? (($estimate['discount_val'] * $estimate['total']) / 100) : $estimate['discount_val'];
-            }
+            },
         ];
     }
 }

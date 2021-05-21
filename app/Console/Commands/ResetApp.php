@@ -5,7 +5,6 @@ namespace Crater\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Filesystem\Filesystem;
 
 class ResetApp extends Command
 {
@@ -42,7 +41,7 @@ class ResetApp extends Command
      */
     public function handle()
     {
-        if (!$this->confirmToProceed()) {
+        if (! $this->confirmToProceed()) {
             return;
         }
 

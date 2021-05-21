@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\General;
 
-use Crater\Models\Currency;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Currency;
 use Illuminate\Http\Request;
 
 class CurrenciesController extends Controller
@@ -19,7 +19,7 @@ class CurrenciesController extends Controller
         $currencies = Currency::latest()->get();
 
         return response()->json([
-            'currencies' => $currencies
+            'currencies' => $currencies,
         ]);
     }
 }

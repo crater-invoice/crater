@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Crater\Models\InvoiceTemplate;
+use Illuminate\Database\Seeder;
 
 class InvoiceTemplateSeeder extends Seeder
 {
@@ -17,19 +17,19 @@ class InvoiceTemplateSeeder extends Seeder
         InvoiceTemplate::create([
             'name' => 'Template 1',
             'view' => 'invoice1',
-            'path' => '/assets/img/PDF/Template1.png'
+            'path' => '/assets/img/PDF/Template1.png',
         ]);
 
         InvoiceTemplate::create([
             'name' => ' Template 2',
             'view' => 'invoice2',
-            'path' => '/assets/img/PDF/Template2.png'
+            'path' => '/assets/img/PDF/Template2.png',
         ]);
 
         InvoiceTemplate::create([
             'name' => 'Template 3',
             'view' => 'invoice3',
-            'path' => '/assets/img/PDF/Template3.png'
+            'path' => '/assets/img/PDF/Template3.png',
         ]);
     }
 }

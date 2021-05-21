@@ -17,7 +17,7 @@ class DateFormatsController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'date_formats' => DateFormatter::get_list()
+            'date_formats' => DateFormatter::get_list(),
         ]);
     }
 }

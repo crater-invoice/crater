@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DeleteCustomersRequest extends FormRequest
 {
@@ -26,12 +26,12 @@ class DeleteCustomersRequest extends FormRequest
     {
         return [
             'ids' => [
-                'required'
+                'required',
             ],
             'ids.*' => [
                 'required',
-                Rule::exists('users', 'id')
-            ]
+                Rule::exists('users', 'id'),
+            ],
         ];
     }
 }

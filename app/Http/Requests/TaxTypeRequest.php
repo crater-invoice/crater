@@ -25,20 +25,20 @@ class TaxTypeRequest extends FormRequest
     {
         return [
             'name' => [
-                'required'
+                'required',
             ],
             'percent' => [
-                'required'
+                'required',
             ],
             'description' => [
-                'nullable'
+                'nullable',
             ],
             'compound_tax' => [
-                'nullable'
+                'nullable',
             ],
             'collective_tax' => [
-                'nullable'
-            ]
+                'nullable',
+            ],
         ];
     }
 }

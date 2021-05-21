@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\EstimateTemplate;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 

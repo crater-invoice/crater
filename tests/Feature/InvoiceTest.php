@@ -1,16 +1,18 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Invoice\InvoicesController;
+use Crater\Http\Requests\InvoicesRequest;
+use Crater\Mail\SendInvoiceMail;
 use Crater\Models\Invoice;
 use Crater\Models\InvoiceItem;
 use Crater\Models\Tax;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\InvoicesRequest;
-use Crater\Http\Controllers\V1\Invoice\InvoicesController;
-use Crater\Mail\SendInvoiceMail;
 
-use function Pest\Laravel\{postJson, putJson, getJson};
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -36,7 +38,7 @@ test('create invoice', function () {
     $invoice = Invoice::factory()
         ->raw([
             'taxes' => [Tax::factory()->raw()],
-            'items' => [InvoiceItem::factory()->raw()]
+            'items' => [InvoiceItem::factory()->raw()],
         ]);
 
     $response = postJson('api/v1/invoices', $invoice);
@@ -62,7 +64,7 @@ test('create invoice as sent', function () {
     $invoice = Invoice::factory()
         ->raw([
             'taxes' => [Tax::factory()->raw()],
-            'items' => [InvoiceItem::factory()->raw()]
+            'items' => [InvoiceItem::factory()->raw()],
         ]);
 
     $response = postJson('api/v1/invoices', $invoice);
@@ -101,10 +103,10 @@ test('update invoice', function () {
     $invoice2 = Invoice::factory()
         ->raw([
             'taxes' => [Tax::factory()->raw()],
-            'items' => [InvoiceItem::factory()->raw()]
+            'items' => [InvoiceItem::factory()->raw()],
         ]);
 
-    putJson('api/v1/invoices/' . $invoice->id, $invoice2)->assertOk();
+    putJson('api/v1/invoices/'.$invoice->id, $invoice2)->assertOk();
 
     $this->assertDatabaseHas('invoices', [
         'invoice_number' => $invoice2['invoice_number'],
@@ -141,15 +143,15 @@ test('send invoice to customer', function () {
         'from' => 'john@example.com',
         'to' => 'doe@example.com',
         'subject' => 'email subject',
-        'body' => 'email body'
+        'body' => 'email body',
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoices->id . '/send', $data);
+    $response = postJson('api/v1/invoices/'.$invoices->id.'/send', $data);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $invoice2 = Invoice::find($invoices->id);
@@ -165,15 +167,15 @@ test('invoice mark as paid', function () {
     ]);
 
     $data = [
-        'status' => Invoice::STATUS_COMPLETED
+        'status' => Invoice::STATUS_COMPLETED,
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoice->id . '/status', $data);
+    $response = postJson('api/v1/invoices/'.$invoice->id.'/status', $data);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertEquals(Invoice::find($invoice->id)->paid_status, Invoice::STATUS_PAID);
@@ -186,15 +188,15 @@ test('invoice mark as sent', function () {
     ]);
 
     $data = [
-        'status' => Invoice::STATUS_SENT
+        'status' => Invoice::STATUS_SENT,
     ];
 
-    $response = postJson('api/v1/invoices/' . $invoice->id . '/status', $data);
+    $response = postJson('api/v1/invoices/'.$invoice->id.'/status', $data);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     $this->assertEquals(Invoice::find($invoice->id)->status, Invoice::STATUS_SENT);
@@ -208,12 +210,12 @@ test('search invoices', function () {
         'status' => Invoice::STATUS_DRAFT,
         'from_date' => '2019-01-20',
         'to_date' => '2019-01-27',
-        'invoice_number' => '000012'
+        'invoice_number' => '000012',
     ];
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/invoices?' . $queryString);
+    $response = getJson('api/v1/invoices?'.$queryString);
 
     $response->assertOk();
 });
@@ -227,13 +229,13 @@ test('delete multiple invoices', function () {
     $ids = $invoices->pluck('id');
 
     $data = [
-        'ids' => $ids
+        'ids' => $ids,
     ];
 
     postJson('api/v1/invoices/delete', $data)
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     foreach ($invoices as $invoice) {
@@ -252,6 +254,6 @@ test('clone invoice', function () {
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 });

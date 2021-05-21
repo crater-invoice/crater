@@ -1,14 +1,10 @@
 <?php
+
 namespace Crater\Models;
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Tax;
-use Crater\Models\Unit;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\InvoiceItem;
-use Crater\Models\EstimateItem;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Item extends Model
@@ -18,11 +14,11 @@ class Item extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'price' => 'integer'
+        'price' => 'integer',
     ];
 
     protected $appends = [
-        'formattedCreatedAt'
+        'formattedCreatedAt',
     ];
 
     public function unit()
@@ -99,14 +95,15 @@ class Item extends Model
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
     public function taxes()
     {
         return $this->hasMany(Tax::class)
-            ->where('invoice_item_id', NULL)
-            ->where('estimate_item_id', NULL);
+            ->where('invoice_item_id', null)
+            ->where('estimate_item_id', null);
     }
 
     public function scopeWhereCompany($query, $company_id)
@@ -121,7 +118,7 @@ class Item extends Model
 
     public function estimateItems()
     {
-        return $this->hasMany( EstimateItem::class);
+        return $this->hasMany(EstimateItem::class);
     }
 
     public static function createItem($request)

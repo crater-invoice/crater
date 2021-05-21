@@ -3,20 +3,21 @@
 use Crater\Http\Requests\UnitRequest;
 
 test('unit request validation rules', function () {
-    $request = new UnitRequest;
+    $request = new UnitRequest();
 
-    $this->assertEquals([
+    $this->assertEquals(
+        [
             'name' => [
                 'required',
-                'unique:units,name'
-            ]
+                'unique:units,name',
+            ],
         ],
         $request->rules()
     );
 });
 
 test('unit request authorize', function () {
-    $request = new UnitRequest;
+    $request = new UnitRequest();
 
     $this->assertTrue($request->authorize());
 });

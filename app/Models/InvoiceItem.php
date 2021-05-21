@@ -1,12 +1,10 @@
 <?php
+
 namespace Crater\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Invoice;
-use Crater\Models\Tax;
-use Crater\Models\Item;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceItem extends Model
@@ -35,7 +33,7 @@ class InvoiceItem extends Model
         'discount' => 'float',
         'quantity' => 'float',
         'discount_val' => 'integer',
-        'tax' => 'integer'
+        'tax' => 'integer',
     ];
 
     public function invoice()

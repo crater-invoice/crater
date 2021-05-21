@@ -2,30 +2,24 @@
 
 namespace Crater\Models;
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Models\UserSetting;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
-use Crater\Models\Address;
-use Crater\Models\Payment;
-use Crater\Models\Expense;
-use Crater\Models\Company;
-use Crater\Traits\HasCustomFieldsTrait;
 use Crater\Notifications\MailResetPasswordNotification;
+use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, Notifiable, InteractsWithMedia, HasCustomFieldsTrait;
+    use HasApiTokens;
+    use Notifiable;
+    use InteractsWithMedia;
+    use HasCustomFieldsTrait;
     use HasFactory;
 
     /**
@@ -49,7 +43,7 @@ class User extends Authenticatable implements HasMedia
         'contact_name',
         'website',
         'enable_portal',
-        'creator_id'
+        'creator_id',
     ];
 
     /**
@@ -63,12 +57,12 @@ class User extends Authenticatable implements HasMedia
     ];
 
     protected $with = [
-        'currency'
+        'currency',
     ];
 
     protected $appends = [
         'formattedCreatedAt',
-        'avatar'
+        'avatar',
     ];
 
     /**
@@ -99,12 +93,14 @@ class User extends Authenticatable implements HasMedia
         $remember = $request->remember;
         $email = $request->email;
         $password = $request->password;
-        return (\Auth::attempt(array('email' => $email, 'password' => $password), $remember));
+
+        return (\Auth::attempt(['email' => $email, 'password' => $password], $remember));
     }
 
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
@@ -180,31 +176,31 @@ class User extends Authenticatable implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->where(function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('email', 'LIKE', '%' . $term . '%')
-                    ->orWhere('phone', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('email', 'LIKE', '%'.$term.'%')
+                    ->orWhere('phone', 'LIKE', '%'.$term.'%');
             });
         }
     }
 
     public function scopeWhereContactName($query, $contactName)
     {
-        return $query->where('contact_name', 'LIKE', '%' . $contactName . '%');
+        return $query->where('contact_name', 'LIKE', '%'.$contactName.'%');
     }
 
     public function scopeWhereDisplayName($query, $displayName)
     {
-        return $query->where('name', 'LIKE', '%' . $displayName . '%');
+        return $query->where('name', 'LIKE', '%'.$displayName.'%');
     }
 
     public function scopeWherePhone($query, $phone)
     {
-        return $query->where('phone', 'LIKE', '%' . $phone . '%');
+        return $query->where('phone', 'LIKE', '%'.$phone.'%');
     }
 
     public function scopeWhereEmail($query, $email)
     {
-        return $query->where('email', 'LIKE', '%' . $email . '%');
+        return $query->where('email', 'LIKE', '%'.$email.'%');
     }
 
     public function scopeCustomer($query)
@@ -290,7 +286,6 @@ class User extends Authenticatable implements HasMedia
     public static function deleteCustomers($ids)
     {
         foreach ($ids as $id) {
-
             $customer = self::find($id);
 
             if ($customer->estimates()->exists()) {
@@ -335,7 +330,7 @@ class User extends Authenticatable implements HasMedia
             'company_name',
             'contact_name',
             'website',
-            'enable_portal'
+            'enable_portal',
         ]);
 
         $data['creator_id'] = Auth::id();
@@ -374,7 +369,7 @@ class User extends Authenticatable implements HasMedia
             'company_name',
             'contact_name',
             'website',
-            'enable_portal'
+            'enable_portal',
         ]);
 
         $data['role'] = 'customer';
@@ -410,7 +405,7 @@ class User extends Authenticatable implements HasMedia
                 ],
                 [
                     'key' => $key,
-                    'value' => $value
+                    'value' => $value,
                 ]
             );
         }

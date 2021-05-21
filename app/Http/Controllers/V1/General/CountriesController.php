@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\General;
 
-use Crater\Models\Country;
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Country;
 use Illuminate\Http\Request;
 
 class CountriesController extends Controller
@@ -17,7 +17,7 @@ class CountriesController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'countries' => Country::all()
+            'countries' => Country::all(),
         ]);
     }
 }

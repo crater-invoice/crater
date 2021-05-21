@@ -1,12 +1,14 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Expense\ExpensesController;
+use Crater\Http\Requests\ExpenseRequest;
 use Crater\Models\Expense;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\ExpenseRequest;
-use Crater\Http\Controllers\V1\Expense\ExpensesController;
-use function Pest\Laravel\{postJson, putJson, getJson, deleteJson};
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -48,7 +50,7 @@ test('store validates using a form request', function () {
 
 test('get expense data', function () {
     $expense = Expense::factory()->create([
-        'expense_date' => '2019-02-05'
+        'expense_date' => '2019-02-05',
     ]);
 
     getJson("api/v1/expenses/{$expense->id}")->assertOk();
@@ -63,12 +65,12 @@ test('get expense data', function () {
 
 test('update expense', function () {
     $expense = Expense::factory()->create([
-        'expense_date' => '2019-02-05'
+        'expense_date' => '2019-02-05',
     ]);
 
     $expense2 = Expense::factory()->raw();
 
-    putJson('api/v1/expenses/' . $expense->id, $expense2)->assertOk();
+    putJson('api/v1/expenses/'.$expense->id, $expense2)->assertOk();
 
     $this->assertDatabaseHas('expenses', [
         'id' => $expense->id,
@@ -93,23 +95,23 @@ test('search expenses', function () {
         'expense_category_id' => 1,
         'search' => 'cate',
         'from_date' => '2020-07-18',
-        'to_date' => '2020-07-20'
+        'to_date' => '2020-07-20',
     ];
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/expenses?' . $queryString);
+    $response = getJson('api/v1/expenses?'.$queryString);
 
     $response->assertOk();
 });
 
 test('delete multiple expenses', function () {
     $expenses = Expense::factory()->count(3)->create([
-        'expense_date' => '2019-02-05'
+        'expense_date' => '2019-02-05',
     ]);
 
     $data = [
-        'ids' => $expenses->pluck('id')
+        'ids' => $expenses->pluck('id'),
     ];
 
     $response = postJson('api/v1/expenses/delete', $data);
@@ -117,7 +119,7 @@ test('delete multiple expenses', function () {
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 
     foreach ($expenses as $expense) {

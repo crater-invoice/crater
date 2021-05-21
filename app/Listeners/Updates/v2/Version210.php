@@ -2,16 +2,14 @@
 
 namespace Crater\Listeners\Updates\v2;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
-use Crater\Models\Setting;
 use Crater\Models\CompanySetting;
+use Crater\Models\Setting;
 
 class Version210 extends Listener
 {
-    const VERSION = '2.1.0';
+    public const VERSION = '2.1.0';
 
     /**
      * Create the event listener.
@@ -50,7 +48,7 @@ class Version210 extends Listener
             'estimate_prefix' => 'EST',
             'estimate_auto_generate' => 'YES',
             'payment_prefix' => 'PAY',
-            'payment_auto_generate' => 'YES'
+            'payment_auto_generate' => 'YES',
         ];
 
         foreach ($settings as $key => $value) {

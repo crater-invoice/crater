@@ -2,8 +2,8 @@
 
 namespace Crater\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Crater\Http\Middleware\AdminMiddleware;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Crater\Http\Middleware\TrustProxies::class,
         \Crater\Http\Middleware\ConfigMiddleware::class,
-        \Fruitcake\Cors\HandleCors::class
+        \Fruitcake\Cors\HandleCors::class,
     ];
 
     /**
@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'redirect-if-installed' => \Crater\Http\Middleware\RedirectIfInstalled::class,
         'redirect-if-unauthenticated' => \Crater\Http\Middleware\RedirectIfUnauthorized::class,
     ];
+
     /**
      * The priority-sorted list of middleware.
      *

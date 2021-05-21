@@ -4,8 +4,8 @@ namespace Crater\Http\Controllers\V1\Users;
 
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\UserRequest;
-use Crater\Models\User;
 use Crater\Models\CompanySetting;
+use Crater\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,14 +28,14 @@ class UsersController extends Controller
                     'email',
                     'display_name',
                     'orderByField',
-                    'orderBy'
+                    'orderBy',
                 ])
             )
             ->latest()
             ->paginate($limit);
 
         return response()->json([
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -54,12 +54,12 @@ class UsersController extends Controller
         $user = User::create($data);
 
         $user->setSettings([
-            'language' => CompanySetting::getSetting('language', $user->company_id)
+            'language' => CompanySetting::getSetting('language', $user->company_id),
         ]);
 
         return response()->json([
             'user' => $user,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -73,7 +73,7 @@ class UsersController extends Controller
     {
         return response()->json([
             'user' => $user,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -90,7 +90,7 @@ class UsersController extends Controller
 
         return response()->json([
             'user' => $user,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -107,7 +107,7 @@ class UsersController extends Controller
         }
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

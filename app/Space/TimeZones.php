@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Space;
 
 class TimeZones

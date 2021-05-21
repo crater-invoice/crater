@@ -3,10 +3,10 @@
 namespace Crater\Http\Controllers\V1\Settings;
 
 use Crater\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Crater\Models\FileDisk;
 use Crater\Http\Requests\DiskEnvironmentRequest;
+use Crater\Models\FileDisk;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class DiskController extends Controller
 {
@@ -33,10 +33,10 @@ class DiskController extends Controller
      */
     public function store(DiskEnvironmentRequest $request)
     {
-        if(!FileDisk::validateCredentials($request->credentials, $request->driver)) {
+        if (! FileDisk::validateCredentials($request->credentials, $request->driver)) {
             return response()->json([
                 'success' => false,
-                'error' => 'invalid_credentials'
+                'error' => 'invalid_credentials',
             ]);
         }
 
@@ -44,7 +44,7 @@ class DiskController extends Controller
 
         return response()->json([
             'success' => true,
-            'disk' => $disk
+            'disk' => $disk,
         ]);
     }
 
@@ -59,22 +59,22 @@ class DiskController extends Controller
         $credentials = $request->credentials;
         $driver = $request->driver;
 
-        if($credentials && $driver && $disk->type !== 'SYSTEM') {
-            if(!FileDisk::validateCredentials($credentials, $driver)) {
+        if ($credentials && $driver && $disk->type !== 'SYSTEM') {
+            if (! FileDisk::validateCredentials($credentials, $driver)) {
                 return response()->json([
                     'success' => false,
-                    'error' => 'invalid_credentials'
+                    'error' => 'invalid_credentials',
                 ]);
             }
 
             $disk->updateDisk($request);
-        } else if($request->set_as_default) {
+        } elseif ($request->set_as_default) {
             $disk->setAsDefaultDisk();
         }
 
         return response()->json([
             'success' => true,
-            'disk' => $disk
+            'disk' => $disk,
         ]);
     }
 
@@ -90,6 +90,7 @@ class DiskController extends Controller
                 $diskData = [
                     'root' => config('filesystems.disks.local.root'),
                 ];
+
                 break;
 
 
@@ -101,6 +102,7 @@ class DiskController extends Controller
                     'bucket' => '',
                     'root' => '',
                 ];
+
                 break;
 
             case 'doSpaces':
@@ -112,6 +114,7 @@ class DiskController extends Controller
                     'endpoint' => '',
                     'root' => '',
                 ];
+
                 break;
 
             case 'dropbox':
@@ -122,6 +125,7 @@ class DiskController extends Controller
                     'app' => '',
                     'root' => '',
                 ];
+
                 break;
         }
 
@@ -140,14 +144,14 @@ class DiskController extends Controller
     {
         if ($disk->setAsDefault() && $disk->type === 'SYSTEM') {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
 
         $disk->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -160,19 +164,19 @@ class DiskController extends Controller
         $drivers = [
             [
                 'name' => 'Local',
-                'value' => 'local'
+                'value' => 'local',
             ],
             [
                 'name' => 'Amazon S3',
-                'value' => 's3'
+                'value' => 's3',
             ],
             [
                 'name' => 'Digital Ocean Spaces',
-                'value' => 'doSpaces'
+                'value' => 'doSpaces',
             ],
             [
                 'name' => 'Dropbox',
-                'value' => 'dropbox'
+                'value' => 'dropbox',
             ],
         ];
 
@@ -180,7 +184,7 @@ class DiskController extends Controller
 
         return response()->json([
             'drivers' => $drivers,
-            'default' => $default
+            'default' => $default,
         ]);
     }
 }

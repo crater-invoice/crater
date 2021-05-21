@@ -1,12 +1,14 @@
 <?php
 
-use Crater\Models\User;
+use Crater\Http\Controllers\V1\Customer\CustomersController;
+use Crater\Http\Requests\CustomerRequest;
 use Crater\Models\Invoice;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-use Crater\Http\Requests\CustomerRequest;
-use Crater\Http\Controllers\V1\Customer\CustomersController;
-use function Pest\Laravel\{postJson, putJson, getJson};
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\postJson;
+use function Pest\Laravel\putJson;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -30,11 +32,11 @@ test('get customers', function () {
 
 test('customer stats', function () {
     $customer = User::factory()->create([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
     $invoice = Invoice::factory()->create([
-        'user_id' => $customer->id
+        'user_id' => $customer->id,
     ]);
 
     $response = getJson("api/v1/customers/{$customer->id}/stats");
@@ -45,7 +47,7 @@ test('customer stats', function () {
 test('create customer', function () {
     $customer = User::factory()->raw([
         'password' => 'secret',
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
     $response = postJson('api/v1/customers', $customer);
@@ -54,13 +56,13 @@ test('create customer', function () {
         'name' => $customer['name'],
         'email' => $customer['email'],
         'role' => $customer['role'],
-        'company_id' => $customer['company_id']
+        'company_id' => $customer['company_id'],
     ]);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 });
 
@@ -74,7 +76,7 @@ test('store validates using a form request', function () {
 
 test('get customer', function () {
     $customer = User::factory()->create([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
     $response = getJson("api/v1/customers/{$customer->id}");
@@ -84,7 +86,7 @@ test('get customer', function () {
         'name' => $customer['name'],
         'email' => $customer['email'],
         'role' => $customer['role'],
-        'company_id' => $customer['company_id']
+        'company_id' => $customer['company_id'],
     ]);
 
     $response->assertOk();
@@ -92,28 +94,28 @@ test('get customer', function () {
 
 test('update customer', function () {
     $customer = User::factory()->create([
-        'role' => 'customer'
-    ]);
-
-    $customer1  = User::factory()->raw([
         'role' => 'customer',
-        'name' => 'new name'
     ]);
 
-    $response = putJson('api/v1/customers/' . $customer->id, $customer1);
+    $customer1 = User::factory()->raw([
+        'role' => 'customer',
+        'name' => 'new name',
+    ]);
+
+    $response = putJson('api/v1/customers/'.$customer->id, $customer1);
 
     $this->assertDatabaseHas('users', [
         'id' => $customer->id,
         'name' => $customer1['name'],
         'email' => $customer1['email'],
         'role' => $customer1['role'],
-        'company_id' => $customer1['company_id']
+        'company_id' => $customer1['company_id'],
     ]);
 
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 });
 
@@ -130,25 +132,25 @@ test('search customers', function () {
         'page' => 1,
         'limit' => 15,
         'search' => 'doe',
-        'email' => '.com'
+        'email' => '.com',
     ];
 
     $queryString = http_build_query($filters, '', '&');
 
-    $response = getJson('api/v1/customers?' . $queryString);
+    $response = getJson('api/v1/customers?'.$queryString);
 
     $response->assertOk();
 });
 
 test('delete multiple customer', function () {
     $customers = User::factory()->count(4)->create([
-        'role' => 'customer'
+        'role' => 'customer',
     ]);
 
     $ids = $customers->pluck('id');
 
     $data = [
-        'ids' => $ids
+        'ids' => $ids,
     ];
 
     $response = postJson('api/v1/customers/delete', $data);
@@ -156,6 +158,6 @@ test('delete multiple customer', function () {
     $response
         ->assertOk()
         ->assertJson([
-            'success' => true
+            'success' => true,
         ]);
 });

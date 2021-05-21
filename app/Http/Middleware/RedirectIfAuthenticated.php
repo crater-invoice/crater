@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Middleware;
 
-use Crater\Providers\RouteServiceProvider;
 use Closure;
+use Crater\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated

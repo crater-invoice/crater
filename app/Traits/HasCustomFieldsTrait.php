@@ -2,10 +2,7 @@
 
 namespace Crater\Traits;
 
-
-use Carbon\Carbon;
 use Crater\Models\CustomField;
-use Crater\Models\CustomFieldValue;
 
 trait HasCustomFieldsTrait
 {
@@ -23,7 +20,7 @@ trait HasCustomFieldsTrait
                 'type' => $customField->type,
                 'custom_field_id' => $customField->id,
                 'company_id' => $customField->company_id,
-                getCustomFieldValueKey($customField->type) => $field['value']
+                getCustomFieldValueKey($customField->type) => $field['value'],
             ];
 
             $this->fields()->create($customFieldValue);
@@ -37,7 +34,7 @@ trait HasCustomFieldsTrait
             $customFieldValue = $this->fields()->firstOrCreate([
                 'custom_field_id' => $customField->id,
                 'type' => $customField->type,
-                'company_id' => $this->company_id
+                'company_id' => $this->company_id,
             ]);
 
             $type = getCustomFieldValueKey($customField->type);

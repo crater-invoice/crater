@@ -2,35 +2,31 @@
 
 namespace Crater\Models;
 
-use App;
-use Crater\Models\CompanySetting;
-use Crater\Models\User;
-use Crater\Models\Invoice;
-use Crater\Models\Company;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\PaymentMethod;
-use Crater\Traits\HasCustomFieldsTrait;
+use Crater\Jobs\GeneratePaymentPdfJob;
 use Crater\Mail\SendPaymentMail;
-use Vinkla\Hashids\Facades\Hashids;
+use Crater\Traits\GeneratesPdfTrait;
+use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Crater\Traits\GeneratesPdfTrait;
-use Barryvdh\DomPDF\Facade as PDF;
-use Crater\Jobs\GeneratePaymentPdfJob;
-use Illuminate\Support\Facades\Auth;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Payment extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, GeneratesPdfTrait;
+    use HasFactory;
+    use InteractsWithMedia;
+    use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
 
-    const PAYMENT_MODE_CHECK = 'CHECK';
-    const PAYMENT_MODE_OTHER = 'OTHER';
-    const PAYMENT_MODE_CASH = 'CASH';
-    const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
-    const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
+    public const PAYMENT_MODE_CHECK = 'CHECK';
+    public const PAYMENT_MODE_OTHER = 'OTHER';
+    public const PAYMENT_MODE_CASH = 'CASH';
+    public const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
+    public const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
     protected $dates = ['created_at', 'updated_at'];
 
@@ -39,7 +35,7 @@ class Payment extends Model implements HasMedia
     protected $appends = [
         'formattedCreatedAt',
         'formattedPaymentDate',
-        'paymentPdfUrl'
+        'paymentPdfUrl',
     ];
 
     protected static function booted()
@@ -63,29 +59,33 @@ class Payment extends Model implements HasMedia
     public function getPaymentPrefixAttribute()
     {
         $prefix = explode("-", $this->payment_number)[0];
+
         return $prefix;
     }
 
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
     public function getFormattedPaymentDateAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->payment_date)->format($dateFormat);
     }
 
     public function getPaymentPdfUrlAttribute()
     {
-        return url('/payments/pdf/' . $this->unique_hash);
+        return url('/payments/pdf/'.$this->unique_hash);
     }
 
     public function getPaymentNumAttribute()
     {
         $position = $this->strposX($this->payment_number, "-", 1) + 1;
+
         return substr($this->payment_number, $position);
     }
 
@@ -130,7 +130,7 @@ class Payment extends Model implements HasMedia
         \Mail::to($data['to'])->send(new SendPaymentMail($data));
 
         return [
-            'success' => true
+            'success' => true,
         ];
     }
 
@@ -151,10 +151,10 @@ class Payment extends Model implements HasMedia
                 $invoice->due_amount = (int)$invoice->due_amount - (int)$request->amount;
                 if ($invoice->due_amount < 0) {
                     return [
-                        'error' => 'invalid_amount'
+                        'error' => 'invalid_amount',
                     ];
                 }
-                $invoice->paid_status =  Invoice::STATUS_PARTIALLY_PAID;
+                $invoice->paid_status = Invoice::STATUS_PARTIALLY_PAID;
             }
             $invoice->save();
         }
@@ -192,7 +192,7 @@ class Payment extends Model implements HasMedia
 
             if ($invoice->due_amount < 0) {
                 return [
-                    'error' => 'invalid_amount'
+                    'error' => 'invalid_amount',
                 ];
             }
 
@@ -251,6 +251,7 @@ class Payment extends Model implements HasMedia
 
         return true;
     }
+
     private function strposX($haystack, $needle, $number)
     {
         if ($number == '1') {
@@ -269,7 +270,7 @@ class Payment extends Model implements HasMedia
     public static function getNextPaymentNumber($value)
     {
         // Get the last created order
-        $payment = Payment::where('payment_number', 'LIKE', $value . '-%')
+        $payment = Payment::where('payment_number', 'LIKE', $value.'-%')
             ->orderBy('payment_number', 'desc')
             ->first();
 
@@ -277,7 +278,7 @@ class Payment extends Model implements HasMedia
         $numberLength = CompanySetting::getSetting('payment_number_length', request()->header('company'));
         $numberLengthText = "%0{$numberLength}d";
 
-        if (!$payment) {
+        if (! $payment) {
             // We get here if there is no order at all
             // If there is no number set it to 0, which will be 1 at the end.
             $number = 0;
@@ -299,16 +300,16 @@ class Payment extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('user', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('contact_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('company_name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
             });
         }
     }
 
     public function scopePaymentNumber($query, $paymentNumber)
     {
-        return $query->where('payments.payment_number', 'LIKE', '%' . $paymentNumber . '%');
+        return $query->where('payments.payment_number', 'LIKE', '%'.$paymentNumber.'%');
     }
 
     public function scopePaymentMethod($query, $paymentMethodId)
@@ -390,7 +391,7 @@ class Payment extends Model implements HasMedia
             'company_address' => $this->getCompanyAddress(),
             'billing_address' => $this->getCustomerBillingAddress(),
             'notes' => $this->getNotes(),
-            'logo' => $logo ?? null
+            'logo' => $logo ?? null,
         ]);
 
         return PDF::loadView('app.pdf.payment.payment');
@@ -442,7 +443,7 @@ class Payment extends Model implements HasMedia
             '{PAYMENT_MODE}' => $this->paymentMethod ? $this->paymentMethod->name : null,
             '{PAYMENT_NUMBER}' => $this->payment_number,
             '{PAYMENT_AMOUNT}' => $this->reference_number,
-            '{PAYMENT_LINK}' => $this->paymentPdfUrl
+            '{PAYMENT_LINK}' => $this->paymentPdfUrl,
         ];
     }
 }

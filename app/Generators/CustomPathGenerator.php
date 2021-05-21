@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Crater\Generators;
-
 
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
@@ -12,20 +10,19 @@ use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
 class CustomPathGenerator implements PathGenerator
 {
-
     public function getPath(Media $media): string
     {
-        return $this->getBasePath($media) . '/';
+        return $this->getBasePath($media).'/';
     }
 
     public function getPathForConversions(Media $media): string
     {
-        return $this->getBasePath($media) . '/conversations/';
+        return $this->getBasePath($media).'/conversations/';
     }
 
     public function getPathForResponsiveImages(Media $media): string
     {
-        return $this->getBasePath($media) . '/responsive-images/';
+        return $this->getBasePath($media).'/responsive-images/';
     }
 
     /*

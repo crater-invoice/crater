@@ -2,10 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Settings;
 
-use Crater\Models\TaxType;
-use Crater\Http\Requests\TaxTypeRequest;
-use Illuminate\Http\Request;
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\TaxTypeRequest;
+use Crater\Models\TaxType;
+use Illuminate\Http\Request;
 
 class TaxTypesController extends Controller
 {
@@ -23,13 +23,13 @@ class TaxTypesController extends Controller
                 'tax_type_id',
                 'search',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->latest()
             ->paginateData($limit);
 
         return response()->json([
-            'taxTypes' => $taxTypes
+            'taxTypes' => $taxTypes,
         ]);
     }
 
@@ -61,7 +61,7 @@ class TaxTypesController extends Controller
     public function show(TaxType $taxType)
     {
         return response()->json([
-            'taxType' => $taxType
+            'taxType' => $taxType,
         ]);
     }
 
@@ -91,13 +91,13 @@ class TaxTypesController extends Controller
     {
         if ($taxType->taxes() && $taxType->taxes()->count() > 0) {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
         $taxType->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

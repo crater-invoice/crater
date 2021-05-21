@@ -26,7 +26,7 @@ class Note extends Model
 
     public function scopeWhereSearch($query, $search)
     {
-        $query->where('name', 'LIKE', '%' . $search . '%');
+        $query->where('name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopeWhereType($query, $type)

@@ -1,14 +1,13 @@
 <?php
+
 // Implementation taken from nova-backup-tool - https://github.com/spatie/nova-backup-tool/
 
 namespace Crater\Http\Controllers\V1\Backup;
 
-use Crater\Http\Controllers\Controller;
+use Crater\Rules\Backup\PathToZip;
 use Illuminate\Http\Request;
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
-use Crater\Rules\Backup\BackupDisk;
-use Crater\Rules\Backup\PathToZip;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

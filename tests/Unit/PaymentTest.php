@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\User;
 use Crater\Models\Payment;
+use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
@@ -47,7 +47,7 @@ test('get payment num attribute', function () {
 
     $prefix_attribute = $payment->getPaymentPrefixAttribute();
 
-    $this->assertEquals($prefix_attribute.'-'.$num_attribute , $payment['payment_number']);
+    $this->assertEquals($prefix_attribute.'-'.$num_attribute, $payment['payment_number']);
 });
 
 test('get payment prefix attribute', function () {
@@ -57,7 +57,7 @@ test('get payment prefix attribute', function () {
 
     $prefix_attribute = $payment->getPaymentPrefixAttribute();
 
-    $this->assertEquals($prefix_attribute.'-'.$num_attribute , $payment['payment_number']);
+    $this->assertEquals($prefix_attribute.'-'.$num_attribute, $payment['payment_number']);
 });
 
 test('get next payment number', function () {
@@ -69,6 +69,5 @@ test('get next payment number', function () {
 
     $payment2 = Payment::factory()->create();
 
-    $this->assertEquals($prefix_attribute.'-'.$next_payment_number , $payment2['payment_number']);
+    $this->assertEquals($prefix_attribute.'-'.$next_payment_number, $payment2['payment_number']);
 });
-

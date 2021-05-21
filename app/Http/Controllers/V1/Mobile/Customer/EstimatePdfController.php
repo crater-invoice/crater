@@ -2,13 +2,10 @@
 
 namespace Crater\Http\Controllers\V1\Mobile\Customer;
 
-use Barryvdh\DomPDF\PDF;
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
-use Crater\Models\Estimate;
-use Crater\Models\EstimateTemplate;
 use Crater\Http\Controllers\Controller;
 use Crater\Mail\EstimateViewedMail;
+use Crater\Models\CompanySetting;
+use Crater\Models\Estimate;
 use Crater\Models\User;
 
 class EstimatePdfController extends Controller

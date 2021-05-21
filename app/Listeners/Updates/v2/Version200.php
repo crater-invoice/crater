@@ -2,17 +2,14 @@
 
 namespace Crater\Listeners\Updates\v2;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Database\Schema\Blueprint;
-use Crater\Listeners\Updates\Listener;
 use Crater\Events\UpdateFinished;
+use Crater\Listeners\Updates\Listener;
 use Crater\Models\Setting;
-use Crater\Models\Address;
+use Illuminate\Database\Schema\Blueprint;
 
 class Version200 extends Listener
 {
-    const VERSION = '2.0.0';
+    public const VERSION = '2.0.0';
 
     /**
      * Create the event listener.
@@ -52,7 +49,8 @@ class Version200 extends Listener
         $this->updateVersion();
     }
 
-    private function replaceStateAndCityName() {
+    private function replaceStateAndCityName()
+    {
         \Schema::table('addresses', function (Blueprint $table) {
             $table->string('state')->nullable();
             $table->string('city')->nullable();
@@ -61,12 +59,12 @@ class Version200 extends Listener
         $addresses = \Crater\Models\Address::all();
         foreach ($addresses as $add) {
             $city = \Crater\City::find($add->city_id);
-            if($city) {
+            if ($city) {
                 $add->city = $city->name;
             }
 
             $state = \Crater\State::find($add->state_id);
-            if($state) {
+            if ($state) {
                 $add->state = $state->name;
             }
 
@@ -74,7 +72,8 @@ class Version200 extends Listener
         }
     }
 
-    private function dropForeignKey() {
+    private function dropForeignKey()
+    {
         \Schema::table('addresses', function (Blueprint $table) {
             $table->dropForeign('addresses_state_id_foreign');
             $table->dropForeign('addresses_city_id_foreign');
@@ -83,7 +82,8 @@ class Version200 extends Listener
         });
     }
 
-    private function dropSchemas() {
+    private function dropSchemas()
+    {
         \Schema::disableForeignKeyConstraints();
 
         \Schema::dropIfExists('states');
@@ -92,7 +92,8 @@ class Version200 extends Listener
         \Schema::enableForeignKeyConstraints();
     }
 
-    private function deleteFiles() {
+    private function deleteFiles()
+    {
         \File::delete(
             database_path('migrations/2017_05_06_172817_create_cities_table.php'),
             database_path('migrations/2017_05_06_173711_create_states_table.php'),
@@ -103,7 +104,8 @@ class Version200 extends Listener
         );
     }
 
-    private function updateVersion() {
+    private function updateVersion()
+    {
         Setting::setSetting('version', static::VERSION);
     }
 }

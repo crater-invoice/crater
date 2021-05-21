@@ -22,25 +22,25 @@ beforeEach(function () {
 test('next number', function () {
     $key = 'invoice';
 
-    $response = getJson('api/v1/next-number?key=' . $key);
+    $response = getJson('api/v1/next-number?key='.$key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 
     $key = 'estimate';
 
-    $response = getJson('api/v1/next-number?key=' . $key);
+    $response = getJson('api/v1/next-number?key='.$key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 
     $key = 'payment';
 
-    $response = getJson('api/v1/next-number?key=' . $key);
+    $response = getJson('api/v1/next-number?key='.$key);
 
     $response->assertStatus(200)->assertJson([
-        'nextNumber' => '000001'
+        'nextNumber' => '000001',
     ]);
 });

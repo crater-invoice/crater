@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         return response()->json([
             'type' => 'Bearer',
-            'token' => $user->createToken($request->device_name)->plainTextToken
+            'token' => $user->createToken($request->device_name)->plainTextToken,
         ]);
     }
 
@@ -37,7 +37,7 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

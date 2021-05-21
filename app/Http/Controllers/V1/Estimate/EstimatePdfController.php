@@ -2,8 +2,8 @@
 
 namespace Crater\Http\Controllers\V1\Estimate;
 
-use Crater\Models\Estimate; 
 use Crater\Http\Controllers\Controller;
+use Crater\Models\Estimate;
 
 class EstimatePdfController extends Controller
 {

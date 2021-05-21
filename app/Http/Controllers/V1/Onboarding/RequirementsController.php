@@ -2,9 +2,9 @@
 
 namespace Crater\Http\Controllers\V1\Onboarding;
 
+use Crater\Http\Controllers\Controller;
 use Crater\Space\RequirementsChecker;
 use Illuminate\Http\JsonResponse;
-use Crater\Http\Controllers\Controller;
 
 class RequirementsController extends Controller
 {
@@ -37,7 +37,7 @@ class RequirementsController extends Controller
 
         return response()->json([
             'phpSupportInfo' => $phpSupportInfo,
-            'requirements' => $requirements
+            'requirements' => $requirements,
         ]);
     }
 }

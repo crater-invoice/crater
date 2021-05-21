@@ -1,17 +1,15 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Crater\Models\CompanySetting;
 use Crater\Models\Estimate;
 use Crater\Models\Expense;
+use Crater\Models\FileDisk;
 use Crater\Models\Invoice;
 use Crater\Models\Item;
 use Crater\Models\Payment;
 use Crater\Models\Setting;
-use Crater\Models\FileDisk;
 use Crater\Models\User;
+use Illuminate\Database\Migrations\Migration;
 
 class UpdateCraterVersion400 extends Migration
 {
@@ -31,7 +29,7 @@ class UpdateCraterVersion400 extends Migration
 
         if ($user && $user->role == 'admin') {
             $user->update([
-                'role' => 'super admin'
+                'role' => 'super admin',
             ]);
 
             // Update language
@@ -74,7 +72,7 @@ class UpdateCraterVersion400 extends Migration
         $publicDisk = [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ];
 
@@ -130,7 +128,7 @@ class UpdateCraterVersion400 extends Migration
             'estimate_shipping_address_format' => $shippingAddressFormat,
             'estimate_billing_address_format' => $billingAddressFormat,
             'payment_company_address_format' => $companyAddressFormat,
-            'payment_from_customer_address_format' => $paymentFromCustomerAddress
+            'payment_from_customer_address_format' => $paymentFromCustomerAddress,
         ];
 
         CompanySetting::setSettings($settings, $user->company_id);

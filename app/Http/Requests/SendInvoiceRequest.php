@@ -25,17 +25,17 @@ class SendInvoiceRequest extends FormRequest
     {
         return [
             'body' => [
-                'required'
+                'required',
             ],
             'subject' => [
-                'required'
+                'required',
             ],
             'from' => [
-                'required'
+                'required',
             ],
             'to' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

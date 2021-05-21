@@ -2,16 +2,14 @@
 
 namespace Crater\Listeners\Updates\v2;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Database\Schema\Blueprint;
 use Crater\Events\UpdateFinished;
 use Crater\Listeners\Updates\Listener;
 use Crater\Models\Setting;
+use Illuminate\Database\Schema\Blueprint;
 
 class Version201 extends Listener
 {
-    const VERSION = '2.0.1';
+    public const VERSION = '2.0.1';
 
     /**
      * Create the event listener.
@@ -45,20 +43,21 @@ class Version201 extends Listener
         Setting::setSetting('version', static::VERSION);
     }
 
-    private function removeLanguageFiles() {
+    private function removeLanguageFiles()
+    {
         $en = resource_path('assets/js/plugins/en.js');
         $es = resource_path('assets/js/plugins/es.js');
         $fr = resource_path('assets/js/plugins/fr.js');
 
-        if(file_exists($en)) {
+        if (file_exists($en)) {
             unlink($en);
         }
 
-        if(file_exists($es)) {
+        if (file_exists($es)) {
             unlink($es);
         }
 
-        if(file_exists($fr)) {
+        if (file_exists($fr)) {
             unlink($fr);
         }
     }

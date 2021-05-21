@@ -3,13 +3,13 @@
 namespace Crater\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class InvoiceViewedMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $data;
 
@@ -32,6 +32,7 @@ class InvoiceViewedMail extends Mailable
     {
         $email = $this->data['user']['email'];
         $name = $this->data['user']['name'];
+
         return $this->from($email, $name)
                     ->markdown('emails.viewed.invoice', ['data', $this->data]);
     }

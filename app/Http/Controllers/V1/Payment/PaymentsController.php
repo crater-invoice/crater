@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Payment;
 
-use Illuminate\Http\Request;
-use Crater\Models\Payment;
+use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\DeletePaymentsRequest;
 use Crater\Http\Requests\PaymentRequest;
-use Crater\Http\Controllers\Controller;
+use Crater\Models\Payment;
+use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
 {
@@ -30,7 +30,7 @@ class PaymentsController extends Controller
                 'payment_method_id',
                 'customer_id',
                 'orderByField',
-                'orderBy'
+                'orderBy',
             ]))
             ->whereCompany($request->header('company'))
             ->select('payments.*', 'users.name', 'invoices.invoice_number', 'payment_methods.name as payment_mode')
@@ -39,7 +39,7 @@ class PaymentsController extends Controller
 
         return response()->json([
             'payments' => $payments,
-            'paymentTotalCount' => Payment::count()
+            'paymentTotalCount' => Payment::count(),
         ]);
     }
 
@@ -55,7 +55,7 @@ class PaymentsController extends Controller
 
         return response()->json([
             'payment' => $payment,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -65,7 +65,7 @@ class PaymentsController extends Controller
             'user',
             'invoice',
             'paymentMethod',
-            'fields.customField'
+            'fields.customField',
         ]);
 
         return response()->json([
@@ -81,7 +81,7 @@ class PaymentsController extends Controller
 
         return response()->json([
             'payment' => $payment,
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -90,7 +90,7 @@ class PaymentsController extends Controller
         Payment::deletePayments($request->ids);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

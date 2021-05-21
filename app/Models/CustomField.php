@@ -3,26 +3,23 @@
 namespace Crater\Models;
 
 use Carbon\Carbon;
-use Crater\Models\CustomFieldValue;
-use Crater\Models\CompanySetting;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Company;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class CustomField extends Model
 {
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $appends = [
-        'defaultAnswer'
+        'defaultAnswer',
     ];
 
     protected $casts = [
-        'options' => 'array'
+        'options' => 'array',
     ];
 
     public function setDateAnswerAttribute($value)
@@ -76,8 +73,8 @@ class CustomField extends Model
     public function scopeWhereSearch($query, $search)
     {
         $query->where(function ($query) use ($search) {
-            $query->where('label', 'LIKE', '%' . $search . '%')
-                ->orWhere('name', 'LIKE', '%' . $search . '%');
+            $query->where('label', 'LIKE', '%'.$search.'%')
+                ->orWhere('name', 'LIKE', '%'.$search.'%');
         });
     }
 
@@ -135,7 +132,7 @@ class CustomField extends Model
                 'estimate_shipping_address_format',
                 'estimate_billing_address_format',
                 'payment_company_address_format',
-                'payment_from_customer_address_format'
+                'payment_from_customer_address_format',
             ];
 
             $settings = CompanySetting::getSettings($settings, $this->company_id);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Crater\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,7 @@ class Setting extends Model
         if ($old) {
             $old->value = $setting;
             $old->save();
+
             return;
         }
 

@@ -3,10 +3,9 @@
 namespace Crater\Http\Controllers\V1\Auth;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Providers\RouteServiceProvider;
 use Crater\Models\User;
+use Crater\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -67,7 +66,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password']
+            'password' => $data['password'],
         ]);
     }
 }

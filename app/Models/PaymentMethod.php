@@ -2,8 +2,6 @@
 
 namespace Crater\Models;
 
-use Crater\Models\Company;
-use Crater\Models\Payment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,7 +33,7 @@ class PaymentMethod extends Model
 
     public function scopeWhereSearch($query, $search)
     {
-        $query->where('name', 'LIKE', '%' . $search . '%');
+        $query->where('name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopeApplyFilters($query, array $filters)

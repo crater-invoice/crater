@@ -1,17 +1,17 @@
 <?php
+
 // Implementation taken from nova-backup-tool - https://github.com/spatie/nova-backup-tool/
 
 namespace Crater\Http\Controllers\V1\Backup;
 
+use Crater\Jobs\CreateBackupJob;
+use Crater\Rules\Backup\PathToZip;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
 use Spatie\Backup\Helpers\Format;
-use Crater\Jobs\CreateBackupJob;
-use Crater\Rules\Backup\BackupDisk;
-use Crater\Rules\Backup\PathToZip;
-use Illuminate\Http\JsonResponse;
 
 class BackupsController extends ApiController
 {
@@ -42,14 +42,14 @@ class BackupsController extends ApiController
 
             return response()->json([
                 'backups' => $backups,
-                'disks' => $configuredBackupDisks
+                'disks' => $configuredBackupDisks,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'backups' => [],
                 'error' => 'invalid_disk_credentials',
                 'error_message' => $e->getMessage(),
-                'disks' => $configuredBackupDisks
+                'disks' => $configuredBackupDisks,
             ]);
         }
     }

@@ -33,7 +33,7 @@ class AddressFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'fax' => $this->faker->phoneNumber,
             'type' => $this->faker->randomElement([Address::BILLING_TYPE, Address::SHIPPING_TYPE]),
-            'user_id' => User::factory()
+            'user_id' => User::factory(),
         ];
     }
 }

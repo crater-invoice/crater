@@ -31,6 +31,7 @@
         "barryvdh/laravel-ide-helper": "^2.6",
         "beyondcode/laravel-dump-server": "^1.0",
         "facade/ignition": "^2.3.6",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "fzaninotto/faker": "^1.9.1",
         "jasonmccreary/laravel-test-assertions": "^1.0",
         "mockery/mockery": "^1.3.1",

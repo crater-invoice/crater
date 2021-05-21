@@ -25,13 +25,12 @@ class UnzipUpdateController extends Controller
 
             return response()->json([
                 'success' => true,
-                'path' => $path
+                'path' => $path,
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

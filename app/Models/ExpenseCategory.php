@@ -1,15 +1,15 @@
 <?php
+
 namespace Crater\Models;
 
-use Crater\Models\CompanySetting;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Expense;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ExpenseCategory extends Model
 {
     use HasFactory;
+
     protected $fillable = ['name', 'company_id', 'description'];
 
     /**
@@ -27,6 +27,7 @@ class ExpenseCategory extends Model
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
@@ -47,7 +48,7 @@ class ExpenseCategory extends Model
 
     public function scopeWhereSearch($query, $search)
     {
-        $query->where('name', 'LIKE', '%' . $search . '%');
+        $query->where('name', 'LIKE', '%'.$search.'%');
     }
 
     public function scopeApplyFilters($query, array $filters)

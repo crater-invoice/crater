@@ -1,4 +1,5 @@
 <?php
+
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
 use Crater\Models\CustomField;
@@ -11,10 +12,9 @@ use Illuminate\Support\Str;
  * @param string $active
  * @return string
  */
-function set_active($path, $active = 'active') {
-
+function set_active($path, $active = 'active')
+{
     return call_user_func_array('Request::is', (array)$path) ? $active : '';
-
 }
 
 /**
@@ -76,7 +76,7 @@ function format_money_pdf($money, $currency = null)
 {
     $money = $money / 100;
 
-    if (!$currency) {
+    if (! $currency) {
         $currency = Currency::findOrFail(CompanySetting::getSetting('currency', 1));
     }
 
@@ -93,6 +93,7 @@ function format_money_pdf($money, $currency = null)
     } else {
         $currency_with_symbol = '<span style="font-family: DejaVu Sans;">'.$currency->symbol.'</span>'.$format_money;
     }
+
     return $currency_with_symbol;
 }
 
@@ -110,14 +111,14 @@ function clean_slug($model, $title, $id = 0)
     $allSlugs = getRelatedSlugs($model, $slug, $id);
 
     // If we haven't used it before then we are all good.
-    if (!$allSlugs->contains('slug', $slug)) {
+    if (! $allSlugs->contains('slug', $slug)) {
         return $slug;
     }
 
     // Just append numbers like a savage until we find not used.
     for ($i = 1; $i <= 10; $i++) {
-        $newSlug = $slug . '_' . $i;
-        if (!$allSlugs->contains('slug', $newSlug)) {
+        $newSlug = $slug.'_'.$i;
+        if (! $allSlugs->contains('slug', $newSlug)) {
             return $newSlug;
         }
     }
@@ -127,7 +128,7 @@ function clean_slug($model, $title, $id = 0)
 
 function getRelatedSlugs($type, $slug, $id = 0)
 {
-    return CustomField::select('slug')->where('slug', 'like', $slug . '%')
+    return CustomField::select('slug')->where('slug', 'like', $slug.'%')
         ->where('model_type', $type)
         ->where('id', '<>', $id)
         ->get();

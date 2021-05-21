@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class UniqueNumber implements Rule
 {
     public $id;
+
     public $class;
 
     /**
@@ -31,7 +32,7 @@ class UniqueNumber implements Rule
     public function passes($attribute, $value)
     {
         if ($value && count(explode("-", $value)) > 2) {
-            $number = explode("-",$value);
+            $number = explode("-", $value);
             $uniqueNumber = $number[0].'-'.sprintf('%06d', intval($number[1]));
         } else {
             $uniqueNumber = $value;

@@ -26,19 +26,19 @@ class CustomerRequest extends FormRequest
     {
         $rules = [
             'name' => [
-                'required'
+                'required',
             ],
             'addresses.*.address_street_1' => [
-                'max:255'
+                'max:255',
             ],
             'addresses.*.address_street_2' => [
-                'max:255'
+                'max:255',
             ],
             'email' => [
                 'email',
                 'nullable',
                 'unique:users,email',
-            ]
+            ],
         ];
 
         if ($this->isMethod('PUT') && $this->email != null) {
@@ -46,8 +46,8 @@ class CustomerRequest extends FormRequest
                 'email' => [
                     'email',
                     'nullable',
-                    Rule::unique('users')->ignore($this->route('customer')->id)
-                ]
+                    Rule::unique('users')->ignore($this->route('customer')->id),
+                ],
             ];
         };
 

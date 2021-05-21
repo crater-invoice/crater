@@ -32,7 +32,7 @@ class CloneInvoiceController extends Controller
             'reference_number' => $invoice->reference_number,
             'user_id' => $invoice->user_id,
             'company_id' => $request->header('company'),
-            'invoice_template_id' => 1,
+            'invoice_template_id' => $invoice->invoice_template_id,
             'status' => Invoice::STATUS_DRAFT,
             'paid_status' => Invoice::STATUS_UNPAID,
             'sub_total' => $invoice->sub_total,

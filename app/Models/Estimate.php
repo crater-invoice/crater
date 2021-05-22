@@ -510,4 +510,9 @@ class Estimate extends Model implements HasMedia
             '{ESTIMATE_LINK}' => url('/customer/estimates/pdf/'.$this->unique_hash),
         ];
     }
+
+    public function getValues($slug)
+    {
+        return $this->getCustomFieldValues($slug);
+    }
 }

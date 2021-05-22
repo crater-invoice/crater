@@ -591,4 +591,9 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_LINK}' => url('/customer/invoices/pdf/'.$this->unique_hash),
         ];
     }
+
+    public function getValues($slug)
+    {
+        return $this->getCustomFieldValues($slug);
+    }
 }

@@ -31,7 +31,7 @@ jobs:
       if: "matrix.php >= 8"
 
     - name: Check coding style
-      run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --config=.php-cs-fixer.ci.php
+      run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --config=.php-cs-fixer.dist.php
 
     - name: Unit Tests
       run: php ./vendor/bin/pest

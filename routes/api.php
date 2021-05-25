@@ -105,7 +105,6 @@ Route::prefix('/v1')->group(function () {
 
         // Send reset password mail
         Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware("throttle:10,2");
-        ;
 
         // handle reset password form process
         Route::post('reset/password', [ResetPasswordController::class, 'reset']);

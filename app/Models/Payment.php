@@ -380,7 +380,7 @@ class Payment extends Model implements HasMedia
     public function getPDFData()
     {
         $company = Company::find($this->company_id);
-        $locale = CompanySetting::getSetting('language',  $company->id);
+        $locale = CompanySetting::getSetting('language', $company->id);
 
         \App::setLocale($locale);
 
@@ -445,10 +445,5 @@ class Payment extends Model implements HasMedia
             '{PAYMENT_AMOUNT}' => $this->reference_number,
             '{PAYMENT_LINK}' => $this->paymentPdfUrl,
         ];
-    }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
     }
 }

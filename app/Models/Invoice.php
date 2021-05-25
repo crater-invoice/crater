@@ -515,7 +515,7 @@ class Invoice extends Model implements HasMedia
         $invoiceTemplate = InvoiceTemplate::find($this->invoice_template_id);
 
         $company = Company::find($this->company_id);
-        $locale = CompanySetting::getSetting('language',  $company->id);
+        $locale = CompanySetting::getSetting('language', $company->id);
 
         App::setLocale($locale);
 
@@ -590,10 +590,5 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_REF_NUMBER}' => $this->reference_number,
             '{INVOICE_LINK}' => url('/customer/invoices/pdf/'.$this->unique_hash),
         ];
-    }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
     }
 }

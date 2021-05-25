@@ -422,9 +422,4 @@ class User extends Authenticatable implements HasMedia
 
         return $companySettings;
     }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
-    }
 }

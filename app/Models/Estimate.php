@@ -434,7 +434,7 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
-        $locale = CompanySetting::getSetting('language',  $company->id);
+        $locale = CompanySetting::getSetting('language', $company->id);
 
         App::setLocale($locale);
 
@@ -509,10 +509,5 @@ class Estimate extends Model implements HasMedia
             '{ESTIMATE_REF_NUMBER}' => $this->reference_number,
             '{ESTIMATE_LINK}' => url('/customer/estimates/pdf/'.$this->unique_hash),
         ];
-    }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
     }
 }

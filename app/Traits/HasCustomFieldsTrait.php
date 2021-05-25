@@ -43,9 +43,9 @@ trait HasCustomFieldsTrait
         }
     }
 
-    public function getCustomFieldValues($slug)
+    public function getCustomFieldBySlug($slug)
     {
-        return $this->fields()->whereHas('customField', function ($query) use ($slug) {
+        return $this->fields()->with('customField')->whereHas('customField', function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->first();
     }

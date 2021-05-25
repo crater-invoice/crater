@@ -219,9 +219,4 @@ class Expense extends Model implements HasMedia
 
         return true;
     }
-
-    public function getValues($slug)
-    {
-        return $this->getCustomFieldValues($slug);
-    }
 }

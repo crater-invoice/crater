@@ -434,7 +434,7 @@ class Estimate extends Model implements HasMedia
         $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
 
         $company = Company::find($this->company_id);
-        $locale = CompanySetting::getSetting('language',  $company->id);
+        $locale = CompanySetting::getSetting('language', $company->id);
 
         App::setLocale($locale);
 

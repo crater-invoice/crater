@@ -99,7 +99,8 @@ test('create negative tax type', function () {
         'percent' => -9.99
     ]);
 
-    postJson('api/v1/tax-types', $taxType)->assertOk();
+    postJson('api/v1/tax-types', $taxType)
+        ->assertOk();
 
     $this->assertDatabaseHas('tax_types', $taxType);
 });

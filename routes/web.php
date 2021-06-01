@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 */
-
+if (str_starts_with(env('APP_URL', 'http://localhost'), 'https')) {
+    URL::forceScheme('https');
+}
 Route::post('login', [LoginController::class, 'login']);
 
 

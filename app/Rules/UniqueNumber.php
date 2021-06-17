@@ -10,6 +10,8 @@ class UniqueNumber implements Rule
 
     public $class;
 
+    public $type;
+
     /**
      * Create a new rule instance.
      * @param  string  $class
@@ -38,6 +40,8 @@ class UniqueNumber implements Rule
             $uniqueNumber = $value;
         }
 
+        $this->type = $attribute;
+
         if ($this->id && $this->class::where('id', $this->id)->where($attribute, $uniqueNumber)->first()) {
             return true;
         }
@@ -56,6 +60,7 @@ class UniqueNumber implements Rule
      */
     public function message()
     {
-        return 'Invalid number passed.';
+        $type = str_replace('_', ' ', $this->type);
+        return "{$type} is already used.";
     }
 }

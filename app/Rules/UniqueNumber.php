@@ -61,6 +61,6 @@ class UniqueNumber implements Rule
     public function message()
     {
         $type = str_replace('_', ' ', $this->type);
-        return "Invalid {$type} passed.";
+        return "{$type} already used.";
     }
 }

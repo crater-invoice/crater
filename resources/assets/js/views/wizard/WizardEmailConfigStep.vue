@@ -67,7 +67,7 @@ export default {
           mailConfigData
         )
         if (response.data.success) {
-          this.$emit('next', 4)
+          this.$emit('next', 5)
           this.showNotification({
             type: 'success',
             message: this.$t('wizard.success.' + response.data.success),

@@ -21,7 +21,6 @@ import SiteSidebar from './partials/TheSiteSidebar.vue'
 import BaseModal from '../../components/base/modal/BaseModal'
 import { RefreshIcon } from '@vue-hero-icons/solid'
 import { mapActions, mapGetters } from 'vuex'
-import BaseNotification from '../../components/base/BaseNotification.vue'
 
 export default {
   components: {
@@ -30,7 +29,6 @@ export default {
     SiteFooter,
     BaseModal,
     RefreshIcon,
-    BaseNotification,
   },
 
   computed: {

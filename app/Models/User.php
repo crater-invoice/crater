@@ -262,6 +262,11 @@ class User extends Authenticatable implements HasMedia
         $query->orWhere('users.id', $customer_id);
     }
 
+    public function scopeWhereSuperAdmin($query)
+    {
+        $query->orWhere('role', 'super admin');
+    }
+
     public function scopeApplyInvoiceFilters($query, array $filters)
     {
         $filters = collect($filters);

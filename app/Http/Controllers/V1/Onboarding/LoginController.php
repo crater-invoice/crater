@@ -2,12 +2,12 @@
 
 namespace Crater\Http\Controllers\V1\Onboarding;
 
+use Auth;
 use Crater\Http\Controllers\Controller;
 use Crater\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class FinishController extends Controller
+class LoginController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -17,7 +17,8 @@ class FinishController extends Controller
      */
     public function __invoke(Request $request)
     {
-        \Storage::disk('local')->put('database_created', 'database_created');
+        $user = User::where('role', 'super admin')->first();
+        Auth::login($user);
 
         return response()->json(['success' => true]);
     }

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
 import Mysql from './database/MysqlDatabase'
 import Pgsql from './database/PgsqlDatabase'
 import Sqlite from './database/SqliteDatabase'
@@ -67,14 +66,10 @@ export default {
     async next(databaseData) {
       this.isLoading = this.isFetching = true
       try {
-        await window.axios.get('/sanctum/csrf-cookie')
-
         let response = await window.axios.post(
           '/api/v1/onboarding/database/config',
           databaseData
         )
-
-        await window.axios.get('/sanctum/csrf-cookie')
 
         if (response.data.success) {
           await window.axios.post('/api/v1/onboarding/finish')

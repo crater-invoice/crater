@@ -1,7 +1,7 @@
 <template>
   <form action="" @submit.prevent="next()">
     <div>
-      <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:mb-6 md:mb-6">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:mb-6 md:mb-6">
         <sw-input-group
           :label="$t('wizard.database.app_url')"
           :error="urlError"
@@ -16,23 +16,6 @@
           />
         </sw-input-group>
 
-        <sw-input-group
-          :label="$t('wizard.database.app_domain')"
-          :error="domainError"
-          required
-        >
-          <sw-input
-            :invalid="$v.databaseData.app_domain.$error"
-            v-model.trim="databaseData.app_domain"
-            type="text"
-            name="name"
-            placeholder="crater.com"
-            @input="$v.databaseData.app_domain.$touch()"
-          />
-        </sw-input-group>
-      </div>
-
-      <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:mb-6 md:mb-6">
         <sw-input-group
           :label="$t('wizard.database.connection')"
           :error="connectionError"
@@ -62,9 +45,7 @@
             @input="$v.databaseData.database_port.$touch()"
           />
         </sw-input-group>
-      </div>
 
-      <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:mb-6 md:mb-6">
         <sw-input-group
           :label="$t('wizard.database.db_name')"
           :error="nameError"
@@ -92,9 +73,7 @@
             @input="$v.databaseData.database_username.$touch()"
           />
         </sw-input-group>
-      </div>
 
-      <div class="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2">
         <sw-input-group :label="$t('wizard.database.password')">
           <sw-input
             v-model.trim="databaseData.database_password"
@@ -134,8 +113,7 @@
 
 <script>
 import { SaveIcon } from '@vue-hero-icons/outline'
-import { validationMixin } from 'vuelidate'
-const { required, numeric, url } = require('vuelidate/lib/validators')
+const { required, numeric } = require('vuelidate/lib/validators')
 
 export default {
   components: {
@@ -168,12 +146,11 @@ export default {
         database_username: null,
         database_password: null,
         app_url: window.location.origin,
-        app_domain: window.location.origin.replace(/(^\w+:|^)\/\//, ''),
       },
       connections: ['sqlite', 'mysql', 'pgsql', 'sqlsrv'],
     }
   },
-   computed: {
+  computed: {
     urlError() {
       if (!this.$v.databaseData.app_url.$error) {
         return ''
@@ -185,19 +162,6 @@ export default {
 
       if (!this.$v.databaseData.app_url.isUrl) {
         return this.$tc('validation.invalid_url')
-      }
-    },
-    domainError() {
-      if (!this.$v.databaseData.app_domain.$error) {
-        return ''
-      }
-
-      if (!this.$v.databaseData.app_domain.required) {
-        return this.$tc('validation.required')
-      }
-
-      if (!this.$v.databaseData.app_domain.isUrl) {
-        return this.$tc('validation.invalid_domain_url')
       }
     },
     connectionError() {
@@ -272,12 +236,6 @@ export default {
         required,
         isUrl(val) {
           return this.$utils.checkValidUrl(val)
-        },
-      },
-      app_domain: {
-        required,
-        isUrl(val) {
-          return this.$utils.checkValidDomainUrl(val)
         },
       },
     },

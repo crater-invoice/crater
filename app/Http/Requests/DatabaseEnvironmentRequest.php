@@ -30,9 +30,6 @@ class DatabaseEnvironmentRequest extends FormRequest
                         'required',
                         'url',
                     ],
-                    'app_domain' => [
-                        'required',
-                    ],
                     'database_connection' => [
                         'required',
                         'string',
@@ -49,9 +46,6 @@ class DatabaseEnvironmentRequest extends FormRequest
                     'app_url' => [
                         'required',
                         'url',
-                    ],
-                    'app_domain' => [
-                        'required',
                     ],
                     'database_connection' => [
                         'required',

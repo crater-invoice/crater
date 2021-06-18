@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center justify-between w-full h-32 pt-10 step-indicator"
+    class="flex flex-col items-center justify-between w-full h-32 pt-10  step-indicator"
   >
     <img
       id="logo-crater"
@@ -22,6 +22,7 @@
 import SystemRequirement from './WizardSystemRequirementStep'
 import Permission from './WizardPermissionStep'
 import Database from './WizardDatabaseStep'
+import VerifyDomain from './WizardVerifyDomainStep'
 import EmailConfiguration from './WizardEmailConfigStep'
 import UserProfile from './WizardUserProfileStep'
 import CompanyInfo from './WizardCompanyInfoStep'
@@ -32,10 +33,11 @@ export default {
     step_1: SystemRequirement,
     step_2: Permission,
     step_3: Database,
-    step_4: EmailConfiguration,
-    step_5: UserProfile,
-    step_6: CompanyInfo,
-    step_7: Settings,
+    step_4: VerifyDomain,
+    step_5: EmailConfiguration,
+    step_6: UserProfile,
+    step_7: CompanyInfo,
+    step_8: Settings,
   },
   data() {
     return {
@@ -69,16 +71,27 @@ export default {
       let status = {
         profile_complete: data,
       }
-
-      let response = await axios.post('/api/v1/onboarding/wizard-step', status)
+      try {
+        let response = await axios.post(
+          '/api/v1/onboarding/wizard-step',
+          status
+        )
+        return true
+      } catch (e) {
+        if (e?.response?.data?.message === 'The MAC is invalid.') {
+          window.location.reload()
+        }
+        return false
+      }
     },
     async setTab(data) {
       if (data) {
-        this.setProfileComplete(data)
+        let res = await this.setProfileComplete(data)
+        if (!res) return false
       }
       this.step++
 
-      if (this.step <= 7) {
+      if (this.step <= 8) {
         this.tab = 'step_' + this.step
       } else {
         // window.location.reload()

@@ -3,8 +3,12 @@
 namespace Crater\Http\Controllers\V1\Mobile;
 
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\DomainEnvironmentRequest;
 use Crater\Models\User;
+use Crater\Space\EnvironmentManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -39,5 +43,10 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
         ]);
+    }
+
+    public function check()
+    {
+        return Auth::check();
     }
 }

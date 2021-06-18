@@ -4,6 +4,7 @@ namespace Crater\Space;
 
 use Crater\Http\Requests\DatabaseEnvironmentRequest;
 use Crater\Http\Requests\DiskEnvironmentRequest;
+use Crater\Http\Requests\DomainEnvironmentRequest;
 use Crater\Http\Requests\MailEnvironmentRequest;
 use Exception;
 use Illuminate\Http\Request;
@@ -359,11 +360,11 @@ class EnvironmentManager
     }
 
     /**
-    * Save the disk content to the .env file.
-    *
-    * @param Request $request
-    * @return array
-    */
+     * Save the disk content to the .env file.
+     *
+     * @param Request $request
+     * @return array
+     */
     public function saveDiskVariables(DiskEnvironmentRequest $request)
     {
         $diskData = $this->getDiskData($request);
@@ -484,6 +485,37 @@ class EnvironmentManager
             'new_disk_data' => $newDiskData,
             'default_driver' => $defaultDriver,
             'old_default_driver' => $oldDefaultDriver,
+        ];
+    }
+
+    /**
+     * Save sanctum statful domain to the .env file.
+     *
+     * @param DomainEnvironmentRequest $request
+     * @return array
+     */
+    public function saveDomainVariables(DomainEnvironmentRequest $request)
+    {
+        try {
+            file_put_contents($this->envPath, str_replace(
+                'SANCTUM_STATEFUL_DOMAINS='.env('SANCTUM_STATEFUL_DOMAINS'),
+                'SANCTUM_STATEFUL_DOMAINS='.$request->app_domain,
+                file_get_contents($this->envPath)
+            ));
+
+            file_put_contents($this->envPath, str_replace(
+                'SESSION_DOMAIN='.config('session.domain'),
+                'SESSION_DOMAIN='.explode(':', $request->app_domain)[0],
+                file_get_contents($this->envPath)
+            ));
+        } catch (Exception $e) {
+            return [
+                'error' => 'domain_verification_failed'
+            ];
+        }
+
+        return [
+            'success' => 'domain_variable_save_successfully'
         ];
     }
 }

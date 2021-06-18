@@ -36,8 +36,10 @@ use Crater\Http\Controllers\V1\Invoice\SendInvoiceController;
 use Crater\Http\Controllers\V1\Item\ItemsController;
 use Crater\Http\Controllers\V1\Item\UnitsController;
 use Crater\Http\Controllers\V1\Mobile\AuthController;
+use Crater\Http\Controllers\V1\Onboarding\AppDomainController;
 use Crater\Http\Controllers\V1\Onboarding\DatabaseConfigurationController;
 use Crater\Http\Controllers\V1\Onboarding\FinishController;
+use Crater\Http\Controllers\V1\Onboarding\LoginController;
 use Crater\Http\Controllers\V1\Onboarding\OnboardingWizardController;
 use Crater\Http\Controllers\V1\Onboarding\PermissionsController;
 use Crater\Http\Controllers\V1\Onboarding\RequirementsController;
@@ -133,11 +135,16 @@ Route::prefix('/v1')->group(function () {
 
         Route::get('/onboarding/database/config', [DatabaseConfigurationController::class, 'getDatabaseEnvironment']);
 
+        Route::put('/onboarding/set-domain', AppDomainController::class);
+
+        Route::post('/onboarding/login', LoginController::class);
+
         Route::post('/onboarding/finish', FinishController::class);
     });
 
 
     Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+
 
         // Bootstrap
         //----------------------------------
@@ -149,6 +156,12 @@ Route::prefix('/v1')->group(function () {
         //----------------------------------
 
         Route::get('/dashboard', DashboardController::class);
+
+
+        // Auth check
+        //----------------------------------
+
+        Route::get('/auth/check', [AuthController::class, 'check']);
 
 
         // Search users

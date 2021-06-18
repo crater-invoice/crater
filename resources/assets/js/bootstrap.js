@@ -126,9 +126,11 @@ global.axios.interceptors.response.use(undefined, function (err) {
   } else {
     if (
       err.response.data &&
+      err.config.url !== '/api/v1/auth/check' &&
       (err.response.statusText === 'Unauthorized' ||
         err.response.data === ' Unauthorized.')
     ) {
+      console.log(err.response)
       // Unauthorized and log out
       store.dispatch('notification/showNotification', {
         type: 'error',

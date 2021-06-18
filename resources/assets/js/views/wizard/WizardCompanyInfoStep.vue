@@ -297,7 +297,7 @@ export default {
           })
         }
 
-        this.$emit('next', 6)
+        this.$emit('next', 7)
         this.isLoading = false
       }
     },

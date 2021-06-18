@@ -246,7 +246,7 @@ export default {
 
           this.uploadAvatar(avatarData)
         }
-        this.$emit('next', 5)
+        this.$emit('next', 6)
         this.isLoading = false
       }
       return true

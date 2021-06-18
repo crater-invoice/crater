@@ -1,5 +1,6 @@
 <template>
-  <div class="site-wrapper h-full text-base">
+  <div class="h-full text-base site-wrapper">
+    <base-notification />
     <div class="container mx-auto">
       <router-view></router-view>
     </div>

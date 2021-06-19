@@ -7,14 +7,19 @@
           :key="index"
           :class="{
             'border border-solid border-primary-500':
-              selectedTemplate === template.id,
+              selectedTemplate === template.name,
           }"
-          class="relative flex flex-col m-2 border border-gray-200 border-solid cursor-pointer hover:border-primary-300"
-          @click="selectedTemplate = template.id"
+          class="relative flex flex-col m-2 border border-gray-200 border-solid cursor-pointer  hover:border-primary-300"
         >
-          <img :src="template.path" alt="template-image" />
           <img
-            v-if="selectedTemplate === template.id"
+            :src="template.path"
+            :alt="template.name"
+            class="w-full"
+            @click="selectedTemplate = template.name"
+          />
+          <img
+            v-if="selectedTemplate === template.name"
+            :alt="template.name"
             class="absolute z-10 w-5 h-5 text-primary-500"
             style="top: -6px; right: -5px"
             src="/assets/img/tick.png"
@@ -53,16 +58,16 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      selectedTemplate: 1,
+      selectedTemplate: null,
       isLoading: false,
     }
   },
   computed: {
     ...mapGetters('modal', ['modalData']),
-    ...mapGetters('invoice', ['getTemplateId']),
+    ...mapGetters('invoice', ['getTemplateName']),
   },
   mounted() {
-    this.selectedTemplate = this.getTemplateId
+    this.selectedTemplate = this.getTemplateName
   },
   methods: {
     ...mapActions('invoice', ['setTemplate']),
@@ -77,7 +82,7 @@ export default {
       }
     },
     closeInvoiceModal() {
-      this.selectedTemplate = this.getTemplateId
+      this.selectedTemplate = this.getTemplateName
       this.closeModal()
       this.resetModalData()
     },

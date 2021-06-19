@@ -60,10 +60,7 @@ export const fetchEstimate = ({ commit, dispatch, state }, id) => {
     window.axios
       .get(`/api/v1/estimates/${id}`)
       .then((response) => {
-        commit(
-          types.SET_TEMPLATE_ID,
-          response.data.estimate.estimate_template_id
-        )
+        commit(types.SET_TEMPLATE_NAME, response.data.estimate.template_name)
         resolve(response)
       })
       .catch((err) => {
@@ -297,7 +294,7 @@ export const resetItem = ({ commit, dispatch, state }) => {
 
 export const setTemplate = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
-    commit(types.SET_TEMPLATE_ID, data)
+    commit(types.SET_TEMPLATE_NAME, data)
     resolve({})
   })
 }

@@ -52,8 +52,8 @@ export default {
     state.selectAllField = false
   },
 
-  [types.SET_TEMPLATE_ID](state, templateId) {
-    state.estimateTemplateId = templateId
+  [types.SET_TEMPLATE_NAME](state, templateName) {
+    state.estimateTemplateName = templateName
   },
 
   [types.SELECT_CUSTOMER](state, data) {

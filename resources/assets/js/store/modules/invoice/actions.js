@@ -21,7 +21,7 @@ export const fetchInvoice = ({ commit, dispatch, state }, id) => {
     window.axios
       .get(`/api/v1/invoices/${id}`)
       .then((response) => {
-        commit(types.SET_TEMPLATE_ID, response.data.invoice.invoice_template_id)
+        commit(types.SET_TEMPLATE_NAME, response.data.invoice.template_name)
         resolve(response)
       })
       .catch((err) => {
@@ -219,7 +219,7 @@ export const resetCustomer = ({ commit, dispatch, state }) => {
 
 export const setTemplate = ({ commit, dispatch, state }, data) => {
   return new Promise((resolve, reject) => {
-    commit(types.SET_TEMPLATE_ID, data)
+    commit(types.SET_TEMPLATE_NAME, data)
     resolve({})
   })
 }

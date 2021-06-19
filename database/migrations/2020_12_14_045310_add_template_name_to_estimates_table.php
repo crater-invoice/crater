@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstimateTemplatesTable extends Migration
+class AddTemplateNameToEstimatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateEstimateTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('estimate_templates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->nullable();
-            $table->string('view');
-            $table->string('path');
-            $table->timestamps();
+        Schema::table('estimates', function (Blueprint $table) {
+            $table->string('template_name')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateEstimateTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estimate_templates');
+        Schema::table('estimates', function (Blueprint $table) {
+            $table->dropColumn('template_name');
+        });
     }
 }

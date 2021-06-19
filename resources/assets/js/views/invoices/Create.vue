@@ -259,7 +259,7 @@
               @click="openTemplateModal"
             >
               <span class="flex text-black">
-                {{ $t('invoices.template') }} {{ getTemplateId }}
+                {{ getTemplateName }}
                 <pencil-icon class="h-5 ml-2 -mr-1" />
               </span>
             </sw-button>
@@ -510,7 +510,7 @@ export default {
     ...mapGetters('notes', ['notes']),
 
     ...mapGetters('invoice', [
-      'getTemplateId',
+      'getTemplateName',
       'selectedCustomer',
       'selectedNote',
     ]),
@@ -710,6 +710,7 @@ export default {
       'selectCustomer',
       'updateInvoice',
       'resetSelectedNote',
+      'setTemplate',
     ]),
 
     ...mapActions('invoiceTemplate', ['fetchInvoiceTemplates']),
@@ -784,6 +785,7 @@ export default {
               this.invoiceNumAttribute = res4.data.nextNumber
               this.invoicePrefix = res4.data.prefix
             }
+            this.setTemplate(this.getInvoiceTemplates[0].name)
           } else {
             this.invoicePrefix = res4.data.prefix
           }
@@ -899,7 +901,7 @@ export default {
         total: this.total,
         tax: this.totalTax,
         user_id: null,
-        invoice_template_id: this.getTemplateId,
+        template_name: this.getTemplateName,
       }
 
       if (this.selectedCustomer != null) {

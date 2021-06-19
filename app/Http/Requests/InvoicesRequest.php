@@ -54,8 +54,8 @@ class InvoicesRequest extends FormRequest
             'tax' => [
                 'required',
             ],
-            'invoice_template_id' => [
-                'required',
+            'template_name' => [
+                'required'
             ],
             'items' => [
                 'required',

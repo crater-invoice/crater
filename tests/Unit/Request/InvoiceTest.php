@@ -33,8 +33,8 @@ test('invoice request validation rules', function () {
             'tax' => [
                 'required',
             ],
-            'invoice_template_id' => [
-                'required',
+            'template_name' => [
+                'required'
             ],
             'items' => [
                 'required',

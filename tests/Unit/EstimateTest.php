@@ -46,13 +46,6 @@ test('estimate has many taxes', function () {
     $this->assertTrue($estimate->taxes()->exists());
 });
 
-test('estimate belongs to estimate template', function () {
-    $estimate = Estimate::factory()->forEstimateTemplate()->create();
-
-    $this->assertTrue($estimate->estimateTemplate()->exists());
-});
-
-
 test('get next estimate number', function () {
     $estimate = Estimate::factory()->create();
 
@@ -114,7 +107,7 @@ test('create estimate', function () {
     $this->assertDatabaseHas('estimates', [
         'estimate_number' => $estimate['estimate_number'],
         'user_id' => $estimate['user_id'],
-        'estimate_template_id' => $estimate['estimate_template_id'],
+        'template_name' => $estimate['template_name'],
         'sub_total' => $estimate['sub_total'],
         'total' => $estimate['total'],
         'discount' => $estimate['discount'],
@@ -162,7 +155,7 @@ test('update estimate', function () {
     $this->assertDatabaseHas('estimates', [
         'estimate_number' => $newEstimate['estimate_number'],
         'user_id' => $newEstimate['user_id'],
-        'estimate_template_id' => $newEstimate['estimate_template_id'],
+        'template_name' => $newEstimate['template_name'],
         'sub_total' => $newEstimate['sub_total'],
         'total' => $newEstimate['total'],
         'discount' => $newEstimate['discount'],

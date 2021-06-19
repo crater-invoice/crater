@@ -54,12 +54,6 @@ test('invoice belongs to user', function () {
     $this->assertTrue($invoice->user()->exists());
 });
 
-test('invoice belongs to invoice template', function () {
-    $invoice = Invoice::factory()->forInvoiceTemplate()->create();
-
-    $this->assertTrue($invoice->invoiceTemplate()->exists());
-});
-
 test('get next invoice number', function () {
     $invoice = Invoice::factory()->create();
 
@@ -140,7 +134,7 @@ test('create invoice', function () {
         'discount' => $invoice['discount'],
         'notes' => $invoice['notes'],
         'user_id' => $invoice['user_id'],
-        'invoice_template_id' => $invoice['invoice_template_id'],
+        'template_name' => $invoice['template_name'],
     ]);
 });
 
@@ -191,7 +185,7 @@ test('update invoice', function () {
         'discount' => $newInvoice['discount'],
         'notes' => $newInvoice['notes'],
         'user_id' => $newInvoice['user_id'],
-        'invoice_template_id' => $newInvoice['invoice_template_id'],
+        'template_name' => $newInvoice['template_name'],
     ]);
 });
 

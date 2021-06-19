@@ -20,7 +20,7 @@ class InvoicesController extends Controller
     {
         $limit = $request->has('limit') ? $request->limit : 10;
 
-        $invoices = Invoice::with(['items', 'user', 'creator', 'invoiceTemplate', 'taxes'])
+        $invoices = Invoice::with(['items', 'user', 'creator', 'taxes'])
             ->join('users', 'users.id', '=', 'invoices.user_id')
             ->applyFilters($request->only([
                 'status',
@@ -78,7 +78,6 @@ class InvoicesController extends Controller
             'items',
             'items.taxes',
             'user',
-            'invoiceTemplate',
             'taxes.taxType',
             'fields.customField',
         ]);

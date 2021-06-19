@@ -51,8 +51,8 @@ export default {
     state.selectedInvoices = []
   },
 
-  [types.SET_TEMPLATE_ID](state, templateId) {
-    state.invoiceTemplateId = templateId
+  [types.SET_TEMPLATE_NAME](state, templateName) {
+    state.invoiceTemplateName = templateName
   },
 
   [types.SELECT_CUSTOMER](state, data) {

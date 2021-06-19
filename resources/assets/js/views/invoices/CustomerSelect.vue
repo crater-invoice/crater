@@ -185,7 +185,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('invoice', ['getTemplateId', 'selectedCustomer']),
+    ...mapGetters('invoice', ['getTemplateName', 'selectedCustomer']),
   },
 
   created() {

@@ -5,6 +5,8 @@ namespace Crater\Http\Controllers\V1\Estimate;
 use Crater\Http\Controllers\Controller;
 use Crater\Models\EstimateTemplate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class EstimateTemplatesController extends Controller
 {
@@ -16,8 +18,17 @@ class EstimateTemplatesController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $templates = Storage::disk('views')->files('/app/pdf/estimate');
+        $estimateTemplates = [];
+
+        foreach ($templates as $key => $template) {
+            $templateName = Str::before(basename($template), '.blade.php');
+            $estimateTemplates[$key]['name'] = $templateName;
+            $estimateTemplates[$key]['path'] = asset('assets/img/PDF/'.$templateName.'.png');
+        }
+
         return response()->json([
-            'templates' => EstimateTemplate::all(),
+            'templates' => $estimateTemplates
         ]);
     }
 }

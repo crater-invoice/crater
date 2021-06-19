@@ -46,7 +46,7 @@ test('create invoice', function () {
     $response->assertOk();
 
     $this->assertDatabaseHas('invoices', [
-        'invoice_template_id' => $invoice['invoice_template_id'],
+        'template_name' => $invoice['template_name'],
         'invoice_number' => $invoice['invoice_number'],
         'sub_total' => $invoice['sub_total'],
         'discount' => $invoice['discount'],
@@ -78,7 +78,7 @@ test('create invoice as sent', function () {
         'tax' => $invoice['tax'],
         'discount' => $invoice['discount'],
         'user_id' => $invoice['user_id'],
-        'invoice_template_id' => $invoice['invoice_template_id'],
+        'template_name' => $invoice['template_name'],
     ]);
 
     $this->assertDatabaseHas('invoice_items', $invoice['items'][0]);
@@ -115,7 +115,7 @@ test('update invoice', function () {
         'tax' => $invoice2['tax'],
         'discount' => $invoice2['discount'],
         'user_id' => $invoice2['user_id'],
-        'invoice_template_id' => $invoice2['invoice_template_id'],
+        'template_name' => $invoice2['template_name'],
     ]);
 
     $this->assertDatabaseHas('invoice_items', $invoice2['items'][0]);

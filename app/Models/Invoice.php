@@ -2,6 +2,12 @@
 
 namespace Crater\Models;
 
+use Crater\Models\Company;
+use Crater\Models\CompanySetting;
+use Crater\Models\Currency;
+use Crater\Models\Tax;
+use Illuminate\Database\Eloquent\Model;
+use Crater\Models\Payment;
 use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -9,7 +15,6 @@ use Crater\Mail\SendInvoiceMail;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -139,11 +144,6 @@ class Invoice extends Model implements HasMedia
     public function creator()
     {
         return $this->belongsTo('Crater\Models\User', 'creator_id');
-    }
-
-    public function invoiceTemplate()
-    {
-        return $this->belongsTo(InvoiceTemplate::class);
     }
 
     public function getInvoicePdfUrlAttribute()
@@ -366,11 +366,10 @@ class Invoice extends Model implements HasMedia
         }
 
         $invoice = Invoice::with([
-            'items',
-            'user',
-            'invoiceTemplate',
-            'taxes',
-        ])
+                'items',
+                'user',
+                'taxes'
+            ])
             ->find($invoice->id);
 
         return $invoice;
@@ -418,11 +417,10 @@ class Invoice extends Model implements HasMedia
         }
 
         $invoice = Invoice::with([
-            'items',
-            'user',
-            'invoiceTemplate',
-            'taxes',
-        ])
+                'items',
+                'user',
+                'taxes'
+            ])
             ->find($this->id);
 
         return $invoice;
@@ -512,7 +510,7 @@ class Invoice extends Model implements HasMedia
             }
         }
 
-        $invoiceTemplate = InvoiceTemplate::find($this->invoice_template_id);
+        $invoiceTemplate = self::find($this->id)->template_name;
 
         $company = Company::find($this->company_id);
         $locale = CompanySetting::getSetting('language', $company->id);
@@ -532,7 +530,7 @@ class Invoice extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
-        return PDF::loadView('app.pdf.invoice.'.$invoiceTemplate->view);
+        return PDF::loadView('app.pdf.invoice.'.$invoiceTemplate);
     }
 
     public function getEmailAttachmentSetting()

@@ -183,7 +183,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('estimate', ['getTemplateId', 'selectedCustomer']),
+    ...mapGetters('estimate', ['getTemplateName', 'selectedCustomer']),
   },
 
   created() {

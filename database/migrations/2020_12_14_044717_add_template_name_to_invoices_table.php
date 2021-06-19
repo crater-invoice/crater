@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceTemplatesTable extends Migration
+class AddTemplateNameToInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateInvoiceTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_templates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->nullable();
-            $table->string('view');
-            $table->string('path');
-            $table->timestamps();
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->string('template_name')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateInvoiceTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_templates');
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->dropColumn('template_name');
+        });
     }
 }

@@ -18,7 +18,6 @@ class EstimatesController extends Controller
         $estimates = Estimate::with([
                 'items',
                 'user',
-                'estimateTemplate',
                 'taxes',
                 'creator',
             ])
@@ -68,7 +67,6 @@ class EstimatesController extends Controller
             'items',
             'items.taxes',
             'user',
-            'estimateTemplate',
             'creator',
             'taxes',
             'taxes.taxType',

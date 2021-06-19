@@ -90,6 +90,12 @@ return [
             'app' => env('DROPBOX_APP'),
             'root' => env('DROPBOX_ROOT'),
         ],
+
+        'views' => [
+            'driver' => 'local',
+            'root' => resource_path('views'),
+        ],
+
     ],
 
     /*

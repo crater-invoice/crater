@@ -32,8 +32,6 @@ class CreateEstimatesTable extends Migration
             $table->string('unique_hash')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('estimate_template_id')->unsigned()->nullable();
-            $table->foreign('estimate_template_id')->references('id')->on('estimate_templates');
             $table->integer('company_id')->unsigned()->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->timestamps();

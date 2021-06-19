@@ -21,7 +21,7 @@ class ConvertEstimateController extends Controller
     */
     public function __invoke(Request $request, Estimate $estimate)
     {
-        $estimate->load(['items', 'items.taxes', 'user', 'estimateTemplate', 'taxes']);
+        $estimate->load(['items', 'items.taxes', 'user', 'taxes']);
 
         $invoice_date = Carbon::now();
         $due_date = Carbon::now()->addDays(7);
@@ -39,7 +39,7 @@ class ConvertEstimateController extends Controller
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),
-            'invoice_template_id' => 1,
+            'template_name' => 'invoice1',
             'status' => Invoice::STATUS_DRAFT,
             'paid_status' => Invoice::STATUS_UNPAID,
             'sub_total' => $estimate->sub_total,
@@ -84,8 +84,7 @@ class ConvertEstimateController extends Controller
         $invoice = Invoice::with([
             'items',
             'user',
-            'invoiceTemplate',
-            'taxes',
+            'taxes'
         ])->find($invoice->id);
 
         return response()->json([

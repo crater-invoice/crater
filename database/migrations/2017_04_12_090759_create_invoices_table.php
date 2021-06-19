@@ -34,8 +34,6 @@ class CreateInvoicesTable extends Migration
             $table->boolean('sent')->default(false);
             $table->boolean('viewed')->default(false);
             $table->string('unique_hash')->nullable();
-            $table->integer('invoice_template_id')->unsigned()->nullable();
-            $table->foreign('invoice_template_id')->references('id')->on('invoice_templates');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('company_id')->unsigned()->nullable();

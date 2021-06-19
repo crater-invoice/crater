@@ -4,7 +4,7 @@ import * as getters from './getters'
 
 const initialState = {
   invoices: [],
-  invoiceTemplateId: 1,
+  invoiceTemplateName: null,
   selectedInvoices: [],
   selectAllField: false,
   totalInvoices: 0,

@@ -33,8 +33,8 @@ test('estimate request validation rules', function () {
             'tax' => [
                 'required',
             ],
-            'estimate_template_id' => [
-                'required',
+            'template_name' => [
+                'required'
             ],
             'items' => [
                 'required',

@@ -266,8 +266,8 @@
               variant="gray"
               @click="openTemplateModal"
             >
-              <span class="flex text-black">
-                {{ $t('estimates.estimate_template') }} {{ getTemplateId }}
+              <span class="flex text-black capitalize">
+                {{ getTemplateName }}
                 <pencil-icon class="h-5 ml-2 -mr-1" />
               </span>
             </sw-button>
@@ -514,9 +514,9 @@ export default {
     ...mapGetters('company', ['defaultCurrency']),
 
     ...mapGetters('estimate', [
-      'getTemplateId',
       'selectedCustomer',
       'selectedNote',
+      'getTemplateName',
     ]),
 
     ...mapGetters('estimateTemplate', ['getEstimateTemplates']),
@@ -708,6 +708,7 @@ export default {
       'selectCustomer',
       'updateEstimate',
       'resetSelectedNote',
+      'setTemplate',
     ]),
 
     ...mapActions('item', ['fetchItems']),
@@ -789,6 +790,7 @@ export default {
               this.estimateNumAttribute = res4.data.nextNumber
               this.estimatePrefix = res4.data.prefix
             }
+            this.setTemplate(this.getEstimateTemplates[0].name)
           } else {
             this.estimatePrefix = res4.data.prefix
           }
@@ -903,7 +905,7 @@ export default {
         total: this.total,
         tax: this.totalTax,
         user_id: null,
-        estimate_template_id: this.getTemplateId,
+        template_name: this.getTemplateName,
       }
 
       if (this.selectedCustomer != null) {

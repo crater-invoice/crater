@@ -2,6 +2,10 @@
 
 namespace Crater\Models;
 
+use Crater\Models\Company;
+use Crater\Models\Tax;
+use Illuminate\Database\Eloquent\Model;
+use Crater\Models\CompanySetting;
 use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -9,7 +13,6 @@ use Crater\Mail\SendEstimateMail;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -128,11 +131,6 @@ class Estimate extends Model implements HasMedia
     public function taxes()
     {
         return $this->hasMany(Tax::class);
-    }
-
-    public function estimateTemplate()
-    {
-        return $this->belongsTo('Crater\Models\EstimateTemplate');
     }
 
     public function getEstimateNumAttribute()
@@ -315,8 +313,7 @@ class Estimate extends Model implements HasMedia
         return Estimate::with([
             'items.taxes',
             'user',
-            'estimateTemplate',
-            'taxes',
+            'taxes'
         ])
             ->find($estimate->id);
     }
@@ -341,11 +338,10 @@ class Estimate extends Model implements HasMedia
         }
 
         return Estimate::with([
-            'items.taxes',
-            'user',
-            'estimateTemplate',
-            'taxes',
-        ])
+                'items.taxes',
+                'user',
+                'taxes'
+            ])
             ->find($this->id);
     }
 
@@ -431,7 +427,7 @@ class Estimate extends Model implements HasMedia
             }
         }
 
-        $estimateTemplate = EstimateTemplate::find($this->estimate_template_id);
+        $estimateTemplate = self::find($this->id)->template_name;
 
         $company = Company::find($this->company_id);
         $locale = CompanySetting::getSetting('language', $company->id);
@@ -451,7 +447,7 @@ class Estimate extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
-        return PDF::loadView('app.pdf.estimate.'.$estimateTemplate->view);
+        return PDF::loadView('app.pdf.estimate.'.$estimateTemplate);
     }
 
     public function getCompanyAddress()

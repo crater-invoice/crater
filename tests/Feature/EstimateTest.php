@@ -51,7 +51,7 @@ test('create estimate', function () {
         ->assertStatus(200);
 
     $this->assertDatabaseHas('estimates', [
-        'estimate_template_id' => $estimate['estimate_template_id'],
+        'template_name' => $estimate['template_name'],
         'estimate_number' => $estimate['estimate_number'],
         'discount_type' => $estimate['discount_type'],
         'discount_val' => $estimate['discount_val'],
@@ -97,7 +97,7 @@ test('update estimate', function () {
     $newEstimate = $response->decodeResponseJson()['estimate'];
 
     $this->assertDatabaseHas('estimates', [
-        'estimate_template_id' => $estimate2['estimate_template_id'],
+        'template_name' => $estimate2['template_name'],
         'estimate_number' => $estimate2['estimate_number'],
         'discount_type' => $estimate2['discount_type'],
         'discount_val' => $estimate2['discount_val'],

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Crater\Models\Estimate;
-use Crater\Models\EstimateTemplate;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -76,7 +75,7 @@ class EstimateFactory extends Factory
             'company_id' => User::where('role', 'super admin')->first()->company_id,
             'user_id' => User::factory()->create(['role' => 'customer'])->id,
             'status' => Estimate::STATUS_DRAFT,
-            'estimate_template_id' => EstimateTemplate::find(1) ?? EstimateTemplate::factory(),
+            'template_name' => 'estimate1',
             'sub_total' => $this->faker->randomDigitNotNull,
             'total' => $this->faker->randomDigitNotNull,
             'discount_type' => $this->faker->randomElement(['percentage', 'fixed']),

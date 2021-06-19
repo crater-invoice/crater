@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Crater\Models\Invoice;
-use Crater\Models\InvoiceTemplate;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -101,7 +100,7 @@ class InvoiceFactory extends Factory
             'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber('INV'),
             'reference_number' => Invoice::getNextInvoiceNumber('INV'),
             'user_id' => User::factory()->create(['role' => 'customer'])->id,
-            'invoice_template_id' => InvoiceTemplate::find(1) ?? InvoiceTemplate::factory(),
+            'template_name' => 'invoice1',
             'status' => Invoice::STATUS_DRAFT,
             'tax_per_item' => 'NO',
             'discount_per_item' => 'NO',

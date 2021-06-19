@@ -54,8 +54,8 @@ class EstimatesRequest extends FormRequest
             'tax' => [
                 'required',
             ],
-            'estimate_template_id' => [
-                'required',
+            'template_name' => [
+                'required'
             ],
             'items' => [
                 'required',

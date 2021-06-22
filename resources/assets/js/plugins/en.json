@@ -1099,7 +1099,7 @@
     },
     "req": {
       "system_req": "System Requirements",
-      "php_req_version": "Php (version {version} required)",
+      "php_req_version": "Minimum Php (version {version} required)",
       "check_req": "Check Requirements",
       "system_req_desc": "Crater has a few server requirements. Make sure that your server has the required php version and all the extensions mentioned below."
     },

@@ -32,19 +32,16 @@ class DatabaseConfigurationController extends Controller
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
 
-        $status = pcntl_fork();
-        pcntl_wait($status);
-
         $results = $this->environmentManager->saveDatabaseVariables($request);
 
         if (array_key_exists("success", $results)) {
+            Artisan::call('key:generate --force');
             Artisan::call('optimize:clear');
             Artisan::call('config:clear');
             Artisan::call('cache:clear');
             Artisan::call('storage:link');
             Artisan::call('migrate --seed --force');
         }
-
 
         return response()->json($results);
     }

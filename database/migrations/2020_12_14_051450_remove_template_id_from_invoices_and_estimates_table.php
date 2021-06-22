@@ -25,7 +25,6 @@ class RemoveTemplateIdFromInvoicesAndEstimatesTable extends Migration
             });
 
             Schema::table('invoices', function (Blueprint $table) {
-                $table->dropForeign(['invoice_template_id']);
                 $table->dropColumn('invoice_template_id');
             });
         }
@@ -40,7 +39,6 @@ class RemoveTemplateIdFromInvoicesAndEstimatesTable extends Migration
             });
 
             Schema::table('estimates', function (Blueprint $table) {
-                $table->dropForeign(['estimate_template_id']);
                 $table->dropColumn('estimate_template_id');
             });
         }

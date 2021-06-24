@@ -94,7 +94,7 @@ export default {
         database_name: null,
         app_url: window.location.origin,
       },
-      connections: ['sqlite', 'mysql', 'pgsql', 'sqlsrv'],
+      connections: ['sqlite', 'mysql', 'pgsql'],
     }
   },
   validations: {

@@ -19,14 +19,12 @@
 import Mysql from './database/MysqlDatabase'
 import Pgsql from './database/PgsqlDatabase'
 import Sqlite from './database/SqliteDatabase'
-import Sqlsrv from './database/SqlsrvDatabase'
 import { mapActions } from 'vuex'
 export default {
   components: {
     Mysql,
     Pgsql,
     Sqlite,
-    Sqlsrv,
   },
   data() {
     return {
@@ -36,7 +34,7 @@ export default {
       isLoading: false,
       isFetching: false,
       database_connection: 'mysql',
-      connections: ['sqlite', 'mysql', 'pgsql', 'sqlsrv'],
+      connections: ['sqlite', 'mysql', 'pgsql'],
     }
   },
   created() {
@@ -83,6 +81,16 @@ export default {
 
           return true
         } else if (response.data.error) {
+          if (response.data.requirement) {
+            this.showNotification({
+              type: 'error',
+              message: this.$t('wizard.errors.' + response.data.error, {
+                version: response.data.requirement.minimum,
+                name: this.database_connection,
+              }),
+            })
+            return
+          }
           this.showNotification({
             type: 'error',
             message: this.$t('wizard.errors.' + response.data.error),

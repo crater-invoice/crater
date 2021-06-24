@@ -150,7 +150,7 @@ export default {
         database_password: null,
         app_url: window.location.origin,
       },
-      connections: ['sqlite', 'mysql', 'pgsql', 'sqlsrv'],
+      connections: ['sqlite', 'mysql', 'pgsql'],
     }
   },
   validations: {

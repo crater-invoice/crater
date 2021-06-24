@@ -3,9 +3,27 @@
 return [
 
     /*
-    * Current version of the application.
+    * Minimum php version of the application.
     */
-    'version' => '4.0.0',
+    'min_php_version' => '7.4.0',
+
+    /*
+    * Minimum mysql version of the application.
+    */
+
+    'min_mysql_version' => '5.7.7',
+
+    /*
+    * Minimum pgsql version of the application.
+    */
+
+    'min_pgsql_version' => '9.2.0',
+
+    /*
+    * Minimum sqlite version of the application.
+    */
+
+    'min_sqlite_version' => '3.24.0',
 
     /*
     * List of languages supported by Crater.

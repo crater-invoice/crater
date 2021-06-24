@@ -1109,7 +1109,8 @@
       "database_variables_save_error": "Cannot write configuration to .env file. Please check its file permissions",
       "mail_variables_save_error": "Email configuration failed.",
       "connection_failed": "Database connection failed",
-      "database_should_be_empty": "Database should be empty"
+      "database_should_be_empty": "Database should be empty",
+      "minimum_version_requirement": "Minimum {name} version {version} required."
     },
     "success": {
       "mail_variables_save_successfully": "Email configured successfully",

@@ -78,6 +78,15 @@ class EnvironmentManager
         try {
             $this->checkDatabaseConnection($request);
 
+            $requirement = $this->checkVersionRequirements($request);
+
+            if ($requirement) {
+                return [
+                    'error' => 'minimum_version_requirement',
+                    'requirement' => $requirement,
+                ];
+            }
+
             if (\Schema::hasTable('users')) {
                 return [
                     'error' => 'database_should_be_empty',
@@ -135,6 +144,7 @@ class EnvironmentManager
         $connection = $request->database_connection;
 
         $settings = config("database.connections.$connection");
+        $settings = config("database.connections.$connection");
 
         $connectionArray = array_merge($settings, [
             'driver' => $connection,
@@ -159,6 +169,60 @@ class EnvironmentManager
         ]);
 
         return DB::connection()->getPdo();
+    }
+
+    /**
+     *
+     * @param DatabaseEnvironmentRequest $request
+     * @return bool
+     */
+    private function checkVersionRequirements(DatabaseEnvironmentRequest $request)
+    {
+        $connection = $request->database_connection;
+
+        $checker = new RequirementsChecker();
+
+        $phpSupportInfo = $checker->checkPHPVersion(
+            config('crater.min_php_version')
+        );
+
+        if (! $phpSupportInfo['supported']) {
+            return $phpSupportInfo;
+        }
+
+        $dbSupportInfo = [];
+
+        switch ($connection) {
+            case 'mysql':
+                $dbSupportInfo = $checker->checkMysqlVersion(
+                    config('crater.min_mysql_version')
+                );
+
+                break;
+
+            case 'pgsql':
+                $conn = pg_connect("host={$request->database_hostname} port={$request->database_port} dbname={$request->database_name} user={$request->database_username} password={$request->database_password}");
+                $dbSupportInfo = $checker->checkPgsqlVersion(
+                    $conn,
+                    config('crater.min_pgsql_version')
+                );
+
+                break;
+
+            case 'sqlite':
+                $dbSupportInfo = $checker->checkSqliteVersion(
+                    config('crater.min_sqlite_version')
+                );
+
+                break;
+
+        }
+
+        if (! $dbSupportInfo['supported']) {
+            return $dbSupportInfo;
+        }
+
+        return false;
     }
 
     /**

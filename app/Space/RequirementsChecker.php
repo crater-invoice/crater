@@ -2,6 +2,8 @@
 
 namespace Crater\Space;
 
+use SQLite3;
+
 class RequirementsChecker
 {
     /**
@@ -63,7 +65,7 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkPHPversion(string $minPhpVersion = null)
+    public function checkPHPVersion(string $minPhpVersion = null)
     {
         $minVersionPhp = $minPhpVersion;
         $currentPhpVersion = $this->getPhpVersionInfo();
@@ -112,5 +114,113 @@ class RequirementsChecker
     protected function getMinPhpVersion()
     {
         return $this->_minPhpVersion;
+    }
+
+    /**
+     * Check PHP version requirement.
+     *
+     * @return array
+     */
+    public function checkMysqlVersion(string $minMysqlVersion = null)
+    {
+        $minVersionMysql = $minMysqlVersion;
+        $currentMysqlVersion = $this->getMysqlVersionInfo();
+        $supported = false;
+
+        if (version_compare($currentMysqlVersion, $minVersionMysql) >= 0) {
+            $supported = true;
+        }
+
+        $phpStatus = [
+            'current' => $currentMysqlVersion,
+            'minimum' => $minVersionMysql,
+            'supported' => $supported,
+        ];
+
+        return $phpStatus;
+    }
+
+    /**
+     * Get current Mysql version information.
+     *
+     * @return string
+     */
+    private static function getMysqlVersionInfo()
+    {
+        $currentVersion = explode(' ', mysqli_get_client_info());
+
+        return $currentVersion[1];
+    }
+
+    /**
+     * Check Sqlite version requirement.
+     *
+     * @return array
+     */
+    public function checkSqliteVersion(string $minSqliteVersion = null)
+    {
+        $minVersionSqlite = $minSqliteVersion;
+        $currentSqliteVersion = $this->getSqliteVersionInfo();
+        $supported = false;
+
+        if (version_compare($currentSqliteVersion, $minVersionSqlite) >= 0) {
+            $supported = true;
+        }
+
+        $phpStatus = [
+            'current' => $currentSqliteVersion,
+            'minimum' => $minVersionSqlite,
+            'supported' => $supported,
+        ];
+
+        return $phpStatus;
+    }
+
+    /**
+     * Get current Sqlite version information.
+     *
+     * @return string
+     */
+    private static function getSqliteVersionInfo()
+    {
+        $currentVersion = SQLite3::version();
+
+        return $currentVersion['versionString'];
+    }
+
+    /**
+     * Check Pgsql version requirement.
+     *
+     * @return array
+     */
+    public function checkPgsqlVersion($conn, string $minPgsqlVersion = null)
+    {
+        $minVersionPgsql = $minPgsqlVersion;
+        $currentPgsqlVersion = $this->getPgsqlVersionInfo($conn);
+        $supported = false;
+
+        if (version_compare($currentPgsqlVersion, $minVersionPgsql) >= 0) {
+            $supported = true;
+        }
+
+        $phpStatus = [
+            'current' => $currentPgsqlVersion,
+            'minimum' => $minVersionPgsql,
+            'supported' => $supported,
+        ];
+
+        return $phpStatus;
+    }
+
+    /**
+     * Get current Pgsql version information.
+     *
+     * @return string
+     */
+    private static function getPgsqlVersionInfo($conn)
+    {
+        $currentVersion = pg_version($conn);
+
+        return $currentVersion['server'];
     }
 }

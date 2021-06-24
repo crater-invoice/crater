@@ -77,14 +77,6 @@ class DatabaseConfigurationController extends Controller
 
                 break;
 
-            case 'sqlsrv':
-                $databaseData = [
-                    'driver' => 'sqlsrv',
-                    'host' => '127.0.0.1',
-                    'port' => 1433,
-                ];
-
-                break;
         }
 
 

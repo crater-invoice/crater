@@ -3,7 +3,6 @@
 namespace Crater\Http\Controllers\V1\Estimate;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Models\EstimateTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

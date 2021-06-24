@@ -41,7 +41,7 @@ class CreateTemplateCommand extends Command
         $templateName = $this->argument('name');
         $type = $this->option('type');
 
-        if (!$type) {
+        if (! $type) {
             $type = $this->choice('Create a template for?', ['invoice', 'estimate']);
         }
 
@@ -56,7 +56,7 @@ class CreateTemplateCommand extends Command
 
         $path = resource_path("app/pdf/{$type}/{$templateName}.blade.php");
         $type = ucfirst($type);
-        $this->info("{$type} Template created successfully at ". $path);
+        $this->info("{$type} Template created successfully at ".$path);
 
         return 0;
     }

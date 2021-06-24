@@ -3,9 +3,7 @@
 namespace Crater\Http\Controllers\V1\Onboarding;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FinishController extends Controller
 {

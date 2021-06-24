@@ -2,12 +2,6 @@
 
 namespace Crater\Models;
 
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
-use Crater\Models\Tax;
-use Illuminate\Database\Eloquent\Model;
-use Crater\Models\Payment;
 use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -15,6 +9,7 @@ use Crater\Mail\SendInvoiceMail;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;

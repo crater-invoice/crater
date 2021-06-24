@@ -3,9 +3,9 @@
 namespace Crater\Http\Controllers\V1\Invoice;
 
 use Crater\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
 class InvoiceTemplatesController extends Controller
 {

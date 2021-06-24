@@ -15,10 +15,9 @@ class RemoveTemplateIdFromInvoicesAndEstimatesTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('invoices', 'invoice_template_id'))
-        {
+        if (Schema::hasColumn('invoices', 'invoice_template_id')) {
             $invoices = Invoice::all();
-            
+
             $invoices->map(function ($invoice) {
                 $invoice->template_name = 'invoice'.$invoice->invoice_template_id;
                 $invoice->save();
@@ -31,9 +30,8 @@ class RemoveTemplateIdFromInvoicesAndEstimatesTable extends Migration
                 $table->dropColumn('invoice_template_id');
             });
         }
-        
-        if (Schema::hasColumn('estimates', 'estimate_template_id'))
-        {
+
+        if (Schema::hasColumn('estimates', 'estimate_template_id')) {
             $estimates = Estimate::all();
 
             $estimates->map(function ($estimate) {
@@ -48,7 +46,7 @@ class RemoveTemplateIdFromInvoicesAndEstimatesTable extends Migration
                 $table->dropColumn('estimate_template_id');
             });
         }
-        
+
         Schema::dropIfExists('invoice_templates');
         Schema::dropIfExists('estimate_templates');
     }

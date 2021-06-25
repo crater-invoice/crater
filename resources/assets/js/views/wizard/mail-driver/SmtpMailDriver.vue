@@ -23,8 +23,8 @@
         required
       >
         <sw-input
-          :invalid="$v.mailConfigData.mail_host.$error"
           v-model.trim="mailConfigData.mail_host"
+          :invalid="$v.mailConfigData.mail_host.$error"
           type="text"
           name="mail_host"
           @input="$v.mailConfigData.mail_host.$touch()"
@@ -45,6 +45,8 @@
         <sw-input
           v-model.trim="mailConfigData.mail_password"
           :type="getInputType"
+          autocomplete="off"
+          data-lpignore="true"
           name="password"
         >
           <template v-slot:rightIcon>
@@ -70,8 +72,8 @@
         required
       >
         <sw-input
-          :invalid="$v.mailConfigData.mail_port.$error"
           v-model.trim="mailConfigData.mail_port"
+          :invalid="$v.mailConfigData.mail_port.$error"
           type="text"
           name="mail_port"
           @input="$v.mailConfigData.mail_port.$touch()"
@@ -101,8 +103,8 @@
         required
       >
         <sw-input
-          :invalid="$v.mailConfigData.from_mail.$error"
           v-model.trim="mailConfigData.from_mail"
+          :invalid="$v.mailConfigData.from_mail.$error"
           type="text"
           name="from_mail"
           @input="$v.mailConfigData.from_mail.$touch()"
@@ -115,8 +117,8 @@
         required
       >
         <sw-input
-          :invalid="$v.mailConfigData.from_name.$error"
           v-model.trim="mailConfigData.from_name"
+          :invalid="$v.mailConfigData.from_name.$error"
           type="text"
           name="from_name"
           @input="$v.mailConfigData.from_name.$touch()"

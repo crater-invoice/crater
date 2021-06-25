@@ -6,6 +6,7 @@ use Crater\Http\Requests\DatabaseEnvironmentRequest;
 use Crater\Http\Requests\DiskEnvironmentRequest;
 use Crater\Http\Requests\DomainEnvironmentRequest;
 use Crater\Http\Requests\MailEnvironmentRequest;
+use Crater\Http\Requests\PaymentSettingsRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -76,9 +77,9 @@ class EnvironmentManager
         }
 
         try {
-            $this->checkDatabaseConnection($request);
+            $conn = $this->checkDatabaseConnection($request);
 
-            $requirement = $this->checkVersionRequirements($request);
+            $requirement = $this->checkVersionRequirements($request, $conn);
 
             if ($requirement) {
                 return [
@@ -176,7 +177,7 @@ class EnvironmentManager
      * @param DatabaseEnvironmentRequest $request
      * @return bool
      */
-    private function checkVersionRequirements(DatabaseEnvironmentRequest $request)
+    private function checkVersionRequirements(DatabaseEnvironmentRequest $request, $conn)
     {
         $connection = $request->database_connection;
 
@@ -195,6 +196,7 @@ class EnvironmentManager
         switch ($connection) {
             case 'mysql':
                 $dbSupportInfo = $checker->checkMysqlVersion(
+                    $conn,
                     config('crater.min_mysql_version')
                 );
 

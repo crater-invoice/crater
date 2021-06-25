@@ -2,6 +2,7 @@
 
 namespace Crater\Space;
 
+use PDO;
 use SQLite3;
 
 class RequirementsChecker
@@ -121,10 +122,10 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkMysqlVersion(string $minMysqlVersion = null)
+    public function checkMysqlVersion($conn, string $minMysqlVersion = null)
     {
         $minVersionMysql = $minMysqlVersion;
-        $currentMysqlVersion = $this->getMysqlVersionInfo();
+        $currentMysqlVersion = $this->getMysqlVersionInfo($conn);
         $supported = false;
 
         if (version_compare($currentMysqlVersion, $minVersionMysql) >= 0) {
@@ -145,11 +146,11 @@ class RequirementsChecker
      *
      * @return string
      */
-    private static function getMysqlVersionInfo()
+    private static function getMysqlVersionInfo($pdo)
     {
-        $currentVersion = explode(' ', mysqli_get_client_info());
+        $currentVersion = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
 
-        return $currentVersion[1];
+        return $currentVersion;
     }
 
     /**

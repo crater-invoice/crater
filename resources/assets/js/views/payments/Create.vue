@@ -176,7 +176,7 @@
 
         <sw-popup
           ref="notePopup"
-          class="my-6 text-sm font-semibold leading-5 text-primary-400"
+          class="z-10 my-6 text-sm font-semibold leading-5 text-primary-400"
         >
           <div slot="activator" class="float-right mt-1">
             + {{ $t('general.insert_note') }}

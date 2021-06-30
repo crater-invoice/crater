@@ -257,3 +257,31 @@ test('clone invoice', function () {
             'success' => true,
         ]);
 });
+
+test('create invoice with negative tax', function () {
+    $invoice = Invoice::factory()
+        ->raw([
+            'taxes' => [Tax::factory()->raw([
+                'percent' => -9.99
+            ])],
+            'items' => [InvoiceItem::factory()->raw()],
+        ]);
+
+    $response = postJson('api/v1/invoices', $invoice);
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('invoices', [
+        'invoice_number' => $invoice['invoice_number'],
+        'sub_total' => $invoice['sub_total'],
+        'total' => $invoice['total'],
+        'tax' => $invoice['tax'],
+        'discount' => $invoice['discount'],
+        'user_id' => $invoice['user_id'],
+        'invoice_template_id' => $invoice['invoice_template_id'],
+    ]);
+
+    $this->assertDatabaseHas('invoice_items', $invoice['items'][0]);
+
+    $this->assertDatabaseHas('taxes', $invoice['taxes'][0]);
+});

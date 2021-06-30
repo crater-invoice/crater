@@ -92,3 +92,15 @@ test('delete tax type', function () {
 
     $this->assertDeleted($taxType);
 });
+
+
+test('create negative tax type', function () {
+    $taxType = TaxType::factory()->raw([
+        'percent' => -9.99
+    ]);
+
+    postJson('api/v1/tax-types', $taxType)
+        ->assertOk();
+
+    $this->assertDatabaseHas('tax_types', $taxType);
+});

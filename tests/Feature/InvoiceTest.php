@@ -278,7 +278,6 @@ test('create invoice with negative tax', function () {
         'tax' => $invoice['tax'],
         'discount' => $invoice['discount'],
         'user_id' => $invoice['user_id'],
-        'invoice_template_id' => $invoice['invoice_template_id'],
     ]);
 
     $this->assertDatabaseHas('invoice_items', $invoice['items'][0]);

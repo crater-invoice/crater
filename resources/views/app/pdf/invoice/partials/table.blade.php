@@ -79,16 +79,16 @@
         </tr>
 
         @if ($invoice->tax_per_item === 'YES')
-            @for ($i = 0; $i < count($labels); $i++)
+            @foreach ($taxes as $tax)
                 <tr>
                     <td class="border-0 total-table-attribute-label">
-                        {{$labels[$i]}}
+                        {{$tax->name.' ('.$tax->percent.'%)'}}
                     </td>
                     <td class="py-2 border-0 item-cell total-table-attribute-value">
-                        {!! format_money_pdf($taxes[$i], $invoice->user->currency) !!}
+                        {!! format_money_pdf($tax->amount, $invoice->user->currency) !!}
                     </td>
                 </tr>
-            @endfor
+            @endforeach
         @else
             @foreach ($invoice->taxes as $tax)
                 <tr>

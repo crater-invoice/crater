@@ -395,32 +395,21 @@ class Estimate extends Model implements HasMedia
 
     public function getPDFData()
     {
-        $taxTypes = [];
-        $taxes = [];
-        $labels = [];
+        $taxes = collect();
 
         if ($this->tax_per_item === 'YES') {
             foreach ($this->items as $item) {
                 foreach ($item->taxes as $tax) {
-                    if (! in_array($tax->name, $taxTypes)) {
-                        array_push($taxTypes, $tax->name);
-                        array_push($labels, $tax->name.' ('.$tax->percent.'%)');
+                    $found = $taxes->filter(function ($item) use ($tax) {
+                        return $item->tax_type_id == $tax->tax_type_id;
+                    })->first();
+
+                    if ($found) {
+                        $found->amount += $tax->amount;
+                    } else {
+                        $taxes->push($tax);
                     }
                 }
-            }
-
-            foreach ($taxTypes as $taxType) {
-                $total = 0;
-
-                foreach ($this->items as $item) {
-                    foreach ($item->taxes as $tax) {
-                        if ($tax->name == $taxType) {
-                            $total += $tax->amount;
-                        }
-                    }
-                }
-
-                array_push($taxes, $total);
             }
         }
 
@@ -440,7 +429,6 @@ class Estimate extends Model implements HasMedia
             'shipping_address' => $this->getCustomerShippingAddress(),
             'billing_address' => $this->getCustomerBillingAddress(),
             'notes' => $this->getNotes(),
-            'labels' => $labels,
             'taxes' => $taxes,
         ]);
 

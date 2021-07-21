@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Định lượng",
   "pdf_price_label": "Giá bán",
   "pdf_discount_label": "Giảm giá",
+  "pdf_tax_label": "Thuế",
   "pdf_amount_label": "Số tiền",
   "pdf_subtotal": "Tổng phụ",
   "pdf_total": "Toàn bộ",

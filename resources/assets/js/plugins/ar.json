@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "الكمية",
   "pdf_price_label": "السعر",
   "pdf_discount_label": "الخصم",
+  "pdf_tax_label": "ضريبة",
   "pdf_amount_label": "المبلغ المطلوب",
   "pdf_subtotal": "المجموع الفرعي",
   "pdf_total": "الإجمالي",

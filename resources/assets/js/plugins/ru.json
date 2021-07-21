@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Кол-во",
   "pdf_price_label": "Цена",
   "pdf_discount_label": "Скидка",
+  "pdf_tax_label": "Налог",
   "pdf_amount_label": "Сумма",
   "pdf_subtotal": "В сумме",
   "pdf_total": "Итого",

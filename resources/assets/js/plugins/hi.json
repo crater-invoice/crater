@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Quantity",
   "pdf_price_label": "Price",
   "pdf_discount_label": "Discount",
+  "pdf_tax_label": "कर",
   "pdf_amount_label": "Amount",
   "pdf_subtotal": "Subtotal",
   "pdf_total": "Total",

@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Daudzums",
   "pdf_price_label": "Cena",
   "pdf_discount_label": "Atlaide",
+  "pdf_tax_label": "Nodoklis",
   "pdf_amount_label": "Summa",
   "pdf_subtotal": "Starpsumma",
   "pdf_total": "Kopā",

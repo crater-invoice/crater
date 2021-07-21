@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Quantità",
   "pdf_price_label": "Prezzo",
   "pdf_discount_label": "Sconto",
+  "pdf_tax_label": "Imposta",
   "pdf_amount_label": "Ammontare",
   "pdf_subtotal": "Parziale",
   "pdf_total": "Totale",

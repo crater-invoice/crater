@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Antal",
   "pdf_price_label": "Kostnad",
   "pdf_discount_label": "Rabatt",
+  "pdf_tax_label": "Moms",
   "pdf_amount_label": "Belopp",
   "pdf_subtotal": "Delsumma",
   "pdf_total": "Summa",

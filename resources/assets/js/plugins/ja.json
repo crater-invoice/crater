@@ -1163,6 +1163,7 @@
     "pdf_quantity_label": "量",
     "pdf_price_label": "価格",
     "pdf_discount_label": "ディスカウント",
+  "pdf_tax_label": "税金",
     "pdf_amount_label": "量",
     "pdf_subtotal": "小計",
     "pdf_total": "合計",

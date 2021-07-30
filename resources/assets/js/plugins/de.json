@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Menge",
   "pdf_price_label": "Preis",
   "pdf_discount_label": "Rabatt",
+  "pdf_tax_label": "Steuer",
   "pdf_amount_label": "Summe",
   "pdf_subtotal": "Zwischensumme",
   "pdf_total": "Gesamt",

@@ -1163,6 +1163,7 @@
     "pdf_quantity_label": "수량",
     "pdf_price_label": "가격",
     "pdf_discount_label": "할인",
+  "pdf_tax_label": "세",
     "pdf_amount_label": "양",
     "pdf_subtotal": "소계",
     "pdf_total": "합계",

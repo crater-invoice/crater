@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Määrä",
   "pdf_price_label": "Hinta",
   "pdf_discount_label": "Alennus",
+  "pdf_tax_label": "ALV",
   "pdf_amount_label": "Yhteensä veroton",
   "pdf_subtotal": "Välisumma",
   "pdf_total": "Yhteensä",

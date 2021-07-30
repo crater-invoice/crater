@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Aantal stuks",
   "pdf_price_label": "Prijs",
   "pdf_discount_label": "Korting",
+  "pdf_tax_label": "Belasting",
   "pdf_amount_label": "Bedrag",
   "pdf_subtotal": "Subtotaal",
   "pdf_total": "Totaal",

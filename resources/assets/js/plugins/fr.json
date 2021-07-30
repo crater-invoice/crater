@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Quantité",
   "pdf_price_label": "Prix",
   "pdf_discount_label": "Remise",
+  "pdf_tax_label": "Taxe",
   "pdf_amount_label": "Montant",
   "pdf_subtotal": "Total HT",
   "pdf_total": "Total TTC",

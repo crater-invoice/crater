@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Količina",
   "pdf_price_label": "Cena",
   "pdf_discount_label": "Popust",
+  "pdf_tax_label": "Porez",
   "pdf_amount_label": "Iznos",
   "pdf_subtotal": "Osnovica za obračun PDV-a",
   "pdf_total": "Ukupan iznos",

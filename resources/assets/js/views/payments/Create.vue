@@ -121,7 +121,11 @@
                 v-model="amount"
                 :currency="customerCurrency"
                 :invalid="$v.formData.amount.$error"
-                class="relative w-full focus:border focus:border-solid focus:border-primary-500"
+                class="
+                  relative
+                  w-full
+                  focus:border focus:border-solid focus:border-primary-500
+                "
                 @input="$v.formData.amount.$touch()"
               />
             </div>
@@ -141,7 +145,18 @@
               <div slot="afterList">
                 <button
                   type="button"
-                  class="flex items-center justify-center w-full px-2 py-2 bg-gray-200 border-none outline-none text-primary-400"
+                  class="
+                    flex
+                    items-center
+                    justify-center
+                    w-full
+                    px-2
+                    py-2
+                    bg-gray-200
+                    border-none
+                    outline-none
+                    text-primary-400
+                  "
                   @click="addPaymentMode"
                 >
                   <shopping-cart-icon class="h-5 mr-3 text-primary-400" />
@@ -524,7 +539,7 @@ export default {
     async fetchCustomerInvoices(userId) {
       let data = {
         customer_id: userId,
-        status: 'UNPAID',
+        status: 'DUE',
       }
       let response = await this.fetchInvoices(data)
       this.invoiceList = response.data.invoices.data

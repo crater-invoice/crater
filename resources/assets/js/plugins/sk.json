@@ -1167,6 +1167,7 @@
   "pdf_quantity_label": "Počet",
   "pdf_price_label": "Cena",
   "pdf_discount_label": "Zľava",
+  "pdf_tax_label": "Daň",
   "pdf_amount_label": "Celkom",
   "pdf_subtotal": "Medzisúčet",
   "pdf_total": "Súčet",

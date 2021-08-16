@@ -22,7 +22,7 @@ class DownloadReceiptController extends Controller
             if ($media) {
                 $imagePath = $media->getPath();
                 $response = \Response::download($imagePath, $media->file_name);
-                ob_end_clean();
+                if (ob_get_contents()) ob_end_clean();
 
                 return $response;
             }

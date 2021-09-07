@@ -58,6 +58,7 @@ class DashboardController extends Controller
                     'invoice_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
                 )
+                ->where('status', '!=', Invoice::STATUS_DRAFT)
                 ->whereCompany($request->header('company'))
                 ->sum('total')
             );
@@ -94,6 +95,7 @@ class DashboardController extends Controller
         $start->subMonth()->endOfMonth();
 
         $salesTotal = Invoice::whereCompany($request->header('company'))
+            ->where('status', '!=', Invoice::STATUS_DRAFT)
             ->whereBetween(
                 'invoice_date',
                 [$startDate->format('Y-m-d'), $start->format('Y-m-d')]
@@ -121,11 +123,21 @@ class DashboardController extends Controller
             'netProfits' => $netProfits,
         ];
 
-        $customersCount = User::customer()->whereCompany($request->header('company'))->get()->count();
-        $invoicesCount = Invoice::whereCompany($request->header('company'))->get()->count();
-        $estimatesCount = Estimate::whereCompany($request->header('company'))->get()->count();
-        $totalDueAmount = Invoice::whereCompany($request->header('company'))->sum('due_amount');
-        $dueInvoices = Invoice::with('user')->whereCompany($request->header('company'))->where('due_amount', '>', 0)->take(5)->latest()->get();
+        $customersCount = User::customer()->whereCompany($request->header('company'))->count();
+        $invoicesCount = Invoice::whereCompany($request->header('company'))
+            ->where('status', '!=', Invoice::STATUS_DRAFT)
+            ->count();
+        $estimatesCount = Estimate::whereCompany($request->header('company'))->count();
+        $totalDueAmount = Invoice::whereCompany($request->header('company'))
+            ->where('status', '!=', Invoice::STATUS_DRAFT)
+            ->sum('due_amount');
+        $dueInvoices = Invoice::with('user')
+            ->whereCompany($request->header('company'))
+            ->where('status', '!=', Invoice::STATUS_DRAFT)
+            ->where('due_amount', '>', 0)
+            ->take(5)
+            ->latest()
+            ->get();
         $estimates = Estimate::with('user')->whereCompany($request->header('company'))->take(5)->latest()->get();
 
         return response()->json([

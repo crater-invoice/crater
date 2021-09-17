@@ -820,7 +820,7 @@ export default {
 
               this.discountPerItem = res1.data.invoice.discount_per_item
               this.selectedCurrency = this.defaultCurrency
-              this.invoiceNumAttribute = res1.data.nextInvoiceSerialNumber
+              this.invoiceNumAttribute = res1.data.invoiceSerialNumber
               this.taxPerItem = res1.data.invoice.tax_per_item
               let fields = res1.data.invoice.fields
 

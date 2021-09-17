@@ -129,7 +129,7 @@
                   size="sm"
                   type="radio"
                   name="filter"
-                  value="invoice_number"
+                  value="sequence_number"
                   @change="onSearch"
                 />
               </sw-input-group>

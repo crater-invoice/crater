@@ -321,8 +321,8 @@ class Payment extends Model implements HasMedia
         }
 
         if ($filters->get('orderByField') || $filters->get('orderBy')) {
-            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'payment_number';
-            $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'asc';
+            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'sequence_number';
+            $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'desc';
             $query->whereOrder($field, $orderBy);
         }
     }

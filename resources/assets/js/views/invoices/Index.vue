@@ -408,7 +408,7 @@ export default {
     return {
       showFilters: false,
       currency: null,
-
+      awaitingSearch: false,
       status: [
         {
           label: 'Status',
@@ -648,7 +648,7 @@ export default {
         from_date: this.filters.from_date,
         to_date: this.filters.to_date,
         invoice_number: this.filters.invoice_number,
-        orderByField: sort.fieldName || 'created_at',
+        orderByField: sort.fieldName || 'sequence_number',
         orderBy: sort.order || 'desc',
         page,
       }

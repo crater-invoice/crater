@@ -24,6 +24,7 @@ class CloneInvoiceController extends Controller
             'invoice_date' => $date->format('Y-m-d'),
             'due_date' => $date->format('Y-m-d'),
             'invoice_number' => $invoice->getNextInvoiceNumber(),
+            'sequence_number' => $invoice::getNextInvoiceSequenceNumber(),
             'reference_number' => $invoice->reference_number,
             'user_id' => $invoice->user_id,
             'company_id' => $request->header('company'),

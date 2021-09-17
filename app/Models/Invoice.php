@@ -271,8 +271,8 @@ class Invoice extends Model implements HasMedia
         }
 
         if ($filters->get('orderByField') || $filters->get('orderBy')) {
-            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'invoice_number';
-            $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'asc';
+            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'sequence_number';
+            $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'desc';
             $query->whereOrder($field, $orderBy);
         }
     }
@@ -344,7 +344,6 @@ class Invoice extends Model implements HasMedia
 
     public function updateInvoice($request)
     {
-        var_dump('update');
         $data = $request->except('items');
         $oldAmount = $this->total;
 

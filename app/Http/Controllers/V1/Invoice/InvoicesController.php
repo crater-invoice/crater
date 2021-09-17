@@ -85,7 +85,7 @@ class InvoicesController extends Controller
 
         $siteData = [
             'invoice' => $invoice,
-            'nextInvoiceSerialNumber' => $invoice->getNextInvoiceNumber(),
+            'invoiceSerialNumber' => $invoice->invoice_number,
         ];
 
         return response()->json($siteData);

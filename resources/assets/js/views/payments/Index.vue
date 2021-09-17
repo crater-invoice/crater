@@ -389,7 +389,7 @@ export default {
             ? this.filters.payment_mode.id
             : '',
         payment_number: this.filters.payment_number,
-        orderByField: sort.fieldName || 'created_at',
+        orderByField: sort.fieldName || 'sequence_number',
         orderBy: sort.order || 'desc',
         page,
       }

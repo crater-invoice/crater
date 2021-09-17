@@ -395,7 +395,7 @@ export default {
             ? this.filters.to_date
             : this.filters.to_date,
 
-        orderByField: sort.fieldName || 'created_at',
+        orderByField: sort.fieldName || 'sequence_number',
 
         orderBy: sort.order || 'desc',
 

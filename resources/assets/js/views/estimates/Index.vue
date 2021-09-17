@@ -497,7 +497,7 @@ export default {
         from_date: this.filters.from_date,
         to_date: this.filters.to_date,
         estimate_number: this.filters.estimate_number,
-        orderByField: sort.fieldName || 'created_at',
+        orderByField: sort.fieldName || 'sequence_number',
         orderBy: sort.order || 'desc',
         page,
       }

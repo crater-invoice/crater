@@ -128,9 +128,6 @@ import { mapActions } from 'vuex'
 const {
   required,
   maxLength,
-  minValue,
-  alpha,
-  numeric,
 } = require('vuelidate/lib/validators')
 
 export default {
@@ -199,13 +196,13 @@ export default {
       estimate_format: {
         required,
         maxLength: maxLength(255),
-        alpha,
       },
     },
   },
 
   watch: {
     settings(val) {
+      console.log(val);
       this.estimates.estimate_format = val ? val.estimate_format : ''
 
       this.estimates.estimate_mail_body = val ? val.estimate_mail_body : ''

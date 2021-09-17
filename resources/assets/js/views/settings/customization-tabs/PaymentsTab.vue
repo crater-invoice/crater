@@ -14,19 +14,6 @@
       </sw-input-group>
 
       <sw-input-group
-        :label="$t('settings.customization.payments.payment_number_length')"
-        :error="paymentnumberLengthError"
-        class="mt-6 mb-4"
-      >
-        <sw-input
-          v-model="payments.payment_number_length"
-          :invalid="$v.payments.payment_number_length.$error"
-          type="number"
-          style="max-width: 60px"
-        />
-      </sw-input-group>
-
-      <sw-input-group
         :label="
           $t('settings.customization.payments.default_payment_email_body')
         "
@@ -132,7 +119,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-const { required, maxLength, minValue, alpha, numeric } = require('vuelidate/lib/validators')
+const { required, maxLength } = require('vuelidate/lib/validators')
 
 export default {
   props: {
@@ -150,7 +137,6 @@ export default {
 
       payments: {
         payment_format: null,
-        payment_number_length: null,
         payment_mail_body: null,
         from_customer_address_format: null,
         company_address_format: null,
@@ -201,10 +187,7 @@ export default {
   watch: {
     settings(val) {
       this.payments.payment_format = val ? val.payment_format : ''
-      this.payments.payment_number_length = val ? val.payment_number_length : ''
-
       this.payments.payment_mail_body = val ? val.payment_mail_body : ''
-
       this.payments.company_address_format = val
         ? val.payment_company_address_format
         : ''
@@ -271,7 +254,6 @@ export default {
       let data = {
         settings: {
           payment_format: this.payments.payment_format,
-          payment_number_length: this.payments.payment_number_length,
           payment_mail_body: this.payments.payment_mail_body,
           payment_company_address_format: this.payments.company_address_format,
           payment_from_customer_address_format: this.payments

@@ -49,6 +49,19 @@
       <sw-card v-else>
         <div class="grid gap-6 grid-col-1 md:grid-cols-2">
           <sw-input-group
+            :label="$t('payments.payment_number')"
+            :error="paymentNumError"
+            required
+          >
+            <sw-label-editable
+              :invalid="$v.paymentNumAttribute.$error"
+              v-model.trim="paymentNumAttribute"
+              class="mt-1"
+              @input="$v.paymentNumAttribute.$touch()"
+            />
+          </sw-input-group>
+
+          <sw-input-group
             :label="$t('payments.date')"
             :error="DateError"
             required
@@ -60,20 +73,6 @@
               class="mt-1"
               calendar-button-icon="calendar"
               @input="$v.formData.payment_date.$touch()"
-            />
-          </sw-input-group>
-
-          <sw-input-group
-            :label="$t('payments.payment_number')"
-            :error="paymentNumError"
-            required
-          >
-            <sw-input
-              :prefix="`${paymentPrefix} - `"
-              :invalid="$v.paymentNumAttribute.$error"
-              v-model.trim="paymentNumAttribute"
-              class="mt-1"
-              @input="$v.paymentNumAttribute.$touch()"
             />
           </sw-input-group>
 
@@ -263,7 +262,6 @@ export default {
       maxPayableAmount: Number.MAX_SAFE_INTEGER,
       isSettingInitialData: true,
       paymentNumAttribute: null,
-      paymentPrefix: '',
       PaymentFields: [
         'customer',
         'company',
@@ -289,7 +287,6 @@ export default {
       },
       paymentNumAttribute: {
         required,
-        numeric,
       },
     }
   },
@@ -376,10 +373,6 @@ export default {
       if (!this.$v.paymentNumAttribute.required) {
         return this.$tc('validation.required')
       }
-
-      if (!this.$v.paymentNumAttribute.numeric) {
-        return this.$tc('validation.numbers_only')
-      }
     },
   },
   watch: {
@@ -462,11 +455,8 @@ export default {
       if (response.data && response.data.payment_auto_generate === 'YES') {
         if (response1.data) {
           this.paymentNumAttribute = response1.data.nextNumber
-          this.paymentPrefix = response1.data.prefix
           return true
         }
-      } else {
-        this.paymentPrefix = response1.data.prefix
       }
     },
 
@@ -481,8 +471,7 @@ export default {
           'YYYY-MM-DD'
         ).toString()
         this.formData.amount = parseFloat(response.data.payment.amount)
-        this.paymentPrefix = response.data.payment_prefix
-        this.paymentNumAttribute = response.data.nextPaymentNumber
+        this.paymentNumAttribute = response.data.paymentNumber
         this.formData.payment_method = response.data.payment.payment_method
         if (response.data.payment.invoice !== null) {
           this.maxPayableAmount =
@@ -552,8 +541,7 @@ export default {
         return true
       }
 
-      this.formData.payment_number =
-        this.paymentPrefix + '-' + this.paymentNumAttribute
+      this.formData.payment_number = this.paymentNumAttribute
 
       if (this.isEdit) {
         let data = {

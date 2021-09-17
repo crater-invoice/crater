@@ -66,7 +66,7 @@ class DefaultSettingsSeeder extends Seeder
             'save_pdf_to_disk' => 'NO',
             'invoice_format' => '{{SERIES:INV}}{{DELIMITER:-}}{{SEQUENCE:6}}',
             'estimate_format' => '{{SERIES:EST}}{{DELIMITER:-}}{{SEQUENCE:6}}',
-            'receipt_format' => '{{SERIES:PAY}}{{DELIMITER:-}}{{SEQUENCE:6}}',
+            'payment_format' => '{{SERIES:PAY}}{{DELIMITER:-}}{{SEQUENCE:6}}',
         ];
 
         CompanySetting::setSettings($settings, $user->company_id);

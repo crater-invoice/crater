@@ -2,16 +2,14 @@
   <div>
     <form action="" class="mt-6" @submit.prevent="updatePaymentSetting">
       <sw-input-group
-        :label="$t('settings.customization.payments.payment_prefix')"
-        :error="paymentPrefixError"
+        :label="$t('settings.customization.payments.payment_format')"
+        :error="paymentFormatError"
       >
-        <sw-input
-          v-model="payments.payment_prefix"
-          :invalid="$v.payments.payment_prefix.$error"
+        <sw-label-editable
+          v-model="payments.payment_format"
+          :invalid="$v.payments.payment_format.$error"
           class="mt-2"
-          style="max-width: 30%"
-          @input="$v.payments.payment_prefix.$touch()"
-          @keyup="changeToUppercase('PAYMENTS')"
+          @input="$v.payments.payment_format.$touch()"
         />
       </sw-input-group>
 
@@ -151,7 +149,7 @@ export default {
       paymentAsAttachment: false,
 
       payments: {
-        payment_prefix: null,
+        payment_format: null,
         payment_number_length: null,
         payment_mail_body: null,
         from_customer_address_format: null,
@@ -176,60 +174,33 @@ export default {
     }
   },
   computed: {
-    paymentPrefixError() {
-      if (!this.$v.payments.payment_prefix.$error) {
+    paymentFormatError() {
+      if (!this.$v.payments.payment_format.$error) {
         return ''
       }
 
-      if (!this.$v.payments.payment_prefix.required) {
+      if (!this.$v.payments.payment_format.required) {
         return this.$t('validation.required')
       }
 
-      if (!this.$v.payments.payment_prefix.maxLength) {
-        return this.$t('validation.prefix_maxlength')
-      }
-
-      if (!this.$v.payments.payment_prefix.alpha) {
-        return this.$t('validation.characters_only')
-      }
-    },
-    paymentnumberLengthError() {
-      if (!this.$v.payments.payment_number_length.$error) {
-        return ''
-      }
-
-      if (!this.$v.payments.payment_number_length.required) {
-        return this.$t('validation.required')
-      }
-
-      if (!this.$v.payments.payment_number_length.minValue) {
-        return this.$t('validation.number_length_minvalue')
-      }
-
-      if (!this.$v.payments.payment_number_length.numeric) {
-        return this.$t('validation.numbers_only')
+      if (!this.$v.payments.payment_format.maxLength) {
+        return this.$t('validation.format_maxlength')
       }
     },
   },
 
   validations: {
     payments: {
-      payment_prefix: {
+      payment_format: {
         required,
-        maxLength: maxLength(5),
-        alpha,
-      },
-      payment_number_length: {
-        required,
-        minValue: minValue(1),
-        numeric
-      },
+        maxLength: maxLength(255),
+      }
     },
   },
 
   watch: {
     settings(val) {
-      this.payments.payment_prefix = val ? val.payment_prefix : ''
+      this.payments.payment_format = val ? val.payment_format : ''
       this.payments.payment_number_length = val ? val.payment_number_length : ''
 
       this.payments.payment_mail_body = val ? val.payment_mail_body : ''
@@ -269,7 +240,7 @@ export default {
 
     changeToUppercase(currentTab) {
       if (currentTab === 'PAYMENTS') {
-        this.payments.payment_prefix = this.payments.payment_prefix.toUpperCase()
+        this.payments.payment_format = this.payments.payment_format.toUpperCase()
         return true
       }
     },
@@ -299,7 +270,7 @@ export default {
 
       let data = {
         settings: {
-          payment_prefix: this.payments.payment_prefix,
+          payment_format: this.payments.payment_format,
           payment_number_length: this.payments.payment_number_length,
           payment_mail_body: this.payments.payment_mail_body,
           payment_company_address_format: this.payments.company_address_format,

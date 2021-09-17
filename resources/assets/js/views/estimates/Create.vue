@@ -820,7 +820,7 @@ export default {
               this.taxPerItem = res1.data.estimate.tax_per_item
               this.selectedCurrency = this.defaultCurrency
               this.estimateTemplates = res1.data.estimate.estimateTemplates
-              this.estimateNumAttribute = res1.data.nextEstimateNumber
+              this.estimateNumAttribute = res1.data.estimateNumber
               let fields = res1.data.estimate.fields
 
               if (res2.data) {

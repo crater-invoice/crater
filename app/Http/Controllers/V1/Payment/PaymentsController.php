@@ -69,8 +69,7 @@ class PaymentsController extends Controller
         ]);
 
         return response()->json([
-            'nextPaymentNumber' => $payment->getPaymentNumAttribute(),
-            'payment_prefix' => $payment->getPaymentPrefixAttribute(),
+            'paymentNumber' => $payment->payment_number,
             'payment' => $payment,
         ]);
     }

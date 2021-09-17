@@ -22,7 +22,7 @@ class AddSequenceColumn extends Migration
     const NEW_SETTINGS_FIELDS = [
         'invoice_format' => '{{SERIES:INV}}{{DELIMITER:-}}{{SEQUENCE:6}}',
         'estimate_format' => '{{SERIES:EST}}{{DELIMITER:-}}{{SEQUENCE:6}}',
-        'receipt_format' => '{{SERIES:PAY}}{{DELIMITER:-}}{{SEQUENCE:6}}',
+        'payment_format' => '{{SERIES:PAY}}{{DELIMITER:-}}{{SEQUENCE:6}}',
     ];
 
     /**

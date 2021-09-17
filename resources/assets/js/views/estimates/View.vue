@@ -111,7 +111,7 @@
                   id="filter_estimate_number"
                   v-model="searchData.orderByField"
                   :label="$t('estimates.estimate_number')"
-                  value="estimate_number"
+                  value="sequence_number"
                   size="sm"
                   name="filter"
                   @change="onSearched"

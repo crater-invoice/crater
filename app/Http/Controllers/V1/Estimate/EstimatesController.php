@@ -76,7 +76,7 @@ class EstimatesController extends Controller
 
         return response()->json([
             'estimate' => $estimate,
-            'nextEstimateNumber' => $estimate->getNextEstimateNumber(),
+            'estimateNumber' => $estimate->estimate_number,
         ]);
     }
 

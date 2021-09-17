@@ -222,7 +222,7 @@
         <sw-table-column
           :sortable="true"
           :label="$tc('estimates.estimate', 1)"
-          show="estimate_number"
+          show="sequence_number"
         >
           <template slot-scope="row">
             <span>{{ $tc('estimates.estimate', 1) }}</span>

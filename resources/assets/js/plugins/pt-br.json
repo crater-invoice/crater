@@ -691,30 +691,27 @@
       "invoices": {
         "title": "Faturas",
         "notes": "Notas",
-        "invoice_prefix": "Fatura Prefixo",
         "invoice_settings": "Configrações da Fatura",
+        "invoice_format": "Invoice format",
         "autogenerate_invoice_number": "Gerar automaticamente o número da Fatura",
         "invoice_setting_description": "Desative isso, se você não deseja gerar automaticamente números da Fatura sempre que criar uma nova.",
-        "enter_invoice_prefix": "Digite o prefixo da Fatura",
         "terms_and_conditions": "Termos e Condições",
         "invoice_setting_updated": "Configuração da Fatura atualizada com sucesso"
       },
       "estimates": {
         "title": "Orçamentos",
-        "estimate_prefix": "Orçamento Prefixo",
         "estimate_settings": "Configurações do Orçamento",
+        "estimate_format": "Estimate format",
         "autogenerate_estimate_number": "Gerar automaticamente o número do Orçamento",
         "estimate_setting_description": "Desative isso, se você não deseja gerar automaticamente números do Orçamento sempre que criar um novo.",
-        "enter_estimate_prefix": "Digite o prefixo do Orçamento",
         "estimate_setting_updated": "Configuração do Orçamento atualizada com sucesso"
       },
       "payments": {
         "title": "Pagamentos",
-        "payment_prefix": "Pagamento Prefixo",
         "payment_settings": "Configurações de Pagamento",
+        "payment_format": "Payment format",
         "autogenerate_payment_number": "Gerar automaticamente número do Pagamento",
         "payment_setting_description": "Desative isso, se você não deseja gerar automaticamente números do Pagamento sempre que criar um novo.",
-        "enter_payment_prefix": "Digite o Prefixo do Pagamento",
         "payment_setting_updated": "Configurações de Pagamento atualizada com sucesso",
         "payment_mode": "Modo de pagamento",
         "add_payment_mode": "Adicionar modo de pagamento",

@@ -209,7 +209,7 @@
         <sw-table-column
           :sortable="true"
           :label="$t('invoices.number')"
-          show="invoice_number"
+          show="sequence_number"
         >
           <template slot-scope="row">
             <span>{{ $t('invoices.number') }}</span>

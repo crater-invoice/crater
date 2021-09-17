@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
+use Crater\Traits\SerialNumberFormatter;
 
 class Payment extends Model implements HasMedia
 {
@@ -21,6 +22,7 @@ class Payment extends Model implements HasMedia
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use SerialNumberFormatter;
 
     public const PAYMENT_MODE_CHECK = 'CHECK';
     public const PAYMENT_MODE_OTHER = 'OTHER';
@@ -147,9 +149,8 @@ class Payment extends Model implements HasMedia
 
 
         $payment = Payment::create($data);
-
         $payment->unique_hash = Hashids::connection(Payment::class)->encode($payment->id);
-
+        $payment->sequence_number = Payment::getNextPaymentSequenceNumber();
         $payment->save();
 
         $customFields = $request->customFields;

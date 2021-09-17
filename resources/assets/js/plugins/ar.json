@@ -1150,7 +1150,7 @@
     "notes_maxlength": "يجب ألا يزيد حجم الملاحظات عن 255 حرفاً.",
     "address_maxlength": "يجب ألا يزيد العنوان عن 255 حرفاً.",
     "ref_number_maxlength": "يجب ألا يزيد الرقم المرجعي عن 255 حرفاً.",
-    "prefix_maxlength": "يجب ألا تزيد البادئة عن 5 أحرف.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "خطأ غير معروف!",
     "number_length_minvalue": "يجب أن تكون قيمة الرقم أكبر من الصفر"
   },

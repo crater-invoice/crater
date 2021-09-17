@@ -66,6 +66,35 @@
         <div
           class="grid grid-cols-1 col-span-7 gap-4 mt-8 lg:gap-6 lg:mt-0 lg:grid-cols-2"
         >
+         <sw-input-group
+            :label="$t('invoices.invoice_number')"
+            :error="invoiceNumError"
+            class="lg:mt-0"
+            required
+          >
+            <sw-label-editable
+              v-model="invoiceNumAttribute"
+              :invalid="$v.invoiceNumAttribute.$error"
+              @input="$v.invoiceNumAttribute.$touch()"
+            >
+              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
+            </sw-label-editable>
+          </sw-input-group>
+
+          <sw-input-group
+            :label="$t('invoices.ref_number')"
+            :error="referenceError"
+            class="lg:mt-0"
+          >
+            <sw-input
+              v-model="newInvoice.reference_number"
+              :invalid="$v.newInvoice.reference_number.$error"
+              class="mt-2"
+              @input="$v.newInvoice.reference_number.$touch()"
+            >
+              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
+            </sw-input>
+          </sw-input-group>
           <sw-input-group
             :label="$t('invoices.invoice_date')"
             :error="invoiceDateError"
@@ -95,37 +124,7 @@
             />
           </sw-input-group>
 
-          <sw-input-group
-            :label="$t('invoices.invoice_number')"
-            :error="invoiceNumError"
-            class="lg:mt-0"
-            required
-          >
-            <sw-input
-              :prefix="`${invoicePrefix} - `"
-              v-model="invoiceNumAttribute"
-              :invalid="$v.invoiceNumAttribute.$error"
-              class="mt-2"
-              @input="$v.invoiceNumAttribute.$touch()"
-            >
-              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
-            </sw-input>
-          </sw-input-group>
-
-          <sw-input-group
-            :label="$t('invoices.ref_number')"
-            :error="referenceError"
-            class="lg:mt-0"
-          >
-            <sw-input
-              v-model="newInvoice.reference_number"
-              :invalid="$v.newInvoice.reference_number.$error"
-              class="mt-2"
-              @input="$v.newInvoice.reference_number.$touch()"
-            >
-              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
-            </sw-input>
-          </sw-input-group>
+         
         </div>
       </div>
 
@@ -463,7 +462,6 @@ export default {
       isLoadingData: true,
       isLoading: false,
       maxDiscount: 0,
-      invoicePrefix: null,
       invoiceNumAttribute: null,
       InvoiceFields: [
         'customer',
@@ -473,6 +471,7 @@ export default {
         'invoiceCustom',
       ],
       customerId: null,
+      editField : '',
     }
   },
 
@@ -497,7 +496,6 @@ export default {
       },
       invoiceNumAttribute: {
         required,
-        numeric,
       },
     }
   },
@@ -651,10 +649,6 @@ export default {
       if (!this.$v.invoiceNumAttribute.required) {
         return this.$tc('validation.required')
       }
-
-      if (!this.$v.invoiceNumAttribute.numeric) {
-        return this.$tc('validation.numbers_only')
-      }
     },
 
     referenceError() {
@@ -783,11 +777,8 @@ export default {
           ) {
             if (res4.data) {
               this.invoiceNumAttribute = res4.data.nextNumber
-              this.invoicePrefix = res4.data.prefix
             }
             this.setTemplate(this.getInvoiceTemplates[0].name)
-          } else {
-            this.invoicePrefix = res4.data.prefix
           }
 
           // this.discountPerItem = res5.data.discount_per_item
@@ -829,8 +820,7 @@ export default {
 
               this.discountPerItem = res1.data.invoice.discount_per_item
               this.selectedCurrency = this.defaultCurrency
-              this.invoiceNumAttribute = res1.data.nextInvoiceNumber
-              this.invoicePrefix = res1.data.invoicePrefix
+              this.invoiceNumAttribute = res1.data.nextInvoiceSerialNumber
               this.taxPerItem = res1.data.invoice.tax_per_item
               let fields = res1.data.invoice.fields
 
@@ -891,8 +881,7 @@ export default {
       }
 
       this.isLoading = true
-      this.newInvoice.invoice_number =
-        this.invoicePrefix + '-' + this.invoiceNumAttribute
+      this.newInvoice.invoice_number = this.invoiceNumAttribute
 
       let data = {
         ...this.formData,

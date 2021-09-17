@@ -2,28 +2,13 @@
   <div>
     <form action="" class="mt-6" @submit.prevent="updateInvoiceSetting">
       <sw-input-group
-        :label="$t('settings.customization.invoices.invoice_prefix')"
-        :error="invoicePrefixError"
+        :label="$t('settings.customization.invoices.invoice_format')"
+        :error="invoiceFormatError"
       >
-        <sw-input
-          v-model="invoices.invoice_prefix"
-          :invalid="$v.invoices.invoice_prefix.$error"
-          style="max-width: 30%"
-          @input="$v.invoices.invoice_prefix.$touch()"
-          @keyup="changeToUppercase('INVOICES')"
-        />
-      </sw-input-group>
-
-      <sw-input-group
-        :label="$t('settings.customization.invoices.invoice_number_length')"
-        :error="invoicenumberLengthError"
-        class="mt-6 mb-4"
-      >
-        <sw-input
-          v-model="invoices.invoice_number_length"
-          :invalid="$v.invoices.invoice_number_length.$error"
-          type="number"
-          style="max-width: 60px"
+        <sw-label-editable
+          v-model="invoices.invoice_format"
+          :invalid="$v.invoices.invoice_format.$error"
+          @input="$v.invoices.invoice_format.$touch()"
         />
       </sw-input-group>
 
@@ -145,7 +130,7 @@
 </template>
 
 <script>
-const { required, maxLength, minValue, alpha, numeric } = require('vuelidate/lib/validators')
+const { required, maxLength, alpha } = require('vuelidate/lib/validators')
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -163,8 +148,7 @@ export default {
       invoiceAsAttachment: false,
 
       invoices: {
-        invoice_prefix: null,
-        invoice_number_length: null,
+        invoice_format: null,
         invoice_mail_body: null,
         company_address_format: null,
         shipping_address_format: null,
@@ -190,46 +174,24 @@ export default {
   },
 
   computed: {
-    invoicePrefixError() {
-      if (!this.$v.invoices.invoice_prefix.$error) {
+    invoiceFormatError() {
+      if (!this.$v.invoices.invoice_format.$error) {
         return ''
       }
 
-      if (!this.$v.invoices.invoice_prefix.required) {
+      if (!this.$v.invoices.invoice_format.required) {
         return this.$t('validation.required')
       }
 
-      if (!this.$v.invoices.invoice_prefix.maxLength) {
-        return this.$t('validation.prefix_maxlength')
-      }
-
-      if (!this.$v.invoices.invoice_prefix.alpha) {
-        return this.$t('validation.characters_only')
-      }
-    },
-    invoicenumberLengthError() {
-      if (!this.$v.invoices.invoice_number_length.$error) {
-        return ''
-      }
-
-      if (!this.$v.invoices.invoice_number_length.required) {
-        return this.$t('validation.required')
-      }
-
-      if (!this.$v.invoices.invoice_number_length.minValue) {
-        return this.$t('validation.number_length_minvalue')
-      }
-
-      if (!this.$v.invoices.invoice_number_length.numeric) {
-        return this.$t('validation.numbers_only')
+      if (!this.$v.invoices.invoice_format.maxLength) {
+        return this.$t('validation.format_maxlength')
       }
     },
   },
 
   watch: {
     settings(val) {
-      this.invoices.invoice_prefix = val ? val.invoice_prefix : ''
-      this.invoices.invoice_number_length = val ? val.invoice_number_length : ''
+      this.invoices.invoice_format = val ? val.invoice_format : ''
 
       this.invoices.invoice_mail_body = val ? val.invoice_mail_body : null
       this.invoices.company_address_format = val
@@ -262,15 +224,9 @@ export default {
 
   validations: {
     invoices: {
-      invoice_prefix: {
+      invoice_format: {
         required,
-        maxLength: maxLength(5),
-        alpha,
-      },
-      invoice_number_length: {
-        required,
-        minValue: minValue(1),
-        numeric
+        maxLength: maxLength(255),
       },
     },
   },
@@ -297,14 +253,6 @@ export default {
       }
     },
 
-    changeToUppercase(currentTab) {
-      if (currentTab === 'INVOICES') {
-        this.invoices.invoice_prefix = this.invoices.invoice_prefix.toUpperCase()
-
-        return true
-      }
-    },
-
     async updateInvoiceSetting() {
       this.$v.invoices.$touch()
 
@@ -314,8 +262,7 @@ export default {
 
       let data = {
         settings: {
-          invoice_prefix: this.invoices.invoice_prefix,
-          invoice_number_length: this.invoices.invoice_number_length,
+          invoice_format: this.invoices.invoice_format,
           invoice_mail_body: this.invoices.invoice_mail_body,
           invoice_company_address_format: this.invoices.company_address_format,
           invoice_billing_address_format: this.invoices.billing_address_format,

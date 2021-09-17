@@ -21,6 +21,7 @@ import DotIcon from '../../components/icon/DotIcon.vue'
 import SaveIcon from '../../components/icon/SaveIcon.vue'
 
 import SwSelect from '@bytefury/spacewind/src/components/sw-select'
+import BaseLabelEdit from './BaseLabelEdit.vue'
 
 Vue.component('base-modal', BaseModal)
 Vue.component('global-search', GlobalSearch)
@@ -44,3 +45,5 @@ Vue.component('base-notification', BaseNotification)
 
 Vue.component('dot-icon', DotIcon)
 Vue.component('save-icon', SaveIcon)
+
+Vue.component('sw-label-editable', BaseLabelEdit)

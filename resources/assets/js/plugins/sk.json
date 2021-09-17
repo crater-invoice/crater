@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Poznámky nesmú obsahovať viac ako 100 znakov.",
     "address_maxlength": "Adresa nesmie obsahovať viac ako 255 znakov",
     "ref_number_maxlength": "Referenčné čislo nesmie obsahovať viac ako 255 znakov",
-    "prefix_maxlength": "Predpona nesmie mať viac ako 5 znakov.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "Niečo neprebehlo v poriadku, odskúšajte prosím znova.",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

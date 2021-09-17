@@ -67,6 +67,37 @@
         <div
           class="grid grid-cols-1 col-span-7 gap-4 mt-8 lg:gap-6 lg:mt-0 lg:grid-cols-2"
         >
+         <sw-input-group
+            :label="$t('estimates.estimate_number')"
+            :error="estimateNumError"
+            class="lg:mt-0"
+            required
+          >
+            <sw-label-editable
+              v-model="estimateNumAttribute"
+              :invalid="$v.estimateNumAttribute.$error"
+              class="mt-2"
+              @input="$v.estimateNumAttribute.$touch()"
+            >
+              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
+            </sw-label-editable>
+          </sw-input-group>
+
+          <sw-input-group
+            :label="$t('estimates.ref_number')"
+            :error="referenceNumError"
+            class="lg:mt-0"
+          >
+            <sw-input
+              v-model="newEstimate.reference_number"
+              :invalid="$v.newEstimate.reference_number.$error"
+              class="mt-2"
+              @input="$v.newEstimate.reference_number.$touch()"
+            >
+              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
+            </sw-input>
+          </sw-input-group>
+          
           <sw-input-group
             :label="$t('reports.estimates.estimate_date')"
             :erorr="estimateDateError"
@@ -94,38 +125,6 @@
               class="mt-2"
               @input="$v.newEstimate.expiry_date.$touch()"
             />
-          </sw-input-group>
-
-          <sw-input-group
-            :label="$t('estimates.estimate_number')"
-            :error="estimateNumError"
-            class="lg:mt-0"
-            required
-          >
-            <sw-input
-              :prefix="`${estimatePrefix} - `"
-              v-model="estimateNumAttribute"
-              :invalid="$v.estimateNumAttribute.$error"
-              class="mt-2"
-              @input="$v.estimateNumAttribute.$touch()"
-            >
-              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
-            </sw-input>
-          </sw-input-group>
-
-          <sw-input-group
-            :label="$t('estimates.ref_number')"
-            :error="referenceNumError"
-            class="lg:mt-0"
-          >
-            <sw-input
-              v-model="newEstimate.reference_number"
-              :invalid="$v.newEstimate.reference_number.$error"
-              class="mt-2"
-              @input="$v.newEstimate.reference_number.$touch()"
-            >
-              <hashtag-icon slot="leftIcon" class="h-4 ml-1 text-gray-500" />
-            </sw-input>
           </sw-input-group>
         </div>
       </div>
@@ -470,7 +469,6 @@ export default {
       isLoadingData: false,
       isLoading: false,
       estimateNumAttribute: null,
-      estimatePrefix: null,
       EstimateFields: [
         'customer',
         'company',
@@ -503,7 +501,6 @@ export default {
       },
       estimateNumAttribute: {
         required,
-        numeric,
       },
     }
   },
@@ -640,10 +637,6 @@ export default {
 
       if (!this.$v.estimateNumAttribute.required) {
         return this.$tc('estimates.errors.required')
-      }
-
-      if (!this.$v.estimateNumAttribute.numeric) {
-        return this.$tc('validation.numbers_only')
       }
     },
 
@@ -788,13 +781,9 @@ export default {
           ) {
             if (res4.data) {
               this.estimateNumAttribute = res4.data.nextNumber
-              this.estimatePrefix = res4.data.prefix
             }
             this.setTemplate(this.getEstimateTemplates[0].name)
-          } else {
-            this.estimatePrefix = res4.data.prefix
-          }
-
+          } 
           this.isLoadingData = false
         })
         .catch((error) => {
@@ -832,7 +821,6 @@ export default {
               this.selectedCurrency = this.defaultCurrency
               this.estimateTemplates = res1.data.estimate.estimateTemplates
               this.estimateNumAttribute = res1.data.nextEstimateNumber
-              this.estimatePrefix = res1.data.estimatePrefix
               let fields = res1.data.estimate.fields
 
               if (res2.data) {
@@ -891,8 +879,7 @@ export default {
       }
 
       this.isLoading = true
-      this.newEstimate.estimate_number =
-        this.estimatePrefix + '-' + this.estimateNumAttribute
+      this.newEstimate.estimate_number = this.estimateNumAttribute
 
       let data = {
         ...this.formData,

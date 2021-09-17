@@ -56,13 +56,6 @@ class Payment extends Model implements HasMedia
         }
     }
 
-    public function getPaymentPrefixAttribute()
-    {
-        $prefix = explode("-", $this->payment_number)[0];
-
-        return $prefix;
-    }
-
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
@@ -80,13 +73,6 @@ class Payment extends Model implements HasMedia
     public function getPaymentPdfUrlAttribute()
     {
         return url('/payments/pdf/'.$this->unique_hash);
-    }
-
-    public function getPaymentNumAttribute()
-    {
-        $position = $this->strposX($this->payment_number, "-", 1) + 1;
-
-        return substr($this->payment_number, $position);
     }
 
     public function emailLogs()
@@ -252,48 +238,32 @@ class Payment extends Model implements HasMedia
         return true;
     }
 
-    private function strposX($haystack, $needle, $number)
+    public function getNextPaymentNumber()
     {
-        if ($number == '1') {
-            return strpos($haystack, $needle);
-        } elseif ($number > '1') {
-            return strpos(
-                $haystack,
-                $needle,
-                $this->strposX($haystack, $needle, $number - 1) + strlen($needle)
-            );
-        } else {
-            return error_log('Error: Value for parameter $number is out of range');
-        }
+        $nextSequenceNumber = self::getNextPaymentSequenceNumber();
+        
+        $format = CompanySetting::getSetting(
+            'payment_format', 
+            request()->header('company')
+        );
+
+        $serialNumber = $this->generateSerialNumber(
+            $format, 
+            $nextSequenceNumber
+        );
+
+        return $serialNumber;
     }
 
-    public static function getNextPaymentNumber($value)
+    public static function getNextPaymentSequenceNumber()
     {
-        // Get the last created order
-        $payment = Payment::where('payment_number', 'LIKE', $value.'-%')
-            ->orderBy('payment_number', 'desc')
+        $last = Payment::orderBy('sequence_number', 'desc')
+            ->take(1)
             ->first();
 
-        // Get number length config
-        $numberLength = CompanySetting::getSetting('payment_number_length', request()->header('company'));
-        $numberLengthText = "%0{$numberLength}d";
+        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
 
-        if (! $payment) {
-            // We get here if there is no order at all
-            // If there is no number set it to 0, which will be 1 at the end.
-            $number = 0;
-        } else {
-            $number = explode("-", $payment->payment_number);
-            $number = $number[1];
-        }
-        // If we have ORD000001 in the database then we only want the number
-        // So the substr returns this 000001
-
-        // Add the string in front and higher up the number.
-        // the %05d part makes sure that there are always 6 numbers in the string.
-        // so it adds the missing zero's when needed.
-
-        return sprintf($numberLengthText, intval($number) + 1);
+        return $nextSequenceNumber;
     }
 
     public function scopeWhereSearch($query, $search)

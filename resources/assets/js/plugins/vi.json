@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Ghi chú không được lớn hơn 65.000 ký tự.",
     "address_maxlength": "Địa chỉ không được lớn hơn 255 ký tự.",
     "ref_number_maxlength": "Số tham chiếu không được lớn hơn 255 ký tự.",
-    "prefix_maxlength": "Tiền tố không được lớn hơn 5 ký tự.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "có gì đó không ổn",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

@@ -2,28 +2,13 @@
   <div>
     <form action="" class="mt-6" @submit.prevent="updateEstimateSetting">
       <sw-input-group
-        :label="$t('settings.customization.estimates.estimate_prefix')"
-        :error="estimatePrefixError"
+        :label="$t('settings.customization.estimates.estimate_format')"
+        :error="estimateFormatError"
       >
-        <sw-input
-          v-model="estimates.estimate_prefix"
-          :invalid="$v.estimates.estimate_prefix.$error"
-          style="max-width: 30%"
-          @input="$v.estimates.estimate_prefix.$touch()"
-          @keyup="changeToUppercase('ESTIMATES')"
-        />
-      </sw-input-group>
-
-      <sw-input-group
-        :label="$t('settings.customization.estimates.estimate_number_length')"
-        :error="estimateNumberLengthError"
-        class="mt-6 mb-4"
-      >
-        <sw-input
-          v-model="estimates.estimate_number_length"
-          :invalid="$v.estimates.estimate_number_length.$error"
-          type="number"
-          style="max-width: 60px"
+        <sw-label-editable
+          v-model="estimates.estimate_format"
+          :invalid="$v.estimates.estimate_format.$error"
+          @input="$v.estimates.estimate_format.$touch()"
         />
       </sw-input-group>
 
@@ -162,8 +147,7 @@ export default {
       estimateAsAttachment: false,
 
       estimates: {
-        estimate_prefix: null,
-        estimate_number_length: null,
+        estimate_format: null,
         estimate_mail_body: null,
         estimate_terms_and_conditions: null,
         company_address_format: null,
@@ -195,63 +179,34 @@ export default {
   },
 
   computed: {
-    estimatePrefixError() {
-      if (!this.$v.estimates.estimate_prefix.$error) {
+    estimateFormatError() {
+      if (!this.$v.estimates.estimate_format.$error) {
         return ''
       }
 
-      if (!this.$v.estimates.estimate_prefix.required) {
+      if (!this.$v.estimates.estimate_format.required) {
         return this.$t('validation.required')
       }
 
-      if (!this.$v.estimates.estimate_prefix.maxLength) {
-        return this.$t('validation.prefix_maxlength')
-      }
-
-      if (!this.$v.estimates.estimate_prefix.alpha) {
-        return this.$t('validation.characters_only')
-      }
-    },
-    estimateNumberLengthError() {
-      if (!this.$v.estimates.estimate_number_length.$error) {
-        return ''
-      }
-
-      if (!this.$v.estimates.estimate_number_length.required) {
-        return this.$t('validation.required')
-      }
-
-      if (!this.$v.estimates.estimate_number_length.minValue) {
-        return this.$t('validation.number_length_minvalue')
-      }
-
-      if (!this.$v.estimates.estimate_number_length.numeric) {
-        return this.$t('validation.numbers_only')
+      if (!this.$v.estimates.estimate_format.maxLength) {
+        return this.$t('validation.format_maxlength')
       }
     },
   },
 
   validations: {
     estimates: {
-      estimate_prefix: {
+      estimate_format: {
         required,
-        maxLength: maxLength(5),
+        maxLength: maxLength(255),
         alpha,
-      },
-      estimate_number_length: {
-        required,
-        minValue: minValue(1),
-        numeric,
       },
     },
   },
 
   watch: {
     settings(val) {
-      this.estimates.estimate_prefix = val ? val.estimate_prefix : ''
-      this.estimates.estimate_number_length = val
-        ? val.estimate_number_length
-        : ''
+      this.estimates.estimate_format = val ? val.estimate_format : ''
 
       this.estimates.estimate_mail_body = val ? val.estimate_mail_body : ''
       this.estimates.company_address_format = val
@@ -305,13 +260,6 @@ export default {
       }
     },
 
-    changeToUppercase(currentTab) {
-      if (currentTab === 'ESTIMATES') {
-        this.estimates.estimate_prefix = this.estimates.estimate_prefix.toUpperCase()
-        return true
-      }
-    },
-
     async updateEstimateSetting() {
       this.$v.estimates.$touch()
 
@@ -321,8 +269,7 @@ export default {
 
       let data = {
         settings: {
-          estimate_prefix: this.estimates.estimate_prefix,
-          estimate_number_length: this.estimates.estimate_number_length,
+          estimate_format: this.estimates.estimate_format,
           estimate_mail_body: this.estimates.estimate_mail_body,
           estimate_company_address_format: this.estimates
             .company_address_format,

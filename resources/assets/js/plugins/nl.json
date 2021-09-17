@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Notities mogen niet langer zijn dan 255 tekens.",
     "address_maxlength": "Adres mag niet groter zijn dan 255 tekens.",
     "ref_number_maxlength": "Ref-nummer mag niet groter zijn dan 255 tekens.",
-    "prefix_maxlength": "Het voorvoegsel mag niet meer dan 5 tekens bevatten.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "Er is iets fout gegaan",
     "number_length_minvalue": "Het getal moet groter zijn dan 0"
   },

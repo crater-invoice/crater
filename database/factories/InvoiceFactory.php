@@ -5,9 +5,12 @@ namespace Database\Factories;
 use Crater\Models\Invoice;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Crater\Traits\SerialNumberFormatter;
 
 class InvoiceFactory extends Factory
 {
+    use SerialNumberFormatter;
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -97,8 +100,8 @@ class InvoiceFactory extends Factory
         return [
             'invoice_date' => $this->faker->date('Y-m-d', 'now'),
             'due_date' => $this->faker->date('Y-m-d', 'now'),
-            'invoice_number' => 'INV-'.Invoice::getNextInvoiceNumber('INV'),
-            'reference_number' => Invoice::getNextInvoiceNumber('INV'),
+            'invoice_number' => $this->generateSerialNumber('{{SERIES:INV}}{{DELIMITER:-}}{{RANDSEQUENCE:4}}', 1),
+            'reference_number' => $this->generateSerialNumber('{{SERIES:EST}}{{DELIMITER:-}}{{RANDSEQUENCE:4}}', 1),
             'user_id' => User::factory()->create(['role' => 'customer'])->id,
             'template_name' => 'invoice1',
             'status' => Invoice::STATUS_DRAFT,

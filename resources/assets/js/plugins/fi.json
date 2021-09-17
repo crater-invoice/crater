@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Notes should not be greater than 65,000 characters.",
     "address_maxlength": "Osoiterivin pituus ei saisi ylittää 255 merkkiä.",
     "ref_number_maxlength": "Asiakkaan viitteen pituus ei saisi ylittää 255 merkkiä.",
-    "prefix_maxlength": "Etuliitten pituus ei saisi ylittää 5 merkkiä.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "jotain meni pieleen",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

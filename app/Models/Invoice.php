@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
-
+use Crater\Traits\SerialNumberFormatter;
 class Invoice extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use SerialNumberFormatter;
 
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
@@ -72,33 +73,32 @@ class Invoice extends Model implements HasMedia
         }
     }
 
-    public static function getNextInvoiceNumber($value)
+    public function getNextInvoiceNumber()
     {
-        // Get the last created order
-        $lastOrder = Invoice::where('invoice_number', 'LIKE', $value.'-%')
-            ->orderBy('invoice_number', 'desc')
+        $nextSequenceNumber = self::getNextInvoiceSequenceNumber();
+        
+        $format = CompanySetting::getSetting(
+            'invoice_format', 
+            request()->header('company')
+        );
+
+        $serialNumber = $this->generateSerialNumber(
+            $format, 
+            $nextSequenceNumber
+        );
+
+        return $serialNumber;
+    }
+
+    public static function getNextInvoiceSequenceNumber()
+    {
+        $last = Invoice::orderBy('sequence_number', 'desc')
+            ->take(1)
             ->first();
 
-        // Get number length config
-        $numberLength = CompanySetting::getSetting('invoice_number_length', request()->header('company'));
-        $numberLengthText = "%0{$numberLength}d";
+        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
 
-        if (! $lastOrder) {
-            // We get here if there is no order at all
-            // If there is no number set it to 0, which will be 1 at the end.
-            $number = 0;
-        } else {
-            $number = explode("-", $lastOrder->invoice_number);
-            $number = $number[1];
-        }
-        // If we have ORD000001 in the database then we only want the number
-        // So the substr returns this 000001
-
-        // Add the string in front and higher up the number.
-        // the %06d part makes sure that there are always 6 numbers in the string.
-        // so it adds the missing zero's when needed.
-
-        return sprintf($numberLengthText, intval($number) + 1);
+        return $nextSequenceNumber;
     }
 
     public function emailLogs()
@@ -157,35 +157,6 @@ class Invoice extends Model implements HasMedia
         } else {
             return self::STATUS_DRAFT;
         }
-    }
-
-    private function strposX($haystack, $needle, $number)
-    {
-        if ($number == '1') {
-            return strpos($haystack, $needle);
-        } elseif ($number > '1') {
-            return strpos(
-                $haystack,
-                $needle,
-                $this->strposX($haystack, $needle, $number - 1) + strlen($needle)
-            );
-        } else {
-            return error_log('Error: Value for parameter $number is out of range');
-        }
-    }
-
-    public function getInvoiceNumAttribute()
-    {
-        $position = $this->strposX($this->invoice_number, "-", 1) + 1;
-
-        return substr($this->invoice_number, $position);
-    }
-
-    public function getInvoicePrefixAttribute()
-    {
-        $prefix = explode("-", $this->invoice_number)[0];
-
-        return $prefix;
     }
 
     public function getFormattedCreatedAtAttribute($value)
@@ -348,6 +319,7 @@ class Invoice extends Model implements HasMedia
 
         $invoice = Invoice::create($data);
         $invoice->unique_hash = Hashids::connection(Invoice::class)->encode($invoice->id);
+        $invoice->sequence_number = Invoice::getNextInvoiceSequenceNumber();
         $invoice->save();
 
         self::createItems($invoice, $request);
@@ -372,6 +344,7 @@ class Invoice extends Model implements HasMedia
 
     public function updateInvoice($request)
     {
+        var_dump('update');
         $data = $request->except('items');
         $oldAmount = $this->total;
 

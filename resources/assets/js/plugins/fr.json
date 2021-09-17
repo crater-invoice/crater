@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Les notes ne doivent pas dépasser 255 caractères.",
     "address_maxlength": "L'adresse ne doit pas dépasser 255 caractères.",
     "ref_number_maxlength": "Le numéro de référence ne doit pas dépasser 255 caractères.",
-    "prefix_maxlength": "Le préfixe ne doit pas dépasser 5 caractères.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "quelque chose a mal tourné",
     "number_length_minvalue": "Ce nombre doit être supérieur à 0"
   },

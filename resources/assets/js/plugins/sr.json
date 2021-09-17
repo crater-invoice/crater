@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Napomena ne može da ima više od 65,000 karaktera",
     "address_maxlength": "Adresa ne može da ima više od 255 karaktera",
     "ref_number_maxlength": "Poziv na broj ne može da ima više od 225 karaktera",
-    "prefix_maxlength": "Prefiks ne može da ima više od 5 karaktera",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "nešto je krenulo naopako",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

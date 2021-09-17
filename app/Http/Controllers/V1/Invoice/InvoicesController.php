@@ -27,6 +27,7 @@ class InvoicesController extends Controller
                 'paid_status',
                 'customer_id',
                 'invoice_id',
+                'sequence_number',
                 'invoice_number',
                 'from_date',
                 'to_date',
@@ -84,8 +85,7 @@ class InvoicesController extends Controller
 
         $siteData = [
             'invoice' => $invoice,
-            'nextInvoiceNumber' => $invoice->getInvoiceNumAttribute(),
-            'invoicePrefix' => $invoice->getInvoicePrefixAttribute(),
+            'nextInvoiceSerialNumber' => $invoice->getNextInvoiceNumber(),
         ];
 
         return response()->json($siteData);

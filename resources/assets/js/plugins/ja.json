@@ -1147,7 +1147,7 @@
         "notes_maxlength": "メモは65,000文字を超えてはなりません。",
         "address_maxlength": "アドレスは255文字を超えてはなりません。",
         "ref_number_maxlength": "参照番号は255文字を超えてはなりません。",
-        "prefix_maxlength": "プレフィックスは5文字を超えてはなりません。",
+        "format_maxlength": "Format should not be greater than 255 characters.",
         "something_went_wrong": "何かがうまくいかなかった"
     },
     "pdf_estimate_label": "見積もり",

@@ -965,6 +965,6 @@
     "notes_maxlength": "As anotações não devem ter mais que 255 caracteres.",
     "address_maxlength": "O endereço não deve ter mais que 255 caracteres.",
     "ref_number_maxlength": "O número de referência não deve ter mais que 255 caracteres.",
-    "prefix_maxlength": "O prefixo não deve ter mais que 5 caracteres."
+    "format_maxlength": "Format should not be greater than 255 characters."
   }
 }

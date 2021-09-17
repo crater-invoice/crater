@@ -20,15 +20,10 @@ class CloneInvoiceController extends Controller
     {
         $date = Carbon::now();
 
-        $invoice_prefix = CompanySetting::getSetting(
-            'invoice_prefix',
-            $request->header('company')
-        );
-
         $newInvoice = Invoice::create([
             'invoice_date' => $date->format('Y-m-d'),
             'due_date' => $date->format('Y-m-d'),
-            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
+            'invoice_number' => $invoice->getNextInvoiceNumber(),
             'reference_number' => $invoice->reference_number,
             'user_id' => $invoice->user_id,
             'company_id' => $request->header('company'),

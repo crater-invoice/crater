@@ -1161,7 +1161,7 @@
     "notes_maxlength": "Notes should not be greater than 65,000 characters.",
     "address_maxlength": "Address should not be greater than 255 characters.",
     "ref_number_maxlength": "Ref Number should not be greater than 255 characters.",
-    "prefix_maxlength": "Prefix should not be greater than 5 characters.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "something went wrong",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

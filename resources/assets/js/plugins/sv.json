@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Noteringar kan inte vara större än 255 tecken.",
     "address_maxlength": "Adress kan inte vara större än 255 tecken.",
     "ref_number_maxlength": "Referensnummer kan inte vara större än 255 tecken.",
-    "prefix_maxlength": "Prefix kan inte vara större än 5 tecken.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "något blev fel",
     "number_length_minvalue": "Number lenght should be greater than 0"
   },

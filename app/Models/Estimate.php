@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
+use Crater\Traits\SerialNumberFormatter;
 
 class Estimate extends Model implements HasMedia
 {
@@ -21,6 +22,7 @@ class Estimate extends Model implements HasMedia
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use SerialNumberFormatter;
 
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
@@ -70,34 +72,32 @@ class Estimate extends Model implements HasMedia
         return url('/estimates/pdf/'.$this->unique_hash);
     }
 
-    public static function getNextEstimateNumber($value)
+    public function getNextEstimateNumber()
     {
-        // Get the last created order
-        $lastOrder = Estimate::where('estimate_number', 'LIKE', $value.'-%')
-            ->orderBy('estimate_number', 'desc')
+        $nextSequenceNumber = self::getNextEstimateSequenceNumber();
+        
+        $format = CompanySetting::getSetting(
+            'estimate_format', 
+            request()->header('company')
+        );
+
+        $serialNumber = $this->generateSerialNumber(
+            $format, 
+            $nextSequenceNumber
+        );
+
+        return $serialNumber;
+    }
+
+    public static function getNextEstimateSequenceNumber()
+    {
+        $last = Estimate::orderBy('sequence_number', 'desc')
+            ->take(1)
             ->first();
 
-        // Get number length config
-        $numberLength = CompanySetting::getSetting('estimate_number_length', request()->header('company'));
-        $numberLengthText = "%0{$numberLength}d";
+        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
 
-        if (! $lastOrder) {
-            // We get here if there is no order at all
-            // If there is no number set it to 0, which will be 1 at the end.
-            $number = 0;
-        } else {
-            $number = explode("-", $lastOrder->estimate_number);
-            $number = $number[1];
-        }
-
-        // If we have ORD000001 in the database then we only want the number
-        // So the substr returns this 000001
-
-        // Add the string in front and higher up the number.
-        // the %05d part makes sure that there are always 6 numbers in the string.
-        // so it adds the missing zero's when needed.
-
-        return sprintf($numberLengthText, intval($number) + 1);
+        return $nextSequenceNumber;
     }
 
     public function emailLogs()
@@ -128,35 +128,6 @@ class Estimate extends Model implements HasMedia
     public function taxes()
     {
         return $this->hasMany(Tax::class);
-    }
-
-    public function getEstimateNumAttribute()
-    {
-        $position = $this->strposX($this->estimate_number, "-", 1) + 1;
-
-        return substr($this->estimate_number, $position);
-    }
-
-    public function getEstimatePrefixAttribute()
-    {
-        $prefix = explode("-", $this->estimate_number)[0];
-
-        return $prefix;
-    }
-
-    private function strposX($haystack, $needle, $number)
-    {
-        if ($number == '1') {
-            return strpos($haystack, $needle);
-        } elseif ($number > '1') {
-            return strpos(
-                $haystack,
-                $needle,
-                $this->strposX($haystack, $needle, $number - 1) + strlen($needle)
-            );
-        } else {
-            return error_log('Error: Value for parameter $number is out of range');
-        }
     }
 
     public function getFormattedExpiryDateAttribute($value)
@@ -293,6 +264,7 @@ class Estimate extends Model implements HasMedia
 
         $estimate = self::create($data);
         $estimate->unique_hash = Hashids::connection(Estimate::class)->encode($estimate->id);
+        $estimate->sequence_number = self::getNextEstimateSequenceNumber();
         $estimate->save();
 
         self::createItems($estimate, $request);

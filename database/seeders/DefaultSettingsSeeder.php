@@ -52,7 +52,6 @@ class DefaultSettingsSeeder extends Seeder
             'notify_estimate_viewed' => 'NO',
             'tax_per_item' => 'NO',
             'discount_per_item' => 'NO',
-            'invoice_prefix' => 'INV',
             'invoice_auto_generate' => 'YES',
             'invoice_number_length' => 6,
             'invoice_email_attachment' => 'NO',
@@ -65,6 +64,9 @@ class DefaultSettingsSeeder extends Seeder
             'payment_number_length' => 6,
             'payment_email_attachment' => 'NO',
             'save_pdf_to_disk' => 'NO',
+            'invoice_format' => '{{SERIES:INV}}{{DELIMITER:-}}{{SEQUENCE:6}}',
+            'estimate_format' => '{{SERIES:EST}}{{DELIMITER:-}}{{SEQUENCE:6}}',
+            'receipt_format' => '{{SERIES:PAY}}{{DELIMITER:-}}{{SEQUENCE:6}}',
         ];
 
         CompanySetting::setSettings($settings, $user->company_id);

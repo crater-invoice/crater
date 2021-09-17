@@ -1150,7 +1150,7 @@
     "notes_maxlength": "Notizen sollten nicht länger als 255 Zeichen sein.",
     "address_maxlength": "Die Adresse sollte nicht länger als 255 Zeichen sein.",
     "ref_number_maxlength": "Ref Number sollte nicht länger als 255 Zeichen sein.",
-    "prefix_maxlength": "Das Präfix sollte nicht länger als 5 Zeichen sein.",
+    "format_maxlength": "Format should not be greater than 255 characters.",
     "something_went_wrong": "Da ist etwas schief gelaufen",
     "number_length_minvalue": "Nummernlänge sollte größer als 0 sein"
   },

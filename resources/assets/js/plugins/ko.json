@@ -1147,7 +1147,7 @@
         "notes_maxlength": "메모는 65,000자를 초과 할 수 없습니다.",
         "address_maxlength": "주소는 255자를 초과 할 수 없습니다.",
         "ref_number_maxlength": "참조 번호는 255자를 초과 할 수 없습니다.",
-        "prefix_maxlength": "접두사는 5 자 이하 여야합니다.",
+        "format_maxlength": "Format should not be greater than 255 characters.",
         "something_went_wrong": "뭔가 잘못 됐어"
     },
     "pdf_estimate_label": "견적",

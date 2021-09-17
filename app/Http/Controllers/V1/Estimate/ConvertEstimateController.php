@@ -19,23 +19,19 @@ class ConvertEstimateController extends Controller
     * @param  \Crater\Models\Estimate $estimate
     * @return \Illuminate\Http\Response
     */
-    public function __invoke(Request $request, Estimate $estimate)
+    public function __invoke(Request $request, Invoice $invoice, Estimate $estimate)
     {
         $estimate->load(['items', 'items.taxes', 'user', 'taxes']);
 
         $invoice_date = Carbon::now();
         $due_date = Carbon::now()->addDays(7);
 
-        $invoice_prefix = CompanySetting::getSetting(
-            'invoice_prefix',
-            $request->header('company')
-        );
-
         $invoice = Invoice::create([
             'creator_id' => Auth::id(),
             'invoice_date' => $invoice_date->format('Y-m-d'),
             'due_date' => $due_date->format('Y-m-d'),
-            'invoice_number' => $invoice_prefix."-".Invoice::getNextInvoiceNumber($invoice_prefix),
+            'invoice_number' => $invoice->getNextInvoiceNumber(),
+            'sequence_number' => $invoice::getNextInvoiceSequenceNumber(),
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

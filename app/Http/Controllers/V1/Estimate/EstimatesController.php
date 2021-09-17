@@ -27,6 +27,7 @@ class EstimatesController extends Controller
                 'customer_id',
                 'estimate_id',
                 'estimate_number',
+                'sequence_number',
                 'from_date',
                 'to_date',
                 'search',
@@ -75,8 +76,7 @@ class EstimatesController extends Controller
 
         return response()->json([
             'estimate' => $estimate,
-            'nextEstimateNumber' => $estimate->getEstimateNumAttribute(),
-            'estimatePrefix' => $estimate->getEstimatePrefixAttribute(),
+            'nextEstimateNumber' => $estimate->getNextEstimateNumber(),
         ]);
     }
 

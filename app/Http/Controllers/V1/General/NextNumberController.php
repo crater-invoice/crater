@@ -17,42 +17,27 @@ class NextNumberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Invoice $invoice, Estimate $estimate, Payment $payment)
     {
         $key = $request->key;
-
-        $val = $key.'_prefix';
-
-        $prefix = CompanySetting::getSetting(
-            $val,
-            $request->header('company')
-        );
-
         $nextNumber = null;
 
         switch ($key) {
             case 'invoice':
-                $nextNumber = Invoice::getNextInvoiceNumber($prefix);
-
+                $nextNumber = $invoice->getNextInvoiceNumber();
                 break;
-
             case 'estimate':
-                $nextNumber = Estimate::getNextEstimateNumber($prefix);
-
+                $nextNumber = $estimate->getNextEstimateNumber();
                 break;
-
             case 'payment':
-                $nextNumber = Payment::getNextPaymentNumber($prefix);
-
+                $nextNumber = $payment->getNextPaymentNumber();
                 break;
-
             default:
                 return;
         }
 
         return response()->json([
             'nextNumber' => $nextNumber,
-            'prefix' => $prefix,
         ]);
     }
 }

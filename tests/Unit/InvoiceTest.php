@@ -59,7 +59,7 @@ test('get next invoice number', function () {
 
     $prefix = $invoice->getInvoicePrefixAttribute();
 
-    $nextNumber = $invoice->getNextInvoiceNumber($prefix);
+    $nextNumber = $invoice->getNextInvoiceNumber();
 
     $invoice1 = Invoice::factory()->create();
 

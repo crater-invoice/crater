@@ -32,59 +32,61 @@ class AddSequenceColumn extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('invoices', 'sequence_number')) {
-            Schema::table('invoices', function (Blueprint $table) {
-                $table->mediumInteger('sequence_number')->unsigned()->after('id');
-            });
-        }
-        if (!Schema::hasColumn('estimates', 'sequence_number')) {
-            Schema::table('estimates', function (Blueprint $table) {
-                $table->mediumInteger('sequence_number')->unsigned()->after('id');
-            });
-        }
-        if (!Schema::hasColumn('payments', 'sequence_number')) {
-            Schema::table('payments', function (Blueprint $table) {
-                $table->mediumInteger('sequence_number')->unsigned()->after('id');
-            });
-        }
-
         $user = User::where('role', 'super admin')->first();
 
-        if (Schema::hasColumn('invoices', 'sequence_number')) {
-            $invoices = Invoice::all();
+        if ($user && $user->role == 'super admin') {
+            if (! Schema::hasColumn('invoices', 'sequence_number')) {
+                Schema::table('invoices', function (Blueprint $table) {
+                    $table->mediumInteger('sequence_number')->unsigned()->after('id');
+                });
+            }
+            if (! Schema::hasColumn('estimates', 'sequence_number')) {
+                Schema::table('estimates', function (Blueprint $table) {
+                    $table->mediumInteger('sequence_number')->unsigned()->after('id');
+                });
+            }
+            if (! Schema::hasColumn('payments', 'sequence_number')) {
+                Schema::table('payments', function (Blueprint $table) {
+                    $table->mediumInteger('sequence_number')->unsigned()->after('id');
+                });
+            }
 
-            $invoices->map(function ($invoice) {
-                $invoiceNumber = explode("-", $invoice->invoice_number);
-                $invoice->sequence_number = intval(end($invoiceNumber));
-                $invoice->save();
-            });
+            if (Schema::hasColumn('invoices', 'sequence_number')) {
+                $invoices = Invoice::all();
+
+                $invoices->map(function ($invoice) {
+                    $invoiceNumber = explode("-", $invoice->invoice_number);
+                    $invoice->sequence_number = intval(end($invoiceNumber));
+                    $invoice->save();
+                });
+            }
+
+            if (Schema::hasColumn('estimates', 'sequence_number')) {
+                $estimates = Estimate::all();
+
+                $estimates->map(function ($estimate) {
+                    $estimateNumber = explode("-", $estimate->estimate_number);
+                    $estimate->sequence_number = intval(end($estimateNumber));
+                    $estimate->save();
+                });
+            }
+
+            if (Schema::hasColumn('payments', 'sequence_number')) {
+                $payments = Payment::all();
+
+                $payments->map(function ($payment) {
+                    $paymentNumber = explode("-", $payment->payment_number);
+                    $payment->sequence_number = intval(end($paymentNumber));
+                    $payment->save();
+                });
+            }
+
+            /**
+             * Invoice/Est prefix, Inv/Est length
+             */
+            $this->updateCompanySettings($user, self::NEW_SETTINGS_FIELDS);
+            $this->removeDeprecatedFields(array_keys(self::DEPRECATED_FIELDS));
         }
-
-        if (Schema::hasColumn('estimates', 'sequence_number')) {
-            $estimates = Estimate::all();
-
-            $estimates->map(function ($estimate) {
-                $estimateNumber = explode("-", $estimate->estimate_number);
-                $estimate->sequence_number = intval(end($estimateNumber));
-                $estimate->save();
-            });
-        }
-
-        if (Schema::hasColumn('payments', 'sequence_number')) {
-            $payments = Payment::all();
-
-            $payments->map(function ($payment) {
-                $paymentNumber = explode("-", $payment->payment_number);
-                $payment->sequence_number = intval(end($paymentNumber));
-                $payment->save();
-            });
-        }
-
-        /**
-         * Invoice/Est prefix, Inv/Est length
-         */
-        $this->updateCompanySettings($user, self::NEW_SETTINGS_FIELDS);
-        $this->removeDeprecatedFields(array_keys(self::DEPRECATED_FIELDS));
     }
 
     /**

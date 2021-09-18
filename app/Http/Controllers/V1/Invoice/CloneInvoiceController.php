@@ -4,10 +4,9 @@ namespace Crater\Http\Controllers\V1\Invoice;
 
 use Carbon\Carbon;
 use Crater\Http\Controllers\Controller;
-use Crater\Models\CompanySetting;
 use Crater\Models\Invoice;
 use Illuminate\Http\Request;
-
+use Crater\Services\SerialNumberFormatter;
 class CloneInvoiceController extends Controller
 {
     /**
@@ -19,12 +18,15 @@ class CloneInvoiceController extends Controller
     public function __invoke(Request $request, Invoice $invoice)
     {
         $date = Carbon::now();
+        $serial = (new SerialNumberFormatter())
+            ->setModel($invoice)
+            ->setNextSequenceNumber();
 
         $newInvoice = Invoice::create([
             'invoice_date' => $date->format('Y-m-d'),
             'due_date' => $date->format('Y-m-d'),
-            'invoice_number' => $invoice->getNextInvoiceNumber(),
-            'sequence_number' => $invoice::getNextInvoiceSequenceNumber(),
+            'invoice_number' => $serial->getNextNumber(),
+            'sequence_number' => $serial->nextSequenceNumber,
             'reference_number' => $invoice->reference_number,
             'user_id' => $invoice->user_id,
             'company_id' => $request->header('company'),

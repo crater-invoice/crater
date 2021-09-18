@@ -5,12 +5,9 @@ namespace Database\Factories;
 use Crater\Models\Invoice;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Crater\Traits\SerialNumberFormatter;
 
 class InvoiceFactory extends Factory
 {
-    use SerialNumberFormatter;
-
     /**
      * The name of the factory's corresponding model.
      *

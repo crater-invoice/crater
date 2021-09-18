@@ -7,6 +7,7 @@ use Crater\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+use Crater\Services\SerialNumberFormatter;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -56,14 +57,13 @@ test('invoice belongs to user', function () {
 
 test('get next invoice number', function () {
     $invoice = Invoice::factory()->create();
+    $serial = (new SerialNumberFormatter())->setModel($invoice);
 
-    $prefix = $invoice->getInvoicePrefixAttribute();
-
-    $nextNumber = $invoice->getNextInvoiceNumber();
+    $nextNumber = $serial->getNextNumber();
 
     $invoice1 = Invoice::factory()->create();
 
-    $this->assertEquals($prefix.'-'.$nextNumber, $invoice1['invoice_number']);
+    $this->assertEquals($nextNumber, $invoice1['invoice_number']);
 });
 
 test('get invoice prefix attribute', function () {

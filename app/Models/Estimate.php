@@ -6,6 +6,7 @@ use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Crater\Mail\SendEstimateMail;
+use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
-use Crater\Traits\SerialNumberFormatter;
 
 class Estimate extends Model implements HasMedia
 {
@@ -22,7 +22,6 @@ class Estimate extends Model implements HasMedia
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
-    use SerialNumberFormatter;
 
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
@@ -70,34 +69,6 @@ class Estimate extends Model implements HasMedia
     public function getEstimatePdfUrlAttribute()
     {
         return url('/estimates/pdf/'.$this->unique_hash);
-    }
-
-    public function getNextEstimateNumber()
-    {
-        $nextSequenceNumber = self::getNextEstimateSequenceNumber();
-        
-        $format = CompanySetting::getSetting(
-            'estimate_format', 
-            request()->header('company')
-        );
-
-        $serialNumber = $this->generateSerialNumber(
-            $format, 
-            $nextSequenceNumber
-        );
-
-        return $serialNumber;
-    }
-
-    public static function getNextEstimateSequenceNumber()
-    {
-        $last = Estimate::orderBy('sequence_number', 'desc')
-            ->take(1)
-            ->first();
-
-        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
-
-        return $nextSequenceNumber;
     }
 
     public function emailLogs()
@@ -264,7 +235,10 @@ class Estimate extends Model implements HasMedia
 
         $estimate = self::create($data);
         $estimate->unique_hash = Hashids::connection(Estimate::class)->encode($estimate->id);
-        $estimate->sequence_number = self::getNextEstimateSequenceNumber();
+        $serial = (new SerialNumberFormatter())
+            ->setModel($estimate)
+            ->setNextSequenceNumber();
+        $estimate->sequence_number = $serial->nextSequenceNumber;
         $estimate->save();
 
         self::createItems($estimate, $request);

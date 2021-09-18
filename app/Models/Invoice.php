@@ -6,6 +6,7 @@ use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Crater\Mail\SendInvoiceMail;
+use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,14 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
-use Crater\Traits\SerialNumberFormatter;
 class Invoice extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
-    use SerialNumberFormatter;
 
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
@@ -71,34 +70,6 @@ class Invoice extends Model implements HasMedia
         if ($value) {
             $this->attributes['due_date'] = Carbon::createFromFormat('Y-m-d', $value);
         }
-    }
-
-    public function getNextInvoiceNumber()
-    {
-        $nextSequenceNumber = self::getNextInvoiceSequenceNumber();
-        
-        $format = CompanySetting::getSetting(
-            'invoice_format', 
-            request()->header('company')
-        );
-
-        $serialNumber = $this->generateSerialNumber(
-            $format, 
-            $nextSequenceNumber
-        );
-
-        return $serialNumber;
-    }
-
-    public static function getNextInvoiceSequenceNumber()
-    {
-        $last = Invoice::orderBy('sequence_number', 'desc')
-            ->take(1)
-            ->first();
-
-        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
-
-        return $nextSequenceNumber;
     }
 
     public function emailLogs()
@@ -301,7 +272,7 @@ class Invoice extends Model implements HasMedia
         return $query->paginate($limit);
     }
 
-    public static function createInvoice($request)
+    public function createInvoice($request)
     {
         $data = $request->except('items', 'taxes');
 
@@ -319,7 +290,10 @@ class Invoice extends Model implements HasMedia
 
         $invoice = Invoice::create($data);
         $invoice->unique_hash = Hashids::connection(Invoice::class)->encode($invoice->id);
-        $invoice->sequence_number = Invoice::getNextInvoiceSequenceNumber();
+        $serial = (new SerialNumberFormatter())
+            ->setModel($invoice)
+            ->setNextSequenceNumber();
+        $invoice->sequence_number = $serial->nextSequenceNumber;
         $invoice->save();
 
         self::createItems($invoice, $request);

@@ -52,9 +52,9 @@ class InvoicesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Requests\InvoicesRequest $request)
+    public function store(Requests\InvoicesRequest $request, Invoice $invoice)
     {
-        $invoice = Invoice::createInvoice($request);
+        $invoice = $invoice->createInvoice($request);
 
         if ($request->has('invoiceSend')) {
             $invoice->send($request->subject, $request->body);

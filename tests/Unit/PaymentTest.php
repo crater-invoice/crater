@@ -4,6 +4,7 @@ use Crater\Models\Payment;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+use Crater\Services\SerialNumberFormatter;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -62,12 +63,11 @@ test('get payment prefix attribute', function () {
 
 test('get next payment number', function () {
     $payment = Payment::factory()->create();
+    $serial = (new SerialNumberFormatter())->setModel($payment);
 
-    $prefix_attribute = $payment->getPaymentPrefixAttribute();
-
-    $next_payment_number = $payment->getNextPaymentNumber($prefix_attribute);
+    $next_payment_number = $serial->getNextNumber();
 
     $payment2 = Payment::factory()->create();
 
-    $this->assertEquals($prefix_attribute.'-'.$next_payment_number, $payment2['payment_number']);
+    $this->assertEquals($next_payment_number, $payment2['payment_number']);
 });

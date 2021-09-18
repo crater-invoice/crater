@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Crater\Models\Estimate;
 use Crater\Models\User;
+use Crater\Services\SerialNumberFormatter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstimateFactory extends Factory
@@ -67,11 +68,14 @@ class EstimateFactory extends Factory
      */
     public function definition()
     {
+        $estimate = new Estimate();
+        $serial = (new SerialNumberFormatter())->setModel($estimate)->setNextSequenceNumber();
+
         return [
             'estimate_date' => $this->faker->date('Y-m-d', 'now'),
             'expiry_date' => $this->faker->date('Y-m-d', 'now'),
-            'estimate_number' => 'EST-'.Estimate::getNextEstimateNumber('EST'),
-            'reference_number' => Estimate::getNextEstimateNumber('EST'),
+            'estimate_number' => $serial->getNextNumber(),
+            'reference_number' => $serial->getNextNumber(),
             'company_id' => User::where('role', 'super admin')->first()->company_id,
             'user_id' => User::factory()->create(['role' => 'customer'])->id,
             'status' => Estimate::STATUS_DRAFT,

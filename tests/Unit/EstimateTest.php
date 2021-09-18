@@ -7,6 +7,7 @@ use Crater\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+use Crater\Services\SerialNumberFormatter;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -48,14 +49,13 @@ test('estimate has many taxes', function () {
 
 test('get next estimate number', function () {
     $estimate = Estimate::factory()->create();
+    $serial = (new SerialNumberFormatter())->setModel($estimate);
 
-    $prefix = $estimate->getEstimatePrefixAttribute();
-
-    $nextNumber = $estimate->getNextEstimateNumber($prefix);
+    $nextNumber = $serial->getNextNumber();
 
     $estimate1 = Estimate::factory()->create();
 
-    $this->assertEquals($prefix.'-'.$nextNumber, $estimate1['estimate_number']);
+    $this->assertEquals($nextNumber, $estimate1['estimate_number']);
 });
 
 test('get estimate prefix attribute', function () {

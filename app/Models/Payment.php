@@ -6,6 +6,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Crater\Jobs\GeneratePaymentPdfJob;
 use Crater\Mail\SendPaymentMail;
+use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,15 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
-use Crater\Traits\SerialNumberFormatter;
-
 class Payment extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
-    use SerialNumberFormatter;
 
     public const PAYMENT_MODE_CHECK = 'CHECK';
     public const PAYMENT_MODE_OTHER = 'OTHER';
@@ -150,7 +148,10 @@ class Payment extends Model implements HasMedia
 
         $payment = Payment::create($data);
         $payment->unique_hash = Hashids::connection(Payment::class)->encode($payment->id);
-        $payment->sequence_number = Payment::getNextPaymentSequenceNumber();
+        $serial = (new SerialNumberFormatter())
+            ->setModel($payment)
+            ->setNextSequenceNumber();
+        $payment->sequence_number = $serial->nextSequenceNumber;
         $payment->save();
 
         $customFields = $request->customFields;
@@ -237,34 +238,6 @@ class Payment extends Model implements HasMedia
         }
 
         return true;
-    }
-
-    public function getNextPaymentNumber()
-    {
-        $nextSequenceNumber = self::getNextPaymentSequenceNumber();
-        
-        $format = CompanySetting::getSetting(
-            'payment_format', 
-            request()->header('company')
-        );
-
-        $serialNumber = $this->generateSerialNumber(
-            $format, 
-            $nextSequenceNumber
-        );
-
-        return $serialNumber;
-    }
-
-    public static function getNextPaymentSequenceNumber()
-    {
-        $last = Payment::orderBy('sequence_number', 'desc')
-            ->take(1)
-            ->first();
-
-        $nextSequenceNumber = ($last) ? $last->sequence_number+1 : 1;
-
-        return $nextSequenceNumber;
     }
 
     public function scopeWhereSearch($query, $search)

@@ -3,7 +3,7 @@
 namespace Crater\Http\Controllers\V1\General;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Models\CompanySetting;
+use Crater\Services\SerialNumberFormatter;
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
 use Crater\Models\Payment;
@@ -21,16 +21,17 @@ class NextNumberController extends Controller
     {
         $key = $request->key;
         $nextNumber = null;
+        $serial = new SerialNumberFormatter();
 
         switch ($key) {
             case 'invoice':
-                $nextNumber = $invoice->getNextInvoiceNumber();
+                $nextNumber = $serial->setModel($invoice)->getNextNumber();
                 break;
             case 'estimate':
-                $nextNumber = $estimate->getNextEstimateNumber();
+                $nextNumber = $serial->setModel($estimate)->getNextNumber();
                 break;
             case 'payment':
-                $nextNumber = $payment->getNextPaymentNumber();
+                $nextNumber = $serial->setModel($payment)->getNextNumber();
                 break;
             default:
                 return;

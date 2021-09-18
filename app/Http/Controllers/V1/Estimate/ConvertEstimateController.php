@@ -4,7 +4,7 @@ namespace Crater\Http\Controllers\V1\Estimate;
 
 use Carbon\Carbon;
 use Crater\Http\Controllers\Controller;
-use Crater\Models\CompanySetting;
+use Crater\Services\SerialNumberFormatter;
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
 use Illuminate\Http\Request;
@@ -25,13 +25,16 @@ class ConvertEstimateController extends Controller
 
         $invoice_date = Carbon::now();
         $due_date = Carbon::now()->addDays(7);
+        $serial = (new SerialNumberFormatter())
+            ->setModel($invoice)
+            ->setNextSequenceNumber();
 
         $invoice = Invoice::create([
             'creator_id' => Auth::id(),
             'invoice_date' => $invoice_date->format('Y-m-d'),
             'due_date' => $due_date->format('Y-m-d'),
-            'invoice_number' => $invoice->getNextInvoiceNumber(),
-            'sequence_number' => $invoice::getNextInvoiceSequenceNumber(),
+            'invoice_number' => $serial->getNextNumber(),
+            'sequence_number' => $serial->nextSequenceNumber,
             'reference_number' => $estimate->reference_number,
             'user_id' => $estimate->user_id,
             'company_id' => $request->header('company'),

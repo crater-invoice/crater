@@ -24,11 +24,7 @@ class Company extends Model implements HasMedia
         $isSystem = FileDisk::whereSetAsDefault(true)->first()->isSystem();
 
         if ($logo) {
-            if ($isSystem) {
-                return $logo->getPath();
-            } else {
-                return $logo->getFullUrl();
-            }
+            return $logo->getFullUrl();
         }
 
         return null;

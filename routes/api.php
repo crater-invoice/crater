@@ -234,6 +234,8 @@ Route::prefix('/v1')->group(function () {
         Route::post('/invoices/{invoice}/status', ChangeInvoiceStatusController::class);
 
         Route::post('/invoices/delete', [InvoicesController::class, 'delete']);
+        
+        Route::post('/invoices/create', [InvoicesController::class, 'store']);
 
         Route::get('/invoices/templates', InvoiceTemplatesController::class);
 
@@ -251,6 +253,8 @@ Route::prefix('/v1')->group(function () {
 
         Route::get('/estimates/templates', EstimateTemplatesController::class);
 
+        Route::post('/estimates/delete', [EstimatesController::class, 'delete']);
+        
         Route::post('/estimates/delete', [EstimatesController::class, 'delete']);
 
         Route::apiResource('estimates', EstimatesController::class);

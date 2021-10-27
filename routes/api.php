@@ -255,7 +255,7 @@ Route::prefix('/v1')->group(function () {
 
         Route::post('/estimates/delete', [EstimatesController::class, 'delete']);
         
-        Route::post('/estimates/delete', [EstimatesController::class, 'delete']);
+        Route::post('/estimates/delete', [EstimatesController::class, 'store']);
 
         Route::apiResource('estimates', EstimatesController::class);
 

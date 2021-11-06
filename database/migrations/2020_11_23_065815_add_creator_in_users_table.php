@@ -27,7 +27,9 @@ class AddCreatorInUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['creator_id']);
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'creator_id' ] );
+            }
         });
     }
 }

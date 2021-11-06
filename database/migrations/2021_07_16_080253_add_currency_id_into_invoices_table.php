@@ -27,6 +27,9 @@ class AddCurrencyIdIntoInvoicesTable extends Migration
     public function down()
     {
         Schema::table('invoices', function (Blueprint $table) {
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'currency_id' ] );
+            }
             $table->dropColumn('currency_id');
         });
     }

@@ -33,6 +33,6 @@ class CreateExchangeRateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exchange_rates');
+        Schema::dropIfExists('exchange_rate_logs');
     }
 }

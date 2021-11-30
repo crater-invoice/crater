@@ -20,7 +20,7 @@ import Register from './views/auth/Register.vue'
 
 import NotFoundPage from './views/errors/404.vue'
 
-// Dashbord
+// Dashboard
 import Dashboard from './views/dashboard/Dashboard.vue'
 
 // Customers

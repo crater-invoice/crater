@@ -439,7 +439,7 @@ export default {
   },
   methods: {
     /**
-     * Returns the internalValue in a way it can be emited to the parent
+     * Returns the internalValue in a way it can be emitted to the parent
      * @returns {Object||Array||String||Integer}
      */
     getValue() {

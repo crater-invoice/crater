@@ -41,44 +41,54 @@ class UpdateCustomerIdInAllTables extends Migration
                     });
                 }
 
-                $user->addresses->map(function ($address) use ($newCustomer) {
-                    if ($address) {
-                        $address->customer_id = $newCustomer->id;
-                        $address->user_id = null;
-                        $address->save();
-                    }
-                });
+                if ($user->addresses()->exists()) {
+                    $user->addresses->map(function ($address) use ($newCustomer) {
+                        if ($address) {
+                            $address->customer_id = $newCustomer->id;
+                            $address->user_id = null;
+                            $address->save();
+                        }
+                    });
+                }
 
-                $user->expenses->map(function ($expense) use ($newCustomer) {
-                    if ($expense) {
-                        $expense->customer_id = $newCustomer->id;
-                        $expense->user_id = null;
-                        $expense->save();
-                    }
-                });
+                if ($user->expenses()->exists()) {
+                    $user->expenses->map(function ($expense) use ($newCustomer) {
+                        if ($expense) {
+                            $expense->customer_id = $newCustomer->id;
+                            $expense->user_id = null;
+                            $expense->save();
+                        }
+                    });
+                }
 
-                $user->estimates->map(function ($estimate) use ($newCustomer) {
-                    if ($estimate) {
-                        $estimate->customer_id = $newCustomer->id;
-                        $estimate->user_id = null;
-                        $estimate->save();
-                    }
-                });
+                if ($user->estimates()->exists()) {
+                    $user->estimates->map(function ($estimate) use ($newCustomer) {
+                        if ($estimate) {
+                            $estimate->customer_id = $newCustomer->id;
+                            $estimate->user_id = null;
+                            $estimate->save();
+                        }
+                    });
+                }
 
-                $user->invoices->map(function ($invoice) use ($newCustomer) {
-                    if ($invoice) {
-                        $invoice->customer_id = $newCustomer->id;
-                        $invoice->user_id = null;
-                        $invoice->save();
-                    }
-                });
+                if ($user->invoices()->exists()) {
+                    $user->invoices->map(function ($invoice) use ($newCustomer) {
+                        if ($invoice) {
+                            $invoice->customer_id = $newCustomer->id;
+                            $invoice->user_id = null;
+                            $invoice->save();
+                        }
+                    });
+                }
 
-                $user->payments->map(function ($payment) use ($newCustomer) {
-                    if ($payment) {
-                        $payment->customer_id = $newCustomer->id;
-                        $payment->save();
-                    }
-                });
+                if ($user->payments()->exists()) {
+                    $user->payments->map(function ($payment) use ($newCustomer) {
+                        if ($payment) {
+                            $payment->customer_id = $newCustomer->id;
+                            $payment->save();
+                        }
+                    });
+                }
             }
         }
 

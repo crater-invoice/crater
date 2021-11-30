@@ -26,7 +26,7 @@ class AddOwnerIdToCompaniesTable extends Migration
 
         $companies = Company::all();
 
-        if ($companies) {
+        if ($companies && $user) {
             foreach ($companies as $company) {
                 $company->owner_id = $user->id;
                 $company->slug = Str::slug($company->name);

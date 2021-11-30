@@ -33,12 +33,12 @@ class UpdateCraterVersion400 extends Migration
             ]);
 
             // Update language
-            $user->setSettings(['language' => CompanySetting::getSetting('language', $user->company_id)]);
+            $user->setSettings(['language' => CompanySetting::getSetting('language', $user->companies()->first()->id)]);
 
             // Update user's addresses
             if ($user->addresses()->exists()) {
                 foreach ($user->addresses as $address) {
-                    $address->company_id = $user->company_id;
+                    $address->company_id = $user->companies()->first()->id;
                     $address->user_id = null;
                     $address->save();
                 }
@@ -131,6 +131,6 @@ class UpdateCraterVersion400 extends Migration
             'payment_from_customer_address_format' => $paymentFromCustomerAddress,
         ];
 
-        CompanySetting::setSettings($settings, $user->company_id);
+        CompanySetting::setSettings($settings, $user->companies()->first()->id);
     }
 }

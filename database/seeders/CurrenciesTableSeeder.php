@@ -567,7 +567,16 @@ class CurrenciesTableSeeder extends Seeder
                 'thousand_separator' => ',',
                 'decimal_separator' => '.',
             ],
+            [
+                'name' => 'Jamaican Dollar',
+                'code' => 'JMD',
+                'symbol' => '$',
+                'precision' => '0',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.',
+            ],
         ];
+
 
         foreach ($currencies as $currency) {
             Currency::create($currency);

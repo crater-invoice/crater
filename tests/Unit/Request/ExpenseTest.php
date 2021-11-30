@@ -16,7 +16,7 @@ test('expense request validation rules', function () {
             'amount' => [
                 'required',
             ],
-            'user_id' => [
+            'customer_id' => [
                 'nullable',
             ],
             'notes' => [

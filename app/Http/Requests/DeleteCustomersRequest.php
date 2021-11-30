@@ -30,7 +30,7 @@ class DeleteCustomersRequest extends FormRequest
             ],
             'ids.*' => [
                 'required',
-                Rule::exists('users', 'id'),
+                Rule::exists('customers', 'id'),
             ],
         ];
     }

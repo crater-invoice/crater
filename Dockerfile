@@ -1,40 +1,44 @@
-FROM php:7.4-fpm
+FROM php:7.4-fpm-alpine
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    libzip-dev \
-    libmagickwand-dev \
-    mariadb-client
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN pecl install imagick \
-    && docker-php-ext-enable imagick
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
-# Set working directory
 WORKDIR /var/www
 
-USER $user
+RUN apk add --no-cache \
+            $PHPIZE_DEPS \
+            freetype-dev \
+            git \
+            zip \
+            libzip-dev \
+            php7-bcmath \
+            curl \
+            unzip \
+            libjpeg-turbo-dev \
+            libpng-dev \
+            libxml2-dev \
+            mariadb-client \
+            sqlite \
+            php7-json \
+            php7-openssl \
+            php7-pdo \
+            php7-pdo_mysql \
+            php7-session \
+            php7-simplexml \
+            php7-tokenizer \
+            php7-xml \
+            imagemagick \
+            imagemagick-libs \
+            imagemagick-dev \
+            php7-imagick \
+            php7-pcntl \
+            --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/ gnu-libiconv=1.15-r3
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
+RUN printf "\n" | pecl install \
+		imagick && \
+		docker-php-ext-enable --ini-name 20-imagick.ini imagick
+
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install iconv pdo pdo_mysql bcmath pcntl exif
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype
+RUN docker-php-ext-install gd

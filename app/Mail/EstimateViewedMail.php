@@ -30,10 +30,7 @@ class EstimateViewedMail extends Mailable
      */
     public function build()
     {
-        $email = $this->data['user']['email'];
-        $name = $this->data['user']['name'];
-
-        return $this->from($email, $name)
+        return $this->from(config('mail.from.address'), config('mail.from.name'))
                     ->markdown('emails.viewed.estimate', ['data', $this->data]);
     }
 }

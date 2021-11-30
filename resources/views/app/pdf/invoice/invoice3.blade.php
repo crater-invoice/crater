@@ -312,7 +312,7 @@
                     @if($logo)
                     <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    <h1 class="header-logo"> {{$invoice->user->company->name}} </h1>
+                    <h1 class="header-logo"> {{$invoice->customer->company->name}} </h1>
                     @endif
                 </td>
                 <td width="50%" class="text-right company-address-container company-address">

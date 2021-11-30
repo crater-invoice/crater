@@ -1,6 +1,7 @@
 <?php
 
 use Crater\Http\Requests\PaymentMethodRequest;
+use Illuminate\Validation\Rule;
 
 test('payment method request validation rules', function () {
     $request = new PaymentMethodRequest();
@@ -9,7 +10,8 @@ test('payment method request validation rules', function () {
         [
             'name' => [
                 'required',
-                'unique:payment_methods,name',
+                Rule::unique('units')
+                    ->where('payment_methods', $request->header('company')),
             ],
         ],
         $request->rules()

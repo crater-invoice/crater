@@ -21,9 +21,9 @@ class PaymentMethod extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function scopeWhereCompany($query, $company_id)
+    public function scopeWhereCompany($query)
     {
-        $query->where('company_id', $company_id);
+        $query->where('company_id', request()->header('company'));
     }
 
     public function scopeWherePaymentMethod($query, $payment_id)
@@ -56,7 +56,7 @@ class PaymentMethod extends Model
     public function scopePaginateData($query, $limit)
     {
         if ($limit == 'all') {
-            return collect(['data' => $query->get()]);
+            return $query->get();
         }
 
         return $query->paginate($limit);

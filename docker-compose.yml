@@ -39,10 +39,20 @@ services:
     image: nginx:1.17-alpine
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - crater
+
+  cron:
+    build:
+      context: ./
+      dockerfile: ./docker-compose/cron.dockerfile
+    container_name: cron
+    volumes:
+      - ./:/var/www
     networks:
       - crater
 

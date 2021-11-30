@@ -9,6 +9,7 @@
  * @see https://github.com/vinkla/laravel-hashids
  */
 
+use Crater\Models\Company;
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
 use Crater\Models\Payment;
@@ -54,6 +55,11 @@ return [
             'salt' => Payment::class.config('app.key'),
             'length' => '20',
             'alphabet' => 'asqtW3eDRIxB65GYl7UVLS1dybn9XrKTZ4zO',
+        ],
+        Company::class => [
+            'salt' => Company::class.config('app.key'),
+            'length' => '20',
+            'alphabet' => 's0DxOFtEYEnuKPmP08Ch6A1iHlLmBTBVWms5',
         ],
     ],
 

@@ -1,0 +1,44 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "search.exclude": {
+            "**/public": true
+        },
+        "editor.formatOnSave": true,
+        "vetur.validation.template": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": true,
+        "editor.codeActionsOnSaveTimeout": 2000,
+        "prettier.semi": false,
+        "prettier.singleQuote": true,
+        "files.associations": {},
+        "eslint.codeAction.disableRuleComment": {},
+        "eslint.codeAction.showDocumentation": {
+            "enable": true
+        },
+        "eslint.validate": [
+            "javascript",
+            "javascriptreact",
+            "vue"
+        ],
+        "[php]": {
+            "editor.defaultFormatter": "junstyle.php-cs-fixer"
+        },
+        "debug.allowBreakpointsEverywhere": true,
+        "files.autoGuessEncoding": true,
+        "files.exclude": {
+            "**/.vscode": true,
+            "compile_commands.json": true,
+            "*.hrccproj": true,
+            "*.sln": true,
+            "*.suo": true
+        },
+    }
+}

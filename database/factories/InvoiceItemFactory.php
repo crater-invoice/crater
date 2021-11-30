@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Crater\Models\InvoiceItem;
 use Crater\Models\Item;
+use Crater\Models\RecurringInvoice;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -34,7 +35,7 @@ class InvoiceItemFactory extends Factory
             'price' => function (array $item) {
                 return Item::find($item['item_id'])->price;
             },
-            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'company_id' => User::find(1)->companies()->first()->id,
             'quantity' => $this->faker->randomDigitNotNull,
             'total' => function (array $item) {
                 return ($item['price'] * $item['quantity']);
@@ -47,6 +48,12 @@ class InvoiceItemFactory extends Factory
                 return $invoice['discount_type'] == 'percentage' ? (($invoice['discount_val'] * $invoice['total']) / 100) : $invoice['discount_val'];
             },
             'tax' => $this->faker->randomDigitNotNull,
+            'recurring_invoice_id' => RecurringInvoice::factory(),
+            'exchange_rate' => $this->faker->randomDigitNotNull,
+            'base_discount_val' => $this->faker->randomDigitNotNull,
+            'base_price' => $this->faker->randomDigitNotNull,
+            'base_total' => $this->faker->randomDigitNotNull,
+            'base_tax' => $this->faker->randomDigitNotNull,
         ];
     }
 }

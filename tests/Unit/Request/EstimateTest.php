@@ -1,8 +1,7 @@
 <?php
 
 use Crater\Http\Requests\EstimatesRequest;
-use Crater\Models\Estimate;
-use Crater\Rules\UniqueNumber;
+use Illuminate\Validation\Rule;
 
 test('estimate request validation rules', function () {
     $request = new EstimatesRequest();
@@ -13,10 +12,14 @@ test('estimate request validation rules', function () {
                 'required',
             ],
             'expiry_date' => [
+                'nullable',
+            ],
+            'customer_id' => [
                 'required',
             ],
-            'user_id' => [
+            'estimate_number' => [
                 'required',
+                Rule::unique('estimates')->where('company_id', null)
             ],
             'discount' => [
                 'required',
@@ -41,7 +44,7 @@ test('estimate request validation rules', function () {
                 'array',
             ],
             'items.*.description' => [
-                'max:255',
+                'nullable',
             ],
             'items.*' => [
                 'required',
@@ -55,10 +58,6 @@ test('estimate request validation rules', function () {
             ],
             'items.*.price' => [
                 'required',
-            ],
-            'estimate_number' => [
-                'required',
-                new UniqueNumber(Estimate::class),
             ],
         ],
         $request->rules()

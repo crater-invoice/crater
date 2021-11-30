@@ -16,6 +16,10 @@ class FileDisk extends Model
         'id',
     ];
 
+    protected $casts = [
+        'set_as_default' => 'boolean',
+    ];
+
     public function setCredentialsAttribute($value)
     {
         $this->attributes['credentials'] = json_encode($value);
@@ -45,7 +49,7 @@ class FileDisk extends Model
     public function scopePaginateData($query, $limit)
     {
         if ($limit == 'all') {
-            return collect(['data' => $query->get()]);
+            return $query->get();
         }
 
         return $query->paginate($limit);
@@ -65,7 +69,7 @@ class FileDisk extends Model
         }
 
         if ($filters->get('orderByField') || $filters->get('orderBy')) {
-            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'invoice_number';
+            $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'sequence_number';
             $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'asc';
             $query->whereOrder($field, $orderBy);
         }
@@ -139,6 +143,7 @@ class FileDisk extends Model
             'name' => $request->name,
             'driver' => $request->driver,
             'set_as_default' => $request->set_as_default,
+            'company_id' => $request->header('company'),
         ]);
 
         return $disk;

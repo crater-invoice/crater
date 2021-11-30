@@ -1,8 +1,7 @@
 <?php
 
 use Crater\Http\Requests\InvoicesRequest;
-use Crater\Models\Invoice;
-use Crater\Rules\UniqueNumber;
+use Illuminate\Validation\Rule;
 
 test('invoice request validation rules', function () {
     $request = new InvoicesRequest();
@@ -13,10 +12,14 @@ test('invoice request validation rules', function () {
                 'required',
             ],
             'due_date' => [
+                'nullable',
+            ],
+            'customer_id' => [
                 'required',
             ],
-            'user_id' => [
+            'invoice_number' => [
                 'required',
+                Rule::unique('invoices')->where('company_id', null)
             ],
             'discount' => [
                 'required',
@@ -45,7 +48,7 @@ test('invoice request validation rules', function () {
                 'max:255',
             ],
             'items.*.description' => [
-                'max:255',
+                'nullable',
             ],
             'items.*.name' => [
                 'required',
@@ -55,10 +58,6 @@ test('invoice request validation rules', function () {
             ],
             'items.*.price' => [
                 'required',
-            ],
-            'invoice_number' => [
-                'required',
-                new UniqueNumber(Invoice::class),
             ],
         ],
         $request->rules()

@@ -23,15 +23,15 @@ class CustomFieldValue extends Model
         if ($value && $value != null) {
             $this->attributes['date_answer'] = Carbon::createFromFormat('Y-m-d', $value);
         }
-        $this->attributes['date_answer'] = null;
     }
 
     public function setTimeAnswerAttribute($value)
     {
         if ($value && $value != null) {
             $this->attributes['time_answer'] = date("H:i:s", strtotime($value));
+        } else {
+            $this->attributes['time_answer'] = null;
         }
-        $this->attributes['time_answer'] = null;
     }
 
     public function setDateTimeAnswerAttribute($value)

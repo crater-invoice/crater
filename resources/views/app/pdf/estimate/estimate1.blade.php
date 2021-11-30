@@ -391,8 +391,8 @@
                     @if($logo)
                         <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        @if($estimate->user->company)
-                            <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
+                        @if($estimate->customer->company)
+                            <h2 class="header-logo"> {{$estimate->customer->company->name}} </h2>
                         @endif
                     @endif
                 </td>

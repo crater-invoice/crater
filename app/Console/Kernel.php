@@ -2,6 +2,7 @@
 
 namespace Crater\Console;
 
+use Crater\Models\RecurringInvoice;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,6 +32,13 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('check:estimates:status')
             ->daily();
+
+        $recurringInvoices = RecurringInvoice::where('status', 'ACTIVE')->get();
+        foreach ($recurringInvoices as $recurringInvoice) {
+            $schedule->call(function () use ($recurringInvoice) {
+                $recurringInvoice->generateInvoice();
+            })->cron($recurringInvoice->frequency);
+        }
     }
 
     /**

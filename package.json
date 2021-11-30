@@ -35,7 +35,7 @@
     "@vuelidate/core": "^2.0.0-alpha.32",
     "@vuelidate/validators": "^2.0.0-alpha.25",
     "@vueuse/core": "^6.0.0",
-    "axios": "^0.19",
+    "axios": "^0.21",
     "chart.js": "^2.7.3",
     "guid": "0.0.12",
     "lodash": "^4.17.13",

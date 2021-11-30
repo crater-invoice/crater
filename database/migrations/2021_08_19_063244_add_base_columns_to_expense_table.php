@@ -16,8 +16,7 @@ class AddBaseColumnsToExpenseTable extends Migration
         Schema::table('expenses', function (Blueprint $table) {
             $table->decimal('exchange_rate', 19, 6)->nullable();
             $table->unsignedBigInteger('base_amount')->nullable();
-            $table->unsignedInteger('currency_id');
-            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->unsignedInteger('currency_id')->nullable();
         });
     }
 

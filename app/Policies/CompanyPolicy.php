@@ -21,7 +21,7 @@ class CompanyPolicy
 
     public function delete(User $user, Company $company)
     {
-        if ($user->id === $company->owner_id) {
+        if ($user->id == $company->owner_id) {
             return true;
         }
 
@@ -30,7 +30,7 @@ class CompanyPolicy
 
     public function transferOwnership(User $user, Company $company)
     {
-        if ($user->id === $company->owner_id) {
+        if ($user->id == $company->owner_id) {
             return true;
         }
 

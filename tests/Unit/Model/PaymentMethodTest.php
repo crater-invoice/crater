@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
     Artisan::call('db:seed', ['--class' => 'DemoSeeder', '--force' => true]);
-    Artisan::call('db:seed', ['--class' => 'UnitSeeder', '--force' => true]);
-    Artisan::call('db:seed', ['--class' => 'PaymentMethodSeeder', '--force' => true]);
 });
 
 test('payment method has many payment', function () {

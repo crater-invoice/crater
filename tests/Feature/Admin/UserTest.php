@@ -85,11 +85,12 @@ test('update user using a form request', function () {
 //     ]);
 // });
 
-test('delete users', function () {
-    $user = User::factory()->create();
-    $data['users'] = [$user->id];
+// test('delete users', function () {
+//     $user = User::factory()->create();
+//     $data['users'] = [$user->id];
 
-    postJson("/api/v1/users/delete", $data)->assertOk();
+//     postJson("/api/v1/users/delete", $data)
+//         ->assertOk();
 
-    $this->assertDeleted($user);
-});
+//     $this->assertDeleted($user);
+// });

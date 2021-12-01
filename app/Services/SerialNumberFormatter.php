@@ -51,7 +51,7 @@ class SerialNumberFormatter
             $this->nextSequenceNumber = $this->ob->sequence_number;
         }
 
-        if (isSet($this->ob) && isSet($this->ob->customer_sequence_number) && isSet($this->customer) && $this->ob->customer_id == $this->customer->id) {
+        if (isset($this->ob) && isset($this->ob->customer_sequence_number) && isset($this->customer) && $this->ob->customer_id == $this->customer->id) {
             $this->nextCustomerSequenceNumber = $this->ob->customer_sequence_number;
         }
 

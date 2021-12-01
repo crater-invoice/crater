@@ -65,13 +65,15 @@ class PaymentRequest extends FormRequest
 
         $companyCurrency = CompanySetting::getSetting('currency', $this->header('company'));
 
-        $customerCurrency = Customer::find($this->customer_id)->currency_id;
+        $customer = Customer::find($this->customer_id);
 
-        if ((string)$customerCurrency !== $companyCurrency) {
-            $rules['exchange_rate'] = [
-                'required',
-            ];
-        };
+        if ($customer && $companyCurrency) {
+            if ((string)$customer->currency_id !== $companyCurrency) {
+                $rules['exchange_rate'] = [
+                    'required',
+                ];
+            };
+        }
 
         return $rules;
     }

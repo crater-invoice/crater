@@ -54,6 +54,7 @@
                 type="number"
                 small
                 min="1"
+                step="any"
                 @change="syncItemToStore()"
                 @input="v$.quantity.$touch()"
               />
@@ -257,7 +258,7 @@ const quantity = computed({
     return props.itemData.quantity
   },
   set: (newValue) => {
-    updateItemAttribute('quantity', parseInt(newValue))
+    updateItemAttribute('quantity', parseFloat(newValue))
   },
 })
 

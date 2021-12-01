@@ -26,6 +26,7 @@
         "laravel/ui": "^3.0",
         "lavary/laravel-menu": "^1.8",
         "league/flysystem-aws-s3-v3": "^1.0",
+        "predis/predis": "^1.1",
         "silber/bouncer": "v1.0.0-rc.10",
         "spatie/flysystem-dropbox": "^1.2",
         "spatie/laravel-backup": "^6.11",

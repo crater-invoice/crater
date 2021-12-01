@@ -8,7 +8,7 @@ trait ExchangeRateProvidersTrait
 {
     public function getExchangeRate($filter, $baseCurrencyCode, $currencyCode)
     {
-        switch ($filter['driver']) {    
+        switch ($filter['driver']) {
             case 'currency_freak':
                 $url = "https://api.currencyfreaks.com/latest?apikey=".$filter['key'];
 

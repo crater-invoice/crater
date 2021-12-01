@@ -5,7 +5,6 @@ namespace Crater\Http\Requests;
 use Crater\Models\Address;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CustomerRequest extends FormRequest

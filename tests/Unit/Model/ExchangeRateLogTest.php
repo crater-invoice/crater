@@ -16,7 +16,7 @@ test('an exchange rate log belongs to company', function () {
 
 test('add exchange rate log', function () {
     $expense = Expense::factory()->create();
-    $response = ExchangeRateLog::addExchangeRateLog($expense, $expense->currency_id);
+    $response = ExchangeRateLog::addExchangeRateLog($expense);
 
     $this->assertDatabaseHas('exchange_Rate_logs', [
         'exchange_rate' => $response->exchange_rate,

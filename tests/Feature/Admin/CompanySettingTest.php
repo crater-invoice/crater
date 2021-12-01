@@ -25,9 +25,8 @@ beforeEach(function () {
 });
 
 test('get profile', function () {
-    $response = getJson('api/v1/me');
-
-    $response->assertOk();
+    getJson('api/v1/me')
+        ->assertOk();
 });
 
 
@@ -74,11 +73,13 @@ test('update company', function () {
         'address_street_2' => 'test2',
         'phone' => '1234567890',
         'zip' => '112233',
+        'address' => [
+            'country_id' => 2
+        ]
     ];
 
-    $response = putJson('api/v1/company', $company);
-
-    $response->assertOk();
+    putJson('api/v1/company', $company)
+        ->assertOk();
 
     $this->assertDatabaseHas('companies', [
         'name' => $company['name'],
@@ -86,12 +87,6 @@ test('update company', function () {
 
     $this->assertDatabaseHas('addresses', [
         'country_id' => $company['country_id'],
-        'state' => $company['state'],
-        'city' => $company['city'],
-        'address_street_1' => $company['address_street_1'],
-        'address_street_2' => $company['address_street_2'],
-        'phone' => $company['phone'],
-        'zip' => $company['zip'],
     ]);
 });
 

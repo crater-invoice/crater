@@ -278,12 +278,19 @@ export const useEstimateStore = (useWindow = false) => {
           axios
             .post(`/api/v1/estimates/${data.id}/status`, data)
             .then((response) => {
-              const notificationStore = useNotificationStore()
+              let pos = this.estimates.findIndex(
+                (estimate) => estimate.id === data.id
+              )
+              if (this.estimates[pos]) {
+                this.estimates[pos].status = 'ACCEPTED'
 
-              notificationStore.showNotification({
-                type: 'success',
-                message: global.t('estimates.marked_as_accepted_message'),
-              })
+                const notificationStore = useNotificationStore()
+
+                notificationStore.showNotification({
+                  type: 'success',
+                  message: global.t('estimates.marked_as_accepted_message'),
+                })
+              }
               resolve(response)
             })
             .catch((err) => {

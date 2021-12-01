@@ -238,7 +238,9 @@ onSearched = debounce(onSearched, 500)
           style="border-bottom: 1px solid rgba(185, 193, 209, 0.41)"
         >
           <div class="flex-2">
-            <div
+            <BaseText
+              :text="invoice.customer.name"
+              :length="30"
               class="
                 pr-2
                 mb-2
@@ -250,10 +252,8 @@ onSearched = debounce(onSearched, 500)
                 capitalize
                 truncate
               "
-            >
-              {{ invoice.customer.name }}
-            </div>
-
+            />
+            
             <div
               class="
                 mt-1

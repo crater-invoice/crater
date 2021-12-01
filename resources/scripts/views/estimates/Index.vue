@@ -197,9 +197,7 @@
         </template>
 
         <template #cell-name="{ row }">
-          <div>
-            {{ row.data.customer.name }}
-          </div>
+          <BaseText :text="row.data.customer.name" :length="30" />
         </template>
 
         <template #cell-status="{ row }">

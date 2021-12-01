@@ -179,7 +179,10 @@
         </template>
 
         <template #cell-name="{ row }">
-          {{ row.data.customer.name }}
+         <BaseText
+            :text="row.data.customer.name"
+            :length="30"
+          />
         </template>
 
         <!-- Invoice Number  -->

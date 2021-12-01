@@ -211,27 +211,31 @@ async function submitCompanyData() {
   }
 
   isSaving.value = true
-  const res = await companyStore.addNewCompany(newCompanyForm)
-  if (res.data.data) {
-    await companyStore.setSelectedCompany(res.data.data)
-    if (companyLogoFileBlob && companyLogoFileBlob.value) {
-      let logoData = new FormData()
+  try {
+    const res = await companyStore.addNewCompany(newCompanyForm)
+    if (res.data.data) {
+      await companyStore.setSelectedCompany(res.data.data)
+      if (companyLogoFileBlob && companyLogoFileBlob.value) {
+        let logoData = new FormData()
 
-      logoData.append(
-        'company_logo',
-        JSON.stringify({
-          name: companyLogoName.value,
-          data: companyLogoFileBlob.value,
-        })
-      )
+        logoData.append(
+          'company_logo',
+          JSON.stringify({
+            name: companyLogoName.value,
+            data: companyLogoFileBlob.value,
+          })
+        )
 
-      await companyStore.updateCompanyLogo(logoData)
+        await companyStore.updateCompanyLogo(logoData)
+      }
+      await globalStore.setIsAppLoaded(false)
+      await globalStore.bootstrap()
+      closeCompanyModal()
     }
-    await globalStore.setIsAppLoaded(false)
-    await globalStore.bootstrap()
-    closeCompanyModal()
+    isSaving.value = false
+  } catch {
+    isSaving.value = false
   }
-  isSaving.value = false
 }
 
 function resetNewCompanyForm() {

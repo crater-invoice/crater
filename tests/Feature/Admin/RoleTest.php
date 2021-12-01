@@ -1,7 +1,6 @@
 <?php
 
 use Crater\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\postJson;
@@ -24,11 +23,24 @@ test('create super admin role', function () {
     $data = [
         "email" => "loremipsum@gmail.com",
         "name" => "lorem",
-        "role" => "super admin",
         "password" => "lorem@123"
     ];
+    $data['companies'] = [
+        [
+            "role" => "super admin",
+            "id" => 1
+        ]
+    ];
 
-    postJson('api/v1/users', $data)->assertStatus(201);
+    postJson('api/v1/users', $data)
+        ->assertStatus(201);
 
-    $this->assertDatabaseHas('users', Arr::except($data, ['password']));
+    $data = collect($data)
+        ->only([
+            'email',
+            'name',
+        ])
+        ->toArray();
+
+    $this->assertDatabaseHas('users', $data);
 });

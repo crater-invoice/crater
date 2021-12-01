@@ -10,8 +10,8 @@ test('payment method request validation rules', function () {
         [
             'name' => [
                 'required',
-                Rule::unique('units')
-                    ->where('payment_methods', $request->header('company')),
+                Rule::unique('payment_methods')
+                    ->where('company_id', $request->header('company')),
             ],
         ],
         $request->rules()

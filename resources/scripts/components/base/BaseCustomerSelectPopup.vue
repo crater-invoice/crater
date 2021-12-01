@@ -302,8 +302,10 @@
                   </span>
 
                   <div class="flex flex-col justify-center text-left">
-                    <label
+                    <BaseText
                       v-if="customer.name"
+                      :text="customer.name"
+                      :length="30"
                       class="
                         m-0
                         text-base
@@ -311,12 +313,11 @@
                         leading-tight
                         cursor-pointer
                       "
-                    >
-                      {{ customer.name }}
-                    </label>
-
-                    <label
+                    />
+                    <BaseText
                       v-if="customer.contact_name"
+                      :text="customer.contact_name"
+                      :length="30"
                       class="
                         m-0
                         text-sm
@@ -324,9 +325,7 @@
                         text-gray-400
                         cursor-pointer
                       "
-                    >
-                      {{ customer.contact_name }}
-                    </label>
+                    />
                   </div>
                 </li>
                 <div

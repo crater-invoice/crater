@@ -186,7 +186,10 @@
         </template>
 
         <template #cell-user_name="{ row }">
-          {{ row.data.customer ? row.data.customer.name : '-' }}
+          <BaseText
+            :text="row.data.customer ? row.data.customer.name : '-' "
+            :length="30"
+          />
         </template>
 
         <template #cell-notes="{ row }">

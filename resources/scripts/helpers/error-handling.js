@@ -140,6 +140,10 @@ export const showError = (error) => {
       showToaster('errors.not_allowed')
       break
 
+    case 'Email could not be sent to this email address.':
+      showToaster('errors.email_could_not_be_sent')
+      break
+
     default:
       showToaster(error, false)
       break

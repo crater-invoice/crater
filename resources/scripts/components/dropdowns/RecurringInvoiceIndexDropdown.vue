@@ -109,7 +109,7 @@ async function removeMultipleRecurringInvoices(id = null) {
           .deleteMultipleRecurringInvoices(id)
           .then((res) => {
             if (res.data.success) {
-              // refreshTable()
+              props.table && props.table.refresh()
               recurringInvoiceStore.$patch((state) => {
                 state.selectedRecurringInvoices = []
                 state.selectAllField = false

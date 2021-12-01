@@ -1,1 +1,0 @@
-import{N as t}from"./main.c79d7c07.js";import{r as s,o as c,c as r,b as e,t as a}from"./vendor.e9042f2c.js";const n={class:"h-screen h-screen-ios overflow-y-auto text-base"},i={class:"container mx-auto px-4"},u={setup(_){return(m,p)=>{const o=s("router-view");return c(),r("div",n,[e(t),a("div",i,[e(o)])])}}};export{u as default};

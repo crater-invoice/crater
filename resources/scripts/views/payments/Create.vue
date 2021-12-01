@@ -424,6 +424,7 @@ function onCustomerChange(customer_id) {
     let data = {
       customer_id: customer_id,
       status: 'DUE',
+      limit: 'all',
     }
 
     if (isEdit.value) {
@@ -510,7 +511,10 @@ function selectNewCustomer(id) {
   let params = {
     userId: id,
   }
+
   if (route.params.id) params.model_id = route.params.id
+
+  paymentStore.currentPayment.invoice_id = null
 
   paymentStore.getNextNumber(params, true)
 }

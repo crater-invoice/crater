@@ -44,12 +44,14 @@ test('get payment', function () {
 test('create payment', function () {
     $invoice = Invoice::factory()->create([
         'due_amount' => 100,
+        'exchange_rate' => 1
     ]);
 
     $payment = Payment::factory()->raw([
         'invoice_id' => $invoice->id,
         'payment_number' => "PAY-000001",
-        'amount' => $invoice->due_amount
+        'amount' => $invoice->due_amount,
+        'exchange_rate' => 1
     ]);
 
     $response = postJson('api/v1/payments', $payment);
@@ -77,11 +79,13 @@ test('update payment', function () {
 
     $payment = Payment::factory()->create([
         'payment_date' => '1988-08-18',
-        'invoice_id' => $invoice->id
+        'invoice_id' => $invoice->id,
+        'exchange_rate' => 1
     ]);
 
     $payment2 = Payment::factory()->raw([
-        'invoice_id' => $invoice->id
+        'invoice_id' => $invoice->id,
+        'exchange_rate' => 1
     ]);
 
     putJson("api/v1/payments/{$payment->id}", $payment2)

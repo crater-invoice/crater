@@ -161,9 +161,11 @@
         </template>
 
         <template #cell-name="{ row }">
-          <span>
-            {{ row.data.customer.name }}
-          </span>
+          <BaseText
+            :text="row.data.customer.name"
+            :length="30"
+            tag="span"
+          />
         </template>
 
         <template #cell-payment_mode="{ row }">
@@ -185,7 +187,7 @@
         <template #cell-amount="{ row }">
           <BaseFormatMoney
             :amount="row.data.amount"
-            :currency="companyStore.selectedCompanyCurrency"
+            :currency="row.data.customer.currency"
           />
         </template>
 

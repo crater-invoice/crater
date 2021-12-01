@@ -86,13 +86,15 @@ class InvoicesRequest extends FormRequest
 
         $companyCurrency = CompanySetting::getSetting('currency', $this->header('company'));
 
-        $customerCurrency = Customer::find($this->customer_id)->currency_id;
+        $customer = Customer::find($this->customer_id);
 
-        if ((string)$customerCurrency !== $companyCurrency) {
-            $rules['exchange_rate'] = [
-                'required',
-            ];
-        };
+        if ($customer && $companyCurrency) {
+            if ((string)$customer->currency_id !== $companyCurrency) {
+                $rules['exchange_rate'] = [
+                    'required',
+                ];
+            };
+        }
 
         if ($this->isMethod('PUT')) {
             $rules['invoice_number'] = [
@@ -115,7 +117,7 @@ class InvoicesRequest extends FormRequest
 
         return collect($this->except('items', 'taxes'))
             ->merge([
-                'creator_id' => $this->user()->id,
+                'creator_id' => $this->user()->id ?? null,
                 'status' => $this->has('invoiceSend') ? Invoice::STATUS_SENT : Invoice::STATUS_DRAFT,
                 'paid_status' => Invoice::STATUS_UNPAID,
                 'company_id' => $this->header('company'),

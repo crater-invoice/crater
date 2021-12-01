@@ -49,7 +49,7 @@ test('create estimate', function () {
     ]);
 
     postJson('api/v1/estimates', $estimate)
-        ->assertStatus(200);
+        ->assertStatus(201);
 
     $this->assertDatabaseHas('estimates', [
         'template_name' => $estimate['template_name'],

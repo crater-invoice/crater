@@ -278,6 +278,14 @@ export const useInvoiceStore = (useWindow = false) => {
           axios
             .post(`/api/v1/invoices/${data.id}/status`, data)
             .then((response) => {
+              let pos = this.invoices.findIndex(
+                (invoices) => invoices.id === data.id
+              )
+
+              if (this.invoices[pos]) {
+                this.invoices[pos].status = 'SENT'
+              }
+
               notificationStore.showNotification({
                 type: 'success',
                 message: global.t('invoices.mark_as_sent_successfully'),

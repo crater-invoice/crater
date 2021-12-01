@@ -184,7 +184,7 @@
 
         <!-- Estimate date  -->
         <template #cell-estimate_date="{ row }">
-            {{ row.data.formatted_estimate_date }}
+          {{ row.data.formatted_estimate_date }}
         </template>
 
         <template #cell-estimate_number="{ row }">
@@ -197,9 +197,7 @@
         </template>
 
         <template #cell-name="{ row }">
-          <div>
-            {{ row.data.customer.name }}
-          </div>
+          <BaseText :text="row.data.customer.name" :length="30" />
         </template>
 
         <template #cell-status="{ row }">
@@ -209,7 +207,10 @@
         </template>
 
         <template #cell-total="{ row }">
-          <BaseFormatMoney :amount="row.data.total" />
+          <BaseFormatMoney
+            :amount="row.data.total"
+            :currency="row.data.customer.currency"
+          />
         </template>
 
         <!-- Actions -->

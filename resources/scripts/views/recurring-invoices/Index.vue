@@ -124,7 +124,11 @@
         "
       >
         <!-- Tabs -->
-        <BaseTabGroup class="-mb-5" @change="setStatusFilter">
+        <BaseTabGroup
+          class="-mb-5"
+          :default-index="currentStatusIndex"
+          @change="setStatusFilter"
+        >
           <BaseTab :title="$t('recurring_invoices.active')" filter="ACTIVE" />
           <BaseTab :title="$t('recurring_invoices.on_hold')" filter="ON_HOLD" />
           <BaseTab :title="$t('recurring_invoices.all')" filter="ALL" />
@@ -189,24 +193,29 @@
 
         <!-- Starts at  -->
         <template #cell-starts_at="{ row }">
-            {{ row.data.formatted_starts_at }}
+          {{ row.data.formatted_starts_at }}
         </template>
 
         <!-- Customer  -->
         <template #cell-customer="{ row }">
-          <router-link
-            :to="{ path: `recurring-invoices/${row.data.id}/view` }"
-            class="font-medium text-primary-500 flex flex-col"
-          >
-            {{ row.data.customer.name }}
+          <router-link :to="{ path: `recurring-invoices/${row.data.id}/view` }">
+            <BaseText
+              :text="row.data.customer.name"
+              :length="30"
+              tag="span"
+              class="font-medium text-primary-500 flex flex-col"
+            />
 
-            <span class="text-xs text-gray-400">
-              {{
+            <BaseText
+              :text="
                 row.data.customer.contact_name
                   ? row.data.customer.contact_name
                   : ''
-              }}
-            </span>
+              "
+              :length="30"
+              tag="span"
+              class="text-xs text-gray-400"
+            />
           </router-link>
         </template>
 
@@ -329,6 +338,10 @@ onUnmounted(() => {
   if (recurringInvoiceStore.selectAllField) {
     recurringInvoiceStore.selectAllRecurringInvoices()
   }
+})
+
+const currentStatusIndex = computed(() => {
+  return statusList.value.findIndex((status) => status === filters.status)
 })
 
 function canViewActions() {

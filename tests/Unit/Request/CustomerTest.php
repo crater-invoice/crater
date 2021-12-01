@@ -1,6 +1,7 @@
 <?php
 
 use Crater\Http\Requests\CustomerRequest;
+use Illuminate\Validation\Rule;
 
 test('customer request validation rules', function () {
     $request = new CustomerRequest();
@@ -13,7 +14,7 @@ test('customer request validation rules', function () {
             'email' => [
                 'email',
                 'nullable',
-                'unique:customers,email',
+                Rule::unique('customers')->where('company_id', $request->header('company'))
             ],
             'password' => [
                 'nullable',

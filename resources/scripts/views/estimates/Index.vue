@@ -184,7 +184,7 @@
 
         <!-- Estimate date  -->
         <template #cell-estimate_date="{ row }">
-            {{ row.data.formatted_estimate_date }}
+          {{ row.data.formatted_estimate_date }}
         </template>
 
         <template #cell-estimate_number="{ row }">
@@ -197,10 +197,7 @@
         </template>
 
         <template #cell-name="{ row }">
-          <BaseText
-            :text="row.data.customer.name"
-            :length="30"
-          />
+          <BaseText :text="row.data.customer.name" :length="30" />
         </template>
 
         <template #cell-status="{ row }">

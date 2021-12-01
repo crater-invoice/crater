@@ -187,7 +187,7 @@
 
         <template #cell-user_name="{ row }">
           <BaseText
-            :text="row.data.customer ? row.data.customer.name : '-' "
+            :text="row.data.customer ? row.data.customer.name : '-'"
             :length="30"
           />
         </template>

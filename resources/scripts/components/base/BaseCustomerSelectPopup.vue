@@ -23,9 +23,11 @@
       @click.stop
     >
       <div class="flex relative justify-between mb-2">
-        <label class="flex-1 text-base font-medium text-left text-gray-900">
-          {{ selectedCustomer.name }}
-        </label>
+        <BaseText
+          :text="selectedCustomer.name"
+          :length="30"
+          class="flex-1 text-base font-medium text-left text-gray-900"
+        />
         <div class="flex">
           <a
             class="

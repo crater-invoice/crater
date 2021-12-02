@@ -91,5 +91,5 @@ Help us translate on https://crowdin.com/project/crater-invoice
 
 ## License
 
-Crater is released under the Attribution Assurance License.
-See [LICENSE](https://craterapp.com/license) for full details & use-cases.
+Crater is released under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3.
+See [LICENSE](LICENSE) for details.

@@ -50,7 +50,6 @@ services:
     build:
       context: ./
       dockerfile: ./docker-compose/cron.dockerfile
-    container_name: cron
     volumes:
       - ./:/var/www
     networks:

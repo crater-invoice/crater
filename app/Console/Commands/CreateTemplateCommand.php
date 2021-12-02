@@ -52,7 +52,7 @@ class CreateTemplateCommand extends Command
         }
 
         Storage::disk('views')->copy("/app/pdf/{$type}/{$type}1.blade.php", "/app/pdf/{$type}/{$templateName}.blade.php");
-        copy(resource_path("/static/img/PDF/{$type}1.png"), resource_path("/static/img/PDF/{$templateName}.png"));
+        copy(public_path("/build/img/PDF/{$type}1.png"), public_path("/build/img/PDF/{$templateName}.png"));
 
         $path = resource_path("app/pdf/{$type}/{$templateName}.blade.php");
         $type = ucfirst($type);

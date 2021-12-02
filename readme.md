@@ -63,9 +63,9 @@ Join the Crater discord server to discuss:
 - [ ] Accept Payments (Stripe Integration)
 - [ ] Debit & Credit Notes
 
-## Credits
+## Copyright
 
-Crater is a product of [Bytefury](https://bytefury.com)
+© 2021 Crater Invoice, Inc.
 
 **Special thanks to:**
 

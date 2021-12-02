@@ -514,8 +514,9 @@ function selectNewCustomer(id) {
 
   if (route.params.id) params.model_id = route.params.id
 
-  paymentStore.currentPayment.invoice_id = null
-
+  paymentStore.currentPayment.invoice_id = selectedInvoice.value = null
+  paymentStore.currentPayment.amount = 100
+  invoiceList.value = []
   paymentStore.getNextNumber(params, true)
 }
 </script>

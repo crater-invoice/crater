@@ -38,7 +38,11 @@
       </template>
     </BasePageHeader>
 
-    <BaseFilterWrapper v-show="showFilters" @clear="clearFilter">
+    <BaseFilterWrapper
+      v-show="showFilters"
+      :row-on-xl="true"
+      @clear="clearFilter"
+    >
       <BaseInputGroup :label="$tc('customers.customer', 1)">
         <BaseCustomerSelectInput
           v-model="filters.customer_id"

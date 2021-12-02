@@ -27,10 +27,11 @@
       </label>
 
       <div
-        class="
-          flex flex-col
-          space-y-3
-          lg:flex-row lg:space-x-4 lg:space-y-0 lg:items-center
+        class="flex flex-col space-y-3"
+        :class="
+          rowOnXl
+            ? 'xl:flex-row xl:space-x-4 xl:space-y-0 xl:items-center'
+            : 'lg:flex-row lg:space-x-4 lg:space-y-0 lg:items-center'
         "
       >
         <slot />
@@ -42,6 +43,10 @@
 <script setup>
 defineProps({
   show: {
+    type: Boolean,
+    default: false,
+  },
+  rowOnXl: {
     type: Boolean,
     default: false,
   },

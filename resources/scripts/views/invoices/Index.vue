@@ -38,13 +38,29 @@
       </template>
     </BasePageHeader>
 
-    <BaseFilterWrapper v-show="showFilters" @clear="clearFilter">
+    <BaseFilterWrapper
+      v-show="showFilters"
+      :row-on-xl="true"
+      @clear="clearFilter"
+    >
       <BaseInputGroup :label="$tc('customers.customer', 1)">
         <BaseCustomerSelectInput
           v-model="filters.customer_id"
           :placeholder="$t('customers.type_or_click')"
           value-prop="id"
           label="name"
+        />
+      </BaseInputGroup>
+
+      <BaseInputGroup :label="$t('invoices.status')">
+        <BaseMultiselect
+          v-model="filters.status"
+          :groups="true"
+          :options="status"
+          searchable
+          :placeholder="$t('general.select_a_status')"
+          @update:modelValue="setActiveTab"
+          @remove="clearStatusSearch()"
         />
       </BaseInputGroup>
 
@@ -116,6 +132,7 @@
         <!-- Tabs -->
         <BaseTabGroup class="-mb-5" @change="setStatusFilter">
           <BaseTab :title="$t('general.draft')" filter="DRAFT" />
+          <BaseTab :title="$t('general.due')" filter="DUE" />
           <BaseTab :title="$t('general.sent')" filter="SENT" />
           <BaseTab :title="$t('general.all')" filter="" />
         </BaseTabGroup>
@@ -265,12 +282,15 @@ const table = ref(null)
 const showFilters = ref(false)
 
 const status = ref([
-  'DRAFT',
-  'SENT',
-  'VIEWED',
-  'EXPIRED',
-  'ACCEPTED',
-  'REJECTED',
+  {
+    label: 'Status',
+    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED'],
+  },
+  {
+    label: 'Paid Status',
+    options: ['UNPAID', 'PAID', 'PARTIALLY_PAID'],
+  },
+  ,
 ])
 const isRequestOngoing = ref(true)
 const activeTab = ref('general.draft')
@@ -357,6 +377,11 @@ function hasAtleastOneAbility() {
   ])
 }
 
+async function clearStatusSearch(removedOption, id) {
+  filters.status = ''
+  refreshTable()
+}
+
 function refreshTable() {
   table.value && table.value.refresh()
 }
@@ -404,6 +429,11 @@ function setStatusFilter(val) {
     case t('general.sent'):
       filters.status = 'SENT'
       break
+
+    case t('general.due'):
+      filters.status = 'DUE'
+      break
+
     default:
       filters.status = ''
       break
@@ -472,6 +502,35 @@ function setActiveTab(val) {
     case 'SENT':
       activeTab.value = t('general.sent')
       break
+
+    case 'DUE':
+      activeTab.value = t('general.due')
+      break
+
+    case 'COMPLETED':
+      activeTab.value = t('invoices.completed')
+      break
+
+    case 'PAID':
+      activeTab.value = t('invoices.paid')
+      break
+
+    case 'UNPAID':
+      activeTab.value = t('invoices.unpaid')
+      break
+
+    case 'PARTIALLY_PAID':
+      activeTab.value = t('invoices.partially_paid')
+      break
+
+    case 'VIEWED':
+      activeTab.value = t('invoices.viewed')
+      break
+
+    case 'OVERDUE':
+      activeTab.value = t('invoices.overdue')
+      break
+
     default:
       activeTab.value = t('general.all')
       break

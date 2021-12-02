@@ -2,8 +2,6 @@
 
 use Crater\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class UpdateCraterVersion502 extends Migration
 {
@@ -14,7 +12,7 @@ class UpdateCraterVersion502 extends Migration
      */
     public function up()
     {
-        Setting::setSetting('version', '5.0.1');
+        Setting::setSetting('version', '5.0.2');
     }
 
     /**

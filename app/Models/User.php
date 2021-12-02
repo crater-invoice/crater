@@ -96,7 +96,17 @@ class User extends Authenticatable implements HasMedia
 
     public function estimates()
     {
-        return $this->hasMany(Estimate::class);
+        return $this->hasMany(Estimate::class, 'creator_id');
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'creator_id');
+    }
+
+    public function recurringInvoices()
+    {
+        return $this->hasMany(RecurringInvoice::class, 'creator_id');
     }
 
     public function currency()
@@ -114,34 +124,24 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Company::class, 'user_company', 'user_id', 'company_id');
     }
 
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
-    }
-
     public function expenses()
     {
-        return $this->hasMany(Expense::class);
-    }
-
-    public function billingAddress()
-    {
-        return $this->hasOne(Address::class)->where('type', Address::BILLING_TYPE);
-    }
-
-    public function shippingAddress()
-    {
-        return $this->hasOne(Address::class)->where('type', Address::SHIPPING_TYPE);
+        return $this->hasMany(Expense::class, 'creator_id');
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'creator_id');
     }
 
     public function invoices()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany(Invoice::class, 'creator_id');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'creator_id');
     }
 
     public function settings()
@@ -253,37 +253,6 @@ class User extends Authenticatable implements HasMedia
                 [$start->format('Y-m-d'), $end->format('Y-m-d')]
             );
         });
-    }
-
-    public static function deleteCustomers($ids)
-    {
-        foreach ($ids as $id) {
-            $customer = self::find($id);
-
-            if ($customer->estimates()->exists()) {
-                $customer->estimates()->delete();
-            }
-
-            if ($customer->invoices()->exists()) {
-                $customer->invoices()->delete();
-            }
-
-            if ($customer->payments()->exists()) {
-                $customer->payments()->delete();
-            }
-
-            if ($customer->addresses()->exists()) {
-                $customer->addresses()->delete();
-            }
-
-            if ($customer->fields()->exists()) {
-                $customer->fields()->delete();
-            }
-
-            $customer->delete();
-        }
-
-        return true;
     }
 
     public function getAvatarAttribute()
@@ -484,5 +453,48 @@ class User extends Authenticatable implements HasMedia
         }
 
         return false;
+    }
+
+    public static function deleteUsers($ids)
+    {
+        foreach ($ids as $id) {
+            $user = self::find($id);
+
+            if ($user->invoices()->exists()) {
+                $user->invoices()->update(['creator_id' => null]);
+            }
+
+            if ($user->estimates()->exists()) {
+                $user->estimates()->update(['creator_id' => null]);
+            }
+
+            if ($user->customers()->exists()) {
+                $user->customers()->update(['creator_id' => null]);
+            }
+
+            if ($user->recurringInvoices()->exists()) {
+                $user->recurringInvoices()->update(['creator_id' => null]);
+            }
+
+            if ($user->expenses()->exists()) {
+                $user->expenses()->update(['creator_id' => null]);
+            }
+
+            if ($user->payments()->exists()) {
+                $user->payments()->update(['creator_id' => null]);
+            }
+
+            if ($user->items()->exists()) {
+                $user->items()->update(['creator_id' => null]);
+            }
+
+            if ($user->settings()->exists()) {
+                $user->settings()->delete();
+            }
+
+            $user->delete();
+        }
+
+        return true;
     }
 }

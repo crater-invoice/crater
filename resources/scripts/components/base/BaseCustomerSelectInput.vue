@@ -6,7 +6,6 @@
     value-prop="id"
     label="name"
     :filter-results="false"
-    :min-chars="1"
     resolve-on-load
     :delay="500"
     :searchable="true"

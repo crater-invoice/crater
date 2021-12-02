@@ -50,12 +50,16 @@
       <BaseInputGroup :label="$tc('items.unit')" class="text-left">
         <BaseMultiselect
           v-model="filters.unit_id"
-          :options="itemStore.itemUnits"
-          label="name"
           :placeholder="$t('items.select_a_unit')"
-          class="w-full"
           value-prop="id"
+          track-by="name"
+          :filter-results="false"
+          label="name"
+          resolve-on-load
+          :delay="500"
           searchable
+          class="w-full"
+          :options="searchUnits"
         />
       </BaseInputGroup>
 
@@ -296,6 +300,12 @@ function refreshTable() {
 
 function setFilters() {
   refreshTable()
+}
+
+async function searchUnits(search) {
+  let res = await itemStore.fetchItemUnits({ search })
+
+  return res.data.data
 }
 
 async function fetchData({ page, filter, sort }) {

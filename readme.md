@@ -52,19 +52,20 @@ Join the Crater discord server to discuss:
 - [x] Performance Improvements
 - [x] Customer View page
 - [x] Add and Use Custom Fields on Invoices & Estimates.
+- [x] Multiple Companies
+- [x] Recurring Invoices
 - [ ] Modules
-- [ ] Multiple Companies
 - [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
 - [ ] Vendors, Inventory & Bills
-- [ ] Recurring Invoices & Payment Reminders
+- [ ] Payment Reminders
 - [ ] Improve Accessibility
 - [ ] Customer Portal
 - [ ] Accept Payments (Stripe Integration)
 - [ ] Debit & Credit Notes
 
-## Credits
+## Copyright
 
-Crater is a product of [Bytefury](https://bytefury.com)
+© 2021 Crater Invoice, Inc.
 
 **Special thanks to:**
 
@@ -90,5 +91,5 @@ Help us translate on https://crowdin.com/project/crater-invoice
 
 ## License
 
-Crater is released under the Attribution Assurance License.
-See [LICENSE](https://craterapp.com/license) for full details & use-cases.
+Crater is released under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3.
+See [LICENSE](LICENSE) for details.

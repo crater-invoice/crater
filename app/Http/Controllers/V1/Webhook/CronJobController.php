@@ -6,7 +6,7 @@ use Crater\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-class CronJobOrgController extends Controller
+class CronJobController extends Controller
 {
     /**
      * Handle the incoming request.

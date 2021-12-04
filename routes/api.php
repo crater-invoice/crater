@@ -80,7 +80,7 @@ use Crater\Http\Controllers\V1\Installation\FinishController;
 use Crater\Http\Controllers\V1\Installation\LoginController;
 use Crater\Http\Controllers\V1\Installation\OnboardingWizardController;
 use Crater\Http\Controllers\V1\Installation\RequirementsController;
-use Crater\Http\Controllers\V1\Webhook\CronJobOrgController;
+use Crater\Http\Controllers\V1\Webhook\CronJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -439,4 +439,4 @@ Route::prefix('/v1')->group(function () {
     });
 });
 
-Route::get('/cron', CronJobOrgController::class)->middleware('cron-job-org');
+Route::get('/cron', CronJobController::class)->middleware('cron-job');

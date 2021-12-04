@@ -5,7 +5,7 @@ namespace Crater\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CronJobOrgMiddleware
+class CronJobMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class CronJobOrgMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->header('Authorization-token')) {
+        if ($request->header('x-authorization-token') && $request->header('x-authorization-token') == config('services.cron_job.auth_token')) {
             return $next($request);
         }
 

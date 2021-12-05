@@ -217,7 +217,7 @@
             line-height: 22px;
             letter-spacing: 0.05em;
             color: #040405;
-            width: 108px;
+            width: 50%;
             height: 19.87px;
             padding-bottom: 10px;
         }

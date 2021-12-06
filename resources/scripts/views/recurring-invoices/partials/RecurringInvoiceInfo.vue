@@ -81,7 +81,7 @@ let isLoading = computed(() => {
 watch(
   route,
   () => {
-    if (route.params.id) {
+    if (route.params.id && route.name === 'recurring-invoices.view') {
       loadRecurringInvoice()
     }
   },

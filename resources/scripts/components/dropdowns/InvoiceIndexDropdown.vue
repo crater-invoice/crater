@@ -36,7 +36,7 @@
         route.name !== 'invoices.view' &&
         userStore.hasAbilities(abilities.VIEW_INVOICE)
       "
-      :to="`invoices/${row.id}/view`"
+      :to="`/admin/invoices/${row.id}/view`"
     >
       <BaseDropdownItem>
         <BaseIcon

@@ -20,6 +20,10 @@ class RecurringInvoice extends Model
         'id',
     ];
 
+    protected $dates = [
+        'starts_at'
+    ];
+
     public const NONE = 'NONE';
     public const COUNT = 'COUNT';
     public const DATE = 'DATE';
@@ -259,6 +263,10 @@ class RecurringInvoice extends Model
 
     public function generateInvoice()
     {
+        if (Carbon::now()->lessThan($this->starts_at)) {
+            return;
+        }
+
         if ($this->limit_by == 'DATE') {
             $startDate = Carbon::today()->format('Y-m-d');
 

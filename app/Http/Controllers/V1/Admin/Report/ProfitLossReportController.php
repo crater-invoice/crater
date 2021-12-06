@@ -34,7 +34,7 @@ class ProfitLossReportController extends Controller
         $invoicesAmount = Invoice::whereCompanyId($company->id)
             ->applyFilters($request->only(['from_date', 'to_date']))
             ->wherePaidStatus(Invoice::STATUS_PAID)
-            ->sum('total');
+            ->sum('base_total');
 
         $expenseCategories = Expense::with('category')
             ->whereCompanyId($company->id)

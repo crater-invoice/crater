@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import { useCustomFieldStore } from '@/scripts/stores/custom-field'
 
 const props = defineProps({
@@ -121,12 +121,20 @@ watch(
   }
 )
 
+onMounted(() => {
+  fetchFields()
+})
+
 const value = computed({
   get: () => props.modelValue,
   set: (value) => {
     emit('update:modelValue', value)
   },
 })
+
+async function fetchFields() {
+  await customFieldsStore.fetchCustomFields()
+}
 
 async function getFields() {
   fieldList.value = []

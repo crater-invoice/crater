@@ -68,7 +68,7 @@ class Tax extends Model
     public function scopeTaxAttributes($query)
     {
         $query->select(
-            DB::raw('sum(amount) as total_tax_amount, tax_type_id')
+            DB::raw('sum(base_amount) as total_tax_amount, tax_type_id')
         )->groupBy('tax_type_id');
     }
 

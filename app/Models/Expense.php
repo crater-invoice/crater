@@ -226,7 +226,7 @@ class Expense extends Model implements HasMedia
         $query->select(
             DB::raw('
                 count(*) as expenses_count,
-                sum(amount) as total_amount,
+                sum(base_amount) as total_amount,
                 expense_category_id')
         )
             ->groupBy('expense_category_id');

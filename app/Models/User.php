@@ -9,8 +9,6 @@ use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\BouncerFacade;
@@ -264,87 +262,6 @@ class User extends Authenticatable implements HasMedia
         }
 
         return 0;
-    }
-
-    public static function createCustomer($request)
-    {
-        $data = $request->only([
-            'name',
-            'email',
-            'phone',
-            'company_name',
-            'contact_name',
-            'website',
-            'enable_portal',
-            'invoice_prefix',
-            'estimate_prefix',
-            'payment_prefix'
-        ]);
-
-        $data['creator_id'] = Auth::id();
-        $data['company_id'] = $request->header('company');
-        $data['role'] = 'customer';
-        $data['password'] = Hash::make($request->password);
-        $customer = User::create($data);
-
-        $customer['currency_id'] = $request->currency_id;
-        $customer->save();
-
-        if ($request->addresses) {
-            foreach ($request->addresses as $address) {
-                $customer->addresses()->create($address);
-            }
-        }
-
-        $customFields = $request->customFields;
-
-        if ($customFields) {
-            $customer->addCustomFields($customFields);
-        }
-
-        $customer = User::with('billingAddress', 'shippingAddress', 'fields')->find($customer->id);
-
-        return $customer;
-    }
-
-    public static function updateCustomer($request, $customer)
-    {
-        $data = $request->only([
-            'name',
-            'currency_id',
-            'email',
-            'phone',
-            'company_name',
-            'contact_name',
-            'website',
-            'enable_portal',
-            'invoice_prefix',
-            'estimate_prefix',
-            'payment_prefix'
-        ]);
-
-        $data['role'] = 'customer';
-        if ($request->has('password')) {
-            $customer->password = Hash::make($request->password);
-        }
-        $customer->update($data);
-
-        $customer->addresses()->delete();
-        if ($request->addresses) {
-            foreach ($request->addresses as $address) {
-                $customer->addresses()->create($address);
-            }
-        }
-
-        $customFields = $request->customFields;
-
-        if ($customFields) {
-            $customer->updateCustomFields($customFields);
-        }
-
-        $customer = User::with('billingAddress', 'shippingAddress', 'fields')->find($customer->id);
-
-        return $customer;
     }
 
     public function setSettings($settings)

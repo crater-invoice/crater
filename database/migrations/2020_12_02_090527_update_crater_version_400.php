@@ -1,5 +1,6 @@
 <?php
 
+use Crater\Models\Address;
 use Crater\Models\CompanySetting;
 use Crater\Models\Estimate;
 use Crater\Models\Expense;
@@ -35,14 +36,10 @@ class UpdateCraterVersion400 extends Migration
             // Update language
             $user->setSettings(['language' => CompanySetting::getSetting('language', $user->company_id)]);
 
-            // Update user's addresses
-            if ($user->addresses()->exists()) {
-                foreach ($user->addresses as $address) {
-                    $address->company_id = $user->company_id;
-                    $address->user_id = null;
-                    $address->save();
-                }
-            }
+            Address::where('user_id', $user->id)->update([
+                'company_id' => $user->company_id,
+                'user_id' => null
+            ]);
 
             // Update company settings
             $this->updateCompanySettings($user);

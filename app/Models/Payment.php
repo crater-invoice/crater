@@ -312,11 +312,25 @@ class Payment extends Model implements HasMedia
             $query->whereCustomer($filters->get('customer_id'));
         }
 
+        if ($filters->get('from_date') && $filters->get('to_date')) {
+            $start = Carbon::createFromFormat('Y-m-d', $filters->get('from_date'));
+            $end = Carbon::createFromFormat('Y-m-d', $filters->get('to_date'));
+            $query->paymentsBetween($start, $end);
+        }
+
         if ($filters->get('orderByField') || $filters->get('orderBy')) {
             $field = $filters->get('orderByField') ? $filters->get('orderByField') : 'sequence_number';
             $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'desc';
             $query->whereOrder($field, $orderBy);
         }
+    }
+
+    public function scopePaymentsBetween($query, $start, $end)
+    {
+        return $query->whereBetween(
+            'payments.payment_date',
+            [$start->format('Y-m-d'), $end->format('Y-m-d')]
+        );
     }
 
     public function scopeWhereOrder($query, $orderByField, $orderBy)

@@ -38,7 +38,7 @@ class UpdateCraterVersion400 extends Migration
             // Update user's addresses
             if ($user->addresses()->exists()) {
                 foreach ($user->addresses as $address) {
-                    $address->company_id = $user->companies()->first()->id;
+                    $address->company_id = $user->company_id;
                     $address->user_id = null;
                     $address->save();
                 }

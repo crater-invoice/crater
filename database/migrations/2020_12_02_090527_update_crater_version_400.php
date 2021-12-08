@@ -128,6 +128,6 @@ class UpdateCraterVersion400 extends Migration
             'payment_from_customer_address_format' => $paymentFromCustomerAddress,
         ];
 
-        CompanySetting::setSettings($settings, $user->companies()->first()->id);
+        CompanySetting::setSettings($settings, $user->company_id);
     }
 }

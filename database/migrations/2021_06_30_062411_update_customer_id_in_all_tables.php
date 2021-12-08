@@ -24,7 +24,9 @@ class UpdateCustomerIdInAllTables extends Migration
 
         if ($users) {
             foreach ($users as $user) {
-                $newCustomer = Customer::create($user->toArray());
+                $newCustomer = Customer::updateOrCreate([
+                    'email' => $user->email,
+                ], $user->toArray());
 
                 $customFields = CustomField::where('model_type', 'User')->get();
 
@@ -92,37 +94,57 @@ class UpdateCustomerIdInAllTables extends Migration
             }
         }
 
-        Schema::table('estimates', function (Blueprint $table) {
-            if (config('database.default') !== 'sqlite') {
-                $table->dropForeign(['user_id']);
-            }
-            $table->dropColumn('user_id');
-        });
+        try {
+            Schema::table('estimates', function (Blueprint $table) {
+                if (config('database.default') !== 'sqlite') {
+                    $table->dropForeign(['user_id']);
+                }
+                $table->dropColumn('user_id');
+            });
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
 
-        Schema::table('expenses', function (Blueprint $table) {
-            if (config('database.default') !== 'sqlite') {
-                $table->dropForeign(['user_id']);
-            }
-            $table->dropColumn('user_id');
-        });
+        try {
+            Schema::table('expenses', function (Blueprint $table) {
+                if (config('database.default') !== 'sqlite') {
+                    $table->dropForeign(['user_id']);
+                }
+                $table->dropColumn('user_id');
+            });
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
 
-        Schema::table('invoices', function (Blueprint $table) {
-            if (config('database.default') !== 'sqlite') {
-                $table->dropForeign(['user_id']);
-            }
-            $table->dropColumn('user_id');
-        });
+        try {
+            Schema::table('invoices', function (Blueprint $table) {
+                if (config('database.default') !== 'sqlite') {
+                    $table->dropForeign(['user_id']);
+                }
+                $table->dropColumn('user_id');
+            });
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
 
-        Schema::table('payments', function (Blueprint $table) {
-            if (config('database.default') !== 'sqlite') {
-                $table->dropForeign(['user_id']);
-            }
-            $table->dropColumn('user_id');
-        });
+        try {
+            Schema::table('payments', function (Blueprint $table) {
+                if (config('database.default') !== 'sqlite') {
+                    $table->dropForeign(['user_id']);
+                }
+                $table->dropColumn('user_id');
+            });
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
 
-        Schema::table('items', function (Blueprint $table) {
-            $table->dropColumn('unit');
-        });
+        try {
+            Schema::table('items', function (Blueprint $table) {
+                $table->dropColumn('unit');
+            });
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
 
         $users = User::where('role', 'customer')
             ->delete();

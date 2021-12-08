@@ -16,23 +16,23 @@ class CreateBouncerTables extends Migration
     public function up()
     {
         if (Schema::hasTable('role_has_permissions')) {
-            Schema::drop(Models::table('role_has_permissions'));
+            Schema::drop('role_has_permissions');
         }
 
         if (Schema::hasTable('model_has_roles')) {
-            Schema::drop(Models::table('model_has_roles'));
+            Schema::drop('model_has_roles');
         }
 
         if (Schema::hasTable('model_has_permissions')) {
-            Schema::drop(Models::table('model_has_permissions'));
+            Schema::drop('model_has_permissions');
         }
 
         if (Schema::hasTable('permissions')) {
-            Schema::drop(Models::table('permissions'));
+            Schema::drop('permissions');
         }
 
         if (Schema::hasTable('roles')) {
-            Schema::drop(Models::table('roles'));
+            Schema::drop('roles');
         }
 
         Schema::create(Models::table('abilities'), function (Blueprint $table) {

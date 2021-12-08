@@ -347,7 +347,7 @@ const rules = computed(() => {
         required: helpers.withMessage(t('validation.required'), required),
         between: helpers.withMessage(
           t('validation.payment_greater_than_due_amount'),
-          between(1, paymentStore.currentPayment.maxPayableAmount)
+          between(0, paymentStore.currentPayment.maxPayableAmount)
         ),
       },
       exchange_rate: {

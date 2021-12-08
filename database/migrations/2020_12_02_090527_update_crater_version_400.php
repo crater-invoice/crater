@@ -33,7 +33,7 @@ class UpdateCraterVersion400 extends Migration
             ]);
 
             // Update language
-            $user->setSettings(['language' => CompanySetting::getSetting('language', $user->companies()->first()->id)]);
+            $user->setSettings(['language' => CompanySetting::getSetting('language', $user->company_id)]);
 
             // Update user's addresses
             if ($user->addresses()->exists()) {

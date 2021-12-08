@@ -1,7 +1,13 @@
 <?php
 
+use Crater\Models\Address;
 use Crater\Models\Customer;
 use Crater\Models\CustomField;
+use Crater\Models\CustomFieldValue;
+use Crater\Models\Estimate;
+use Crater\Models\Expense;
+use Crater\Models\Invoice;
+use Crater\Models\Payment;
 use Crater\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -26,68 +32,46 @@ class UpdateCustomerIdInAllTables extends Migration
             foreach ($users as $user) {
                 $newCustomer = Customer::create($user->toArray());
 
-                $customFields = CustomField::where('model_type', 'User')->get();
+                Address::where('user_id', $user->id)->update([
+                    'customer_id' => $newCustomer->id,
+                    'user_id' => null
+                ]);
 
-                if ($customFields) {
-                    $user->fields->map(function ($customFieldValue) use ($newCustomer) {
-                        $customFieldValue->custom_field_valuable_type = "Crater\Models\Customer";
-                        $customFieldValue->custom_field_valuable_id = $newCustomer->id;
-                        $customFieldValue->save();
+                Expense::where('user_id', $user->id)->update([
+                    'customer_id' => $newCustomer->id,
+                    'user_id' => null
+                ]);
 
-                        $customField = $customFieldValue->customField;
-                        $customField->model_type = "Customer";
-                        $customField->slug = Str::upper('CUSTOM_'.$customField->model_type.'_'.Str::slug($customField->label, '_'));
-                        $customField->save();
-                    });
-                }
+                Estimate::where('user_id', $user->id)->update([
+                    'customer_id' => $newCustomer->id,
+                    'user_id' => null
+                ]);
 
-                if ($user->addresses()->exists()) {
-                    $user->addresses->map(function ($address) use ($newCustomer) {
-                        if ($address) {
-                            $address->customer_id = $newCustomer->id;
-                            $address->user_id = null;
-                            $address->save();
-                        }
-                    });
-                }
+                Invoice::where('user_id', $user->id)->update([
+                    'customer_id' => $newCustomer->id,
+                    'user_id' => null
+                ]);
 
-                if ($user->expenses()->exists()) {
-                    $user->expenses->map(function ($expense) use ($newCustomer) {
-                        if ($expense) {
-                            $expense->customer_id = $newCustomer->id;
-                            $expense->user_id = null;
-                            $expense->save();
-                        }
-                    });
-                }
+                Payment::where('user_id', $user->id)->update([
+                    'customer_id' => $newCustomer->id,
+                    'user_id' => null
+                ]);
 
-                if ($user->estimates()->exists()) {
-                    $user->estimates->map(function ($estimate) use ($newCustomer) {
-                        if ($estimate) {
-                            $estimate->customer_id = $newCustomer->id;
-                            $estimate->user_id = null;
-                            $estimate->save();
-                        }
-                    });
-                }
+                CustomFieldValue::where('custom_field_valuable_id', $user->id)
+                    ->where('custom_field_valuable_type', 'Crater\Models\User')
+                    ->update([
+                        'custom_field_valuable_type' => 'Crater\Models\Customer',
+                        'custom_field_valuable_id' => $newCustomer->id
+                    ]);
+            }
 
-                if ($user->invoices()->exists()) {
-                    $user->invoices->map(function ($invoice) use ($newCustomer) {
-                        if ($invoice) {
-                            $invoice->customer_id = $newCustomer->id;
-                            $invoice->user_id = null;
-                            $invoice->save();
-                        }
-                    });
-                }
+            $customFields = CustomField::where('model_type', 'User')->get();
 
-                if ($user->payments()->exists()) {
-                    $user->payments->map(function ($payment) use ($newCustomer) {
-                        if ($payment) {
-                            $payment->customer_id = $newCustomer->id;
-                            $payment->save();
-                        }
-                    });
+            if ($customFields) {
+                foreach ($customFields as $customField) {
+                    $customField->model_type = "Customer";
+                    $customField->slug = Str::upper('CUSTOM_'.$customField->model_type.'_'.Str::slug($customField->label, '_'));
+                    $customField->save();
                 }
             }
         }

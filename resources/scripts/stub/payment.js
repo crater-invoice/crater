@@ -6,7 +6,7 @@ export default {
   customer_id: '',
   payment_number: '',
   payment_date: '',
-  amount: 100,
+  amount: 0,
   invoice_id: '',
   notes: '',
   payment_method_id: '',

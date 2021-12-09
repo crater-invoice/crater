@@ -448,7 +448,7 @@ function onCustomerChange(customer_id) {
           paymentStore.currentPayment.currency = res2.data.data.currency
         }
 
-        if (isEdit.value && paymentStore.currentPayment.invoice_id) {
+        if (paymentStore.currentPayment.invoice_id) {
           selectedInvoice.value = invoiceList.value.find(
             (inv) => inv.id === paymentStore.currentPayment.invoice_id
           )
@@ -456,9 +456,14 @@ function onCustomerChange(customer_id) {
           paymentStore.currentPayment.maxPayableAmount =
             selectedInvoice.value.due_amount +
             paymentStore.currentPayment.amount
+
+          if (amount.value === 0) {
+            amount.value = selectedInvoice.value.due_amount / 100
+          }
         }
 
         if (isEdit.value) {
+          // remove all invoices that are paid except currently selected invoice
           invoiceList.value = invoiceList.value.filter((v) => {
             return (
               v.due_amount > 0 || v.id == paymentStore.currentPayment.invoice_id
@@ -515,7 +520,7 @@ function selectNewCustomer(id) {
   if (route.params.id) params.model_id = route.params.id
 
   paymentStore.currentPayment.invoice_id = selectedInvoice.value = null
-  paymentStore.currentPayment.amount = 100
+  paymentStore.currentPayment.amount = 0
   invoiceList.value = []
   paymentStore.getNextNumber(params, true)
 }

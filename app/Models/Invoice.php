@@ -47,7 +47,8 @@ class Invoice extends Model implements HasMedia
         'sub_total' => 'integer',
         'discount' => 'float',
         'discount_val' => 'integer',
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
+        'display_due_amount' => 'boolean',
     ];
 
     protected $guarded = [

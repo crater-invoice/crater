@@ -33,5 +33,6 @@ export default function () {
     fields: [],
     selectedNote: null,
     selectedCurrency: '',
+    display_due_amount: false,
   }
 }

@@ -160,5 +160,34 @@
                 {!! format_money_pdf($invoice->total, $invoice->customer->currency)!!}
             </td>
         </tr>
+
+        @if ($invoice->display_due_amount)
+            <tr>
+                <td colspan="2" style="padding-top: 20px;"><hr/></td>
+            </tr>
+            <tr>
+                <td class="border-0 total-table-attribute-label">
+                    <label class="total-bottom"> Paid so far </label>
+                </td>
+                <td
+                    class="border-0 py-8 total-table-attribute-value text-primary"
+                    style="color: green"
+                >
+                    {!! format_money_pdf($invoice->total - $invoice->due_amount, $invoice->customer->currency)!!}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="border-0 total-border-left total-table-attribute-label">
+                    Remaining
+                </td>
+                <td
+                    class="border-0 total-border-right item-cell py-8 total-table-attribute-value text-primary"
+                    style="color: rgb(247, 67, 67)"
+                >
+                    {!! format_money_pdf($invoice->due_amount, $invoice->customer->currency)!!}
+                </td>
+            </tr>
+        @endif
     </table>
 </div>

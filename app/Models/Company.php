@@ -147,7 +147,7 @@ class Company extends Model implements HasMedia
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_company', 'user_id', 'company_id');
+        return $this->belongsToMany(User::class, 'user_company', 'company_id', 'user_id');
     }
 
     public function setupRoles()

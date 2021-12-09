@@ -112,6 +112,14 @@
               store-prop="newInvoice"
               component-name="InvoiceTemplate"
             />
+
+            <!-- display due amount -->
+            <div class="flex">
+              <BaseSwitchSection
+                v-model="invoiceStore.newInvoice.display_due_amount"
+                title="Display due amount in invoice PDF?"
+              />
+            </div>
           </div>
 
           <InvoiceTotal

@@ -15,7 +15,13 @@ services:
       - ./:/var/www
       - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
-      - crater
+      - application
+      - frontend
+      - database
+    expose:
+      - 9000
+    depends_on:
+      - db
 
   db:
     image: mariadb
@@ -26,14 +32,14 @@ services:
       # and uncomment the line under this one.
       #- ./docker-compose/db/data:/var/lib/mysql:rw,delegated
     environment:
-      MYSQL_USER: crater
-      MYSQL_PASSWORD: crater
-      MYSQL_DATABASE: crater
-      MYSQL_ROOT_PASSWORD: crater
-    ports:
-      - '33006:3306'
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
-      - crater
+      - database
+    expose:
+      - 3306
 
   nginx:
     image: nginx:1.17-alpine
@@ -44,7 +50,9 @@ services:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
-      - crater
+      - frontend
+    depends_on:
+      - app
 
   cron:
     build:
@@ -53,11 +61,27 @@ services:
     volumes:
       - ./:/var/www
     networks:
-      - crater
+      - database
+    depends_on:
+      - app
+
+  adminer:
+    # COMPOSE_PROFILES=dev docker-compose up
+    profiles:
+      - dev
+    image: adminer
+    restart: always
+    ports:
+      - 8010:8080
+    networks:
+      - database
+    depends_on:
+      - db
 
 volumes:
-  db:
+  db: null
 
 networks:
-  crater:
-    driver: bridge
+  frontend: null
+  application: null
+  database: null

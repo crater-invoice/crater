@@ -323,6 +323,7 @@ function setData() {
     customFieldStore.currentCustomField.model_type = modelTypes[0]
 
     customFieldStore.currentCustomField.type = dataTypes[0].value
+    selectedType.value = dataTypes[0]
   }
 }
 

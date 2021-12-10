@@ -195,7 +195,7 @@ class Payment extends Model implements HasMedia
             $invoice->addInvoicePayment($this->amount);
         }
 
-        if ($this->invoice_id === $request->invoice_id && $request->amount !== $this->amount) {
+        if ($this->invoice_id && $this->invoice_id === $request->invoice_id && $request->amount !== $this->amount) {
             $invoice = Invoice::find($this->invoice_id);
             $invoice->addInvoicePayment($this->amount);
             $invoice->subtractInvoicePayment($request->amount);

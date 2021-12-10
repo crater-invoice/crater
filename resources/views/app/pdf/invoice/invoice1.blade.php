@@ -271,6 +271,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }

@@ -460,13 +460,13 @@ class Invoice extends Model implements HasMedia
     {
         $data = $this->sendInvoiceData($data);
 
+        \Mail::to($data['to'])->send(new SendInvoiceMail($data));
+
         if ($this->status == Invoice::STATUS_DRAFT) {
             $this->status = Invoice::STATUS_SENT;
             $this->sent = true;
             $this->save();
         }
-
-        \Mail::to($data['to'])->send(new SendInvoiceMail($data));
 
         return [
             'success' => true,

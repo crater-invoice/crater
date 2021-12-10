@@ -7,7 +7,7 @@ use Crater\Http\Controllers\Controller;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
 use Crater\Models\Expense;
-use Crater\Models\Invoice;
+use Crater\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use PDF;
@@ -31,10 +31,9 @@ class ProfitLossReportController extends Controller
 
         App::setLocale($locale);
 
-        $invoicesAmount = Invoice::whereCompanyId($company->id)
+        $paymentsAmount = Payment::whereCompanyId($company->id)
             ->applyFilters($request->only(['from_date', 'to_date']))
-            ->wherePaidStatus(Invoice::STATUS_PAID)
-            ->sum('base_total');
+            ->sum('base_amount');
 
         $expenseCategories = Expense::with('category')
             ->whereCompanyId($company->id)
@@ -68,7 +67,7 @@ class ProfitLossReportController extends Controller
 
         view()->share([
             'company' => $company,
-            'income' => $invoicesAmount,
+            'income' => $paymentsAmount,
             'expenseCategories' => $expenseCategories,
             'totalExpense' => $totalAmount,
             'colorSettings' => $colorSettings,

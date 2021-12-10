@@ -246,8 +246,8 @@ class Expense extends Model implements HasMedia
             $expense->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
         }
 
-        if ($request->customFields && empty($request->customFields)) {
-            $expense->addCustomFields($request->customFields);
+        if ($request->customFields) {
+            $expense->addCustomFields(json_decode($request->customFields));
         }
 
         return $expense;
@@ -270,8 +270,8 @@ class Expense extends Model implements HasMedia
             $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
         }
 
-        if ($request->customFields && empty($request->customFields)) {
-            $this->updateCustomFields($request->customFields);
+        if ($request->customFields) {
+            $this->updateCustomFields(json_decode($request->customFields));
         }
 
         return true;

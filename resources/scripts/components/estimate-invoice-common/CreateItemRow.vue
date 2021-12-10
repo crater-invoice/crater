@@ -53,7 +53,7 @@
                 :content-loading="loading"
                 type="number"
                 small
-                min="1"
+                min="0"
                 step="any"
                 @change="syncItemToStore()"
                 @input="v$.quantity.$touch()"
@@ -352,7 +352,7 @@ const rules = {
     required: helpers.withMessage(t('validation.required'), required),
     minValue: helpers.withMessage(
       t('validation.qty_must_greater_than_zero'),
-      minValue(1)
+      minValue(0)
     ),
     maxLength: helpers.withMessage(
       t('validation.amount_maxlength'),

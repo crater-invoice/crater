@@ -369,6 +369,7 @@ class RecurringInvoice extends Model
                 'customer' => $invoice->customer->toArray(),
                 'company' => Company::find($invoice->company_id)
             ];
+
             $invoice->send($data);
         }
     }

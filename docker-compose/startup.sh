@@ -1,5 +1,8 @@
 #!/bin/sh
 
+chmod 775 /var/www/ -R
+chown 1000:33 /var/www -R
+
 if [ ! -f ".env" ]; then
     cp .env.example .env
     echo "created .env from .env.example"

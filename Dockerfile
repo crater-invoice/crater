@@ -1,5 +1,6 @@
 FROM php:7.4-fpm
 
+
 WORKDIR /var/www
 
 COPY ./docker-compose/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
@@ -27,8 +28,8 @@ RUN rmdir html && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmat
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN useradd -G www-data,root -u 1000 -d /home/crater crater && chmod 777 /var/www/ && chown 1000:1000 /var/www/
+USER 0
 
-USER 1000
 
 COPY ./docker-compose/startup.sh /startup.sh
 

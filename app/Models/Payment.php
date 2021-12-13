@@ -183,7 +183,7 @@ class Payment extends Model implements HasMedia
 
     public function updatePayment($request)
     {
-        $data = $request->all();
+        $data = $request->getPaymentPayload();
 
         if ($request->invoice_id && (! $this->invoice_id || $this->invoice_id !== $request->invoice_id)) {
             $invoice = Invoice::find($request->invoice_id);

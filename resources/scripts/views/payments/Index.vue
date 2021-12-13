@@ -151,6 +151,10 @@
           </div>
         </template>
 
+        <template #cell-payment_date="{ row }">
+          {{ row.data.formatted_payment_date }}
+        </template>
+
         <template #cell-payment_number="{ row }">
           <router-link
             :to="{ path: `payments/${row.data.id}/view` }"
@@ -161,11 +165,7 @@
         </template>
 
         <template #cell-name="{ row }">
-          <BaseText
-            :text="row.data.customer.name"
-            :length="30"
-            tag="span"
-          />
+          <BaseText :text="row.data.customer.name" :length="30" tag="span" />
         </template>
 
         <template #cell-payment_mode="{ row }">

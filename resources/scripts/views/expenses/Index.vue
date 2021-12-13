@@ -185,6 +185,10 @@
           />
         </template>
 
+        <template #cell-expense_date="{ row }">
+          {{ row.data.formatted_expense_date }}
+        </template>
+
         <template #cell-user_name="{ row }">
           <BaseText
             :text="row.data.customer ? row.data.customer.name : '-'"

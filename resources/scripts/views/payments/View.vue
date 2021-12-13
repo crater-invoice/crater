@@ -163,7 +163,7 @@
           >
             <div class="flex-2">
               <BaseText
-                :text="payment?.customer?.name "
+                :text="payment?.customer?.name"
                 :length="30"
                 class="
                   pr-2
@@ -219,11 +219,11 @@
                   text-right text-gray-900
                 "
                 :amount="payment?.amount"
-                :currency="payment?.currency"
+                :currency="payment.customer.currency"
               />
 
               <div class="text-sm text-right text-gray-500 non-italic">
-                {{ paymentDate }}
+                {{ payment.formatted_payment_date }}
               </div>
             </div>
           </router-link>

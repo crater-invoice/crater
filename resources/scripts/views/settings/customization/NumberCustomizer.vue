@@ -386,8 +386,8 @@ function removeComponent(component) {
 function onUpdate(val, element) {
   switch (element.name) {
     case 'SERIES':
-      if (val.length >= 4) {
-        val = val.substring(0, 4)
+      if (val.length >= 6) {
+        val = val.substring(0, 6)
       }
       break
     case 'DELIMITER':

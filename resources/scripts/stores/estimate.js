@@ -496,9 +496,11 @@ export const useEstimateStore = (useWindow = false) => {
           this.newEstimate.discount_per_item =
             companyStore.selectedCompanySettings.discount_per_item
           this.newEstimate.estimate_date = moment().format('YYYY-MM-DD')
-          this.newEstimate.expiry_date = moment()
-            .add(7, 'days')
-            .format('YYYY-MM-DD')
+          if (companyStore.selectedCompanySettings.estimate_set_expiry_date_automatically === 'YES') {
+            this.newEstimate.expiry_date = moment()
+              .add(companyStore.selectedCompanySettings.estimate_expiry_date_days, 'days')
+              .format('YYYY-MM-DD')
+          }
         } else {
           editActions = [this.fetchEstimate(route.params.id)]
         }

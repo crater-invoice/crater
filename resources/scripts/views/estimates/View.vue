@@ -195,7 +195,7 @@
                   truncate
                 "
               />
-              
+
               <div
                 class="
                   mt-1
@@ -461,6 +461,7 @@ async function onMarkAsSent() {
         estimateData.value.status = 'SENT'
         isMarkAsSent.value = true
       }
+       isMarkAsSent.value = false
     })
 }
 

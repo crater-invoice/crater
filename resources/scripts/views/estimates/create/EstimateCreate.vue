@@ -185,9 +185,6 @@ const rules = {
   estimate_date: {
     required: helpers.withMessage(t('validation.required'), required),
   },
-  expiry_date: {
-    required: helpers.withMessage(t('validation.required'), required),
-  },
   estimate_number: {
     required: helpers.withMessage(t('validation.required'), required),
   },

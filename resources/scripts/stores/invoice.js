@@ -449,9 +449,11 @@ export const useInvoiceStore = (useWindow = false) => {
           this.newInvoice.discount_per_item =
             companyStore.selectedCompanySettings.discount_per_item
           this.newInvoice.invoice_date = moment().format('YYYY-MM-DD')
-          this.newInvoice.due_date = moment()
-            .add(7, 'days')
-            .format('YYYY-MM-DD')
+          if (companyStore.selectedCompanySettings.invoice_set_due_date_automatically ==='YES') {
+            this.newInvoice.due_date = moment()
+              .add(companyStore.selectedCompanySettings.invoice_due_date_days, 'days')
+              .format('YYYY-MM-DD')
+          } 
         } else {
           editActions = [this.fetchInvoice(route.params.id)]
         }

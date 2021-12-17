@@ -26,8 +26,6 @@
       <BaseInputGroup
         :label="$t('estimates.expiry_date')"
         :content-loading="isLoading"
-        required
-        :error="v.expiry_date.$error && v.expiry_date.$errors[0].$message"
       >
         <BaseDatePicker
           v-model="estimateStore.newEstimate.expiry_date"
@@ -82,6 +80,8 @@
 <script setup>
 import { useEstimateStore } from '@/scripts/stores/estimate'
 import ExchangeRateConverter from '@/scripts/components/estimate-invoice-common/ExchangeRateConverter.vue'
+import { useCompanyStore } from '@/scripts/stores/company'
+import { reactive, inject } from 'vue'
 
 const props = defineProps({
   v: {

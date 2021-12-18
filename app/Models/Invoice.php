@@ -64,14 +64,14 @@ class Invoice extends Model implements HasMedia
     public function setInvoiceDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['invoice_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['invoice_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 
     public function setDueDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['due_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['due_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 

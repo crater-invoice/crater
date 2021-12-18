@@ -57,7 +57,7 @@ class Payment extends Model implements HasMedia
     public function setPaymentDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['payment_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['payment_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 

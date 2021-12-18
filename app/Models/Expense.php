@@ -33,7 +33,7 @@ class Expense extends Model implements HasMedia
     public function setExpenseDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['expense_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['expense_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 

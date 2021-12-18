@@ -21,7 +21,7 @@ class CustomFieldValue extends Model
     public function setDateAnswerAttribute($value)
     {
         if ($value && $value != null) {
-            $this->attributes['date_answer'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['date_answer'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 

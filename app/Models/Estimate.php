@@ -57,14 +57,14 @@ class Estimate extends Model implements HasMedia
     public function setEstimateDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['estimate_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['estimate_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 
     public function setExpiryDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['expiry_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['expiry_date'] = Carbon::parse($value)->format('Y-m-d');
         }
     }
 

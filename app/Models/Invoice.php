@@ -39,6 +39,8 @@ class Invoice extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'invoice_date',
+        'due_date'
     ];
 
     protected $casts = [
@@ -64,14 +66,14 @@ class Invoice extends Model implements HasMedia
     public function setInvoiceDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['invoice_date'] = Carbon::parse($value)->format('Y-m-d');
+            $this->attributes['invoice_date'] = $value;
         }
     }
 
     public function setDueDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['due_date'] = Carbon::parse($value)->format('Y-m-d');
+            $this->attributes['due_date'] = $value;
         }
     }
 

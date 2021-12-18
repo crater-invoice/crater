@@ -28,7 +28,7 @@ class Payment extends Model implements HasMedia
     public const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     public const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'payment_date'];
 
     protected $guarded = ['id'];
 
@@ -57,7 +57,7 @@ class Payment extends Model implements HasMedia
     public function setPaymentDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['payment_date'] = Carbon::parse($value)->format('Y-m-d');
+            $this->attributes['payment_date'] = $value;
         }
     }
 

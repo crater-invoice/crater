@@ -56,20 +56,6 @@ class Estimate extends Model implements HasMedia
         'exchange_rate' => 'float'
     ];
 
-    public function setEstimateDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['estimate_date'] = $value;
-        }
-    }
-
-    public function setExpiryDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['expiry_date'] = $value;
-        }
-    }
-
     public function getEstimatePdfUrlAttribute()
     {
         return url('/estimates/pdf/'.$this->unique_hash);

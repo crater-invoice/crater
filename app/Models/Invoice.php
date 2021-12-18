@@ -63,20 +63,6 @@ class Invoice extends Model implements HasMedia
         'invoicePdfUrl',
     ];
 
-    public function setInvoiceDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['invoice_date'] = $value;
-        }
-    }
-
-    public function setDueDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['due_date'] = $value;
-        }
-    }
-
     public function emailLogs()
     {
         return $this->morphMany('App\Models\EmailLog', 'mailable');

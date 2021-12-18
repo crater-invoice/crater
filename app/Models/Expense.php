@@ -34,13 +34,6 @@ class Expense extends Model implements HasMedia
         'exchange_rate' => 'float'
     ];
 
-    public function setExpenseDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['expense_date'] = $value;
-        }
-    }
-
     public function category()
     {
         return $this->belongsTo(ExpenseCategory::class, 'expense_category_id');

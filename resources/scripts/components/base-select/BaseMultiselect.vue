@@ -127,7 +127,7 @@
 
     <!-- Options -->
     <div :class="classList.dropdown" tabindex="-1">
-      <div class="w-full overflow-y-auto">
+      <div class="w-full overflow-y-scroll h-100px" >
         <slot name="beforelist" :options="fo"></slot>
 
         <ul :class="classList.options">
@@ -644,3 +644,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.h-100px{
+  height: 100px;
+}
+</style>

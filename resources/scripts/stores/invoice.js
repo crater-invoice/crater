@@ -19,6 +19,7 @@ export const useInvoiceStore = (useWindow = false) => {
   const defineStoreFunc = useWindow ? window.pinia.defineStore : defineStore
   const { global } = window.i18n
   const notificationStore = useNotificationStore()
+  const companyStore = useCompanyStore()
 
   return defineStoreFunc({
     id: 'invoice',
@@ -450,7 +451,7 @@ export const useInvoiceStore = (useWindow = false) => {
             companyStore.selectedCompanySettings.discount_per_item
           this.newInvoice.invoice_date = moment().format('YYYY-MM-DD')
           this.newInvoice.due_date = moment()
-            .add(7, 'days')
+            .add(companyStore.selectedCompanySettings.invoice_due_date_days || 7, 'days')
             .format('YYYY-MM-DD')
         } else {
           editActions = [this.fetchInvoice(route.params.id)]

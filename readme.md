@@ -55,6 +55,8 @@ Join the Crater discord server to discuss:
 - [x] Multiple Companies
 - [x] Recurring Invoices
 - [ ] Modules
+- [ ] Blockchain Integration
+- [ ] Web 3.0 Accounting
 - [ ] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
 - [ ] Vendors, Inventory & Bills
 - [ ] Payment Reminders

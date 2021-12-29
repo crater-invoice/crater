@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class Base64Mime implements Rule
 {
     private $attribute;
+
     private $extensions;
 
     /**
@@ -33,19 +34,19 @@ class Base64Mime implements Rule
         try {
             $data = json_decode($value)->data;
         } catch (\Exception $e) {
-            return False;
+            return false;
         }
 
         $pattern = '/^data:\w+\/[\w\+]+;base64,[\w\+\=\/]+$/';
 
-        if(!preg_match($pattern, $data)) {
-            return False;
+        if (! preg_match($pattern, $data)) {
+            return false;
         }
 
         $data = explode(',', $data);
 
-        if(!isset($data[1]) || empty($data[1])) {
-            return False;
+        if (! isset($data[1]) || empty($data[1])) {
+            return false;
         }
 
         try {
@@ -53,24 +54,26 @@ class Base64Mime implements Rule
             $f = finfo_open();
             $result = finfo_buffer($f, $data, FILEINFO_EXTENSION);
 
-            if($result === '???')
-                return False;
+            if ($result === '???') {
+                return false;
+            }
 
-            if(strpos($result, '/')) {
-                foreach(explode('/', $result) as $ext) {
-                    if(in_array($ext, $this->extensions))
-                        return True;
+            if (strpos($result, '/')) {
+                foreach (explode('/', $result) as $ext) {
+                    if (in_array($ext, $this->extensions)) {
+                        return true;
+                    }
                 }
             } else {
-                if(in_array($result, $this->extensions))
-                    return True;
+                if (in_array($result, $this->extensions)) {
+                    return true;
+                }
             }
         } catch (\Exception $e) {
-            return False;
+            return false;
         }
-        
-        return False;
 
+        return false;
     }
 
     /**
@@ -80,6 +83,6 @@ class Base64Mime implements Rule
      */
     public function message()
     {
-        return 'The ' . $this->attribute . ' must be a json with file of type: ' . implode(', ', $this->extensions) . ' encoded in base64.';
+        return 'The '.$this->attribute.' must be a json with file of type: '.implode(', ', $this->extensions).' encoded in base64.';
     }
 }

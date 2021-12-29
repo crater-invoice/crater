@@ -3,9 +3,8 @@
 namespace Crater\Http\Controllers\V1\Admin\Expense;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Models\Expense;
-use Illuminate\Http\Request;
 use Crater\Http\Requests\ExpenseRequest;
+use Crater\Models\Expense;
 
 class UploadReceiptController extends Controller
 {

@@ -3,14 +3,14 @@
 namespace Crater\Http\Controllers\V1\Admin\Settings;
 
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\AvatarRequest;
+use Crater\Http\Requests\CompanyLogoRequest;
 use Crater\Http\Requests\CompanyRequest;
 use Crater\Http\Requests\ProfileRequest;
 use Crater\Http\Resources\CompanyResource;
 use Crater\Http\Resources\UserResource;
 use Crater\Models\Company;
 use Illuminate\Http\Request;
-use Crater\Http\Requests\AvatarRequest;
-use Crater\Http\Requests\CompanyLogoRequest;
 
 class CompanyController extends Controller
 {

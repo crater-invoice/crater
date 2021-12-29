@@ -5,17 +5,18 @@ namespace Crater\Http\Controllers\V1\Admin\Expense;
 use Crater\Http\Controllers\Controller;
 use Crater\Models\Expense;
 use Illuminate\Http\Request;
+use Crater\Http\Requests\ExpenseRequest;
 
 class UploadReceiptController extends Controller
 {
     /**
      * Upload the expense receipts to storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\ExpenseRequest $request
      * @param  Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request, Expense $expense)
+    public function __invoke(ExpenseRequest $request, Expense $expense)
     {
         $this->authorize('update', $expense);
 

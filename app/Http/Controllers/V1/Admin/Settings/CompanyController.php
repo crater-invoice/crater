@@ -9,6 +9,8 @@ use Crater\Http\Resources\CompanyResource;
 use Crater\Http\Resources\UserResource;
 use Crater\Models\Company;
 use Illuminate\Http\Request;
+use Crater\Http\Requests\AvatarRequest;
+use Crater\Http\Requests\CompanyLogoRequest;
 
 class CompanyController extends Controller
 {
@@ -58,10 +60,10 @@ class CompanyController extends Controller
     /**
      * Upload the company logo to storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\CompanyLogoRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadCompanyLogo(Request $request)
+    public function uploadCompanyLogo(CompanyLogoRequest $request)
     {
         $company = Company::find($request->header('company'));
 
@@ -89,10 +91,10 @@ class CompanyController extends Controller
     /**
      * Upload the Admin Avatar to public storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\AvatarRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadAvatar(Request $request)
+    public function uploadAvatar(AvatarRequest $request)
     {
         $user = auth()->user();
 

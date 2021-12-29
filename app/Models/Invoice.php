@@ -39,6 +39,8 @@ class Invoice extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'invoice_date',
+        'due_date'
     ];
 
     protected $casts = [
@@ -60,20 +62,6 @@ class Invoice extends Model implements HasMedia
         'formattedDueDate',
         'invoicePdfUrl',
     ];
-
-    public function setInvoiceDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['invoice_date'] = Carbon::createFromFormat('Y-m-d', $value);
-        }
-    }
-
-    public function setDueDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['due_date'] = Carbon::createFromFormat('Y-m-d', $value);
-        }
-    }
 
     public function emailLogs()
     {

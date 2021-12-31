@@ -119,7 +119,7 @@ class CustomerRequest extends FormRequest
             $rules['email'] = [
                 'email',
                 'nullable',
-                Rule::unique('customers')->ignore($this->route('customer')->id),
+                Rule::unique('customers')->where('company_id', $this->header('company'))->ignore($this->route('customer')->id),
             ];
         };
 

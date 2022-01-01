@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Crater\Models\Currency;
 use Crater\Models\Item;
 use Crater\Models\Unit;
 use Crater\Models\User;
@@ -26,9 +27,12 @@ class ItemFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
-            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'company_id' => User::find(1)->companies()->first()->id,
             'price' => $this->faker->randomDigitNotNull,
             'unit_id' => Unit::factory(),
+            'creator_id' => User::where('role', 'super admin')->first()->company_id,
+            'currency_id' => Currency::find(1)->id,
+            'tax_per_item' => $this->faker->randomElement([true, false])
         ];
     }
 }

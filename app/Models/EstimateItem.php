@@ -2,27 +2,17 @@
 
 namespace Crater\Models;
 
+use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EstimateItem extends Model
 {
     use HasFactory;
+    use HasCustomFieldsTrait;
 
-    protected $fillable = [
-        'estimate_id',
-        'name',
-        'item_id',
-        'description',
-        'quantity',
-        'company_id',
-        'price',
-        'discount_type',
-        'discount_val',
-        'tax',
-        'total',
-        'discount',
-        'unit_name',
+    protected $guarded = [
+        'id'
     ];
 
     protected $casts = [

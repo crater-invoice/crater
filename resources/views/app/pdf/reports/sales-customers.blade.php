@@ -6,7 +6,7 @@
         body {
             font-family: "DejaVu Sans";
         }
-        
+
         table {
             border-collapse: collapse;
         }
@@ -168,7 +168,7 @@
                             </td>
                             <td>
                                 <p class="sales-amount">
-                                    {!! format_money_pdf($invoice->total) !!}
+                                    {!! format_money_pdf($invoice->base_total) !!}
                                 </p>
                             </td>
                         </tr>

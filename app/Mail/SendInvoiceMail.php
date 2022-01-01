@@ -2,7 +2,6 @@
 
 namespace Crater\Mail;
 
-use Config;
 use Crater\Models\EmailLog;
 use Crater\Models\Invoice;
 use Illuminate\Bus\Queueable;

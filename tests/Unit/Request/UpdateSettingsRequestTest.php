@@ -10,9 +10,6 @@ test('update settings request rules', function () {
             'settings' => [
                 'required',
             ],
-            'settings.*' => [
-                'required',
-            ],
         ],
         $request->rules()
     );

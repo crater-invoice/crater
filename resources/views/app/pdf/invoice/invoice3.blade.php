@@ -242,6 +242,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }
@@ -312,7 +313,7 @@
                     @if($logo)
                     <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    <h1 class="header-logo"> {{$invoice->user->company->name}} </h1>
+                    <h1 class="header-logo"> {{$invoice->customer->company->name}} </h1>
                     @endif
                 </td>
                 <td width="50%" class="text-right company-address-container company-address">

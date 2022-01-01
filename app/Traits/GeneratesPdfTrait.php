@@ -83,7 +83,7 @@ trait GeneratesPdfTrait
         \Storage::disk('local')->put('temp/'.$collection_name.'/'.$this->id.'/temp.pdf', $pdf->output());
 
         if ($deleteExistingFile) {
-            $this->clearMediaCollection($collection_name);
+            $this->clearMediaCollection($this->id);
         }
 
         $file_disk = FileDisk::whereSetAsDefault(true)->first();
@@ -110,7 +110,7 @@ trait GeneratesPdfTrait
 
     public function getFieldsArray()
     {
-        $customer = $this->user;
+        $customer = $this->customer;
         $shippingAddress = $customer->shippingAddress ?? new Address();
         $billingAddress = $customer->billingAddress ?? new Address();
         $companyAddress = $this->company->address ?? new Address();
@@ -148,7 +148,7 @@ trait GeneratesPdfTrait
         ];
 
         $customFields = $this->fields;
-        $customerCustomFields = $this->user->fields;
+        $customerCustomFields = $this->customer->fields;
 
         foreach ($customFields as $customField) {
             $fields['{'.$customField->customField->slug.'}'] = $customField->defaultAnswer;

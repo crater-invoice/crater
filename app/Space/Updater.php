@@ -16,7 +16,7 @@ class Updater
     public static function checkForUpdate($installed_version)
     {
         $data = null;
-        if (env('APP_ENV') === 'development') {
+        if (env('APP_ENV') === 'development' || env('APP_ENV') === 'local') {
             $url = 'downloads/check/latest/'.$installed_version.'?type=update&is_dev=1';
         } else {
             $url = 'downloads/check/latest/'.$installed_version.'?type=update';

@@ -313,6 +313,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }
@@ -385,8 +386,8 @@
                     </td>
                 @else
                     <td width="60%" class="header-section-left" style="padding-top: 0px;">
-                        @if($invoice->user->company)
-                            <h1 class="header-logo"> {{$invoice->user->company->name}} </h1>
+                        @if($invoice->customer->company)
+                            <h1 class="header-logo"> {{$invoice->customer->company->name}} </h1>
                         @endif
                     </td>
                 @endif

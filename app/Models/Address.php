@@ -25,6 +25,11 @@ class Address extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

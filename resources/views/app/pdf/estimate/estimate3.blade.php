@@ -281,6 +281,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }
@@ -351,7 +352,7 @@
                     @if($logo)
                         <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        <h1 class="header-logo"> {{$estimate->user->company->name}} </h1>
+                        <h1 class="header-logo"> {{$estimate->customer->company->name}} </h1>
                     @endif
                 </td>
                 <td width="50%" class="text-right company-address-container company-address">
@@ -373,7 +374,7 @@
                     @endif
                 </div>
 
-                <div @if($estimate->user->billingaddress) class="shipping-address-container shipping-address" @else class="shipping-address-container--left shipping-address" @endif>
+                <div @if($estimate->customer->billingaddress) class="shipping-address-container shipping-address" @else class="shipping-address-container--left shipping-address" @endif>
                     @if($shipping_address)
                         <b>@lang('pdf_ship_to')</b> <br>
                         {!! $shipping_address !!}

@@ -11,16 +11,8 @@ class Tax extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'amount',
-        'company_id',
-        'percent',
-        'tax_type_id',
-        'invoice_id',
-        'estimate_id',
-        'item_id',
-        'compound_tax',
+    protected $guarded = [
+        'id'
     ];
 
     protected $casts = [
@@ -38,9 +30,19 @@ class Tax extends Model
         return $this->belongsTo(Invoice::class);
     }
 
+    public function recurringInvoice()
+    {
+        return $this->belongsTo(RecurringInvoice::class);
+    }
+
     public function estimate()
     {
         return $this->belongsTo(Estimate::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     public function invoiceItem()
@@ -66,7 +68,7 @@ class Tax extends Model
     public function scopeTaxAttributes($query)
     {
         $query->select(
-            DB::raw('sum(amount) as total_tax_amount, tax_type_id')
+            DB::raw('sum(base_amount) as total_tax_amount, tax_type_id')
         )->groupBy('tax_type_id');
     }
 

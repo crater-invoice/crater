@@ -133,3 +133,11 @@ function getRelatedSlugs($type, $slug, $id = 0)
         ->where('id', '<>', $id)
         ->get();
 }
+
+function respondJson($error, $message)
+{
+    return response()->json([
+        'error' => $error,
+        'message' => $message
+    ], 422);
+}

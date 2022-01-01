@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
+use Crater\Models\Currency;
+use Crater\Models\Customer;
 use Crater\Models\Estimate;
 use Crater\Models\User;
+use Crater\Services\SerialNumberFormatter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstimateFactory extends Factory
@@ -67,13 +70,19 @@ class EstimateFactory extends Factory
      */
     public function definition()
     {
+        $sequenceNumber = (new SerialNumberFormatter())
+            ->setModel(new Estimate())
+            ->setCompany(User::find(1)->companies()->first()->id)
+            ->setNextNumbers();
+
         return [
             'estimate_date' => $this->faker->date('Y-m-d', 'now'),
             'expiry_date' => $this->faker->date('Y-m-d', 'now'),
-            'estimate_number' => 'EST-'.Estimate::getNextEstimateNumber('EST'),
-            'reference_number' => Estimate::getNextEstimateNumber('EST'),
-            'company_id' => User::where('role', 'super admin')->first()->company_id,
-            'user_id' => User::factory()->create(['role' => 'customer'])->id,
+            'estimate_number' => $sequenceNumber->getNextNumber(),
+            'sequence_number' => $sequenceNumber->nextSequenceNumber,
+            'customer_sequence_number' => $sequenceNumber->nextCustomerSequenceNumber,
+            'reference_number' => $sequenceNumber->getNextNumber(),
+            'company_id' => User::find(1)->companies()->first()->id,
             'status' => Estimate::STATUS_DRAFT,
             'template_name' => 'estimate1',
             'sub_total' => $this->faker->randomDigitNotNull,
@@ -90,6 +99,13 @@ class EstimateFactory extends Factory
             'tax' => $this->faker->randomDigitNotNull,
             'notes' => $this->faker->text(80),
             'unique_hash' => str_random(60),
+            'customer_id' => Customer::factory(),
+            'exchange_rate' => $this->faker->randomDigitNotNull,
+            'base_discount_val' => $this->faker->randomDigitNotNull,
+            'base_sub_total' => $this->faker->randomDigitNotNull,
+            'base_total' => $this->faker->randomDigitNotNull,
+            'base_tax' => $this->faker->randomDigitNotNull,
+            'currency_id' => Currency::find(1)->id,
         ];
     }
 }

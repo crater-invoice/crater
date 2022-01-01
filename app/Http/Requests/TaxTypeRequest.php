@@ -3,6 +3,7 @@
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TaxTypeRequest extends FormRequest
 {
@@ -23,9 +24,11 @@ class TaxTypeRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => [
                 'required',
+                Rule::unique('tax_types')
+                ->where('company_id', $this->header('company'))
             ],
             'percent' => [
                 'required',
@@ -40,5 +43,25 @@ class TaxTypeRequest extends FormRequest
                 'nullable',
             ],
         ];
+
+        if ($this->isMethod('PUT')) {
+            $rules['name'] = [
+                'required',
+                Rule::unique('tax_types')
+                    ->ignore($this->route('tax_type')->id)
+                    ->where('company_id', $this->header('company'))
+            ];
+        }
+
+        return $rules;
+    }
+
+    public function getTaxTypePayload()
+    {
+        return collect($this->validated())
+            ->merge([
+                'company_id' => $this->header('company')
+            ])
+            ->toArray();
     }
 }

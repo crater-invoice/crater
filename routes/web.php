@@ -1,17 +1,20 @@
 <?php
 
-use Crater\Http\Controllers\V1\Auth\LoginController;
-use Crater\Http\Controllers\V1\Estimate\EstimatePdfController;
-use Crater\Http\Controllers\V1\Expense\DownloadReceiptController;
-use Crater\Http\Controllers\V1\Invoice\InvoicePdfController;
-use Crater\Http\Controllers\V1\Mobile\Customer\EstimatePdfController as CustomerEstimatePdfController;
-use Crater\Http\Controllers\V1\Mobile\Customer\InvoicePdfController as CustomerInvoicePdfController;
-use Crater\Http\Controllers\V1\Payment\PaymentPdfController;
-use Crater\Http\Controllers\V1\Report\CustomerSalesReportController;
-use Crater\Http\Controllers\V1\Report\ExpensesReportController;
-use Crater\Http\Controllers\V1\Report\ItemSalesReportController;
-use Crater\Http\Controllers\V1\Report\ProfitLossReportController;
-use Crater\Http\Controllers\V1\Report\TaxSummaryReportController;
+use Crater\Http\Controllers\V1\Admin\Auth\LoginController;
+use Crater\Http\Controllers\V1\Admin\Expense\ShowReceiptController;
+use Crater\Http\Controllers\V1\Admin\Report\CustomerSalesReportController;
+use Crater\Http\Controllers\V1\Admin\Report\ExpensesReportController;
+use Crater\Http\Controllers\V1\Admin\Report\ItemSalesReportController;
+use Crater\Http\Controllers\V1\Admin\Report\ProfitLossReportController;
+use Crater\Http\Controllers\V1\Admin\Report\TaxSummaryReportController;
+use Crater\Http\Controllers\V1\Customer\EstimatePdfController as CustomerEstimatePdfController;
+use Crater\Http\Controllers\V1\Customer\InvoicePdfController as CustomerInvoicePdfController;
+use Crater\Http\Controllers\V1\PDF\DownloadInvoicePdfController;
+use Crater\Http\Controllers\V1\PDF\DownloadPaymentPdfController;
+use Crater\Http\Controllers\V1\PDF\DownloadReceiptController;
+use Crater\Http\Controllers\V1\PDF\EstimatePdfController;
+use Crater\Http\Controllers\V1\PDF\InvoicePdfController;
+use Crater\Http\Controllers\V1\PDF\PaymentPdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [LoginController::class, 'login']);
 
 
-Route::prefix('reports')->group(function () {
+Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
 
     // sales report by customer
     //----------------------------------
@@ -48,28 +51,42 @@ Route::prefix('reports')->group(function () {
 });
 
 
-// download invoice pdf
+// view invoice pdf
 // -------------------------------------------------
 
 Route::get('/invoices/pdf/{invoice:unique_hash}', InvoicePdfController::class);
 
 
-// download estimate pdf
+// download invoice pdf
+// -------------------------------------------------
+
+Route::get('/invoices/pdf/download/{invoice:unique_hash}', DownloadInvoicePdfController::class);
+
+
+
+// view estimate pdf
 // -------------------------------------------------
 
 Route::get('/estimates/pdf/{estimate:unique_hash}', EstimatePdfController::class);
 
 
-// download payment pdf
+// view payment pdf
 // -------------------------------------------------
 
 Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
 
 
+// download payment pdf
+// -------------------------------------------------
+
+Route::get('/payments/pdf/download/{payment:unique_hash}', DownloadPaymentPdfController::class);
+
+
 // download expense receipt
 // -------------------------------------------------
 
-Route::get('/expenses/{expense}/receipt', DownloadReceiptController::class);
+Route::get('/expenses/{expense}/download-receipt', DownloadReceiptController::class);
+Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
 
 
 // customer pdf endpoints for invoice and estimate
@@ -88,7 +105,7 @@ Route::get('auth/logout', function () {
 // Setup for installation of app
 // ----------------------------------------------
 
-Route::get('/on-boarding', function () {
+Route::get('/installation', function () {
     return view('app');
 })->name('install')->middleware('redirect-if-installed');
 
@@ -106,4 +123,4 @@ Route::get('/admin/{vue?}', function () {
 
 Route::get('/{vue?}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('login')->middleware(['install', 'guest']);
+})->where('vue', '[\/\w\.-]*')->name('login')->middleware(['install']);

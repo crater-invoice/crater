@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Crater\Models\Address;
+use Crater\Models\Customer;
 use Crater\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -29,11 +30,13 @@ class AddressFactory extends Factory
             'city' => $this->faker->city,
             'state' => $this->faker->state,
             'country_id' => 231,
+            'company_id' => User::find(1)->companies()->first()->id,
             'zip' => $this->faker->postcode,
             'phone' => $this->faker->phoneNumber,
             'fax' => $this->faker->phoneNumber,
             'type' => $this->faker->randomElement([Address::BILLING_TYPE, Address::SHIPPING_TYPE]),
             'user_id' => User::factory(),
+            'customer_id' => Customer::factory()
         ];
     }
 }

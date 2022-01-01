@@ -321,6 +321,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }
@@ -391,8 +392,8 @@
                     @if($logo)
                         <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        @if($estimate->user->company)
-                            <h2 class="header-logo"> {{$estimate->user->company->name}} </h2>
+                        @if($estimate->customer->company)
+                            <h2 class="header-logo"> {{$estimate->customer->company->name}} </h2>
                         @endif
                     @endif
                 </td>

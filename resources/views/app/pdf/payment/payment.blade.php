@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>@lang('pdf_estimate_label') - {{$payment->payment_number}}</title>
+    <title>@lang('pdf_payment_label') - {{$payment->payment_number}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
@@ -218,6 +218,7 @@
             letter-spacing: 0.05em;
             color: #040405;
             width: 108px;
+            white-space: nowrap;
             height: 19.87px;
             padding-bottom: 10px;
         }
@@ -281,9 +282,9 @@
                 <td width="50%" class="header-section-left">
                     <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    @if($payment->user->company)
+                    @if($payment->customer)
                 <td class="header-section-left" style="padding-top:0px;">
-                    <h1 class="header-logo"> {{$payment->user->company->name}} </h1>
+                    <h1 class="header-logo"> {{$payment->customer->company->name}} </h1>
                     @endif
                     @endif
                 </td>
@@ -341,7 +342,7 @@
     </div>
     <div class="total-display-box">
         <p class="total-display-label">@lang('pdf_payment_amount_received_label')</p>
-        <span class="amount">{!! format_money_pdf($payment->amount, $payment->user->currency) !!}</span>
+        <span class="amount">{!! format_money_pdf($payment->amount, $payment->customer->currency) !!}</span>
     </div>
 </body>
 

@@ -78,14 +78,14 @@ class EnvironmentManager
         try {
             $conn = $this->checkDatabaseConnection($request);
 
-            $requirement = $this->checkVersionRequirements($request, $conn);
+            // $requirement = $this->checkVersionRequirements($request, $conn);
 
-            if ($requirement) {
-                return [
-                    'error' => 'minimum_version_requirement',
-                    'requirement' => $requirement,
-                ];
-            }
+            // if ($requirement) {
+            //     return [
+            //         'error' => 'minimum_version_requirement',
+            //         'requirement' => $requirement,
+            //     ];
+            // }
 
             if (\Schema::hasTable('users')) {
                 return [

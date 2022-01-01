@@ -25,7 +25,7 @@ class DatabaseEnvironmentRequest extends FormRequest
     {
         switch ($this->get('database_connection')) {
             case 'sqlite':
-                return  [
+                return [
                     'app_url' => [
                         'required',
                         'url',
@@ -42,7 +42,7 @@ class DatabaseEnvironmentRequest extends FormRequest
 
                 break;
             default:
-                return  [
+                return [
                     'app_url' => [
                         'required',
                         'url',

@@ -31,7 +31,6 @@ class UserFactory extends Factory
             'enable_portal' => true,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->phoneNumber,
-            'company_id' => User::find(1)->company_id,
             'role' => 'super admin',
             'password' => Hash::make('secret'),
             'currency_id' => Currency::first()->id,

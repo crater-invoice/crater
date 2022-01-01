@@ -24,7 +24,7 @@ class UnitFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'company_id' => User::where('role', 'super admin')->first()->company_id,
+            'company_id' => User::find(1)->companies()->first()->id,
         ];
     }
 }

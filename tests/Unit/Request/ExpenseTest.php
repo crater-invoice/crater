@@ -13,14 +13,23 @@ test('expense request validation rules', function () {
             'expense_category_id' => [
                 'required',
             ],
+            'exchange_rate' => [
+                'nullable'
+            ],
+            'payment_method_id' => [
+                'nullable',
+            ],
             'amount' => [
                 'required',
             ],
-            'user_id' => [
+            'customer_id' => [
                 'nullable',
             ],
             'notes' => [
                 'nullable',
+            ],
+            'currency_id' => [
+                'required'
             ],
         ],
         $request->rules()

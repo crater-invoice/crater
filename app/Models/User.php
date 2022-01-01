@@ -3,14 +3,16 @@
 namespace Crater\Models;
 
 use Carbon\Carbon;
+use Crater\Http\Requests\UserRequest;
 use Crater\Notifications\MailResetPasswordNotification;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Laravel\Sanctum\HasApiTokens;
+use Silber\Bouncer\BouncerFacade;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -21,29 +23,15 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
     use HasCustomFieldsTrait;
     use HasFactory;
+    use HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'company_id',
-        'password',
-        'facebook_id',
-        'currency_id',
-        'google_id',
-        'github_id',
-        'role',
-        'group_id',
-        'phone',
-        'company_name',
-        'contact_name',
-        'website',
-        'enable_portal',
-        'creator_id',
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -99,14 +87,24 @@ class User extends Authenticatable implements HasMedia
 
     public function getFormattedCreatedAtAttribute($value)
     {
-        $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+        $dateFormat = CompanySetting::getSetting('carbon_date_format', request()->header('company'));
 
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
     public function estimates()
     {
-        return $this->hasMany(Estimate::class);
+        return $this->hasMany(Estimate::class, 'creator_id');
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'creator_id');
+    }
+
+    public function recurringInvoices()
+    {
+        return $this->hasMany(RecurringInvoice::class, 'creator_id');
     }
 
     public function currency()
@@ -119,39 +117,29 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo('Crater\Models\User', 'creator_id');
     }
 
-    public function company()
+    public function companies()
     {
-        return $this->belongsTo(Company::class);
-    }
-
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
+        return $this->belongsToMany(Company::class, 'user_company', 'user_id', 'company_id');
     }
 
     public function expenses()
     {
-        return $this->hasMany(Expense::class);
-    }
-
-    public function billingAddress()
-    {
-        return $this->hasOne(Address::class)->where('type', Address::BILLING_TYPE);
-    }
-
-    public function shippingAddress()
-    {
-        return $this->hasOne(Address::class)->where('type', Address::SHIPPING_TYPE);
+        return $this->hasMany(Expense::class, 'creator_id');
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'creator_id');
     }
 
     public function invoices()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany(Invoice::class, 'creator_id');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'creator_id');
     }
 
     public function settings()
@@ -203,15 +191,10 @@ class User extends Authenticatable implements HasMedia
         return $query->where('email', 'LIKE', '%'.$email.'%');
     }
 
-    public function scopeCustomer($query)
-    {
-        return $query->where('role', 'customer');
-    }
-
     public function scopePaginateData($query, $limit)
     {
         if ($limit == 'all') {
-            return collect(['data' => $query->get()]);
+            return $query->get();
         }
 
         return $query->paginate($limit);
@@ -225,20 +208,12 @@ class User extends Authenticatable implements HasMedia
             $query->whereSearch($filters->get('search'));
         }
 
-        if ($filters->get('contact_name')) {
-            $query->whereContactName($filters->get('contact_name'));
-        }
-
         if ($filters->get('display_name')) {
             $query->whereDisplayName($filters->get('display_name'));
         }
 
         if ($filters->get('email')) {
             $query->whereEmail($filters->get('email'));
-        }
-
-        if ($filters->get('customer_id')) {
-            $query->whereCustomer($filters->get('customer_id'));
         }
 
         if ($filters->get('phone')) {
@@ -250,16 +225,6 @@ class User extends Authenticatable implements HasMedia
             $orderBy = $filters->get('orderBy') ? $filters->get('orderBy') : 'asc';
             $query->whereOrder($field, $orderBy);
         }
-    }
-
-    public function scopeWhereCompany($query, $company_id)
-    {
-        $query->where('users.company_id', $company_id);
-    }
-
-    public function scopeWhereCustomer($query, $customer_id)
-    {
-        $query->orWhere('users.id', $customer_id);
     }
 
     public function scopeWhereSuperAdmin($query)
@@ -288,33 +253,6 @@ class User extends Authenticatable implements HasMedia
         });
     }
 
-    public static function deleteCustomers($ids)
-    {
-        foreach ($ids as $id) {
-            $customer = self::find($id);
-
-            if ($customer->estimates()->exists()) {
-                $customer->estimates()->delete();
-            }
-
-            if ($customer->invoices()->exists()) {
-                $customer->invoices()->delete();
-            }
-
-            if ($customer->payments()->exists()) {
-                $customer->payments()->delete();
-            }
-
-            if ($customer->addresses()->exists()) {
-                $customer->addresses()->delete();
-            }
-
-            $customer->delete();
-        }
-
-        return true;
-    }
-
     public function getAvatarAttribute()
     {
         $avatar = $this->getMedia('admin_avatar')->first();
@@ -324,81 +262,6 @@ class User extends Authenticatable implements HasMedia
         }
 
         return 0;
-    }
-
-    public static function createCustomer($request)
-    {
-        $data = $request->only([
-            'name',
-            'email',
-            'phone',
-            'company_name',
-            'contact_name',
-            'website',
-            'enable_portal',
-        ]);
-
-        $data['creator_id'] = Auth::id();
-        $data['company_id'] = $request->header('company');
-        $data['role'] = 'customer';
-        $data['password'] = Hash::make($request->password);
-        $customer = User::create($data);
-
-        $customer['currency_id'] = $request->currency_id;
-        $customer->save();
-
-        if ($request->addresses) {
-            foreach ($request->addresses as $address) {
-                $customer->addresses()->create($address);
-            }
-        }
-
-        $customFields = $request->customFields;
-
-        if ($customFields) {
-            $customer->addCustomFields($customFields);
-        }
-
-        $customer = User::with('billingAddress', 'shippingAddress', 'fields')->find($customer->id);
-
-        return $customer;
-    }
-
-    public static function updateCustomer($request, $customer)
-    {
-        $data = $request->only([
-            'name',
-            'currency_id',
-            'email',
-            'phone',
-            'company_name',
-            'contact_name',
-            'website',
-            'enable_portal',
-        ]);
-
-        $data['role'] = 'customer';
-        if ($request->has('password')) {
-            $customer->password = Hash::make($request->password);
-        }
-        $customer->update($data);
-
-        $customer->addresses()->delete();
-        if ($request->addresses) {
-            foreach ($request->addresses as $address) {
-                $customer->addresses()->create($address);
-            }
-        }
-
-        $customFields = $request->customFields;
-
-        if ($customFields) {
-            $customer->updateCustomFields($customFields);
-        }
-
-        $customer = User::with('billingAddress', 'shippingAddress', 'fields')->find($customer->id);
-
-        return $customer;
     }
 
     public function setSettings($settings)
@@ -416,15 +279,139 @@ class User extends Authenticatable implements HasMedia
         }
     }
 
+    public function hasCompany($company_id)
+    {
+        $companies = $this->companies()->pluck('company_id')->toArray();
+
+        return in_array($company_id, $companies);
+    }
+
+    public function getAllSettings()
+    {
+        return $this->settings()->get()->mapWithKeys(function ($item) {
+            return [$item['key'] => $item['value']];
+        });
+    }
+
     public function getSettings($settings)
     {
-        $settings = $this->settings()->whereIn('key', $settings)->get();
-        $companySettings = [];
+        return $this->settings()->whereIn('key', $settings)->get()->mapWithKeys(function ($item) {
+            return [$item['key'] => $item['value']];
+        });
+    }
 
-        foreach ($settings as $setting) {
-            $companySettings[$setting->key] = $setting->value;
+    public function isOwner()
+    {
+        if (Schema::hasColumn('companies', 'owner_id')) {
+            $company = Company::find(request()->header('company'));
+
+            if ($company && $this->id == $company->owner_id) {
+                return true;
+            }
+        } else {
+            return $this->role == 'super admin' || $this->role == 'admin';
         }
 
-        return $companySettings;
+        return false;
+    }
+
+    public static function createFromRequest(UserRequest $request)
+    {
+        $user = self::create($request->getUserPayload());
+
+        $user->setSettings([
+            'language' => CompanySetting::getSetting('language', $request->header('company')),
+        ]);
+
+        $companies = collect($request->companies);
+        $user->companies()->sync($companies->pluck('id'));
+
+        foreach ($companies as $company) {
+            BouncerFacade::scope()->to($company['id']);
+
+            BouncerFacade::sync($user)->roles([$company['role']]);
+        }
+
+        return $user;
+    }
+
+    public function updateFromRequest(UserRequest $request)
+    {
+        $this->update($request->getUserPayload());
+
+        $companies = collect($request->companies);
+        $this->companies()->sync($companies->pluck('id'));
+
+        foreach ($companies as $company) {
+            BouncerFacade::scope()->to($company['id']);
+
+            BouncerFacade::sync($this)->roles([$company['role']]);
+        }
+
+        return $this;
+    }
+
+    public function checkAccess($data)
+    {
+        if ($this->isOwner()) {
+            return true;
+        }
+
+        if ((! $data->data['owner_only']) && empty($data->data['ability'])) {
+            return true;
+        }
+
+        if ((! $data->data['owner_only']) && (! empty($data->data['ability'])) && (! empty($data->data['model'])) && $this->can($data->data['ability'], $data->data['model'])) {
+            return true;
+        }
+
+        if ((! $data->data['owner_only']) && $this->can($data->data['ability'])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function deleteUsers($ids)
+    {
+        foreach ($ids as $id) {
+            $user = self::find($id);
+
+            if ($user->invoices()->exists()) {
+                $user->invoices()->update(['creator_id' => null]);
+            }
+
+            if ($user->estimates()->exists()) {
+                $user->estimates()->update(['creator_id' => null]);
+            }
+
+            if ($user->customers()->exists()) {
+                $user->customers()->update(['creator_id' => null]);
+            }
+
+            if ($user->recurringInvoices()->exists()) {
+                $user->recurringInvoices()->update(['creator_id' => null]);
+            }
+
+            if ($user->expenses()->exists()) {
+                $user->expenses()->update(['creator_id' => null]);
+            }
+
+            if ($user->payments()->exists()) {
+                $user->payments()->update(['creator_id' => null]);
+            }
+
+            if ($user->items()->exists()) {
+                $user->items()->update(['creator_id' => null]);
+            }
+
+            if ($user->settings()->exists()) {
+                $user->settings()->delete();
+            }
+
+            $user->delete();
+        }
+
+        return true;
     }
 }

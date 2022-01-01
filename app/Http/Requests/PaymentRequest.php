@@ -2,9 +2,10 @@
 
 namespace Crater\Http\Requests;
 
-use Crater\Models\Payment;
-use Crater\Rules\UniqueNumber;
+use Crater\Models\CompanySetting;
+use Crater\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PaymentRequest extends FormRequest
 {
@@ -29,15 +30,18 @@ class PaymentRequest extends FormRequest
             'payment_date' => [
                 'required',
             ],
-            'user_id' => [
+            'customer_id' => [
                 'required',
+            ],
+            'exchange_rate' => [
+                'nullable'
             ],
             'amount' => [
                 'required',
             ],
             'payment_number' => [
                 'required',
-                new UniqueNumber(Payment::class),
+                Rule::unique('payments')->where('company_id', $this->header('company'))
             ],
             'invoice_id' => [
                 'nullable',
@@ -53,10 +57,42 @@ class PaymentRequest extends FormRequest
         if ($this->isMethod('PUT')) {
             $rules['payment_number'] = [
                 'required',
-                new UniqueNumber(Payment::class, $this->route('payment')->id),
+                Rule::unique('payments')
+                    ->ignore($this->route('payment')->id)
+                    ->where('company_id', $this->header('company')),
             ];
         }
 
+        $companyCurrency = CompanySetting::getSetting('currency', $this->header('company'));
+
+        $customer = Customer::find($this->customer_id);
+
+        if ($customer && $companyCurrency) {
+            if ((string)$customer->currency_id !== $companyCurrency) {
+                $rules['exchange_rate'] = [
+                    'required',
+                ];
+            };
+        }
+
         return $rules;
+    }
+
+    public function getPaymentPayload()
+    {
+        $company_currency = CompanySetting::getSetting('currency', $this->header('company'));
+        $current_currency = $this->currency_id;
+        $exchange_rate = $company_currency != $current_currency ? $this->exchange_rate : 1;
+        $currency = Customer::find($this->customer_id)->currency_id;
+
+        return collect($this->validated())
+            ->merge([
+                'creator_id' => $this->user()->id,
+                'company_id' => $this->header('company'),
+                'exchange_rate' => $exchange_rate,
+                'base_amount' => $this->amount * $exchange_rate,
+                'currency_id' => $currency
+            ])
+            ->toArray();
     }
 }

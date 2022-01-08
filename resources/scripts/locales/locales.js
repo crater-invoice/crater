@@ -1,3 +1,4 @@
+import cs from './cs.json'
 import en from './en.json'
 import fr from './fr.json'
 import es from './es.json'
@@ -16,6 +17,7 @@ import sk from './sk.json'
 import vi from './vi.json'
 
 export default {
+  cs,
   en,
   fr,
   es,

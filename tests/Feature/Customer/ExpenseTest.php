@@ -7,7 +7,6 @@ use Crater\Models\Expense;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
-
 use function Pest\Laravel\getJson;
 
 beforeEach(function () {
@@ -32,14 +31,11 @@ test('get customer expenses', function () {
 test('get customer expense', function () {
     $customer = Auth::guard('customer')->user();
 
-    $expense = Expense::factory()->create();
-
-    getJson("/api/v1/{$customer->company->slug}/customer/expenses/{$expense->id}")->assertOk();
-
-    $this->assertDatabaseHas('expenses', [
-        'expense_category_id' => $expense['expense_category_id'],
-        'amount' => $expense['amount'],
-        'exchange_rate' => $expense['exchange_rate'],
-        'notes' => $expense['notes'],
+    $expense = Expense::factory()->create([
+        'customer_id' => $customer->id,
+        'company_id' => $customer->company->id
     ]);
+
+    getJson("/api/v1/{$customer->company->slug}/customer/expenses/{$expense->id}")
+        ->assertOk();
 });

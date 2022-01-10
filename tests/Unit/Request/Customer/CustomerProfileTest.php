@@ -18,7 +18,7 @@ test('customer profile request validation rules', function () {
             'email' => [
                 'nullable',
                 'email',
-                Rule::unique('customers')->ignore(Auth::id(), 'id'),
+                Rule::unique('customers')->where('company_id', $request->header('company'))->ignore(Auth::id(), 'id')
             ],
             'billing.name' => [
                 'nullable',

@@ -22,48 +22,48 @@ beforeEach(function () {
 test('get all languages', function () {
     $key = 'languages';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all fiscal years', function () {
     $key = 'fiscal_years';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all convert estimate options', function () {
     $key = 'convert_estimate_options';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all retrospective edits', function () {
     $key = 'retrospective_edits';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all currency converter servers', function () {
     $key = 'currency_converter_servers';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all exchange rate drivers', function () {
     $key = 'exchange_rate_drivers';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });
 
 test('get all custom field models', function () {
     $key = 'custom_field_models';
 
-    getJson('api/v1/config'.$key)
+    getJson('api/v1/config?key='.$key)
         ->assertOk();
 });

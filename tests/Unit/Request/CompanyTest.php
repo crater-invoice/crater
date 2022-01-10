@@ -12,6 +12,9 @@ test('company request validation rules', function () {
                 'required',
                 Rule::unique('companies')->ignore($request->header('company'), 'id'),
             ],
+            'slug' => [
+                'nullable'
+            ],
             'address.country_id' => [
                 'required',
             ],

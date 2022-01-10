@@ -56,29 +56,37 @@ Route::get('/{company:slug}/customer/logout', function () {
     Auth::guard('customer')->logout();
 });
 
+
+Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
+
+    // sales report by customer
+    //----------------------------------
+    Route::get('/sales/customers/{hash}', CustomerSalesReportController::class);
+
+    // sales report by items
+    //----------------------------------
+    Route::get('/sales/items/{hash}', ItemSalesReportController::class);
+
+    // report for expenses
+    //----------------------------------
+    Route::get('/expenses/{hash}', ExpensesReportController::class);
+
+    // report for tax summary
+    //----------------------------------
+    Route::get('/tax-summary/{hash}', TaxSummaryReportController::class);
+
+    // report for profit and loss
+    //----------------------------------
+    Route::get('/profit-loss/{hash}', ProfitLossReportController::class);
+
+
+    // download expense receipt
+    // -------------------------------------------------
+    Route::get('/expenses/{expense}/download-receipt', DownloadReceiptController::class);
+    Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
+});
+
 Route::middleware('pdf-auth')->group(function () {
-    Route::prefix('reports')->group(function () {
-
-        // sales report by customer
-        //----------------------------------
-        Route::get('/sales/customers/{hash}', CustomerSalesReportController::class);
-
-        // sales report by items
-        //----------------------------------
-        Route::get('/sales/items/{hash}', ItemSalesReportController::class);
-
-        // report for expenses
-        //----------------------------------
-        Route::get('/expenses/{hash}', ExpensesReportController::class);
-
-        // report for tax summary
-        //----------------------------------
-        Route::get('/tax-summary/{hash}', TaxSummaryReportController::class);
-
-        // report for profit and loss
-        //----------------------------------
-        Route::get('/profit-loss/{hash}', ProfitLossReportController::class);
-    });
 
     //  invoice pdf
     // -------------------------------------------------
@@ -91,12 +99,8 @@ Route::middleware('pdf-auth')->group(function () {
     // payment pdf
     // -------------------------------------------------
     Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
-
-    // download expense receipt
-    // -------------------------------------------------
-    Route::get('/expenses/{expense}/download-receipt', DownloadReceiptController::class);
-    Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
 });
+
 
 
 // customer pdf endpoints for invoice, estimate and Payment

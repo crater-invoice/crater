@@ -32,9 +32,12 @@ test('get customer estimates', function () {
 test('get customer estimate', function () {
     $customer = Auth::guard('customer')->user();
 
-    $estimate = Estimate::factory()->create();
+    $estimate = Estimate::factory()->create([
+        'customer_id' => $customer->id
+    ]);
 
-    getJson("/api/{$customer->company->slug}/v1/customer/estimates/{$estimate->id}")->assertOk();
+    getJson("/api/v1/{$customer->company->slug}/customer/estimates/{$estimate->id}")
+        ->assertOk();
 });
 
 test('customer estimate mark as accepted', function () {
@@ -43,15 +46,34 @@ test('customer estimate mark as accepted', function () {
     $estimate = Estimate::factory()->create([
         'estimate_date' => '1988-07-18',
         'expiry_date' => '1988-08-18',
+        'customer_id' => $customer->id
     ]);
 
     $status = [
-        'status' => Estimate::STATUS_ACCEPTED,
+        'status' => Estimate::STATUS_ACCEPTED
     ];
 
-    postJson("api/v1/{$customer->company->slug}/customer/estimate/{$estimate->id}/accept", $status)->assertOk();
+    $response = postJson("api/v1/{$customer->company->slug}/customer/estimate/{$estimate->id}/status", $status)
+        ->assertOk();
 
-    $estimate2 = Estimate::find($estimate->id);
+    $this->assertEquals($response->json()['data']['status'], Estimate::STATUS_ACCEPTED);
+});
 
-    $this->assertEquals($estimate2->status, Estimate::STATUS_ACCEPTED);
+test('customer estimate mark as rejected', function () {
+    $customer = Auth::guard('customer')->user();
+
+    $estimate = Estimate::factory()->create([
+        'estimate_date' => '1988-07-18',
+        'expiry_date' => '1988-08-18',
+        'customer_id' => $customer->id
+    ]);
+
+    $status = [
+        'status' => Estimate::STATUS_REJECTED
+    ];
+
+    $response = postJson("api/v1/{$customer->company->slug}/customer/estimate/{$estimate->id}/status", $status)
+        ->assertOk();
+
+    $this->assertEquals($response->json()['data']['status'], Estimate::STATUS_REJECTED);
 });

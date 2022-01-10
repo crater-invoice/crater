@@ -46,7 +46,7 @@ class ExpensesController extends Controller
     public function show(Company $company, $id)
     {
         $expense = $company->expenses()
-            ->whereCustomer(Auth::guard('customer')->id())
+            ->whereUser(Auth::guard('customer')->id())
             ->where('id', $id)
             ->first();
 

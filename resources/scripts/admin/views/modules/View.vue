@@ -880,7 +880,7 @@ async function installModule() {
 
         setTimeout(() => {
           location.reload()
-        }, 3000)
+        }, 1500)
       }
     } catch (error) {
       isInstalling.value = false
@@ -975,6 +975,10 @@ function disableModule() {
             if (res.data.success) {
               moduleData.value.enabled = 0
               isDisabling.value = false
+
+              setTimeout(() => {
+                location.reload()
+              }, 1500)
               return
             }
           })
@@ -990,6 +994,10 @@ async function enableModule() {
   await moduleStore.enableModule(moduleData.value.module_name).then((res) => {
     if (res.data.success) {
       moduleData.value.enabled = 1
+
+      setTimeout(() => {
+        location.reload()
+      }, 1500)
     }
     isEnabling.value = false
     return

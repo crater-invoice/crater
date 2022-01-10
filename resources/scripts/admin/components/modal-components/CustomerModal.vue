@@ -603,13 +603,14 @@ async function setInitialData() {
 }
 
 async function submitCustomerData() {
-  if (customerStore.currentCustomer.email === '') {
+  v$.value.$touch()
+
+  if (v$.value.$invalid && customerStore.currentCustomer.email === '') {
     notificationStore.showNotification({
       type: 'error',
       message: t('settings.notification.please_enter_email'),
     })
   }
-  v$.value.$touch()
 
   if (v$.value.$invalid) {
     return true

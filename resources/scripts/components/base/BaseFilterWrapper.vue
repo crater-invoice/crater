@@ -1,11 +1,11 @@
 <template>
   <transition
     enter-active-class="transition duration-500 ease-in-out"
-    enter-from-class="transform opacity-0"
-    enter-to-class="transform opacity-100"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
     leave-active-class="transition ease-in-out"
-    leave-from-class="transform opacity-100"
-    leave-to-class="transform opacity-0"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
   >
     <div v-show="show" class="relative z-10 p-4 md:p-8 bg-gray-200 rounded">
       <slot name="filter-header" />

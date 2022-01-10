@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ResetApp::class,
         Commands\UpdateCommand::class,
-        Commands\CreateTemplateCommand::class
+        Commands\CreateTemplateCommand::class,
+        Commands\InstallModuleCommand::class,
     ];
 
     /**

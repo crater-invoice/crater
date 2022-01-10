@@ -52,6 +52,9 @@ class InvoiceResource extends JsonResource
             'formatted_invoice_date' => $this->formattedInvoiceDate,
             'formatted_due_date' => $this->formattedDueDate,
             'allow_edit' => $this->allow_edit,
+            'payment_module_enabled' => $this->payment_module_enabled,
+            'sales_tax_type' => $this->sales_tax_type,
+            'sales_tax_address_type' => $this->sales_tax_address_type,
             'items' => $this->when($this->items()->exists(), function () {
                 return InvoiceItemResource::collection($this->items);
             }),

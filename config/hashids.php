@@ -10,9 +10,11 @@
  */
 
 use Crater\Models\Company;
+use Crater\Models\EmailLog;
 use Crater\Models\Estimate;
 use Crater\Models\Invoice;
 use Crater\Models\Payment;
+use Crater\Models\Transaction;
 
 return [
 
@@ -61,6 +63,15 @@ return [
             'length' => '20',
             'alphabet' => 's0DxOFtEYEnuKPmP08Ch6A1iHlLmBTBVWms5',
         ],
+        EmailLog::class => [
+            'salt' => EmailLog::class.config('app.key'),
+            'length' => '20',
+            'alphabet' => 'BRAMEz5str5UVe9oCqzoYY2oKgUi8wQQSmrR',
+        ],
+        Transaction::class => [
+            'salt' => Transaction::class.config('app.key'),
+            'length' => '20',
+            'alphabet' => 'ADyQWE8mgt7jF2vbnPrKLJenHVpiUIq4M12T',
+        ],
     ],
-
 ];

@@ -83,6 +83,8 @@ class ConvertEstimateController extends Controller
             'base_total' => $estimate->total * $exchange_rate,
             'base_tax' => $estimate->tax * $exchange_rate,
             'currency_id' => $estimate->currency_id,
+            'sales_tax_type' => $estimate->sales_tax_type,
+            'sales_tax_address_type' => $estimate->sales_tax_address_type,
         ]);
 
         $invoice->unique_hash = Hashids::connection(Invoice::class)->encode($invoice->id);

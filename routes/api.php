@@ -48,6 +48,16 @@ use Crater\Http\Controllers\V1\Admin\Invoice\SendInvoicePreviewController;
 use Crater\Http\Controllers\V1\Admin\Item\ItemsController;
 use Crater\Http\Controllers\V1\Admin\Item\UnitsController;
 use Crater\Http\Controllers\V1\Admin\Mobile\AuthController;
+use Crater\Http\Controllers\V1\Admin\Modules\ApiTokenController;
+use Crater\Http\Controllers\V1\Admin\Modules\CompleteModuleInstallationController;
+use Crater\Http\Controllers\V1\Admin\Modules\CopyModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\DisableModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\DownloadModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\EnableModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\ModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\ModulesController;
+use Crater\Http\Controllers\V1\Admin\Modules\UnzipModuleController;
+use Crater\Http\Controllers\V1\Admin\Modules\UploadModuleController;
 use Crater\Http\Controllers\V1\Admin\Payment\PaymentMethodsController;
 use Crater\Http\Controllers\V1\Admin\Payment\PaymentsController;
 use Crater\Http\Controllers\V1\Admin\Payment\SendPaymentController;
@@ -60,10 +70,12 @@ use Crater\Http\Controllers\V1\Admin\Settings\CompanyController;
 use Crater\Http\Controllers\V1\Admin\Settings\DiskController;
 use Crater\Http\Controllers\V1\Admin\Settings\GetCompanyMailConfigurationController;
 use Crater\Http\Controllers\V1\Admin\Settings\GetCompanySettingsController;
+use Crater\Http\Controllers\V1\Admin\Settings\GetSettingsController;
 use Crater\Http\Controllers\V1\Admin\Settings\GetUserSettingsController;
 use Crater\Http\Controllers\V1\Admin\Settings\MailConfigurationController;
 use Crater\Http\Controllers\V1\Admin\Settings\TaxTypesController;
 use Crater\Http\Controllers\V1\Admin\Settings\UpdateCompanySettingsController;
+use Crater\Http\Controllers\V1\Admin\Settings\UpdateSettingsController;
 use Crater\Http\Controllers\V1\Admin\Settings\UpdateUserSettingsController;
 use Crater\Http\Controllers\V1\Admin\Update\CheckVersionController;
 use Crater\Http\Controllers\V1\Admin\Update\CopyFilesController;
@@ -73,6 +85,17 @@ use Crater\Http\Controllers\V1\Admin\Update\FinishUpdateController;
 use Crater\Http\Controllers\V1\Admin\Update\MigrateUpdateController;
 use Crater\Http\Controllers\V1\Admin\Update\UnzipUpdateController;
 use Crater\Http\Controllers\V1\Admin\Users\UsersController;
+use Crater\Http\Controllers\V1\Customer\Auth\ForgotPasswordController as AuthForgotPasswordController;
+use Crater\Http\Controllers\V1\Customer\Auth\ResetPasswordController as AuthResetPasswordController;
+use Crater\Http\Controllers\V1\Customer\Estimate\AcceptEstimateController as CustomerAcceptEstimateController;
+use Crater\Http\Controllers\V1\Customer\Estimate\EstimatesController as CustomerEstimatesController;
+use Crater\Http\Controllers\V1\Customer\Expense\ExpensesController as CustomerExpensesController;
+use Crater\Http\Controllers\V1\Customer\General\BootstrapController as CustomerBootstrapController;
+use Crater\Http\Controllers\V1\Customer\General\DashboardController as CustomerDashboardController;
+use Crater\Http\Controllers\V1\Customer\General\ProfileController as CustomerProfileController;
+use Crater\Http\Controllers\V1\Customer\Invoice\InvoicesController as CustomerInvoicesController;
+use Crater\Http\Controllers\V1\Customer\Payment\PaymentMethodController;
+use Crater\Http\Controllers\V1\Customer\Payment\PaymentsController as CustomerPaymentsController;
 use Crater\Http\Controllers\V1\Installation\AppDomainController;
 use Crater\Http\Controllers\V1\Installation\DatabaseConfigurationController;
 use Crater\Http\Controllers\V1\Installation\FilePermissionsController;
@@ -80,6 +103,7 @@ use Crater\Http\Controllers\V1\Installation\FinishController;
 use Crater\Http\Controllers\V1\Installation\LoginController;
 use Crater\Http\Controllers\V1\Installation\OnboardingWizardController;
 use Crater\Http\Controllers\V1\Installation\RequirementsController;
+use Crater\Http\Controllers\V1\Webhook\CronJobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,8 +183,6 @@ Route::prefix('/v1')->group(function () {
 
         Route::post('/finish', FinishController::class);
     });
-
-
 
 
     Route::middleware(['auth:sanctum', 'company'])->group(function () {
@@ -368,6 +390,10 @@ Route::prefix('/v1')->group(function () {
 
             Route::post('/company/settings', UpdateCompanySettingsController::class);
 
+            Route::get('/settings', GetSettingsController::class);
+
+            Route::post('/settings', UpdateSettingsController::class);
+
 
             // Mails
             //----------------------------------
@@ -435,5 +461,86 @@ Route::prefix('/v1')->group(function () {
         Route::post('/users/delete', [UsersController::class, 'delete']);
 
         Route::apiResource('/users', UsersController::class);
+
+
+        // Modules
+        //----------------------------------
+
+        Route::prefix('/modules')->group(function () {
+            Route::get('/', ModulesController::class);
+
+            Route::get('/check', ApiTokenController::class);
+
+            Route::get('/{module}', ModuleController::class);
+
+            Route::post('/{module}/enable', EnableModuleController::class);
+
+            Route::post('/{module}/disable', DisableModuleController::class);
+
+            Route::post('/download', DownloadModuleController::class);
+
+            Route::post('/upload', UploadModuleController::class);
+
+            Route::post('/unzip', UnzipModuleController::class);
+
+            Route::post('/copy', CopyModuleController::class);
+
+            Route::post('/complete', CompleteModuleInstallationController::class);
+        });
+    });
+
+
+    Route::prefix('/{company:slug}/customer')->group(function () {
+
+
+        // Authentication & Password Reset
+        //----------------------------------
+
+        Route::group(['prefix' => 'auth'], function () {
+
+            // Send reset password mail
+            Route::post('password/email', [AuthForgotPasswordController::class, 'sendResetLinkEmail']);
+
+            // handle reset password form process
+            Route::post('reset/password', [AuthResetPasswordController::class, 'reset'])->name('customer.password.reset');
+        });
+
+
+        // Invoices, Estimates, Payments and Expenses endpoints
+        //-------------------------------------------------------
+
+        Route::middleware(['auth:customer', 'customer-portal'])->group(function () {
+            Route::get('/bootstrap', CustomerBootstrapController::class);
+
+            Route::get('/dashboard', CustomerDashboardController::class);
+
+            Route::get('invoices', [CustomerInvoicesController::class, 'index']);
+
+            Route::get('invoices/{id}', [CustomerInvoicesController::class, 'show']);
+
+            Route::post('/estimate/{estimate}/status', CustomerAcceptEstimateController::class);
+
+            Route::get('estimates', [ CustomerEstimatesController::class, 'index']);
+
+            Route::get('estimates/{id}', [CustomerEstimatesController::class, 'show']);
+
+            Route::get('payments', [CustomerPaymentsController::class, 'index']);
+
+            Route::get('payments/{id}', [CustomerPaymentsController::class, 'show']);
+
+            Route::get('/payment-method', PaymentMethodController::class);
+
+            Route::get('expenses', [CustomerExpensesController::class, 'index']);
+
+            Route::get('expenses/{id}', [CustomerExpensesController::class, 'show']);
+
+            Route::post('/profile', [CustomerProfileController::class, 'updateProfile']);
+
+            Route::get('/me', [CustomerProfileController::class, 'getUser']);
+
+            Route::get('/countries', CountriesController::class);
+        });
     });
 });
+
+Route::get('/cron', CronJobController::class)->middleware('cron-job');

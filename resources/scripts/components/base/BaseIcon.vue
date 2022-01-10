@@ -1,5 +1,5 @@
 <template>
-  <component v-if="isLoaded" :is="heroIcons[name]" class="h-5 w-5" />
+  <component :is="heroIcons[name]" v-if="isLoaded" class="h-5 w-5" />
 </template>
 
 <script setup>
@@ -11,6 +11,7 @@ const isLoaded = ref(false)
 const props = defineProps({
   name: {
     type: String,
+    required: true,
   },
 })
 

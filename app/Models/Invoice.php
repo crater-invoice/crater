@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Nwidart\Modules\Facades\Module;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
@@ -39,6 +40,8 @@ class Invoice extends Model implements HasMedia
         'created_at',
         'updated_at',
         'deleted_at',
+        'invoice_date',
+        'due_date'
     ];
 
     protected $casts = [
@@ -61,18 +64,9 @@ class Invoice extends Model implements HasMedia
         'invoicePdfUrl',
     ];
 
-    public function setInvoiceDateAttribute($value)
+    public function transactions()
     {
-        if ($value) {
-            $this->attributes['invoice_date'] = Carbon::createFromFormat('Y-m-d', $value);
-        }
-    }
-
-    public function setDueDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['due_date'] = Carbon::createFromFormat('Y-m-d', $value);
-        }
+        return $this->hasMany(Transaction::class);
     }
 
     public function emailLogs()
@@ -123,6 +117,15 @@ class Invoice extends Model implements HasMedia
     public function getInvoicePdfUrlAttribute()
     {
         return url('/invoices/pdf/'.$this->unique_hash);
+    }
+
+    public function getPaymentModuleEnabledAttribute()
+    {
+        if (Module::has('Payments')) {
+            return Module::isEnabled('Payments');
+        }
+
+        return false;
     }
 
     public function getAllowEditAttribute()

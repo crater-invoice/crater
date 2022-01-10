@@ -44,6 +44,8 @@ class EstimateResource extends JsonResource
             'formatted_expiry_date' => $this->formattedExpiryDate,
             'formatted_estimate_date' => $this->formattedEstimateDate,
             'estimate_pdf_url' => $this->estimatePdfUrl,
+            'sales_tax_type' => $this->sales_tax_type,
+            'sales_tax_address_type' => $this->sales_tax_address_type,
             'items' => $this->when($this->items()->exists(), function () {
                 return EstimateItemResource::collection($this->items);
             }),

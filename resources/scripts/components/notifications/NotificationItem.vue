@@ -18,7 +18,7 @@
     <div class="overflow-hidden rounded-lg shadow-xs">
       <div class="p-4">
         <div class="flex items-start">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <svg
               v-if="success"
               class="w-6 h-6 text-green-400"
@@ -87,7 +87,7 @@
               }}
             </p>
           </div>
-          <div class="flex flex-shrink-0">
+          <div class="flex shrink-0">
             <button
               :class="
                 success || info

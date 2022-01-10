@@ -34,13 +34,13 @@
 </template>
 
 <script setup>
-import { useCustomerStore } from '@/scripts/stores/customer'
+import { useCustomerStore } from '@/scripts/admin/stores/customer'
 import { computed, watch } from 'vue'
 import { useModalStore } from '@/scripts/stores/modal'
 import { useI18n } from 'vue-i18n'
-import CustomerModal from '@/scripts/components/modal-components/CustomerModal.vue'
-import { useUserStore } from '@/scripts/stores/user'
-import abilities from '@/scripts/stub/abilities'
+import CustomerModal from '@/scripts/admin/components/modal-components/CustomerModal.vue'
+import { useUserStore } from '@/scripts/admin/stores/user'
+import abilities from '@/scripts/admin/stub/abilities'
 
 const props = defineProps({
   modelValue: {

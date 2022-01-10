@@ -62,11 +62,11 @@
               text-left
               align-bottom
               transition-all
-              transform
               bg-white
               rounded-lg
               shadow-xl
               sm:my-8 sm:align-middle sm:w-full sm:p-6
+              relative
             "
             :class="dialogSizeClasses"
           >

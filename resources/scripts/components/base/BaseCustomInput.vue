@@ -65,7 +65,7 @@
 
 <script setup>
 import { computed, ref, watch, onMounted } from 'vue'
-import { useCustomFieldStore } from '@/scripts/stores/custom-field'
+import { useCustomFieldStore } from '@/scripts/admin/stores/custom-field'
 
 const props = defineProps({
   contentLoading: {

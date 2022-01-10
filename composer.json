@@ -1,89 +1,91 @@
 {
-    "name": "bytefury/crater",
-    "description": "Free & Open Source Invoice App for Individuals & Small Businesses. https://craterapp.com",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
-    "type": "project",
-    "require": {
-        "php": "^7.4 || ^8.0",
-        "aws/aws-sdk-php": "^3.142",
-        "barryvdh/laravel-dompdf": "^0.9.0",
-        "doctrine/dbal": "^2.10",
-        "dragonmantank/cron-expression": "^3.1",
-        "fideloper/proxy": "^4.0",
-        "fruitcake/laravel-cors": "^1.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "innocenzi/laravel-vite": "^0.1.1",
-        "intervention/image": "^2.3",
-        "jasonmccreary/laravel-test-assertions": "^2.0",
-        "laravel/framework": "^8.0",
-        "laravel/helpers": "^1.1",
-        "laravel/sanctum": "^2.6",
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0",
-        "lavary/laravel-menu": "^1.8",
-        "league/flysystem-aws-s3-v3": "^1.0",
-        "predis/predis": "^1.1",
-        "silber/bouncer": "v1.0.0-rc.10",
-        "spatie/flysystem-dropbox": "^1.2",
-        "spatie/laravel-backup": "^6.11",
-        "spatie/laravel-medialibrary": "^8.7",
-        "vinkla/hashids": "^9.0"
+  "name": "crater-invoice/crater",
+  "description": "Free & Open Source Invoice App for Individuals & Small Businesses. https://craterapp.com",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "aws/aws-sdk-php": "^3.142",
+    "crater-invoice/modules": "^1.0.0",
+    "barryvdh/laravel-dompdf": "^0.8.7",
+    "doctrine/dbal": "^2.10",
+    "dragonmantank/cron-expression": "^3.1",
+    "fideloper/proxy": "^4.0",
+    "fruitcake/laravel-cors": "^1.0",
+    "guzzlehttp/guzzle": "^7.0.1",
+    "innocenzi/laravel-vite": "^0.1.1",
+    "intervention/image": "^2.3",
+    "jasonmccreary/laravel-test-assertions": "^2.0",
+    "laravel/framework": "^8.0",
+    "laravel/helpers": "^1.1",
+    "laravel/sanctum": "^2.6",
+    "laravel/tinker": "^2.0",
+    "laravel/ui": "^3.0",
+    "lavary/laravel-menu": "^1.8",
+    "league/flysystem-aws-s3-v3": "^1.0",
+    "predis/predis": "^1.1",
+    "silber/bouncer": "v1.0.0-rc.10",
+    "spatie/flysystem-dropbox": "^1.2",
+    "spatie/laravel-backup": "^6.11",
+    "spatie/laravel-medialibrary": "^8.7",
+    "vinkla/hashids": "^9.0"
+  },
+  "require-dev": {
+    "barryvdh/laravel-ide-helper": "^2.6",
+    "beyondcode/laravel-dump-server": "^1.0",
+    "facade/ignition": "^2.3.6",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "fzaninotto/faker": "^1.9.1",
+    "mockery/mockery": "^1.3.1",
+    "nunomaduro/collision": "^5.0",
+    "pestphp/pest": "^1.0",
+    "pestphp/pest-plugin-faker": "^1.0",
+    "pestphp/pest-plugin-laravel": "^1.0",
+    "pestphp/pest-plugin-parallel": "^0.2.1",
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Crater\\": "app/",
+      "Database\\Factories\\": "database/factories/",
+      "Database\\Seeders\\": "database/seeders/",
+      "Modules\\": "Modules/"
     },
-    "require-dev": {
-        "barryvdh/laravel-ide-helper": "^2.6",
-        "beyondcode/laravel-dump-server": "^1.0",
-        "facade/ignition": "^2.3.6",
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "fzaninotto/faker": "^1.9.1",
-        "mockery/mockery": "^1.3.1",
-        "nunomaduro/collision": "^5.0",
-        "pestphp/pest": "^1.0",
-        "pestphp/pest-plugin-faker": "^1.0",
-        "pestphp/pest-plugin-laravel": "^1.0",
-        "pestphp/pest-plugin-parallel": "^0.2.1",
-        "phpunit/phpunit": "^9.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Crater\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        },
-        "files": [
-            "app/Space/helpers.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
+    "files": [
+      "app/Space/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
     }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php artisan key:generate --ansi"
+    ]
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  }
 }

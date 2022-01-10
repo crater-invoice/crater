@@ -161,16 +161,16 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useCompanyStore } from '@/scripts/stores/company'
+import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { onClickOutside } from '@vueuse/core'
 import { useRoute, useRouter } from 'vue-router'
 import { useModalStore } from '../stores/modal'
 import { useI18n } from 'vue-i18n'
-import { useGlobalStore } from '../stores/global'
-import { useUserStore } from '@/scripts/stores/user'
+import { useGlobalStore } from '@/scripts/admin//stores/global'
+import { useUserStore } from '@/scripts/admin/stores/user'
 
-import CompanyModal from '@/scripts/components/modal-components/CompanyModal.vue'
-import abilities from '@/scripts/stub/abilities'
+import CompanyModal from '@/scripts/admin/components/modal-components/CompanyModal.vue'
+import abilities from '@/scripts/admin/stub/abilities'
 
 const companyStore = useCompanyStore()
 const modalStore = useModalStore()

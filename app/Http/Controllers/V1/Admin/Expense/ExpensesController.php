@@ -39,7 +39,7 @@ class ExpensesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\ExpenseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ExpenseRequest $request)
@@ -67,7 +67,7 @@ class ExpensesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\ExpenseRequest $request
      * @param  \Crater\Models\Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */

@@ -3,6 +3,8 @@
 namespace Crater\Http\Controllers\V1\Admin\Settings;
 
 use Crater\Http\Controllers\Controller;
+use Crater\Http\Requests\AvatarRequest;
+use Crater\Http\Requests\CompanyLogoRequest;
 use Crater\Http\Requests\CompanyRequest;
 use Crater\Http\Requests\ProfileRequest;
 use Crater\Http\Resources\CompanyResource;
@@ -48,7 +50,7 @@ class CompanyController extends Controller
 
         $this->authorize('manage company', $company);
 
-        $company->update($request->only('name'));
+        $company->update($request->getCompanyPayload());
 
         $company->address()->updateOrCreate(['company_id' => $company->id], $request->address);
 
@@ -58,10 +60,10 @@ class CompanyController extends Controller
     /**
      * Upload the company logo to storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\CompanyLogoRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadCompanyLogo(Request $request)
+    public function uploadCompanyLogo(CompanyLogoRequest $request)
     {
         $company = Company::find($request->header('company'));
 
@@ -89,10 +91,10 @@ class CompanyController extends Controller
     /**
      * Upload the Admin Avatar to public storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Crater\Http\Requests\AvatarRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadAvatar(Request $request)
+    public function uploadAvatar(AvatarRequest $request)
     {
         $user = auth()->user();
 

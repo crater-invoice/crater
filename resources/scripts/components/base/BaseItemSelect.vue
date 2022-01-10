@@ -83,12 +83,12 @@
 import { computed, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { useEstimateStore } from '@/scripts/stores/estimate'
-import { useInvoiceStore } from '@/scripts/stores/invoice'
-import { useItemStore } from '@/scripts/stores/item'
+import { useEstimateStore } from '@/scripts/admin/stores/estimate'
+import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
+import { useItemStore } from '@/scripts/admin/stores/item'
 import { useModalStore } from '@/scripts/stores/modal'
-import { useUserStore } from '@/scripts/stores/user'
-import abilities from '@/scripts/stub/abilities'
+import { useUserStore } from '@/scripts/admin/stores/user'
+import abilities from '@/scripts/admin/stub/abilities'
 
 const props = defineProps({
   contentLoading: {

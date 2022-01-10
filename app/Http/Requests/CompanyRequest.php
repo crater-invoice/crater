@@ -29,9 +29,22 @@ class CompanyRequest extends FormRequest
                 'required',
                 Rule::unique('companies')->ignore($this->header('company'), 'id'),
             ],
+            'slug' => [
+                'nullable'
+            ],
             'address.country_id' => [
                 'required',
             ],
         ];
+    }
+
+    public function getCompanyPayload()
+    {
+        return collect($this->validated())
+            ->only([
+                'name',
+                'slug'
+            ])
+            ->toArray();
     }
 }

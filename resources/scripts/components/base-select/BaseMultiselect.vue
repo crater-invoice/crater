@@ -452,31 +452,30 @@ export default {
           'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
         search:
           'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-sm font-sans bg-white rounded-md pl-3.5',
-        tags: 'flex-grow flex-shrink flex flex-wrap mt-1 pl-2',
+        tags: 'grow shrink flex flex-wrap mt-1 pl-2',
         tag: 'bg-primary-500 text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap',
         tagDisabled: 'pr-2 !bg-gray-400 text-white',
         tagRemove:
           'flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group',
         tagRemoveIcon:
           'bg-multiselect-remove text-white bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60',
-        tagsSearchWrapper:
-          'inline-block relative mx-1 mb-1 flex-grow flex-shrink h-full',
+        tagsSearchWrapper: 'inline-block relative mx-1 mb-1 grow shrink h-full',
         tagsSearch:
           'absolute inset-0 border-0 focus:outline-none !shadow-none !focus:shadow-none appearance-none p-0 text-sm font-sans box-border w-full',
         tagsSearchCopy: 'invisible whitespace-pre-wrap inline-block h-px',
         placeholder:
           'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400 text-sm',
         caret:
-          'bg-multiselect-caret bg-center bg-no-repeat w-5 h-5 py-px box-content z-5 relative mr-1 opacity-40 flex-shrink-0 flex-grow-0 transition-transform transform',
+          'bg-multiselect-caret bg-center bg-no-repeat w-5 h-5 py-px box-content z-5 relative mr-1 opacity-40 shrink-0 grow-0 transition-transform',
         caretOpen: 'rotate-180 pointer-events-auto',
         clear:
-          'pr-3.5 relative z-10 opacity-40 transition duration-300 flex-shrink-0 flex-grow-0 flex hover:opacity-80',
+          'pr-3.5 relative z-10 opacity-40 transition duration-300 shrink-0 grow-0 flex hover:opacity-80',
         clearIcon:
           'bg-multiselect-remove bg-center bg-no-repeat w-2.5 h-4 py-px box-content inline-block',
         spinner:
-          'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin flex-shrink-0 flex-grow-0',
+          'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin shrink-0 grow-0',
         dropdown:
-          'max-h-60 shadow-lg absolute -left-px -right-px -bottom-1 transform translate-y-full border border-gray-300 mt-1 overflow-y-auto z-50 bg-white flex flex-col rounded-md',
+          'max-h-60 shadow-lg absolute -left-px -right-px -bottom-1 translate-y-full border border-gray-300 mt-1 overflow-y-auto z-50 bg-white flex flex-col rounded-md',
         dropdownTop:
           '-translate-y-full -top-2 bottom-auto flex-col-reverse rounded-md',
         dropdownHidden: 'hidden',

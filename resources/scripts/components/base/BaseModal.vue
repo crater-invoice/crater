@@ -58,8 +58,8 @@
               rounded-lg
               text-left
               overflow-hidden
+              relative
               shadow-xl
-              transform
               transition-all
               my-4
               ${modalSize}

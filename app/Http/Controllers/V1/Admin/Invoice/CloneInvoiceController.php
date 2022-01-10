@@ -76,6 +76,8 @@ class CloneInvoiceController extends Controller
             'base_tax' => $invoice->tax * $exchange_rate,
             'base_due_amount' => $invoice->total * $exchange_rate,
             'currency_id' => $invoice->currency_id,
+            'sales_tax_type' => $invoice->sales_tax_type,
+            'sales_tax_address_type' => $invoice->sales_tax_address_type,
         ]);
 
         $newInvoice->unique_hash = Hashids::connection(Invoice::class)->encode($newInvoice->id);

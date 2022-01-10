@@ -4,6 +4,7 @@ use Crater\Http\Controllers\V1\Admin\Payment\PaymentsController;
 use Crater\Http\Requests\PaymentRequest;
 use Crater\Mail\SendPaymentMail;
 use Crater\Models\Invoice;
+use Crater\Models\InvoiceItem;
 use Crater\Models\Payment;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
@@ -157,5 +158,89 @@ test('delete payment', function () {
 
     $response->assertJson([
         'success' => true,
+    ]);
+});
+
+test('create payment without invoice', function () {
+    $payment = Payment::factory()->raw([
+        'payment_number' => "PAY-000001",
+        'exchange_rate' => 1
+    ]);
+
+    postJson('api/v1/payments', $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => $payment['customer_id'],
+        'amount' => $payment['amount'],
+        'company_id' => $payment['company_id'],
+    ]);
+});
+
+test('create payment with invoice', function () {
+    $payment = Payment::factory()->raw([
+        'payment_number' => "PAY-000001",
+    ]);
+
+    $invoice = Invoice::factory()->create();
+
+    $payment = Payment::factory()->raw([
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->due_amount,
+        'exchange_rate' => 1
+    ]);
+
+    postJson('api/v1/payments', $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => $payment['customer_id'],
+        'invoice_id' => $payment['invoice_id'],
+        'amount' => $payment['amount'],
+        'company_id' => $payment['company_id'],
+    ]);
+});
+
+test('create payment with partially paid', function () {
+    $invoice = Invoice::factory()->create([
+        'discount_type' => 'fixed',
+        'discount_val' => 10,
+        'sub_total' => 100,
+        'total' => 95,
+        'tax' => 5,
+        'due_amount' => 95,
+        'exchange_rate' => 86.059663,
+        'base_discount_val' => 860.59663,
+        'base_sub_total' => 8605.9663,
+        'base_total' => 8,175.667985,
+        'base_tax' => 430.298315,
+        'base_due_amount' => 8,175.667985,
+    ]);
+
+    $payment = Payment::factory()->raw([
+        'invoice_id' => $invoice->id,
+        'customer_id' => $invoice->customer_id,
+        'exchange_rate' => $invoice->exchange_rate,
+        'amount' => 90,
+        'currency_id' => $invoice->currency_id
+    ]);
+
+    $response = postJson("api/v1/payments", $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => $payment['customer_id'],
+        'amount' => $payment['amount'],
+        'base_amount' => $payment['base_amount'],
+    ]);
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice['id'],
+        'invoice_number' => $response['data']['invoice']['invoice_number'],
+        'total' => $response['data']['invoice']['total'],
+        'customer_id' => $response['data']['invoice']['customer_id'],
+        'exchange_rate' => $response['data']['invoice']['exchange_rate'],
+        'base_total' => $response['data']['invoice']['base_total'],
+        'paid_status' => $response['data']['invoice']['paid_status'],
     ]);
 });

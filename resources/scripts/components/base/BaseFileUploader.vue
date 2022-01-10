@@ -1,193 +1,3 @@
-<script setup>
-import { ref, onMounted, watch } from 'vue'
-import axios from 'axios'
-import utils from '@/scripts/helpers/utilities'
-
-const props = defineProps({
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
-  avatar: {
-    type: Boolean,
-    default: false,
-  },
-  autoProcess: {
-    type: Boolean,
-    default: false,
-  },
-  uploadUrl: {
-    type: String,
-    default: '',
-  },
-  preserveLocalFiles: {
-    type: Boolean,
-    default: false,
-  },
-  accept: {
-    type: String,
-    default: 'image/*',
-  },
-  inputFieldName: {
-    type: String,
-    default: 'photos',
-  },
-  base64: {
-    type: Boolean,
-    default: false,
-  },
-  modelValue: {
-    type: Array,
-    default: () => [],
-  },
-})
-
-const emit = defineEmits(['change', 'remove', 'update:modelValue'])
-
-// status
-const STATUS_INITIAL = 0
-const STATUS_SAVING = 1
-const STATUS_SUCCESS = 2
-const STATUS_FAILED = 3
-
-let uploadedFiles = ref([])
-const localFiles = ref([])
-const inputRef = ref(null)
-let uploadError = ref(null)
-let currentStatus = ref(null)
-
-function reset() {
-  // reset form to initial state
-  currentStatus = STATUS_INITIAL
-
-  uploadedFiles.value = []
-
-  if (props.modelValue && props.modelValue.length) {
-    localFiles.value = [...props.modelValue]
-  } else {
-    localFiles.value = []
-  }
-
-  uploadError = null
-}
-
-function upload(formData) {
-  return (
-    axios
-      .post(props.uploadUrl, formData)
-      // get data
-      .then((x) => x.data)
-      // add url field
-      .then((x) => x.map((img) => ({ ...img, url: `/images/${img.id}` })))
-  )
-}
-
-// upload data to the server
-function save(formData) {
-  currentStatus = STATUS_SAVING
-
-  upload(formData)
-    .then((x) => {
-      uploadedFiles = [].concat(x)
-      currentStatus = STATUS_SUCCESS
-    })
-    .catch((err) => {
-      uploadError = err.response
-      currentStatus = STATUS_FAILED
-    })
-}
-
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
-}
-
-function onChange(fieldName, fileList, fileCount) {
-  if (!fileList.length) return
-
-  if (props.multiple) {
-    emit('change', fieldName, fileList, fileCount)
-  } else {
-    if (props.base64) {
-      getBase64(fileList[0]).then((res) => {
-        emit('change', fieldName, res, fileCount, fileList[0])
-      })
-    } else {
-      emit('change', fieldName, fileList[0], fileCount)
-    }
-  }
-
-  if (!props.preserveLocalFiles) {
-    localFiles.value = []
-  }
-
-  Array.from(Array(fileList.length).keys()).forEach((x) => {
-    const file = fileList[x]
-
-    if (utils.isImageFile(file.type)) {
-      getBase64(file).then((image) => {
-        localFiles.value.push({
-          fileObject: file,
-          type: file.type,
-          name: file.name,
-          image,
-        })
-      })
-    } else {
-      localFiles.value.push({
-        fileObject: file,
-        type: file.type,
-        name: file.name,
-      })
-    }
-  })
-
-  emit('update:modelValue', localFiles.value)
-
-  if (!props.autoProcess) return
-
-  // append the files to FormData
-  const formData = new FormData()
-
-  Array.from(Array(fileList.length).keys()).forEach((x) => {
-    formData.append(fieldName, fileList[x], fileList[x].name)
-  })
-
-  // save it
-  save(formData)
-}
-
-function onBrowse() {
-  if (inputRef.value) {
-    inputRef.value.click()
-  }
-}
-
-function onAvatarRemove(image) {
-  localFiles.value = []
-  emit('remove', image)
-}
-
-function onFileRemove(index) {
-  localFiles.value.splice(index, 1)
-}
-
-onMounted(() => {
-  reset()
-})
-
-watch(
-  () => props.modelValue,
-  (v) => {
-    localFiles.value = [...v]
-  }
-)
-</script>
-
 <template>
   <form
     enctype="multipart/form-data"
@@ -234,7 +44,7 @@ watch(
 
     <!-- Avatar Not Selected -->
     <div v-if="!localFiles.length && avatar" class="">
-      <img src="/img/default-avatar.jpg" class="rounded" alt="Default Avatar" />
+      <img :src="getDefaultAvatar()" class="rounded" alt="Default Avatar" />
 
       <a
         href="#"
@@ -276,6 +86,9 @@ watch(
           browse
         </a>
         to choose a file
+      </p>
+      <p class="text-xs leading-4 text-center text-gray-400 mt-2">
+        {{ recommendedText }}
       </p>
     </div>
 
@@ -563,3 +376,202 @@ watch(
     </div>
   </form>
 </template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import axios from 'axios'
+import utils from '@/scripts/helpers/utilities'
+
+const props = defineProps({
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  avatar: {
+    type: Boolean,
+    default: false,
+  },
+  autoProcess: {
+    type: Boolean,
+    default: false,
+  },
+  uploadUrl: {
+    type: String,
+    default: '',
+  },
+  preserveLocalFiles: {
+    type: Boolean,
+    default: false,
+  },
+  accept: {
+    type: String,
+    default: 'image/*',
+  },
+  inputFieldName: {
+    type: String,
+    default: 'photos',
+  },
+  base64: {
+    type: Boolean,
+    default: false,
+  },
+  modelValue: {
+    type: Array,
+    default: () => [],
+  },
+  recommendedText: {
+    type: String,
+    default: '',
+  },
+})
+
+const emit = defineEmits(['change', 'remove', 'update:modelValue'])
+
+// status
+const STATUS_INITIAL = 0
+const STATUS_SAVING = 1
+const STATUS_SUCCESS = 2
+const STATUS_FAILED = 3
+
+let uploadedFiles = ref([])
+const localFiles = ref([])
+const inputRef = ref(null)
+let uploadError = ref(null)
+let currentStatus = ref(null)
+
+function reset() {
+  // reset form to initial state
+  currentStatus = STATUS_INITIAL
+
+  uploadedFiles.value = []
+
+  if (props.modelValue && props.modelValue.length) {
+    localFiles.value = [...props.modelValue]
+  } else {
+    localFiles.value = []
+  }
+
+  uploadError = null
+}
+
+function upload(formData) {
+  return (
+    axios
+      .post(props.uploadUrl, formData)
+      // get data
+      .then((x) => x.data)
+      // add url field
+      .then((x) => x.map((img) => ({ ...img, url: `/images/${img.id}` })))
+  )
+}
+
+// upload data to the server
+function save(formData) {
+  currentStatus = STATUS_SAVING
+
+  upload(formData)
+    .then((x) => {
+      uploadedFiles = [].concat(x)
+      currentStatus = STATUS_SUCCESS
+    })
+    .catch((err) => {
+      uploadError = err.response
+      currentStatus = STATUS_FAILED
+    })
+}
+
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (error) => reject(error)
+  })
+}
+
+function onChange(fieldName, fileList, fileCount) {
+  if (!fileList.length) return
+
+  if (props.multiple) {
+    emit('change', fieldName, fileList, fileCount)
+  } else {
+    if (props.base64) {
+      getBase64(fileList[0]).then((res) => {
+        emit('change', fieldName, res, fileCount, fileList[0])
+      })
+    } else {
+      emit('change', fieldName, fileList[0], fileCount)
+    }
+  }
+
+  if (!props.preserveLocalFiles) {
+    localFiles.value = []
+  }
+
+  Array.from(Array(fileList.length).keys()).forEach((x) => {
+    const file = fileList[x]
+
+    if (utils.isImageFile(file.type)) {
+      getBase64(file).then((image) => {
+        localFiles.value.push({
+          fileObject: file,
+          type: file.type,
+          name: file.name,
+          image,
+        })
+      })
+    } else {
+      localFiles.value.push({
+        fileObject: file,
+        type: file.type,
+        name: file.name,
+      })
+    }
+  })
+
+  emit('update:modelValue', localFiles.value)
+
+  if (!props.autoProcess) return
+
+  // append the files to FormData
+  const formData = new FormData()
+
+  Array.from(Array(fileList.length).keys()).forEach((x) => {
+    formData.append(fieldName, fileList[x], fileList[x].name)
+  })
+
+  // save it
+  save(formData)
+}
+
+function onBrowse() {
+  if (inputRef.value) {
+    inputRef.value.click()
+  }
+}
+
+function onAvatarRemove(image) {
+  localFiles.value = []
+  emit('remove', image)
+}
+
+function onFileRemove(index) {
+  localFiles.value.splice(index, 1)
+}
+
+function getDefaultAvatar() {
+  const imgUrl = new URL('/img/default-avatar.jpg', import.meta.url)
+  return imgUrl
+}
+
+onMounted(() => {
+  reset()
+})
+
+watch(
+  () => props.modelValue,
+  (v) => {
+    localFiles.value = [...v]
+  }
+)
+</script>

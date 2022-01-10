@@ -22,6 +22,7 @@ class TaxTypesController extends Controller
         $limit = $request->has('limit') ? $request->limit : 5;
 
         $taxTypes = TaxType::applyFilters($request->all())
+            ->where('type', TaxType::TYPE_GENERAL)
             ->whereCompany()
             ->latest()
             ->paginateData($limit);

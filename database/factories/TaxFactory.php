@@ -36,7 +36,7 @@ class TaxFactory extends Factory
             'amount' => $this->faker->randomDigitNotNull,
             'compound_tax' => $this->faker->randomDigitNotNull,
             'base_amount' => $this->faker->randomDigitNotNull,
-            'currency_id' => Currency::where('name', 'US Dollar')->first()->company_id,
+            'currency_id' => Currency::where('name', 'US Dollar')->first()->id,
         ];
     }
 }

@@ -7,6 +7,7 @@ use Crater\Models\Invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Vinkla\Hashids\Facades\Hashids;
 
 class SendInvoiceMail extends Mailable
 {
@@ -32,7 +33,7 @@ class SendInvoiceMail extends Mailable
      */
     public function build()
     {
-        EmailLog::create([
+        $log = EmailLog::create([
             'from' => $this->data['from'],
             'to' => $this->data['to'],
             'subject' => $this->data['subject'],
@@ -40,6 +41,11 @@ class SendInvoiceMail extends Mailable
             'mailable_type' => Invoice::class,
             'mailable_id' => $this->data['invoice']['id'],
         ]);
+
+        $log->token = Hashids::connection(EmailLog::class)->encode($log->id);
+        $log->save();
+
+        $this->data['url'] = route('invoice', ['email_log' => $log->token]);
 
         $mailContent = $this->from($this->data['from'], config('mail.from.name'))
             ->subject($this->data['subject'])

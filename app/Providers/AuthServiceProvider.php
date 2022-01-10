@@ -9,7 +9,9 @@ use Crater\Policies\EstimatePolicy;
 use Crater\Policies\ExpensePolicy;
 use Crater\Policies\InvoicePolicy;
 use Crater\Policies\ItemPolicy;
+use Crater\Policies\ModulesPolicy;
 use Crater\Policies\NotePolicy;
+use Crater\Policies\OwnerPolicy;
 use Crater\Policies\PaymentPolicy;
 use Crater\Policies\RecurringInvoicePolicy;
 use Crater\Policies\ReportPolicy;
@@ -56,6 +58,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('transfer company ownership', [CompanyPolicy::class, 'transferOwnership']);
         Gate::define('delete company', [CompanyPolicy::class, 'delete']);
 
+        Gate::define('manage modules', [ModulesPolicy::class, 'manageModules']);
+
+        Gate::define('manage settings', [SettingsPolicy::class, 'manageSettings']);
         Gate::define('manage company', [SettingsPolicy::class, 'manageCompany']);
         Gate::define('manage backups', [SettingsPolicy::class, 'manageBackups']);
         Gate::define('manage file disk', [SettingsPolicy::class, 'manageFileDisk']);
@@ -79,5 +84,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view dashboard', [DashboardPolicy::class, 'view']);
 
         Gate::define('view report', [ReportPolicy::class, 'viewReport']);
+
+        Gate::define('owner only', [OwnerPolicy::class, 'managedByOwner']);
     }
 }

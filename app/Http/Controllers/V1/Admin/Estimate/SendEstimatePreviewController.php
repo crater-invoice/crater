@@ -21,6 +21,9 @@ class SendEstimatePreviewController extends Controller
 
         $markdown = new Markdown(view(), config('mail.markdown'));
 
-        return $markdown->render('emails.send.estimate', ['data' => $estimate->sendEstimateData($request->all())]);
+        $data = $estimate->sendEstimateData($request->all());
+        $data['url'] = $estimate->estimatePdfUrl;
+
+        return $markdown->render('emails.send.estimate', ['data' => $data]);
     }
 }

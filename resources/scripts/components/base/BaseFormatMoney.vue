@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { useCompanyStore } from '@/scripts/stores/company'
+import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { inject, computed } from 'vue'
 
 const props = defineProps({

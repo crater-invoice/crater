@@ -20,6 +20,7 @@ class SearchController extends Controller
         $user = $request->user();
 
         $customers = Customer::applyFilters($request->only(['search']))
+            ->whereCompany()
             ->latest()
             ->paginate(10);
 

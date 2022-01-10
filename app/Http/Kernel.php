@@ -69,6 +69,9 @@ class Kernel extends HttpKernel
         'redirect-if-unauthenticated' => \Crater\Http\Middleware\RedirectIfUnauthorized::class,
         'customer-guest' => \Crater\Http\Middleware\CustomerGuest::class,
         'company' => \Crater\Http\Middleware\CompanyMiddleware::class,
+        'pdf-auth' => \Crater\Http\Middleware\PdfMiddleware::class,
+        'cron-job' => \Crater\Http\Middleware\CronJobMiddleware::class,
+        'customer-portal' => \Crater\Http\Middleware\CustomerPortalMiddleware::class,
     ];
 
     /**

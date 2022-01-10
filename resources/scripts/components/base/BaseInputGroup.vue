@@ -12,7 +12,7 @@
         not-italic
         items-center
         font-medium
-        text-primary-800
+        text-gray-800
         whitespace-nowrap
         justify-between
       "
@@ -31,7 +31,7 @@
     </label>
     <div :class="inputContainerClasses">
       <slot></slot>
-      <span v-if="helpText" class="text-gray-400 text-xs mt-1 font-light">
+      <span v-if="helpText" class="text-gray-500 text-xs mt-1 font-light">
         {{ helpText }}
       </span>
       <span v-if="error" class="block mt-0.5 text-sm text-red-500">

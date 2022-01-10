@@ -11,7 +11,8 @@
     "reports": "Reports",
     "settings": "Settings",
     "logout": "Logout",
-    "users": "Users"
+    "users": "Users",
+    "modules": "Modules"
   },
   "general": {
     "add_company": "Add Company",
@@ -92,9 +93,13 @@
     "no_note_found": "No Note Found",
     "insert_note": "Insert Note",
     "copied_pdf_url_clipboard": "Copied PDF url to clipboard!",
+    "copied_url_clipboard": "Copied url to clipboard!",
     "docs": "Docs",
     "do_you_wish_to_continue": "Do you wish to continue?",
-    "note": "Note"
+    "note": "Note",
+    "pay_invoice": "Pay Invoice",
+    "login_successfully": "Logged in successfully!",
+    "logged_out_successfully": "Logged out successfully"
   },
   "dashboard": {
     "select_year": "Select year",
@@ -102,7 +107,8 @@
       "due_amount": "Amount Due",
       "customers": "Customers",
       "invoices": "Invoices",
-      "estimates": "Estimates"
+      "estimates": "Estimates",
+      "payments": "Payments"
     },
     "chart_info": {
       "total_sales": "Sales",
@@ -201,6 +207,10 @@
     "new_customer": "New Customer",
     "edit_customer": "Edit Customer",
     "basic_info": "Basic Info",
+    "portal_access": "Portal Access",
+    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
+    "portal_access_url": "Customer Portal Login URL",
+    "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
     "billing_address": "Billing Address",
     "shipping_address": "Shipping Address",
     "copy_billing_address": "Copy from Billing",
@@ -220,6 +230,7 @@
     "confirm_delete": "You will not be able to recover this customer and all the related Invoices, Estimates and Payments. | You will not be able to recover these customers and all the related Invoices, Estimates and Payments.",
     "created_message": "Customer created successfully",
     "updated_message": "Customer updated successfully",
+    "address_updated_message": "Address Information Updated succesfully",
     "deleted_message": "Customer deleted successfully | Customers deleted successfully",
     "edit_currency_not_allowed": "Cannot change currency once transactions created."
   },
@@ -253,6 +264,8 @@
   },
   "estimates": {
     "title": "Estimates",
+    "accept_estimate": "Accept Estimate",
+    "reject_estimate": "Reject Estimate",
     "estimate": "Estimate | Estimates",
     "estimates_list": "Estimates List",
     "days": "{days} Days",
@@ -344,7 +357,10 @@
   },
   "invoices": {
     "title": "Invoices",
+    "download": "Download",
+    "pay_invoice": "Pay Invoice",
     "invoices_list": "Invoices List",
+    "invoice_information": "Invoice Information",
     "days": "{days} Days",
     "months": "{months} Month",
     "years": "{years} Year",
@@ -637,6 +653,51 @@
     "enter_password": "Enter Password",
     "retype_password": "Retype Password"
   },
+  "modules": {
+    "buy_now": "Buy Now",
+    "install": "Install",
+    "price": "Price",
+    "download_zip_file": "Download ZIP file",
+    "unzipping_package": "Unzipping Package",
+    "copying_files": "Copying Files",
+    "deleting_files": "Deleting Unused files",
+    "completing_installation": "Completing Installation",
+    "update_failed": "Update Failed",
+    "install_success": "Module has been installed successfully!",
+    "customer_reviews": "Reviews",
+    "license": "License",
+    "faq": "FAQ",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "updated": "Updated",
+    "version": "Version",
+    "disable": "Disable",
+    "module_disabled": "Module Disabled",
+    "enable": "Enable",
+    "module_enabled": "Module Enabled",
+    "update_to": "Update To",
+    "module_updated": "Module Updated Successfully!",
+    "title": "Modules",
+    "module": "Module | Modules",
+    "api_token": "API token",
+    "invalid_api_token": "Invalid API Token.",
+    "other_modules": "Other Modules",
+    "view_all": "View All",
+    "no_reviews_found": "There are no reviews for this module yet!",
+    "module_not_purchased": "Module Not Purchased",
+    "module_not_found": "Module Not Found",
+    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "last_updated": "Last Updated On",
+    "connect_installation": "Connect your installation",
+    "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
+    "view_module": "View Module",
+    "update_available": "Update Available",
+    "purchased": "Purchased",
+    "installed": "Installed",
+    "no_modules_installed": "No Modules Installed Yet!",
+    "disable_warning": "All the settings for this particular will be reverted.",
+    "what_you_get": "What you get"
+  },
   "users": {
     "title": "Users",
     "users_list": "Users List",
@@ -741,7 +802,11 @@
       "custom_fields": "Custom Fields",
       "payment_modes": "Payment Modes",
       "notes": "Notes",
-      "exchange_rate": "Exchange Rate"
+      "exchange_rate": "Exchange Rate",
+      "address_information": "Address Information"
+    },
+    "address_information": {
+      "section_description": "  You can update Your Address information using form below."
     },
     "title": "Settings",
     "setting": "Settings | Settings",
@@ -861,7 +926,7 @@
       "component": "Component",
       "Parameter": "Parameter",
       "series": "Series",
-      "series_description": "To set a static prefix/postfix like 'INV' across your company. It supports character length of up to 4 chars.",
+      "series_description": "To set a static prefix/postfix like 'INV' across your company. It supports character length of up to 6 chars.",
       "series_param_label": "Series Value",
       "delimiter": "Delimiter",
       "delimiter_description": "Single character for specifying the boundary between 2 separate components. By default its set to -",
@@ -870,7 +935,7 @@
       "date_format_description": "A local date and time field which accepts a format parameter. The default format: 'Y' renders the current year.",
       "date_format_param_label": "Format",
       "sequence": "Sequence",
-      "sequence_description": "Consecutive sequence of numbers across your company. You can specify the length on the given paramter.",
+      "sequence_description": "Consecutive sequence of numbers across your company. You can specify the length on the given parameter.",
       "sequence_param_label": "Sequence Length",
       "customer_series": "Customer Series",
       "customer_series_description": "To set a different prefix/postfix for each customer.",
@@ -878,7 +943,7 @@
       "customer_sequence_description": "Consecutive sequence of numbers for each of your customer.",
       "customer_sequence_param_label": "Sequence Length",
       "random_sequence": "Random Sequence",
-      "random_sequence_description": "Random alphanumeric string. You can specify the length on the given paramter.",
+      "random_sequence_description": "Random alphanumeric string. You can specify the length on the given parameter.",
       "random_sequence_param_label": "Sequence Length",
       "invoices": {
         "title": "Invoices",
@@ -1108,6 +1173,8 @@
       "discount_setting": "Discount Setting",
       "discount_per_item": "Discount Per Item ",
       "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount is added directly to the invoice.",
+      "expire_public_links": "Automatically Expire Public Links",
+      "expire_setting_description": "Specify whether you would like to expire all the links sent by application to view invoices, estimates & payments, etc after a specified duration.",
       "save": "Save",
       "preference": "Preference | Preferences",
       "general_settings": "Default preferences for the system.",
@@ -1227,6 +1294,18 @@
       "disk_variables_save_successfully": "Disk Configured Successfully",
       "disk_variables_save_error": "Disk configuration failed.",
       "invalid_disk_credentials": "Invalid credential of selected disk"
+    },
+    "taxations": {
+      "add_billing_address": "Enter Billing Address",
+      "add_shipping_address": "Enter Shipping Address",
+      "add_company_address": "Enter Company Address",
+      "modal_description": "The information below is required in order to fetch sales tax.",
+      "add_address": "Add Address for fetching sales tax.",
+      "address_placeholder": "Example: 123, My Street",
+      "city_placeholder": "Example: Los Angeles",
+      "state_placeholder": "Example: CA",
+      "zip_placeholder": "Example: 90024",
+      "invalid_address": "Please provide valid address details."
     }
   },
   "wizard": {
@@ -1386,7 +1465,17 @@
     "not_allowed": "Not Allowed",
     "login_invalid_credentials": "These credentials do not match our records.",
     "enter_valid_cron_format": "Please enter a valid cron format",
-    "email_could_not_be_sent": "Email could not be sent to this email address."
+    "email_could_not_be_sent": "Email could not be sent to this email address.",
+    "invalid_address": "Please enter a valid address.",
+    "invalid_key": "Please enter valid key.",
+    "invalid_state": "Please enter a valid state.",
+    "invalid_city": "Please enter a valid city.",
+    "invalid_postal_code": "Please enter a valid zip.",
+    "invalid_format": "Please enter valid query string format.",
+    "api_error": "Server not responding.",
+    "feature_not_enabled": "Feature not enabled.",
+    "request_limit_met": "Api request limit exceeded.",
+    "address_incomplete": "Incomplete Address"
   },
   "pdf_estimate_label": "Estimate",
   "pdf_estimate_number": "Estimate Number",

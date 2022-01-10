@@ -54,7 +54,8 @@ class CustomerRequest extends FormRequest
                 'nullable',
             ],
             'enable_portal' => [
-                'nullable',
+
+                'boolean'
             ],
             'currency_id' => [
                 'nullable',
@@ -119,7 +120,7 @@ class CustomerRequest extends FormRequest
             $rules['email'] = [
                 'email',
                 'nullable',
-                Rule::unique('customers')->ignore($this->route('customer')->id),
+                Rule::unique('customers')->where('company_id', $this->header('company'))->ignore($this->route('customer')->id),
             ];
         };
 

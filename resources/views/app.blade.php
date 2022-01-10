@@ -16,12 +16,33 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Module Styles -->
+    @foreach(\Crater\Services\Module\ModuleFacade::allStyles() as $name => $path)
+        <link rel="stylesheet" href="/modules/styles/{{ $name }}">
+    @endforeach
+
     @vite
 </head>
 
-<body class="h-full overflow-hidden bg-gray-100 font-base">
+<body
+    class="h-full overflow-hidden bg-gray-100 font-base
+    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_admin_portal_theme()}} @endif ">
+
+    <!-- Module Scripts -->
+    @foreach (\Crater\Services\Module\ModuleFacade::allScripts() as $name => $path)
+        @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
+            <script type="module" src="{!! $path !!}"></script>
+        @else
+            <script type="module" src="/modules/scripts/{{ $name }}"></script>
+        @endif
+    @endforeach
 
     <script type="module">
+        @if(isset($customer_logo))
+
+        window.customer_logo = "/{{$customer_logo}}"
+
+        @endif
         window.Crater.start()
     </script>
 </body>

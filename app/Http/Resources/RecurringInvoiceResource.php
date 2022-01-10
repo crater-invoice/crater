@@ -43,6 +43,8 @@ class RecurringInvoiceResource extends JsonResource
             'tax' => $this->tax,
             'due_amount' => $this->due_amount,
             'template_name' => $this->template_name,
+            'sales_tax_type' => $this->sales_tax_type,
+            'sales_tax_address_type' => $this->sales_tax_address_type,
             'fields' => $this->when($this->fields()->exists(), function () {
                 return CustomFieldValueResource::collection($this->fields);
             }),

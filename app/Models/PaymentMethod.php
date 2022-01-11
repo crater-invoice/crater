@@ -36,6 +36,11 @@ class PaymentMethod extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function scopeWhereCompanyId($query, $id)
+    {
+        $query->where('company_id', $id);
+    }
+
     public function scopeWhereCompany($query)
     {
         $query->where('company_id', request()->header('company'));
@@ -88,8 +93,7 @@ class PaymentMethod extends Model
 
     public static function getSettings($id)
     {
-        $settings = PaymentMethod::whereCompany()
-            ->find($id)
+        $settings = PaymentMethod::find($id)
             ->settings;
 
         return $settings;

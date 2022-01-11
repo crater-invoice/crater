@@ -82,16 +82,15 @@
                   />
                 </MenuButton>
               </template>
-
-              <BaseDropdownItem
-                @click="$router.push({ name: 'customer.profile' })"
-              >
-                <CogIcon
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
-                  aria-hidden="true"
-                />
-                {{ $t('navigation.settings') }}
-              </BaseDropdownItem>
+              <router-link :to="{ name: 'customer.profile' }">
+                <BaseDropdownItem>
+                  <CogIcon
+                    class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                    aria-hidden="true"
+                  />
+                  {{ $t('navigation.settings') }}
+                </BaseDropdownItem>
+              </router-link>
 
               <BaseDropdownItem @click="logout">
                 <LogoutIcon

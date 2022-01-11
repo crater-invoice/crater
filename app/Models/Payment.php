@@ -442,7 +442,7 @@ class Payment extends Model implements HasMedia
 
         $serial = (new SerialNumberFormatter())
             ->setModel(new Payment())
-            ->setCompany(request()->header('company'))
+            ->setCompany($invoice->company_id)
             ->setCustomer($invoice->customer_id)
             ->setNextNumbers();
 
@@ -455,7 +455,7 @@ class Payment extends Model implements HasMedia
         $data['exchange_rate'] = $invoice->exchange_rate;
         $data['base_amount'] = $data['amount'] * $data['exchange_rate'];
         $data['currency_id'] = $invoice->currency_id;
-        $data['company_id'] = request()->header('company');
+        $data['company_id'] = $invoice->company_id;
         $data['transaction_id'] = $transaction->id;
 
         $payment = Payment::create($data);

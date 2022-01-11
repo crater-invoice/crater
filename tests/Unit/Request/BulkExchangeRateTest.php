@@ -27,4 +27,3 @@ test('bulk exchange rate request authorize', function () {
 
     $this->assertTrue($request->authorize());
 });
-

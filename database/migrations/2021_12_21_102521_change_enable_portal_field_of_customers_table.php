@@ -21,7 +21,7 @@ class ChangeEnablePortalFieldOfCustomersTable extends Migration
         $customers = Customer::all();
 
         if ($customers) {
-           $customers->map(function ($customer) {
+            $customers->map(function ($customer) {
                 $customer->enable_portal = false;
                 $customer->save();
             });

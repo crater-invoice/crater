@@ -3,10 +3,8 @@
 use Crater\Http\Controllers\V1\Admin\Invoice\InvoicesController;
 use Crater\Http\Requests\InvoicesRequest;
 use Crater\Mail\SendInvoiceMail;
-use Crater\Models\Company;
 use Crater\Models\Invoice;
 use Crater\Models\InvoiceItem;
-use Crater\Models\Item;
 use Crater\Models\Tax;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;

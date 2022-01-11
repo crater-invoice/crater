@@ -36,4 +36,3 @@ test('exchange rate provider request authorize', function () {
 
     $this->assertTrue($request->authorize());
 });
-

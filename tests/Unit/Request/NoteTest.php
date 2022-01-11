@@ -21,7 +21,6 @@ test('note request validation rules', function () {
                 'required'
             ],
         ],
-
         $request->rules()
     );
 });

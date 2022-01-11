@@ -21,7 +21,6 @@ test('profile request validation rules', function () {
                 Rule::unique('users')->ignore(Auth::id(), 'id'),
             ],
         ],
-
         $request->rules()
     );
 });

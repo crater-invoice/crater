@@ -23,4 +23,3 @@ test('exchange rate log request authorize', function () {
 
     $this->assertTrue($request->authorize());
 });
-

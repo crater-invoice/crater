@@ -3,7 +3,6 @@
 namespace Crater\Http\Controllers\V1\Customer\Estimate;
 
 use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\CustomerEstimateStatusRequest;
 use Crater\Http\Resources\Customer\EstimateResource;
 use Crater\Models\Company;
 use Crater\Models\Estimate;

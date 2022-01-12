@@ -40,7 +40,7 @@
     <script type="module">
         @if(isset($customer_logo))
 
-        window.customer_logo = "/{{$customer_logo}}"
+        window.customer_logo = "/storage/{{$customer_logo}}"
 
         @endif
         window.Crater.start()

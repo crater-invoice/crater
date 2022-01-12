@@ -157,6 +157,10 @@ trait GeneratesPdfTrait
         foreach ($customerCustomFields as $customField) {
             $fields['{'.$customField->customField->slug.'}'] = $customField->defaultAnswer;
         }
+        
+        foreach ($fields as $key => $field) {
+            $fields[$key] = htmlspecialchars($field, ENT_QUOTES, 'UTF-8');
+        }
 
         return $fields;
     }

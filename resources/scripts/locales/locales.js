@@ -14,6 +14,8 @@ import lv from './lv.json'
 import sv from './sv.json'
 import sk from './sk.json'
 import vi from './vi.json'
+import el from './el.json'
+import hr from './hr.json'
 
 export default {
   en,
@@ -31,5 +33,7 @@ export default {
   sv,
   sk,
   vi,
-  pl
+  pl,
+  el,
+  hr
 }

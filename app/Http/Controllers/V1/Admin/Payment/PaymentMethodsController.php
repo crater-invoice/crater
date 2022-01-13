@@ -84,10 +84,12 @@ class PaymentMethodsController extends Controller
     {
         $this->authorize('delete', $paymentMethod);
 
-        $payments = $paymentMethod->payments;
-
-        if ($payments->count() > 0) {
+        if ($paymentMethod->payments()->exists()) {
             return respondJson('payments_attached', 'Payments Attached.');
+        }
+
+        if ($paymentMethod->expenses()->exists()) {
+            return respondJson('expenses_attached', 'Expenses Attached.');
         }
 
         $paymentMethod->delete();

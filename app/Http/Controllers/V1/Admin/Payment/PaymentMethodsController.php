@@ -89,7 +89,7 @@ class PaymentMethodsController extends Controller
         }
 
         if ($paymentMethod->expenses()->exists()) {
-            return respondJson('payments_attached', 'Expenses Attached.');
+            return respondJson('expenses_attached', 'Expenses Attached.');
         }
 
         $paymentMethod->delete();

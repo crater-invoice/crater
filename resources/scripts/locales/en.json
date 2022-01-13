@@ -686,7 +686,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "The minimum required version for this module does not match. Please upgrade your crater app to version: {version} to proceed.",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -1146,7 +1146,8 @@
       "payment_mode_added": "Payment Mode Added",
       "payment_mode_updated": "Payment Mode Updated",
       "payment_mode_confirm_delete": "You will not be able to recover this Payment Mode",
-      "already_in_use": "Payment Mode is already in use",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Payment Mode deleted successfully"
     },
     "expense_category": {

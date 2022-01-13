@@ -861,9 +861,21 @@ async function installModule() {
       }
 
       if (!requestResponse.data.success) {
+        let displayMsg = ref('')
+
+        if (
+          requestResponse.data.message === 'crater_version_is_not_supported'
+        ) {
+          displayMsg.value = t('modules.version_not_supported', {
+            version: requestResponse.data.min_crater_version,
+          })
+        } else {
+          displayMsg.value = getErrorMessage(requestResponse.data.message)
+        }
+
         notificationStore.showNotification({
           type: 'error',
-          message: getErrorMessage(requestResponse.data.message),
+          message: displayMsg.value,
         })
 
         isInstalling.value = false

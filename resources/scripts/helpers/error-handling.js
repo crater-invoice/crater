@@ -62,7 +62,11 @@ export const showError = (error) => {
       break
 
     case 'payments_attached':
-      showToaster('settings.payment_modes.already_in_use')
+      showToaster('settings.payment_modes.payments_attached')
+      break
+    
+    case 'expenses_attached':
+      showToaster('settings.payment_modes.expenses_attached')
       break
 
     case 'role_attached_to_users':

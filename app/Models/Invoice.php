@@ -698,4 +698,19 @@ class Invoice extends Model implements HasMedia
 
         $this->save();
     }
+
+    public static function deleteInvoices($ids)
+    {
+        foreach ($ids as $id) {
+            $invoice = self::find($id);
+
+            if ($invoice->transactions()->exists()) {
+                $invoice->transactions()->delete();
+            }
+
+            $invoice->delete();
+        }
+
+        return true;
+    }
 }

@@ -17,6 +17,8 @@ class DownloadReceiptController extends Controller
      */
     public function __invoke(Expense $expense)
     {
+        $this->authorize('view', $expense);
+
         if ($expense) {
             $media = $expense->getFirstMedia('receipts');
             if ($media) {

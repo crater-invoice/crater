@@ -578,7 +578,7 @@ class CurrenciesTableSeeder extends Seeder
             [
                 'name' => 'Macedonian Denar',
                 'code' => 'MKD',
-                'symbol' => 'ден.',
+                'symbol' => 'ден',
                 'precision' => '0',
                 'thousand_separator' => '.',
                 'decimal_separator' => ',',

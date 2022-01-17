@@ -582,6 +582,7 @@ class CurrenciesTableSeeder extends Seeder
                 'precision' => '0',
                 'thousand_separator' => '.',
                 'decimal_separator' => ',',
+                'swap_currency_symbol' => true,
             ],
         ];
 

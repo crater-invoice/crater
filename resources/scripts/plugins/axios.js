@@ -17,6 +17,12 @@ axios.interceptors.request.use(function (config) {
   // Pass selected company to header on all requests
   const companyId = Ls.get('selectedCompany')
 
+  const authToken = Ls.get('auth.token')
+
+  if (authToken) {
+    config.headers.common.Authorization = authToken
+  }
+
   if (companyId) {
     config.headers.common['company'] = companyId
   }

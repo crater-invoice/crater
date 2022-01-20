@@ -29,7 +29,11 @@ test('get expenses', function () {
 });
 
 test('create expense', function () {
-    $expense = Expense::factory()->raw();
+    $expense = Expense::factory()->raw([
+        'amount' => 150,
+        'exchange_rate' => 76.217498,
+        'base_amount' => 11432.6247,
+    ]);
 
     postJson('api/v1/expenses', $expense)->assertStatus(201);
 
@@ -37,6 +41,8 @@ test('create expense', function () {
         'notes' => $expense['notes'],
         'expense_category_id' => $expense['expense_category_id'],
         'amount' => $expense['amount'],
+        'exchange_rate' => $expense['exchange_rate'],
+        'base_amount' => $expense['base_amount'],
     ]);
 });
 
@@ -125,4 +131,26 @@ test('delete multiple expenses', function () {
     foreach ($expenses as $expense) {
         $this->assertDeleted($expense);
     }
+});
+
+test('update expense with EUR currency', function () {
+    $expense = Expense::factory()->create([
+        'expense_date' => '2019-02-05',
+    ]);
+
+    $expense2 = Expense::factory()->raw([
+        'amount' => 150,
+        'exchange_rate' => 76.217498,
+        'base_amount' => 11432.6247,
+    ]);
+
+    putJson('api/v1/expenses/'.$expense->id, $expense2)->assertOk();
+
+    $this->assertDatabaseHas('expenses', [
+        'id' => $expense->id,
+        'expense_category_id' => $expense2['expense_category_id'],
+        'amount' => $expense2['amount'],
+        'exchange_rate' => $expense2['exchange_rate'],
+        'base_amount' => $expense2['base_amount'],
+    ]);
 });

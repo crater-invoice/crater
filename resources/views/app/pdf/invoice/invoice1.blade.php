@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>@lang('pdf_invoice_label') - {{$invoice->invoice_number}}</title>
+    <title>@lang('pdf_invoice_label') - {{ $invoice->invoice_number }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
@@ -15,10 +15,11 @@
             margin: 0px;
             padding: 0px;
             margin-top: 50px;
+
         }
 
         .text-center {
-            text-align: center
+            text-align: center;
         }
 
         hr {
@@ -31,10 +32,11 @@
 
         .header-bottom-divider {
             color: rgba(0, 0, 0, 0.2);
-            position: absolute;
             top: 90px;
             left: 0px;
             width: 100%;
+            margin-left: 0%;
+
         }
 
         .header-container {
@@ -46,10 +48,11 @@
         }
 
         .header-logo {
-            height: 50px;
             margin-top: 20px;
+            padding-bottom: 20px;
             text-transform: capitalize;
             color: #817AE3;
+
         }
 
         .header {
@@ -81,7 +84,7 @@
         }
 
         .company-address {
-            margin-top: 2px;
+            margin-top: 16px;
             text-align: left;
             font-size: 12px;
             line-height: 15px;
@@ -93,6 +96,7 @@
         .invoice-details-container {
             float: right;
             padding: 10px 30px 0 0;
+            margin-top: 18px;
         }
 
         .attribute-label {
@@ -218,8 +222,9 @@
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left: 500px;
             margin-top: 20px;
+            float: right;
+            width: auto;
         }
 
         .total-table-attribute-label {
@@ -282,9 +287,6 @@
             color: #5851DB;
         }
 
-        .text-center {
-            text-align: center
-        }
 
         table .text-left {
             text-align: left;
@@ -331,6 +333,7 @@
         .pl-0 {
             padding-left: 0;
         }
+
     </style>
 </head>
 
@@ -339,11 +342,11 @@
         <table width="100%">
             <tr>
                 <td class="text-center">
-                    @if($logo)
-                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                    @if ($logo)
+                        <img class="header-logo" style="height:50px" src="{{ $logo }}" alt="Company Logo">
                     @else
-                        @if($invoice->customer->company)
-                            <h2 class="header-logo"> {{$invoice->customer->company->name}} </h2>
+                        @if ($invoice->customer->company)
+                            <h2 class="header-logo"> {{ $invoice->customer->company->name }}</h2>
                         @endif
                     @endif
                 </td>
@@ -351,6 +354,7 @@
         </table>
         <hr class="header-bottom-divider" style="border: 0.620315px solid #E8E8E8;" />
     </div>
+
 
     <div class="content-wrapper">
         <div style="padding-top: 30px">
@@ -362,15 +366,15 @@
                 <table>
                     <tr>
                         <td class="attribute-label">@lang('pdf_invoice_number')</td>
-                        <td class="attribute-value"> &nbsp;{{$invoice->invoice_number}}</td>
+                        <td class="attribute-value"> &nbsp;{{ $invoice->invoice_number }}</td>
                     </tr>
                     <tr>
                         <td class="attribute-label">@lang('pdf_invoice_date')</td>
-                        <td class="attribute-value"> &nbsp;{{$invoice->formattedInvoiceDate}}</td>
+                        <td class="attribute-value"> &nbsp;{{ $invoice->formattedInvoiceDate }}</td>
                     </tr>
                     <tr>
                         <td class="attribute-label">@lang('pdf_invoice_due_date')</td>
-                        <td class="attribute-value"> &nbsp;{{$invoice->formattedDueDate}}</td>
+                        <td class="attribute-value"> &nbsp;{{ $invoice->formattedDueDate }}</td>
                     </tr>
                 </table>
             </div>
@@ -379,15 +383,15 @@
         </div>
 
         <div class="billing-address-container billing-address">
-            @if($billing_address)
+            @if ($billing_address)
                 <b>@lang('pdf_bill_to')</b> <br>
 
                 {!! $billing_address !!}
             @endif
         </div>
 
-        <div class="shipping-address-container shipping-address" @if($billing_address !=='</br>' ) style="float:left;" @else style="display:block; float:left: padding-left: 0px;" @endif>
-            @if($shipping_address)
+        <div class="shipping-address-container shipping-address" @if ($billing_address !== '</br>') style="float:left;" @else style="display:block; float:left: padding-left: 0px;" @endif>
+            @if ($shipping_address)
                 <b>@lang('pdf_ship_to')</b> <br>
 
                 {!! $shipping_address !!}
@@ -399,7 +403,7 @@
         </div>
 
         <div class="notes">
-            @if($notes)
+            @if ($notes)
                 <div class="notes-label">
                     @lang('pdf_notes')
                 </div>

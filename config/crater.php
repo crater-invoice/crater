@@ -44,6 +44,11 @@ return [
     'min_sqlite_version' => '3.24.0',
 
     /*
+    * Marketplace url.
+    */
+    'base_url' => 'https://craterapp.com',
+
+    /*
     * List of languages supported by Crater.
     */
     'languages' => [
@@ -63,7 +68,9 @@ return [
         ["code" => "sv", "name" => "Svenska"],
         ["code" => "sk", "name" => "Slovak"],
         ["code" => "vi", "name" => "Tiếng Việt"],
-        ["code" => "cs", "name" => "Czech"]
+        ["code" => "cs", "name" => "Czech"],
+        ["code" => "el", "name" => "Greek"],
+        ["code" => "hr", "name" => "Crotian"],
     ],
 
     /*
@@ -354,6 +361,16 @@ return [
             'model' => Expense::class
         ],
         [
+            'title' => 'navigation.modules',
+            'group' => 3,
+            'link' => '/admin/modules',
+            'icon' => 'PuzzleIcon',
+            'name' => 'Modules',
+            'owner_only' => true,
+            'ability' => '',
+            'model' => ''
+        ],
+        [
             'title' => 'navigation.users',
             'group' => 3,
             'link' => '/admin/users',
@@ -371,7 +388,8 @@ return [
             'name' => 'Reports',
             'owner_only' => false,
             'ability' => 'view-financial-reports',
-            'model' => ''],
+            'model' => ''
+        ],
         [
             'title' => 'navigation.settings',
             'group' => 3,
@@ -380,6 +398,62 @@ return [
             'name' => 'Settings',
             'owner_only' => false,
             'ability' => '',
+            'model' => ''
+        ],
+    ],
+
+    /*
+    * List of customer portal menu
+    */
+    'customer_menu' => [
+        [
+            'title' => 'Dashboard',
+            'link' => '/customer/dashboard',
+            'icon' => '',
+            'name' => '',
+            'ability' => '',
+            'owner_only' => false,
+            'group' => '',
+            'model' => ''
+        ],
+        [
+            'title' => 'Invoices',
+            'link' => '/customer/invoices',
+            'icon' => '',
+            'name' => '',
+            'ability' => '',
+            'owner_only' => false,
+            'group' => '',
+            'model' => ''
+        ],
+        [
+            'title' => 'Estimates',
+            'link' => '/customer/estimates',
+            'icon' => '',
+            'name' => '',
+            'owner_only' => false,
+            'ability' => '',
+            'group' => '',
+            'model' => ''
+        ],
+        [
+            'title' => 'Payments',
+            'link' => '/customer/payments',
+            'icon' => '',
+            'name' => '',
+            'owner_only' => false,
+            'ability' => '',
+            'group' => '',
+            'model' => ''
+        ],
+        [
+            'title' => 'Settings',
+            'link' => '/customer/settings',
+            'icon' => '',
+            'name' => '',
+            'owner_only' => false,
+            'ability' => '',
+            'group' => '',
             'model' => ''
         ],
     ],

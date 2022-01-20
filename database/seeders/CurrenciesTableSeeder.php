@@ -107,6 +107,14 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => '.',
             ],
             [
+                'name' => 'Nepali Rupee',
+                'code' => 'NPR',
+                'symbol' => 'रू',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.',
+            ],
+            [
                 'name' => 'Indian Rupee',
                 'code' => 'INR',
                 'symbol' => '₹',
@@ -574,6 +582,15 @@ class CurrenciesTableSeeder extends Seeder
                 'precision' => '0',
                 'thousand_separator' => ',',
                 'decimal_separator' => '.',
+            ],
+            [
+                'name' => 'Macedonian Denar',
+                'code' => 'MKD',
+                'symbol' => 'ден',
+                'precision' => '0',
+                'thousand_separator' => '.',
+                'decimal_separator' => ',',
+                'swap_currency_symbol' => true,
             ],
         ];
 

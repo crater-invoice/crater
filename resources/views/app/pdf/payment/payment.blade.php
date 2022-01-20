@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>@lang('pdf_payment_label') - {{$payment->payment_number}}</title>
+    <title>@lang('pdf_payment_label') - {{ $payment->payment_number }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <style type="text/css">
@@ -15,6 +15,7 @@
             margin: 0px;
             padding: 0px;
             margin-top: 50px;
+            margin-bottom: 50px;
         }
 
         table {
@@ -24,6 +25,7 @@
         hr {
             color: rgba(0, 0, 0, 0.2);
             border: 0.5px solid #EAF1FB;
+            margin: 50px 0px;
         }
 
         /* -- Heeader -- */
@@ -48,7 +50,6 @@
 
         .header-logo {
             /* position: absolute; */
-            height: 50px;
             text-transform: capitalize;
             color: #817AE3;
             padding-top: 0px;
@@ -62,9 +63,9 @@
         }
 
         /* .header-section-right {
-            display:inline-block;
+            display: inline-block;
             position: absolute;
-            right:0;
+            right: 0;
             padding: 15px 30px 15px 0px;
             float: right;
         } */
@@ -92,9 +93,10 @@
         }
 
         .company-address {
-            /* margin-top: 12px; */
+            margin-top: 0px;
             font-size: 12px;
             line-height: 15px;
+            padding-right: 60px;
             color: #595959;
             word-wrap: break-word;
         }
@@ -181,10 +183,10 @@
         .payment-details-container {
             display: inline;
             position: absolute;
-            float: right;
             width: 40%;
             height: 120px;
-            padding: 5px 30px 0 0;
+            left: 440px;
+            padding: 5px 10px 0 0;
         }
 
         .attribute-label {
@@ -205,11 +207,11 @@
         .notes {
             font-size: 12px;
             color: #595959;
-            margin-top: 15px;
+            margin-top: 100px;
             margin-left: 30px;
-            width: 442px;
+            width: 90%;
             text-align: left;
-            page-break-inside: avoid;
+            page-break-before: avoid;
         }
 
         .notes-label {
@@ -245,7 +247,7 @@
         /* -- Total Display Box -- */
 
         .total-display-box {
-            width: 315px;
+            min-width: 315px;
             display: block;
             margin-right: 30px;
             background: #F9FBFF;
@@ -270,7 +272,9 @@
             line-height: 21px;
             text-align: right;
             color: #5851D8;
+            margin-left: 150px;
         }
+
     </style>
 </head>
 
@@ -278,15 +282,15 @@
     <div class="header-container">
         <table width="100%">
             <tr>
-                @if($logo)
-                <td width="50%" class="header-section-left">
-                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                @if ($logo)
+                    <td width="50%" class="header-section-left">
+                        <img style="height: 50px;" class="header-logo" src="{{ $logo }}" alt="Company Logo">
                     @else
-                    @if($payment->customer)
-                <td class="header-section-left" style="padding-top:0px;">
-                    <h1 class="header-logo"> {{$payment->customer->company->name}} </h1>
-                    @endif
-                    @endif
+                        @if ($payment->customer)
+                    <td class="header-section-left" style="padding-top:0px;">
+                        <h1 class="header-logo"> {{ $payment->customer->company->name }} </h1>
+                @endif
+                @endif
                 </td>
                 <td width="50%" class="header-section-right company-details company-address">
                     {!! $company_address !!}
@@ -305,9 +309,9 @@
         <div class="main-content">
             <div class="customer-address-container">
                 <div class="billing-address-container billing-address">
-                    @if($billing_address)
-                    @lang('pdf_received_from')
-                    {!! $billing_address !!}
+                    @if ($billing_address)
+                        @lang('pdf_received_from')
+                        {!! $billing_address !!}
                     @endif
                 </div>
                 <div class="billing-address-container--right">
@@ -319,21 +323,22 @@
                 <table width="100%">
                     <tr>
                         <td class="attribute-label">@lang('pdf_payment_date')</td>
-                        <td class="attribute-value"> &nbsp;{{$payment->formattedPaymentDate}}</td>
+                        <td class="attribute-value"> &nbsp;{{ $payment->formattedPaymentDate }}</td>
                     </tr>
                     <tr>
                         <td class="attribute-label">@lang('pdf_payment_number')</td>
-                        <td class="attribute-value"> &nbsp;{{$payment->payment_number}}</td>
+                        <td class="attribute-value"> &nbsp;{{ $payment->payment_number }}</td>
                     </tr>
                     <tr>
                         <td class="attribute-label">@lang('pdf_payment_mode')</td>
-                        <td class="attribute-value"> &nbsp;{{$payment->paymentMethod ? $payment->paymentMethod->name : '-'}}</td>
+                        <td class="attribute-value">
+                            &nbsp;{{ $payment->paymentMethod ? $payment->paymentMethod->name : '-' }}</td>
                     </tr>
                     @if ($payment->invoice && $payment->invoice->invoice_number)
-                    <tr>
-                        <td class="attribute-label">@lang('pdf_invoice_label')</td>
-                        <td class="attribute-value"> &nbsp;{{$payment->invoice->invoice_number}}</td>
-                    </tr>
+                        <tr>
+                            <td class="attribute-label">@lang('pdf_invoice_label')</td>
+                            <td class="attribute-value"> &nbsp;{{ $payment->invoice->invoice_number }}</td>
+                        </tr>
                     @endif
                 </table>
             </div>
@@ -343,6 +348,14 @@
     <div class="total-display-box">
         <p class="total-display-label">@lang('pdf_payment_amount_received_label')</p>
         <span class="amount">{!! format_money_pdf($payment->amount, $payment->customer->currency) !!}</span>
+    </div>
+    <div class="notes">
+        @if ($notes)
+            <div class="notes-label">
+                @lang('pdf_notes')
+            </div>
+            {!! $notes !!}
+        @endif
     </div>
 </body>
 

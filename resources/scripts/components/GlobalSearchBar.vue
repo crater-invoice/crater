@@ -119,7 +119,7 @@
               class="p-2 hover:bg-gray-100 cursor-pointer rounded-md"
             >
               <router-link
-                :to="{ path: `users/${user.id}/view` }"
+                :to="{ path: `/admin/users/${user.id}/edit` }"
                 class="flex items-center"
               >
                 <span
@@ -154,7 +154,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { useUsersStore } from '@/scripts/stores/users'
+import { useUsersStore } from '@/scripts/admin/stores/users'
 import { onClickOutside } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import SpinnerIcon from '@/scripts/components/icons/SpinnerIcon.vue'

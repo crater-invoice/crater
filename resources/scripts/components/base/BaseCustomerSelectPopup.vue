@@ -9,6 +9,7 @@
 
   <div v-else class="max-h-[173px]">
     <CustomerModal />
+    <!-- <SalesTax :type="type" /> -->
 
     <div
       v-if="selectedCustomer"
@@ -198,8 +199,8 @@
             class="
               flex
               justify-center
-              w-10
-              h-10
+              !w-10
+              !h-10
               p-2
               mr-5
               text-sm text-white
@@ -384,19 +385,19 @@
 
 <script setup>
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { useEstimateStore } from '@/scripts/stores/estimate'
-import { useInvoiceStore } from '@/scripts/stores/invoice'
-import { useRecurringInvoiceStore } from '@/scripts/stores/recurring-invoice'
+import { useEstimateStore } from '@/scripts/admin/stores/estimate'
+import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
+import { useRecurringInvoiceStore } from '@/scripts/admin/stores/recurring-invoice'
 import { useModalStore } from '@/scripts/stores/modal'
-import { useGlobalStore } from '@/scripts/stores/global'
-import { useCustomerStore } from '@/scripts/stores/customer'
-import { computed, onMounted, ref } from 'vue'
+import { useGlobalStore } from '@/scripts/admin/stores/global'
+import { useCustomerStore } from '@/scripts/admin/stores/customer'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDebounceFn } from '@vueuse/core'
-import { useUserStore } from '@/scripts/stores/user'
-import abilities from '@/scripts/stub/abilities'
+import { useUserStore } from '@/scripts/admin/stores/user'
+import abilities from '@/scripts/admin/stub/abilities'
 import { useRoute } from 'vue-router'
-import CustomerModal from '@/scripts/components/modal-components/CustomerModal.vue'
+import CustomerModal from '@/scripts/admin/components/modal-components/CustomerModal.vue'
 
 const props = defineProps({
   valid: {

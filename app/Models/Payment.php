@@ -28,7 +28,7 @@ class Payment extends Model implements HasMedia
     public const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
     public const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'payment_date'];
 
     protected $guarded = ['id'];
 
@@ -54,10 +54,10 @@ class Payment extends Model implements HasMedia
         });
     }
 
-    public function setPaymentDateAttribute($value)
+    public function setSettingsAttribute($value)
     {
         if ($value) {
-            $this->attributes['payment_date'] = Carbon::createFromFormat('Y-m-d', $value);
+            $this->attributes['settings'] = json_encode($value);
         }
     }
 
@@ -78,6 +78,11 @@ class Payment extends Model implements HasMedia
     public function getPaymentPdfUrlAttribute()
     {
         return url('/payments/pdf/'.$this->unique_hash);
+    }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 
     public function emailLogs()
@@ -427,7 +432,40 @@ class Payment extends Model implements HasMedia
             '{PAYMENT_MODE}' => $this->paymentMethod ? $this->paymentMethod->name : null,
             '{PAYMENT_NUMBER}' => $this->payment_number,
             '{PAYMENT_AMOUNT}' => $this->reference_number,
-            '{PAYMENT_LINK}' => $this->paymentPdfUrl,
+            '{PAYMENT_LINK}' => url('/customer/payments/pdf/'.$this->unique_hash)
         ];
+    }
+
+    public static function generatePayment($transaction)
+    {
+        $invoice = Invoice::find($transaction->invoice_id);
+
+        $serial = (new SerialNumberFormatter())
+            ->setModel(new Payment())
+            ->setCompany($invoice->company_id)
+            ->setCustomer($invoice->customer_id)
+            ->setNextNumbers();
+
+        $data['payment_number'] = $serial->getNextNumber();
+        $data['payment_date'] = Carbon::now()->format('y-m-d');
+        $data['amount'] = $invoice->total;
+        $data['invoice_id'] = $invoice->id;
+        $data['payment_method_id'] = request()->payment_method_id;
+        $data['customer_id'] = $invoice->customer_id;
+        $data['exchange_rate'] = $invoice->exchange_rate;
+        $data['base_amount'] = $data['amount'] * $data['exchange_rate'];
+        $data['currency_id'] = $invoice->currency_id;
+        $data['company_id'] = $invoice->company_id;
+        $data['transaction_id'] = $transaction->id;
+
+        $payment = Payment::create($data);
+        $payment->unique_hash = Hashids::connection(Payment::class)->encode($payment->id);
+        $payment->sequence_number = $serial->nextSequenceNumber;
+        $payment->customer_sequence_number = $serial->nextCustomerSequenceNumber;
+        $payment->save();
+
+        $invoice->subtractInvoicePayment($invoice->total);
+
+        return $payment;
     }
 }

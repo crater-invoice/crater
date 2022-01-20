@@ -3,6 +3,7 @@
 namespace Crater\Models;
 
 use Carbon\Carbon;
+use Crater\Notifications\CustomerMailResetPasswordNotification;
 use Crater\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,10 @@ class Customer extends Authenticatable implements HasMedia
     protected $appends = [
         'formattedCreatedAt',
         'avatar'
+    ];
+
+    protected $casts = [
+        'enable_portal' => 'boolean',
     ];
 
     public function getFormattedCreatedAtAttribute($value)
@@ -106,6 +111,11 @@ class Customer extends Authenticatable implements HasMedia
     public function shippingAddress()
     {
         return $this->hasOne(Address::class)->where('type', Address::SHIPPING_TYPE);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomerMailResetPasswordNotification($token));
     }
 
     public function getAvatarAttribute()

@@ -27,7 +27,6 @@
             w-4
             h-4
             transition-transform
-            transform
             bg-white
             rounded-full
           "

@@ -45,4 +45,13 @@ class SettingsPolicy
 
         return false;
     }
+
+    public function manageSettings(User $user)
+    {
+        if ($user->isOwner()) {
+            return true;
+        }
+
+        return false;
+    }
 }

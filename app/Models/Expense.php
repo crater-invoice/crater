@@ -16,6 +16,10 @@ class Expense extends Model implements HasMedia
     use InteractsWithMedia;
     use HasCustomFieldsTrait;
 
+    protected $dates = [
+        'expense_date',
+    ];
+
     protected $guarded = ['id'];
 
     protected $appends = [
@@ -29,13 +33,6 @@ class Expense extends Model implements HasMedia
         'notes' => 'string',
         'exchange_rate' => 'float'
     ];
-
-    public function setExpenseDateAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['expense_date'] = Carbon::createFromFormat('Y-m-d', $value);
-        }
-    }
 
     public function category()
     {

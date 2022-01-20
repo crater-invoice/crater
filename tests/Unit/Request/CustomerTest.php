@@ -35,7 +35,7 @@ test('customer request validation rules', function () {
                 'nullable',
             ],
             'enable_portal' => [
-                'nullable',
+                'boolean',
             ],
             'currency_id' => [
                 'nullable',

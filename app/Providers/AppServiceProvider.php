@@ -48,6 +48,12 @@ class AppServiceProvider extends ServiceProvider
                 $this->generateMenu($menu, $data);
             }
         });
+
+        \Menu::make('customer_portal_menu', function ($menu) {
+            foreach (config('crater.customer_menu') as $data) {
+                $this->generateMenu($menu, $data);
+            }
+        });
     }
 
     public function generateMenu($menu, $data)

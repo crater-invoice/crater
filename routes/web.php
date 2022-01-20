@@ -7,14 +7,17 @@ use Crater\Http\Controllers\V1\Admin\Report\ExpensesReportController;
 use Crater\Http\Controllers\V1\Admin\Report\ItemSalesReportController;
 use Crater\Http\Controllers\V1\Admin\Report\ProfitLossReportController;
 use Crater\Http\Controllers\V1\Admin\Report\TaxSummaryReportController;
+use Crater\Http\Controllers\V1\Customer\Auth\LoginController as CustomerLoginController;
 use Crater\Http\Controllers\V1\Customer\EstimatePdfController as CustomerEstimatePdfController;
 use Crater\Http\Controllers\V1\Customer\InvoicePdfController as CustomerInvoicePdfController;
-use Crater\Http\Controllers\V1\PDF\DownloadInvoicePdfController;
-use Crater\Http\Controllers\V1\PDF\DownloadPaymentPdfController;
+use Crater\Http\Controllers\V1\Customer\PaymentPdfController as CustomerPaymentPdfController;
+use Crater\Http\Controllers\V1\Modules\ScriptController;
+use Crater\Http\Controllers\V1\Modules\StyleController;
 use Crater\Http\Controllers\V1\PDF\DownloadReceiptController;
 use Crater\Http\Controllers\V1\PDF\EstimatePdfController;
 use Crater\Http\Controllers\V1\PDF\InvoicePdfController;
 use Crater\Http\Controllers\V1\PDF\PaymentPdfController;
+use Crater\Models\Company;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +27,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Script Includes
+// ----------------------------------------------
+
+
+Route::get('/modules/styles/{style}', StyleController::class);
+
+Route::get('/modules/scripts/{script}', ScriptController::class);
+
+
+// Admin Auth
+// ----------------------------------------------
+
 Route::post('login', [LoginController::class, 'login']);
+
+Route::get('auth/logout', function () {
+    Auth::guard('web')->logout();
+});
+
+
+// Customer auth
+// ----------------------------------------------
+
+Route::post('/{company:slug}/customer/login', CustomerLoginController::class);
+
+Route::get('/{company:slug}/customer/logout', function () {
+    Auth::guard('customer')->logout();
+});
 
 
 Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
@@ -48,57 +78,43 @@ Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
     // report for profit and loss
     //----------------------------------
     Route::get('/profit-loss/{hash}', ProfitLossReportController::class);
+
+
+    // download expense receipt
+    // -------------------------------------------------
+    Route::get('/expenses/{expense}/download-receipt', DownloadReceiptController::class);
+    Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
+});
+
+Route::middleware('pdf-auth')->group(function () {
+
+    //  invoice pdf
+    // -------------------------------------------------
+    Route::get('/invoices/pdf/{invoice:unique_hash}', InvoicePdfController::class);
+
+    // estimate pdf
+    // -------------------------------------------------
+    Route::get('/estimates/pdf/{estimate:unique_hash}', EstimatePdfController::class);
+
+    // payment pdf
+    // -------------------------------------------------
+    Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
 });
 
 
-// view invoice pdf
+
+// customer pdf endpoints for invoice, estimate and Payment
 // -------------------------------------------------
 
-Route::get('/invoices/pdf/{invoice:unique_hash}', InvoicePdfController::class);
+Route::prefix('/customer')->group(function () {
+    Route::get('/invoices/{email_log:token}', [CustomerInvoicePdfController::class, 'getInvoice']);
+    Route::get('/invoices/view/{email_log:token}', [CustomerInvoicePdfController::class, 'getPdf'])->name('invoice');
 
+    Route::get('/estimates/{email_log:token}', [CustomerEstimatePdfController::class, 'getEstimate']);
+    Route::get('/estimates/view/{email_log:token}', [CustomerEstimatePdfController::class, 'getPdf'])->name('estimate');
 
-// download invoice pdf
-// -------------------------------------------------
-
-Route::get('/invoices/pdf/download/{invoice:unique_hash}', DownloadInvoicePdfController::class);
-
-
-
-// view estimate pdf
-// -------------------------------------------------
-
-Route::get('/estimates/pdf/{estimate:unique_hash}', EstimatePdfController::class);
-
-
-// view payment pdf
-// -------------------------------------------------
-
-Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
-
-
-// download payment pdf
-// -------------------------------------------------
-
-Route::get('/payments/pdf/download/{payment:unique_hash}', DownloadPaymentPdfController::class);
-
-
-// download expense receipt
-// -------------------------------------------------
-
-Route::get('/expenses/{expense}/download-receipt', DownloadReceiptController::class);
-Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
-
-
-// customer pdf endpoints for invoice and estimate
-// -------------------------------------------------
-
-Route::get('/customer/invoices/pdf/{invoice:unique_hash}', CustomerInvoicePdfController::class);
-
-Route::get('/customer/estimates/pdf/{estimate:unique_hash}', CustomerEstimatePdfController::class);
-
-
-Route::get('auth/logout', function () {
-    Auth::guard('web')->logout();
+    Route::get('/payments/{email_log:token}', [CustomerPaymentPdfController::class, 'getPayment']);
+    Route::get('/payments/view/{email_log:token}', [CustomerPaymentPdfController::class, 'getPdf'])->name('payment');
 });
 
 
@@ -117,10 +133,21 @@ Route::get('/admin/{vue?}', function () {
     return view('app');
 })->where('vue', '[\/\w\.-]*')->name('admin')->middleware(['install', 'redirect-if-unauthenticated']);
 
+Route::get('{company:slug}/customer/{vue?}', function (Company $company) {
+    return view('app')->with([
+        'customer_logo' => get_customer_logo($company->id),
+        'current_theme' => get_customer_portal_theme($company->id)
+    ]);
+})->where('vue', '[\/\w\.-]*')->name('customer.login')->middleware(['install']);
 
-// Move other http requests to the Vue App
-// -------------------------------------------------
-
-Route::get('/{vue?}', function () {
+Route::get('/', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('login')->middleware(['install']);
+})->where('vue', '[\/\w\.-]*')->name('home')->middleware(['install', 'guest']);
+
+Route::get('/reset-password/{token}', function () {
+    return view('app');
+})->where('vue', '[\/\w\.-]*')->name('home')->middleware(['install', 'guest']);
+
+Route::get('/login', function () {
+    return view('app');
+})->where('vue', '[\/\w\.-]*')->name('login')->middleware(['install', 'guest']);

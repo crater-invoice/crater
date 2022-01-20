@@ -109,7 +109,7 @@ class User extends Authenticatable implements HasMedia
 
     public function currency()
     {
-        return $this->belongsTo(Currency::class);
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
     public function creator()
@@ -145,6 +145,21 @@ class User extends Authenticatable implements HasMedia
     public function settings()
     {
         return $this->hasMany(UserSetting::class, 'user_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function billingAddress()
+    {
+        return $this->hasOne(Address::class)->where('type', Address::BILLING_TYPE);
+    }
+
+    public function shippingAddress()
+    {
+        return $this->hasOne(Address::class)->where('type', Address::SHIPPING_TYPE);
     }
 
     /**

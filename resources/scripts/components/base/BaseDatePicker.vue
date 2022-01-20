@@ -50,7 +50,7 @@
 import FlatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import { computed, reactive, watch, ref, useSlots } from 'vue'
-import { useCompanyStore } from '@/scripts/stores/company'
+import { useCompanyStore } from '@/scripts/admin/stores/company'
 
 const dp = ref(null)
 

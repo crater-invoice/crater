@@ -19,6 +19,9 @@ class Company extends Model implements HasMedia
         'id'
     ];
 
+    public const COMPANY_LEVEL = 'company_level';
+    public const CUSTOMER_LEVEL = 'customer_level';
+
     protected $appends = ['logo', 'logo_path'];
 
     public function getRolesAttribute()
@@ -241,7 +244,9 @@ class Company extends Model implements HasMedia
             'invoice_set_due_date_automatically' => 'YES',
             'invoice_due_date_days' => 7,
             'bulk_exchange_rate_configured' => 'YES',
-            'estimate_convert_action' => 'no_action'
+            'estimate_convert_action' => 'no_action',
+            'automatically_expire_public_links' => 'YES',
+            'link_expiry_days' => 7,
         ];
 
         CompanySetting::setSettings($settings, $this->id);

@@ -14,7 +14,7 @@ test('company has many customers', function () {
     $this->assertTrue($company->customers()->exists());
 });
 
-test('company has many company setings', function () {
+test('company has many company settings', function () {
     $company = Company::factory()->hasSettings(5)->create();
 
     $this->assertCount(5, $company->settings);

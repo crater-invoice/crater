@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/scripts/stores/auth'
+import { useAuthStore } from '@/scripts/admin/stores/auth'
 import { useNotificationStore } from '@/scripts/stores/notification'
 
 export const handleError = (err) => {
@@ -32,7 +32,8 @@ export const handleError = (err) => {
         showError(errors[i][0])
       }
     } else if (err.response.data.error) {
-      showError(err.response.data.error)
+      if (typeof err.response.data.error == 'boolean') showError(err.response.data?.message)
+      else showError(err.response.data.error)
     } else {
       showError(err.response.data.message)
     }
@@ -61,7 +62,11 @@ export const showError = (error) => {
       break
 
     case 'payments_attached':
-      showToaster('settings.payment_modes.already_in_use')
+      showToaster('settings.payment_modes.payments_attached')
+      break
+    
+    case 'expenses_attached':
+      showToaster('settings.payment_modes.expenses_attached')
       break
 
     case 'role_attached_to_users':
@@ -138,6 +143,46 @@ export const showError = (error) => {
 
     case 'not_allowed':
       showToaster('errors.not_allowed')
+      break
+
+    case 'invalid_key':
+      showToaster('errors.invalid_key')
+      break
+
+    case 'invalid_state':
+      showToaster('errors.invalid_state')
+      break
+
+    case 'invalid_city':
+      showToaster('errors.invalid_city')
+      break
+
+    case 'invalid_postal_code':
+      showToaster('errors.invalid_postal_code')
+      break
+
+    case 'invalid_format':
+      showToaster('errors.invalid_format')
+      break
+
+    case 'api_error':
+      showToaster('errors.api_error')
+      break
+
+    case 'feature_not_enabled':
+      showToaster('errors.feature_not_enabled')
+      break
+
+    case 'request_limit_met':
+      showToaster('errors.request_limit_met')
+      break
+
+    case 'address_incomplete':
+      showToaster('errors.address_incomplete')
+      break
+
+    case 'invalid_address':
+      showToaster('errors.invalid_address')
       break
 
     case 'Email could not be sent to this email address.':

@@ -35,6 +35,9 @@ export const useModalStore = (useWindow = false) => {
         }
 
         this.title = payload.title
+        if (payload.content) {
+          this.content = payload.content
+        }
 
         if (payload.data) {
           this.data = payload.data

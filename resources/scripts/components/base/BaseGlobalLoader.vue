@@ -34,8 +34,7 @@
         ><i></i><i></i> <i></i><i></i><i></i> <i></i><i></i><i></i> <i></i
         ><i></i><i></i> <i></i><i></i><i></i> <i></i><i></i><i></i>
       </div>
-      <img
-        src="/img/crater-logo.png"
+      <MainLogo
         class="
           absolute
           block
@@ -54,14 +53,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    showBgOverlay: {
-      default: false,
-      type: Boolean,
-    },
+<script setup>
+import MainLogo from '@/scripts/components/icons/MainLogo.vue'
+
+const props = defineProps({
+  showBgOverlay: {
+    default: false,
+    type: Boolean,
   },
+})
+
+function getCraterLogo() {
+  const imgUrl = new URL('/img/crater-logo.png', import.meta.url)
+  return imgUrl
 }
 </script>
 
@@ -165,7 +169,7 @@ export default {
   position: absolute;
 }
 .pufs > i:after {
-  content: url('data:image/svg+xml; utf8, <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.6875 0.6875C1.75403 0.6875 0.1875 2.25403 0.1875 4.1875C0.1875 6.12097 1.75403 7.6875 3.6875 7.6875C5.62097 7.6875 7.1875 6.12097 7.1875 4.1875C7.1875 2.25403 5.62097 0.6875 3.6875 0.6875Z" fill="%235851D8"/></svg>');
+  content: url('data:image/svg+xml; utf8, <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.6875 0.6875C1.75403 0.6875 0.1875 2.25403 0.1875 4.1875C0.1875 6.12097 1.75403 7.6875 3.6875 7.6875C5.62097 7.6875 7.1875 6.12097 7.1875 4.1875C7.1875 2.25403 5.62097 0.6875 3.6875 0.6875Z" fill="%239EA9C4"/></svg>');
   height: 7px;
   width: 7px;
   position: relative;
@@ -513,7 +517,7 @@ export default {
   position: absolute;
 }
 .particles > i:after {
-  content: url('data:image/svg+xml; utf8, <svg width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.1875 0.6875C0.635081 0.6875 0.1875 1.13508 0.1875 1.6875C0.1875 2.23992 0.635081 2.6875 1.1875 2.6875C1.73992 2.6875 2.1875 2.23992 2.1875 1.6875C2.1875 1.13508 1.73992 0.6875 1.1875 0.6875Z" fill="%235851D8"/></svg>');
+  content: url('data:image/svg+xml; utf8, <svg width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.1875 0.6875C0.635081 0.6875 0.1875 1.13508 0.1875 1.6875C0.1875 2.23992 0.635081 2.6875 1.1875 2.6875C1.73992 2.6875 2.1875 2.23992 2.1875 1.6875C2.1875 1.13508 1.73992 0.6875 1.1875 0.6875Z" fill="%239EA9C4"/></svg>');
   height: 7px;
   width: 7px;
   position: relative;

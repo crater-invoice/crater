@@ -22,6 +22,7 @@ class PaymentMethodsController extends Controller
         $limit = $request->has('limit') ? $request->limit : 5;
 
         $paymentMethods = PaymentMethod::applyFilters($request->all())
+            ->where('type', PaymentMethod::TYPE_GENERAL)
             ->whereCompany()
             ->latest()
             ->paginateData($limit);
@@ -68,7 +69,7 @@ class PaymentMethodsController extends Controller
     {
         $this->authorize('update', $paymentMethod);
 
-        $paymentMethod->update($request->validated());
+        $paymentMethod->update($request->getPaymentMethodPayload());
 
         return new PaymentMethodResource($paymentMethod);
     }
@@ -83,10 +84,12 @@ class PaymentMethodsController extends Controller
     {
         $this->authorize('delete', $paymentMethod);
 
-        $payments = $paymentMethod->payments;
-
-        if ($payments->count() > 0) {
+        if ($paymentMethod->payments()->exists()) {
             return respondJson('payments_attached', 'Payments Attached.');
+        }
+
+        if ($paymentMethod->expenses()->exists()) {
+            return respondJson('expenses_attached', 'Expenses Attached.');
         }
 
         $paymentMethod->delete();

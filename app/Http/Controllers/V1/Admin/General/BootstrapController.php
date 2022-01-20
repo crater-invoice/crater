@@ -8,6 +8,8 @@ use Crater\Http\Resources\UserResource;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
+use Crater\Models\Module;
+use Crater\Models\Setting;
 use Crater\Traits\GeneratesMenuTrait;
 use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
@@ -47,6 +49,8 @@ class BootstrapController extends Controller
 
         BouncerFacade::refreshFor($current_user);
 
+        $global_settings = Setting::getSettings(['api_token', 'admin_portal_theme']);
+
         return response()->json([
             'current_user' => new UserResource($current_user),
             'current_user_settings' => $current_user_settings,
@@ -56,8 +60,10 @@ class BootstrapController extends Controller
             'current_company_settings' => $current_company_settings,
             'current_company_currency' => $current_company_currency,
             'config' => config('crater'),
+            'global_settings' => $global_settings,
             'main_menu' => $main_menu,
             'setting_menu' => $setting_menu,
+            'modules' => Module::where('enabled', true)->pluck('name'),
         ]);
     }
 }

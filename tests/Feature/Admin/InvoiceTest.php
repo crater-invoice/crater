@@ -286,3 +286,176 @@ test('create invoice with negative tax', function () {
         'tax_type_id' => $invoice['taxes'][0]['tax_type_id']
     ]);
 });
+
+test('create invoice with tax per item', function () {
+    $invoice = Invoice::factory()
+        ->raw([
+                'tax_per_item' => 'YES',
+                'items' => [
+                    InvoiceItem::factory()->raw([
+                        'taxes' => [Tax::factory()->raw()],
+                    ]),
+                    InvoiceItem::factory()->raw([
+                        'taxes' => [Tax::factory()->raw()],
+                    ]),
+                ],
+            ]);
+
+    $response = postJson('api/v1/invoices', $invoice);
+
+    $response->assertOk();
+
+    $this->assertDatabaseHas('invoices', [
+        'invoice_number' => $invoice['invoice_number'],
+        'sub_total' => $invoice['sub_total'],
+        'total' => $invoice['total'],
+        'tax' => $invoice['tax'],
+        'discount' => $invoice['discount'],
+        'customer_id' => $invoice['customer_id'],
+    ]);
+
+    $this->assertDatabaseHas('invoice_items', [
+        'name' => $invoice['items'][0]['name'],
+    ]);
+
+    $this->assertDatabaseHas('taxes', [
+        'tax_type_id' => $invoice['items'][0]['taxes'][0]['tax_type_id']
+    ]);
+});
+
+test('create invoice with EUR currency', function () {
+    $invoice = Invoice::factory()
+        ->raw([
+            'discount_type' => 'fixed',
+            'discount_val' => 20,
+            'sub_total' => 100,
+            'total' => 84,
+            'tax' => 4,
+            'due_amount' => 84,
+            'exchange_rate' => 86.403538,
+            'base_discount_val' => 1728.07,
+            'base_sub_total' => 8640.35,
+            'base_total' => 7257.90,
+            'base_tax' => 345.61,
+            'base_due_amount' => 7257.90,
+            'taxes' => [Tax::factory()->raw([
+                'amount' => 4,
+                'percent' => 5,
+                'base_amount' => 345.61,
+            ])],
+            'items' => [InvoiceItem::factory()->raw([
+                'discount_type' => 'fixed',
+                'price' => 100,
+                'quantity' => 1,
+                'discount' => 0,
+                'discount_val' => 0,
+                'tax' => 0,
+                'total' => 100,
+                'base_price' => 8640.35,
+                'exchange_rate' => 86.403538,
+                'base_discount_val' => 0,
+                'base_tax' => 0,
+                'base_total' => 8640.35,
+            ])],
+        ]);
+
+    $response = postJson('api/v1/invoices', $invoice)->assertOk();
+
+    $this->assertDatabaseHas('invoices', [
+        'template_name' => $invoice['template_name'],
+        'invoice_number' => $invoice['invoice_number'],
+        'sub_total' => $invoice['sub_total'],
+        'discount' => $invoice['discount'],
+        'customer_id' => $invoice['customer_id'],
+        'total' => $invoice['total'],
+        'tax' => $invoice['tax'],
+    ]);
+
+    $this->assertDatabaseHas('taxes', [
+        'tax_type_id' => $invoice['taxes'][0]['tax_type_id'],
+        'amount' => $invoice['tax']
+    ]);
+
+    $this->assertDatabaseHas('invoice_items', [
+        'item_id' => $invoice['items'][0]['item_id'],
+        'name' => $invoice['items'][0]['name']
+    ]);
+});
+
+test('update invoice with EUR currency', function () {
+    $invoice = Invoice::factory()
+        ->hasItems(1)
+        ->hasTaxes(1)
+        ->create([
+        'invoice_date' => '1988-07-18',
+        'due_date' => '1988-08-18',
+    ]);
+
+    $invoice2 = Invoice::factory()
+        ->raw([
+            'id' => $invoice['id'],
+            'discount_type' => 'fixed',
+            'discount_val' => 20,
+            'sub_total' => 100,
+            'total' => 84,
+            'tax' => 4,
+            'due_amount' => 84,
+            'exchange_rate' => 86.403538,
+            'base_discount_val' => 1728.07,
+            'base_sub_total' => 8640.35,
+            'base_total' => 7257.897192,
+            'base_tax' => 345.614152,
+            'base_due_amount' => 7257.897192,
+            'taxes' => [Tax::factory()->raw([
+                'tax_type_id' => $invoice->taxes[0]->tax_type_id,
+                'amount' => 4,
+                'percent' => 5,
+                'base_amount' => 345.614152,
+            ])],
+            'items' => [InvoiceItem::factory()->raw([
+                'invoice_id' => $invoice->id,
+                'discount_type' => 'fixed',
+                'price' => 100,
+                'quantity' => 1,
+                'discount' => 0,
+                'discount_val' => 0,
+                'tax' => 0,
+                'total' => 100,
+                'base_price' => 8640.3538,
+                'exchange_rate' => 86.403538,
+                'base_discount_val' => 0,
+                'base_tax' => 0,
+                'base_total' => 8640.3538,
+            ])],
+        ]);
+
+    putJson('api/v1/invoices/'.$invoice->id, $invoice2)->assertOk();
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice['id'],
+        'invoice_number' => $invoice2['invoice_number'],
+        'sub_total' => $invoice2['sub_total'],
+        'total' => $invoice2['total'],
+        'tax' => $invoice2['tax'],
+        'discount' => $invoice2['discount'],
+        'customer_id' => $invoice2['customer_id'],
+        'template_name' => $invoice2['template_name'],
+        'exchange_rate' => $invoice2['exchange_rate'],
+        'base_total' => $invoice2['base_total'],
+    ]);
+
+    $this->assertDatabaseHas('invoice_items', [
+        'invoice_id' => $invoice2['items'][0]['invoice_id'],
+        'item_id' => $invoice2['items'][0]['item_id'],
+        'name' => $invoice2['items'][0]['name'],
+        'exchange_rate' => $invoice2['items'][0]['exchange_rate'],
+        'base_price' => $invoice2['items'][0]['base_price'],
+        'base_total' => $invoice2['items'][0]['base_total'],
+    ]);
+
+    $this->assertDatabaseHas('taxes', [
+        'amount' => $invoice2['taxes'][0]['amount'],
+        'name' => $invoice2['taxes'][0]['name'],
+        'base_amount' => $invoice2['taxes'][0]['base_amount'],
+    ]);
+});

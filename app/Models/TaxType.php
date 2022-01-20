@@ -9,19 +9,17 @@ class TaxType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'percent',
-        'company_id',
-        'compound_tax',
-        'collective_tax',
-        'description',
+    protected $guarded = [
+        'id',
     ];
 
     protected $casts = [
         'percent' => 'float',
         'compound_tax' => 'boolean'
     ];
+
+    public const TYPE_GENERAL = 'GENERAL';
+    public const TYPE_MODULE = 'MODULE';
 
     public function taxes()
     {

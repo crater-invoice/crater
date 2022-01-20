@@ -16,7 +16,7 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::where('role', 'super admin')->first();
+        $user = User::whereIs('super admin')->first();
 
         $user->setSettings(['language' => 'en']);
 

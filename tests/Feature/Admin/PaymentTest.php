@@ -159,3 +159,83 @@ test('delete payment', function () {
         'success' => true,
     ]);
 });
+
+test('create payment without invoice', function () {
+    $payment = Payment::factory()->raw([
+        'payment_number' => "PAY-000001",
+        'exchange_rate' => 1
+    ]);
+
+    postJson('api/v1/payments', $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => $payment['customer_id'],
+        'amount' => $payment['amount'],
+        'company_id' => $payment['company_id'],
+    ]);
+});
+
+test('create payment with invoice', function () {
+    $payment = Payment::factory()->raw([
+        'payment_number' => "PAY-000001",
+    ]);
+
+    $invoice = Invoice::factory()->create();
+
+    $payment = Payment::factory()->raw([
+        'invoice_id' => $invoice->id,
+        'amount' => $invoice->due_amount,
+        'exchange_rate' => 1
+    ]);
+
+    postJson('api/v1/payments', $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => $payment['customer_id'],
+        'invoice_id' => $payment['invoice_id'],
+        'amount' => $payment['amount'],
+        'company_id' => $payment['company_id'],
+    ]);
+});
+
+test('create payment with partially paid', function () {
+    $invoice = Invoice::factory()->create([
+        'sub_total' => 100,
+        'total' => 100,
+        'due_amount' => 100,
+        'exchange_rate' => 1,
+        'base_discount_val' => 100,
+        'base_sub_total' => 100,
+        'base_total' => 100,
+        'base_tax' => 100,
+        'base_due_amount' => 100,
+    ]);
+
+    $payment = Payment::factory()->raw([
+        'invoice_id' => $invoice->id,
+        'customer_id' => $invoice->customer_id,
+        'exchange_rate' => $invoice->exchange_rate,
+        'amount' => 100,
+        'currency_id' => $invoice->currency_id
+    ]);
+
+    $response = postJson("api/v1/payments", $payment)->assertOk();
+
+    $this->assertDatabaseHas('payments', [
+        'payment_number' => $payment['payment_number'],
+        'customer_id' => (string)$payment['customer_id'],
+        'amount' => (string)$payment['amount'],
+    ]);
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice['id'],
+        'invoice_number' => $response['data']['invoice']['invoice_number'],
+        'total' => $response['data']['invoice']['total'],
+        'customer_id' => $response['data']['invoice']['customer_id'],
+        'exchange_rate' => $response['data']['invoice']['exchange_rate'],
+        'base_total' => $response['data']['invoice']['base_total'],
+        'paid_status' => $response['data']['invoice']['paid_status'],
+    ]);
+});

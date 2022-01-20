@@ -18,7 +18,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { Money3Component } from 'v-money3'
-import { useCompanyStore } from '@/scripts/stores/company'
+import { useCompanyStore } from '@/scripts/admin/stores/company'
 
 let money3 = Money3Component
 

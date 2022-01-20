@@ -36,7 +36,7 @@
         }
 
         .header-logo {
-            height: 50px;
+
             text-transform: capitalize;
             color: #817AE3;
             padding-top: 0px;
@@ -44,8 +44,8 @@
 
         .company-address-container {
             width: 50%;
-            padding-left: 80px;
             margin-bottom: 2px;
+            padding-right: 60px;
         }
 
         .company-address {
@@ -187,11 +187,13 @@
 
 
         .total-display-table {
+             border-top: none;
             page-break-inside: avoid;
             page-break-before: auto;
             page-break-after: auto;
-            margin-left: 500px;
             margin-top: 20px;
+            float: right;
+            width: auto;
         }
 
         .total-table-attribute-label {
@@ -311,7 +313,7 @@
             <tr>
                 <td width="50%" class="header-section-left">
                     @if($logo)
-                    <img class="header-logo" src="{{ $logo }}" alt="Company Logo">
+                    <img class="header-logo" style="height: 50px;" src="{{ $logo }}" alt="Company Logo">
                     @else
                     <h1 class="header-logo"> {{$invoice->customer->company->name}} </h1>
                     @endif

@@ -50,7 +50,7 @@ class CompanyController extends Controller
 
         $this->authorize('manage company', $company);
 
-        $company->update($request->only('name'));
+        $company->update($request->getCompanyPayload());
 
         $company->address()->updateOrCreate(['company_id' => $company->id], $request->address);
 

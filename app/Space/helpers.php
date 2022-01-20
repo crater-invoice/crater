@@ -3,7 +3,56 @@
 use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
 use Crater\Models\CustomField;
+use Crater\Models\Setting;
 use Illuminate\Support\Str;
+
+/**
+ * Get current customer theme
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_customer_portal_theme($company_id)
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return CompanySetting::getSetting('customer_portal_theme', $company_id);
+    }
+}
+
+
+/**
+ * Get current customer logo
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_customer_logo($company_id)
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return CompanySetting::getSetting('customer_portal_logo', $company_id);
+    }
+}
+
+
+/**
+ * Get current admin theme
+ *
+ * @return string
+ */
+function get_admin_portal_theme()
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        $setting = Setting::getSetting('admin_portal_theme');
+
+        if ($setting) {
+            return $setting;
+        }
+
+        return  'crater';
+    }
+
+    return 'crater';
+}
 
 /**
  * Set Active Path

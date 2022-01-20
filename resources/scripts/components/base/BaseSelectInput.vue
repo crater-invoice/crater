@@ -12,7 +12,7 @@
   >
     <ListboxLabel
       v-if="label"
-      class="block text-sm not-italic font-medium text-primary-800 mb-0.5"
+      class="block text-sm not-italic font-medium text-gray-800 mb-0.5"
     >
       {{ label }}
     </ListboxLabel>
@@ -33,7 +33,8 @@
           shadow-sm
           cursor-default
           focus:outline-none
-          focus:ring-1 focus:ring-primary-500
+          focus:ring-1
+          focus:ring-primary-500
           focus:border-primary-500
           sm:text-sm
         "
@@ -120,7 +121,6 @@
                 ]"
               >
                 <BaseIcon name="CheckIcon" aria-hidden="true" />
-                />
               </span>
             </li>
           </ListboxOption>

@@ -10,7 +10,7 @@ const props = defineProps({
 
 const formLayout = computed(() => {
   if (props.layout === 'two-column') {
-    return 'grid gap-y-6 gap-x-4 md:grid-cols-2'
+    return 'grid gap-y-6 gap-x-4 grid-cols-1 md:grid-cols-2'
   }
 
   return 'grid gap-y-6 gap-x-4 grid-cols-1'

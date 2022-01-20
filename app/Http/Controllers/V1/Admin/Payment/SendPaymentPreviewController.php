@@ -21,6 +21,9 @@ class SendPaymentPreviewController extends Controller
 
         $markdown = new Markdown(view(), config('mail.markdown'));
 
-        return $markdown->render('emails.send.payment', ['data' => $payment->sendPaymentData($request->all())]);
+        $data = $payment->sendPaymentData($request->all());
+        $data['url'] = $payment->paymentPdfUrl;
+
+        return $markdown->render('emails.send.payment', ['data' => $data]);
     }
 }

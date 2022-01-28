@@ -43,6 +43,21 @@
         window.customer_logo = "/storage/{{$customer_logo}}"
 
         @endif
+        @if(isset($login_page_logo))
+
+        window.login_page_logo = "/storage/{{$login_page_logo}}"
+
+        @endif
+        @if(isset($login_page_heading))
+
+        window.login_page_heading = "{{$login_page_heading}}"
+
+        @endif
+        @if(isset($login_page_description))
+
+        window.login_page_description = "{{$login_page_description}}"
+
+        @endif
         window.Crater.start()
     </script>
 </body>

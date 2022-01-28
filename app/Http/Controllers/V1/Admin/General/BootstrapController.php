@@ -49,7 +49,14 @@ class BootstrapController extends Controller
 
         BouncerFacade::refreshFor($current_user);
 
-        $global_settings = Setting::getSettings(['api_token', 'admin_portal_theme']);
+        $global_settings = Setting::getSettings([
+            'api_token',
+            'admin_portal_theme', 
+            'admin_portal_logo', 
+            'login_page_logo',
+            'login_page_heading',
+            'login_page_description'
+        ]);
 
         return response()->json([
             'current_user' => new UserResource($current_user),

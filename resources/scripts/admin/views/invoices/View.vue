@@ -40,6 +40,10 @@ const isSendingEmail = ref(false)
 const isRequestOnGoing = ref(false)
 const isSearching = ref(false)
 const isLoading = ref(false)
+const invoiceList = ref(null)
+const page_no = ref(1)
+const last_page_no = ref(1)
+const isLoadMore = ref(false)
 
 const searchData = reactive({
   orderBy: null,
@@ -118,14 +122,38 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadInvoices() {
-  isLoading.value = true
-  await invoiceStore.fetchInvoices()
+async function loadInvoices(params, isScroll=false) {
+  if(isScroll) {
+    isLoadMore.value = true
+  }
+  else {
+    isLoading.value = true
+  }
+  let invoice = await invoiceStore.fetchInvoices(params)
   isLoading.value = false
+  isLoadMore.value = false
+  let invoice_list = invoiceList.value ? invoiceList.value : []
+  
+  for (const key in invoice.data.data) {
+    invoice_list.push(invoice.data.data[key])
+  }
+  invoiceList.value = invoice_list
 
-  setTimeout(() => {
-    scrollToInvoice()
-  }, 500)
+  page_no.value = params ? params.page : 1
+  last_page_no.value = invoice.data.meta.last_page
+  let isInvoiceExist = invoiceList.value.find(inv=>inv.id==route.params.id)
+
+  if(isScroll==false && !isInvoiceExist && page_no.value<last_page_no.value) {
+    loadInvoices({page: ++page_no.value})
+  }
+
+  if(isInvoiceExist) {
+    setTimeout(() => {
+      if(isScroll==false) {
+        scrollToInvoice()
+      }
+    }, 500)
+  }
 }
 
 function scrollToInvoice() {
@@ -133,7 +161,19 @@ function scrollToInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
+    addScrollListner()
   }
+}
+
+function addScrollListner() {
+  let el = document.getElementById("scroll_load")
+  el.addEventListener('scroll', (ev) => {
+    if(ev.target.scrollTop>0 && (ev.target.scrollTop == ev.target.scrollHeight - ev.target.clientHeight)) {
+      if(page_no.value<last_page_no.value) {
+        loadInvoices({page: ++page_no.value}, true)
+      }
+    }
+  })
 }
 
 async function loadInvoice() {
@@ -359,7 +399,7 @@ onSearched = debounce(onSearched, 500)
       </div>
 
       <div
-        v-if="invoiceStore && invoiceStore.invoices"
+        v-if="invoiceStore && invoiceList"
         class="
           h-full
           pb-32
@@ -367,8 +407,10 @@ onSearched = debounce(onSearched, 500)
           border-l border-gray-200 border-solid
           base-scroll
         "
+        id="scroll_load"
       >
-        <div v-for="(invoice, index) in invoiceStore.invoices" :key="index">
+      
+        <div v-for="(invoice, index) in invoiceList" :key="index">
           <router-link
             v-if="invoice && !isLoading"
             :id="'invoice-' + invoice.id"
@@ -451,7 +493,7 @@ onSearched = debounce(onSearched, 500)
         </div>
         <div class="flex justify-center p-4 items-center">
           <LoadingIcon
-            v-if="isLoading"
+            v-if="isLoading || isLoadMore"
             class="h-6 m-1 animate-spin text-primary-400"
           />
         </div>

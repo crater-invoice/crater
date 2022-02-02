@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>@lang('pdf_expense_report_label')</title>
     <style type="text/css">
@@ -11,7 +12,7 @@
             border-collapse: collapse;
         }
 
-        .sub-container{
+        .sub-container {
             padding: 0px 20px;
         }
 
@@ -132,8 +133,14 @@
             line-height: 21px;
             color: #5851D8;
         }
+
     </style>
+
+    @if (App::isLocale('th'))
+        @include('app.pdf.locale.th')
+    @endif
 </head>
+
 <body>
     <div class="sub-container">
         <table class="report-header">
@@ -190,4 +197,5 @@
         </tr>
     </table>
 </body>
+
 </html>

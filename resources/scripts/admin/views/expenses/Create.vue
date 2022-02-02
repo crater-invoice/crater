@@ -419,7 +419,7 @@ async function searchCategory(search) {
     let checkCategoryExist = res.data.data.find((c) => c.id==categoryStore.editCategory.id)
     if(!checkCategoryExist) {
       let edit_category = Object.assign({}, categoryStore.editCategory)
-      res.data.data.push(edit_category)
+      res.data.data.unshift(edit_category)
     }
   }
   return res.data.data
@@ -431,7 +431,7 @@ async function searchCustomer(search) {
     let checkCustomerExist = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
     if(!checkCustomerExist) {
       let edit_customer = Object.assign({}, customerStore.editCustomer)
-      res.data.data.push(edit_customer)
+      res.data.data.unshift(edit_customer)
     }
   }
   return res.data.data

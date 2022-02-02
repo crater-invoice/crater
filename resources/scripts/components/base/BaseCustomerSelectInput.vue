@@ -86,7 +86,7 @@ async function searchCustomers(search) {
     let checkCustomerExist = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
     if(!checkCustomerExist) {
       let edit_customer = Object.assign({}, customerStore.editCustomer)
-      res.data.data.push(edit_customer)
+      res.data.data.unshift(edit_customer)
     }
   }
 

@@ -10,6 +10,7 @@ import StrikethroughIcon from './StrikethroughIcon.vue'
 import UndoIcon from './UndoIcon.vue'
 import RedoIcon from './RedoIcon.vue'
 import CodeBlockIcon from './CodeBlockIcon.vue'
+import MenuCenterIcon from './MenuCenterIcon.vue'
 
 export {
   UnderlineIcon,
@@ -23,5 +24,6 @@ export {
   StrikethroughIcon,
   UndoIcon,
   RedoIcon,
-  CodeBlockIcon
+  CodeBlockIcon,
+  MenuCenterIcon
 }

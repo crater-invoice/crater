@@ -71,6 +71,7 @@
             required
           >
             <BaseMultiselect
+              v-if="!isFetchingInitialData"
               v-model="expenseStore.currentExpense.expense_category_id"
               :content-loading="isFetchingInitialData"
               value-prop="id"
@@ -81,6 +82,10 @@
               resolve-on-load
               :delay="500"
               searchable
+              :initial-search="
+                expenseStore.currentExpense.expense_category &&
+                expenseStore.currentExpense.expense_category.name
+              "
               :invalid="v$.currentExpense.expense_category_id.$error"
               :placeholder="$t('expenses.categories.select_a_category')"
               @input="v$.currentExpense.expense_category_id.$touch()"
@@ -174,12 +179,17 @@
             :label="$t('expenses.customer')"
           >
             <BaseMultiselect
+              v-if="!isFetchingInitialData"
               v-model="expenseStore.currentExpense.customer_id"
               :content-loading="isFetchingInitialData"
               value-prop="id"
               label="name"
               track-by="id"
               :options="searchCustomer"
+              :initial-search="
+                expenseStore.currentExpense.customer &&
+                expenseStore.currentExpense.customer.name
+              "
               :filter-results="false"
               resolve-on-load
               :delay="500"

@@ -2,11 +2,10 @@
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-9 xl:gap-8">
     <!-- Amount Due -->
     <DashboardStatsItem
+      v-if="userStore.hasAbilities(abilities.VIEW_INVOICE)"
       :icon-component="DollarIcon"
       :loading="!dashboardStore.isDashboardDataLoaded"
-      :route="
-        userStore.hasAbilities(abilities.VIEW_INVOICE) ? `/admin/invoices` : ''
-      "
+      route="/admin/invoices"
       :large="true"
       :label="$t('dashboard.cards.due_amount')"
     >
@@ -18,13 +17,10 @@
 
     <!-- Customers -->
     <DashboardStatsItem
+      v-if="userStore.hasAbilities(abilities.VIEW_CUSTOMER)"
       :icon-component="CustomerIcon"
       :loading="!dashboardStore.isDashboardDataLoaded"
-      :route="
-        userStore.hasAbilities(abilities.VIEW_CUSTOMER)
-          ? `/admin/customers`
-          : ''
-      "
+      route="/admin/customers"
       :label="$t('dashboard.cards.customers')"
     >
       {{ dashboardStore.stats.totalCustomerCount }}
@@ -32,11 +28,10 @@
 
     <!-- Invoices -->
     <DashboardStatsItem
+      v-if="userStore.hasAbilities(abilities.VIEW_INVOICE)"
       :icon-component="InvoiceIcon"
       :loading="!dashboardStore.isDashboardDataLoaded"
-      :route="
-        userStore.hasAbilities(abilities.VIEW_INVOICE) ? `/admin/invoices` : ''
-      "
+      route="/admin/invoices"
       :label="$t('dashboard.cards.invoices')"
     >
       {{ dashboardStore.stats.totalInvoiceCount }}
@@ -44,13 +39,10 @@
 
     <!-- Estimates -->
     <DashboardStatsItem
+      v-if="userStore.hasAbilities(abilities.VIEW_ESTIMATE)"
       :icon-component="EstimateIcon"
       :loading="!dashboardStore.isDashboardDataLoaded"
-      :route="
-        userStore.hasAbilities(abilities.VIEW_ESTIMATE)
-          ? `/admin/estimates`
-          : ''
-      "
+      route="/admin/estimates"
       :label="$t('dashboard.cards.estimates')"
     >
       {{ dashboardStore.stats.totalEstimateCount }}

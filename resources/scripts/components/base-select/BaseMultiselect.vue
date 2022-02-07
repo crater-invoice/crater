@@ -127,7 +127,7 @@
 
     <!-- Options -->
     <div :class="classList.dropdown" tabindex="-1">
-      <div class="w-full overflow-y-auto">
+      <div class="w-full overflow-y-auto h-20">
         <slot name="beforelist" :options="fo"></slot>
 
         <ul :class="classList.options">

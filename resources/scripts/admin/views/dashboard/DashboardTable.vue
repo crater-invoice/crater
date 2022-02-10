@@ -2,7 +2,10 @@
   <div>
     <div class="grid grid-cols-1 gap-6 mt-10 xl:grid-cols-2">
       <!-- Due Invoices -->
-      <div class="due-invoices">
+      <div
+        v-if="userStore.hasAbilities(abilities.VIEW_INVOICE)"
+        class="due-invoices"
+      >
         <div class="relative z-10 flex items-center justify-between mb-3">
           <h6 class="mb-0 text-xl font-semibold leading-normal">
             {{ $t('dashboard.recent_invoices_card.title') }}
@@ -49,7 +52,10 @@
       </div>
 
       <!-- Recent Estimates -->
-      <div class="recent-estimates">
+      <div
+        v-if="userStore.hasAbilities(abilities.VIEW_ESTIMATE)"
+        class="recent-estimates"
+      >
         <div class="relative z-10 flex items-center justify-between mb-3">
           <h6 class="mb-0 text-xl font-semibold leading-normal">
             {{ $t('dashboard.recent_estimate_card.title') }}

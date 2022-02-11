@@ -52,7 +52,7 @@ Route::post('auth/logout', function () {
 
 Route::post('/{company:slug}/customer/login', CustomerLoginController::class);
 
-Route::get('/{company:slug}/customer/logout', function () {
+Route::post('/{company:slug}/customer/logout', function () {
     Auth::guard('customer')->logout();
 });
 

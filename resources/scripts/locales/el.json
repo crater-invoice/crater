@@ -1146,7 +1146,8 @@
       "payment_mode_added": "Προστέθηκε Λειτουργία Πληρωμής",
       "payment_mode_updated": "Προστέθηκε Λειτουργία Πληρωμής",
       "payment_mode_confirm_delete": "Δεν θα μπορείτε να ανακτήσετε αυτό το Προσαρμοσμένο Πεδίο",
-      "already_in_use": "Το όνομα είναι ήδη σε χρήση",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Η πληρωμή εστάλη επιτυχώς"
     },
     "expense_category": {

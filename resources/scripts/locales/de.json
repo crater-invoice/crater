@@ -1146,7 +1146,8 @@
       "payment_mode_added": "Zahlungsart hinzugefügt",
       "payment_mode_updated": "Zahlungsart aktualisiert",
       "payment_mode_confirm_delete": "Sie werden diese Zahlungsart nicht wiederherstellen können",
-      "already_in_use": "Zahlungsart wird bereits verwendet",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Zahlungsart erfolgreich gelöscht"
     },
     "expense_category": {

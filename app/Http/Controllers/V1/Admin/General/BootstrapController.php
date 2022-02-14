@@ -51,8 +51,8 @@ class BootstrapController extends Controller
 
         $global_settings = Setting::getSettings([
             'api_token',
-            'admin_portal_theme', 
-            'admin_portal_logo', 
+            'admin_portal_theme',
+            'admin_portal_logo',
             'login_page_logo',
             'login_page_heading',
             'login_page_description'

@@ -416,8 +416,8 @@ function onCurrencyChange(v) {
 async function searchCategory(search) {
   let res = await categoryStore.fetchCategories({ search })
   if(res.data.data.length>0 && categoryStore.editCategory) {
-    let checkCategoryExist = res.data.data.find((c) => c.id==categoryStore.editCategory.id)
-    if(!checkCategoryExist) {
+    let categoryFound = res.data.data.find((c) => c.id==categoryStore.editCategory.id)
+    if(!categoryFound) {
       let edit_category = Object.assign({}, categoryStore.editCategory)
       res.data.data.unshift(edit_category)
     }
@@ -428,8 +428,8 @@ async function searchCategory(search) {
 async function searchCustomer(search) {
   let res = await customerStore.fetchCustomers({ search })
   if(res.data.data.length>0 && customerStore.editCustomer) {
-    let checkCustomerExist = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
-    if(!checkCustomerExist) {
+    let customerFound = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
+    if(!customerFound) {
       let edit_customer = Object.assign({}, customerStore.editCustomer)
       res.data.data.unshift(edit_customer)
     }
@@ -463,7 +463,7 @@ async function loadData() {
         customerStore.editCustomer = expenseData.data.data.customer
       }
     }
-    
+
   } else if (route.query.customer) {
     expenseStore.currentExpense.customer_id = route.query.customer
   }

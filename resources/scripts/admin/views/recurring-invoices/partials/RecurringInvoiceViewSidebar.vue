@@ -37,7 +37,7 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadRecurringInvoices(params, isScroll = false) {
+async function loadRecurringInvoices(params, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
@@ -52,21 +52,21 @@ async function loadRecurringInvoices(params, isScroll = false) {
 
   currentPageNumber.value = params ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
-  let isInvoiceExist = invoiceList.value.find(
+  let invoiceFound = invoiceList.value.find(
     (inv) => inv.id == route.params.id
   )
 
   if (
-    isScroll == false &&
-    !isInvoiceExist &&
+    fromScrollListener == false &&
+    !invoiceFound &&
     currentPageNumber.value < lastPageNumber.value
   ) {
     loadRecurringInvoices({ page: ++currentPageNumber.value })
   }
 
-  if (isInvoiceExist) {
+  if (invoiceFound) {
     setTimeout(() => {
-      if (isScroll == false) {
+      if (fromScrollListener == false) {
         scrollToRecurringInvoice()
       }
     }, 500)
@@ -78,11 +78,11 @@ function scrollToRecurringInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListner()
+    addScrollListener()
   }
 }
 
-function addScrollListner() {
+function addScrollListener() {
   invoiceListSection.value.addEventListener('scroll', (ev) => {
     if (
       ev.target.scrollTop > 0 &&

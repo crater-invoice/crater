@@ -361,7 +361,7 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadEstimates(params, isScroll = false) {
+async function loadEstimates(params, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
@@ -376,21 +376,21 @@ async function loadEstimates(params, isScroll = false) {
 
   currentPageNumber.value = params ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
-  let isEstimateExist = estimateList.value.find(
+  let estimateFound = estimateList.value.find(
     (est) => est.id == route.params.id
   )
 
   if (
-    isScroll == false &&
-    !isEstimateExist &&
+    fromScrollListener == false &&
+    !estimateFound &&
     currentPageNumber.value < lastPageNumber.value
   ) {
     loadEstimates({ page: ++currentPageNumber.value })
   }
 
-  if (isEstimateExist) {
+  if (estimateFound) {
     setTimeout(() => {
-      if (isScroll == false) {
+      if (fromScrollListener == false) {
         scrollToEstimate()
       }
     }, 500)
@@ -402,11 +402,11 @@ function scrollToEstimate() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListner()
+    addScrollListener()
   }
 }
 
-function addScrollListner() {
+function addScrollListener() {
   estimateListSection.value.addEventListener('scroll', (ev) => {
     if (
       ev.target.scrollTop > 0 &&

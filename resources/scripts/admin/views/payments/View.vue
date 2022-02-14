@@ -337,7 +337,7 @@ function hasAbilities() {
 
 const dialogStore = useDialogStore()
 
-async function loadPayments(params, isScroll = false) {
+async function loadPayments(params, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
@@ -352,21 +352,21 @@ async function loadPayments(params, isScroll = false) {
 
   currentPageNumber.value = params ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
-  let isPaymentExist = paymentList.value.find(
+  let paymentFound = paymentList.value.find(
     (paym) => paym.id == route.params.id
   )
 
   if (
-    isScroll == false &&
-    !isPaymentExist &&
+    fromScrollListener == false &&
+    !paymentFound &&
     currentPageNumber.value < lastPageNumber.value
   ) {
     loadPayments({ page: ++currentPageNumber.value })
   }
 
-  if (isPaymentExist) {
+  if (paymentFound) {
     setTimeout(() => {
-      if (isScroll == false) {
+      if (fromScrollListener == false) {
         scrollToPayment()
       }
     }, 500)
@@ -392,11 +392,11 @@ function scrollToPayment() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListner()
+    addScrollListener()
   }
 }
 
-function addScrollListner() {
+function addScrollListener() {
   paymentListSection.value.addEventListener('scroll', (ev) => {
     if (
       ev.target.scrollTop > 0 &&

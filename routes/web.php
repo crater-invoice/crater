@@ -42,7 +42,7 @@ Route::get('/modules/scripts/{script}', ScriptController::class);
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::get('auth/logout', function () {
+Route::post('auth/logout', function () {
     Auth::guard('web')->logout();
 });
 
@@ -52,7 +52,7 @@ Route::get('auth/logout', function () {
 
 Route::post('/{company:slug}/customer/login', CustomerLoginController::class);
 
-Route::get('/{company:slug}/customer/logout', function () {
+Route::post('/{company:slug}/customer/logout', function () {
     Auth::guard('customer')->logout();
 });
 

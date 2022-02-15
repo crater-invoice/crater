@@ -222,14 +222,11 @@
             </div>
           </router-link>
         </div>
-        <div
-          v-if="isLoading || isSearching"
-          class="flex justify-center p-4 items-center"
-        >
+        <div v-if="isLoading" class="flex justify-center p-4 items-center">
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!paymentList?.length && !isLoading && !isSearching"
+          v-if="!paymentList?.length && !isLoading"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('payments.no_matching_payments') }}
@@ -279,7 +276,6 @@ let searchData = reactive({
   searchText: null,
 })
 
-let isSearching = ref(false)
 let isLoading = ref(false)
 let isFetching = ref(false)
 
@@ -340,20 +336,42 @@ function hasAbilities() {
 
 const dialogStore = useDialogStore()
 
-async function loadPayments(params, fromScrollListener = false) {
+async function loadPayments(pageNumber, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
 
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.search = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isLoading.value = true
-  let response = await paymentStore.fetchPayments(params)
+  let response = await paymentStore.fetchPayments({
+    page: pageNumber,
+    ...params,
+  })
   isLoading.value = false
 
   paymentList.value = paymentList.value ? paymentList.value : []
-
   paymentList.value = [...paymentList.value, ...response.data.data]
 
-  currentPageNumber.value = params ? params.page : 1
+  currentPageNumber.value = pageNumber ? pageNumber : 1
   lastPageNumber.value = response.data.meta.last_page
   let paymentFound = paymentList.value.find(
     (paym) => paym.id == route.params.id
@@ -362,9 +380,10 @@ async function loadPayments(params, fromScrollListener = false) {
   if (
     fromScrollListener == false &&
     !paymentFound &&
-    currentPageNumber.value < lastPageNumber.value
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
   ) {
-    loadPayments({ page: ++currentPageNumber.value })
+    loadPayments(++currentPageNumber.value)
   }
 
   if (paymentFound) {
@@ -407,45 +426,15 @@ function addScrollListener() {
         ev.target.scrollHeight - 200
     ) {
       if (currentPageNumber.value < lastPageNumber.value) {
-        loadPayments({ page: ++currentPageNumber.value }, true)
+        loadPayments(++currentPageNumber.value, true)
       }
     }
   })
 }
 
 async function onSearch() {
-  let data = {}
-
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    data.search = searchData.searchText
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data.orderBy = searchData.orderBy
-  }
-
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    data.orderByField = searchData.orderByField
-  }
-
-  isSearching.value = true
-  try {
-    let response = await paymentStore.searchPayment(data)
-    isSearching.value = false
-
-    if (response.data.data) {
-      paymentList.value = response.data.data
-    }
-  } catch (error) {
-    isSearching.value = false
-  }
+  paymentList.value = []
+  loadPayments()
 }
 
 function sortData() {

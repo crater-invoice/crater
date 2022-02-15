@@ -109,29 +109,52 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadInvoices(params, fromScrollListener = false) {
+async function loadInvoices(pageNumber, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
 
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.search = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isLoading.value = true
-  let response = await invoiceStore.fetchInvoices(params)
+  let response = await invoiceStore.fetchInvoices({
+    page: pageNumber,
+    ...params,
+  })
   isLoading.value = false
 
   invoiceList.value = invoiceList.value ? invoiceList.value : []
-
   invoiceList.value = [...invoiceList.value, ...response.data.data]
 
-  currentPageNumber.value = params && params.page ? params.page : 1
+  currentPageNumber.value = pageNumber ? pageNumber : 1
   lastPageNumber.value = response.data.meta.last_page
   let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
 
   if (
     fromScrollListener == false &&
     !invoiceFound &&
-    currentPageNumber.value < lastPageNumber.value
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
   ) {
-    loadInvoices({ page: ++currentPageNumber.value })
+    loadInvoices(++currentPageNumber.value)
   }
 
   if (invoiceFound) {
@@ -160,7 +183,7 @@ function addScrollListener() {
         ev.target.scrollHeight - 200
     ) {
       if (currentPageNumber.value < lastPageNumber.value) {
-        loadInvoices({ page: ++currentPageNumber.value }, true)
+        loadInvoices(++currentPageNumber.value, true)
       }
     }
   })
@@ -174,29 +197,8 @@ async function loadInvoice() {
 }
 
 async function onSearched() {
-  let params = {}
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    params.search = searchData.searchText
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    params.orderBy = searchData.orderBy
-  }
-
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    params.orderByField = searchData.orderByField
-  }
-
   invoiceList.value = []
-
-  loadInvoices(params)
+  loadInvoices()
 }
 
 function sortData() {

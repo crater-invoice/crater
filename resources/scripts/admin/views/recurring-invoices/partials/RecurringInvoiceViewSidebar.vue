@@ -12,7 +12,6 @@ const recurringInvoiceStore = useRecurringInvoiceStore()
 
 const { t } = useI18n()
 const route = useRoute()
-const isSearching = ref(false)
 const isLoading = ref(false)
 
 const invoiceList = ref(null)
@@ -37,29 +36,52 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadRecurringInvoices(params, fromScrollListener = false) {
+async function loadRecurringInvoices(pageNumber, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
 
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.search = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isLoading.value = true
-  let response = await recurringInvoiceStore.fetchRecurringInvoices(params)
+  let response = await recurringInvoiceStore.fetchRecurringInvoices({
+    page: pageNumber,
+    ...params,
+  })
   isLoading.value = false
 
   invoiceList.value = invoiceList.value ? invoiceList.value : []
-
   invoiceList.value = [...invoiceList.value, ...response.data.data]
 
-  currentPageNumber.value = params ? params.page : 1
+  currentPageNumber.value = pageNumber ? pageNumber : 1
   lastPageNumber.value = response.data.meta.last_page
   let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
 
   if (
     fromScrollListener == false &&
     !invoiceFound &&
-    currentPageNumber.value < lastPageNumber.value
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
   ) {
-    loadRecurringInvoices({ page: ++currentPageNumber.value })
+    loadRecurringInvoices(++currentPageNumber.value)
   }
 
   if (invoiceFound) {
@@ -88,37 +110,15 @@ function addScrollListener() {
         ev.target.scrollHeight - 200
     ) {
       if (currentPageNumber.value < lastPageNumber.value) {
-        loadRecurringInvoices({ page: ++currentPageNumber.value }, true)
+        loadRecurringInvoices(++currentPageNumber.value, true)
       }
     }
   })
 }
 
 async function onSearched() {
-  let data = ''
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    data += `search=${searchData.searchText}&`
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data += `orderBy=${searchData.orderBy}&`
-  }
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    data += `orderByField=${searchData.orderByField}`
-  }
-  isSearching.value = true
-  let response = await recurringInvoiceStore.searchRecurringInvoice(data)
-  isSearching.value = false
-  if (response.data) {
-    invoiceList.value = response.data.data
-  }
+  invoiceList.value = []
+  loadRecurringInvoices()
 }
 
 function sortData() {
@@ -327,14 +327,11 @@ onSearched = debounce(onSearched, 500)
           </div>
         </router-link>
       </div>
-      <div
-        v-if="isLoading || isSearching"
-        class="flex justify-center p-4 items-center"
-      >
+      <div v-if="isLoading" class="flex justify-center p-4 items-center">
         <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
       </div>
       <p
-        v-if="!invoiceList?.length && !isLoading && !isSearching"
+        v-if="!invoiceList?.length && !isLoading"
         class="flex justify-center px-4 mt-5 text-sm text-gray-600"
       >
         {{ $t('invoices.no_matching_invoices') }}

@@ -246,14 +246,11 @@
             </div>
           </router-link>
         </div>
-        <div
-          v-if="isLoading || isSearching"
-          class="flex justify-center p-4 items-center"
-        >
+        <div v-if="isLoading" class="flex justify-center p-4 items-center">
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!estimateList.length && !isLoading && !isSearching"
+          v-if="!estimateList?.length && !isLoading"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('estimates.no_matching_estimates') }}
@@ -307,7 +304,6 @@ const route = useRoute()
 const router = useRouter()
 
 const isMarkAsSent = ref(false)
-const isSearching = ref(false)
 const isLoading = ref(false)
 const isLoadingEstimate = ref(false)
 
@@ -364,20 +360,42 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadEstimates(params, fromScrollListener = false) {
+async function loadEstimates(pageNumber, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
 
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.search = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isLoading.value = true
-  let response = await estimateStore.fetchEstimates(params)
+  let response = await estimateStore.fetchEstimates({
+    page: pageNumber,
+    ...params,
+  })
   isLoading.value = false
 
   estimateList.value = estimateList.value ? estimateList.value : []
-
   estimateList.value = [...estimateList.value, ...response.data.data]
 
-  currentPageNumber.value = params ? params.page : 1
+  currentPageNumber.value = pageNumber ? pageNumber : 1
   lastPageNumber.value = response.data.meta.last_page
   let estimateFound = estimateList.value.find(
     (est) => est.id == route.params.id
@@ -386,9 +404,10 @@ async function loadEstimates(params, fromScrollListener = false) {
   if (
     fromScrollListener == false &&
     !estimateFound &&
-    currentPageNumber.value < lastPageNumber.value
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
   ) {
-    loadEstimates({ page: ++currentPageNumber.value })
+    loadEstimates(++currentPageNumber.value)
   }
 
   if (estimateFound) {
@@ -417,7 +436,7 @@ function addScrollListener() {
         ev.target.scrollHeight - 200
     ) {
       if (currentPageNumber.value < lastPageNumber.value) {
-        loadEstimates({ page: ++currentPageNumber.value }, true)
+        loadEstimates(++currentPageNumber.value, true)
       }
     }
   })
@@ -434,30 +453,8 @@ async function loadEstimate() {
 }
 
 async function onSearched() {
-  let data = ''
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    data += `search=${searchData.searchText}&`
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data += `orderBy=${searchData.orderBy}&`
-  }
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    data += `orderByField=${searchData.orderByField}`
-  }
-  isSearching.value = true
-  let response = await estimateStore.searchEstimate(data)
-  isSearching.value = false
-  if (response.data) {
-    estimateList.value = response.data.data
-  }
+  estimateList.value = []
+  loadEstimates()
 }
 
 function sortData() {

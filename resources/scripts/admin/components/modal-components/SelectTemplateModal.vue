@@ -30,12 +30,12 @@
             cursor-pointer
             hover:border-primary-300
           "
+          @click="selectedTemplate = template.name"
         >
           <img
             :src="template.path"
             :alt="template.name"
-            class="w-full"
-            @click="selectedTemplate = template.name"
+            class="w-full min-h-[100px]"
           />
           <img
             v-if="selectedTemplate === template.name"

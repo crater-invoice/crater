@@ -1146,7 +1146,8 @@
       "payment_mode_added": "Mokėjimo Būdas pridėtas",
       "payment_mode_updated": "Mokėjimo Būdas atnaujintas",
       "payment_mode_confirm_delete": "You will not be able to recover this Payment Mode",
-      "already_in_use": "Mokėjimo Būdas jau naudojamas",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Mokėjimo Būdas sėkmingai pašalintas"
     },
     "expense_category": {

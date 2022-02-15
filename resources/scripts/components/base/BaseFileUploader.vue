@@ -33,6 +33,7 @@
       :name="inputFieldName"
       :accept="accept"
       class="absolute z-10 w-full h-full opacity-0 cursor-pointer"
+      @click="$event.target.value=null"
       @change="
         onChange(
           $event.target.name,
@@ -557,6 +558,7 @@ function onAvatarRemove(image) {
 
 function onFileRemove(index) {
   localFiles.value.splice(index, 1)
+  emit('remove', index)
 }
 
 function getDefaultAvatar() {

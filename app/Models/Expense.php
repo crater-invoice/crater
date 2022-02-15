@@ -126,14 +126,14 @@ class Expense extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('category', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%'.$term.'%');
+                $query->where('name', 'LIKE', '%' . $term . '%');
             });
         }
     }
 
     public function scopeWhereNotes($query, $search)
     {
-        $query->where('notes', 'LIKE', '%'.$search.'%');
+        $query->where('notes', 'LIKE', '%' . $search . '%');
     }
 
     public function scopeWhereCategory($query, $categoryId)
@@ -188,9 +188,9 @@ class Expense extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('category', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%'.$term.'%');
+                $query->where('name', 'LIKE', '%' . $term . '%');
             })
-                ->orWhere('notes', 'LIKE', '%'.$term.'%');
+                ->orWhere('notes', 'LIKE', '%' . $term . '%');
         }
     }
 
@@ -262,6 +262,9 @@ class Expense extends Model implements HasMedia
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
+        if (isset($request->is_attachment_receipt_removed) && (bool) $request->is_attachment_receipt_removed) {
+            $this->clearMediaCollection('receipts');
+        }
         if ($request->hasFile('attachment_receipt')) {
             $this->clearMediaCollection('receipts');
             $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');

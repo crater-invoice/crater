@@ -12,7 +12,7 @@
     "settings": "Configurazione",
     "logout": "Disconnessione",
     "users": "Utenti",
-    "modules": "Modules"
+    "modules": "Moduli"
   },
   "general": {
     "add_company": "Aggiungi azienda",
@@ -93,13 +93,13 @@
     "no_note_found": "Nessuna Nota Trovata",
     "insert_note": "Inserisci Nota",
     "copied_pdf_url_clipboard": "Url PDF copiato negli appunti!",
-    "copied_url_clipboard": "Copied url to clipboard!",
+    "copied_url_clipboard": "URL copiato negli appunti!",
     "docs": "Documenti",
     "do_you_wish_to_continue": "Vuoi continuare?",
     "note": "Nota",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "pay_invoice": "Paga Fattura",
+    "login_successfully": "Accesso effettuato con successo!",
+    "logged_out_successfully": "Disconnessione riuscita"
   },
   "dashboard": {
     "select_year": "Seleziona anno",
@@ -108,7 +108,7 @@
       "customers": "Clienti",
       "invoices": "Fatture",
       "estimates": "Preventivi",
-      "payments": "Payments"
+      "payments": "Pagamenti"
     },
     "chart_info": {
       "total_sales": "Vendite",
@@ -207,10 +207,10 @@
     "new_customer": "Nuovo cliente",
     "edit_customer": "Modifica Cliente",
     "basic_info": "Informazioni",
-    "portal_access": "Portal Access",
-    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
-    "portal_access_url": "Customer Portal Login URL",
-    "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
+    "portal_access": "Accesso al Portale",
+    "portal_access_text": "Vuoi consentire a questo cliente di accedere al Portale Clienti?",
+    "portal_access_url": "URL Login Portale Cliente",
+    "portal_access_url_help": "Copia e inoltra l'URL sopra indicato al tuo cliente per fornire l'accesso.",
     "billing_address": "Indirizzo di Fatturazione",
     "shipping_address": "Indirizzo di Spedizione",
     "copy_billing_address": "Copia da Fatturazione",
@@ -230,7 +230,7 @@
     "confirm_delete": "Non sarai in grado di recuperare questo cliente e tutte le relative fatture, stime e pagamenti. | Non sarai in grado di recuperare questi clienti e tutte le relative fatture, stime e pagamenti.",
     "created_message": "Cliente creato con successo",
     "updated_message": "Cliente aggiornato con successo",
-    "address_updated_message": "Address Information Updated succesfully",
+    "address_updated_message": "Indirizzo aggiornato con successo",
     "deleted_message": "Cliente cancellato con successo | Clienti cancellati con successo",
     "edit_currency_not_allowed": "Impossibile cambiare valuta, dopo aver creato transazioni."
   },
@@ -264,8 +264,8 @@
   },
   "estimates": {
     "title": "Preventivi",
-    "accept_estimate": "Accept Estimate",
-    "reject_estimate": "Reject Estimate",
+    "accept_estimate": "Accetta Preventivo",
+    "reject_estimate": "Rifiuta Preventivo",
     "estimate": "Preventivo | Preventivi",
     "estimates_list": "Lista Preventivi",
     "days": "{days} Giorni",
@@ -317,10 +317,10 @@
     },
     "accepted": "Accettato",
     "rejected": "Rifiutato",
-    "expired": "Expired",
+    "expired": "Scaduto",
     "sent": "Inviato",
     "draft": "Bozza",
-    "viewed": "Viewed",
+    "viewed": "Visualizzato",
     "declined": "Rifiutato",
     "new_estimate": "Nuovo Preventivo",
     "add_new_estimate": "Crea Nuovo Preventivo",
@@ -357,10 +357,10 @@
   },
   "invoices": {
     "title": "Fatture",
-    "download": "Download",
-    "pay_invoice": "Pay Invoice",
+    "download": "Scarica",
+    "pay_invoice": "Paga Fattura",
     "invoices_list": "Lista Fatture",
-    "invoice_information": "Invoice Information",
+    "invoice_information": "Informazioni Fattura",
     "days": "{days} Giorni",
     "months": "{months} Mese",
     "years": "{years} Anno",
@@ -654,10 +654,10 @@
     "retype_password": "Ridigita Password"
   },
   "modules": {
-    "buy_now": "Buy Now",
-    "install": "Install",
-    "price": "Price",
-    "download_zip_file": "Download ZIP file",
+    "buy_now": "Acquista Ora",
+    "install": "Installa",
+    "price": "Prezzo",
+    "download_zip_file": "Scarica il file zip",
     "unzipping_package": "Unzipping Package",
     "copying_files": "Copying Files",
     "deleting_files": "Deleting Unused files",

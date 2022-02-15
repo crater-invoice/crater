@@ -16,7 +16,7 @@ trait GeneratesPdfTrait
         if ($pdf && file_exists($pdf['path'])) {
             return response()->make(file_get_contents($pdf['path']), 200, [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'.pdf"',
+                'Content-Disposition' => 'inline; filename="'.$pdf['file_name'].'"',
             ]);
         }
 

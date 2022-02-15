@@ -30,12 +30,12 @@
             cursor-pointer
             hover:border-primary-300
           "
+          @click="selectedTemplate = template.name"
         >
           <img
             :src="template.path"
             :alt="template.name"
-            class="w-full"
-            @click="selectedTemplate = template.name"
+            class="w-full min-h-[100px]"
           />
           <img
             v-if="selectedTemplate === template.name"
@@ -58,7 +58,18 @@
           </span>
         </div>
       </div>
+
+      <div v-if="!modalStore.data.store.isEdit" class="z-0 flex ml-3 pt-5">
+        <BaseCheckbox
+          v-model="modalStore.data.isMarkAsDefault"
+          :set-initial-value="false"
+          variant="primary"
+          :label="$t('general.mark_as_default')"
+          :description="modalStore.data.markAsDefaultDescription"
+        />
+      </div>
     </div>
+
     <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid">
       <BaseButton class="mr-3" variant="primary-outline" @click="closeModal">
         {{ $t('general.cancel') }}
@@ -76,8 +87,10 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useModalStore } from '@/scripts/stores/modal'
+import { useUserStore } from '@/scripts/admin/stores/user'
 
 const modalStore = useModalStore()
+const userStore = useUserStore()
 
 const selectedTemplate = ref('')
 
@@ -100,6 +113,22 @@ function setData() {
 
 async function chooseTemplate() {
   await modalStore.data.store.setTemplate(selectedTemplate.value)
+  // update default estimate or invoice template
+  if (!modalStore.data.store.isEdit && modalStore.data.isMarkAsDefault) {
+    if (modalStore.data.storeProp == 'newEstimate') {
+      await userStore.updateUserSettings({
+        settings: {
+          default_estimate_template: selectedTemplate.value,
+        },
+      })
+    } else if (modalStore.data.storeProp == 'newInvoice') {
+      await userStore.updateUserSettings({
+        settings: {
+          default_invoice_template: selectedTemplate.value,
+        },
+      })
+    }
+  }
   closeModal()
 }
 

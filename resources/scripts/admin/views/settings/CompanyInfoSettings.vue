@@ -180,6 +180,7 @@ utils.mergeSettings(companyForm, {
 let previewLogo = ref([])
 let logoFileBlob = ref(null)
 let logoFileName = ref(null)
+const isCompanyLogoRemoved = ref(false)
 
 if (companyForm.logo) {
   previewLogo.value.push({
@@ -218,6 +219,7 @@ function onFileInputChange(fileName, file, fileCount, fileList) {
 
 function onFileInputRemove() {
   logoFileBlob.value = null
+  isCompanyLogoRemoved.value = true
 }
 
 async function updateCompanyData() {
@@ -232,18 +234,23 @@ async function updateCompanyData() {
   const res = await companyStore.updateCompany(companyForm)
 
   if (res.data.data) {
-    if (logoFileBlob.value) {
+    if (logoFileBlob.value || isCompanyLogoRemoved.value) {
       let logoData = new FormData()
 
-      logoData.append(
-        'company_logo',
-        JSON.stringify({
-          name: logoFileName.value,
-          data: logoFileBlob.value,
-        })
-      )
+      if (logoFileBlob.value) {
+        logoData.append(
+          'company_logo',
+          JSON.stringify({
+            name: logoFileName.value,
+            data: logoFileBlob.value,
+          })
+        )
+      }
+      logoData.append('is_company_logo_removed', isCompanyLogoRemoved.value)
 
       await companyStore.updateCompanyLogo(logoData)
+      logoFileBlob.value = null
+      isCompanyLogoRemoved.value = false
     }
 
     isSaving.value = false

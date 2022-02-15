@@ -14,6 +14,7 @@ import { useCustomerStore } from './customer'
 import { useTaxTypeStore } from './tax-type'
 import { useCompanyStore } from './company'
 import { useItemStore } from './item'
+import { useUserStore } from './user'
 
 export const useInvoiceStore = (useWindow = false) => {
   const defineStoreFunc = useWindow ? window.pinia.defineStore : defineStore
@@ -445,6 +446,7 @@ export const useInvoiceStore = (useWindow = false) => {
         const itemStore = useItemStore()
         const taxTypeStore = useTaxTypeStore()
         const route = useRoute()
+        const userStore = useUserStore()
 
         this.isFetchingInitialSettings = true
 
@@ -495,6 +497,9 @@ export const useInvoiceStore = (useWindow = false) => {
 
               if (res3.data) {
                 this.setTemplate(this.templates[0].name)
+                this.newInvoice.template_name =
+                userStore.currentUserSettings.default_invoice_template ?
+                userStore.currentUserSettings.default_invoice_template : this.newInvoice.template_name
               }
             }
             if (isEdit) {

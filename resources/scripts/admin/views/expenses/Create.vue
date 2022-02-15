@@ -21,7 +21,7 @@
 
         <template #actions>
           <BaseButton
-            v-if="isEdit && expenseStore.currentExpense.attachment_receipt"
+            v-if="isEdit && expenseStore.currentExpense.attachment_receipt_url"
             :href="receiptDownloadUrl"
             tag="a"
             variant="primary-outline"
@@ -317,6 +317,7 @@ const globalStore = useGlobalStore()
 let isSaving = ref(false)
 let isFetchingInitialData = ref(false)
 const expenseValidationScope = 'newExpense'
+const isAttachmentReceiptRemoved = ref(false)
 
 const rules = computed(() => {
   return {
@@ -381,7 +382,7 @@ const pageTitle = computed(() =>
 )
 
 const receiptDownloadUrl = computed(() =>
-  isEdit.value ? `/expenses/${route.params.id}/download-receipt` : ''
+  isEdit.value ? `/reports/expenses/${route.params.id}/download-receipt` : ''
 )
 
 expenseStore.resetCurrentExpenseData()
@@ -395,6 +396,7 @@ function onFileInputChange(fileName, file) {
 
 function onFileInputRemove() {
   expenseStore.currentExpense.attachment_receipt = null
+  isAttachmentReceiptRemoved.value = true
 }
 
 function openCategoryModal() {
@@ -460,11 +462,14 @@ async function submitForm() {
       await expenseStore.updateExpense({
         id: route.params.id,
         data: formData,
+        isAttachmentReceiptRemoved: isAttachmentReceiptRemoved.value
       })
     } else {
       await expenseStore.addExpense(formData)
     }
     isSaving.value = false
+    expenseStore.currentExpense.attachment_receipt = null
+    isAttachmentReceiptRemoved.value = false
     router.push('/admin/expenses')
   } catch (err) {
     console.error(err)

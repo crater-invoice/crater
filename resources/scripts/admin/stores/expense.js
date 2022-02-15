@@ -61,15 +61,15 @@ export const useExpenseStore = (useWindow = false) => {
                 Object.assign(this.currentExpense, response.data.data)
                 this.currentExpense.selectedCurrency =
                   response.data.data.currency
-
-                if (response.data.data.attachment_receipt) {
+                this.currentExpense.attachment_receipt = null
+                if (response.data.data.attachment_receipt_url) {
                   if (
                     utils.isImageFile(
                       response.data.data.attachment_receipt_meta.mime_type
                     )
                   ) {
                     this.currentExpense.receiptFiles = [
-                      { image: `/expenses/${id}/receipt` },
+                      { image: `/reports/expenses/${id}/receipt?${response.data.data.attachment_receipt_meta.uuid}` },
                     ]
                   } else {
                     this.currentExpense.receiptFiles = [
@@ -118,12 +118,13 @@ export const useExpenseStore = (useWindow = false) => {
         })
       },
 
-      updateExpense({ id, data }) {
+      updateExpense({ id, data, isAttachmentReceiptRemoved }) {
         const notificationStore = useNotificationStore()
 
         const formData = utils.toFormData(data)
 
         formData.append('_method', 'PUT')
+        formData.append('is_attachment_receipt_removed', isAttachmentReceiptRemoved)
 
         return new Promise((resolve) => {
           axios.post(`/api/v1/expenses/${id}`, formData).then((response) => {

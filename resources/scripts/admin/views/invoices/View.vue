@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { computed, reactive, ref, watch, inject } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { debounce } from 'lodash'
 
@@ -27,9 +27,11 @@ const route = useRoute()
 const isMarkAsSent = ref(false)
 const isSearching = ref(false)
 const isLoading = ref(false)
+
 const invoiceList = ref(null)
 const currentPageNumber = ref(1)
 const lastPageNumber = ref(1)
+const invoiceListSection = ref(null)
 
 const searchData = reactive({
   orderBy: null,
@@ -108,7 +110,7 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadInvoices(params, isScroll = false) {
+async function loadInvoices(params, fromScrollListener = false) {
   if (isLoading.value) {
     return
   }
@@ -123,21 +125,21 @@ async function loadInvoices(params, isScroll = false) {
 
   currentPageNumber.value = params ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
-  let isInvoiceExist = invoiceList.value.find(
+  let invoiceFound = invoiceList.value.find(
     (inv) => inv.id == route.params.id
   )
 
   if (
-    isScroll == false &&
-    !isInvoiceExist &&
+    fromScrollListener == false &&
+    !invoiceFound &&
     currentPageNumber.value < lastPageNumber.value
   ) {
     loadInvoices({ page: ++currentPageNumber.value })
   }
 
-  if (isInvoiceExist) {
+  if (invoiceFound) {
     setTimeout(() => {
-      if (isScroll == false) {
+      if (fromScrollListener == false) {
         scrollToInvoice()
       }
     }, 500)
@@ -149,16 +151,16 @@ function scrollToInvoice() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
-    addScrollListner()
+    addScrollListener()
   }
 }
 
-function addScrollListner() {
-  let el = document.getElementById('scroll_load')
-  el.addEventListener('scroll', (ev) => {
+function addScrollListener() {
+  invoiceListSection.value.addEventListener('scroll', (ev) => {
     if (
       ev.target.scrollTop > 0 &&
-      ev.target.scrollTop == ev.target.scrollHeight - ev.target.clientHeight
+      ev.target.scrollTop + ev.target.clientHeight >
+        ev.target.scrollHeight - 200
     ) {
       if (currentPageNumber.value < lastPageNumber.value) {
         loadInvoices({ page: ++currentPageNumber.value }, true)
@@ -284,7 +286,7 @@ onSearched = debounce(onSearched, 500)
         hidden
         h-full
         pt-16
-        pb-4
+        pb-[6.4rem]
         ml-56
         bg-white
         xl:ml-64
@@ -389,10 +391,9 @@ onSearched = debounce(onSearched, 500)
       </div>
 
       <div
-        id="scroll_load"
+        ref="invoiceListSection"
         class="
           h-full
-          pb-32
           overflow-y-scroll
           border-l border-gray-200 border-solid
           base-scroll
@@ -479,11 +480,8 @@ onSearched = debounce(onSearched, 500)
             </div>
           </router-link>
         </div>
-        <div class="flex justify-center p-4 items-center">
-          <LoadingIcon
-            v-if="isLoading"
-            class="h-6 m-1 animate-spin text-primary-400"
-          />
+        <div v-if="isLoading" class="flex justify-center p-4 items-center">
+          <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
           v-if="!invoiceStore.invoices.length && !isLoading"

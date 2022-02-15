@@ -50,6 +50,7 @@ import { useUserStore } from '@/scripts/admin/stores/user'
 import { useRecurringInvoiceStore } from '@/scripts/admin/stores/recurring-invoice'
 import abilities from '@/scripts/admin/stub/abilities'
 import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
+import SendInvoiceModal from '@/scripts/admin/components/modal-components/SendInvoiceModal.vue'
 
 const recurringInvoiceStore = useRecurringInvoiceStore()
 

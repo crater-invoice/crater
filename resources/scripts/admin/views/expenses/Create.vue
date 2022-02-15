@@ -381,7 +381,7 @@ const pageTitle = computed(() =>
 )
 
 const receiptDownloadUrl = computed(() =>
-  isEdit.value ? `/expenses/${route.params.id}/download-receipt` : ''
+  isEdit.value ? `/reports/expenses/${route.params.id}/download-receipt` : ''
 )
 
 expenseStore.resetCurrentExpenseData()

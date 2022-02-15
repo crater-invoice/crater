@@ -25,7 +25,6 @@ const invoiceData = ref(null)
 const route = useRoute()
 
 const isMarkAsSent = ref(false)
-const isSearching = ref(false)
 const isLoading = ref(false)
 
 const invoiceList = ref(null)
@@ -123,7 +122,7 @@ async function loadInvoices(params, fromScrollListener = false) {
 
   invoiceList.value = [...invoiceList.value, ...response.data.data]
 
-  currentPageNumber.value = params ? params.page : 1
+  currentPageNumber.value = params && params.page ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
   let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
 
@@ -175,30 +174,29 @@ async function loadInvoice() {
 }
 
 async function onSearched() {
-  let data = ''
+  let params = {}
   if (
     searchData.searchText !== '' &&
     searchData.searchText !== null &&
     searchData.searchText !== undefined
   ) {
-    data += `search=${searchData.searchText}&`
+    params.search = searchData.searchText
   }
 
   if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data += `orderBy=${searchData.orderBy}&`
+    params.orderBy = searchData.orderBy
   }
+
   if (
     searchData.orderByField !== null &&
     searchData.orderByField !== undefined
   ) {
-    data += `orderByField=${searchData.orderByField}`
+    params.orderByField = searchData.orderByField
   }
-  isSearching.value = true
-  let response = await invoiceStore.searchInvoice(data)
-  isSearching.value = false
-  if (response.data) {
-    invoiceList.value = response.data.data
-  }
+
+  invoiceList.value = []
+
+  loadInvoices(params)
 }
 
 function sortData() {
@@ -478,14 +476,11 @@ onSearched = debounce(onSearched, 500)
             </div>
           </router-link>
         </div>
-        <div
-          v-if="isLoading || isSearching"
-          class="flex justify-center p-4 items-center"
-        >
+        <div v-if="isLoading" class="flex justify-center p-4 items-center">
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!invoiceList?.length && !isLoading && !isSearching"
+          v-if="!invoiceList?.length && !isLoading"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('invoices.no_matching_invoices') }}

@@ -125,9 +125,7 @@ async function loadInvoices(params, fromScrollListener = false) {
 
   currentPageNumber.value = params ? params.page : 1
   lastPageNumber.value = response.data.meta.last_page
-  let invoiceFound = invoiceList.value.find(
-    (inv) => inv.id == route.params.id
-  )
+  let invoiceFound = invoiceList.value.find((inv) => inv.id == route.params.id)
 
   if (
     fromScrollListener == false &&
@@ -199,7 +197,7 @@ async function onSearched() {
   let response = await invoiceStore.searchInvoice(data)
   isSearching.value = false
   if (response.data) {
-    invoiceStore.invoices = response.data.data
+    invoiceList.value = response.data.data
   }
 }
 
@@ -480,11 +478,14 @@ onSearched = debounce(onSearched, 500)
             </div>
           </router-link>
         </div>
-        <div v-if="isLoading" class="flex justify-center p-4 items-center">
+        <div
+          v-if="isLoading || isSearching"
+          class="flex justify-center p-4 items-center"
+        >
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!invoiceStore.invoices.length && !isLoading"
+          v-if="!invoiceList?.length && !isLoading && !isSearching"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('invoices.no_matching_invoices') }}

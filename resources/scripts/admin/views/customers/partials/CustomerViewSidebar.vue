@@ -145,7 +145,7 @@
                 truncate
               "
             />
-            
+
             <BaseText
               v-if="customer.contact_name"
               :text="customer.contact_name"
@@ -170,12 +170,12 @@
       </div>
       <div class="flex justify-center p-4 items-center">
         <LoadingIcon
-          v-if="isFetching"
+          v-if="isFetching || isSearching"
           class="h-6 m-1 animate-spin text-primary-400"
         />
       </div>
       <p
-        v-if="!customerStore.customers.length && !isFetching"
+        v-if="!customerStore.customers.length && !isFetching && !isSearching"
         class="flex justify-center px-4 mt-5 text-sm text-gray-600"
       >
         {{ $t('customers.no_matching_customers') }}

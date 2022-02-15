@@ -246,11 +246,14 @@
             </div>
           </router-link>
         </div>
-        <div v-if="isLoading" class="flex justify-center p-4 items-center">
+        <div
+          v-if="isLoading || isSearching"
+          class="flex justify-center p-4 items-center"
+        >
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!estimateStore.estimates.length && !isLoading"
+          v-if="!estimateList.length && !isLoading && !isSearching"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('estimates.no_matching_estimates') }}
@@ -453,7 +456,7 @@ async function onSearched() {
   let response = await estimateStore.searchEstimate(data)
   isSearching.value = false
   if (response.data) {
-    estimateStore.estimates = response.data.data
+    estimateList.value = response.data.data
   }
 }
 

@@ -222,11 +222,14 @@
             </div>
           </router-link>
         </div>
-        <div v-if="isLoading" class="flex justify-center p-4 items-center">
+        <div
+          v-if="isLoading || isSearching"
+          class="flex justify-center p-4 items-center"
+        >
           <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!paymentStore?.payments?.length && !isLoading"
+          v-if="!paymentList?.length && !isLoading && !isSearching"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('payments.no_matching_payments') }}
@@ -438,7 +441,7 @@ async function onSearch() {
     isSearching.value = false
 
     if (response.data.data) {
-      paymentStore.payments = response.data.data
+      paymentList.value = response.data.data
     }
   } catch (error) {
     isSearching.value = false

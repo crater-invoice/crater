@@ -181,6 +181,11 @@ onMounted(async () => {
   isFetchingInitialData.value = true
   await globalStore.fetchCountries()
   isFetchingInitialData.value = false
+
+  // set default country
+  companyForm.address.country_id = globalStore.countries.find((country) => {
+    return country.code == 'US'
+  })?.id
 })
 
 const rules = {

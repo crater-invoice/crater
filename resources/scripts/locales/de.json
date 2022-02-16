@@ -99,7 +99,8 @@
     "note": "Notiz",
     "pay_invoice": "Rechnung bezahlen",
     "login_successfully": "Erfolgreich angemeldet!",
-    "logged_out_successfully": "Erfolgreich abgemeldet"
+    "logged_out_successfully": "Erfolgreich abgemeldet",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Jahr wählen",
@@ -353,7 +354,8 @@
       "amount": "Summe",
       "select_an_item": "Wählen Sie einen Artikel",
       "type_item_description": "Artikel Beschreibung (optional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Rechnungen",
@@ -444,7 +446,8 @@
     "deleted_message": "Rechnung erfolgreich gelöscht | Rechnungen erfolgreich gelöscht",
     "marked_as_sent_message": "Rechnung als erfolgreich gesendet markiert",
     "something_went_wrong": "Da ist etwas schief gelaufen",
-    "invalid_due_amount_message": "Der Gesamtrechnungsbetrag darf nicht kleiner sein als der für diese Rechnung bezahlte Gesamtbetrag. Bitte aktualisieren Sie die Rechnung oder löschen Sie die zugehörigen Zahlungen um fortzufahren."
+    "invalid_due_amount_message": "Der Gesamtrechnungsbetrag darf nicht kleiner sein als der für diese Rechnung bezahlte Gesamtbetrag. Bitte aktualisieren Sie die Rechnung oder löschen Sie die zugehörigen Zahlungen um fortzufahren.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Serienrechnungen",

@@ -99,7 +99,8 @@
     "note": "Nota",
     "pay_invoice": "Paga Fattura",
     "login_successfully": "Accesso effettuato con successo!",
-    "logged_out_successfully": "Disconnessione riuscita"
+    "logged_out_successfully": "Disconnessione riuscita",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Seleziona anno",
@@ -353,7 +354,8 @@
       "amount": "Ammontare",
       "select_an_item": "Scrivi o clicca per selezionare un item",
       "type_item_description": "Scrivi una Descrizione (opzionale)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Fatture",
@@ -444,7 +446,8 @@
     "deleted_message": "Fattura cancellata con successo | Fatture cancellate con successo",
     "marked_as_sent_message": "Fattura contrassegnata come inviata con successo",
     "something_went_wrong": "Si è verificato un errore",
-    "invalid_due_amount_message": "L'ammontare totale della fattura non può essere inferiore all'ammontare totale pagato per questa fattura. Modifica la fattura o cancella i pagamenti associati per continuare."
+    "invalid_due_amount_message": "L'ammontare totale della fattura non può essere inferiore all'ammontare totale pagato per questa fattura. Modifica la fattura o cancella i pagamenti associati per continuare.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Fatture ricorrenti",

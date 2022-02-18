@@ -93,6 +93,18 @@ function get_login_page_description()
     }
 }
 
+/**
+ * Get admin document title
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_admin_document_title()
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return Setting::getSetting('admin_document_title');
+    }
+}
 
 /**
  * Set Active Path

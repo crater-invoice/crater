@@ -58,6 +58,11 @@
         window.login_page_description = "{{$login_page_description}}"
 
         @endif
+        @if(isset($admin_document_title))
+
+        window.admin_document_title = "{{$admin_document_title}}"
+
+        @endif
         window.Crater.start()
     </script>
 </body>

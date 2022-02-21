@@ -3,7 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Crater - Self Hosted Invoicing Platform</title>
+    @if (Route::currentRouteName() === 'admin') 
+        @if(isset($admin_page_title) && $admin_page_title != null)
+            <title>{{$admin_page_title}}</title>
+        @else
+            <title>Crater - Self Hosted Invoicing Platform</title>
+        @endif
+    @endif
+    @if (Route::currentRouteName() === 'customer.login') 
+        @if(isset($customer_page_title) && $customer_page_title != null)
+            <title>{{$customer_page_title}}</title>
+        @else
+            <title>Crater - Self Hosted Invoicing Platform</title>
+        @endif
+    @endif
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -57,12 +70,13 @@
 
         window.login_page_description = "{{$login_page_description}}"
 
-        @endif
-        @if(isset($admin_document_title))
+        @endif     
+        @if(isset($copyright_text))
 
-        window.admin_document_title = "{{$admin_document_title}}"
+        window.copyright_text = "{{$copyright_text}}"
 
-        @endif
+        @endif    
+
         window.Crater.start()
     </script>
 </body>

@@ -54,7 +54,7 @@
           "
         >
           <p class="mb-3">
-            Copyright @ {{ documentTitle }}, Inc.
+            {{ documentTitle }}, Inc.
             {{ new Date().getFullYear() }}
           </p>
         </div>
@@ -161,11 +161,10 @@ const pageDescription = computed(() => {
 })
 
 const documentTitle = computed(() => {
-  if (window.admin_document_title) {
-    return window.admin_document_title
+  if (window.copyright_text) {
+    return window.copyright_text
   }
-
-  return 'Crater Invoice'
+  return 'Copyright @ Crater Invoice'
 })
 
 const loginPageLogo = computed(() => {

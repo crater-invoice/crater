@@ -136,7 +136,8 @@ Route::get('/admin/{vue?}', function () {
 Route::get('{company:slug}/customer/{vue?}', function (Company $company) {
     return view('app')->with([
         'customer_logo' => get_customer_logo($company->id),
-        'current_theme' => get_customer_portal_theme($company->id)
+        'current_theme' => get_customer_portal_theme($company->id),
+        'customer_page_title' => get_customer_page_title($company->id)
     ]);
 })->where('vue', '[\/\w\.-]*')->name('customer.login')->middleware(['install']);
 

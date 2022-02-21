@@ -131,10 +131,10 @@
       >
         <!-- Tabs -->
         <BaseTabGroup class="-mb-5" @change="setStatusFilter">
-          <BaseTab :title="$t('general.draft')" filter="DRAFT" />
-          <BaseTab :title="$t('general.due')" filter="DUE" />
-          <BaseTab :title="$t('general.sent')" filter="SENT" />
           <BaseTab :title="$t('general.all')" filter="" />
+          <BaseTab :title="$t('general.draft')" filter="DRAFT" />
+          <BaseTab :title="$t('general.sent')" filter="SENT" />
+          <BaseTab :title="$t('general.due')" filter="DUE" />
         </BaseTabGroup>
 
         <BaseDropdown

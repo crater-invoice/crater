@@ -115,7 +115,7 @@
     class="
       hidden
       w-56
-      h-screen h-screen-ios
+      h-screen
       pb-32
       overflow-y-auto
       bg-white

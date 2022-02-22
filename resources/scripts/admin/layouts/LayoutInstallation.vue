@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen h-screen-ios overflow-y-auto text-base">
+  <div class="h-screen overflow-y-auto text-base">
     <NotificationRoot />
 
     <div class="container mx-auto px-4">

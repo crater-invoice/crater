@@ -49,7 +49,7 @@
         class="
           hidden
           w-full
-          h-screen h-screen-ios
+          h-screen
           border-gray-100 border-solid
           rounded
           md:flex

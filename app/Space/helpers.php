@@ -35,6 +35,19 @@ function get_customer_logo($company_id)
 
 
 /**
+ * Get current admin portal logo
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_login_page_logo()
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return Setting::getSetting('login_page_logo');
+    }
+}
+
+/**
  * Get current admin theme
  *
  * @return string
@@ -53,6 +66,33 @@ function get_admin_portal_theme()
 
     return 'crater';
 }
+
+/**
+ * Get current login page heading
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_login_page_heading()
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return Setting::getSetting('login_page_heading');
+    }
+}
+
+/**
+ * Get current login page description
+ *
+ * @param $company_id
+ * @return string
+ */
+function get_login_page_description()
+{
+    if (\Storage::disk('local')->has('database_created')) {
+        return Setting::getSetting('login_page_description');
+    }
+}
+
 
 /**
  * Set Active Path

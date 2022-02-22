@@ -119,6 +119,7 @@
               :store="estimateStore"
               component-name="EstimateTemplate"
               store-prop="newEstimate"
+              :is-mark-as-default="isMarkAsDefault"
             />
           </div>
 
@@ -171,6 +172,7 @@ const { t } = useI18n()
 
 const estimateValidationScope = 'newEstimate'
 let isSaving = ref(false)
+const isMarkAsDefault = ref(false)
 
 const estimateNoteFieldList = ref([
   'customer',

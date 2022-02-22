@@ -166,6 +166,11 @@ class Invoice extends Model implements HasMedia
         }
     }
 
+    public function getFormattedNotesAttribute($value)
+    {
+        return $this->getNotes();
+    }
+
     public function getFormattedCreatedAtAttribute($value)
     {
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
@@ -643,7 +648,6 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_DUE_DATE}' => $this->formattedDueDate,
             '{INVOICE_NUMBER}' => $this->invoice_number,
             '{INVOICE_REF_NUMBER}' => $this->reference_number,
-            '{INVOICE_LINK}' => url('/customer/invoices/pdf/'.$this->unique_hash),
         ];
     }
 

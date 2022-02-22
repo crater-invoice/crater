@@ -5,7 +5,6 @@
       <template #actions>
         <BaseButton
           v-if="userStore.hasAbilities(abilities.SEND_PAYMENT)"
-          :disabled="isSendingEmail"
           :content-loading="isFetching"
           variant="primary"
           @click="onPaymentSend"
@@ -30,7 +29,7 @@
         hidden
         h-full
         pt-16
-        pb-4
+        pb-[6rem]
         ml-56
         bg-white
         xl:ml-64
@@ -139,17 +138,12 @@
       </div>
 
       <div
-        v-if="paymentStore && paymentStore.payments"
-        class="
-          h-full
-          pb-32
-          overflow-y-scroll
-          border-l border-gray-200 border-solid
-        "
+        ref="paymentListSection"
+        class="h-full overflow-y-scroll border-l border-gray-200 border-solid"
       >
-        <div v-for="(payment, index) in paymentStore.payments" :key="index">
+        <div v-for="(payment, index) in paymentList" :key="index">
           <router-link
-            v-if="payment && !isLoading"
+            v-if="payment"
             :id="'payment-' + payment.id"
             :to="`/admin/payments/${payment.id}/view`"
             :class="[
@@ -228,14 +222,11 @@
             </div>
           </router-link>
         </div>
-        <div class="flex justify-center p-4 items-center">
-          <LoadingIcon
-            v-if="isLoading"
-            class="h-6 m-1 animate-spin text-primary-400"
-          />
+        <div v-if="isLoading" class="flex justify-center p-4 items-center">
+          <LoadingIcon class="h-6 m-1 animate-spin text-primary-400" />
         </div>
         <p
-          v-if="!paymentStore?.payments?.length && !isLoading"
+          v-if="!paymentList?.length && !isLoading"
           class="flex justify-center px-4 mt-5 text-sm text-gray-600"
         >
           {{ $t('payments.no_matching_payments') }}
@@ -260,43 +251,42 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { debounce } from 'lodash'
-import { ref, reactive, computed, inject, onMounted, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, reactive, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import moment from 'moment'
+
 import { useDialogStore } from '@/scripts/stores/dialog'
 import { usePaymentStore } from '@/scripts/admin/stores/payment'
 import { useModalStore } from '@/scripts/stores/modal'
-import PaymentDropdown from '@/scripts/admin/components/dropdowns/PaymentIndexDropdown.vue'
-import moment from 'moment'
 import { useUserStore } from '@/scripts/admin/stores/user'
+
+import PaymentDropdown from '@/scripts/admin/components/dropdowns/PaymentIndexDropdown.vue'
 import SendPaymentModal from '@/scripts/admin/components/modal-components/SendPaymentModal.vue'
-import abilities from '@/scripts/admin/stub/abilities'
 import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
 
+import abilities from '@/scripts/admin/stub/abilities'
+
 const route = useRoute()
-const router = useRouter()
 
 const { t } = useI18n()
-let id = ref(null)
-let count = ref(null)
 let payment = reactive({})
-let currency = ref(null)
 let searchData = reactive({
   orderBy: null,
   orderByField: null,
   searchText: null,
 })
 
-let isSearching = ref(false)
-let isSendingEmail = ref(false)
-let isMarkingAsSent = ref(false)
 let isLoading = ref(false)
 let isFetching = ref(false)
-
-const $utils = inject('utils')
 
 const paymentStore = usePaymentStore()
 const modalStore = useModalStore()
 const userStore = useUserStore()
+
+const paymentList = ref(null)
+const currentPageNumber = ref(1)
+const lastPageNumber = ref(1)
+const paymentListSection = ref(null)
 
 const pageTitle = computed(() => {
   return payment.payment_number || ''
@@ -346,14 +336,63 @@ function hasAbilities() {
 
 const dialogStore = useDialogStore()
 
-async function loadPayments() {
+async function loadPayments(pageNumber, fromScrollListener = false) {
+  if (isLoading.value) {
+    return
+  }
+
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.search = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isLoading.value = true
-  await paymentStore.fetchPayments({ limit: 'all' })
+  let response = await paymentStore.fetchPayments({
+    page: pageNumber,
+    ...params,
+  })
   isLoading.value = false
 
-  setTimeout(() => {
-    scrollToPayment()
-  }, 500)
+  paymentList.value = paymentList.value ? paymentList.value : []
+  paymentList.value = [...paymentList.value, ...response.data.data]
+
+  currentPageNumber.value = pageNumber ? pageNumber : 1
+  lastPageNumber.value = response.data.meta.last_page
+  let paymentFound = paymentList.value.find(
+    (paym) => paym.id == route.params.id
+  )
+
+  if (
+    fromScrollListener == false &&
+    !paymentFound &&
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
+  ) {
+    loadPayments(++currentPageNumber.value)
+  }
+
+  if (paymentFound) {
+    setTimeout(() => {
+      if (fromScrollListener == false) {
+        scrollToPayment()
+      }
+    }, 500)
+  }
 }
 
 async function loadPayment() {
@@ -375,42 +414,27 @@ function scrollToPayment() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
+    addScrollListener()
   }
 }
 
-async function onSearch() {
-  let data = {}
-
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    data.search = searchData.searchText
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data.orderBy = searchData.orderBy
-  }
-
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    data.orderByField = searchData.orderByField
-  }
-
-  isSearching.value = true
-  try {
-    let response = await paymentStore.searchPayment(data)
-    isSearching.value = false
-
-    if (response.data.data) {
-      paymentStore.payments = response.data.data
+function addScrollListener() {
+  paymentListSection.value.addEventListener('scroll', (ev) => {
+    if (
+      ev.target.scrollTop > 0 &&
+      ev.target.scrollTop + ev.target.clientHeight >
+        ev.target.scrollHeight - 200
+    ) {
+      if (currentPageNumber.value < lastPageNumber.value) {
+        loadPayments(++currentPageNumber.value, true)
+      }
     }
-  } catch (error) {
-    isSearching.value = false
-  }
+  })
+}
+
+async function onSearch() {
+  paymentList.value = []
+  loadPayments()
 }
 
 function sortData() {

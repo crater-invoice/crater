@@ -44,8 +44,8 @@ class InvoicePdfController extends Controller
             }
 
             return view('app')->with([
-                'customer_logo' => get_customer_logo($invoice->company_id),
-                'current_theme' => get_customer_portal_theme($invoice->company_id)
+                'customer_logo' => get_company_setting('customer_portal_logo', $invoice->company_id),
+                'current_theme' => get_company_setting('customer_portal_theme', $invoice->company_id)
             ]);
         }
 

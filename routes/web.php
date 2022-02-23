@@ -131,15 +131,15 @@ Route::get('/installation', function () {
 
 Route::get('/admin/{vue?}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('admin')->middleware(['install', 'redirect-if-unauthenticated']);
+})->where('vue', '[\/\w\.-]*')->name('admin.dashboard')->middleware(['install', 'redirect-if-unauthenticated']);
 
 Route::get('{company:slug}/customer/{vue?}', function (Company $company) {
     return view('app')->with([
-        'customer_logo' => get_customer_logo($company->id),
-        'current_theme' => get_customer_portal_theme($company->id),
-        'customer_page_title' => get_customer_page_title($company->id)
+        'customer_logo' => get_company_setting('customer_portal_logo', $company->id),
+        'current_theme' => get_company_setting('customer_portal_theme', $company->id),
+        'customer_page_title' => get_company_setting('customer_portal_page_title', $company->id)
     ]);
-})->where('vue', '[\/\w\.-]*')->name('customer.login')->middleware(['install']);
+})->where('vue', '[\/\w\.-]*')->name('customer.dashboard')->middleware(['install']);
 
 Route::get('/', function () {
     return view('app');

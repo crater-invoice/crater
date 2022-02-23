@@ -3,20 +3,58 @@
 
 <head>
     <meta charset="utf-8">
-    @if (Route::currentRouteName() === 'admin') 
-        @if(isset($admin_page_title) && $admin_page_title != null)
-            <title>{{$admin_page_title}}</title>
-        @else
-            <title>Crater - Self Hosted Invoicing Platform</title>
-        @endif
-    @endif
-    @if (Route::currentRouteName() === 'customer.login') 
-        @if(isset($customer_page_title) && $customer_page_title != null)
-            <title>{{$customer_page_title}}</title>
-        @else
-            <title>Crater - Self Hosted Invoicing Platform</title>
-        @endif
-    @endif
+    <!-- @php
+        $routeName = Route::currentRouteName();
+
+        $isAdminPage = false;
+        $isCustomerPage = false;
+        $hasAdminPageTitle = false;
+        $hasCustomerPageTitle = false;
+
+        switch ($routeName) {
+            case 'admin.dashboard':
+                $isAdminPage = true;
+                break;
+
+            case 'home':
+                $isAdminPage = true;
+                break;
+
+            case 'login':
+                $isAdminPage = true;
+                break;
+
+            case 'reset-password':
+                $isAdminPage = true;
+                break;
+
+            case 'forgot-password':
+                $isAdminPage = true;
+                break;
+            
+            case 'customer.dashboard':
+                $isCustomerPage = true;
+                break;
+        }
+
+        if(isset($admin_page_title) && $admin_page_title != null) {
+            $hasAdminPageTitle = true;
+        }
+
+        if(isset($customer_page_title) && $customer_page_title != null) {
+            $hasCustomerPageTitle = true;
+        }
+    @endphp -->
+
+    <!-- @if ($isAdminPage && $hasAdminPageTitle)
+        <title>Admin Page</title>
+    @elseif ($isCustomerPage && $hasCustomerPageTitle)
+        <title>Customer Page</title>
+    @else
+        <title>Crater - Self Hosted Invoicing Platform</title>
+    @endif -->
+
+    <title>{{ get_page_title(!Request::header('company')) }}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -39,7 +77,7 @@
 
 <body
     class="h-full overflow-hidden bg-gray-100 font-base
-    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_admin_portal_theme()}} @endif ">
+    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'crater'}} @endif ">
 
     <!-- Module Scripts -->
     @foreach (\Crater\Services\Module\ModuleFacade::allScripts() as $name => $path)

@@ -7,127 +7,53 @@ use Crater\Models\Setting;
 use Illuminate\Support\Str;
 
 /**
- * Get current customer theme
+ * Get company setting
  *
  * @param $company_id
  * @return string
  */
-function get_customer_portal_theme($company_id)
+function get_company_setting($key, $company_id)
 {
     if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_theme', $company_id);
+        return CompanySetting::getSetting($key, $company_id);
     }
 }
 
-
 /**
- * Get current customer logo
+ * Get app setting
  *
  * @param $company_id
  * @return string
  */
-function get_customer_logo($company_id)
+function get_app_setting($key)
 {
     if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_logo', $company_id);
+        return Setting::getSetting($key);
     }
 }
 
 /**
- * Get current customer page title
+ * Get page title
  *
  * @param $company_id
  * @return string
  */
-function get_customer_page_title($company_id)
+function get_page_title($company_id)
 {
-    if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_page_title', $company_id);
-    }
-}
+    $routeName = Route::currentRouteName();
 
-/**
- * Get current admin portal logo
- *
- * @param $company_id
- * @return string
- */
-function get_login_page_logo()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_logo');
-    }
-}
+    $pageTitle = null;
+    $defaultPageTitle = 'Crater - Self Hosted Invoicing Platform';
 
-/**
- * Get current admin theme
- *
- * @return string
- */
-function get_admin_portal_theme()
-{
     if (\Storage::disk('local')->has('database_created')) {
-        $setting = Setting::getSetting('admin_portal_theme');
+        if ($routeName === 'customer.dashboard') {
+            $pageTitle = CompanySetting::getSetting('customer_portal_page_title', $company_id);
 
-        if ($setting) {
-            return $setting;
+            return $pageTitle ? $pageTitle : $defaultPageTitle;
         }
 
-        return  'crater';
-    }
-
-    return 'crater';
-}
-
-/**
- * Get current login page heading
- *
- * @param $company_id
- * @return string
- */
-function get_login_page_heading()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_heading');
-    }
-}
-
-/**
- * Get current login page description
- *
- * @param $company_id
- * @return string
- */
-function get_login_page_description()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_description');
-    }
-}
-
-/**
- * Get admin page title
- *
- * @param $company_id
- * @return string
- */
-function get_admin_page_title()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('admin_page_title');
-    }
-}
-
-/**
- * Get admin page title
- *
- * @param $company_id
- * @return string
- */
-function get_copyright_text()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('copyright_text');
+        $pageTitle = Setting::getSetting('admin_page_title');
+        return $pageTitle ? $pageTitle : $defaultPageTitle;
     }
 }
 

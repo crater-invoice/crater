@@ -55,7 +55,9 @@ class BootstrapController extends Controller
             'admin_portal_logo',
             'login_page_logo',
             'login_page_heading',
-            'login_page_description'
+            'login_page_description',
+            'admin_page_title',
+            'copyright_text'
         ]);
 
         return response()->json([

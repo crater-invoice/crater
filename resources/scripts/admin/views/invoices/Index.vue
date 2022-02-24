@@ -299,7 +299,7 @@ const userStore = useUserStore()
 
 let filters = reactive({
   customer_id: '',
-  status: 'DRAFT',
+  status: '',
   from_date: '',
   to_date: '',
   invoice_number: '',

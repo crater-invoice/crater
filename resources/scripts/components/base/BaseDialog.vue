@@ -111,9 +111,9 @@
               </div>
             </div>
             <div
-              class="mt-5 sm:mt-6"
+              class="mt-5 sm:mt-6 grid gap-3"
               :class="{
-                'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense':
+                'sm:grid-cols-2 sm:grid-flow-row-dense':
                   !dialogStore.hideNoButton,
               }"
             >

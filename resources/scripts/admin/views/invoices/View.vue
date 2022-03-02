@@ -267,9 +267,7 @@ onSearched = debounce(onSearched, 500)
         >
           <BaseButton
             v-if="
-              invoiceData.status === 'SENT' ||
-              invoiceData.status === 'OVERDUE' ||
-              invoiceData.status === 'VIEWED'
+              invoiceData.status === 'SENT' || invoiceData.status === 'VIEWED'
             "
             variant="primary"
           >

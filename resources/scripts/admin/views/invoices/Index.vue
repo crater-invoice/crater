@@ -238,6 +238,14 @@
             />
 
             <BasePaidStatusBadge
+              v-if="row.data.overdue"
+              status="OVERDUE"
+              class="px-1 py-0.5 ml-2"
+            >
+              {{ $t('invoices.overdue') }}
+            </BasePaidStatusBadge>
+
+            <BasePaidStatusBadge
               :status="row.data.paid_status"
               class="px-1 py-0.5 ml-2"
             >
@@ -284,7 +292,7 @@ const showFilters = ref(false)
 const status = ref([
   {
     label: 'Status',
-    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED'],
+    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'],
   },
   {
     label: 'Paid Status',
@@ -525,10 +533,6 @@ function setActiveTab(val) {
 
     case 'VIEWED':
       activeTab.value = t('invoices.viewed')
-      break
-
-    case 'OVERDUE':
-      activeTab.value = t('invoices.overdue')
       break
 
     default:

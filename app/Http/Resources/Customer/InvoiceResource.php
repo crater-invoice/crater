@@ -51,6 +51,7 @@ class InvoiceResource extends JsonResource
             'formatted_invoice_date' => $this->formattedInvoiceDate,
             'formatted_due_date' => $this->formattedDueDate,
             'payment_module_enabled' => $this->payment_module_enabled,
+            'overdue' => $this->overdue,
             'items' => $this->when($this->items()->exists(), function () {
                 return InvoiceItemResource::collection($this->items);
             }),

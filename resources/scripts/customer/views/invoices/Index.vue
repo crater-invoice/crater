@@ -160,7 +160,7 @@ const route = useRoute()
 const table = ref(null)
 let isFetchingInitialData = ref(true)
 let showFilters = ref(false)
-const status = ref(['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED'])
+const status = ref(['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'])
 const filters = reactive({
   status: '',
   from_date: '',

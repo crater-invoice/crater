@@ -300,6 +300,10 @@ class Company extends Model implements HasMedia
         if ($this->invoices()->exists()) {
             $this->invoices->map(function ($invoice) {
                 $this->checkModelData($invoice);
+
+                if ($invoice->transactions()->exists()) {
+                    $invoice->transactions()->delete();
+                }
             });
 
             $this->invoices()->delete();

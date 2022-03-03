@@ -26,7 +26,7 @@ class UpdateCompanySettingsController extends Controller
         if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
             return response()->json([
                 'success' => false,
-                'message' => 'You cannot change currency once transaction is created.'
+                'message' => 'Cannot update company currency after transactions are created.'
             ]);
         }
 

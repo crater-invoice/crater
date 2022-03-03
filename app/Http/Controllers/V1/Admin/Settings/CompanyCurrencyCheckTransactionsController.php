@@ -20,14 +20,8 @@ class CompanyCurrencyCheckTransactionsController extends Controller
 
         $this->authorize('manage company', $company);
 
-        if ($company->hasTransactions()) {
-            return response()->json([
-                'success' => false,
-            ]);
-        }
-
         return response()->json([
-            'success' => true,
+            'has_transactions' => $company->hasTransactions(),
         ]);
     }
 }

@@ -307,7 +307,7 @@ class RecurringInvoice extends Model
 
         $days = CompanySetting::getSetting('invoice_due_date_days', $this->company_id);
 
-        if ($days == "null") {
+        if (! $days || $days == "null") {
             $days = 7;
         }
 

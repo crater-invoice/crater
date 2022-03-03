@@ -4,8 +4,6 @@ namespace Crater\Http\Controllers\V1\Admin\Settings;
 
 use Crater\Http\Controllers\Controller;
 use Crater\Models\Company;
-use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
 use Illuminate\Http\Request;
 
 class CompanyCurrencyCheckTransactionsController extends Controller
@@ -18,13 +16,11 @@ class CompanyCurrencyCheckTransactionsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $this->authorize('manage company', Company::find($request->header('company')));
+        $company = Company::find($request->header('company'));
 
-        $companyCurrency = CompanySetting::getSetting('currency', $request->header('company'));
+        $this->authorize('manage company', $company);
 
-        $currency = Currency::find((int)$companyCurrency);
-
-        if ($currency->checkTransactions()) {
+        if ($company->hasTransactions()) {
             return response()->json([
                 'success' => false,
             ]);

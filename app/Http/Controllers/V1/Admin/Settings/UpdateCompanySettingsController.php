@@ -6,7 +6,6 @@ use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\UpdateSettingsRequest;
 use Crater\Models\Company;
 use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
 
 class UpdateCompanySettingsController extends Controller
 {
@@ -18,14 +17,13 @@ class UpdateCompanySettingsController extends Controller
      */
     public function __invoke(UpdateSettingsRequest $request)
     {
-        $this->authorize('manage company', Company::find($request->header('company')));
+        $company = Company::find($request->header('company'));
+        $this->authorize('manage company', $company);
 
         $companyCurrency = CompanySetting::getSetting('currency', $request->header('company'));
-
         $data = $request->settings;
-        $currency = Currency::find((int)$companyCurrency);
 
-        if ($companyCurrency !== $data['currency'] && $currency->checkTransactions()) {
+        if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
             return response()->json([
                 'success' => false,
                 'message' => 'You cannot change currency once transaction is created.'

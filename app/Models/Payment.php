@@ -375,6 +375,10 @@ class Payment extends Model implements HasMedia
             'logo' => $logo ?? null,
         ]);
 
+        if (request()->has('preview')) {
+            return view('app.pdf.payment.payment');
+        }
+
         return PDF::loadView('app.pdf.payment.payment');
     }
 

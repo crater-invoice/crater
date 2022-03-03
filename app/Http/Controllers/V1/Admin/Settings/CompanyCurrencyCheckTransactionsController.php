@@ -8,7 +8,7 @@ use Crater\Models\CompanySetting;
 use Crater\Models\Currency;
 use Illuminate\Http\Request;
 
-class CompanyCurrencyTransactionController extends Controller
+class CompanyCurrencyCheckTransactionsController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -24,15 +24,7 @@ class CompanyCurrencyTransactionController extends Controller
 
         $currency = Currency::find((int)$companyCurrency);
 
-        if (
-            $currency->customers()->exists() ||
-            $currency->items()->exists() ||
-            $currency->invoices()->exists() ||
-            $currency->estimates()->exists() ||
-            $currency->expenses()->exists() ||
-            $currency->payments()->exists() ||
-            $currency->recurringInvoices()->exists()
-        ) {
+        if ($currency->checkTransactions()) {
             return response()->json([
                 'success' => false,
             ]);

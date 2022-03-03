@@ -67,7 +67,7 @@ use Crater\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceFrequencyC
 use Crater\Http\Controllers\V1\Admin\Role\AbilitiesController;
 use Crater\Http\Controllers\V1\Admin\Role\RolesController;
 use Crater\Http\Controllers\V1\Admin\Settings\CompanyController;
-use Crater\Http\Controllers\V1\Admin\Settings\CompanyCurrencyTransactionController;
+use Crater\Http\Controllers\V1\Admin\Settings\CompanyCurrencyCheckTransactionsController;
 use Crater\Http\Controllers\V1\Admin\Settings\DiskController;
 use Crater\Http\Controllers\V1\Admin\Settings\GetCompanyMailConfigurationController;
 use Crater\Http\Controllers\V1\Admin\Settings\GetCompanySettingsController;
@@ -395,7 +395,7 @@ Route::prefix('/v1')->group(function () {
 
             Route::post('/settings', UpdateSettingsController::class);
 
-            Route::get('/company-currency-transaction', CompanyCurrencyTransactionController::class);
+            Route::get('/company/has-transactions', CompanyCurrencyCheckTransactionsController::class);
 
 
             // Mails

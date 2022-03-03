@@ -12,7 +12,7 @@ class ChangeOverDueStatusToSent extends Migration
      */
     public function up()
     {
-        $overdueInvoices = Invoice::where('status', Invoice::STATUS_OVERDUE)->get();
+        $overdueInvoices = Invoice::where('status', 'OVERDUE')->get();
 
         if ($overdueInvoices) {
             $overdueInvoices->map(function ($overdueInvoice) {

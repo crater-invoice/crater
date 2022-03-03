@@ -27,7 +27,6 @@ class Invoice extends Model implements HasMedia
 
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
-    public const STATUS_OVERDUE = 'OVERDUE';
     public const STATUS_VIEWED = 'VIEWED';
     public const STATUS_COMPLETED = 'COMPLETED';
 

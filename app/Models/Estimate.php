@@ -412,6 +412,10 @@ class Estimate extends Model implements HasMedia
             'taxes' => $taxes,
         ]);
 
+        if (request()->has('preview')) {
+            return view('app.pdf.estimate.'.$estimateTemplate);
+        }
+
         return PDF::loadView('app.pdf.estimate.'.$estimateTemplate);
     }
 

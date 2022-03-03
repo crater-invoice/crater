@@ -12,4 +12,39 @@ class Currency extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function estimates()
+    {
+        return $this->hasMany(Estimate::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function recurringInvoices()
+    {
+        return $this->hasMany(RecurringInvoice::class);
+    }
 }

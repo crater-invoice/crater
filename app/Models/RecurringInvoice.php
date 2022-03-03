@@ -307,6 +307,10 @@ class RecurringInvoice extends Model
 
         $days = CompanySetting::getSetting('invoice_due_date_days', $this->company_id);
 
+        if ($days == "null") {
+            $days = 7;
+        }
+
         $newInvoice['creator_id'] = $this->creator_id;
         $newInvoice['invoice_date'] = Carbon::today()->format('Y-m-d');
         $newInvoice['due_date'] = Carbon::today()->addDays($days)->format('Y-m-d');

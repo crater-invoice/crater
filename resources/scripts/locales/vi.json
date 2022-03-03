@@ -99,7 +99,8 @@
     "note": "Ghi chú",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Đánh dấu mặc định"
   },
   "dashboard": {
     "select_year": "Chọn năm",
@@ -353,7 +354,8 @@
       "amount": "Số tiền",
       "select_an_item": "Nhập hoặc nhấp để chọn một mục",
       "type_item_description": "Loại Mục Mô tả (tùy chọn)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "Nếu bật, mẫu đang chọn sẽ được tự động áp dụng cho ước tính mới."
   },
   "invoices": {
     "title": "Hóa đơn",
@@ -444,7 +446,8 @@
     "deleted_message": "Hóa đơn đã được xóa thành công | Hóa đơn đã được xóa thành công",
     "marked_as_sent_message": "Hóa đơn được đánh dấu là đã gửi thành công",
     "something_went_wrong": "có gì đó không ổn",
-    "invalid_due_amount_message": "Tổng số tiền trên Hóa đơn không được nhỏ hơn tổng số tiền đã thanh toán cho Hóa đơn này. Vui lòng cập nhật hóa đơn hoặc xóa các khoản thanh toán liên quan để tiếp tục."
+    "invalid_due_amount_message": "Tổng số tiền trên Hóa đơn không được nhỏ hơn tổng số tiền đã thanh toán cho Hóa đơn này. Vui lòng cập nhật hóa đơn hoặc xóa các khoản thanh toán liên quan để tiếp tục.",
+    "mark_as_default_invoice_template_description": "Nếu bật, mẫu đang chọn sẽ được tự động áp dụng cho hóa đơn mới."
   },
   "recurring_invoices": {
     "title": "Hóa đơn định kỳ",

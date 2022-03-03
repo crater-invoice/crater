@@ -53,6 +53,7 @@ function get_page_title($company_id)
         }
 
         $pageTitle = Setting::getSetting('admin_page_title');
+
         return $pageTitle ? $pageTitle : $defaultPageTitle;
     }
 }

@@ -20,17 +20,8 @@ use Crater\Http\Controllers\V1\PDF\PaymentPdfController;
 use Crater\Models\Company;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Frontend Routes
-|--------------------------------------------------------------------------
-|
-*/
-
-
-// Script Includes
+// Module Asset Includes
 // ----------------------------------------------
-
 
 Route::get('/modules/styles/{style}', StyleController::class);
 
@@ -56,6 +47,9 @@ Route::post('/{company:slug}/customer/logout', function () {
     Auth::guard('customer')->logout();
 });
 
+
+// Report PDF & Expense Endpoints
+// ----------------------------------------------
 
 Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
 
@@ -86,6 +80,10 @@ Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
     Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
 });
 
+
+// PDF Endpoints
+// ----------------------------------------------
+
 Route::middleware('pdf-auth')->group(function () {
 
     //  invoice pdf
@@ -100,7 +98,6 @@ Route::middleware('pdf-auth')->group(function () {
     // -------------------------------------------------
     Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
 });
-
 
 
 // customer pdf endpoints for invoice, estimate and Payment

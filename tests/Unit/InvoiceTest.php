@@ -47,7 +47,7 @@ test('get previous status', function () {
 
     $status = $invoice->getPreviousStatus();
 
-    $this->assertEquals('OVERDUE', $status);
+    $this->assertEquals('DRAFT', $status);
 });
 
 

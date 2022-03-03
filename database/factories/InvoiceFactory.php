@@ -37,29 +37,11 @@ class InvoiceFactory extends Factory
         });
     }
 
-    public function overdue()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'status' => Invoice::STATUS_OVERDUE,
-            ];
-        });
-    }
-
     public function completed()
     {
         return $this->state(function (array $attributes) {
             return [
                 'status' => Invoice::STATUS_COMPLETED,
-            ];
-        });
-    }
-
-    public function due()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'status' => Invoice::STATUS_DUE,
             ];
         });
     }

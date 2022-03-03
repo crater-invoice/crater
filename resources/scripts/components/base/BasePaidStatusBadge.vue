@@ -29,6 +29,8 @@ export default {
           return ' bg-yellow-500 bg-opacity-25 text-yellow-900 uppercase font-normal text-center '
         case 'PARTIALLY_PAID':
           return 'bg-blue-400 bg-opacity-25 text-blue-900 uppercase font-normal text-center'
+        case 'OVERDUE':
+          return 'bg-red-300 bg-opacity-50 px-2  py-1 text-sm  text-red-900 uppercase font-normal text-center'
         default:
           return 'bg-gray-500 bg-opacity-25 text-gray-900 uppercase font-normal text-center'
       }

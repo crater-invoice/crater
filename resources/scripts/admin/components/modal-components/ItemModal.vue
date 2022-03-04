@@ -50,7 +50,7 @@
                 :can-clear="false"
                 :placeholder="$t('items.select_a_unit')"
                 searchable
-                track-by="id"
+                track-by="name"
               />
             </BaseInputGroup>
 
@@ -67,7 +67,7 @@
                 :can-deselect="false"
                 :can-clear="false"
                 searchable
-                track-by="id"
+                track-by="name"
                 object
               />
             </BaseInputGroup>

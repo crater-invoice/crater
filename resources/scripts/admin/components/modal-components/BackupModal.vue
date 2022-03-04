@@ -51,7 +51,7 @@
               label="name"
               value-prop="id"
               :placeholder="$t('settings.disk.select_disk')"
-              track-by="id"
+              track-by="name"
               object
             />
           </BaseInputGroup>

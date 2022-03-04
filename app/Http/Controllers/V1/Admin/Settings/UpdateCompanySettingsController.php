@@ -23,11 +23,13 @@ class UpdateCompanySettingsController extends Controller
         $companyCurrency = CompanySetting::getSetting('currency', $request->header('company'));
         $data = $request->settings;
 
-        if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Cannot update company currency after transactions are created.'
-            ]);
+        if (array_key_exists('currency', $data)) {
+            if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cannot update company currency after transactions are created.'
+                ]);
+            }
         }
 
         CompanySetting::setSettings($data, $request->header('company'));

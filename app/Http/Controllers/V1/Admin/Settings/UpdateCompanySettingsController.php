@@ -2,11 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Models\Company;
-use Illuminate\Support\Arr;
-use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\UpdateSettingsRequest;
+use Crater\Models\Company;
+use Crater\Models\CompanySetting;
+use Illuminate\Support\Arr;
 
 class UpdateCompanySettingsController extends Controller
 {

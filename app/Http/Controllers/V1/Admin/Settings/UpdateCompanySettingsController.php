@@ -2,10 +2,11 @@
 
 namespace Crater\Http\Controllers\V1\Admin\Settings;
 
+use Crater\Models\Company;
+use Illuminate\Support\Arr;
+use Crater\Models\CompanySetting;
 use Crater\Http\Controllers\Controller;
 use Crater\Http\Requests\UpdateSettingsRequest;
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
 
 class UpdateCompanySettingsController extends Controller
 {
@@ -20,10 +21,13 @@ class UpdateCompanySettingsController extends Controller
         $company = Company::find($request->header('company'));
         $this->authorize('manage company', $company);
 
-        $companyCurrency = CompanySetting::getSetting('currency', $request->header('company'));
         $data = $request->settings;
 
-        if ($companyCurrency !== $data['currency'] && $company->hasTransactions()) {
+        if (
+            Arr::exists($data, 'currency') &&
+            (CompanySetting::getSetting('currency', $company->id) !== $data['currency']) && 
+            $company->hasTransactions()
+        ) {
             return response()->json([
                 'success' => false,
                 'message' => 'Cannot update company currency after transactions are created.'

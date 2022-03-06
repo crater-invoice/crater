@@ -526,7 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
-    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
+    "add_customer_email": "Thêm một địa chỉ email cho khách hàng này để gửi hóa đơn tự động.",
     "item": {
       "title": "Item Title",
       "description": "Description",

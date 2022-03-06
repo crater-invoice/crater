@@ -526,6 +526,7 @@
     "cloned_successfully": "Serienrechnung erfolgreich kopiert",
     "clone_invoice": "Serienrechnung kopieren",
     "confirm_clone": "Diese Serienrechnung wird in eine neue Serienrechnung kopiert",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Titel des Artikels",
       "description": "Beschreibung",

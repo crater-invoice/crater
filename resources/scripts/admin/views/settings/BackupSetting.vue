@@ -23,7 +23,7 @@
           v-model="filters.selected_disk"
           :content-loading="isFetchingInitialData"
           :options="getDisksOptions"
-          track-by="id"
+          track-by="name"
           :placeholder="$t('settings.disk.select_disk')"
           label="name"
           :searchable="true"

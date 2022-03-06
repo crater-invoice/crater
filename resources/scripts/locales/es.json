@@ -526,6 +526,7 @@
     "cloned_successfully": "Factura recurrente clonada con éxito",
     "clone_invoice": "Clonar factura recurrente",
     "confirm_clone": "Esta factura recurrente será clonada en una nueva factura recurrente",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Título del artículo",
       "description": "Descripción",

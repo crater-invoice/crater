@@ -124,7 +124,6 @@ test('update settings', function () {
 });
 
 test('update settings without currency setting', function () {
-
     $settings = [
         'notification_email' => 'noreply@crater.in',
     ];
@@ -144,7 +143,7 @@ test('update settings without currency setting', function () {
     }
 });
 
-test('update currency settings after company has currency and transactions is not allowed', function () {        
+test('update currency settings after company has currency and transactions is not allowed', function () {
     $settings = [
         'currency' => 1,
     ];

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./container-services/Dockerfile.app.dev
+    image: crater-php-dev
+    ports:
+      - 3000:3000
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8880:8080
+    networks:
+      - database
+    depends_on:
+      - db

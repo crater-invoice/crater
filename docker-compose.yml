@@ -7,15 +7,21 @@ services:
         user: crater-user
         uid: 1000
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: ./container-services/Dockerfile.app.prod
     image: crater-php
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
       - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
+      - ./container-services/app/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
-      - crater
+      - application
+      - frontend
+      - database
+    expose:
+      - 9000
+    depends_on:
+      - db
 
   db:
     image: mariadb
@@ -24,16 +30,16 @@ services:
       - db:/var/lib/mysql
       # If you want to persist data on the host, comment the line above this one...
       # and uncomment the line under this one.
-      #- ./docker-compose/db/data:/var/lib/mysql:rw,delegated
+      #- ./container-services/db/data:/var/lib/mysql:rw,delegated
     environment:
-      MYSQL_USER: crater
-      MYSQL_PASSWORD: crater
-      MYSQL_DATABASE: crater
-      MYSQL_ROOT_PASSWORD: crater
-    ports:
-      - '33006:3306'
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
-      - crater
+      - database
+    expose:
+      - 3306
 
   nginx:
     image: nginx:1.17-alpine
@@ -42,22 +48,27 @@ services:
       - 80:80
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./container-services/nginx:/etc/nginx/conf.d/
     networks:
-      - crater
+      - frontend
+    depends_on:
+      - app
 
   cron:
     build:
       context: ./
-      dockerfile: ./docker-compose/cron.dockerfile
+      dockerfile: ./container-services/Dockerfile.cron
     volumes:
       - ./:/var/www
     networks:
-      - crater
+      - database
+    depends_on:
+      - app
 
 volumes:
-  db:
+  db: null
 
 networks:
-  crater:
-    driver: bridge
+  frontend: null
+  application: null
+  database: null

@@ -25,7 +25,7 @@ class UpdateCompanySettingsController extends Controller
 
         if (
             Arr::exists($data, 'currency') &&
-            (CompanySetting::getSetting('currency', $company->id) !== $data['currency']) && 
+            (CompanySetting::getSetting('currency', $company->id) !== $data['currency']) &&
             $company->hasTransactions()
         ) {
             return response()->json([

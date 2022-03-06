@@ -498,7 +498,7 @@ class Invoice extends Model implements HasMedia
             if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
                 foreach ($invoiceItem['taxes'] as $tax) {
                     $tax['company_id'] = $invoice->company_id;
-                    $tax['exchnage_rate'] = $invoice->exchange_rate;
+                    $tax['exchange_rate'] = $invoice->exchange_rate;
                     $tax['base_amount'] = $tax['amount'] * $exchange_rate;
                     $tax['currency_id'] = $invoice->currency_id;
 
@@ -524,7 +524,7 @@ class Invoice extends Model implements HasMedia
 
         foreach ($taxes as $tax) {
             $tax['company_id'] = $invoice->company_id;
-            $tax['exchnage_rate'] = $invoice->exchange_rate;
+            $tax['exchange_rate'] = $invoice->exchange_rate;
             $tax['base_amount'] = $tax['amount'] * $exchange_rate;
             $tax['currency_id'] = $invoice->currency_id;
 

@@ -526,6 +526,7 @@
     "cloned_successfully": "Faktur Berulang berhasil digandakan",
     "clone_invoice": "Gandakan Faktur Berulang",
     "confirm_clone": "Faktur Berulang ini akan digandakan menjadi Faktur Berulang yang baru",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Judul item",
       "description": "Deskripsi",

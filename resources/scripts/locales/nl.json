@@ -526,6 +526,7 @@
     "cloned_successfully": "Terugkerende factuur succesvol gekopieerd",
     "clone_invoice": "Kopieer periodieke factuur",
     "confirm_clone": "Deze periodieke factuur wordt gekopieerd naar een nieuwe periodieke factuur",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item titel",
       "description": "Beschrijving",

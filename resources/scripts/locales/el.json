@@ -526,6 +526,7 @@
     "cloned_successfully": "Επαναλαμβανόμενο τιμολόγιο κλωνοποιήθηκε επιτυχής",
     "clone_invoice": "Δημιουργία Επαναλαμβανόμενου Τιμολογίου",
     "confirm_clone": "Αυτό το επαναλαμβανόμενο τιμολόγιο θα κλωνοποιηθεί σε ένα νέο επαναλαμβανόμενο τιμολόγιο",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Τίτλος Προϊόντος",
       "description": "Περιγραφή",

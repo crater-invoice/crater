@@ -592,6 +592,23 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
                 'swap_currency_symbol' => true,
             ],
+            [
+                'name' => 'Bitcoin',
+                'code' => 'BTC',
+                'symbol' => '₿',
+                'precision' => '8',
+                'thousand_separator' => '.',
+                'decimal_separator' => ',',
+            ],
+            [
+                'name' => 'Satoshi',
+                'code' => 'SAT',
+                'symbol' => 'sat',
+                'precision' => '0',
+                'thousand_separator' => ' ',
+                'decimal_separator' => ',',
+                'swap_currency_symbol' => true,
+            ],
         ];
 
 

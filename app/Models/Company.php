@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Silber\Bouncer\BouncerFacade;
 use Silber\Bouncer\Database\Role;
+use Silber\Bouncer\Database\Ability;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -352,6 +353,18 @@ class Company extends Model implements HasMedia
                 $role->delete();
             });
         }
+
+        // remove all 
+        $abilities = Ability::when($this->id, function ($query) {
+            return $query->where('scope', $this->id);
+        })->get();
+
+        if ($abilities) {
+            $abilities->map(function ($ability) {
+                $ability->delete();
+            });
+        }
+
 
         if ($this->users()->exists()) {
             $user->companies()->detach($this->id);

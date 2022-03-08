@@ -354,7 +354,7 @@ class Company extends Model implements HasMedia
             });
         }
 
-        // remove all 
+        // remove all abilities
         $abilities = Ability::when($this->id, function ($query) {
             return $query->where('scope', $this->id);
         })->get();

@@ -28,6 +28,18 @@
           />
         </BaseInputGroup>
 
+        <BaseInputGroup
+          :label="$tc('settings.company_info.company_slug')"
+          :error="v$.slug.$error && v$.slug.$errors[0].$message"
+          required
+        >
+          <BaseInput
+            v-model="companyForm.slug"
+            :invalid="v$.slug.$error"
+            @blur="v$.slug.$touch()"
+          />
+        </BaseInputGroup>
+
         <BaseInputGroup :label="$tc('settings.company_info.phone')">
           <BaseInput v-model="companyForm.address.phone" />
         </BaseInputGroup>
@@ -160,6 +172,7 @@ let isSaving = ref(false)
 
 const companyForm = reactive({
   name: null,
+  slug: null,
   logo: null,
   address: {
     address_street_1: '',
@@ -193,7 +206,14 @@ const rules = computed(() => {
     name: {
       required: helpers.withMessage(t('validation.required'), required),
       minLength: helpers.withMessage(
-        t('validation.name_min_length'),
+        t('validation.name_min_length', { count: 3 }),
+        minLength(3)
+      ),
+    },
+    slug: {
+      required: helpers.withMessage(t('validation.required'), required),
+      minLength: helpers.withMessage(
+        t('validation.name_min_length', { count: 3 }),
         minLength(3)
       ),
     },

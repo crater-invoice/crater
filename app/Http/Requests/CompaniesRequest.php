@@ -33,7 +33,7 @@ class CompaniesRequest extends FormRequest
             'currency' => [
                 'required'
             ],
-            'currency' => [
+            'slug' => [
                 'required'
             ],
             'address.name' => [
@@ -70,7 +70,8 @@ class CompaniesRequest extends FormRequest
     {
         return collect($this->validated())
             ->only([
-                'name'
+                'name',
+                'slug'
             ])
             ->merge([
                 'owner_id' => $this->user()->id

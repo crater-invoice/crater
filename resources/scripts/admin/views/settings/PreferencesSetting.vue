@@ -8,7 +8,11 @@
         <BaseInputGroup
           :content-loading="isFetchingInitialData"
           :label="$tc('settings.preferences.currency')"
-          :help-text="$t('settings.preferences.company_currency_unchangeable')"
+          :help-text="
+            isCurrencyDisabled
+              ? $t('settings.preferences.company_currency_unchangeable')
+              : ''
+          "
           :error="v$.currency.$error && v$.currency.$errors[0].$message"
           required
         >
@@ -21,7 +25,7 @@
             :searchable="true"
             track-by="name"
             :invalid="v$.currency.$error"
-            disabled
+            :disabled="isCurrencyDisabled"
             class="w-full"
           >
           </BaseMultiselect>
@@ -187,6 +191,7 @@ const { t, tm } = useI18n()
 let isSaving = ref(false)
 let isDataSaving = ref(false)
 let isFetchingInitialData = ref(false)
+let isCurrencyDisabled = ref(true)
 
 const settingsForm = reactive({ ...companyStore.selectedCompanySettings })
 
@@ -282,10 +287,14 @@ setInitialData()
 async function setInitialData() {
   isFetchingInitialData.value = true
   Promise.all([
+    companyStore.checkCompanyHasCurrencyTransactions(),
     globalStore.fetchCurrencies(),
     globalStore.fetchDateFormats(),
     globalStore.fetchTimeZones(),
   ]).then(([res1]) => {
+    if (res1.data?.has_transactions == false) {
+      isCurrencyDisabled.value = false
+    }
     isFetchingInitialData.value = false
   })
 }

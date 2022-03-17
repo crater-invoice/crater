@@ -99,7 +99,8 @@
     "note": "Σημείωση",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Επιλογή έτους",
@@ -353,7 +354,8 @@
       "amount": "Ποσό",
       "select_an_item": "Πληκτρολογήστε ή κάντε κλικ για να επιλέξετε ένα στοιχείο",
       "type_item_description": "Πληκτρολογήστε Περιγραφή Στοιχείου (προαιρετικό)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Τιμολόγια",
@@ -444,7 +446,8 @@
     "deleted_message": "Ο υπολογισμός διαγράφηκε επιτυχώς",
     "marked_as_sent_message": "Το τιμολόγιο επισημάνθηκε ως απεσταλμένο επιτυχώς",
     "something_went_wrong": "Κάτι πήγε στραβά",
-    "invalid_due_amount_message": "Συνολικό επαναλαμβανόμενο ποσό Τιμολογίου δεν μπορεί να είναι μικρότερο από το συνολικό καταβληθέν ποσό για αυτό το επαναλαμβανόμενο τιμολόγιο. Παρακαλούμε ενημερώστε το τιμολόγιο ή διαγράψτε τις σχετικές πληρωμές για να συνεχίσετε."
+    "invalid_due_amount_message": "Συνολικό επαναλαμβανόμενο ποσό Τιμολογίου δεν μπορεί να είναι μικρότερο από το συνολικό καταβληθέν ποσό για αυτό το επαναλαμβανόμενο τιμολόγιο. Παρακαλούμε ενημερώστε το τιμολόγιο ή διαγράψτε τις σχετικές πληρωμές για να συνεχίσετε.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Επαναλαμβανόμενα τιμολόγια",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Επαναλαμβανόμενο τιμολόγιο κλωνοποιήθηκε επιτυχής",
     "clone_invoice": "Δημιουργία Επαναλαμβανόμενου Τιμολογίου",
     "confirm_clone": "Αυτό το επαναλαμβανόμενο τιμολόγιο θα κλωνοποιηθεί σε ένα νέο επαναλαμβανόμενο τιμολόγιο",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Τίτλος Προϊόντος",
       "description": "Περιγραφή",

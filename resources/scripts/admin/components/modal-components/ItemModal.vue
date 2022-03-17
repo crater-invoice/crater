@@ -50,7 +50,7 @@
                 :can-clear="false"
                 :placeholder="$t('items.select_a_unit')"
                 searchable
-                track-by="id"
+                track-by="name"
               />
             </BaseInputGroup>
 
@@ -61,13 +61,14 @@
               <BaseMultiselect
                 v-model="taxes"
                 :options="getTaxTypes"
-                label="name"
+                mode="tags"
+                label="tax_name"
                 value-prop="id"
                 class="w-full"
                 :can-deselect="false"
                 :can-clear="false"
                 searchable
-                track-by="id"
+                track-by="tax_name"
                 object
               />
             </BaseInputGroup>

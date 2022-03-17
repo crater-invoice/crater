@@ -99,7 +99,8 @@
     "note": "Užrašas",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Pasirinkite metus",
@@ -353,7 +354,8 @@
       "amount": "Amount",
       "select_an_item": "Type or click to select an item",
       "type_item_description": "Type Item Description (optional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Sąskaitos",
@@ -444,7 +446,8 @@
     "deleted_message": "Sąskaita pašalinta sėkmingai | Sąskaitos pašalintos sėkmingai",
     "marked_as_sent_message": "Sąskaita pažymėta kaip sėkmingai išsiųsta",
     "something_went_wrong": "įvyko klaida",
-    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue."
+    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Pasikartojančios sąskaitos",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

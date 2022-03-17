@@ -99,7 +99,8 @@
     "note": "Poznámka",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Vybrat rok",
@@ -353,7 +354,8 @@
       "amount": "Množství",
       "select_an_item": "Pište nebo klikněte pro výběr položky",
       "type_item_description": "Zadejte popis položky (volitelné)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Faktury",
@@ -444,7 +446,8 @@
     "deleted_message": "Faktura byla úspěšně odstraněna | Faktury byly úspěšně odstraněny",
     "marked_as_sent_message": "Faktura označena jako úspěšně odeslaná",
     "something_went_wrong": "něco se nezdařilo",
-    "invalid_due_amount_message": "Celková částka faktury nemůže být nižší než celková částka zaplacená za tuto fakturu. Chcete-li pokračovat, upravte fakturu nebo smažte související platby."
+    "invalid_due_amount_message": "Celková částka faktury nemůže být nižší než celková částka zaplacená za tuto fakturu. Chcete-li pokračovat, upravte fakturu nebo smažte související platby.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Opakující se faktury",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Opakující se faktura úspěšně naklonována",
     "clone_invoice": "Naklonovat opakující se fakturu",
     "confirm_clone": "Tato opakující se faktura bude naklonována do nové opakující se faktury",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Název položky",
       "description": "Popis",

@@ -99,7 +99,8 @@
     "note": "Note",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "اختر السنة",
@@ -353,7 +354,8 @@
       "amount": "المبلغ المطلوب",
       "select_an_item": "اكتب أو اختر الصنف",
       "type_item_description": "اكتب وصف الصنف (اختياري)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "الفواتير",
@@ -444,7 +446,8 @@
     "deleted_message": "تم حذف الفاتورة بنجاح | تم حذف الفواتير بنجاح",
     "marked_as_sent_message": "تم إرسال الفاتورة بنجاح",
     "something_went_wrong": "خطأ غير معروف!",
-    "invalid_due_amount_message": "المبلغ النهائي للفاتورة لا يمكن أن يكون أقل من المبلغ المطلوب لها. رجاءاً حدث الفاتورة أو قم بحذف المدفوعات المرتبطة بها للاستمرار."
+    "invalid_due_amount_message": "المبلغ النهائي للفاتورة لا يمكن أن يكون أقل من المبلغ المطلوب لها. رجاءاً حدث الفاتورة أو قم بحذف المدفوعات المرتبطة بها للاستمرار.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Recurring Invoices",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

@@ -139,7 +139,12 @@ class Customer extends Authenticatable implements HasMedia
             }
 
             if ($customer->invoices()->exists()) {
-                $customer->invoices()->delete();
+                $customer->invoices->map(function ($invoice) {
+                    if ($invoice->transactions()->exists()) {
+                        $invoice->transactions()->delete();
+                    }
+                    $invoice->delete();
+                });
             }
 
             if ($customer->payments()->exists()) {

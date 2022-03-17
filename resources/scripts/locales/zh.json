@@ -99,7 +99,8 @@
     "note": "備註",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "選擇年份",
@@ -353,7 +354,8 @@
       "amount": "總額",
       "select_an_item": "輸入或點擊去選擇商品",
       "type_item_description": "商品詳情(可選)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "發票",
@@ -444,7 +446,8 @@
     "deleted_message": "成功刪除發票 | 成功刪除發票",
     "marked_as_sent_message": "發票已標示為成功傳送",
     "something_went_wrong": "出現錯誤",
-    "invalid_due_amount_message": "發票總額不能少於支付總額. 請更新發票或刪除相關支付再繼續."
+    "invalid_due_amount_message": "發票總額不能少於支付總額. 請更新發票或刪除相關支付再繼續.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "定期發票",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

@@ -99,7 +99,8 @@
     "note": "Notering",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Välj år",
@@ -353,7 +354,8 @@
       "amount": "Summa",
       "select_an_item": "Skriv eller klicka för att välja artikel",
       "type_item_description": "Skriv in artikelns beskrivning (frivilligt)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Fakturor",
@@ -444,7 +446,8 @@
     "deleted_message": "Faktura raderades | fakturor raderades",
     "marked_as_sent_message": "Faktura markerad som skickad",
     "something_went_wrong": "något blev fel",
-    "invalid_due_amount_message": "Totalsumman för fakturan kan inte vara lägra än den betalda summan. Vänligen uppdatera fakturan eller radera dom kopplade betalningarna."
+    "invalid_due_amount_message": "Totalsumman för fakturan kan inte vara lägra än den betalda summan. Vänligen uppdatera fakturan eller radera dom kopplade betalningarna.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Återkommande fakturor",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

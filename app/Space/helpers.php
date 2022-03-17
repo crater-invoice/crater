@@ -7,92 +7,56 @@ use Crater\Models\Setting;
 use Illuminate\Support\Str;
 
 /**
- * Get current customer theme
+ * Get company setting
  *
  * @param $company_id
  * @return string
  */
-function get_customer_portal_theme($company_id)
+function get_company_setting($key, $company_id)
 {
     if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_theme', $company_id);
+        return CompanySetting::getSetting($key, $company_id);
     }
 }
 
-
 /**
- * Get current customer logo
+ * Get app setting
  *
  * @param $company_id
  * @return string
  */
-function get_customer_logo($company_id)
+function get_app_setting($key)
 {
     if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting('customer_portal_logo', $company_id);
+        return Setting::getSetting($key);
     }
 }
 
-
 /**
- * Get current admin portal logo
+ * Get page title
  *
  * @param $company_id
  * @return string
  */
-function get_login_page_logo()
+function get_page_title($company_id)
 {
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_logo');
-    }
-}
+    $routeName = Route::currentRouteName();
 
-/**
- * Get current admin theme
- *
- * @return string
- */
-function get_admin_portal_theme()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        $setting = Setting::getSetting('admin_portal_theme');
+    $pageTitle = null;
+    $defaultPageTitle = 'Crater - Self Hosted Invoicing Platform';
 
-        if ($setting) {
-            return $setting;
+    if (\Storage::disk('local')->has('database_created')) {
+        if ($routeName === 'customer.dashboard') {
+            $pageTitle = CompanySetting::getSetting('customer_portal_page_title', $company_id);
+
+            return $pageTitle ? $pageTitle : $defaultPageTitle;
         }
 
-        return  'crater';
-    }
+        $pageTitle = Setting::getSetting('admin_page_title');
 
-    return 'crater';
-}
-
-/**
- * Get current login page heading
- *
- * @param $company_id
- * @return string
- */
-function get_login_page_heading()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_heading');
+        return $pageTitle ? $pageTitle : $defaultPageTitle;
     }
 }
-
-/**
- * Get current login page description
- *
- * @param $company_id
- * @return string
- */
-function get_login_page_description()
-{
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting('login_page_description');
-    }
-}
-
 
 /**
  * Set Active Path

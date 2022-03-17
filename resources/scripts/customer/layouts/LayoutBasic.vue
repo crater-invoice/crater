@@ -6,7 +6,7 @@
 
     <!-- <SiteSidebar /> -->
 
-    <main class="mt-16 pb-16 h-screen h-screen-ios overflow-y-auto min-h-0">
+    <main class="mt-16 pb-16 h-screen overflow-y-auto min-h-0">
       <router-view />
     </main>
   </div>

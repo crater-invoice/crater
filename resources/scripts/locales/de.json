@@ -99,7 +99,8 @@
     "note": "Notiz",
     "pay_invoice": "Rechnung bezahlen",
     "login_successfully": "Erfolgreich angemeldet!",
-    "logged_out_successfully": "Erfolgreich abgemeldet"
+    "logged_out_successfully": "Erfolgreich abgemeldet",
+    "mark_as_default": "Als Standard festlegen"
   },
   "dashboard": {
     "select_year": "Jahr wählen",
@@ -353,7 +354,8 @@
       "amount": "Summe",
       "select_an_item": "Wählen Sie einen Artikel",
       "type_item_description": "Artikel Beschreibung (optional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "Wenn aktiviert, wird die ausgewählte Vorlage automatisch für neue Angebote ausgewählt."
   },
   "invoices": {
     "title": "Rechnungen",
@@ -444,7 +446,8 @@
     "deleted_message": "Rechnung erfolgreich gelöscht | Rechnungen erfolgreich gelöscht",
     "marked_as_sent_message": "Rechnung als erfolgreich gesendet markiert",
     "something_went_wrong": "Da ist etwas schief gelaufen",
-    "invalid_due_amount_message": "Der Gesamtrechnungsbetrag darf nicht kleiner sein als der für diese Rechnung bezahlte Gesamtbetrag. Bitte aktualisieren Sie die Rechnung oder löschen Sie die zugehörigen Zahlungen um fortzufahren."
+    "invalid_due_amount_message": "Der Gesamtrechnungsbetrag darf nicht kleiner sein als der für diese Rechnung bezahlte Gesamtbetrag. Bitte aktualisieren Sie die Rechnung oder löschen Sie die zugehörigen Zahlungen um fortzufahren.",
+    "mark_as_default_invoice_template_description": "Wenn aktiviert, wird die ausgewählte Vorlage automatisch für neue Rechnungen ausgewählt."
   },
   "recurring_invoices": {
     "title": "Serienrechnungen",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Serienrechnung erfolgreich kopiert",
     "clone_invoice": "Serienrechnung kopieren",
     "confirm_clone": "Diese Serienrechnung wird in eine neue Serienrechnung kopiert",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Titel des Artikels",
       "description": "Beschreibung",

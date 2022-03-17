@@ -99,7 +99,8 @@
     "note": "Notitie",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Selecteer jaar",
@@ -353,7 +354,8 @@
       "amount": "Bedrag",
       "select_an_item": "Typ of klik om een item te selecteren",
       "type_item_description": "Type Item Beschrijving (optioneel)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Facturen",
@@ -444,7 +446,8 @@
     "deleted_message": "Factuur succesvol verwijderd | Facturen succesvol verwijderd",
     "marked_as_sent_message": "Factuur gemarkeerd als succesvol verzonden",
     "something_went_wrong": "Er is iets fout gegaan",
-    "invalid_due_amount_message": "Het totale factuurbedrag mag niet lager zijn dan het totale betaalde bedrag voor deze factuur. Werk de factuur bij of verwijder de bijbehorende betalingen om door te gaan."
+    "invalid_due_amount_message": "Het totale factuurbedrag mag niet lager zijn dan het totale betaalde bedrag voor deze factuur. Werk de factuur bij of verwijder de bijbehorende betalingen om door te gaan.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Periodieke facturen",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Terugkerende factuur succesvol gekopieerd",
     "clone_invoice": "Kopieer periodieke factuur",
     "confirm_clone": "Deze periodieke factuur wordt gekopieerd naar een nieuwe periodieke factuur",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item titel",
       "description": "Beschrijving",

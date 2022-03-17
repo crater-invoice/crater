@@ -99,7 +99,8 @@
     "note": "Nota",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Seleccionar año",
@@ -353,7 +354,8 @@
       "amount": "Cantidad",
       "select_an_item": "Escriba o haga clic para seleccionar un elemento",
       "type_item_description": "Descripción del tipo de elemento(opcional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Facturas",
@@ -444,7 +446,8 @@
     "deleted_message": "Factura eliminada con éxito | Facturas borradas exitosamente",
     "marked_as_sent_message": "Factura marcada como enviada con éxito",
     "something_went_wrong": "Algo fue mal",
-    "invalid_due_amount_message": "El pago introducido es mayor que el importe total pendiente de esta factura. Por favor, verificalo y vuelve a intentarlo."
+    "invalid_due_amount_message": "El pago introducido es mayor que el importe total pendiente de esta factura. Por favor, verificalo y vuelve a intentarlo.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Facturas recurrentes",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Factura recurrente clonada con éxito",
     "clone_invoice": "Clonar factura recurrente",
     "confirm_clone": "Esta factura recurrente será clonada en una nueva factura recurrente",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Título del artículo",
       "description": "Descripción",

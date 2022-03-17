@@ -217,7 +217,7 @@ class Company extends Model implements HasMedia
             'estimate_billing_address_format' => $billingAddressFormat,
             'payment_company_address_format' => $companyAddressFormat,
             'payment_from_customer_address_format' => $paymentFromCustomerAddress,
-            'currency' => request()->currency ?? 12,
+            'currency' => request()->currency ?? 13,
             'time_zone' => 'Asia/Kolkata',
             'language' => 'en',
             'fiscal_year' => '1-12',
@@ -300,6 +300,10 @@ class Company extends Model implements HasMedia
         if ($this->invoices()->exists()) {
             $this->invoices->map(function ($invoice) {
                 $this->checkModelData($invoice);
+
+                if ($invoice->transactions()->exists()) {
+                    $invoice->transactions()->delete();
+                }
             });
 
             $this->invoices()->delete();
@@ -375,5 +379,22 @@ class Company extends Model implements HasMedia
         if ($model->taxes()->exists()) {
             $model->taxes()->delete();
         }
+    }
+
+    public function hasTransactions()
+    {
+        if (
+            $this->customers()->exists() ||
+            $this->items()->exists() ||
+            $this->invoices()->exists() ||
+            $this->estimates()->exists() ||
+            $this->expenses()->exists() ||
+            $this->payments()->exists() ||
+            $this->recurringInvoices()->exists()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 }

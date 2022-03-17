@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen h-screen-ios">
+  <div class="w-full h-screen">
     <div class="flex items-center justify-center w-full h-full">
       <div class="flex flex-col items-center justify-center">
         <h1 class="text-primary-500" style="font-size: 10rem">

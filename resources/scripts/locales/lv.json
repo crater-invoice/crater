@@ -99,7 +99,8 @@
     "note": "Piezīme",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Izvēlieties gadu",
@@ -353,7 +354,8 @@
       "amount": "Summa",
       "select_an_item": "Rakstīt vai spiest, lai izvēlētos",
       "type_item_description": "Ievadiet preces/pakalpojuma aprakstu (nav obligāti)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Rēķini",
@@ -444,7 +446,8 @@
     "deleted_message": "Rēķins veiksmīgi izdzēsts | Rēķini veiksmīgi izdzēsti",
     "marked_as_sent_message": "Rēķins atzīmēts kā veiksmīgi nosūtīts",
     "something_went_wrong": "kaut kas nogāja greizi",
-    "invalid_due_amount_message": "Rēķina kopējā summa nevar būt mazāka par kopējo apmaksāto summu. Lūdzu atjauniniet rēķinu vai dzēsiet piesaistītos maksājumus, lai turpinātu."
+    "invalid_due_amount_message": "Rēķina kopējā summa nevar būt mazāka par kopējo apmaksāto summu. Lūdzu atjauniniet rēķinu vai dzēsiet piesaistītos maksājumus, lai turpinātu.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Regulārie rēķini",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

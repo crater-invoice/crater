@@ -99,7 +99,8 @@
     "note": "Catatan",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Pilih tahun",
@@ -353,7 +354,8 @@
       "amount": "Jumlah",
       "select_an_item": "Ketik atau klik untuk memilih",
       "type_item_description": "Ketik Deskripsi Item (opsional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Faktur",
@@ -444,7 +446,8 @@
     "deleted_message": "Invoice deleted successfully | Invoices deleted successfully",
     "marked_as_sent_message": "Invoice marked as sent successfully",
     "something_went_wrong": "something went wrong",
-    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue."
+    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Recurring Invoices",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Faktur Berulang berhasil digandakan",
     "clone_invoice": "Gandakan Faktur Berulang",
     "confirm_clone": "Faktur Berulang ini akan digandakan menjadi Faktur Berulang yang baru",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Judul item",
       "description": "Deskripsi",

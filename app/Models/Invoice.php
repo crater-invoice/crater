@@ -28,10 +28,8 @@ class Invoice extends Model implements HasMedia
     public const STATUS_DRAFT = 'DRAFT';
     public const STATUS_SENT = 'SENT';
     public const STATUS_VIEWED = 'VIEWED';
-    public const STATUS_OVERDUE = 'OVERDUE';
     public const STATUS_COMPLETED = 'COMPLETED';
 
-    public const STATUS_DUE = 'DUE';
     public const STATUS_UNPAID = 'UNPAID';
     public const STATUS_PARTIALLY_PAID = 'PARTIALLY_PAID';
     public const STATUS_PAID = 'PAID';
@@ -138,7 +136,6 @@ class Invoice extends Model implements HasMedia
             self::STATUS_DRAFT,
             self::STATUS_SENT,
             self::STATUS_VIEWED,
-            self::STATUS_OVERDUE,
             self::STATUS_COMPLETED,
         ];
 
@@ -155,9 +152,7 @@ class Invoice extends Model implements HasMedia
 
     public function getPreviousStatus()
     {
-        if ($this->due_date < Carbon::now()) {
-            return self::STATUS_OVERDUE;
-        } elseif ($this->viewed) {
+        if ($this->viewed) {
             return self::STATUS_VIEWED;
         } elseif ($this->sent) {
             return self::STATUS_SENT;
@@ -254,7 +249,7 @@ class Invoice extends Model implements HasMedia
                 $filters->get('status') == self::STATUS_PAID
             ) {
                 $query->wherePaidStatus($filters->get('status'));
-            } elseif ($filters->get('status') == self::STATUS_DUE) {
+            } elseif ($filters->get('status') == 'DUE') {
                 $query->whereDueStatus($filters->get('status'));
             } else {
                 $query->whereStatus($filters->get('status'));
@@ -503,6 +498,10 @@ class Invoice extends Model implements HasMedia
             if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
                 foreach ($invoiceItem['taxes'] as $tax) {
                     $tax['company_id'] = $invoice->company_id;
+                    $tax['exchange_rate'] = $invoice->exchange_rate;
+                    $tax['base_amount'] = $tax['amount'] * $exchange_rate;
+                    $tax['currency_id'] = $invoice->currency_id;
+
                     if (gettype($tax['amount']) !== "NULL") {
                         if (array_key_exists('recurring_invoice_id', $invoiceItem)) {
                             unset($invoiceItem['recurring_invoice_id']);
@@ -525,7 +524,7 @@ class Invoice extends Model implements HasMedia
 
         foreach ($taxes as $tax) {
             $tax['company_id'] = $invoice->company_id;
-            $tax['exchnage_rate'] = $invoice->exchange_rate;
+            $tax['exchange_rate'] = $invoice->exchange_rate;
             $tax['base_amount'] = $tax['amount'] * $exchange_rate;
             $tax['currency_id'] = $invoice->currency_id;
 
@@ -579,6 +578,10 @@ class Invoice extends Model implements HasMedia
             'logo' => $logo ?? null,
             'taxes' => $taxes,
         ]);
+
+        if (request()->has('preview')) {
+            return view('app.pdf.invoice.'.$invoiceTemplate);
+        }
 
         return PDF::loadView('app.pdf.invoice.'.$invoiceTemplate);
     }
@@ -692,6 +695,7 @@ class Invoice extends Model implements HasMedia
         if ($amount == 0) {
             $this->status = Invoice::STATUS_COMPLETED;
             $this->paid_status = Invoice::STATUS_PAID;
+            $this->overdue = false;
         } elseif ($amount == $this->total) {
             $this->status = $this->getPreviousStatus();
             $this->paid_status = Invoice::STATUS_UNPAID;

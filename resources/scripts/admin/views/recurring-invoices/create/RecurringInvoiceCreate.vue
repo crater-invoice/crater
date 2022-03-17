@@ -27,12 +27,7 @@
             to="#"
             active
           />
-          <BaseBreadcrumbItem
-            v-else
-            :title="pageTitle"
-            to="#"
-            active
-          />
+          <BaseBreadcrumbItem v-else :title="pageTitle" to="#" active />
         </BaseBreadcrumb>
 
         <template #actions>
@@ -143,6 +138,8 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useNotificationStore } from '@/scripts/stores/notification'
+import { useModalStore } from '@/scripts/stores/modal'
 import CreateItems from '@/scripts/admin/components/estimate-invoice-common/CreateItems.vue'
 import CreateTotal from '@/scripts/admin/components/estimate-invoice-common/CreateTotal.vue'
 import SelectTemplateButton from '@/scripts/admin/components/estimate-invoice-common/SelectTemplateButton.vue'
@@ -165,6 +162,7 @@ import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { useCustomFieldStore } from '@/scripts/admin/stores/custom-field'
 import { useRecurringInvoiceStore } from '@/scripts/admin/stores/recurring-invoice'
 import { useModuleStore } from '@/scripts/admin/stores/module'
+import { useCustomerStore } from '@/scripts/admin/stores/customer'
 import SelectTemplateModal from '@/scripts/admin/components/modal-components/SelectTemplateModal.vue'
 import TaxTypeModal from '@/scripts/admin/components/modal-components/TaxTypeModal.vue'
 import ItemModal from '@/scripts/admin/components/modal-components/ItemModal.vue'
@@ -173,7 +171,10 @@ const recurringInvoiceStore = useRecurringInvoiceStore()
 const companyStore = useCompanyStore()
 const customFieldStore = useCustomFieldStore()
 const moduleStore = useModuleStore()
+const modalStore = useModalStore()
+const customerStore = useCustomerStore()
 const recurringInvoiceValidationScope = 'newRecurringInvoice'
+const notificationStore = useNotificationStore()
 const { t } = useI18n()
 let isSaving = ref(false)
 
@@ -292,6 +293,16 @@ async function submitForm() {
     tax: recurringInvoiceStore.getTotalTax,
   }
 
+  if (data.customer && !data.customer.email && data.send_automatically) {
+    notificationStore.showNotification({
+      type: 'error',
+      message: t('recurring_invoices.add_customer_email'),
+    })
+    editCustomer()
+    isSaving.value = false
+    return
+  }
+
   if (route.params.id) {
     recurringInvoiceStore
       .updateRecurringInvoice(data)
@@ -307,6 +318,16 @@ async function submitForm() {
   } else {
     submitCreate(data)
   }
+}
+
+async function editCustomer() {
+  let selectedCustomer = recurringInvoiceStore.newRecurringInvoice.customer.id
+
+  await customerStore.fetchCustomer(selectedCustomer)
+  modalStore.openModal({
+    title: t('customers.edit_customer'),
+    componentName: 'CustomerModal',
+  })
 }
 
 function submitCreate(data) {

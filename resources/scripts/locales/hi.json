@@ -99,7 +99,8 @@
     "note": "Note",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "वर्ष चुनें",
@@ -353,7 +354,8 @@
       "amount": "राशि",
       "select_an_item": "चुनने के लिए टाइप करें या क्लिक करें",
       "type_item_description": "आइटम विवरण टाइप करें (वैकल्पिक)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "चालान",
@@ -444,7 +446,8 @@
     "deleted_message": "चालान सफलतापूर्वक हटाया गया | चालान सफलतापूर्वक हटा दिए गए",
     "marked_as_sent_message": "अनुमान को सफलतापूर्वक भेजा गया के रूप में चिह्नित किया गया",
     "something_went_wrong": "कुछ गलत हो गया",
-    "invalid_due_amount_message": "कुल चालान राशि इस चालान के लिए कुल भुगतान की गई राशि से कम नहीं हो सकती है। जारी रखने के लिए कृपया इनवॉइस अपडेट करें या संबद्ध भुगतानों को हटा दें।"
+    "invalid_due_amount_message": "कुल चालान राशि इस चालान के लिए कुल भुगतान की गई राशि से कम नहीं हो सकती है। जारी रखने के लिए कृपया इनवॉइस अपडेट करें या संबद्ध भुगतानों को हटा दें।",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Recurring Invoices",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",

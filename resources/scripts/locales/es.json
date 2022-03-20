@@ -97,9 +97,9 @@
     "docs": "Documentación",
     "do_you_wish_to_continue": "¿Deseas continuar?",
     "note": "Nota",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully",
+    "pay_invoice": "Pagar factura",
+    "login_successfully": "Logeado Satisfactoriamente!",
+    "logged_out_successfully": "Logeado Satisfactoriamente",
     "mark_as_default": "Mark as default"
   },
   "dashboard": {
@@ -210,7 +210,7 @@
     "basic_info": "Información básica",
     "portal_access": "Portal Access",
     "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
-    "portal_access_url": "Customer Portal Login URL",
+    "portal_access_url": "Portal URL del cliente",
     "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
     "billing_address": "Dirección de Facturación",
     "shipping_address": "Dirección de Envío",

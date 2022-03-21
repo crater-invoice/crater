@@ -35,6 +35,24 @@
         </BaseInputGroup>
 
         <BaseInputGroup
+          :label="$tc('wizard.company_slug')"
+          :help-text="$t('wizard.company_slug_help_text')"
+          :error="
+            v$.companyForm.slug.$error &&
+            v$.companyForm.slug.$errors[0].$message
+          "
+          required
+        >
+          <BaseInput
+            v-model="companyForm.slug"
+            :invalid="v$.companyForm.slug.$error"
+            type="text"
+            name="slug"
+            @input="v$.companyForm.slug.$touch()"
+          />
+        </BaseInputGroup>
+
+        <BaseInputGroup
           :label="$t('wizard.country')"
           :error="
             v$.companyForm.address.country_id.$error &&
@@ -57,9 +75,7 @@
             track-by="name"
           />
         </BaseInputGroup>
-      </div>
 
-      <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 md:mb-6">
         <BaseInputGroup :label="$t('wizard.state')">
           <BaseInput
             v-model="companyForm.address.state"
@@ -144,9 +160,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, reactive } from 'vue'
+import { ref, computed, onMounted, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { required, maxLength, helpers } from '@vuelidate/validators'
+import { required, minLength, maxLength, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import { useGlobalStore } from '@/scripts/admin/stores/global'
 import { useCompanyStore } from '@/scripts/admin/stores/company'
@@ -162,6 +178,7 @@ let logoFileName = ref(null)
 
 const companyForm = reactive({
   name: null,
+  slug: null,
   address: {
     address_street_1: '',
     address_street_2: '',
@@ -188,10 +205,28 @@ onMounted(async () => {
   })?.id
 })
 
+const slugValidator = (value) => {
+  return value == slugify(value)
+}
 const rules = {
   companyForm: {
     name: {
       required: helpers.withMessage(t('validation.required'), required),
+      minLength: helpers.withMessage(
+        t('validation.name_min_length', { count: 3 }),
+        minLength(3)
+      ),
+    },
+    slug: {
+      required: helpers.withMessage(t('validation.required'), required),
+      minLength: helpers.withMessage(
+        t('validation.name_min_length', { count: 3 }),
+        minLength(3)
+      ),
+      slugValidator: helpers.withMessage(
+        t('validation.invalid_slug'),
+        slugValidator
+      ),
     },
     address: {
       country_id: {
@@ -248,5 +283,25 @@ async function next() {
     isSaving.value = false
     emit('next', 7)
   }
+}
+
+// watcher for if change company name then auto fill company slug value
+watch(
+  () => companyForm.name,
+  (currentValue) => {
+    companyForm.slug = slugify(currentValue)
+  }
+)
+
+function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
 }
 </script>

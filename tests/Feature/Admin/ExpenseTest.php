@@ -37,13 +37,15 @@ test('create expense', function () {
 
     postJson('api/v1/expenses', $expense)->assertStatus(201);
 
-    $this->assertDatabaseHas('expenses', [
-        'notes' => $expense['notes'],
-        'expense_category_id' => $expense['expense_category_id'],
-        'amount' => $expense['amount'],
-        'exchange_rate' => $expense['exchange_rate'],
-        'base_amount' => $expense['base_amount'],
-    ]);
+    $expense = collect($expense)
+        ->only([
+            'notes',
+            'expense_category_id',
+            'amount'
+        ])
+        ->toArray();
+
+    $this->assertDatabaseHas('expenses', $expense);
 });
 
 test('store validates using a form request', function () {
@@ -146,11 +148,13 @@ test('update expense with EUR currency', function () {
 
     putJson('api/v1/expenses/'.$expense->id, $expense2)->assertOk();
 
-    $this->assertDatabaseHas('expenses', [
-        'id' => $expense->id,
-        'expense_category_id' => $expense2['expense_category_id'],
-        'amount' => $expense2['amount'],
-        'exchange_rate' => $expense2['exchange_rate'],
-        'base_amount' => $expense2['base_amount'],
-    ]);
+    $expense2 = collect($expense2)
+        ->only([
+            'id',
+            'expense_category_id',
+            'amount'
+        ])
+        ->toArray();
+
+    $this->assertDatabaseHas('expenses', $expense2);
 });

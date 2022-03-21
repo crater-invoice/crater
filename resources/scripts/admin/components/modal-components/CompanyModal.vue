@@ -50,6 +50,7 @@
 
           <BaseInputGroup
             :label="$tc('settings.company_info.company_slug')"
+            :help-text="$t('settings.company_info.company_slug_help_text')"
             :error="
               v$.newCompanyForm.slug.$error &&
               v$.newCompanyForm.slug.$errors[0].$message

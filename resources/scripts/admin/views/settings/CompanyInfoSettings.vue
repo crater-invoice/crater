@@ -30,6 +30,7 @@
 
         <BaseInputGroup
           :label="$tc('settings.company_info.company_slug')"
+          :help-text="$t('settings.company_info.company_slug_help_text')"
           :error="v$.slug.$error && v$.slug.$errors[0].$message"
           required
         >

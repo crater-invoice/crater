@@ -34,7 +34,8 @@ class CompaniesRequest extends FormRequest
                 'required'
             ],
             'slug' => [
-                'required'
+                'required',
+                Rule::unique('companies')
             ],
             'address.name' => [
                 'nullable',

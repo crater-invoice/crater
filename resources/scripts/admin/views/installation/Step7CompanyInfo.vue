@@ -36,6 +36,7 @@
 
         <BaseInputGroup
           :label="$tc('wizard.company_slug')"
+          :help-text="$t('wizard.company_slug_help_text')"
           :error="
             v$.companyForm.slug.$error &&
             v$.companyForm.slug.$errors[0].$message

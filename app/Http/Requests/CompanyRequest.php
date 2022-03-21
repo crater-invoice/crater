@@ -30,7 +30,8 @@ class CompanyRequest extends FormRequest
                 Rule::unique('companies')->ignore($this->header('company'), 'id'),
             ],
             'slug' => [
-                'nullable'
+                'required',
+                Rule::unique('companies')->ignore($this->header('company'), 'id'),
             ],
             'address.country_id' => [
                 'required',

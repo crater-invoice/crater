@@ -25,7 +25,7 @@ class UploadExpenseReceiptRequest extends FormRequest
     public function rules()
     {
         return [
-            'upload_receipt' => [
+            'attachment_receipt' => [
                 'nullable',
                 new Base64Mime(['gif', 'jpg', 'png'])
             ]

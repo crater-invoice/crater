@@ -276,6 +276,14 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
             ],
             [
+                'name' => 'Central African Franc',
+                'code' => 'XAF',
+                'symbol' => 'CFA ',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.',
+            ],
+            [
                 'name' => 'West African Franc',
                 'code' => 'XOF',
                 'symbol' => 'CFA ',

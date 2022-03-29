@@ -2,10 +2,9 @@
 
 namespace Crater\Http\Requests;
 
-use Crater\Rules\Base64Mime;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UploadExpenseReceiptRequest extends FormRequest
+class UnzipUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,13 @@ class UploadExpenseReceiptRequest extends FormRequest
     public function rules()
     {
         return [
-            'attachment_receipt' => [
-                'nullable',
-                new Base64Mime(['gif', 'jpg', 'png'])
+            'path' => [
+                'required',
+                'regex:/^[\.\/\w\-]+$/'
+            ],
+            'module' => [
+                'required',
+                'string'
             ]
         ];
     }

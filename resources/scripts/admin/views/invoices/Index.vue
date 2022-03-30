@@ -56,7 +56,7 @@
         <BaseMultiselect
           v-model="filters.status"
           :groups="true"
-          :options="status"
+          :options="invoiceStatus"
           searchable
           :placeholder="$t('general.select_a_status')"
           @update:modelValue="setActiveTab"
@@ -130,11 +130,27 @@
         "
       >
         <!-- Tabs -->
-        <BaseTabGroup class="-mb-5" @change="setStatusFilter">
-          <BaseTab :title="$t('general.all')" filter="" />
-          <BaseTab :title="$t('general.draft')" filter="DRAFT" />
-          <BaseTab :title="$t('general.sent')" filter="SENT" />
-          <BaseTab :title="$t('general.due')" filter="DUE" />
+        <BaseTabGroup
+          class="-mb-5"
+          :selected-index="selectedIndex"
+          @change="changeTabStatus"
+        >
+          <BaseTab
+            :title="invoiceTabStatus[0].title"
+            :tab-status="invoiceTabStatus[0].value"
+          />
+          <BaseTab
+            :title="invoiceTabStatus[1].title"
+            :tab-status="invoiceTabStatus[1].value"
+          />
+          <BaseTab
+            :title="invoiceTabStatus[2].title"
+            :tab-status="invoiceTabStatus[2].value"
+          />
+          <BaseTab
+            :title="invoiceTabStatus[3].title"
+            :tab-status="invoiceTabStatus[3].value"
+          />
         </BaseTabGroup>
 
         <BaseDropdown
@@ -289,10 +305,10 @@ const utils = inject('$utils')
 const table = ref(null)
 const showFilters = ref(false)
 
-const status = ref([
+const invoiceStatus = ref([
   {
     label: 'Status',
-    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'],
+    options: ['DRAFT', 'SENT', 'VIEWED', 'COMPLETED'],
   },
   {
     label: 'Paid Status',
@@ -300,10 +316,29 @@ const status = ref([
   },
   ,
 ])
+
+const invoiceTabStatus = {
+  0: {
+    title: t('general.all'),
+    value: '',
+  },
+  1: {
+    title: t('general.draft'),
+    value: 'DRAFT',
+  },
+  2: {
+    title: t('general.sent'),
+    value: 'SENT',
+  },
+  3: {
+    title: t('general.due'),
+    value: 'DUE',
+  },
+}
 const isRequestOngoing = ref(true)
-const activeTab = ref('general.draft')
 const router = useRouter()
 const userStore = useUserStore()
+const selectedIndex = ref(0)
 
 let filters = reactive({
   customer_id: '',
@@ -311,6 +346,7 @@ let filters = reactive({
   from_date: '',
   to_date: '',
   invoice_number: '',
+  tab_status: '',
 })
 
 const showEmptyScreen = computed(
@@ -401,6 +437,7 @@ async function fetchData({ page, filter, sort }) {
     from_date: filters.from_date,
     to_date: filters.to_date,
     invoice_number: filters.invoice_number,
+    tab_status: filters.tab_status,
     orderByField: sort.fieldName || 'created_at',
     orderBy: sort.order || 'desc',
     page,
@@ -423,29 +460,9 @@ async function fetchData({ page, filter, sort }) {
   }
 }
 
-function setStatusFilter(val) {
-  if (activeTab.value == val.title) {
-    return true
-  }
-
-  activeTab.value = val.title
-
-  switch (val.title) {
-    case t('general.draft'):
-      filters.status = 'DRAFT'
-      break
-    case t('general.sent'):
-      filters.status = 'SENT'
-      break
-
-    case t('general.due'):
-      filters.status = 'DUE'
-      break
-
-    default:
-      filters.status = ''
-      break
-  }
+function changeTabStatus(val, index) {
+  filters.tab_status = val['tab-status']
+  selectedIndex.value = index
 }
 
 function setFilters() {
@@ -463,8 +480,6 @@ function clearFilter() {
   filters.from_date = ''
   filters.to_date = ''
   filters.invoice_number = ''
-
-  activeTab.value = t('general.all')
 }
 
 async function removeMultipleInvoices() {
@@ -505,39 +520,21 @@ function toggleFilter() {
 function setActiveTab(val) {
   switch (val) {
     case 'DRAFT':
-      activeTab.value = t('general.draft')
+      selectedIndex.value = 1
       break
+
     case 'SENT':
-      activeTab.value = t('general.sent')
-      break
-
-    case 'DUE':
-      activeTab.value = t('general.due')
-      break
-
+    case 'VIEWED':
     case 'COMPLETED':
-      activeTab.value = t('invoices.completed')
-      break
-
     case 'PAID':
-      activeTab.value = t('invoices.paid')
+      selectedIndex.value = 2
       break
 
     case 'UNPAID':
-      activeTab.value = t('invoices.unpaid')
-      break
-
     case 'PARTIALLY_PAID':
-      activeTab.value = t('invoices.partially_paid')
-      break
-
-    case 'VIEWED':
-      activeTab.value = t('invoices.viewed')
-      break
-
-    default:
-      activeTab.value = t('general.all')
+      selectedIndex.value = 3
       break
   }
+  filters.tab_status = invoiceTabStatus[selectedIndex.value].value
 }
 </script>

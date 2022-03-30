@@ -103,6 +103,7 @@ class CustomerStatsController extends Controller
         )
             ->whereCompany()
             ->whereCustomer($customer->id)
+            ->where('status', '<>', Invoice::STATUS_DRAFT)
             ->sum('total');
         $totalReceipts = Payment::whereBetween(
             'payment_date',

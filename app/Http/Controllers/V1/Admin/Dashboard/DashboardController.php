@@ -104,6 +104,7 @@ class DashboardController extends Controller
             'invoice_date',
             [$startDate->format('Y-m-d'), $start->format('Y-m-d')]
         )
+            ->where('status', '<>', Invoice::STATUS_DRAFT)
             ->whereCompany()
             ->sum('base_total');
 
@@ -141,6 +142,7 @@ class DashboardController extends Controller
         $recent_due_invoices = Invoice::with('customer')
             ->whereCompany()
             ->where('base_due_amount', '>', 0)
+            ->where('status', '<>', Invoice::STATUS_DRAFT)
             ->take(5)
             ->latest()
             ->get();

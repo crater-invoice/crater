@@ -650,7 +650,9 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_DATE}' => $this->formattedInvoiceDate,
             '{INVOICE_DUE_DATE}' => $this->formattedDueDate,
             '{INVOICE_NUMBER}' => $this->invoice_number,
-            '{INVOICE_REF_NUMBER}' => $this->reference_number,
+            '{PDF_LINK}' => $this->invoicePdfUrl,
+            '{DUE_AMOUNT}' => format_money_pdf($this->due_amount, $this->customer->currency),
+            '{TOTAL_AMOUNT}' => format_money_pdf($this->total, $this->customer->currency)
         ];
     }
 

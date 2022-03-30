@@ -483,7 +483,8 @@ class Estimate extends Model implements HasMedia
             '{ESTIMATE_DATE}' => $this->formattedEstimateDate,
             '{ESTIMATE_EXPIRY_DATE}' => $this->formattedExpiryDate,
             '{ESTIMATE_NUMBER}' => $this->estimate_number,
-            '{ESTIMATE_REF_NUMBER}' => $this->reference_number,
+            '{PDF_LINK}' => $this->estimatePdfUrl,
+            '{TOTAL_AMOUNT}' => format_money_pdf($this->total, $this->customer->currency)
         ];
     }
 

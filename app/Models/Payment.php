@@ -435,7 +435,8 @@ class Payment extends Model implements HasMedia
             '{PAYMENT_DATE}' => $this->formattedPaymentDate,
             '{PAYMENT_MODE}' => $this->paymentMethod ? $this->paymentMethod->name : null,
             '{PAYMENT_NUMBER}' => $this->payment_number,
-            '{PAYMENT_AMOUNT}' => $this->reference_number,
+            '{PDF_LINK}' => $this->paymentPdfUrl,
+            '{PAYMENT_AMOUNT}' => format_money_pdf($this->amount, $this->customer->currency)
         ];
     }
 

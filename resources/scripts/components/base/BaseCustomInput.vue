@@ -126,7 +126,7 @@ onMounted(() => {
 })
 
 const value = computed({
-  get: () => props.modelValue,
+  get: () => (props.modelValue ? props.modelValue : ''),
   set: (value) => {
     emit('update:modelValue', value)
   },
@@ -195,7 +195,9 @@ async function getFields() {
           { label: 'Date', value: 'INVOICE_DATE' },
           { label: 'Due Date', value: 'INVOICE_DUE_DATE' },
           { label: 'Number', value: 'INVOICE_NUMBER' },
-          { label: 'Ref Number', value: 'INVOICE_REF_NUMBER' },
+          { label: 'PDF Link', value: 'PDF_LINK' },
+          { label: 'Due Amount', value: 'DUE_AMOUNT' },
+          { label: 'Total Amount', value: 'TOTAL_AMOUNT' },
           ...invoiceFields.value.map((i) => ({
             label: i.label,
             value: i.slug,
@@ -211,7 +213,8 @@ async function getFields() {
           { label: 'Date', value: 'ESTIMATE_DATE' },
           { label: 'Expiry Date', value: 'ESTIMATE_EXPIRY_DATE' },
           { label: 'Number', value: 'ESTIMATE_NUMBER' },
-          { label: 'Ref Number', value: 'ESTIMATE_REF_NUMBER' },
+          { label: 'PDF Link', value: 'PDF_LINK' },
+          { label: 'Total Amount', value: 'TOTAL_AMOUNT' },
           ...estimateFields.value.map((i) => ({
             label: i.label,
             value: i.slug,
@@ -228,6 +231,7 @@ async function getFields() {
           { label: 'Number', value: 'PAYMENT_NUMBER' },
           { label: 'Mode', value: 'PAYMENT_MODE' },
           { label: 'Amount', value: 'PAYMENT_AMOUNT' },
+          { label: 'PDF Link', value: 'PDF_LINK' },
           ...paymentFields.value.map((i) => ({
             label: i.label,
             value: i.slug,

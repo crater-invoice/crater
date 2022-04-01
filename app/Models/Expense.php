@@ -240,7 +240,7 @@ class Expense extends Model implements HasMedia
         }
 
         if ($request->hasFile('attachment_receipt')) {
-            $expense->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
+            $expense->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts', 'local');
         }
 
         if ($request->customFields) {
@@ -267,7 +267,7 @@ class Expense extends Model implements HasMedia
         }
         if ($request->hasFile('attachment_receipt')) {
             $this->clearMediaCollection('receipts');
-            $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
+            $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts', 'local');
         }
 
         if ($request->customFields) {

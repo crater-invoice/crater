@@ -187,16 +187,6 @@ class Invoice extends Model implements HasMedia
         return Carbon::parse($this->invoice_date)->format($dateFormat);
     }
 
-    public function scopeWhereStatus($query, $status)
-    {
-        return $query->where('invoices.status', $status);
-    }
-
-    public function scopeWherePaidStatus($query, $status)
-    {
-        return $query->where('invoices.paid_status', $status);
-    }
-
     public function scopeWhereDueStatus($query, $status)
     {
         return $query->whereIn('invoices.paid_status', [
@@ -234,6 +224,40 @@ class Invoice extends Model implements HasMedia
         $query->orderBy($orderByField, $orderBy);
     }
 
+    public function scopeWhereStatus($query, $status)
+    {
+        return $query->where('invoices.status', $status);
+    }
+
+    public function scopeWherePaidStatus($query, $status)
+    {
+        return $query->where('invoices.paid_status', $status);
+    }
+
+    public function scopeWhereTabFilters($query, $status)
+    {
+        if ($status == "DRAFT") {
+            return $query->where('invoices.status', $status);
+        }
+
+        if ($status == "SENT") {
+            return $query->whereIn('invoices.status', [
+                self::STATUS_SENT,
+                self::STATUS_VIEWED,
+                self::STATUS_COMPLETED
+            ]);
+        }
+
+        if ($status == 'DUE') {
+            return $query->whereIn('invoices.paid_status', [
+                self::STATUS_UNPAID,
+                self::STATUS_PARTIALLY_PAID,
+            ]);
+        }
+
+        return ;
+    }
+
     public function scopeApplyFilters($query, array $filters)
     {
         $filters = collect($filters);
@@ -249,15 +273,9 @@ class Invoice extends Model implements HasMedia
                 $filters->get('status') == self::STATUS_PAID
             ) {
                 $query->wherePaidStatus($filters->get('status'));
-            } elseif ($filters->get('status') == 'DUE') {
-                $query->whereDueStatus($filters->get('status'));
             } else {
                 $query->whereStatus($filters->get('status'));
             }
-        }
-
-        if ($filters->get('paid_status')) {
-            $query->wherePaidStatus($filters->get('status'));
         }
 
         if ($filters->get('invoice_id')) {
@@ -650,7 +668,9 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_DATE}' => $this->formattedInvoiceDate,
             '{INVOICE_DUE_DATE}' => $this->formattedDueDate,
             '{INVOICE_NUMBER}' => $this->invoice_number,
-            '{INVOICE_REF_NUMBER}' => $this->reference_number,
+            '{PDF_LINK}' => $this->invoicePdfUrl,
+            '{DUE_AMOUNT}' => format_money_pdf($this->due_amount, $this->customer->currency),
+            '{TOTAL_AMOUNT}' => format_money_pdf($this->total, $this->customer->currency)
         ];
     }
 

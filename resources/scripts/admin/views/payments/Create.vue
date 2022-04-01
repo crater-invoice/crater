@@ -82,9 +82,9 @@
             required
           >
             <BaseCustomerSelectInput
+              v-if="!isLoadingContent"
               v-model="paymentStore.currentPayment.customer_id"
               :content-loading="isLoadingContent"
-              v-if="!isLoadingContent"
               :invalid="v$.currentPayment.customer_id.$error"
               :placeholder="$t('customers.select_a_customer')"
               show-action
@@ -423,7 +423,7 @@ function onCustomerChange(customer_id) {
   if (customer_id) {
     let data = {
       customer_id: customer_id,
-      status: 'DUE',
+      tab_status: 'DUE',
       limit: 'all',
     }
 
@@ -446,7 +446,11 @@ function onCustomerChange(customer_id) {
           paymentStore.currentPayment.selectedCustomer = res2.data.data
           paymentStore.currentPayment.customer = res2.data.data
           paymentStore.currentPayment.currency = res2.data.data.currency
-          if(isEdit.value && !customerStore.editCustomer && paymentStore.currentPayment.customer_id) {
+          if (
+            isEdit.value &&
+            !customerStore.editCustomer &&
+            paymentStore.currentPayment.customer_id
+          ) {
             customerStore.editCustomer = res2.data.data
           }
         }

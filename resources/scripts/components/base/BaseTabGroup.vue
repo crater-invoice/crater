@@ -1,6 +1,10 @@
 <template>
   <div>
-    <TabGroup :default-index="defaultIndex" @change="onChange">
+    <TabGroup
+      :selected-index="selectedIndex"
+      :default-index="defaultIndex"
+      @change="onChange"
+    >
       <TabList
         :class="[
           'flex border-b border-grey-light',
@@ -54,6 +58,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  selectedIndex: {
+    type: Number,
+    default: 0,
+  },
   filter: {
     type: String,
     default: null,
@@ -67,6 +75,6 @@ const slots = useSlots()
 const tabs = computed(() => slots.default().map((tab) => tab.props))
 
 function onChange(d) {
-  emit('change', tabs.value[d])
+  emit('change', tabs.value[d], d)
 }
 </script>

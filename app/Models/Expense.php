@@ -262,7 +262,7 @@ class Expense extends Model implements HasMedia
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
-        if (isset($request->is_attachment_receipt_removed) && (bool) $request->is_attachment_receipt_removed) {
+        if (isset($request->is_attachment_receipt_removed) && $request->is_attachment_receipt_removed == "true") {
             $this->clearMediaCollection('receipts');
         }
         if ($request->hasFile('attachment_receipt')) {

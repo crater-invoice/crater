@@ -1527,5 +1527,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "date_picker": {
+    "same_day": "Same Day",
+    "within_7_days": "Within 7 Days",
+    "within_15_days": "Within 15 Days",
+    "within_30_days": "Within 30 Days",
+    "within_45_days": "Within 45 Days",
+    "within_60_days": "Within 60 Days"
+  }
 }

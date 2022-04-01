@@ -32,6 +32,8 @@
           :content-loading="isLoading"
           :calendar-button="true"
           calendar-button-icon="calendar"
+          :show-extra-options="true"
+          :source-date="estimateStore.newEstimate.estimate_date"
         />
       </BaseInputGroup>
 

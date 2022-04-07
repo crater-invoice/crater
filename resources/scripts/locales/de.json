@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Angebot",
   "pdf_estimate_number": "Angebotsnummer",
   "pdf_estimate_date": "Angebotsdatum",
-  "pdf_estimate_expire_date": "Ablaufdatum",
+  "pdf_estimate_expire_date": "Gültig bis",
   "pdf_invoice_label": "Rechnung",
   "pdf_invoice_number": "Rechnungsnummer",
   "pdf_invoice_date": "Rechnungsdatum",
@@ -1519,8 +1519,8 @@
   "pdf_total_tax_label": "Gesamte Umsatzsteuer",
   "pdf_tax_types_label": "Steuersätze",
   "pdf_expenses_label": "Ausgaben",
-  "pdf_bill_to": "Rechnungsempfänger:",
-  "pdf_ship_to": "Versand an:",
+  "pdf_bill_to": "Rechnungsanschrift",
+  "pdf_ship_to": "Lieferanschrift",
   "pdf_received_from": "Erhalten von:",
   "pdf_tax_label": "Steuer"
 }

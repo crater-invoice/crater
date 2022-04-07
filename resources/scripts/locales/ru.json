@@ -171,7 +171,7 @@
   },
   "customers": {
     "title": "Клиенты",
-    "prefix": "Prefix",
+    "prefix": "Префикс",
     "add_customer": "Добавить клиента",
     "contacts_list": "Список клиентов",
     "name": "Имя",
@@ -197,7 +197,7 @@
     "added_on": "Добавлено",
     "action": "Действие",
     "password": "Пароль",
-    "confirm_password": "Confirm Password",
+    "confirm_password": "Подтвердить пароль",
     "street_number": "Номер дома",
     "primary_currency": "Основная валюта",
     "description": "Описание",
@@ -208,10 +208,10 @@
     "new_customer": "New Клиент",
     "edit_customer": "Редактировать клиента",
     "basic_info": "Основное",
-    "portal_access": "Portal Access",
-    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
-    "portal_access_url": "Customer Portal Login URL",
-    "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
+    "portal_access": "Доступ к порталу",
+    "portal_access_text": "Хотите ли вы разрешить данному клиенту доступ к порталу для клиентов?",
+    "portal_access_url": "URL для входа на портал клиента",
+    "portal_access_url_help": "Пожалуйста, скопируйте и перешлите вышеуказанный URL вашему клиенту для предоставления доступа.",
     "billing_address": "Адрес плательщика",
     "shipping_address": "Адрес доставки",
     "copy_billing_address": "Скопировать из биллинга",
@@ -231,9 +231,9 @@
     "confirm_delete": "Восстановление клиента вместе со всеми его оплатами, сметами и счетами-фактурами будет невозможно. | Восстановление клиентов вместе со всеми их оплатами, сметами и счетами-фактурами будет невозможно.",
     "created_message": "Клиент добавлен",
     "updated_message": "Клиент обновлён",
-    "address_updated_message": "Address Information Updated succesfully",
+    "address_updated_message": "Информация об адресе успешно обновлена",
     "deleted_message": "Клиент удалён | Клиенты удалены",
-    "edit_currency_not_allowed": "Cannot change currency once transactions created."
+    "edit_currency_not_allowed": "Невозможно изменить валюту после создания транзакций."
   },
   "items": {
     "title": "Товары",
@@ -265,8 +265,8 @@
   },
   "estimates": {
     "title": "Заказы",
-    "accept_estimate": "Accept Estimate",
-    "reject_estimate": "Reject Estimate",
+    "accept_estimate": "Принять заказ",
+    "reject_estimate": "Отклонить заказ",
     "estimate": "Заказ | Заказы",
     "estimates_list": "Список заказов",
     "days": "{days} дней",
@@ -355,14 +355,14 @@
       "select_an_item": "Выберите товар",
       "type_item_description": "Описание товара (необязательно)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "Если включено, выбранный шаблон будет автоматически выбираться для новых заказов."
   },
   "invoices": {
     "title": "Счет-фактуры",
     "download": "Загрузить",
-    "pay_invoice": "Pay Invoice",
+    "pay_invoice": "Оплатить счет",
     "invoices_list": "Список счетов",
-    "invoice_information": "Invoice Information",
+    "invoice_information": "Информация о счете",
     "days": "{days} дн.",
     "months": "{months} мес.",
     "years": "{years} г.",

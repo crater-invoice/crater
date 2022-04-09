@@ -1150,8 +1150,8 @@
       "payment_mode_added": "Forma de pago añadida",
       "payment_mode_updated": "Forma de pago actualizada",
       "payment_mode_confirm_delete": "No podrás recuperar este Modo de Pago",
-      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
-      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
+      "payments_attached": "Esta forma de pago ya está vinculada a los pagos. Por favor, elimine los pagos adjuntos para proceder con la eliminación.",
+      "expenses_attached": "Esta forma de pago ya está adjunta a los gastos. Por favor, elimine los gastos adjuntos para proceder con la eliminación.",
       "deleted_message": "Método de pago eliminado correctamente"
     },
     "expense_category": {
@@ -1178,8 +1178,8 @@
       "discount_setting": "Ajuste de descuento",
       "discount_per_item": "Descuento por artículo",
       "discount_setting_description": "Habilítelo si desea agregar Descuento a artículos de factura individuales. Por defecto, los descuentos se agregan directamente a la factura.",
-      "expire_public_links": "Automatically Expire Public Links",
-      "expire_setting_description": "Specify whether you would like to expire all the links sent by application to view invoices, estimates & payments, etc after a specified duration.",
+      "expire_public_links": "Expirar automáticamente enlaces públicos",
+      "expire_setting_description": "Especifique si desea expirar todos los enlaces enviados por la aplicación para ver facturas, estimaciones y pagos, etc. después de una duración especificada.",
       "save": "Guardar",
       "preference": "Preferencia | Preferencias",
       "general_settings": "Preferencias predeterminadas para el sistema.",
@@ -1309,8 +1309,8 @@
       "address_placeholder": "Ejemplo: 123, Mi Calle",
       "city_placeholder": "Ejemplo: Los Angeles",
       "state_placeholder": "Ejemplo: CA",
-      "zip_placeholder": "Example: 90024",
-      "invalid_address": "Please provide valid address details."
+      "zip_placeholder": "Ejemplo: 90024",
+      "invalid_address": "Proporciona una dirección válida."
     }
   },
   "wizard": {
@@ -1470,17 +1470,17 @@
     "not_allowed": "No permitido",
     "login_invalid_credentials": "Estas credenciales no coinciden con nuestros registros.",
     "enter_valid_cron_format": "Por favor, introduzca un formato cron válido",
-    "email_could_not_be_sent": "Email could not be sent to this email address.",
-    "invalid_address": "Please enter a valid address.",
-    "invalid_key": "Please enter valid key.",
-    "invalid_state": "Please enter a valid state.",
-    "invalid_city": "Please enter a valid city.",
-    "invalid_postal_code": "Please enter a valid zip.",
-    "invalid_format": "Please enter valid query string format.",
-    "api_error": "Server not responding.",
-    "feature_not_enabled": "Feature not enabled.",
-    "request_limit_met": "Api request limit exceeded.",
-    "address_incomplete": "Incomplete Address"
+    "email_could_not_be_sent": "No se pudo enviar el correo a esta dirección de correo electrónico.",
+    "invalid_address": "Por favor, introduzca una dirección válida.",
+    "invalid_key": "Por favor, introduzca una clave válida.",
+    "invalid_state": "Por favor, introduzca un estado válido.",
+    "invalid_city": "Por favor, introduzca una ciudad válida.",
+    "invalid_postal_code": "Por favor, introduzca un código postal válido.",
+    "invalid_format": "Por favor, introduzca un formato de consulta válido.",
+    "api_error": "El servidor no responde.",
+    "feature_not_enabled": "Característica no habilitada.",
+    "request_limit_met": "Ha alcanzado el límite de solicitudes.",
+    "address_incomplete": "Dirección incompleta"
   },
   "pdf_estimate_label": "Presupuestar",
   "pdf_estimate_number": "Número de Presupuesto",

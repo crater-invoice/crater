@@ -49,7 +49,7 @@
     "view": "Ver",
     "add_new_item": "Agregar ítem nuevo",
     "clear_all": "Limpiar todo",
-    "showing": "Mostrando",
+    "showing": "Mostrar",
     "of": "de",
     "actions": "Acciones",
     "subtotal": "SUBTOTAL",
@@ -810,7 +810,7 @@
       "address_information": "Información de dirección"
     },
     "address_information": {
-      "section_description": "  You can update Your Address information using form below."
+      "section_description": "Puede actualizar la información de su dirección utilizando el siguiente formulario."
     },
     "title": "Configuraciones",
     "setting": "Configuraciones | Configuraciones",
@@ -1112,9 +1112,9 @@
       "error": " No puede eliminar el controlador activo",
       "default_currency_error": "Esta moneda ya se usa en uno de los proveedores activos",
       "exchange_help_text": "Ingrese el tipo de cambio para convertir de {currency} a {baseCurrency}",
-      "currency_freak": "Currency Freak",
+      "currency_freak": "Moneda",
       "currency_layer": "Currency Layer",
-      "open_exchange_rate": "Open Exchange Rate",
+      "open_exchange_rate": "Tasa de cambio",
       "currency_converter": "Conversor de moneda",
       "server": "Servidor",
       "url": "URL",

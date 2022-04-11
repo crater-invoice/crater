@@ -209,9 +209,9 @@
     "edit_customer": "Editar cliente",
     "basic_info": "Información básica",
     "portal_access": "Acceso al portal",
-    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
+    "portal_access_text": "¿Le gustaría permitir que este cliente inicie sesión en el Portal del Cliente?",
     "portal_access_url": "Portal URL del cliente",
-    "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
+    "portal_access_url_help": "Por favor, copie y reenvíe la URL anterior a su cliente para proporcionar acceso.",
     "billing_address": "Dirección de Facturación",
     "shipping_address": "Dirección de Envío",
     "copy_billing_address": "Copia de facturación",
@@ -231,7 +231,7 @@
     "confirm_delete": "No podrá recuperar este cliente y todas las facturas, estimaciones y pagos relacionados. | No podrá recuperar estos clientes y todas las facturas, estimaciones y pagos relacionados.",
     "created_message": "Cliente creado con éxito",
     "updated_message": "Cliente actualizado con éxito",
-    "address_updated_message": "Address Information Updated succesfully",
+    "address_updated_message": "Información del domicilio actualizado correctamente",
     "deleted_message": "Cliente eliminado correctamente | Clientes eliminados exitosamente",
     "edit_currency_not_allowed": "No se puede cambiar la divisa una vez creadas las transacciones."
   },
@@ -265,8 +265,8 @@
   },
   "estimates": {
     "title": "Presupuestos",
-    "accept_estimate": "Accept Estimate",
-    "reject_estimate": "Reject Estimate",
+    "accept_estimate": "Aceptar cotización",
+    "reject_estimate": "Rechazar cotización",
     "estimate": "Presupuesto | Presupuestos",
     "estimates_list": "Lista de presupuestos",
     "days": "{días} Días",
@@ -318,10 +318,10 @@
     },
     "accepted": "Aceptado",
     "rejected": "Rechazado",
-    "expired": "Expired",
+    "expired": "Caducado",
     "sent": "Enviado",
     "draft": "Borrador",
-    "viewed": "Viewed",
+    "viewed": "Visto",
     "declined": "Rechazado",
     "new_estimate": "Nuevo presupuesto",
     "add_new_estimate": "Añadir nuevo presupuesto",
@@ -355,14 +355,14 @@
       "select_an_item": "Escriba o haga clic para seleccionar un elemento",
       "type_item_description": "Descripción del tipo de elemento(opcional)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "Si se activa, esta plantilla se selccionará automáticamente para nuevos presupuestos. "
   },
   "invoices": {
     "title": "Facturas",
-    "download": "Download",
-    "pay_invoice": "Pay Invoice",
+    "download": "Descargar",
+    "pay_invoice": "Pagar factura",
     "invoices_list": "Lista de facturas",
-    "invoice_information": "Invoice Information",
+    "invoice_information": "Información de la factura",
     "days": "{días} Días",
     "months": "{meses} Mes",
     "years": "{años} Año",
@@ -447,7 +447,7 @@
     "marked_as_sent_message": "Factura marcada como enviada con éxito",
     "something_went_wrong": "Algo fue mal",
     "invalid_due_amount_message": "El pago introducido es mayor que el importe total pendiente de esta factura. Por favor, verificalo y vuelve a intentarlo.",
-    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
+    "mark_as_default_invoice_template_description": "Si se activa, esta plantilla se seleccionará automáticamente para nuevas facturas. "
   },
   "recurring_invoices": {
     "title": "Facturas recurrentes",
@@ -526,7 +526,7 @@
     "cloned_successfully": "Factura recurrente clonada con éxito",
     "clone_invoice": "Clonar factura recurrente",
     "confirm_clone": "Esta factura recurrente será clonada en una nueva factura recurrente",
-    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
+    "add_customer_email": "Por favor, agregue una dirección de correo electrónico para que este cliente envíe las facturas automáticamente.",
     "item": {
       "title": "Título del artículo",
       "description": "Descripción",
@@ -658,7 +658,7 @@
     "retype_password": "Reescriba la contraseña"
   },
   "modules": {
-    "buy_now": "Buy Now",
+    "buy_now": "Comprar ahora",
     "install": "Instalar",
     "price": "Precio",
     "download_zip_file": "Descargar archivo ZIP",
@@ -681,26 +681,26 @@
     "module_enabled": "Módulo habilitado",
     "update_to": "Actualizar a",
     "module_updated": "¡Módulo actualizado correctamente!",
-    "title": "Modules",
-    "module": "Module | Modules",
+    "title": "Módulos",
+    "module": "Módulo | Módulos",
     "api_token": "API token",
-    "invalid_api_token": "Invalid API Token.",
-    "other_modules": "Other Modules",
-    "view_all": "View All",
-    "no_reviews_found": "There are no reviews for this module yet!",
-    "module_not_purchased": "Module Not Purchased",
-    "module_not_found": "Module Not Found",
+    "invalid_api_token": "API Token inválido.",
+    "other_modules": "Otros módulos",
+    "view_all": "Ver todo",
+    "no_reviews_found": "¡Este módulo aún no tiene reseñas!",
+    "module_not_purchased": "Módulo no comprado",
+    "module_not_found": "Módulo no encontrado",
     "version_not_supported": "This module version doesn't support the current version of Crater",
-    "last_updated": "Last Updated On",
-    "connect_installation": "Connect your installation",
-    "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
-    "view_module": "View Module",
-    "update_available": "Update Available",
-    "purchased": "Purchased",
-    "installed": "Installed",
-    "no_modules_installed": "No Modules Installed Yet!",
-    "disable_warning": "All the settings for this particular will be reverted.",
-    "what_you_get": "What you get"
+    "last_updated": "Actualizado",
+    "connect_installation": "Conecte su instalación",
+    "api_token_description": "Inicie sesión en {url} y conecte esta instalación introduciendo el token de API. Los módulos comprados aparecerán aquí después de establecer la conexión.",
+    "view_module": "Ver módulo",
+    "update_available": "Actualización disponible",
+    "purchased": "Comprado",
+    "installed": "Instalado",
+    "no_modules_installed": "¡No hay módulos instalados todavía!",
+    "disable_warning": "Se revertirán todos los ajustes para este particular.",
+    "what_you_get": "Beneficios que obtiene"
   },
   "users": {
     "title": "Usuarios",
@@ -807,7 +807,7 @@
       "payment_modes": "Formas de pago",
       "notes": "Notas",
       "exchange_rate": "Tasa de cambio",
-      "address_information": "Address Information"
+      "address_information": "Información de dirección"
     },
     "address_information": {
       "section_description": "  You can update Your Address information using form below."

@@ -663,11 +663,11 @@
     "price": "Prix",
     "download_zip_file": "Télécharger le fichier ZIP",
     "unzipping_package": "Décompresser le fichier",
-    "copying_files": "Copying Files",
-    "deleting_files": "Deleting Unused files",
-    "completing_installation": "Completing Installation",
+    "copying_files": "Copie de fichiers en cours",
+    "deleting_files": "Supprimer les fichiers inutilisés",
+    "completing_installation": "Terminer l'installation",
     "update_failed": "Échec de la mise à jour",
-    "install_success": "Module has been installed successfully!",
+    "install_success": "Votre module a été correctement installé !",
     "customer_reviews": "Évaluations",
     "license": "License",
     "faq": "FAQ",
@@ -691,16 +691,16 @@
     "module_not_purchased": "Module non acheté",
     "module_not_found": "Module non trouvé",
     "version_not_supported": "This module version doesn't support the current version of Crater",
-    "last_updated": "Last Updated On",
+    "last_updated": "Mis à jour le",
     "connect_installation": "Connectez votre installation",
-    "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
-    "view_module": "View Module",
-    "update_available": "Update Available",
-    "purchased": "Purchased",
-    "installed": "Installed",
-    "no_modules_installed": "No Modules Installed Yet!",
-    "disable_warning": "All the settings for this particular will be reverted.",
-    "what_you_get": "What you get"
+    "api_token_description": "Rendez-vous à {url} et connectez votre application en entrant le jeton d'API. Vos modules achetés apparaîtront ici une fois la connexion établie.",
+    "view_module": "Afficher le module",
+    "update_available": "Mise à jour disponible",
+    "purchased": "Acheté",
+    "installed": "Installé",
+    "no_modules_installed": "Aucun module installé !",
+    "disable_warning": "Tous les paramètres de ce module seront réinitialisés.",
+    "what_you_get": "Ce que vous obtenez"
   },
   "users": {
     "title": "Utilisateurs",
@@ -807,7 +807,7 @@
       "payment_modes": "Modes de paiement",
       "notes": "Notes de bas de page",
       "exchange_rate": "Taux de change",
-      "address_information": "Address Information"
+      "address_information": "Information d'adresse"
     },
     "address_information": {
       "section_description": "  Vous pouvez mettre à jour vos informations d'adresse via le formulaire ci dessous."

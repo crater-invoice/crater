@@ -318,10 +318,10 @@
     },
     "accepted": "Diterima",
     "rejected": "Ditolak",
-    "expired": "Expired",
+    "expired": "Kadaluarsa",
     "sent": "Terkirim",
     "draft": "Draf",
-    "viewed": "Viewed",
+    "viewed": "Dilihat",
     "declined": "Ditolak",
     "new_estimate": "Penawaran Baru",
     "add_new_estimate": "Tambah Penawaran Baru",
@@ -355,12 +355,12 @@
       "select_an_item": "Ketik atau klik untuk memilih",
       "type_item_description": "Ketik Deskripsi Item (opsional)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "Jika diaktifkan, template terpilih akan secara otomatis digunakan saat pembuatan estimate baru."
   },
   "invoices": {
     "title": "Faktur",
-    "download": "Download",
-    "pay_invoice": "Pay Invoice",
+    "download": "Unduh",
+    "pay_invoice": "Bayar tagihan",
     "invoices_list": "Daftar Faktur",
     "invoice_information": "Invoice Information",
     "days": "{days} Hari",

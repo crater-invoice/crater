@@ -282,14 +282,14 @@
     <div class="header-container">
         <table width="100%">
             <tr>
-                @if ($logo)
+                @if ($payment->customer->company->logo)
                     <td width="50%" class="header-section-left">
-                        <img style="height: 50px;" class="header-logo" src="{{ $logo }}" alt="Company Logo">
-                    @else
-                        @if ($payment->customer)
+                        <img class="header-logo" style="height: 50px;" src="{{ $payment->customer->company->logo }}" alt="{{$payment->customer->company->name}}" />
+                @else
+                    @if ($payment->customer)
                     <td class="header-section-left" style="padding-top:0px;">
-                        <h1 class="header-logo"> {{ $payment->customer->company->name }} </h1>
-                @endif
+                        <h1 class="header-logo">{{ $payment->customer->company->name }}</h1>
+                    @endif
                 @endif
                 </td>
                 <td width="50%" class="header-section-right company-details company-address">

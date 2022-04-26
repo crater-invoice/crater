@@ -353,10 +353,10 @@
         <table width="100%">
             <tr>
                 <td width="50%" class="header-section-left">
-                    @if ($logo)
-                        <img class="header-logo" style="height: 50px;" src="{{ $logo }}" alt="Company Logo">
+                    @if ($estimate->customer->company->logo)
+                        <img class="header-logo" style="height: 50px;" src="{{ $estimate->customer->company->logo }}" alt="{{$estimate->customer->company->name}}" />
                     @else
-                        <h1 class="header-logo"> {{ $estimate->customer->company->name }} </h1>
+                        <h1 class="header-logo">{{ $estimate->customer->company->name }}</h1>
                     @endif
                 </td>
                 <td width="50%" class="text-right company-address-container company-address">

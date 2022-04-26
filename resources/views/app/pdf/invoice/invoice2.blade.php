@@ -384,12 +384,10 @@
         <table width="100%">
             <tr>
                 <td width="60%" class="header-section-left">
-                    @if ($logo)
-                        <img class="header-logo" src="{{ $logo }}" alt="Company Logo" style="height: 50px;">
+                    @if ($invoice->customer->company->logo)
+                        <img class="header-logo" style="height: 50px;" src="{{ $invoice->customer->company->logo }}" alt="{{$invoice->customer->company->name}}" />
                     @elseif ($invoice->customer->company)
-                        <h1 class="header-logo" style="padding-top: 0px;">
-                            {{ $invoice->customer->company->name }}
-                        </h1>
+                        <h1 class="header-logo" style="padding-top: 0px;">{{ $invoice->customer->company->name }}</h1>
                     @endif
                 </td>
 

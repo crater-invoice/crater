@@ -414,14 +414,14 @@
     <div class="header-container">
         <table width="100%">
             <tr>
-                @if ($logo)
+                @if ($estimate->customer->company->logo)
                     <td width="60%" class="header-section-left">
-                        <img class="header-logo" style="height: 50px;" src="{{ $logo }}" alt="Company Logo">
+                        <img class="header-logo" style="height: 50px;" src="{{ $estimate->customer->company->logo }}" alt="{{$estimate->customer->company->name}}" />
                     </td>
                 @else
                     <td width="60%" class="header-section-left" style="padding-top: 0px;">
                         @if ($estimate->customer->company)
-                            <h1 class="header-logo"> {{ $estimate->customer->company->name }} </h1>
+                            <h1 class="header-logo">{{ $estimate->customer->company->name }}</h1>
                         @endif
                     </td>
                 @endif

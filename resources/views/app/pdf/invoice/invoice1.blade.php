@@ -334,11 +334,11 @@
         <table width="100%">
             <tr>
                 <td class="text-center">
-                    @if ($logo)
-                        <img class="header-logo" style="height:50px" src="{{ $logo }}" alt="Company Logo">
+                    @if ($invoice->customer->company->logo)
+                        <img class="header-logo" style="height:50px" src="{{ $invoice->customer->company->logo }}" alt="{{ $invoice->customer->company->name }}" />
                     @else
                         @if ($invoice->customer->company)
-                            <h2 class="header-logo"> {{ $invoice->customer->company->name }}</h2>
+                            <h2 class="header-logo">{{ $invoice->customer->company->name }}</h2>
                         @endif
                     @endif
                 </td>

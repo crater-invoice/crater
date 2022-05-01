@@ -104,6 +104,7 @@ class DashboardController extends Controller
             'invoice_date',
             [$startDate->format('Y-m-d'), $start->format('Y-m-d')]
         )
+            ->where('status', '<>', 'DRAFT')
             ->whereCompany()
             ->sum('base_total');
 
@@ -133,17 +134,21 @@ class DashboardController extends Controller
 
         $total_customer_count = Customer::whereCompany()->count();
         $total_invoice_count = Invoice::whereCompany()
+            ->where('status', '<>', 'DRAFT')
             ->count();
         $total_estimate_count = Estimate::whereCompany()->count();
         $total_amount_due = Invoice::whereCompany()
+            ->where('status', '<>', 'DRAFT')
             ->sum('base_due_amount');
 
         $recent_due_invoices = Invoice::with('customer')
             ->whereCompany()
             ->where('base_due_amount', '>', 0)
+            ->where('status', '<>', 'DRAFT')
             ->take(5)
             ->latest()
             ->get();
+
         $recent_estimates = Estimate::with('customer')->whereCompany()->take(5)->latest()->get();
 
         return response()->json([

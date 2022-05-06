@@ -5,6 +5,6 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-install pdo pdo_mysql bcmath
 
-COPY docker-compose/crontab /etc/crontabs/root
+COPY /docker/crontab /etc/crontabs/root
 
 CMD ["crond", "-f"]

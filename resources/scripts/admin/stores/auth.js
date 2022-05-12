@@ -46,7 +46,7 @@ export const useAuthStore = (useWindow = false) => {
       logout() {
         return new Promise((resolve, reject) => {
           axios
-            .get('/auth/logout')
+            .post('/auth/logout')
             .then((response) => {
               const notificationStore = useNotificationStore()
               notificationStore.showNotification({
@@ -55,7 +55,7 @@ export const useAuthStore = (useWindow = false) => {
               })
 
               window.router.push('/login')
-              // resetStore.clearPinia()
+                // resetStore.clearPinia()
               resolve(response)
             })
             .catch((err) => {

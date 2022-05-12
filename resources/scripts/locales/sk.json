@@ -99,7 +99,8 @@
     "note": "Note",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default"
   },
   "dashboard": {
     "select_year": "Vyberte rok",
@@ -353,7 +354,8 @@
       "amount": "Suma",
       "select_an_item": "Začnite písať alebo kliknite pre vybratie položky",
       "type_item_description": "Zadajte Popis Položky (voliteľné)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Faktúry",
@@ -444,7 +446,8 @@
     "deleted_message": "Faktúra úspešne vymazaná | Faktúry úspešne vymazané",
     "marked_as_sent_message": "Faktúra úspešne označená ako odoslaná",
     "something_went_wrong": "Niečo neprebehlo v poriadku, odskúšajte prosím znova.",
-    "invalid_due_amount_message": "Celková suma faktúry nemôže byť nižšia ako celková suma zaplatená za túto faktúru. Ak chcete pokračovať, aktualizujte faktúru alebo odstráňte súvisiace platby."
+    "invalid_due_amount_message": "Celková suma faktúry nemôže byť nižšia ako celková suma zaplatená za túto faktúru. Ak chcete pokračovať, aktualizujte faktúru alebo odstráňte súvisiace platby.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Recurring Invoices",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",
@@ -1146,7 +1150,8 @@
       "payment_mode_added": "Payment Mode Added",
       "payment_mode_updated": "Payment Mode Updated",
       "payment_mode_confirm_delete": "You will not be able to recover this Payment Mode",
-      "already_in_use": "Payment Mode is already in use",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Payment Mode deleted successfully"
     },
     "expense_category": {

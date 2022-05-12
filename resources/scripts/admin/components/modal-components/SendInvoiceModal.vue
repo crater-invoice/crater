@@ -167,6 +167,8 @@ let isLoading = ref(false)
 const templateUrl = ref('')
 const isPreview = ref(false)
 
+const emit = defineEmits(['update'])
+
 const invoiceMailFields = ref([
   'customer',
   'customerCustom',
@@ -260,7 +262,10 @@ async function submitForm() {
 
     const response = await invoiceStore.sendInvoice(invoiceMailForm)
 
+    isLoading.value = false
+
     if (response.data.success) {
+      emit('update', modalStore.id)
       closeSendInvoiceModal()
       return true
     }

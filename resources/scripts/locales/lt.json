@@ -12,7 +12,7 @@
     "settings": "Nustatymai",
     "logout": "Atsijungti",
     "users": "Vartotojai",
-    "modules": "Modules"
+    "modules": "Moduliai"
   },
   "general": {
     "add_company": "Pridėti įmonę",
@@ -93,13 +93,14 @@
     "no_note_found": "Jokių žinučių nerasta",
     "insert_note": "Terpti prierašą",
     "copied_pdf_url_clipboard": "Nukopijuotas PDF url į iškarpinę!",
-    "copied_url_clipboard": "Copied url to clipboard!",
+    "copied_url_clipboard": "Nuoroda nukopijuota!",
     "docs": "Dokumentacija",
     "do_you_wish_to_continue": "Ar norite tęsti?",
     "note": "Užrašas",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully"
+    "pay_invoice": "Apmokėti",
+    "login_successfully": "Prisijungta sėkmingai!",
+    "logged_out_successfully": "Atsijungta sėkmingai",
+    "mark_as_default": "Pažymėti kaip numatytąjį"
   },
   "dashboard": {
     "select_year": "Pasirinkite metus",
@@ -108,7 +109,7 @@
       "customers": "Klientai",
       "invoices": "Sąskaitos",
       "estimates": "Įverčiai",
-      "payments": "Payments"
+      "payments": "Mokėjimai"
     },
     "chart_info": {
       "total_sales": "Pardavimai",
@@ -353,7 +354,8 @@
       "amount": "Amount",
       "select_an_item": "Type or click to select an item",
       "type_item_description": "Type Item Description (optional)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "Sąskaitos",
@@ -444,7 +446,8 @@
     "deleted_message": "Sąskaita pašalinta sėkmingai | Sąskaitos pašalintos sėkmingai",
     "marked_as_sent_message": "Sąskaita pažymėta kaip sėkmingai išsiųsta",
     "something_went_wrong": "įvyko klaida",
-    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue."
+    "invalid_due_amount_message": "Total Invoice amount cannot be less than total paid amount for this Invoice. Please update the invoice or delete the associated payments to continue.",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "Pasikartojančios sąskaitos",
@@ -523,6 +526,7 @@
     "cloned_successfully": "Recurring Invoice cloned successfully",
     "clone_invoice": "Clone Recurring Invoice",
     "confirm_clone": "This recurring invoice will be cloned into a new Recurring Invoice",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "Item Title",
       "description": "Description",
@@ -1146,7 +1150,8 @@
       "payment_mode_added": "Mokėjimo Būdas pridėtas",
       "payment_mode_updated": "Mokėjimo Būdas atnaujintas",
       "payment_mode_confirm_delete": "You will not be able to recover this Payment Mode",
-      "already_in_use": "Mokėjimo Būdas jau naudojamas",
+      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
+      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Mokėjimo Būdas sėkmingai pašalintas"
     },
     "expense_category": {

@@ -55,6 +55,7 @@ class InvoiceResource extends JsonResource
             'payment_module_enabled' => $this->payment_module_enabled,
             'sales_tax_type' => $this->sales_tax_type,
             'sales_tax_address_type' => $this->sales_tax_address_type,
+            'overdue' => $this->overdue,
             'items' => $this->when($this->items()->exists(), function () {
                 return InvoiceItemResource::collection($this->items);
             }),

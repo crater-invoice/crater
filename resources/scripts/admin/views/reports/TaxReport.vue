@@ -8,6 +8,10 @@
         <BaseMultiselect
           v-model="selectedRange"
           :options="dateRange"
+          value-prop="key"
+          track-by="key"
+          label="label"
+          object
           @update:modelValue="onChangeDateRange"
         />
       </BaseInputGroup>
@@ -49,7 +53,7 @@
         class="
           hidden
           w-full
-          h-screen h-screen-ios
+          h-screen
           border-gray-100 border-solid
           rounded
           md:flex
@@ -94,19 +98,49 @@ globalStore.downloadReport = downloadReport
 const { t } = useI18n()
 
 const dateRange = reactive([
-  t('dateRange.today'),
-  t('dateRange.this_week'),
-  t('dateRange.this_month'),
-  t('dateRange.this_quarter'),
-  t('dateRange.this_year'),
-  t('dateRange.previous_week'),
-  t('dateRange.previous_month'),
-  t('dateRange.previous_quarter'),
-  t('dateRange.previous_year'),
-  t('dateRange.custom'),
+  {
+    label: t('dateRange.today'),
+    key: 'Today',
+  },
+  {
+    label: t('dateRange.this_week'),
+    key: 'This Week',
+  },
+  {
+    label: t('dateRange.this_month'),
+    key: 'This Month',
+  },
+  {
+    label: t('dateRange.this_quarter'),
+    key: 'This Quarter',
+  },
+  {
+    label: t('dateRange.this_year'),
+    key: 'This Year',
+  },
+  {
+    label: t('dateRange.previous_week'),
+    key: 'Previous Week',
+  },
+  {
+    label: t('dateRange.previous_month'),
+    key: 'Previous Month',
+  },
+  {
+    label: t('dateRange.previous_quarter'),
+    key: 'Previous Quarter',
+  },
+  {
+    label: t('dateRange.previous_year'),
+    key: 'Previous Year',
+  },
+  {
+    label: t('dateRange.custom'),
+    key: 'Custom',
+  },
 ])
 
-const selectedRange = ref(t('dateRange.this_month'))
+const selectedRange = ref(dateRange[2])
 
 const formData = reactive({
   from_date: moment().startOf('month').format('YYYY-MM-DD').toString(),
@@ -153,7 +187,9 @@ function getPreDate(type, time) {
 }
 
 function onChangeDateRange() {
-  switch (selectedRange.value) {
+  let key = selectedRange.value.key
+
+  switch (key) {
     case 'Today':
       formData.from_date = moment().format('YYYY-MM-DD')
       formData.to_date = moment().format('YYYY-MM-DD')

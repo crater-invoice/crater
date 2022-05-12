@@ -131,10 +131,10 @@
       >
         <!-- Tabs -->
         <BaseTabGroup class="-mb-5" @change="setStatusFilter">
-          <BaseTab :title="$t('general.draft')" filter="DRAFT" />
-          <BaseTab :title="$t('general.due')" filter="DUE" />
-          <BaseTab :title="$t('general.sent')" filter="SENT" />
           <BaseTab :title="$t('general.all')" filter="" />
+          <BaseTab :title="$t('general.draft')" filter="DRAFT" />
+          <BaseTab :title="$t('general.sent')" filter="SENT" />
+          <BaseTab :title="$t('general.due')" filter="DUE" />
         </BaseTabGroup>
 
         <BaseDropdown
@@ -238,6 +238,14 @@
             />
 
             <BasePaidStatusBadge
+              v-if="row.data.overdue"
+              status="OVERDUE"
+              class="px-1 py-0.5 ml-2"
+            >
+              {{ $t('invoices.overdue') }}
+            </BasePaidStatusBadge>
+
+            <BasePaidStatusBadge
               :status="row.data.paid_status"
               class="px-1 py-0.5 ml-2"
             >
@@ -284,7 +292,7 @@ const showFilters = ref(false)
 const status = ref([
   {
     label: 'Status',
-    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'OVERDUE', 'COMPLETED'],
+    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'],
   },
   {
     label: 'Paid Status',
@@ -299,7 +307,7 @@ const userStore = useUserStore()
 
 let filters = reactive({
   customer_id: '',
-  status: 'DRAFT',
+  status: '',
   from_date: '',
   to_date: '',
   invoice_number: '',
@@ -525,10 +533,6 @@ function setActiveTab(val) {
 
     case 'VIEWED':
       activeTab.value = t('invoices.viewed')
-      break
-
-    case 'OVERDUE':
-      activeTab.value = t('invoices.overdue')
       break
 
     default:

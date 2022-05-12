@@ -84,9 +84,9 @@
             <BaseCustomerSelectInput
               v-model="paymentStore.currentPayment.customer_id"
               :content-loading="isLoadingContent"
+              v-if="!isLoadingContent"
               :invalid="v$.currentPayment.customer_id.$error"
               :placeholder="$t('customers.select_a_customer')"
-              :fetch-all="isEdit"
               show-action
               @update:modelValue="
                 selectNewCustomer(paymentStore.currentPayment.customer_id)
@@ -446,6 +446,9 @@ function onCustomerChange(customer_id) {
           paymentStore.currentPayment.selectedCustomer = res2.data.data
           paymentStore.currentPayment.customer = res2.data.data
           paymentStore.currentPayment.currency = res2.data.data.currency
+          if(isEdit.value && !customerStore.editCustomer && paymentStore.currentPayment.customer_id) {
+            customerStore.editCustomer = res2.data.data
+          }
         }
 
         if (paymentStore.currentPayment.invoice_id) {
@@ -482,6 +485,7 @@ function onCustomerChange(customer_id) {
 onBeforeUnmount(() => {
   paymentStore.resetCurrentPayment()
   invoiceList.value = []
+  customerStore.editCustomer = null
 })
 
 async function submitPaymentData() {

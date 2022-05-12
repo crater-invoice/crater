@@ -12,6 +12,7 @@ use Crater\Models\Expense;
 use Crater\Models\Invoice;
 use Crater\Models\Payment;
 use Illuminate\Http\Request;
+use Silber\Bouncer\BouncerFacade;
 
 class DashboardController extends Controller
 {
@@ -151,8 +152,8 @@ class DashboardController extends Controller
             'total_invoice_count' => $total_invoice_count,
             'total_estimate_count' => $total_estimate_count,
 
-            'recent_due_invoices' => $recent_due_invoices,
-            'recent_estimates' => $recent_estimates,
+            'recent_due_invoices' => BouncerFacade::can('view-invoice', Invoice::class) ? $recent_due_invoices : [],
+            'recent_estimates' => BouncerFacade::can('view-estimate', Estimate::class) ? $recent_estimates : [],
 
             'chart_data' => $chart_data,
 

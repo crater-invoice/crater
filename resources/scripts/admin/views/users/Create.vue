@@ -70,6 +70,7 @@
                 searchable
                 :can-deselect="false"
                 class="w-full"
+                track-by="name"
               />
             </BaseInputGroup>
 

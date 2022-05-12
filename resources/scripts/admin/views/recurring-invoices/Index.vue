@@ -129,9 +129,9 @@
           :default-index="currentStatusIndex"
           @change="setStatusFilter"
         >
+          <BaseTab :title="$t('recurring_invoices.all')" filter="ALL" />
           <BaseTab :title="$t('recurring_invoices.active')" filter="ACTIVE" />
           <BaseTab :title="$t('recurring_invoices.on_hold')" filter="ON_HOLD" />
-          <BaseTab :title="$t('recurring_invoices.all')" filter="ALL" />
         </BaseTabGroup>
 
         <BaseDropdown
@@ -283,7 +283,7 @@ const router = useRouter()
 
 let filters = reactive({
   customer_id: '',
-  status: 'ACTIVE',
+  status: '',
   from_date: '',
   to_date: '',
 })

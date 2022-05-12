@@ -75,7 +75,7 @@
             :options="globalStore.config.languages"
             label="name"
             value-prop="code"
-            track-by="code"
+            track-by="name"
             open-direction="top"
           />
         </BaseInputGroup>
@@ -118,6 +118,7 @@ const { t } = useI18n()
 let isSaving = ref(false)
 let avatarFileBlob = ref(null)
 let imgFiles = ref([])
+const isAdminAvatarRemoved = ref(false)
 
 if (userStore.currentUser.avatar) {
   imgFiles.value.push({
@@ -170,6 +171,7 @@ function onFileInputChange(fileName, file) {
 
 function onFileInputRemove() {
   avatarFileBlob.value = null
+  isAdminAvatarRemoved.value = true
 }
 
 async function updateUserData() {
@@ -209,12 +211,17 @@ async function updateUserData() {
     if (response.data.data) {
       isSaving.value = false
 
-      if (avatarFileBlob.value) {
+      if (avatarFileBlob.value || isAdminAvatarRemoved.value) {
         let avatarData = new FormData()
 
-        avatarData.append('admin_avatar', avatarFileBlob.value)
+        if (avatarFileBlob.value) {
+          avatarData.append('admin_avatar', avatarFileBlob.value)
+        }
+        avatarData.append('is_admin_avatar_removed', isAdminAvatarRemoved.value)
 
         await userStore.uploadAvatar(avatarData)
+        avatarFileBlob.value = null
+        isAdminAvatarRemoved.value = false
       }
 
       userForm.password = ''

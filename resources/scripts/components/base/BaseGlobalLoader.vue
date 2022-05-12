@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen h-screen-ios">
+  <div class="flex flex-col items-center justify-center h-screen">
     <div class="loader loader-white">
       <div class="loader-spined">
         <div class="loader--icon">

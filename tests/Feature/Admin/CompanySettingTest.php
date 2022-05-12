@@ -3,6 +3,9 @@
 use Crater\Http\Controllers\V1\Admin\Settings\CompanyController;
 use Crater\Http\Requests\CompanyRequest;
 use Crater\Http\Requests\ProfileRequest;
+use Crater\Models\Invoice;
+use Crater\Models\InvoiceItem;
+use Crater\Models\Tax;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
@@ -118,6 +121,63 @@ test('update settings', function () {
             'value' => $value,
         ]);
     }
+});
+
+test('update settings without currency setting', function () {
+    $settings = [
+        'notification_email' => 'noreply@crater.in',
+    ];
+
+    $response = postJson('/api/v1/company/settings', ['settings' => $settings]);
+
+    $response->assertOk()
+        ->assertJson([
+            'success' => true,
+        ]);
+
+    foreach ($settings as $key => $value) {
+        $this->assertDatabaseHas('company_settings', [
+            'option' => $key,
+            'value' => $value,
+        ]);
+    }
+});
+
+test('update currency settings after company has currency and transactions is not allowed', function () {
+    $settings = [
+        'currency' => 1,
+    ];
+
+    $response = postJson('/api/v1/company/settings', ['settings' => $settings]);
+
+    $response->assertOk()
+        ->assertJson([
+            'success' => true,
+        ]);
+
+    Invoice::factory()
+        ->raw([
+            'taxes' => [Tax::factory()->raw()],
+            'items' => [InvoiceItem::factory()->raw()],
+        ]);
+
+    $settings = [
+        'currency' => 2,
+    ];
+
+    $response = postJson('/api/v1/company/settings', ['settings' => $settings]);
+
+    $response->assertOK()
+        ->assertJson([
+            'success' => false,
+            'message' => 'Cannot update company currency after transactions are created.'
+        ]);
+
+
+    $this->assertDatabaseHas('company_settings', [
+        'option' => 'currency',
+        'value' => 1,
+    ]);
 });
 
 test('get notification email settings', function () {

@@ -41,7 +41,7 @@
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("/fonts/Poppins-Semibold.ttf") format("truetype");
+    src: url("/fonts/Poppins-SemiBold.ttf") format("truetype");
 }
 
 // Default Theme
@@ -53,3 +53,16 @@
 //----------------------------------
 
 @import "components/animation.scss";
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+.h-screen-ios {
+    height: -webkit-fill-available;
+}

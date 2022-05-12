@@ -40,7 +40,7 @@
             label="name"
             value-prop="code"
             class="w-full"
-            track-by="code"
+            track-by="name"
             :searchable="true"
             :invalid="v$.language.$error"
           />
@@ -79,7 +79,7 @@
             :options="globalStore.dateFormats"
             label="display_date"
             value-prop="carbon_format_value"
-            track-by="carbon_format_value"
+            track-by="display_date"
             searchable
             :invalid="v$.carbon_date_format.$error"
             class="w-full"

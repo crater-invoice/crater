@@ -196,7 +196,6 @@ async function getFields() {
           { label: 'Due Date', value: 'INVOICE_DUE_DATE' },
           { label: 'Number', value: 'INVOICE_NUMBER' },
           { label: 'Ref Number', value: 'INVOICE_REF_NUMBER' },
-          { label: 'Invoice Link', value: 'INVOICE_LINK' },
           ...invoiceFields.value.map((i) => ({
             label: i.label,
             value: i.slug,
@@ -213,7 +212,6 @@ async function getFields() {
           { label: 'Expiry Date', value: 'ESTIMATE_EXPIRY_DATE' },
           { label: 'Number', value: 'ESTIMATE_NUMBER' },
           { label: 'Ref Number', value: 'ESTIMATE_REF_NUMBER' },
-          { label: 'Estimate Link', value: 'ESTIMATE_LINK' },
           ...estimateFields.value.map((i) => ({
             label: i.label,
             value: i.slug,
@@ -230,7 +228,6 @@ async function getFields() {
           { label: 'Number', value: 'PAYMENT_NUMBER' },
           { label: 'Mode', value: 'PAYMENT_MODE' },
           { label: 'Amount', value: 'PAYMENT_AMOUNT' },
-          { label: 'Payment Link', value: 'PAYMENT_LINK' },
           ...paymentFields.value.map((i) => ({
             label: i.label,
             value: i.slug,

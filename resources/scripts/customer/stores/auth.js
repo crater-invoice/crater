@@ -103,7 +103,7 @@ export const useAuthStore = defineStore({
     logout(data) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${data}/customer/logout`)
+          .post(`/${data}/customer/logout`)
           .then((response) => {
             const notificationStore = useNotificationStore()
             notificationStore.showNotification({

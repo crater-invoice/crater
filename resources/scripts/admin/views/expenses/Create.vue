@@ -21,7 +21,7 @@
 
         <template #actions>
           <BaseButton
-            v-if="isEdit && expenseStore.currentExpense.attachment_receipt"
+            v-if="isEdit && expenseStore.currentExpense.attachment_receipt_url"
             :href="receiptDownloadUrl"
             tag="a"
             variant="primary-outline"
@@ -77,6 +77,7 @@
               label="name"
               track-by="id"
               :options="searchCategory"
+              v-if="!isFetchingInitialData"
               :filter-results="false"
               resolve-on-load
               :delay="500"
@@ -180,6 +181,7 @@
               label="name"
               track-by="id"
               :options="searchCustomer"
+              v-if="!isFetchingInitialData"
               :filter-results="false"
               resolve-on-load
               :delay="500"
@@ -280,7 +282,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
@@ -317,6 +319,7 @@ const globalStore = useGlobalStore()
 let isSaving = ref(false)
 let isFetchingInitialData = ref(false)
 const expenseValidationScope = 'newExpense'
+const isAttachmentReceiptRemoved = ref(false)
 
 const rules = computed(() => {
   return {
@@ -381,7 +384,7 @@ const pageTitle = computed(() =>
 )
 
 const receiptDownloadUrl = computed(() =>
-  isEdit.value ? `/expenses/${route.params.id}/download-receipt` : ''
+  isEdit.value ? `/reports/expenses/${route.params.id}/download-receipt` : ''
 )
 
 expenseStore.resetCurrentExpenseData()
@@ -395,6 +398,7 @@ function onFileInputChange(fileName, file) {
 
 function onFileInputRemove() {
   expenseStore.currentExpense.attachment_receipt = null
+  isAttachmentReceiptRemoved.value = true
 }
 
 function openCategoryModal() {
@@ -413,11 +417,25 @@ function onCurrencyChange(v) {
 
 async function searchCategory(search) {
   let res = await categoryStore.fetchCategories({ search })
+  if(res.data.data.length>0 && categoryStore.editCategory) {
+    let categoryFound = res.data.data.find((c) => c.id==categoryStore.editCategory.id)
+    if(!categoryFound) {
+      let edit_category = Object.assign({}, categoryStore.editCategory)
+      res.data.data.unshift(edit_category)
+    }
+  }
   return res.data.data
 }
 
 async function searchCustomer(search) {
   let res = await customerStore.fetchCustomers({ search })
+  if(res.data.data.length>0 && customerStore.editCustomer) {
+    let customerFound = res.data.data.find((c) => c.id==customerStore.editCustomer.id)
+    if(!customerFound) {
+      let edit_customer = Object.assign({}, customerStore.editCustomer)
+      res.data.data.unshift(edit_customer)
+    }
+  }
   return res.data.data
 }
 
@@ -433,10 +451,21 @@ async function loadData() {
   await expenseStore.fetchPaymentModes({ limit: 'all' })
 
   if (isEdit.value) {
-    await expenseStore.fetchExpense(route.params.id)
+    const expenseData = await expenseStore.fetchExpense(route.params.id)
 
     expenseStore.currentExpense.currency_id =
       expenseStore.currentExpense.selectedCurrency.id
+
+    if(expenseData.data) {
+      if(!categoryStore.editCategory && expenseData.data.data.expense_category) {
+        categoryStore.editCategory = expenseData.data.data.expense_category
+      }
+
+      if(!customerStore.editCustomer && expenseData.data.data.customer) {
+        customerStore.editCustomer = expenseData.data.data.customer
+      }
+    }
+
   } else if (route.query.customer) {
     expenseStore.currentExpense.customer_id = route.query.customer
   }
@@ -460,11 +489,14 @@ async function submitForm() {
       await expenseStore.updateExpense({
         id: route.params.id,
         data: formData,
+        isAttachmentReceiptRemoved: isAttachmentReceiptRemoved.value
       })
     } else {
       await expenseStore.addExpense(formData)
     }
     isSaving.value = false
+    expenseStore.currentExpense.attachment_receipt = null
+    isAttachmentReceiptRemoved.value = false
     router.push('/admin/expenses')
   } catch (err) {
     console.error(err)
@@ -472,4 +504,10 @@ async function submitForm() {
     return
   }
 }
+
+onBeforeUnmount(() => {
+  expenseStore.resetCurrentExpenseData()
+  customerStore.editCustomer = null
+  categoryStore.editCategory = null
+})
 </script>

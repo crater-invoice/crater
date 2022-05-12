@@ -7,7 +7,7 @@
       hidden
       h-full
       pt-16
-      pb-4
+      pb-[6.6rem]
       ml-56
       bg-white
       xl:ml-64
@@ -107,18 +107,18 @@
     </div>
 
     <div
+      ref="customerListSection"
       class="
         h-full
-        pb-32
         overflow-y-scroll
         border-l border-gray-200 border-solid
         sidebar
         base-scroll
       "
     >
-      <div v-for="(customer, index) in customerStore.customers" :key="index">
+      <div v-for="(customer, index) in customerList" :key="index">
         <router-link
-          v-if="customer && !isFetching"
+          v-if="customer"
           :id="'customer-' + customer.id"
           :to="`/admin/customers/${customer.id}/view`"
           :class="[
@@ -145,7 +145,7 @@
                 truncate
               "
             />
-            
+
             <BaseText
               v-if="customer.contact_name"
               :text="customer.contact_name"
@@ -162,20 +162,19 @@
           </div>
           <div class="flex-1 font-bold text-right whitespace-nowrap">
             <BaseFormatMoney
-              :amount="customer.due_amount"
+              :amount="customer.due_amount!==null ? customer.due_amount : 0"
               :currency="customer.currency"
             />
           </div>
         </router-link>
       </div>
-      <div class="flex justify-center p-4 items-center">
+      <div v-if="isFetching" class="flex justify-center p-4 items-center">
         <LoadingIcon
-          v-if="isFetching"
           class="h-6 m-1 animate-spin text-primary-400"
         />
       </div>
       <p
-        v-if="!customerStore.customers.length && !isFetching"
+        v-if="!customerList?.length && !isFetching"
         class="flex justify-center px-4 mt-5 text-sm text-gray-600"
       >
         {{ $t('customers.no_matching_customers') }}
@@ -185,7 +184,7 @@
 </template>
 
 <script setup>
-import { computed, ref, reactive, watch, inject } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { useCustomerStore } from '@/scripts/admin/stores/customer'
@@ -193,19 +192,21 @@ import LoadingIcon from '@/scripts/components/icons/LoadingIcon.vue'
 import { debounce } from 'lodash'
 
 const customerStore = useCustomerStore()
-const title = 'Customer View'
 const route = useRoute()
 const { t } = useI18n()
-
-let isSearching = ref(false)
 
 let isFetching = ref(false)
 
 let searchData = reactive({
-  orderBy: '',
-  orderByField: '',
-  searchText: '',
+  orderBy: null,
+  orderByField: null,
+  searchText: null,
 })
+
+const customerList = ref(null)
+const currentPageNumber = ref(1)
+const lastPageNumber = ref(1)
+const customerListSection = ref(null)
 
 onSearch = debounce(onSearch, 500)
 
@@ -224,16 +225,64 @@ function hasActiveUrl(id) {
   return route.params.id == id
 }
 
-async function loadCustomers() {
+async function loadCustomers(pageNumber, fromScrollListener = false) {
+  if (isFetching.value) {
+    return
+  }
+
+  let params = {}
+  if (
+    searchData.searchText !== '' &&
+    searchData.searchText !== null &&
+    searchData.searchText !== undefined
+  ) {
+    params.display_name = searchData.searchText
+  }
+
+  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
+    params.orderBy = searchData.orderBy
+  }
+
+  if (
+    searchData.orderByField !== null &&
+    searchData.orderByField !== undefined
+  ) {
+    params.orderByField = searchData.orderByField
+  }
+
   isFetching.value = true
-
-  await customerStore.fetchCustomers({ limit: 'all' })
-
+  let response = await customerStore.fetchCustomers({
+    page: pageNumber,
+    ...params,
+    limit: 15
+  })
   isFetching.value = false
 
-  setTimeout(() => {
-    scrollToCustomer()
-  }, 500)
+  customerList.value = customerList.value ? customerList.value : []
+  customerList.value = [...customerList.value, ...response.data.data]
+
+  currentPageNumber.value = pageNumber ? pageNumber : 1
+  lastPageNumber.value = response.data.meta.last_page
+  let customerFound = customerList.value.find(
+    (cust) => cust.id == route.params.id
+  )
+
+  if (
+    fromScrollListener == false &&
+    !customerFound &&
+    currentPageNumber.value < lastPageNumber.value &&
+    Object.keys(params).length === 0
+  ) {
+    loadCustomers(++currentPageNumber.value)
+  }
+
+  if (customerFound) {
+    setTimeout(() => {
+      if (fromScrollListener == false) {
+        scrollToCustomer()
+      }
+    }, 500)
+  }
 }
 
 function scrollToCustomer() {
@@ -242,41 +291,27 @@ function scrollToCustomer() {
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' })
     el.classList.add('shake')
+    addScrollListener()
   }
 }
 
-async function onSearch() {
-  let data = {}
-  if (
-    searchData.searchText !== '' &&
-    searchData.searchText !== null &&
-    searchData.searchText !== undefined
-  ) {
-    data.display_name = searchData.searchText
-  }
-
-  if (searchData.orderBy !== null && searchData.orderBy !== undefined) {
-    data.orderBy = searchData.orderBy
-  }
-
-  if (
-    searchData.orderByField !== null &&
-    searchData.orderByField !== undefined
-  ) {
-    data.orderByField = searchData.orderByField
-  }
-
-  isSearching.value = true
-
-  try {
-    let response = await customerStore.fetchCustomers(data)
-    isSearching.value = false
-    if (response.data) {
-      customerStore.customers = response.data.data
+function addScrollListener() {
+  customerListSection.value.addEventListener('scroll', (ev) => {
+    if (
+      ev.target.scrollTop > 0 &&
+      ev.target.scrollTop + ev.target.clientHeight >
+        ev.target.scrollHeight - 200
+    ) {
+      if (currentPageNumber.value < lastPageNumber.value) {
+        loadCustomers(++currentPageNumber.value, true)
+      }
     }
-  } catch (error) {
-    isSearching.value = false
-  }
+  })
+}
+
+async function onSearch() {
+  customerList.value = []
+  loadCustomers()
 }
 
 function sortData() {

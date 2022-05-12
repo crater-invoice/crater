@@ -20,17 +20,8 @@ use Crater\Http\Controllers\V1\PDF\PaymentPdfController;
 use Crater\Models\Company;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Frontend Routes
-|--------------------------------------------------------------------------
-|
-*/
-
-
-// Script Includes
+// Module Asset Includes
 // ----------------------------------------------
-
 
 Route::get('/modules/styles/{style}', StyleController::class);
 
@@ -42,7 +33,7 @@ Route::get('/modules/scripts/{script}', ScriptController::class);
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::get('auth/logout', function () {
+Route::post('auth/logout', function () {
     Auth::guard('web')->logout();
 });
 
@@ -52,10 +43,13 @@ Route::get('auth/logout', function () {
 
 Route::post('/{company:slug}/customer/login', CustomerLoginController::class);
 
-Route::get('/{company:slug}/customer/logout', function () {
+Route::post('/{company:slug}/customer/logout', function () {
     Auth::guard('customer')->logout();
 });
 
+
+// Report PDF & Expense Endpoints
+// ----------------------------------------------
 
 Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
 
@@ -86,6 +80,10 @@ Route::middleware('auth:sanctum')->prefix('reports')->group(function () {
     Route::get('/expenses/{expense}/receipt', ShowReceiptController::class);
 });
 
+
+// PDF Endpoints
+// ----------------------------------------------
+
 Route::middleware('pdf-auth')->group(function () {
 
     //  invoice pdf
@@ -100,7 +98,6 @@ Route::middleware('pdf-auth')->group(function () {
     // -------------------------------------------------
     Route::get('/payments/pdf/{payment:unique_hash}', PaymentPdfController::class);
 });
-
 
 
 // customer pdf endpoints for invoice, estimate and Payment
@@ -131,14 +128,15 @@ Route::get('/installation', function () {
 
 Route::get('/admin/{vue?}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('admin')->middleware(['install', 'redirect-if-unauthenticated']);
+})->where('vue', '[\/\w\.-]*')->name('admin.dashboard')->middleware(['install', 'redirect-if-unauthenticated']);
 
 Route::get('{company:slug}/customer/{vue?}', function (Company $company) {
     return view('app')->with([
-        'customer_logo' => get_customer_logo($company->id),
-        'current_theme' => get_customer_portal_theme($company->id)
+        'customer_logo' => get_company_setting('customer_portal_logo', $company->id),
+        'current_theme' => get_company_setting('customer_portal_theme', $company->id),
+        'customer_page_title' => get_company_setting('customer_portal_page_title', $company->id)
     ]);
-})->where('vue', '[\/\w\.-]*')->name('customer.login')->middleware(['install']);
+})->where('vue', '[\/\w\.-]*')->name('customer.dashboard')->middleware(['install']);
 
 Route::get('/', function () {
     return view('app');
@@ -146,7 +144,11 @@ Route::get('/', function () {
 
 Route::get('/reset-password/{token}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('home')->middleware(['install', 'guest']);
+})->where('vue', '[\/\w\.-]*')->name('reset-password')->middleware(['install', 'guest']);
+
+Route::get('/forgot-password', function () {
+    return view('app');
+})->where('vue', '[\/\w\.-]*')->name('forgot-password')->middleware(['install', 'guest']);
 
 Route::get('/login', function () {
     return view('app');

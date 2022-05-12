@@ -12,7 +12,7 @@
           flex
           items-end
           justify-center
-          min-h-screen min-h-screen-ios
+          min-h-screen
           px-4
           pt-4
           pb-20
@@ -36,10 +36,7 @@
 
         <!-- This element is to trick the browser into centering the modal contents. -->
         <span
-          class="
-            hidden
-            sm:inline-block sm:align-middle sm:h-screen sm:h-screen-ios
-          "
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
           >&#8203;</span
         >
@@ -114,9 +111,9 @@
               </div>
             </div>
             <div
-              class="mt-5 sm:mt-6"
+              class="mt-5 sm:mt-6 grid gap-3"
               :class="{
-                'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense':
+                'sm:grid-cols-2 sm:grid-flow-row-dense':
                   !dialogStore.hideNoButton,
               }"
             >

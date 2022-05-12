@@ -1,5 +1,5 @@
 <template>
-  <SendInvoiceModal />
+  <SendInvoiceModal @update="updateSentInvoiceStatus" />
   <div class="relative table-container">
     <BaseTable
       ref="table"
@@ -50,6 +50,7 @@ import { useUserStore } from '@/scripts/admin/stores/user'
 import { useRecurringInvoiceStore } from '@/scripts/admin/stores/recurring-invoice'
 import abilities from '@/scripts/admin/stub/abilities'
 import InvoiceDropdown from '@/scripts/admin/components/dropdowns/InvoiceIndexDropdown.vue'
+import SendInvoiceModal from '@/scripts/admin/components/modal-components/SendInvoiceModal.vue'
 
 const recurringInvoiceStore = useRecurringInvoiceStore()
 
@@ -95,5 +96,15 @@ function hasAtleastOneAbility() {
 
 function refreshTable() {
   table.value && table.value.refresh()
+}
+
+function updateSentInvoiceStatus(id) {
+  let pos = recurringInvoiceStore.newRecurringInvoice.invoices.findIndex(
+    (invoice) => invoice.id === id
+  )
+
+  if (recurringInvoiceStore.newRecurringInvoice.invoices[pos]) {
+    recurringInvoiceStore.newRecurringInvoice.invoices[pos].status = 'SENT'
+  }
 }
 </script>

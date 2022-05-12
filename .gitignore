@@ -14,3 +14,4 @@ Homestead.yaml
 /.vscode
 /docker-compose/db/data/
 .gitkeep
+!storage/fonts/.gitkeep

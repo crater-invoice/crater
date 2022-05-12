@@ -12,7 +12,7 @@
     "settings": "Nustatymai",
     "logout": "Atsijungti",
     "users": "Vartotojai",
-    "modules": "Modules"
+    "modules": "Moduliai"
   },
   "general": {
     "add_company": "Pridėti įmonę",
@@ -93,14 +93,14 @@
     "no_note_found": "Jokių žinučių nerasta",
     "insert_note": "Terpti prierašą",
     "copied_pdf_url_clipboard": "Nukopijuotas PDF url į iškarpinę!",
-    "copied_url_clipboard": "Copied url to clipboard!",
+    "copied_url_clipboard": "Nuoroda nukopijuota!",
     "docs": "Dokumentacija",
     "do_you_wish_to_continue": "Ar norite tęsti?",
     "note": "Užrašas",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "pay_invoice": "Apmokėti",
+    "login_successfully": "Prisijungta sėkmingai!",
+    "logged_out_successfully": "Atsijungta sėkmingai",
+    "mark_as_default": "Pažymėti kaip numatytąjį"
   },
   "dashboard": {
     "select_year": "Pasirinkite metus",
@@ -109,7 +109,7 @@
       "customers": "Klientai",
       "invoices": "Sąskaitos",
       "estimates": "Įverčiai",
-      "payments": "Payments"
+      "payments": "Mokėjimai"
     },
     "chart_info": {
       "total_sales": "Pardavimai",

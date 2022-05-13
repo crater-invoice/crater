@@ -563,7 +563,7 @@ class Invoice extends Model implements HasMedia
 
         $company = Company::find($this->company_id);
         $locale = CompanySetting::getSetting('language', $company->id);
-        $customFields = CustomField::where('model_type', 'Item')->get();
+        $customFields = CustomField::where('model_type', 'Invoice')->get();
 
         App::setLocale($locale);
 

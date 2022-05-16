@@ -1,0 +1,21 @@
+replicaCount: 1
+
+metadata:
+  labels:
+    environment: dev
+
+image:
+  repository: bahmni
+  name: crater-nginx
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
+
+autoscaling:
+  enabled: false
+  #  minReplicas: 1
+  #  maxReplicas: 5
+  #  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

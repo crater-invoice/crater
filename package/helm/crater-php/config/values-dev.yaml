@@ -1,0 +1,20 @@
+replicaCount: 1
+
+metadata:
+  labels:
+    environment: dev
+
+image:
+  repository: bahmni
+  name: crater-php
+  tag: latest
+
+service:
+  type: ClusterIP
+
+autoscaling:
+  enabled: false
+  #  minReplicas: 1
+  #  maxReplicas: 5
+  #  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

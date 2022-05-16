@@ -26,4 +26,4 @@ spec:
           image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           resources: {}
           workingDir: /var/www/
-      restartPolicy: unless-stopped
+      restartPolicy: Always

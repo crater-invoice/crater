@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           resources: {}
           envFrom:
             - configMapRef:
@@ -35,4 +35,4 @@ spec:
           ports:
             - containerPort: {{ .Values.service.port }}
               protocol: TCP
-      restartPolicy: always
+      restartPolicy: Always

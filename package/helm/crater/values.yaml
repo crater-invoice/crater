@@ -1,4 +1,6 @@
-replicaCount: 1
+nginxReplicaCount: 1
+
+phpReplicaCount: 1
 
 metadata:
   labels:
@@ -6,15 +8,23 @@ metadata:
 
 image:
   repository: bahmni
+
+nginx-image:
+  name: crater-nginx
+  tag: latest
+
+php-image:
   name: crater-php
   tag: latest
 
 service:
   type: ClusterIP
 
+nginx-service:
+  port: 80
+
+php-service:
+  port: 9000
+
 autoscaling:
   enabled: false
-  #  minReplicas: 1
-  #  maxReplicas: 5
-  #  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80

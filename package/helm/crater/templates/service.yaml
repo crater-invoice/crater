@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-nginx
+  labels:
+    app: {{ .Chart.Name }}-nginx
+    environment: {{ .Values.metadata.labels.environment }}
+
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.nginx-service.port }}
+      targetPort: 80
+      name: '80'
+  selector:
+    app: {{ .Chart.Name }}-nginx
+    environment: {{ .Values.metadata.labels.environment }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}-php
+  labels:
+    app: {{ .Chart.Name }}-php
+    environment: {{ .Values.metadata.labels.environment }}
+
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.php-service.port }}
+      targetPort: 9000
+      name: '9000'
+  selector:
+    app: {{ .Chart.Name }}-php
+    environment: {{ .Values.metadata.labels.environment }}

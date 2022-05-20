@@ -7,7 +7,7 @@ metadata:
     environment: {{ .Values.metadata.labels.environment }}
 
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.nginx.type }}
   ports:
     - port: {{ .Values.service.nginx.port }}
       targetPort: 80
@@ -27,7 +27,7 @@ metadata:
     environment: {{ .Values.metadata.labels.environment }}
 
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.php.type }}
   ports:
     - port: {{ .Values.service.php.port }}
       targetPort: 9000

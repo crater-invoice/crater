@@ -1,21 +1,21 @@
 version: '3'
 
 services:
-  app:
-    image: craterapp/crater-php
+  crater-php:
+    image: bahmni/crater-php
     restart: unless-stopped
     working_dir: /var/www/
     networks:
       - crater
 
-  db:
-    image: mariadb
+  craterdb:
+    image: mysql:5.7
     restart: always
     volumes:
       - db:/var/lib/mysql
-      # If you want to persist data on the host, comment the line above this one...
-      # and uncomment the line under this one.
-      #- ./docker-compose/db/data:/var/lib/mysql:rw,delegated
+      # # If you want to persist data on the host, comment the line above this one...
+      # # and uncomment the line under this one.
+      # - ./docker-compose/db/data:/var/lib/mysql:rw,delegated
     environment:
       MYSQL_USER: crater
       MYSQL_PASSWORD: crater
@@ -26,8 +26,8 @@ services:
     networks:
       - crater
 
-  nginx:
-    image: craterapp/crater-nginx
+  crater-nginx:
+    image: bahmni/crater-nginx
     restart: unless-stopped
     ports:
       - 80:80

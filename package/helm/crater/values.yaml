@@ -8,23 +8,19 @@ metadata:
 
 image:
   repository: bahmni
-
-nginx-image:
-  name: crater-nginx
-  tag: latest
-
-php-image:
-  name: crater-php
-  tag: latest
+  nginx:
+    name: crater-nginx
+    tag: latest
+  php:
+    name: crater-php
+    tag: latest
 
 service:
   type: ClusterIP
-
-nginx-service:
-  port: 80
-
-php-service:
-  port: 9000
+  nginx:
+    port: 80
+  php:
+    port: 9000
 
 autoscaling:
   enabled: false

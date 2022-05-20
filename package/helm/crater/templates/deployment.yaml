@@ -23,10 +23,10 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-nginx
-          image: "{{ .Values.image.repository }}/{{ .Values.nginx-image.name }}:{{ .Values.nginx-image.tag }}"
+          image: "{{ .Values.image.repository }}/{{ .Values.image.nginx.name }}:{{ .Values.image.nginx.tag }}"
           resources: {}
           ports:
-            - containerPort: {{ .Values.nginx-service.port }}
+            - containerPort: {{ .Values.service.nginx.port }}
               protocol: TCP
       restartPolicy: Always
 
@@ -57,7 +57,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-php
-          image: "{{ .Values.image.repository }}/{{ .Values.php-image.name }}:{{ .Values.php-image.tag }}"
+          image: "{{ .Values.image.repository }}/{{ .Values.image.php.name }}:{{ .Values.image.php.tag }}"
           resources: {}
           workingDir: /var/www/
       restartPolicy: Always

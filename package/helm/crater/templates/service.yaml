@@ -9,7 +9,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.nginx-service.port }}
+    - port: {{ .Values.service.nginx.port }}
       targetPort: 80
       name: '80'
   selector:
@@ -29,7 +29,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.php-service.port }}
+    - port: {{ .Values.service.php.port }}
       targetPort: 9000
       name: '9000'
   selector:

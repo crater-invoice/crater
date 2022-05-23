@@ -3,8 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
-      - BAH-1552
+      - bahmni-master
     tags:
       - "v*.**"
   pull_request:

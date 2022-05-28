@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Εκτίμηση",
   "pdf_estimate_number": "Εκτίμηση Αριθμού",
   "pdf_estimate_date": "Εκτιμώμενη ημ. επισκευής",
-  "pdf_estimate_expire_date": "Ημερομηνία λήξης",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Τιμολόγιο",
   "pdf_invoice_number": "Αριθμός τιμολογίου",
   "pdf_invoice_date": "Ημ/νία Τιμολόγησης",

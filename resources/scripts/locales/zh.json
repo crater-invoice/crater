@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "報價",
   "pdf_estimate_number": "報價單號",
   "pdf_estimate_date": "報價日期",
-  "pdf_estimate_expire_date": "有效日期",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "發票",
   "pdf_invoice_number": "發票號碼",
   "pdf_invoice_date": "發票日期",

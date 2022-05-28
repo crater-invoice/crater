@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Preventivo",
   "pdf_estimate_number": "Preventivo Numero",
   "pdf_estimate_date": "Data preventivo",
-  "pdf_estimate_expire_date": "Data di scadenza",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Fattura",
   "pdf_invoice_number": "Numero Fattura",
   "pdf_invoice_date": "Data fattura",

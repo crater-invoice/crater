@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Kostnadsförslag",
   "pdf_estimate_number": "Kostnadsförslagsnummer",
   "pdf_estimate_date": "Kostnadsförslagsdatum",
-  "pdf_estimate_expire_date": "Utgångsdatum",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Faktura",
   "pdf_invoice_number": "Fakturanummer",
   "pdf_invoice_date": "Fakturadatum",

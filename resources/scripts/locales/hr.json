@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Ponuda",
   "pdf_estimate_number": "Broj Ponude",
   "pdf_estimate_date": "Datum Ponude",
-  "pdf_estimate_expire_date": "Datum isteka Ponude",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Faktura",
   "pdf_invoice_number": "Broj Fakture",
   "pdf_invoice_date": "Datum Fakture",

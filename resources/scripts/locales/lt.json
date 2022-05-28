@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Pasiūlymas",
   "pdf_estimate_number": "Pasiūlymo numeris",
   "pdf_estimate_date": "Pasiūlymo data",
-  "pdf_estimate_expire_date": "Galiojimo laikas",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Sąskaita",
   "pdf_invoice_number": "Invoice Number",
   "pdf_invoice_date": "Invoice Date",

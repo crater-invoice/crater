@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Заказ",
   "pdf_estimate_number": "Номер заказа",
   "pdf_estimate_date": "Дата заказа",
-  "pdf_estimate_expire_date": "Истекает",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Счет-фактура",
   "pdf_invoice_number": "Номер счета-фактуры",
   "pdf_invoice_date": "Дата счета-фактуры",

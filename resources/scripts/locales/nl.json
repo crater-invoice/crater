@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Offerte",
   "pdf_estimate_number": "Offerte nummer",
   "pdf_estimate_date": "Offerte Datum",
-  "pdf_estimate_expire_date": "Vervaldatum",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Factuur",
   "pdf_invoice_number": "Factuurnummer",
   "pdf_invoice_date": "Factuur datum",

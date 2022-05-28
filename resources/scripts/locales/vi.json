@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Ước tính",
   "pdf_estimate_number": "Số ước tính",
   "pdf_estimate_date": "Ngày ước tính",
-  "pdf_estimate_expire_date": "Ngày hết hạn",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Hóa đơn",
   "pdf_invoice_number": "Số hóa đơn",
   "pdf_invoice_date": "Ngày lập hóa đơn",

@@ -2,18 +2,9 @@ version: '3'
 
 services:
   app:
-    build:
-      args:
-        user: crater-user
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: crater-php
+    image: craterapp/crater-php
     restart: unless-stopped
     working_dir: /var/www/
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
       - crater
 
@@ -36,22 +27,20 @@ services:
       - crater
 
   nginx:
-    image: nginx:1.17-alpine
+    image: craterapp/crater-nginx
     restart: unless-stopped
     ports:
       - 80:80
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - crater
 
   cron:
     build:
-      context: ./
-      dockerfile: ./docker-compose/cron.dockerfile
+      context: ../
+      dockerfile: docker/cron.dockerfile
+    image: crater-cron
     volumes:
-      - ./:/var/www
+      - ../:/var/www
     networks:
       - crater
 

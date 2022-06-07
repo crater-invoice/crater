@@ -5,6 +5,22 @@ services:
     image: bahmni/crater-php
     restart: unless-stopped
     working_dir: /var/www/
+    environment:
+      APP_URL: http://crater.test
+      DB_HOST: craterdb
+      DB_PORT: 3306
+      DB_DATABASE: crater
+      DB_USERNAME: crater
+      DB_PASSWORD: "crater"
+      SANCTUM_STATEFUL_DOMAINS: crater.test
+      SESSION_DOMAIN: crater.test
+      AUTO_INSTALL: "true"
+      ADMIN_EMAIL: admin@craterapp.com
+      ADMIN_NAME: Jane Doe
+      ADMIN_PASSWORD: "crater@123"
+      COMPANY_NAME: xyz
+      COMPANY_SLUG: xyz
+      COUNTRY_ID: 1
     networks:
       - crater
 

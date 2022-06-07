@@ -18,27 +18,29 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'email' => 'admin@craterapp.com',
-            'name' => 'Jane Doe',
-            'role' => 'super admin',
-            'password' => 'crater@123',
-        ]);
+        if (empty(User::count())) {
+            $user = User::create([
+                'email' => env('ADMIN_EMAIL'),
+                'name' => env('ADMIN_NAME'),
+                'role' => 'super admin',
+                'password' => env('ADMIN_PASSWORD'),
+            ]);
 
-        $company = Company::create([
-            'name' => 'xyz',
-            'owner_id' => $user->id,
-            'slug' => 'xyz'
-        ]);
+            $company = Company::create([
+                'name' => env('COMPANY_NAME'),
+                'owner_id' => $user->id,
+                'slug' => env('COMPANY_SLUG'),
+            ]);
 
-        $company->unique_hash = Hashids::connection(Company::class)->encode($company->id);
-        $company->save();
-        $company->setupDefaultData();
-        $user->companies()->attach($company->id);
-        BouncerFacade::scope()->to($company->id);
+            $company->unique_hash = Hashids::connection(Company::class)->encode($company->id);
+            $company->save();
+            $company->setupDefaultData();
+            $user->companies()->attach($company->id);
+            BouncerFacade::scope()->to($company->id);
 
-        $user->assign('super admin');
+            $user->assign('super admin');
 
-        Setting::setSetting('profile_complete', 0);
+            Setting::setSetting('profile_complete', 0);
+        }
     }
 }

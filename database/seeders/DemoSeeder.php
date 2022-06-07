@@ -20,7 +20,7 @@ class DemoSeeder extends Seeder
 
         $user->setSettings(['language' => 'en']);
 
-        Address::create(['company_id' => $user->companies()->first()->id, 'country_id' => 1]);
+        Address::create(['company_id' => $user->companies()->first()->id, 'country_id' => env('COUNTRY_ID')]);
 
         Setting::setSetting('profile_complete', 'COMPLETED');
 

@@ -3,6 +3,10 @@ FROM php:7.4-fpm
 ENV user=crater-user
 ENV uid=1000
 
+ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /etc/wait-for
+RUN apt-get update && apt-get install -y netcat
+RUN chmod +x /etc/wait-for
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -14,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     libmagickwand-dev \
-    mariadb-client
+    mariadb-client \
+    gettext-base
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -35,7 +40,6 @@ RUN mkdir -p /home/$user/.composer && \
 
 COPY . /var/www/
 COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
-RUN cp /var/www/.env.example /var/www/.env
 RUN chown -R $user:$user /var/www/
 RUN chmod -R 775 /var/www/storage
 RUN chmod -R 775 /var/www/bootstrap
@@ -44,7 +48,12 @@ RUN chmod -R 775 /var/www/bootstrap
 WORKDIR /var/www
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-RUN php artisan key:generate
-RUN php artisan storage:link || true
+
+COPY docker/start.sh start.sh
+RUN chmod 775 start.sh
+RUN chmod 775 /etc/wait-for
+RUN rm -rf /tmp/artifacts
 
 USER $user
+
+ENTRYPOINT [ "./start.sh" ]

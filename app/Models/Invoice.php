@@ -398,7 +398,6 @@ class Invoice extends Model implements HasMedia
         $this->changeInvoiceStatus($data['due_amount']);
         $data['paid_status'] = $this->paid_status;
 
-
         $this->update($data);
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));

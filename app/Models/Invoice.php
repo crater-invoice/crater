@@ -396,6 +396,8 @@ class Invoice extends Model implements HasMedia
         $data['customer_sequence_number'] = $serial->nextCustomerSequenceNumber;
 
         $this->changeInvoiceStatus($data['due_amount']);
+        $data['paid_status'] = $this->paid_status;
+
 
         $this->update($data);
 

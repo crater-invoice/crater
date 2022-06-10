@@ -263,7 +263,6 @@ const itemWiseTaxes = computed(() => {
         if (found) {
           found.amount += tax.amount
         } else if (tax.tax_type_id) {
-          console.log(tax, 'getting the tax here')
           taxes.push({
             tax_type_id: tax.tax_type_id,
             amount: tax.amount,

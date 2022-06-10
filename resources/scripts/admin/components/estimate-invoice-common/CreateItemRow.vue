@@ -478,7 +478,6 @@ function syncItemToStore() {
   if (!itemTaxes) {
     itemTaxes = []
   }
-  console.log('syncItemToStore', itemTaxes)
 
   let data = {
     ...props.store[props.storeProp].items[props.index],

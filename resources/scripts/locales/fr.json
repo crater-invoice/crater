@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Devis",
   "pdf_estimate_number": "N°",
   "pdf_estimate_date": "Date",
-  "pdf_estimate_expire_date": "Date d'expiration",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Facture",
   "pdf_invoice_number": "Numéro",
   "pdf_invoice_date": "Date",

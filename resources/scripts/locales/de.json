@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Angebot",
   "pdf_estimate_number": "Angebotsnummer",
   "pdf_estimate_date": "Angebotsdatum",
-  "pdf_estimate_expire_date": "Gültig bis",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Rechnung",
   "pdf_invoice_number": "Rechnungsnummer",
   "pdf_invoice_date": "Rechnungsdatum",

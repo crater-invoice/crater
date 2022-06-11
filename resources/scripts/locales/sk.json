@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Cenový odhad",
   "pdf_estimate_number": "Číslo cenového odhadu",
   "pdf_estimate_date": "Dátum cenového odhadu",
-  "pdf_estimate_expire_date": "Platnosť cenového odhadu",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Faktúra",
   "pdf_invoice_number": "Číslo faktúry",
   "pdf_invoice_date": "Dátum vystavenia",

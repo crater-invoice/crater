@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Tarjous",
   "pdf_estimate_number": "Tarjousnumero",
   "pdf_estimate_date": "Tarjouksen päiväys",
-  "pdf_estimate_expire_date": "Voimassaolo päivä",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "Lasku",
   "pdf_invoice_number": "Laskunumero",
   "pdf_invoice_date": "Laskun päiväys",

@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "تقدير",
   "pdf_estimate_number": "رقم تقدير",
   "pdf_estimate_date": "تاريخ التقدير",
-  "pdf_estimate_expire_date": "تاريخ انتهاء الصلاحية",
+  "pdf_estimate_expire_date": "Expiry Date",
   "pdf_invoice_label": "الفاتورة",
   "pdf_invoice_number": "رقم الفاتورة",
   "pdf_invoice_date": "تاريخ الفاتورة",

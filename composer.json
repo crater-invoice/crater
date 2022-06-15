@@ -39,14 +39,14 @@
     "beyondcode/laravel-dump-server": "^1.0",
     "facade/ignition": "^2.3.6",
     "friendsofphp/php-cs-fixer": "^3.0",
-    "fzaninotto/faker": "^1.9.1",
+    "fakerphp/faker": "^1.9.1",
     "mockery/mockery": "^1.3.1",
     "nunomaduro/collision": "^5.0",
     "pestphp/pest": "^1.0",
     "pestphp/pest-plugin-faker": "^1.0",
     "pestphp/pest-plugin-laravel": "^1.0",
     "pestphp/pest-plugin-parallel": "^0.2.1",
-    "phpunit/phpunit": "^9.0"
+    "phpunit/phpunit": "^9.3"
   },
   "autoload": {
     "psr-4": {

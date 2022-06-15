@@ -408,6 +408,10 @@
         }
 
     </style>
+
+    @if (App::isLocale('th'))
+        @include('app.pdf.locale.th')
+    @endif
 </head>
 
 <body>

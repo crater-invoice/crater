@@ -39,7 +39,7 @@ return [
             'resources/sass/module' => 'Resources/sass/module.scss',
             'resources/scripts/stores/sample-store' => 'Resources/scripts/stores/sample-store.js',
             'resources/scripts/views/SamplePage' => 'Resources/scripts/views/SamplePage.vue',
-            'resources/locales/en' => 'Resources/locales/en.json',
+            'resources/locales/ru' => 'Resources/locales/ru.json',
             'resources/locales/locales' => 'Resources/locales/locales.js',
             'package' => 'package.json',
             'postcss.config' => 'postcss.config.js',

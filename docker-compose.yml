@@ -1,25 +1,22 @@
 version: '3'
-
 services:
+
   app:
-    build:
-      args:
-        user: crater-user
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: crater-php
+    build: .
+    image: craterapp/crater
     restart: unless-stopped
-    working_dir: /var/www/
     volumes:
-      - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
+      - ./:/var/www:z
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.somecron.schedule: "@every 60s"
+      ofelia.job-exec.somecron.command: "php artisan schedule:run"
     networks:
       - crater
 
   db:
     image: mariadb
-    restart: always
+    restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
       # If you want to persist data on the host, comment the line above this one...
@@ -41,19 +38,19 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./:/var/www:z
+      - ./docker-compose/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - crater
 
-  cron:
-    build:
-      context: ./
-      dockerfile: ./docker-compose/cron.dockerfile
+  ofelia:
+    image: mcuadros/ofelia
+    restart: unless-stopped
+    command: daemon --docker
     volumes:
-      - ./:/var/www
-    networks:
-      - crater
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - app
 
 volumes:
   db:

@@ -148,11 +148,11 @@
     "search": "Поиск...",
     "customers": "Клиенты",
     "users": "Пользователи",
-    "no_results_found": "Ничего не найдено"
+    "no_results_found": "Результаты не найдены"
   },
   "company_switcher": {
     "label": "СМЕНИТЬ КОМПАНИЮ",
-    "no_results_found": "Результаты не найдены",
+    "no_results_found": "Результатов не найдено",
     "add_new_company": "Добавить новую компанию",
     "new_company": "Новая компания",
     "created_message": "Компания создана успешно"

@@ -90,8 +90,8 @@ const rules = computed(() => {
     name: {
       required: helpers.withMessage(t('validation.required'), required),
       minLength: helpers.withMessage(
-        t('validation.name_min_length', { count: 3 }),
-        minLength(3)
+        t('validation.name_min_length', { count: 1 }),
+        minLength(1)
       ),
     },
   }

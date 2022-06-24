@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-config
+data:
+  APP_URL: "{{ .Values.config.APP_URL }}"
+  DB_DATABASE: "{{ .Values.config.DB_DATABASE }}"
+  SANCTUM_STATEFUL_DOMAINS: "{{ .Values.config.SANCTUM_STATEFUL_DOMAINS }}"
+  SESSION_DOMAIN: "{{ .Values.config.SESSION_DOMAIN }}"
+  AUTO_INSTALL: "{{ .Values.config.AUTO_INSTALL }}"
+  ADMIN_NAME: "{{ .Values.config.ADMIN_NAME }}"
+  COMPANY_NAME: "{{ .Values.config.COMPANY_NAME }}"
+  COMPANY_SLUG: "{{ .Values.config.COMPANY_SLUG }}"
+  COUNTRY_ID: "{{ .Values.config.COUNTRY_ID }}"

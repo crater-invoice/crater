@@ -60,4 +60,11 @@ spec:
           image: "{{ .Values.image.repository }}/{{ .Values.image.php.name }}:{{ .Values.image.php.tag }}"
           resources: {}
           workingDir: /var/www/
+          envFrom:
+            - configMapRef:
+                name: {{ .Chart.Name }}-config
+                optional: false
+            - secretRef:
+                name: {{.Chart.Name }}-secrets
+                optional: false
       restartPolicy: Always

@@ -355,7 +355,7 @@
       "select_an_item": "Sélectionnez un article",
       "type_item_description": "Taper la description de l'article (facultatif)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "Si activé, le modèle sélectionné sera automatiquement utilisé pour les nouvelles estimations."
   },
   "invoices": {
     "title": "Factures",
@@ -447,7 +447,7 @@
     "marked_as_sent_message": "Facture supprimée | Factures supprimées",
     "something_went_wrong": "quelque chose a mal tourné",
     "invalid_due_amount_message": "Le paiement entré est supérieur au montant total dû pour cette facture. Veuillez vérifier et réessayer.",
-    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
+    "mark_as_default_invoice_template_description": "Si activé, le modèle sélectionné sera automatiquement utilisé pour les nouvelles factures."
   },
   "recurring_invoices": {
     "title": "Factures récurrentes",
@@ -526,7 +526,7 @@
     "cloned_successfully": "Facture récurrente clonée",
     "clone_invoice": "Dupliquer",
     "confirm_clone": "Cette facture récurrente sera clonée dans une nouvelle facture récurrente",
-    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
+    "add_customer_email": "Veuillez ajouter une adresse e-mail pour ce client afin d'envoyer les factures automatiquement.",
     "item": {
       "title": "Nom",
       "description": "Description",
@@ -845,8 +845,8 @@
       "mailgun_secret": "Secret Mailgun",
       "mailgun_domain": "Domaine",
       "mailgun_endpoint": "Mailgun Endpoint",
-      "ses_secret": "SES Secret",
-      "ses_key": "SES Key",
+      "ses_secret": "Clé secrète SES",
+      "ses_key": "Clé SES",
       "password": "Mot de passe",
       "username": "Nom d'utilisateur",
       "mail_config": "Envoi d'emails",
@@ -1114,8 +1114,8 @@
       "exchange_help_text": "Veuillez entrer le taux de change pour convertir {currency} en {baseCurrency}",
       "currency_freak": "Currency Freak",
       "currency_layer": "Currency Layer",
-      "open_exchange_rate": "Open Exchange Rate",
-      "currency_converter": "Currency Converter",
+      "open_exchange_rate": "Ouvrir le taux de change",
+      "currency_converter": "Convertisseur de devises",
       "server": "Serveur",
       "url": "URL",
       "active": "Actif",
@@ -1262,8 +1262,8 @@
       "media_driver": "Stockage multimédia",
       "media_root": "Répertoire média",
       "aws_driver": "AWS",
-      "aws_key": "AWS Key",
-      "aws_secret": "AWS Secret",
+      "aws_key": "Clé AWS",
+      "aws_secret": "Clé secrète AWS",
       "aws_region": "Région AWS",
       "aws_bucket": "Bucket",
       "aws_root": "Répertoire",
@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Devis",
   "pdf_estimate_number": "N°",
   "pdf_estimate_date": "Date",
-  "pdf_estimate_expire_date": "Expiry Date",
+  "pdf_estimate_expire_date": "Date d'expiration",
   "pdf_invoice_label": "Facture",
   "pdf_invoice_number": "Numéro",
   "pdf_invoice_date": "Date",

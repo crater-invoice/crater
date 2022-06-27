@@ -1217,10 +1217,10 @@
       "finishing_update": "Afwerking Update",
       "update_failed": "Update mislukt",
       "update_failed_text": "Sorry! Je update is mislukt op: {step} step ",
-      "update_warning": "All of the application files and default template files will be overwritten when you update the application using this utility. Please take a backup of your templates & database before updating."
+      "update_warning": "Alle applicatiebestanden en de standaard sjabloonbestanden worden overschreven wanneer u de applicatie met behulp van dit hulpprogramma bijwerkt. Maak een reservekopie van uw sjablonen en database voordat u deze bijwerkt."
     },
     "backup": {
-      "title": "Backup | Backups",
+      "title": "Back-up | Back-ups",
       "description": "De back-up is een zipfile met alle bestanden in de mappen die je opgeeft samen met een dump van je database",
       "new_backup": "Nieuwe back-up",
       "create_backup": "Backup maken",

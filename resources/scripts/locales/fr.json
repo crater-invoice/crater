@@ -310,7 +310,7 @@
     "confirm_mark_as_sent": "Ce devis sera marqué comme envoyé",
     "confirm_mark_as_accepted": "Ce devis sera marqué comme accepté",
     "confirm_mark_as_rejected": "Ce devis sera marqué comme rejeté",
-    "no_matching_estimates": "Aucune estimation correspondante !",
+    "no_matching_estimates": "Aucun devis correspondant !",
     "mark_as_sent_successfully": "Devis marqué comme envoyé",
     "send_estimate_successfully": "Devis envoyé",
     "errors": {
@@ -1150,8 +1150,8 @@
       "payment_mode_added": "Mode de paiement ajouté",
       "payment_mode_updated": "Mode de paiement mis à jour",
       "payment_mode_confirm_delete": "Vous ne pourrez pas récupérer ce mode de paiement",
-      "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
-      "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
+      "payments_attached": "Ce moyen de paiement est déjà utilisé par des paiements. Merci de supprimer les paiements associés avant de procéder à la suppression.",
+      "expenses_attached": "Ce moyen de paiement est déjà utilisé par des dépenses. Merci de supprimer les dépenses associés avant de procéder à la suppression.",
       "deleted_message": "Mode de paiement supprimé"
     },
     "expense_category": {
@@ -1491,7 +1491,7 @@
   "pdf_invoice_date": "Date",
   "pdf_invoice_due_date": "Date d’échéance",
   "pdf_notes": "Notes de bas de page",
-  "pdf_items_label": "Articles",
+  "pdf_items_label": "Désignation",
   "pdf_quantity_label": "Quantité",
   "pdf_price_label": "Prix",
   "pdf_discount_label": "Remise",

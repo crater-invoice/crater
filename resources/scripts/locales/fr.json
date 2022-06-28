@@ -844,7 +844,7 @@
       "secret": "Secret",
       "mailgun_secret": "Secret Mailgun",
       "mailgun_domain": "Domaine",
-      "mailgun_endpoint": "Mailgun Endpoint",
+      "mailgun_endpoint": "Endpoint de Mailgun",
       "ses_secret": "Clé secrète SES",
       "ses_key": "Clé SES",
       "password": "Mot de passe",

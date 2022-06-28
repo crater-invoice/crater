@@ -26,6 +26,8 @@ service:
 config:
   APP_URL: http://crater.test
   DB_DATABASE: crater
+  DB_HOST: craterdb
+  DB_PORT: 3306
   SANCTUM_STATEFUL_DOMAINS: crater.test
   SESSION_DOMAIN: crater.test
   AUTO_INSTALL: "true"
@@ -35,8 +37,6 @@ config:
   COUNTRY_ID: 1
 
 secrets:
-  DB_HOST: ""
-  DB_PORT: ""
   DB_USERNAME: ""
   DB_PASSWORD: ""
   ADMIN_EMAIL: ""

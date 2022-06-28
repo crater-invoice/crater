@@ -5,6 +5,8 @@ metadata:
 data:
   APP_URL: "{{ .Values.config.APP_URL }}"
   DB_DATABASE: "{{ .Values.config.DB_DATABASE }}"
+  DB_HOST:  {{ .Values.config.DB_HOST }}
+  DB_PORT:  {{ .Values.config.DB_PORT }}
   SANCTUM_STATEFUL_DOMAINS: "{{ .Values.config.SANCTUM_STATEFUL_DOMAINS }}"
   SESSION_DOMAIN: "{{ .Values.config.SESSION_DOMAIN }}"
   AUTO_INSTALL: "{{ .Values.config.AUTO_INSTALL }}"

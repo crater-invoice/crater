@@ -6,21 +6,21 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     environment:
-      APP_URL: http://crater.test
-      DB_HOST: craterdb
-      DB_PORT: 3306
-      DB_DATABASE: crater
-      DB_USERNAME: crater
-      DB_PASSWORD: "crater"
-      SANCTUM_STATEFUL_DOMAINS: crater.test
-      SESSION_DOMAIN: crater.test
-      AUTO_INSTALL: "true"
-      ADMIN_EMAIL: admin@craterapp.com
-      ADMIN_NAME: Jane Doe
-      ADMIN_PASSWORD: "crater@123"
-      COMPANY_NAME: xyz
-      COMPANY_SLUG: xyz
-      COUNTRY_ID: 1
+      APP_URL: ${CRATER_APP_URL:?}
+      DB_HOST: ${CRATER_DB_HOST:?}
+      DB_PORT: ${CRATER_DB_PORT:?}
+      DB_DATABASE: ${CRATER_DB_DATABASE:?}
+      DB_USERNAME: ${CRATER_DB_USERNAME:?}
+      DB_PASSWORD: ${CRATER_DB_PASSWORD:?}
+      SANCTUM_STATEFUL_DOMAINS: ${CRATER_SANCTUM_STATEFUL_DOMAINS:?}
+      SESSION_DOMAIN: ${CRATER_SESSION_DOMAIN:?}
+      AUTO_INSTALL: ${CRATER_AUTO_INSTALL:?}
+      ADMIN_NAME: ${CRATER_ADMIN_NAME:?}
+      ADMIN_EMAIL: ${CRATER_ADMIN_EMAIL:?}
+      ADMIN_PASSWORD: ${CRATER_ADMIN_PASSWORD:?}
+      COMPANY_NAME: ${CRATER_COMPANY_NAME:?}
+      COMPANY_SLUG: ${CRATER_COMPANY_SLUG:?}
+      COUNTRY_ID: ${CRATER_COUNTRY_ID:?}
     networks:
       - crater
 

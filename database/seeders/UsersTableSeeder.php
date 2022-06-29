@@ -20,16 +20,16 @@ class UsersTableSeeder extends Seeder
     {
         if (empty(User::count())) {
             $user = User::create([
-                'email' => env('ADMIN_EMAIL'),
-                'name' => env('ADMIN_NAME'),
+                'email' => env('ADMIN_EMAIL', 'admin@craterapp.com'),
+                'name' => env('ADMIN_NAME', 'Jane Doe'),
                 'role' => 'super admin',
-                'password' => env('ADMIN_PASSWORD'),
+                'password' => env('ADMIN_PASSWORD', 'crater@123'),
             ]);
 
             $company = Company::create([
-                'name' => env('COMPANY_NAME'),
+                'name' => env('COMPANY_NAME', 'xyz'),
                 'owner_id' => $user->id,
-                'slug' => env('COMPANY_SLUG'),
+                'slug' => env('COMPANY_SLUG', 'xyz'),
             ]);
 
             $company->unique_hash = Hashids::connection(Company::class)->encode($company->id);

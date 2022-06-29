@@ -1,5 +1,6 @@
 <?php
 
+use Crater\Models\Group;
 use Crater\Models\Customer;
 use Crater\Models\CustomField;
 use Crater\Models\Estimate;
@@ -310,6 +311,16 @@ return [
             'owner_only' => false,
             'ability' => 'view-item',
             'model' => Item::class
+        ],
+        [
+            'title' => 'navigation.groups',
+            'group' => 1,
+            'link' => '/admin/groups',
+            'icon' => 'FolderIcon',
+            'name' => 'Groups',
+            'owner_only' => false,
+            'ability' => 'view-group',
+            'model' => Group::class
         ],
         [
             'title' => 'navigation.estimates',

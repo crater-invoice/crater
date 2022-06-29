@@ -5,6 +5,7 @@ use Crater\Models\CustomField;
 use Crater\Models\Estimate;
 use Crater\Models\ExchangeRateProvider;
 use Crater\Models\Expense;
+use Crater\Models\Group;
 use Crater\Models\Invoice;
 use Crater\Models\Item;
 use Crater\Models\Note;
@@ -77,6 +78,38 @@ return [
             "model" => Item::class,
             "depends_on" => [
                 'view-item',
+            ]
+        ],
+
+        // Group
+        [
+            "name" => "view group",
+            "ability" => "view-group",
+            "model" => Group::class,
+        ],
+        [
+            "name" => "create group",
+            "ability" => "create-group",
+            "model" => Group::class,
+            "depends_on" => [
+                'view-group',
+                'view-item',
+            ]
+        ],
+        [
+            "name" => "edit group",
+            "ability" => "edit-group",
+            "model" => Group::class,
+            "depends_on" => [
+                'view-group',
+            ]
+        ],
+        [
+            "name" => "delete group",
+            "ability" => "delete-group",
+            "model" => Group::class,
+            "depends_on" => [
+                'view-group',
             ]
         ],
 

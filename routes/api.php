@@ -39,6 +39,7 @@ use Crater\Http\Controllers\V1\Admin\General\NumberPlaceholdersController;
 use Crater\Http\Controllers\V1\Admin\General\SearchController;
 use Crater\Http\Controllers\V1\Admin\General\SearchUsersController;
 use Crater\Http\Controllers\V1\Admin\General\TimezonesController;
+use Crater\Http\Controllers\V1\Admin\Group\GroupsController;
 use Crater\Http\Controllers\V1\Admin\Invoice\ChangeInvoiceStatusController;
 use Crater\Http\Controllers\V1\Admin\Invoice\CloneInvoiceController;
 use Crater\Http\Controllers\V1\Admin\Invoice\InvoicesController;
@@ -260,6 +261,14 @@ Route::prefix('/v1')->group(function () {
             Route::resource('items', ItemsController::class);
 
             Route::resource('units', UnitsController::class);
+
+
+            // Groups
+            //----------------------------------
+
+            Route::post('/groups/delete', [GroupsController::class, 'delete']);
+
+            Route::resource('groups', GroupsController::class);
 
 
             // Invoices

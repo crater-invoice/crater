@@ -61,6 +61,10 @@ const RolesSettings = () =>
 const ItemsIndex = () => import('@/scripts/admin/views/items/Index.vue')
 const ItemCreate = () => import('@/scripts/admin/views/items/Create.vue')
 
+// Groups
+const GroupsIndex = () => import('@/scripts/admin/views/groups/Index.vue')
+const GroupsCreate = () => import('@/scripts/admin/views/groups/Create.vue')
+
 // Expenses
 const ExpensesIndex = () => import('@/scripts/admin/views/expenses/Index.vue')
 const ExpenseCreate = () => import('@/scripts/admin/views/expenses/Create.vue')
@@ -347,6 +351,25 @@ export default [
         name: 'items.edit',
         meta: { ability: abilities.EDIT_ITEM },
         component: ItemCreate,
+      },
+
+      // Groups
+      {
+        path: 'groups',
+        meta: { ability: abilities.VIEW_GROUP },
+        component: GroupsIndex,
+      },
+      {
+        path: 'groups/create',
+        name: 'groups.create',
+        meta: { ability: abilities.CREATE_GROUP },
+        component: GroupsCreate,
+      },
+      {
+        path: 'groups/:id/edit',
+        name: 'groups.edit',
+        meta: { ability: abilities.EDIT_GROUP },
+        component: GroupsCreate,
       },
 
       // Expenses

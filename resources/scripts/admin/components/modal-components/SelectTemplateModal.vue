@@ -133,7 +133,7 @@ async function chooseTemplate() {
 }
 
 function getTickImage() {
-  const imgUrl = new URL('/img/tick.png', import.meta.url)
+  const imgUrl = new URL('../../../../static/img/tick.png', import.meta.url)
   return imgUrl
 }
 

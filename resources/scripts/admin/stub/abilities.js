@@ -13,6 +13,12 @@ export default {
   EDIT_ITEM: 'edit-item',
   VIEW_ITEM: 'view-item',
 
+  // Groups
+  CREATE_GROUP: 'create-group',
+  DELETE_GROUP: 'delete-group',
+  EDIT_GROUP: 'edit-group',
+  VIEW_GROUP: 'view-group',
+
   // Tax Types
   CREATE_TAX_TYPE: 'create-tax-type',
   DELETE_TAX_TYPE: 'delete-tax-type',

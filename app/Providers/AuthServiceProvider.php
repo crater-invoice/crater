@@ -39,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         \Crater\Models\CustomField::class => \Crater\Policies\CustomFieldPolicy::class,
         \Crater\Models\User::class => \Crater\Policies\UserPolicy::class,
         \Crater\Models\Item::class => \Crater\Policies\ItemPolicy::class,
+        \Crater\Models\Group::class => \Crater\Policies\GroupPolicy::class,
         \Silber\Bouncer\Database\Role::class => \Crater\Policies\RolePolicy::class,
         \Crater\Models\Unit::class => \Crater\Policies\UnitPolicy::class,
         \Crater\Models\RecurringInvoice::class => \Crater\Policies\RecurringInvoicePolicy::class,

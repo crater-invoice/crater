@@ -602,13 +602,11 @@ class CurrenciesTableSeeder extends Seeder
                     'swap_currency_symbol' => true,
                 ],
             ];
-    
-    
+
+
             foreach ($currencies as $currency) {
                 Currency::create($currency);
             }
-    
         }
-
     }
 }

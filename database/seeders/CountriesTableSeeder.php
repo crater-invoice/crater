@@ -264,8 +264,7 @@ class CountriesTableSeeder extends Seeder
             ['id' => 245,'code' => 'ZM','name' => "Zambia",'phonecode' => 260],
             ['id' => 246,'code' => 'ZW','name' => "Zimbabwe",'phonecode' => 263],
             ];
-            DB::table('countries')->insert($countries);    
+            DB::table('countries')->insert($countries);
         }
-
     }
 }

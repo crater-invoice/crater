@@ -4,7 +4,7 @@
 
 Crater is an open-source web & mobile app that helps you track expenses, payments & create professional invoices & estimates.
 
-Web Application is made using Laravel & VueJS while the Mobile Apps are built using React Native.
+Web Application is made using Larval & VueJS while the Mobile Apps are built using React Native.
 
 # Table of Contents
 
@@ -46,7 +46,7 @@ Join the Crater discord server to discuss:
 - [x] Automatic Update
 - [x] Email Configuration
 - [x] Installation Wizard
-- [x] Address Customisation & Default notes
+- [x] Address Customization & Default notes
 - [x] Edit Email before Sending Invoice
 - [x] Available as a docker image
 - [x] Performance Improvements
@@ -56,18 +56,17 @@ Join the Crater discord server to discuss:
 - [x] Recurring Invoices
 - [x] Customer Portal
 - [x] Accept Payments (Stripe Integration)
-- [x] White Labeling (Easy Invoice, Email & Consumer Portal Theme customisation)
+- [x] White Labeling (Easy Invoice, Email & Consumer Portal Theme customization)
 - [ ] Modules API
 - [ ] Blockchain Integration
 - [ ] Web 3.0 Accounting
 - [ ] Vendors & Bills
-- [ ] Inventory Management 
+- [ ] Inventory Management
 - [ ] Payment Reminders
 - [ ] Improve Accessibility
 - [ ] Debit & Credit Notes
 - [ ] Time Tracking
 - [ ] Full service Payroll
-
 
 ## Copyright
 

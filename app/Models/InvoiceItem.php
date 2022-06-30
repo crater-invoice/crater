@@ -41,6 +41,11 @@ class InvoiceItem extends Model
         return $this->hasMany(Tax::class);
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function recurringInvoice()
     {
         return $this->belongsTo(RecurringInvoice::class);

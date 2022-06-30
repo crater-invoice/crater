@@ -36,6 +36,17 @@ test('invoice has many payments', function () {
     $this->assertTrue($invoice->payments()->exists());
 });
 
+
+test('estimate has many estimate groups', function () {
+    $estimate = Invoice::factory()->create();
+
+    $estimate = Invoice::factory()->hasItems(5)->hasGroups()->create();
+
+    $this->assertCount(1, $estimate->groups);
+
+    $this->assertTrue($estimate->groups()->exists());
+});
+
 test('invoice belongs to customer', function () {
     $invoice = Invoice::factory()->forCustomer()->create();
 

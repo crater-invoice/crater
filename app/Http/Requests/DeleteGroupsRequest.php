@@ -30,7 +30,7 @@ class DeleteGroupsRequest extends FormRequest
             ],
             'ids.*' => [
                 'required',
-                Rule::exists('items', 'id'),
+                Rule::exists('groups', 'id'),
             ],
         ];
     }

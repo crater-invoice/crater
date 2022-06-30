@@ -33,6 +33,9 @@ class ItemsRequest extends FormRequest
             'unit_id' => [
                 'nullable',
             ],
+            'group_id' => [
+                'nullable',
+            ],
             'description' => [
                 'nullable',
             ],

@@ -9,6 +9,7 @@
     </BasePageHeader>
 
     <ItemUnitModal />
+    <GroupModal />
 
     <form
       class="grid lg:grid-cols-2 mt-6"
@@ -60,6 +61,32 @@
             >
               <template #action>
                 <BaseSelectAction @click="addItemUnit">
+                  <BaseIcon
+                    name="PlusIcon"
+                    class="h-4 mr-2 -ml-2 text-center text-primary-400"
+                  />
+                  {{ $t('settings.customization.items.add_item_unit') }}
+                </BaseSelectAction>
+              </template>
+            </BaseMultiselect>
+          </BaseInputGroup>
+
+          <BaseInputGroup
+            :content-loading="isFetchingInitialData"
+            :label="$t('items.group')"
+          >
+            <BaseMultiselect
+              v-model="itemStore.currentItem.group_id"
+              :content-loading="isFetchingInitialData"
+              label="name"
+              :options="itemStore.groups"
+              value-prop="id"
+              :placeholder="$t('items.select_a_group')"
+              searchable
+              track-by="name"
+            >
+              <template #action>
+                <BaseSelectAction @click="addGroup">
                   <BaseIcon
                     name="PlusIcon"
                     class="h-4 mr-2 -ml-2 text-center text-primary-400"
@@ -150,6 +177,7 @@ import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { useTaxTypeStore } from '@/scripts/admin/stores/tax-type'
 import { useModalStore } from '@/scripts/stores/modal'
 import ItemUnitModal from '@/scripts/admin/components/modal-components/ItemUnitModal.vue'
+import GroupModal from '@/scripts/admin/components/modal-components/GroupModal.vue'
 import { useUserStore } from '@/scripts/admin/stores/user'
 import abilities from '@/scripts/admin/stub/abilities'
 
@@ -241,11 +269,19 @@ async function addItemUnit() {
     size: 'sm',
   })
 }
+async function addGroup() {
+  modalStore.openModal({
+    title: t('settings.customization.items.add_group'),
+    componentName: 'GroupModal',
+    size: 'sm',
+  })
+}
 
 async function loadData() {
   isFetchingInitialData.value = true
 
   await itemStore.fetchItemUnits({ limit: 'all' })
+  await itemStore.fetchGroups({ limit: 'all' })
   if (userStore.hasAbilities(abilities.VIEW_TAX_TYPE)) {
     await taxTypeStore.fetchTaxTypes({ limit: 'all' })
   }

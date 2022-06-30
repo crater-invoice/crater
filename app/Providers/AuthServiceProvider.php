@@ -7,6 +7,7 @@ use Crater\Policies\CustomerPolicy;
 use Crater\Policies\DashboardPolicy;
 use Crater\Policies\EstimatePolicy;
 use Crater\Policies\ExpensePolicy;
+use Crater\Policies\GroupPolicy;
 use Crater\Policies\InvoicePolicy;
 use Crater\Policies\ItemPolicy;
 use Crater\Policies\ModulesPolicy;
@@ -74,6 +75,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('send payment', [PaymentPolicy::class, 'send']);
 
         Gate::define('delete multiple items', [ItemPolicy::class, 'deleteMultiple']);
+        Gate::define('delete multiple groups', [GroupPolicy::class, 'deleteMultiple']);
         Gate::define('delete multiple customers', [CustomerPolicy::class, 'deleteMultiple']);
         Gate::define('delete multiple users', [UserPolicy::class, 'deleteMultiple']);
         Gate::define('delete multiple invoices', [InvoicePolicy::class, 'deleteMultiple']);

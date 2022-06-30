@@ -1,3 +1,5 @@
+@foreach($estimate->groups as $group)
+<h3>{{ $group->name }}</h3>
 <table width="100%" class="items-table" cellspacing="0" border="0">
     <tr class="item-table-heading-row">
         <th width="2%" class="pr-20 text-right item-table-heading">#</th>
@@ -16,6 +18,7 @@
         $index = 1
     @endphp
     @foreach ($estimate->items as $item)
+        @if ($item->group->name === $group->name)
         <tr class="item-row">
             <td
                 class="pr-20 text-right item-cell"
@@ -64,11 +67,13 @@
                 {!! format_money_pdf($item->total, $estimate->customer->currency) !!}
             </td>
         </tr>
+        @endif
         @php
             $index += 1
         @endphp
     @endforeach
 </table>
+@endforeach
 
 <hr class="item-cell-table-hr">
 
@@ -101,7 +106,7 @@
                 </tr>
             @endif
         @endif
-        
+
         @if ($estimate->tax_per_item === 'YES')
             @foreach ($taxes as $tax)
                 <tr>
@@ -125,7 +130,7 @@
                 </tr>
             @endforeach
         @endif
-        
+
         <tr>
             <td class="py-3"></td>
             <td class="py-3"></td>

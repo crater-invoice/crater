@@ -112,6 +112,11 @@ class Invoice extends Model implements HasMedia
         return $this->belongsTo(User::class, 'creator_id');
     }
 
+    public function groups()
+    {
+        return $this->items()->leftJoin('groups', 'invoice_items.group_id', '=', 'groups.id')->groupBy('groups.name');
+    }
+
     public function getInvoicePdfUrlAttribute()
     {
         return url('/invoices/pdf/'.$this->unique_hash);

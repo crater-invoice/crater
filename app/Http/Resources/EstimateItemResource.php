@@ -19,6 +19,7 @@ class EstimateItemResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'discount_type' => $this->discount_type,
+            'group_id' => $this->group_id,
             'quantity' => $this->quantity,
             'unit_name' => $this->unit_name,
             'discount' => $this->discount,

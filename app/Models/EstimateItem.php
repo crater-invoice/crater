@@ -34,6 +34,11 @@ class EstimateItem extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function taxes()
     {
         return $this->hasMany(Tax::class);

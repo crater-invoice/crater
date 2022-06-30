@@ -1,3 +1,5 @@
+@foreach($invoice->groups as $group)
+    <h3>{{ $group->name }}</h3>
 <table width="100%" class="items-table" cellspacing="0" border="0">
     <tr class="item-table-heading-row">
         <th width="2%" class="pr-20 text-right item-table-heading">#</th>
@@ -19,6 +21,7 @@
         $index = 1
     @endphp
     @foreach ($invoice->items as $item)
+        @if ($item->group->name === $group->name)
         <tr class="item-row">
             <td
                 class="pr-20 text-right item-cell"
@@ -81,11 +84,13 @@
                 {!! format_money_pdf($item->total, $invoice->customer->currency) !!}
             </td>
         </tr>
+        @endif
         @php
             $index += 1
         @endphp
     @endforeach
 </table>
+@endforeach
 
 <hr class="item-cell-table-hr">
 

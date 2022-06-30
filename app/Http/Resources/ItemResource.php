@@ -23,6 +23,7 @@ class ItemResource extends JsonResource
             'company_id' => $this->company_id,
             'creator_id' => $this->creator_id,
             'currency_id' => $this->currency_id,
+            'group_id' => $this->group_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'tax_per_item' => $this->tax_per_item,
@@ -38,6 +39,9 @@ class ItemResource extends JsonResource
             }),
             'currency' => $this->when($this->currency()->exists(), function () {
                 return new CurrencyResource($this->currency);
+            }),
+            'group' => $this->when($this->group()->exists(), function () {
+                return new GroupResource($this->currency);
             }),
         ];
     }

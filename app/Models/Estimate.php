@@ -71,6 +71,11 @@ class Estimate extends Model implements HasMedia
         return $this->hasMany('Crater\Models\EstimateItem');
     }
 
+    public function groups()
+    {
+        return $this->items()->leftJoin('groups', 'estimate_items.group_id', '=', 'groups.id')->groupBy('groups.name');
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');

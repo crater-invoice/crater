@@ -22,6 +22,16 @@ test('estimate has many estimate items', function () {
     $this->assertTrue($estimate->items()->exists());
 });
 
+test('estimate has many estimate groups', function () {
+    $estimate = Estimate::factory()->create();
+
+    $estimate = Estimate::factory()->hasItems(5)->hasGroups()->create();
+
+    $this->assertCount(1, $estimate->groups);
+
+    $this->assertTrue($estimate->groups()->exists());
+});
+
 test('estimate belongs to customer', function () {
     $estimate = Estimate::factory()->forCustomer()->create();
 

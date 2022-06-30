@@ -15,7 +15,12 @@ export const useItemStore = (useWindow = false) => {
       selectAllField: false,
       selectedItems: [],
       itemUnits: [],
+      groups: [],
       currentItemUnit: {
+        id: null,
+        name: '',
+      },
+      currentGroup: {
         id: null,
         name: '',
       },
@@ -24,13 +29,16 @@ export const useItemStore = (useWindow = false) => {
         description: '',
         price: 0,
         unit_id: '',
+        group_id: '',
         unit: null,
+        group: null,
         taxes: [],
         tax_per_item: false,
       },
     }),
     getters: {
       isItemUnitEdit: (state) => (state.currentItemUnit.id ? true : false),
+      isGroupEdit: (state) => (state.currentGroup.id ? true : false),
     },
     actions: {
       resetCurrentItem() {
@@ -235,6 +243,40 @@ export const useItemStore = (useWindow = false) => {
         })
       },
 
+      addGroup(data) {
+        const notificationStore = useNotificationStore()
+
+        return new Promise((resolve, reject) => {
+          axios
+            .post(`/api/v1/groups`, data)
+            .then((response) => {
+              this.groups.push(response.data.data)
+
+              if (response.data.data) {
+                notificationStore.showNotification({
+                  type: 'success',
+                  message: global.t(
+                    'settings.customization.items.group_added'
+                  ),
+                })
+              }
+
+              if (response.data.errors) {
+                notificationStore.showNotification({
+                  type: 'error',
+                  message: err.response.data.errors[0],
+                })
+              }
+
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
       updateItemUnit(data) {
         const notificationStore = useNotificationStore()
 
@@ -272,12 +314,64 @@ export const useItemStore = (useWindow = false) => {
         })
       },
 
+      updateGroup(data) {
+        const notificationStore = useNotificationStore()
+
+        return new Promise((resolve, reject) => {
+          axios
+            .put(`/api/v1/groups/${data.id}`, data)
+            .then((response) => {
+              let pos = this.groups.findIndex(
+                (group) => group.id === response.data.data.id
+              )
+
+              this.groups[pos] = data
+
+              if (response.data.data) {
+                notificationStore.showNotification({
+                  type: 'success',
+                  message: global.t(
+                    'settings.customization.items.group_updated'
+                  ),
+                })
+              }
+
+              if (response.data.errors) {
+                notificationStore.showNotification({
+                  type: 'error',
+                  message: err.response.data.errors[0],
+                })
+              }
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
       fetchItemUnits(params) {
         return new Promise((resolve, reject) => {
           axios
             .get(`/api/v1/units`, { params })
             .then((response) => {
               this.itemUnits = response.data.data
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
+      fetchGroups(params) {
+        return new Promise((resolve, reject) => {
+          axios
+            .get(`/api/v1/groups`, { params })
+            .then((response) => {
+              this.groups = response.data.data
               resolve(response)
             })
             .catch((err) => {
@@ -302,6 +396,21 @@ export const useItemStore = (useWindow = false) => {
         })
       },
 
+      fetchGroup(id) {
+        return new Promise((resolve, reject) => {
+          axios
+            .get(`/api/v1/groups/${id}`)
+            .then((response) => {
+              this.currentGroup = response.data.data
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
       deleteItemUnit(id) {
         const notificationStore = useNotificationStore()
 
@@ -312,6 +421,36 @@ export const useItemStore = (useWindow = false) => {
               if (!response.data.error) {
                 let index = this.itemUnits.findIndex((unit) => unit.id === id)
                 this.itemUnits.splice(index, 1)
+              }
+
+              if (response.data.success) {
+                notificationStore.showNotification({
+                  type: 'success',
+                  message: global.t(
+                    'settings.customization.items.deleted_message'
+                  ),
+                })
+              }
+
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
+      deleteGroup(id) {
+        const notificationStore = useNotificationStore()
+
+        return new Promise((resolve, reject) => {
+          axios
+            .delete(`/api/v1/groups/${id}`)
+            .then((response) => {
+              if (!response.data.error) {
+                let index = this.groups.findIndex((group) => group.id === id)
+                this.groups.splice(index, 1)
               }
 
               if (response.data.success) {

@@ -41,6 +41,11 @@ class Item extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function scopeWhereSearch($query, $search)
     {
         return $query->where('items.name', 'LIKE', '%'.$search.'%');

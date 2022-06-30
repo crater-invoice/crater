@@ -18,6 +18,12 @@ test('an item belongs to unit', function () {
     $this->assertTrue($item->unit()->exists());
 });
 
+test('an item belongs to group', function () {
+    $item = Item::factory()->forGroup()->create();
+
+    $this->assertTrue($item->group()->exists());
+});
+
 test('an item has many taxes', function () {
     $item = Item::factory()->hasTaxes(5)->create();
 

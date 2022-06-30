@@ -6,6 +6,7 @@
           <col style="width: 40%; min-width: 280px" />
           <col style="width: 10%; min-width: 120px" />
           <col style="width: 15%; min-width: 120px" />
+          <col style="width: 15%; min-width: 120px" />
           <col
             v-if="store[storeProp].discount_per_item === 'YES'"
             style="width: 15%; min-width: 160px"
@@ -45,6 +46,30 @@
                   @select="onSelectItem"
                 />
               </div>
+            </td>
+            <td class="px-5 py-4 text-right align-top">
+
+                <BaseMultiselect
+                  v-model="group_id"
+                  :content-loading="loading"
+                  label="name"
+                  :options="itemStore.groups"
+                  value-prop="id"
+                  :placeholder="$t('items.select_a_group')"
+                  searchable
+                  track-by="name"
+                  @change="syncItemToStore()"
+                >
+                  <template #action>
+                    <BaseSelectAction @click="addGroup()">
+                      <BaseIcon
+                        name="PlusIcon"
+                        class="h-4 mr-2 -ml-2 text-center text-primary-400"
+                      />
+                      {{ $t('settings.customization.items.add_item_unit') }}
+                    </BaseSelectAction>
+                  </template>
+                </BaseMultiselect>
             </td>
             <td class="px-5 py-4 text-right align-top">
               <BaseInput
@@ -181,11 +206,15 @@
           </tr>
         </tbody>
       </table>
+
+      <GroupModal />
     </td>
   </tr>
 </template>
 
 <script setup>
+import GroupModal from '@/scripts/admin/components/modal-components/GroupModal.vue'
+import { useModalStore } from '@/scripts/stores/modal'
 import { computed, ref, inject } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -249,7 +278,9 @@ const emit = defineEmits(['update', 'remove', 'itemValidate'])
 
 const companyStore = useCompanyStore()
 const itemStore = useItemStore()
+const modalStore = useModalStore()
 
+itemStore.fetchGroups({ limit: 'all' })
 let route = useRoute()
 const { t } = useI18n()
 
@@ -259,6 +290,15 @@ const quantity = computed({
   },
   set: (newValue) => {
     updateItemAttribute('quantity', parseFloat(newValue))
+  },
+})
+
+const group_id = computed({
+  get: () => {
+    return parseInt(props.itemData.group_id)
+  },
+  set: (newValue) => {
+    updateItemAttribute('group_id', newValue)
   },
 })
 
@@ -359,6 +399,9 @@ const rules = {
       maxLength(20)
     ),
   },
+  group_id: {
+    required: helpers.withMessage(t('validation.required'), required),
+  },
   price: {
     required: helpers.withMessage(t('validation.required'), required),
     minValue: helpers.withMessage(
@@ -441,6 +484,10 @@ function onSelectItem(itm) {
       state[props.storeProp].items[props.index].unit_name = itm.unit.name
     }
 
+    if (itm.group_id) {
+      state[props.storeProp].items[props.index].group_id = parseInt(itm.group_id)
+    }
+
     if (props.store[props.storeProp].tax_per_item === 'YES' && itm.taxes) {
       let index = 0
 
@@ -510,5 +557,13 @@ function updateItemAttribute(attribute, value) {
   })
 
   syncItemToStore()
+}
+
+async function addGroup() {
+  modalStore.openModal({
+    title: t('settings.customization.items.add_group'),
+    componentName: 'GroupModal',
+    size: 'sm',
+  })
 }
 </script>

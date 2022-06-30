@@ -534,6 +534,7 @@ export const useEstimateStore = (useWindow = false) => {
             orderByField: '',
             orderBy: '',
           }),
+          itemStore.fetchGroups(),
           this.resetSelectedNote(),
           this.fetchEstimateTemplates(),
           this.getNextNumber(),

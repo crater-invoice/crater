@@ -22,9 +22,9 @@ services:
     restart: always
     volumes:
       - db:/var/lib/mysql
-      # If you want to persist data on the host, comment the line above this one...
-      # and uncomment the line under this one.
-      #- ./docker-compose/db/data:/var/lib/mysql:rw,delegated
+      # - db:/var/lib/mysql
+      # If you are running in a development environment and don't want the DB data to persist uncomment the line above and comment the line below
+      - ./docker-compose/db/data:/var/lib/mysql:rw,delegated
     environment:
       MYSQL_USER: crater
       MYSQL_PASSWORD: crater

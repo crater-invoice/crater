@@ -30,7 +30,7 @@ config:
   DB_PORT: 3306
   SANCTUM_STATEFUL_DOMAINS: crater.test
   SESSION_DOMAIN: crater.test
-  AUTO_INSTALL: "true"
+  AUTO_INSTALL: "false"
   ADMIN_NAME: Jane Doe
   COMPANY_NAME: xyz
   COMPANY_SLUG: xyz

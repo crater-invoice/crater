@@ -170,7 +170,7 @@ class CountriesTableSeeder extends Seeder
         ['id' => 152,'code' => 'NR','name' => "Nauru",'phonecode' => 674],
         ['id' => 153,'code' => 'NP','name' => "Nepal",'phonecode' => 977],
         ['id' => 154,'code' => 'AN','name' => "Netherlands Antilles",'phonecode' => 599],
-        ['id' => 155,'code' => 'NL','name' => "Netherlands The",'phonecode' => 31],
+        ['id' => 155,'code' => 'NL','name' => "Netherlands",'phonecode' => 31],
         ['id' => 156,'code' => 'NC','name' => "New Caledonia",'phonecode' => 687],
         ['id' => 157,'code' => 'NZ','name' => "New Zealand",'phonecode' => 64],
         ['id' => 158,'code' => 'NI','name' => "Nicaragua",'phonecode' => 505],

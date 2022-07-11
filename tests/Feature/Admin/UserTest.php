@@ -4,6 +4,7 @@ use Crater\Http\Controllers\V1\Admin\Users\UsersController;
 use Crater\Http\Requests\UserRequest;
 use Crater\Models\User;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Faker\faker;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;

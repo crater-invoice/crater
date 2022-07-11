@@ -39,7 +39,7 @@ class RequirementsChecker
                         }
                     }
 
-                    break;
+                break;
                 // check apache requirements
                 case 'apache':
                     foreach ($requirements[$type] as $requirement) {
@@ -55,7 +55,7 @@ class RequirementsChecker
                         }
                     }
 
-                    break;
+                break;
             }
         }
 

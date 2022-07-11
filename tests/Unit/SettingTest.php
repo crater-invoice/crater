@@ -2,6 +2,7 @@
 
 use Crater\Models\Setting;
 use Illuminate\Support\Facades\Artisan;
+
 use function Pest\Faker\faker;
 
 beforeEach(function () {

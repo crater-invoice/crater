@@ -336,7 +336,7 @@ class EnvironmentManager
                         'MAILGUN_ENDPOINT='.config('services.mailgun.endpoint')."\n";
                 }
 
-                break;
+            break;
 
             case 'ses':
                 $oldMailData =
@@ -368,7 +368,7 @@ class EnvironmentManager
                         'SES_SECRET='.config('services.ses.secret')."\n";
                 }
 
-                break;
+            break;
 
             case 'mail':
                 $oldMailData =
@@ -494,14 +494,14 @@ class EnvironmentManager
                         'AWS_ROOT='.config('filesystems.disks.s3.root')."\n";
                 }
 
-                $newDiskData = "\n".
-                    'AWS_KEY='.$request->aws_key."\n".
-                    'AWS_SECRET="'.$request->aws_secret."\"\n".
-                    'AWS_REGION='.$request->aws_region."\n".
-                    'AWS_BUCKET='.$request->aws_bucket."\n".
-                    'AWS_ROOT='.$request->aws_root."\n";
+            $newDiskData = "\n".
+                'AWS_KEY='.$request->aws_key."\n".
+                'AWS_SECRET="'.$request->aws_secret."\"\n".
+                'AWS_REGION='.$request->aws_region."\n".
+                'AWS_BUCKET='.$request->aws_bucket."\n".
+                'AWS_ROOT='.$request->aws_root."\n";
 
-                break;
+            break;
 
             case 'doSpaces':
                 if (env('DO_SPACES_KEY') !== null) {
@@ -514,15 +514,15 @@ class EnvironmentManager
                     'DO_SPACES_ROOT='.config('filesystems.disks.doSpaces.root')."\n";
                 }
 
-                $newDiskData = "\n".
-                    'DO_SPACES_KEY='.$request->do_spaces_key."\n".
-                    'DO_SPACES_SECRET="'.$request->do_spaces_secret."\"\n".
-                    'DO_SPACES_REGION='.$request->do_spaces_region."\n".
-                    'DO_SPACES_BUCKET='.$request->do_spaces_bucket."\n".
-                    'DO_SPACES_ENDPOINT='.$request->do_spaces_endpoint."\n";
-                    'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
+            $newDiskData = "\n".
+                'DO_SPACES_KEY='.$request->do_spaces_key."\n".
+                'DO_SPACES_SECRET="'.$request->do_spaces_secret."\"\n".
+                'DO_SPACES_REGION='.$request->do_spaces_region."\n".
+                'DO_SPACES_BUCKET='.$request->do_spaces_bucket."\n".
+                'DO_SPACES_ENDPOINT='.$request->do_spaces_endpoint."\n";
+            'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
 
-                break;
+            break;
 
             case 'dropbox':
                 if (env('DROPBOX_TOKEN') !== null) {
@@ -534,14 +534,14 @@ class EnvironmentManager
                         'DROPBOX_ROOT='.config('filesystems.disks.dropbox.root')."\n";
                 }
 
-                $newDiskData = "\n".
-                    'DROPBOX_TOKEN='.$request->dropbox_token."\n".
-                    'DROPBOX_KEY='.$request->dropbox_key."\n".
-                    'DROPBOX_SECRET="'.$request->dropbox_secret."\"\n".
-                    'DROPBOX_APP='.$request->dropbox_app."\n".
-                    'DROPBOX_ROOT='.$request->dropbox_root."\n";
+            $newDiskData = "\n".
+                'DROPBOX_TOKEN='.$request->dropbox_token."\n".
+                'DROPBOX_KEY='.$request->dropbox_key."\n".
+                'DROPBOX_SECRET="'.$request->dropbox_secret."\"\n".
+                'DROPBOX_APP='.$request->dropbox_app."\n".
+                'DROPBOX_ROOT='.$request->dropbox_root."\n";
 
-                break;
+            break;
         }
 
         return [

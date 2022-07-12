@@ -21,11 +21,11 @@ trait ExchangeRateProvidersTrait
                     }
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response["rates"]),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response["rates"]),
+                ], 200);
 
-            break;
+                break;
 
             case 'currency_layer':
                 $url = "http://api.currencylayer.com/live?access_key=".$filter['key']."&source={$baseCurrencyCode}&currencies={$currencyCode}";
@@ -37,11 +37,11 @@ trait ExchangeRateProvidersTrait
                     }
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response['quotes']),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response['quotes']),
+                ], 200);
 
-            break;
+                break;
 
             case 'open_exchange_rate':
                 $url = "https://openexchangerates.org/api/latest.json?app_id=".$filter['key']."&base={$baseCurrencyCode}&symbols={$currencyCode}";
@@ -51,11 +51,11 @@ trait ExchangeRateProvidersTrait
                     return respondJson($response["message"], $response["description"]);
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response["rates"]),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response["rates"]),
+                ], 200);
 
-            break;
+                break;
 
             case 'currency_converter':
                 $url = $this->getCurrencyConverterUrl($filter['driver_config']);
@@ -116,15 +116,15 @@ trait ExchangeRateProvidersTrait
                     return respondJson($error_message, $server_message);
                 }
 
-            if (array_key_exists('success', $checkKey) && array_key_exists('error', $checkKey)) {
-                if ($checkKey['error']['status'] == 404) {
-                    return respondJson($error, $message);
+                if (array_key_exists('success', $checkKey) && array_key_exists('error', $checkKey)) {
+                    if ($checkKey['error']['status'] == 404) {
+                        return respondJson($error, $message);
+                    }
                 }
-            }
 
-            return response()->json(['supportedCurrencies' => array_keys($response)]);
+                return response()->json(['supportedCurrencies' => array_keys($response)]);
 
-            break;
+                break;
 
             case 'currency_layer':
                 $url = "http://api.currencylayer.com/list?access_key=".$request->key;
@@ -134,13 +134,13 @@ trait ExchangeRateProvidersTrait
                     return respondJson($error_message, $server_message);
                 }
 
-            if (array_key_exists('currencies', $response)) {
-                return response()->json(['supportedCurrencies' => array_keys($response['currencies'])]);
-            }
+                if (array_key_exists('currencies', $response)) {
+                    return response()->json(['supportedCurrencies' => array_keys($response['currencies'])]);
+                }
 
-            return respondJson($error, $message);
+                return respondJson($error, $message);
 
-            break;
+                break;
 
             case 'open_exchange_rate':
                 $url = "https://openexchangerates.org/api/currencies.json";
@@ -151,15 +151,15 @@ trait ExchangeRateProvidersTrait
                     return respondJson($error_message, $server_message);
                 }
 
-            if (array_key_exists('error', $checkKey)) {
-                if ($checkKey['status'] == 401) {
-                    return respondJson($error, $message);
+                if (array_key_exists('error', $checkKey)) {
+                    if ($checkKey['status'] == 401) {
+                        return respondJson($error, $message);
+                    }
                 }
-            }
 
-            return response()->json(['supportedCurrencies' => array_keys($response)]);
+                return response()->json(['supportedCurrencies' => array_keys($response)]);
 
-            break;
+                break;
 
             case 'currency_converter':
                 $response = $this->getUrl($request);
@@ -168,13 +168,13 @@ trait ExchangeRateProvidersTrait
                     return respondJson($error_message, $server_message);
                 }
 
-            if (array_key_exists('results', $response)) {
-                return response()->json(['supportedCurrencies' => array_keys($response['results'])]);
-            }
+                if (array_key_exists('results', $response)) {
+                    return response()->json(['supportedCurrencies' => array_keys($response['results'])]);
+                }
 
-            return respondJson($error, $message);
+                return respondJson($error, $message);
 
-            break;
+                break;
         }
     }
 

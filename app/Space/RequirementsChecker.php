@@ -39,8 +39,8 @@ class RequirementsChecker
                         }
                     }
 
-                break;
-                // check apache requirements
+                    break;
+                    // check apache requirements
                 case 'apache':
                     foreach ($requirements[$type] as $requirement) {
                         // if function doesn't exist we can't check apache modules
@@ -55,7 +55,7 @@ class RequirementsChecker
                         }
                     }
 
-                break;
+                    break;
             }
         }
 

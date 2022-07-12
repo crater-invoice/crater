@@ -87,11 +87,11 @@ class ExchangeRateProvider extends Model
                     }
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response["rates"]),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response["rates"]),
+                ], 200);
 
-            break;
+                break;
 
             case 'currency_layer':
                 $url = "http://api.currencylayer.com/live?access_key=".$request['key']."&source=INR&currencies=USD";
@@ -103,11 +103,11 @@ class ExchangeRateProvider extends Model
                     }
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response['quotes']),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response['quotes']),
+                ], 200);
 
-            break;
+                break;
 
             case 'open_exchange_rate':
                 $url = "https://openexchangerates.org/api/latest.json?app_id=".$request['key']."&base=INR&symbols=USD";
@@ -117,11 +117,11 @@ class ExchangeRateProvider extends Model
                     return respondJson($response['message'], $response["description"]);
                 }
 
-            return response()->json([
-                'exchangeRate' => array_values($response["rates"]),
-            ], 200);
+                return response()->json([
+                    'exchangeRate' => array_values($response["rates"]),
+                ], 200);
 
-            break;
+                break;
 
             case 'currency_converter':
                 $url = self::getCurrencyConverterUrl($request['driver_config']);

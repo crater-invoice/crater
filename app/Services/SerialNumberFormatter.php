@@ -220,7 +220,7 @@ class SerialNumberFormatter
                         $serialNumber .= 'CST';
                     }
 
-                break;
+                    break;
                 case "CUSTOMER_SEQUENCE":
                     $serialNumber .= str_pad($this->nextCustomerSequenceNumber, $value, 0, STR_PAD_LEFT);
 

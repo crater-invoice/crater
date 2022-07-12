@@ -93,14 +93,14 @@
     "no_note_found": "沒有找到備註",
     "insert_note": "插入備註",
     "copied_pdf_url_clipboard": "複製PDF位址到剪貼簿!",
-    "copied_url_clipboard": "Copied url to clipboard!",
+    "copied_url_clipboard": "將網址複製到剪貼簿！",
     "docs": "文檔",
     "do_you_wish_to_continue": "你確定要繼續？",
     "note": "備註",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "pay_invoice": "支付發票",
+    "login_successfully": "已成功登入！",
+    "logged_out_successfully": "已成功登出",
+    "mark_as_default": "標記為預設值"
   },
   "dashboard": {
     "select_year": "選擇年份",
@@ -109,7 +109,7 @@
       "customers": "客户",
       "invoices": "發票",
       "estimates": "報價",
-      "payments": "Payments"
+      "payments": "付款"
     },
     "chart_info": {
       "total_sales": "銷售",
@@ -208,10 +208,10 @@
     "new_customer": "新客戶",
     "edit_customer": "編輯客戶",
     "basic_info": "基本資料",
-    "portal_access": "Portal Access",
-    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
-    "portal_access_url": "Customer Portal Login URL",
-    "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
+    "portal_access": "門戶訪問",
+    "portal_access_text": "您想允許此客戶登入客戶門戶嗎？",
+    "portal_access_url": "客戶門戶登入URL",
+    "portal_access_url_help": "請將上述給定的URL複製並轉發給您的客戶以提供訪問許可權。",
     "billing_address": "帳單地址",
     "shipping_address": "送貨地址",
     "copy_billing_address": "由帳單複製",
@@ -231,7 +231,7 @@
     "confirm_delete": "你將不能夠還原此客戶, 以及此客戶相關的發票, 報價及付款. | 你將不能夠還原此客戶, 以及此客戶相關的發票, 報價及付款.",
     "created_message": "成功新增客戶",
     "updated_message": "成功更新客戶",
-    "address_updated_message": "Address Information Updated succesfully",
+    "address_updated_message": "地址資訊已成功更新",
     "deleted_message": "成功刪除客戶 | 成功刪除客戶",
     "edit_currency_not_allowed": "交易一旦創建後就不能改變貨幣!"
   },
@@ -265,8 +265,8 @@
   },
   "estimates": {
     "title": "報價",
-    "accept_estimate": "Accept Estimate",
-    "reject_estimate": "Reject Estimate",
+    "accept_estimate": "接受估價",
+    "reject_estimate": "拒絕估算",
     "estimate": "報價 | 報價",
     "estimates_list": "報價列表",
     "days": "{days} 天",
@@ -318,10 +318,10 @@
     },
     "accepted": "已接受",
     "rejected": "已拒絕",
-    "expired": "Expired",
+    "expired": "已過期",
     "sent": "傳送",
     "draft": "草稿",
-    "viewed": "Viewed",
+    "viewed": "已檢視",
     "declined": "拒絕",
     "new_estimate": "新報價",
     "add_new_estimate": "新增報價",
@@ -355,14 +355,14 @@
       "select_an_item": "輸入或點擊去選擇商品",
       "type_item_description": "商品詳情(可選)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "如果啟用，所選模板將自動選擇新的估算。"
   },
   "invoices": {
     "title": "發票",
-    "download": "Download",
-    "pay_invoice": "Pay Invoice",
+    "download": "下載",
+    "pay_invoice": "支付發票",
     "invoices_list": "發票列表",
-    "invoice_information": "Invoice Information",
+    "invoice_information": "發票資訊",
     "days": "{days} 天",
     "months": "{months} 月",
     "years": "{years} 年",
@@ -447,7 +447,7 @@
     "marked_as_sent_message": "發票已標示為成功傳送",
     "something_went_wrong": "出現錯誤",
     "invalid_due_amount_message": "發票總額不能少於支付總額. 請更新發票或刪除相關支付再繼續.",
-    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
+    "mark_as_default_invoice_template_description": "如果啟用，所選模板將自動選擇新發票"
   },
   "recurring_invoices": {
     "title": "定期發票",
@@ -464,11 +464,11 @@
     "completed": "已完成",
     "customer": "客戶",
     "paid_status": "付款狀態",
-    "ref_no": "REF NO.",
-    "number": "NUMBER",
-    "amount_due": "AMOUNT DUE",
-    "partially_paid": "Partially Paid",
-    "total": "Total",
+    "ref_no": "參考號碼",
+    "number": "號",
+    "amount_due": "到期金額",
+    "partially_paid": "部分支付",
+    "total": "總計",
     "discount": "Discount",
     "sub_total": "Sub Total",
     "invoice": "Recurring Invoice | Recurring Invoices",

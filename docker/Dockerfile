@@ -3,9 +3,7 @@ FROM php:7.4-fpm
 ENV user=crater-user
 ENV uid=1000
 
-ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /etc/wait-for
-RUN apt-get update && apt-get install -y netcat
-RUN chmod +x /etc/wait-for
+RUN apt-get update && apt-get install -y wait-for-it
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -51,7 +49,6 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 COPY docker/start.sh start.sh
 RUN chmod 775 start.sh
-RUN chmod 775 /etc/wait-for
 RUN rm -rf /tmp/artifacts
 
 USER $user

@@ -90,7 +90,8 @@ jobs:
         tags: bahmni/crater-nginx:${{env.VERSION_TAG}},bahmni/crater-nginx:latest
     - name: Update Version and Image Tag
       run: |
-        yq --inplace '.image.tag = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/values.yaml
+        yq --inplace '.image.php.tag = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/values.yaml
+        yq --inplace '.image.nginx.tag = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/values.yaml
         yq --inplace '.version = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/Chart.yaml
     - name: Helm Lint
       run: helm lint $HELM_CHART_PATH

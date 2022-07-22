@@ -1,5 +1,0 @@
-apiVersion: v2
-name: crater
-description: A Helm chart for crater
-type: application
-version: 1.0.0

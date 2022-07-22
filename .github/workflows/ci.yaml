@@ -5,7 +5,7 @@ on:
     branches:
       - bahmni-master
     tags:
-      - "v*.**"
+      - "*"
   pull_request:
     branches:
       - bahmni-master
@@ -80,7 +80,9 @@ jobs:
         context: .
         file: docker/Dockerfile
         push: true
-        tags: bahmni/crater-php:${{env.VERSION_TAG}},bahmni/crater-php:latest
+        # :product is just a temp tag - eventually the crater-image would come from the craterapp dockerhub repo
+        # PR https://github.com/crater-invoice/crater/pull/922
+        tags: bahmni/crater-php:product
     - name: Docker Build and push crater-nginx
       uses: docker/build-push-action@v2
       with:
@@ -88,32 +90,3 @@ jobs:
         file: docker/nginx.Dockerfile
         push: true
         tags: bahmni/crater-nginx:${{env.VERSION_TAG}},bahmni/crater-nginx:latest
-    - name: Update Version and Image Tag
-      run: |
-        yq --inplace '.image.php.tag = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/values.yaml
-        yq --inplace '.image.nginx.tag = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/values.yaml
-        yq --inplace '.version = "${{ env.VERSION_TAG }}"' $HELM_CHART_PATH/Chart.yaml
-    - name: Helm Lint
-      run: helm lint $HELM_CHART_PATH
-    - name: Helm Package
-      run: helm package $HELM_CHART_PATH
-    - name: Checkout Charts Repository
-      uses: actions/checkout@v2
-      with:
-        repository: Bahmni/helm-charts
-        ref: gh-pages
-        path: helm-charts
-        persist-credentials: false
-    - name: Copy Helm Archive
-      run: cp crater-${{ env.VERSION_TAG }}.tgz helm-charts/crater/
-    - name: Helm Index
-      working-directory: helm-charts/
-      run: helm repo index --merge index.yaml --url https://bahmni.github.io/helm-charts/  .
-    - name: Commit and Push Chart Repository
-      working-directory: helm-charts/
-      run: |
-        git config user.name ${{ secrets.BAHMNI_USERNAME}}
-        git config user.email ${{ secrets.BAHMNI_EMAIL}}
-        git add .
-        git commit -m "Release of crater-${{ env.VERSION_TAG }}"
-        git push 'https://${{ secrets.BAHMNI_USERNAME}}:${{ secrets.BAHMNI_PAT}}@github.com/bahmni/helm-charts.git' gh-pages

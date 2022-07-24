@@ -46,6 +46,7 @@ use Crater\Http\Controllers\V1\Admin\Invoice\InvoiceTemplatesController;
 use Crater\Http\Controllers\V1\Admin\Invoice\SendInvoiceController;
 use Crater\Http\Controllers\V1\Admin\Invoice\SendInvoicePreviewController;
 use Crater\Http\Controllers\V1\Admin\Item\ItemsController;
+use Crater\Http\Controllers\V1\Admin\Item\ItemCategoriesController;
 use Crater\Http\Controllers\V1\Admin\Item\UnitsController;
 use Crater\Http\Controllers\V1\Admin\Mobile\AuthController;
 use Crater\Http\Controllers\V1\Admin\Modules\ApiTokenController;
@@ -257,9 +258,12 @@ Route::prefix('/v1')->group(function () {
 
             Route::post('/items/delete', [ItemsController::class, 'delete']);
 
+            Route::apiResource('items/categories', ItemCategoriesController::class);
+
             Route::resource('items', ItemsController::class);
 
             Route::resource('units', UnitsController::class);
+
 
 
             // Invoices

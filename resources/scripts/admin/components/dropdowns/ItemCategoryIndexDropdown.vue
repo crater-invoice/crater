@@ -76,7 +76,7 @@ function editItemCategory(data) {
   itemCategoryStore.fetchCategory(data)
   modalStore.openModal({
     title: t('settings.item_category.edit_category'),
-    componentName: 'CategoryModal',
+    componentName: 'ItemCategoryModal',
     refreshData: props.loadData,
     size: 'sm',
   })

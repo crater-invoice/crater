@@ -1161,7 +1161,8 @@
       "category_name": "Name",
       "category_number": "Number",
       "add_new_category": "Add new Category",
-      "add_category": "Add Category"
+      "add_category": "Add Category",
+      "updated_message": "Category updated"
     },
     "expense_category": {
       "title": "Expense Categories",

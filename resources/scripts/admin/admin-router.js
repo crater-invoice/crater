@@ -43,6 +43,8 @@ const CustomFieldsIndex = () =>
   import('@/scripts/admin/views/settings/CustomFieldsSetting.vue')
 const NotesSetting = () =>
   import('@/scripts/admin/views/settings/NotesSetting.vue')
+const ItemCategory = () =>
+  import('@/scripts/admin/views/settings/ItemCategorySetting.vue')
 const ExpenseCategory = () =>
   import('@/scripts/admin/views/settings/ExpenseCategorySetting.vue')
 const ExchangeRateSetting = () =>
@@ -295,6 +297,12 @@ export default [
             name: 'custom.fields',
             meta: { ability: abilities.VIEW_CUSTOM_FIELDS },
             component: CustomFieldsIndex,
+          },
+          {
+            path: 'item-category',
+            name: 'item.category',
+            meta: { ability: abilities.VIEW_ITEM },
+            component: ItemCategory,
           },
           {
             path: 'expense-category',

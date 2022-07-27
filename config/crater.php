@@ -226,6 +226,16 @@ return [
             'model' => Note::class
         ],
         [
+            'title' => 'settings.menu_title.item_category',
+            'group' => '',
+            'name' => 'Item Category',
+            'link' => '/admin/settings/item-category',
+            'icon' => 'ClipboardListIcon',
+            'owner_only' => false,
+            'ability' => 'view-item',
+            'model' => Item::class
+        ],
+        [
             'title' => 'settings.menu_title.expense_category',
             'group' => '',
             'name' => 'Expense Category',

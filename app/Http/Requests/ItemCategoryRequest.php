@@ -29,7 +29,8 @@ class ItemCategoryRequest extends FormRequest
             ],
             'number' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1'
             ],
         ];
     }

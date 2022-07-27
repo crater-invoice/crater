@@ -799,6 +799,7 @@
       "preferences": "Einstellungen",
       "notifications": "Benachrichtigungen",
       "tax_types": "Steuersätze",
+      "item_category": "Artikelkategorien",
       "expense_category": "Ausgabenkategorien",
       "update_app": "Applikation aktualisieren",
       "backup": "Sicherung",
@@ -1153,6 +1154,10 @@
       "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
       "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Zahlungsart erfolgreich gelöscht"
+    },
+    "item_category": {
+      "title": "Artikelkategorien",
+      "description": "Artikel können Kategorien haben. Sie können diese Kategorien nach Belieben hinzufügen oder entfernen.\n"
     },
     "expense_category": {
       "title": "Ausgabenkategorien",

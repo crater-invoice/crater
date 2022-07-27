@@ -41,6 +41,11 @@ class Item extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(ItemCategory::class, 'item_category_id');
+    }
+
     public function scopeWhereSearch($query, $search)
     {
         return $query->where('items.name', 'LIKE', '%'.$search.'%');
@@ -80,6 +85,10 @@ class Item extends Model
 
         if ($filters->get('unit_id')) {
             $query->whereUnit($filters->get('unit_id'));
+        }
+
+        if ($filters->get('item_category_id')) {
+            $query->whereCategory($filters->get('item_category_id'));
         }
 
         if ($filters->get('item_id')) {

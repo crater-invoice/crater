@@ -799,6 +799,7 @@
       "preferences": "Preferences",
       "notifications": "Notifications",
       "tax_types": "Tax Types",
+      "item_category": "Article Categories",
       "expense_category": "Expense Categories",
       "update_app": "Update App",
       "backup": "Backup",
@@ -1153,6 +1154,14 @@
       "payments_attached": "This payment method is already attached to payments. Please delete the attached payments to proceed with deletion.",
       "expenses_attached": "This payment method is already attached to expenses. Please delete the attached expenses to proceed with deletion.",
       "deleted_message": "Payment Mode deleted successfully"
+    },
+    "item_category": {
+      "title": "Article categories",
+      "description": "Articles can have categories. You can add or remove these categories as you wish.\n",
+      "category_name": "Name",
+      "category_number": "Number",
+      "add_new_category": "Add new Category",
+      "add_category": "Add Category"
     },
     "expense_category": {
       "title": "Expense Categories",

@@ -4,7 +4,7 @@
     "customers": "العملاء",
     "items": "بضائع/خدمات",
     "invoices": "الفواتير",
-    "recurring-invoices": "Recurring Invoices",
+    "recurring-invoices": "الفواتير المتكررة",
     "expenses": "النفقات",
     "estimates": "التقديرات",
     "payments": "الدفوعات",
@@ -12,7 +12,7 @@
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
     "users": "المستخدمون",
-    "modules": "Modules"
+    "modules": "الإضافات"
   },
   "general": {
     "add_company": "أضف شركة",
@@ -29,9 +29,9 @@
     "to_date": "إلى تاريخ",
     "from": "من",
     "to": "إلى",
-    "ok": "Ok",
-    "yes": "Yes",
-    "no": "No",
+    "ok": "حسناً",
+    "yes": "نعم",
+    "no": "لا",
     "sort_by": "ترتيب حسب",
     "ascending": "تصاعدي",
     "descending": "تنازلي",
@@ -39,7 +39,7 @@
     "body": "الجسم",
     "message": "رسالة",
     "send": "إرسال",
-    "preview": "Preview",
+    "preview": "معاينة",
     "go_back": "إلى الخلف",
     "back_to_login": "العودة إلى تسجيل الدخول؟",
     "home": "الرئيسية",
@@ -65,7 +65,7 @@
     "sent": "ارسلت",
     "all": "الكل",
     "select_all": "تحديد الكل",
-    "select_template": "Select Template",
+    "select_template": "تحديد القالب",
     "choose_file": "اضغط هنا لاختيار ملف",
     "choose_template": "اختيار القالب",
     "choose": "اختر",
@@ -93,14 +93,14 @@
     "no_note_found": "لم يتم العثور على الملاحظة",
     "insert_note": "أدخل ملاحظة",
     "copied_pdf_url_clipboard": "تم نسخ رابط PDF إلى الحافظة!",
-    "copied_url_clipboard": "Copied url to clipboard!",
-    "docs": "Docs",
-    "do_you_wish_to_continue": "Do you wish to continue?",
-    "note": "Note",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "copied_url_clipboard": "تم نسخ الرابط إلى الحافظة!",
+    "docs": "المستندات",
+    "do_you_wish_to_continue": "هل ترغب في المتابعة؟",
+    "note": "ملاحظة",
+    "pay_invoice": "سدد الفاتورة",
+    "login_successfully": "تم تسجيل الدخول بنجاح!",
+    "logged_out_successfully": "تم تسجيل الخروج",
+    "mark_as_default": "تحديد كافتراضي"
   },
   "dashboard": {
     "select_year": "اختر السنة",
@@ -109,7 +109,7 @@
       "customers": "العملاء",
       "invoices": "الفواتير",
       "estimates": "التقديرات",
-      "payments": "Payments"
+      "payments": "المدفوعات"
     },
     "chart_info": {
       "total_sales": "المبيعات",
@@ -151,18 +151,18 @@
     "no_results_found": "لم يتم العثور على نتائج"
   },
   "company_switcher": {
-    "label": "SWITCH COMPANY",
-    "no_results_found": "No Results Found",
-    "add_new_company": "Add new company",
-    "new_company": "New company",
-    "created_message": "Company created successfully"
+    "label": "تبديل الشركة",
+    "no_results_found": "لا توجد نتائج",
+    "add_new_company": "إضافة شركة جديدة",
+    "new_company": "شركة جديدة",
+    "created_message": "تم إنشاء الشركة بنجاح"
   },
   "dateRange": {
-    "today": "Today",
-    "this_week": "This Week",
-    "this_month": "This Month",
-    "this_quarter": "This Quarter",
-    "this_year": "This Year",
+    "today": "اليوم",
+    "this_week": "هذا الاسبوع",
+    "this_month": "هذا الشهر",
+    "this_quarter": "هذا الربع",
+    "this_year": "هذه السنة",
     "previous_week": "Previous Week",
     "previous_month": "Previous Month",
     "previous_quarter": "Previous Quarter",

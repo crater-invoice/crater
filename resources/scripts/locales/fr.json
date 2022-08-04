@@ -1112,7 +1112,7 @@
       "error": "Vous ne pouvez pas supprimer le fournisseur actif",
       "default_currency_error": "Cette devise est déjà affectée à un fournisseur",
       "exchange_help_text": "Veuillez entrer le taux de change pour convertir {currency} en {baseCurrency}",
-      "currency_freak": "Currency Freak",
+      "currency_freak": "Currency Freaks",
       "currency_layer": "Currency Layer",
       "open_exchange_rate": "Ouvrir le taux de change",
       "currency_converter": "Convertisseur de devises",

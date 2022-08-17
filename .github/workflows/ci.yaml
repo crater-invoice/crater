@@ -22,6 +22,9 @@ jobs:
         php-version: ${{ matrix.php }}
         extensions: exif
 
+    - name: Allows some composer plugins
+      run: composer config --no-plugins allow-plugins.pestphp/pest-plugin true
+
     - name: Install PHP 7 dependencies
       run: composer update --no-interaction --no-progress
       if: "matrix.php < 8"

@@ -35,6 +35,7 @@ jobs:
 
     - name: Check coding style
       run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --config=.php-cs-fixer.dist.php
+      if: "matrix.php < 8"
 
     - name: Unit Tests
       run: php ./vendor/bin/pest

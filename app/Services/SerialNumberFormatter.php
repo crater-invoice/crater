@@ -198,36 +198,36 @@ class SerialNumberFormatter
             $value = $placeholder['value'];
 
             switch ($name) {
-                    case "SEQUENCE":
-                        $value = $value ? $value : 6;
-                        $serialNumber .= str_pad($this->nextSequenceNumber, $value, 0, STR_PAD_LEFT);
+                case "SEQUENCE":
+                    $value = $value ? $value : 6;
+                    $serialNumber .= str_pad($this->nextSequenceNumber, $value, 0, STR_PAD_LEFT);
 
-                        break;
-                    case "DATE_FORMAT":
-                        $value = $value ? $value : 'Y';
-                        $serialNumber .= date($value);
+                    break;
+                case "DATE_FORMAT":
+                    $value = $value ? $value : 'Y';
+                    $serialNumber .= date($value);
 
-                        break;
-                    case "RANDOM_SEQUENCE":
-                        $value = $value ? $value : 6;
-                        $serialNumber .= substr(bin2hex(random_bytes($value)), 0, $value);
+                    break;
+                case "RANDOM_SEQUENCE":
+                    $value = $value ? $value : 6;
+                    $serialNumber .= substr(bin2hex(random_bytes($value)), 0, $value);
 
-                        break;
-                    case "CUSTOMER_SERIES":
-                        if (isset($this->customer)) {
-                            $serialNumber .= $this->customer->prefix ?? 'CST';
-                        } else {
-                            $serialNumber .= 'CST';
-                        }
+                    break;
+                case "CUSTOMER_SERIES":
+                    if (isset($this->customer)) {
+                        $serialNumber .= $this->customer->prefix ?? 'CST';
+                    } else {
+                        $serialNumber .= 'CST';
+                    }
 
-                        break;
-                    case "CUSTOMER_SEQUENCE":
-                        $serialNumber .= str_pad($this->nextCustomerSequenceNumber, $value, 0, STR_PAD_LEFT);
+                    break;
+                case "CUSTOMER_SEQUENCE":
+                    $serialNumber .= str_pad($this->nextCustomerSequenceNumber, $value, 0, STR_PAD_LEFT);
 
-                        break;
-                    default:
-                        $serialNumber .= $value;
-                }
+                    break;
+                default:
+                    $serialNumber .= $value;
+            }
         }
 
         return $serialNumber;

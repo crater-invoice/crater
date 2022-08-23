@@ -156,13 +156,16 @@ import LineChart from '@/scripts/admin/components/charts/LineChart.vue'
 import ChartPlaceholder from './DashboardChartPlaceholder.vue'
 import abilities from '@/scripts/admin/stub/abilities'
 import { useUserStore } from '@/scripts/admin/stores/user'
+import { useI18n } from 'vue-i18n'
 
 const dashboardStore = useDashboardStore()
 const companyStore = useCompanyStore()
 
+const { t } = useI18n()
+
 const utils = inject('utils')
 const userStore = useUserStore()
-const years = ref(['This year', 'Previous year'])
+const years = ref([{label: t('dateRange.this_year'), value: 'This year'}, {label: t('dateRange.previous_year'), value: 'Previous year'}])
 const selectedYear = ref('This year')
 
 watch(

@@ -128,17 +128,19 @@ import { useCustomerStore } from '@/scripts/admin/stores/customer'
 import { useRoute } from 'vue-router'
 import { useCompanyStore } from '@/scripts/admin/stores/company'
 import ChartPlaceholder from './CustomerChartPlaceholder.vue'
+import { useI18n } from 'vue-i18n'
 
 const companyStore = useCompanyStore()
 const customerStore = useCustomerStore()
 const utils = inject('utils')
+const { t } = useI18n()
 
 const route = useRoute()
 
 let isLoading = ref(false)
 let chartData = reactive({})
 let data = reactive({})
-let years = reactive(['This year', 'Previous year'])
+let years = reactive([{label: t('dateRange.this_year'), value: 'This year'}, {label: t('dateRange.previous_year'), value: 'Previous year'}])
 let selectedYear = ref('This year')
 
 const getChartExpenses = computed(() => {

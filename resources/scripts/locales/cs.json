@@ -100,7 +100,12 @@
     "pay_invoice": "Zaplatit fakturu",
     "login_successfully": "Přihlášení proběhlo úspěšně!",
     "logged_out_successfully": "Odhlášení proběhlo úspěšně",
-    "mark_as_default": "Označit jako výchozí"
+    "mark_as_default": "Označit jako výchozí",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Vybrat rok",

@@ -100,7 +100,12 @@
     "pay_invoice": "बिल का भुगतान करो",
     "login_successfully": "सफलतापूर्वक लॉगिन किया गया",
     "logged_out_successfully": "सफलतापूर्वक लॉग आउट किया गया",
-    "mark_as_default": "डिफ़ॉल्ट के रूप में चिह्नित करें"
+    "mark_as_default": "डिफ़ॉल्ट के रूप में चिह्नित करें",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "वर्ष चुनें",

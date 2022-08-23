@@ -128,7 +128,7 @@
               class="w-6 h-6 text-gray-400"
             />
 
-            <span class="block mt-1">{{ noResultsMessage }}</span>
+            <span class="block mt-1">{{ $t('general.no_data_found') }}</span>
           </div>
 
           <BaseTablePagination

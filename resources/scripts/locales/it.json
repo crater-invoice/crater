@@ -100,7 +100,12 @@
     "pay_invoice": "Paga Fattura",
     "login_successfully": "Accesso effettuato con successo!",
     "logged_out_successfully": "Disconnessione riuscita",
-    "mark_as_default": "Contrassegna come predefinito"
+    "mark_as_default": "Contrassegna come predefinito",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Seleziona anno",

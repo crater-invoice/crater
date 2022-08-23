@@ -100,7 +100,12 @@
     "pay_invoice": "Geral → pagar cobrança",
     "login_successfully": "Geral → logado com sucesso!",
     "logged_out_successfully": "Geral → saiu com sucesso",
-    "mark_as_default": "Geral → Marcar como padrão"
+    "mark_as_default": "Geral → Marcar como padrão",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Selecione Ano",

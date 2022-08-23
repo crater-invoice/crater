@@ -100,7 +100,12 @@
     "pay_invoice": "Apmokėti",
     "login_successfully": "Prisijungta sėkmingai!",
     "logged_out_successfully": "Atsijungta sėkmingai",
-    "mark_as_default": "Pažymėti kaip numatytąjį"
+    "mark_as_default": "Pažymėti kaip numatytąjį",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Pasirinkite metus",

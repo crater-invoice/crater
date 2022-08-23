@@ -87,7 +87,20 @@
     "choose_note": "참고 선택",
     "no_note_found": "메모를 찾을 수 없습니다.",
     "insert_note": "메모 삽입",
-    "copied_pdf_url_clipboard": "PDF URL을 클립 보드에 복사했습니다!"
+    "copied_pdf_url_clipboard": "PDF URL을 클립 보드에 복사했습니다!",
+    "copied_url_clipboard": "Copied url to clipboard!",
+    "docs": "Docs",
+    "do_you_wish_to_continue": "Do you wish to continue?",
+    "note": "Note",
+    "pay_invoice": "Pay Invoice",
+    "login_successfully": "Logged in successfully!",
+    "logged_out_successfully": "Logged out successfully",
+    "mark_as_default": "Mark as default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "연도 선택",

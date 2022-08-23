@@ -100,7 +100,12 @@
     "pay_invoice": "Zapłać Fakturę",
     "login_successfully": "Zalogowano pomyślnie!",
     "logged_out_successfully": "Wylogowano pomyślnie",
-    "mark_as_default": "Mark as default"
+    "mark_as_default": "Mark as default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Wybierz rok",

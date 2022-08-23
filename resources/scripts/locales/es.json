@@ -100,7 +100,12 @@
     "pay_invoice": "Pagar factura",
     "login_successfully": "Logeado Satisfactoriamente!",
     "logged_out_successfully": "Logeado Satisfactoriamente",
-    "mark_as_default": "Marcar como predeterminado"
+    "mark_as_default": "Marcar como predeterminado",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Seleccionar año",

@@ -100,7 +100,12 @@
     "pay_invoice": "Payer facture",
     "login_successfully": "Identifié avec succès!",
     "logged_out_successfully": "Déconnecté avec succès",
-    "mark_as_default": "Marquer par défaut"
+    "mark_as_default": "Marquer par défaut",
+    "no_data_found" : "Aucune donnée disponible dans le tableau",
+    "previous": "Précédente",
+    "next": "Suivante",
+    "to_table": "à",
+    "results": "résultats"
   },
   "dashboard": {
     "select_year": "Sélectionnez l'année",

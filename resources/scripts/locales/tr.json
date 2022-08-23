@@ -100,7 +100,12 @@
     "pay_invoice": "Fatura ödeme",
     "login_successfully": "Başarıyla giriş yapıldı!",
     "logged_out_successfully": "Başarıyla çıkış yapıldı",
-    "mark_as_default": "Varsayılan olarak işaretleyin"
+    "mark_as_default": "Varsayılan olarak işaretleyin",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Yılı seçin",

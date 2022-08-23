@@ -100,7 +100,12 @@
     "pay_invoice": "Rechnung bezahlen",
     "login_successfully": "Erfolgreich angemeldet!",
     "logged_out_successfully": "Erfolgreich abgemeldet",
-    "mark_as_default": "Als Standard festlegen"
+    "mark_as_default": "Als Standard festlegen",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Jahr wählen",

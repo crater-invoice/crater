@@ -100,7 +100,12 @@
     "pay_invoice": "Πληρωμή τιμολογίου",
     "login_successfully": "Η είσοδος ήταν επιτυχής!",
     "logged_out_successfully": "Η έξοδος ήταν επιτυχής",
-    "mark_as_default": "Σημείωση ως προεπιλογή"
+    "mark_as_default": "Σημείωση ως προεπιλογή",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Επιλογή έτους",

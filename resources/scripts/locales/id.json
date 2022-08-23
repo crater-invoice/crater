@@ -100,7 +100,12 @@
     "pay_invoice": "Bayar tagihan",
     "login_successfully": "Login berhasil!",
     "logged_out_successfully": "Berhasil keluar",
-    "mark_as_default": "Tandai sebagai default"
+    "mark_as_default": "Tandai sebagai default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Pilih tahun",

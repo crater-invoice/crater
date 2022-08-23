@@ -100,7 +100,12 @@
     "pay_invoice": "Оплатить счет",
     "login_successfully": "Вход выполнен!",
     "logged_out_successfully": "Вы успешно вышли",
-    "mark_as_default": "Установить по умолчанию"
+    "mark_as_default": "Установить по умолчанию",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Выберите год",

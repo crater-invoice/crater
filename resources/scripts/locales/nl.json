@@ -100,7 +100,12 @@
     "pay_invoice": "Betaal factuur",
     "login_successfully": "Succesvol ingelogd!",
     "logged_out_successfully": "Succesvol afgemeld",
-    "mark_as_default": "Markeren als standaard"
+    "mark_as_default": "Markeren als standaard",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Selecteer jaar",

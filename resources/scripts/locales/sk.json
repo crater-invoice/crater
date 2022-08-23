@@ -100,7 +100,12 @@
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "mark_as_default": "Mark as default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results"
   },
   "dashboard": {
     "select_year": "Vyberte rok",

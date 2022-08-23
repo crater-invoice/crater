@@ -35,7 +35,7 @@
         "
         @click="pageClicked(pagination.currentPage - 1)"
       >
-        Previous
+        {{ $t('general.previous') }}
       </a>
       <a
         href="#"
@@ -60,13 +60,13 @@
         "
         @click="pageClicked(pagination.currentPage + 1)"
       >
-        Next
+        {{ $t('general.next') }}
       </a>
     </div>
     <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <div>
         <p class="text-sm text-gray-700">
-          Showing
+          {{ $t('general.showing') }}
           {{ ' ' }}
           <span
             v-if="pagination.limit && pagination.currentPage"
@@ -77,7 +77,7 @@
             }}
           </span>
           {{ ' ' }}
-          to
+          {{ $t('general.to_table') }}
           {{ ' ' }}
           <span
             v-if="pagination.limit && pagination.currentPage"
@@ -96,13 +96,13 @@
             </span>
           </span>
           {{ ' ' }}
-          of
+          {{ $t('general.of') }}
           {{ ' ' }}
           <span v-if="pagination.totalCount" class="font-medium">
             {{ pagination.totalCount }}
           </span>
           {{ ' ' }}
-          results
+          {{ $t('general.results') }}
         </p>
       </div>
       <div>
@@ -132,7 +132,7 @@
             "
             @click="pageClicked(pagination.currentPage - 1)"
           >
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">{{ $t('general.previous') }}</span>
             <BaseIcon name="ChevronLeftIcon" />
           </a>
           <a
@@ -270,7 +270,7 @@
             }"
             @click="pageClicked(pagination.currentPage + 1)"
           >
-            <span class="sr-only">Next</span>
+            <span class="sr-only">{{ $t('general.next') }}</span>
             <BaseIcon name="ChevronRightIcon" />
           </a>
         </nav>

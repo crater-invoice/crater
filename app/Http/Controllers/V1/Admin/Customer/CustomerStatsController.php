@@ -88,7 +88,7 @@ class CustomerStatsController extends Controller
                 ($receiptTotals[$i] - $expenseTotals[$i])
             );
             $i++;
-            array_push($months, $start->format('M'));
+            array_push($months, $start->translatedFormat('M'));
             $monthCounter++;
             $end->startOfMonth();
             $start->addMonth()->startOfMonth();

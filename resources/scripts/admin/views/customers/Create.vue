@@ -231,7 +231,7 @@
                 v$.currentCustomer.confirm_password.$errors[0].$message
               "
               :content-loading="isFetchingInitialData"
-              label="Confirm Password"
+              :label="$t('customers.confirm_password')"
             >
               <BaseInput
                 v-model.trim="customerStore.currentCustomer.confirm_password"

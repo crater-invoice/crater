@@ -355,7 +355,7 @@
       "select_an_item": "Escreva ou clique para selecionar um item",
       "type_item_description": "Type Item Description (optional)"
     },
-    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
+    "mark_as_default_estimate_template_description": "Se ativado, o modelo selecionado será selecionado automaticamente para novos orçamentos."
   },
   "invoices": {
     "title": "Faturas",
@@ -479,7 +479,7 @@
     "add_item": "Adicionar um item",
     "date": "Data",
     "limit_by": "Limit by",
-    "limit_date": "Limit Date",
+    "limit_date": "Data Limite",
     "limit_count": "Limit Count",
     "count": "Count",
     "status": "Estado",
@@ -652,7 +652,7 @@
     "login": "Entrar",
     "register": "Registar",
     "reset_password": "Reset Password",
-    "password_reset_successfully": "Password Reset Successfully",
+    "password_reset_successfully": "Password Redefinida com Sucesso",
     "enter_email": "Introduza o e-mail",
     "enter_password": "Introduza a password",
     "retype_password": "Introduza novamente a password"
@@ -667,7 +667,7 @@
     "deleting_files": "Deleting Unused files",
     "completing_installation": "Completing Installation",
     "update_failed": "Falha na Atualização",
-    "install_success": "Module has been installed successfully!",
+    "install_success": "O módulo foi instalado com sucesso!",
     "customer_reviews": "Avaliações",
     "license": "Licença",
     "faq": "FAQ",
@@ -967,7 +967,7 @@
         "billing_address_format": "Formato da Morada de Faturação",
         "invoice_email_attachment": "Enviar faturas como anexos",
         "invoice_email_attachment_setting_description": "Enable this if you want to send invoices as email attachment. Please note that 'View Invoice' button in emails will not be displayed anymore when enabled.",
-        "invoice_settings_updated": "Invoice Settings updated successfully",
+        "invoice_settings_updated": "Configurações de Faturas atualizadas com sucesso",
         "retrospective_edits": "Retrospective Edits",
         "allow": "Permitir",
         "disable_on_invoice_partial_paid": "Disable after partial payment is recorded",
@@ -993,9 +993,9 @@
         "billing_address_format": "Formato da Morada de Faturação",
         "estimate_email_attachment": "Enviar orçamentos como anexos",
         "estimate_email_attachment_setting_description": "Enable this if you want to send the estimates as an email attachment. Please note that 'View Estimate' button in emails will not be displayed anymore when enabled.",
-        "estimate_settings_updated": "Estimate Settings updated successfully",
-        "convert_estimate_options": "Estimate Convert Action",
-        "convert_estimate_description": "Specify what happens to the estimate after it gets converted to an invoice.",
+        "estimate_settings_updated": "Configuração de Orçamentos atualizadas com sucesso",
+        "convert_estimate_options": "Ação ao Converter Orçamento",
+        "convert_estimate_description": "Escolha o que pretende que aconteça ao orçamento depois de ser convertido numa fatura.",
         "no_action": "Nenhuma ação",
         "delete_estimate": "Eliminar orçamento",
         "mark_estimate_as_accepted": "Marcar orçamento como aceite"
@@ -1012,7 +1012,7 @@
         "from_customer_address_format": "From Customer Address Format",
         "payment_email_attachment": "Send payments as attachments",
         "payment_email_attachment_setting_description": "Enable this if you want to send the payment receipts as an email attachment. Please note that 'View Payment' button in emails will not be displayed anymore when enabled.",
-        "payment_settings_updated": "Payment Settings updated successfully"
+        "payment_settings_updated": "Configurações de Pagamento atualizadas com sucesso"
       },
       "items": {
         "title": "Itens",
@@ -1407,8 +1407,8 @@
       "database_should_be_empty": "Database should be empty"
     },
     "success": {
-      "mail_variables_save_successfully": "Email configured successfully",
-      "database_variables_save_successfully": "Database configured successfully."
+      "mail_variables_save_successfully": "Email configurado com sucesso",
+      "database_variables_save_successfully": "Base de dados configurada com sucesso."
     }
   },
   "validation": {

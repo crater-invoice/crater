@@ -408,7 +408,7 @@ return [
     */
     'customer_menu' => [
         [
-            'title' => 'Dashboard',
+            'title' => 'navigation.dashboard',
             'link' => '/customer/dashboard',
             'icon' => '',
             'name' => '',
@@ -418,7 +418,7 @@ return [
             'model' => ''
         ],
         [
-            'title' => 'Invoices',
+            'title' => 'navigation.invoices',
             'link' => '/customer/invoices',
             'icon' => '',
             'name' => '',
@@ -428,7 +428,7 @@ return [
             'model' => ''
         ],
         [
-            'title' => 'Estimates',
+            'title' => 'navigation.estimates',
             'link' => '/customer/estimates',
             'icon' => '',
             'name' => '',
@@ -438,7 +438,7 @@ return [
             'model' => ''
         ],
         [
-            'title' => 'Payments',
+            'title' => 'navigation.payments',
             'link' => '/customer/payments',
             'icon' => '',
             'name' => '',
@@ -448,7 +448,7 @@ return [
             'model' => ''
         ],
         [
-            'title' => 'Settings',
+            'title' => 'navigation.settings',
             'link' => '/customer/settings',
             'icon' => '',
             'name' => '',

@@ -38,7 +38,7 @@
                 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium',
               ]"
             >
-              {{ item.title }}
+              {{ $t(item.title) }}
             </router-link>
           </div>
         </div>
@@ -141,7 +141,7 @@
             'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
           ]"
           :aria-current="item.current ? 'page' : undefined"
-          >{{ item.title }}
+          >{{ $t(item.title) }}
         </router-link>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200">
@@ -185,7 +185,7 @@
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800',
               'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
             ]"
-            >{{ item.title }}</router-link
+            >{{ $t(item.title) }}</router-link
           >
         </div>
       </div>

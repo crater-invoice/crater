@@ -26,7 +26,7 @@
       {{ token }}
     </span>
     <svg
-      v-tooltip="{ content: 'Copy to Clipboard' }"
+      v-tooltip="{ content: $t('general.copy_to_clipboard') }"
       class="
         absolute
         right-0

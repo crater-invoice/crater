@@ -1,8 +1,10 @@
 import Guid from 'guid'
 import recurringInvoiceItemStub from './recurring-invoice-item'
 import taxStub from './tax'
+import { useI18n } from 'vue-i18n'
 
 export default function () {
+  const { t } = useI18n()
   return {
     currency: null,
     customer: null,
@@ -42,7 +44,7 @@ export default function () {
     fields: [],
     invoices: [],
     selectedNote: null,
-    selectedFrequency: { label: 'Every Week', value: '0 0 * * 0' },
+    selectedFrequency: { label: t('recurring_invoices.frequency.every_week'), value: '0 0 * * 0' },
     selectedInvoice: null,
   }
 }

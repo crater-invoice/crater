@@ -94,6 +94,7 @@
     "insert_note": "Insérer une note",
     "copied_pdf_url_clipboard": "L'adresse du PDF a été copiée.",
     "copied_url_clipboard": "URL copiée vers le presse-papier!",
+    "copy_to_clipboard": "Copier dans le presse papier",
     "docs": "Documents",
     "do_you_wish_to_continue": "Voulez-vous continuer ?",
     "note": "Note de bas de page",
@@ -105,7 +106,16 @@
     "previous": "Précédente",
     "next": "Suivante",
     "to_table": "à",
-    "results": "résultats"
+    "results": "résultats",
+    "file_upload": {
+      "drag_a_file": "Déposez un fichier ici ou",
+      "browse": "parcourez",
+      "to_choose": "pour choisir un fichier"
+    },
+    "multiselect": {
+      "no_results_found": "Aucun résultat",
+      "the_list_is_empty": "La liste est vide"
+    }
   },
   "dashboard": {
     "select_year": "Sélectionnez l'année",
@@ -553,7 +563,23 @@
       "hour": "Heure",
       "day_month": "Jour du mois",
       "month": "Mois",
-      "day_week": "Jour de la semaine"
+      "day_week": "Jour de la semaine",
+      "every_minute": "Toutes les minutes",
+      "every_30_minute": "Toutes les 30 minutes",
+      "every_hour": "Toutes les heures",
+      "every_2_hour": "Toutes les 2 heures",
+      "every_day_at_midnight": "Tous les jours à minuit",
+      "every_week": "Toutes les semaines",
+      "every_15_days_at_midnight": "Tous les 15 jours à minuit",
+      "on_the_first_day_of_every_month_at_midnight": "Au premier jour du mois à minuit",
+      "every_6_month": "Tous les 6 mois",
+      "every_year_on_the_first_day_of_january_at_midnight": "Tous les ans, au premier janvier à minuit",
+      "custom": "Personnalisée"
+    },
+    "limit": {
+      "none": "Aucun",
+      "date": "Date",
+      "count": "Nombre"
     },
     "confirm_delete": "Vous ne pourrez pas récupérer cette facture | Vous ne pourrez pas récupérer ces factures",
     "created_message": "Facture récurrente créée",
@@ -663,6 +689,7 @@
     "retype_password": "Retaper le mot de passe"
   },
   "modules": {
+    "sign_up": "Inscrivez-vous et obtenez votre Jeton",
     "buy_now": "Acheter maintenant",
     "install": "Installer",
     "price": "Prix",
@@ -794,6 +821,10 @@
       "to_date": "Au",
       "from_date": "Du",
       "date_range": "Période"
+    },
+    "sort": {
+      "by_customer": "Par Client",
+      "by_item": "Par Article"
     }
   },
   "settings": {

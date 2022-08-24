@@ -94,6 +94,7 @@
     "insert_note": "Insertar una nota",
     "copied_pdf_url_clipboard": "Copiar Url al portapapeles",
     "copied_url_clipboard": "¡URL copiada al portapapeles!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Documentación",
     "do_you_wish_to_continue": "¿Deseas continuar?",
     "note": "Nota",
@@ -105,7 +106,16 @@
     "previous": "Previous",
     "next": "Next",
     "to_table": "to",
-    "results": "results"
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Seleccionar año",
@@ -553,7 +563,23 @@
       "hour": "Hora",
       "day_month": "Día del mes",
       "month": "Mes",
-      "day_week": "Día de la semana"
+      "day_week": "Día de la semana",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "No podrá recuperar esta factura | No podrás recuperar estas facturas",
     "created_message": "Factura recurrente creada con éxito",
@@ -663,6 +689,7 @@
     "retype_password": "Reescriba la contraseña"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Comprar ahora",
     "install": "Instalar",
     "price": "Precio",
@@ -794,6 +821,10 @@
       "to_date": "Hasta la fecha",
       "from_date": "A partir de la fecha",
       "date_range": "Seleccionar rango de fechas"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {

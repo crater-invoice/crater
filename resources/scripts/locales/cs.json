@@ -94,6 +94,7 @@
     "insert_note": "Vložit poznámku",
     "copied_pdf_url_clipboard": "Adresa PDF zkopírována do schránky!",
     "copied_url_clipboard": "Zkopírováno do schránky!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Dokumentace",
     "do_you_wish_to_continue": "Přejete si pokračovat?",
     "note": "Poznámka",
@@ -105,7 +106,16 @@
     "previous": "Previous",
     "next": "Next",
     "to_table": "to",
-    "results": "results"
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Vybrat rok",
@@ -553,7 +563,23 @@
       "hour": "Hodina",
       "day_month": "Den v měsíci",
       "month": "Měsíc",
-      "day_week": "Den v týdnu"
+      "day_week": "Den v týdnu",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "Nebudete moci obnovit tuto fakturu | Nebudete moci obnovit tyto faktury",
     "created_message": "Opakující se faktura byla úspěšně vytvořena",
@@ -663,6 +689,7 @@
     "retype_password": "Zadejte heslo znovu"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Koupit",
     "install": "Instalovat",
     "price": "Cena",
@@ -794,6 +821,10 @@
       "to_date": "Do data",
       "from_date": "Od data",
       "date_range": "Vyberte rozsah data"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {

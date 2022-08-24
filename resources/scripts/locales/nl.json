@@ -94,6 +94,7 @@
     "insert_note": "Notitie invoegen",
     "copied_pdf_url_clipboard": "PDF link naar klembord gekopieerd!",
     "copied_url_clipboard": "URL naar klembord gekopieerd!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Documenten",
     "do_you_wish_to_continue": "Wilt u Doorgaan?",
     "note": "Notitie",
@@ -105,7 +106,16 @@
     "previous": "Previous",
     "next": "Next",
     "to_table": "to",
-    "results": "results"
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Selecteer jaar",
@@ -553,7 +563,23 @@
       "hour": "Uur",
       "day_month": "Dag van de maand",
       "month": "Maand",
-      "day_week": "Dag van de week"
+      "day_week": "Dag van de week",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "Deze factuur wordt permanent verwijderd | Deze facturen worden permanent verwijderd",
     "created_message": "Terugkerende factuur succesvol gecreëerd",
@@ -663,6 +689,7 @@
     "retype_password": "Geef nogmaals het wachtwoord"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Nu kopen",
     "install": "Installeer",
     "price": "Prijs",
@@ -794,6 +821,10 @@
       "to_date": "Tot datum",
       "from_date": "Van datum",
       "date_range": "Selecteer Datumbereik"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {

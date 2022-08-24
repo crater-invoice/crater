@@ -94,6 +94,7 @@
     "insert_note": "Inserisci Nota",
     "copied_pdf_url_clipboard": "Url PDF copiato negli appunti!",
     "copied_url_clipboard": "URL copiato negli appunti!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Documenti",
     "do_you_wish_to_continue": "Vuoi continuare?",
     "note": "Nota",
@@ -105,7 +106,16 @@
     "previous": "Previous",
     "next": "Next",
     "to_table": "to",
-    "results": "results"
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Seleziona anno",
@@ -553,7 +563,23 @@
       "hour": "Ora",
       "day_month": "Giorno del mese",
       "month": "Mese",
-      "day_week": "Giorno della settimana"
+      "day_week": "Giorno della settimana",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "Non sarai in grado di recuperare questa fattura | Non sarai in grado di recuperare queste fatture",
     "created_message": "Fattura ricorrente creata con successo",
@@ -663,6 +689,7 @@
     "retype_password": "Ridigita Password"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Acquista Ora",
     "install": "Installa",
     "price": "Prezzo",
@@ -794,6 +821,10 @@
       "to_date": "Alla data",
       "from_date": "Dalla data",
       "date_range": "Seleziona intervallo date"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {

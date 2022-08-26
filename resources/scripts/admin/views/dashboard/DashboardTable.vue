@@ -95,7 +95,7 @@
             v-if="hasAtleastOneEstimateAbility()"
             #cell-actions="{ row }"
           >
-            <EstimateDropdown :row="row" :table="estimateTableComponent" />
+            <EstimateDropdown :row="row.data" :table="estimateTableComponent" />
           </template>
         </BaseTable>
       </div>

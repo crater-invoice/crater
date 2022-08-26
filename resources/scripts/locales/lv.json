@@ -121,10 +121,10 @@
     "select_year": "Izvēlieties gadu",
     "cards": {
       "due_amount": "Apmaksas summa",
-      "customers": "Klienti",
-      "invoices": "Rēķini",
-      "estimates": "Aprēķini",
-      "payments": "Payments"
+      "customers": "Klienti | Klienti",
+      "invoices": "Rēķini | Rēķini",
+      "estimates": "Aprēķini | Aprēķini",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "Pārdotais",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Saņēmējs,",
   "pdf_ship_to": "Piegādes adrese,",
   "pdf_received_from": "Saņemts no:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

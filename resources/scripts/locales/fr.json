@@ -121,10 +121,10 @@
     "select_year": "Sélectionnez l'année",
     "cards": {
       "due_amount": "Encours clients",
-      "customers": "Clients",
-      "invoices": "Factures",
-      "estimates": "Devis",
-      "payments": "Paiements"
+      "customers": "Client | Clients",
+      "invoices": "Facture | Factures",
+      "estimates": "Devis | Devis",
+      "payments": "Paiement | Paiements"
     },
     "chart_info": {
       "total_sales": "Ventes",
@@ -238,7 +238,7 @@
     "primary_display_name": "Nom d'affichage principal",
     "select_currency": "Sélectionnez la devise",
     "select_a_customer": "Sélectionnez un client",
-    "type_or_click": "Sélectionnez un article",
+    "type_or_click": "Sélectionnez un client",
     "new_transaction": "Ajouter une opération",
     "no_matching_customers": "Il n'y a aucun client correspondant !",
     "phone_number": "Numéro de téléphone",
@@ -336,7 +336,7 @@
     "expired": "Expiré",
     "sent": "Envoyé",
     "draft": "Brouillon",
-    "viewed": "Consultée",
+    "viewed": "Consulté",
     "declined": "Refusé",
     "new_estimate": "Nouveau devis",
     "add_new_estimate": "Nouveau devis",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Facturer à",
   "pdf_ship_to": "Expédier à",
   "pdf_received_from": "Reçu de :",
-  "pdf_tax_label": "Taxe"
+  "pdf_tax_label": "Taxe",
+  "mail_thanks": "Merci,",
+  "mail_view_estimate":"Afficher le Devis",
+  "mail_viewed_estimate": "a consulté ce Devis.",
+  "mail_view_invoice": "Afficher la Facture",
+  "mail_viewed_invoice": "a consulté cette Facture.",
+  "mail_view_payment": "Afficher le Paiement",
+  "notification_view_estimate": "[Notification] Un Devis a été consulté",
+  "notification_view_invoice": "[Notification] Une Facture a été consultée"
 }

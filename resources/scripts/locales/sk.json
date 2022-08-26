@@ -121,10 +121,10 @@
     "select_year": "Vyberte rok",
     "cards": {
       "due_amount": "Čiastka k zaplateniu",
-      "customers": "Zákazníci",
-      "invoices": "Faktúry",
-      "estimates": "Cenové odhady",
-      "payments": "Payments"
+      "customers": "Zákazníci | Zákazníci",
+      "invoices": "Faktúry | Faktúry",
+      "estimates": "Cenové odhady | Cenové odhady",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "Predaje",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Fakturovať,",
   "pdf_ship_to": "Doručiť,",
   "pdf_received_from": "Prijaté od:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

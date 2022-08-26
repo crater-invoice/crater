@@ -121,10 +121,10 @@
     "select_year": "Επιλογή έτους",
     "cards": {
       "due_amount": "Οφειλόμενο Ποσό",
-      "customers": "Πελάτες",
-      "invoices": "Τιμολόγια",
-      "estimates": "Προσφορές",
-      "payments": "Πληρωμές"
+      "customers": "Πελάτες | Πελάτες",
+      "invoices": "Τιμολόγια | Τιμολόγια",
+      "estimates": "Προσφορές | Προσφορές",
+      "payments": "Πληρωμές | Πληρωμές"
     },
     "chart_info": {
       "total_sales": "Πωλήσεις",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Χρέωση σε,",
   "pdf_ship_to": "Αποστολή σε,",
   "pdf_received_from": "Λήψη από",
-  "pdf_tax_label": "Φόρος"
+  "pdf_tax_label": "Φόρος",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

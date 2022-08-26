@@ -121,10 +121,10 @@
     "select_year": "Valitse vuosi",
     "cards": {
       "due_amount": "Avoin summa",
-      "customers": "Asiakkaat",
-      "invoices": "Laskut",
-      "estimates": "Tarjoukset",
-      "payments": "Payments"
+      "customers": "Asiakkaat | Asiakkaat",
+      "invoices": "Laskut | Laskut",
+      "estimates": "Tarjoukset | Tarjoukset",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "Myynti",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Laskutetaan,",
   "pdf_ship_to": "Toimitetaan,",
   "pdf_received_from": "Vastaanotettu:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

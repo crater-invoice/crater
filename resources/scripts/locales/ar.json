@@ -121,10 +121,10 @@
     "select_year": "اختر السنة",
     "cards": {
       "due_amount": "المبلغ المطلوب",
-      "customers": "العملاء",
-      "invoices": "الفواتير",
-      "estimates": "التقديرات",
-      "payments": "Payments"
+      "customers": "العملاء | العملاء",
+      "invoices": "الفواتير | الفواتير",
+      "estimates": "التقديرات | التقديرات",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "المبيعات",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "مطلوب من,",
   "pdf_ship_to": "يشحن إلى,",
   "pdf_received_from": "تم الاستلام من:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

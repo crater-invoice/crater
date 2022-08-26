@@ -121,10 +121,10 @@
     "select_year": "เลือกปี",
     "cards": {
       "due_amount": "จำนวนเงินค้างชำระ",
-      "customers": "ลูกค้า",
-      "invoices": "ใบวางบิล",
-      "estimates": "ใบเสนอราคา",
-      "payments": "การชำระเงิน"
+      "customers": "ลูกค้า | ลูกค้า",
+      "invoices": "ใบวางบิล | ใบวางบิล",
+      "estimates": "ใบเสนอราคา | ใบเสนอราคา",
+      "payments": "การชำระเงิน | การชำระเงิน"
     },
     "chart_info": {
       "total_sales": "การขาย",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "ที่อยู่เรียกเก็บเงิน,",
   "pdf_ship_to": "ที่อยู่สำหรับจัดส่ง,",
   "pdf_received_from": "ได้รับจาก:",
-  "pdf_tax_label": "ภาษี"
+  "pdf_tax_label": "ภาษี",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

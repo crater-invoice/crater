@@ -121,10 +121,10 @@
     "select_year": "Seleziona anno",
     "cards": {
       "due_amount": "Somma dovuta",
-      "customers": "Clienti",
-      "invoices": "Fatture",
-      "estimates": "Preventivi",
-      "payments": "Pagamenti"
+      "customers": "Clienti | Clienti",
+      "invoices": "Fatture | Fatture",
+      "estimates": "Preventivi | Preventivi",
+      "payments": "Pagamenti | Pagamenti"
     },
     "chart_info": {
       "total_sales": "Vendite",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Fattura a,",
   "pdf_ship_to": "Invia a,",
   "pdf_received_from": "Ricevuto da:",
-  "pdf_tax_label": "Tassa"
+  "pdf_tax_label": "Tassa",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

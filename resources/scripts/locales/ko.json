@@ -121,10 +121,10 @@
     "select_year": "연도 선택",
     "cards": {
       "due_amount": "지불액",
-      "customers": "고객",
-      "invoices": "송장",
-      "estimates": "견적",
-      "payments": "Payments"
+      "customers": "고객 | 고객",
+      "invoices": "송장 | 송장",
+      "estimates": "견적 | 견적",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "매상",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "청구서,",
   "pdf_ship_to": "배송지,",
   "pdf_received_from": "받은 사람 :",
-  "pdf_tax_label": "세"
+  "pdf_tax_label": "세",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

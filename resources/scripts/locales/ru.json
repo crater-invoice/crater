@@ -121,10 +121,10 @@
     "select_year": "Выберите год",
     "cards": {
       "due_amount": "Сумма",
-      "customers": "Клиенты",
-      "invoices": "Счет-фактуры",
-      "estimates": "Заказы",
-      "payments": "Платежи"
+      "customers": "Клиенты | Клиенты",
+      "invoices": "Счет-фактуры | Счет-фактуры",
+      "estimates": "Заказы | Заказы",
+      "payments": "Платежи | Платежи"
     },
     "chart_info": {
       "total_sales": "Продажи",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Адрес счёта,",
   "pdf_ship_to": "Адрес доставки,",
   "pdf_received_from": "Получено от:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

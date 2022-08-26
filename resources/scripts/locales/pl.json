@@ -121,10 +121,10 @@
     "select_year": "Wybierz rok",
     "cards": {
       "due_amount": "Do zapłaty",
-      "customers": "Kontrahenci",
-      "invoices": "Faktury",
-      "estimates": "Oferty",
-      "payments": "Płatności"
+      "customers": "Kontrahenci | Kontrahenci",
+      "invoices": "Faktury | Faktury",
+      "estimates": "Oferty | Oferty",
+      "payments": "Płatności | Płatności"
     },
     "chart_info": {
       "total_sales": "Sprzedaż",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Wystawiono dla",
   "pdf_ship_to": "Wysyłka do",
   "pdf_received_from": "Otrzymane od:",
-  "pdf_tax_label": "Podatek"
+  "pdf_tax_label": "Podatek",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

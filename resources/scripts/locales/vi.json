@@ -121,10 +121,10 @@
     "select_year": "Chọn năm",
     "cards": {
       "due_amount": "Số tiền đến hạn",
-      "customers": "Khách hàng",
-      "invoices": "Hóa đơn",
-      "estimates": "Ước tính",
-      "payments": "Payments"
+      "customers": "Khách hàng | Khách hàng",
+      "invoices": "Hóa đơn | Hóa đơn",
+      "estimates": "Ước tính | Ước tính",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "Bán hàng",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Hoa đơn để,",
   "pdf_ship_to": "Tàu,",
   "pdf_received_from": "Nhận được tư:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

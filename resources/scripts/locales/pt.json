@@ -121,10 +121,10 @@
     "select_year": "Selecione Ano",
     "cards": {
       "due_amount": "Total Vencido",
-      "customers": "Clientes",
-      "invoices": "Faturas",
-      "estimates": "Orçamentos",
-      "payments": "Dashboard → Cartões → Pagamentos"
+      "customers": "Clientes | Clientes",
+      "invoices": "Faturas | Faturas",
+      "estimates": "Orçamentos | Orçamentos",
+      "payments": "Dashboard → Cartões → Pagamentos | Dashboard → Cartões → Pagamentos"
     },
     "chart_info": {
       "total_sales": "Vendas",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Cobrar a,",
   "pdf_ship_to": "Envie a,",
   "pdf_received_from": "Remetente:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

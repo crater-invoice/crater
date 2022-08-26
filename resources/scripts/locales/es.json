@@ -121,10 +121,10 @@
     "select_year": "Seleccionar año",
     "cards": {
       "due_amount": "Importe pendiente",
-      "customers": "Clientes",
-      "invoices": "Facturas",
-      "estimates": "Presupuestos",
-      "payments": "Ver Medios de Pago"
+      "customers": "Cliente | Clientes",
+      "invoices": "Factura | Facturas",
+      "estimates": "Presupuesto | Presupuestos",
+      "payments": "Ver Medios de Pago | Ver Medios de Pago"
     },
     "chart_info": {
       "total_sales": "Ventas",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Cobrar a,",
   "pdf_ship_to": "Enviar a,",
   "pdf_received_from": "Recibido desde:",
-  "pdf_tax_label": "Impuesto"
+  "pdf_tax_label": "Impuesto",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

@@ -121,10 +121,10 @@
     "select_year": "Yılı seçin",
     "cards": {
       "due_amount": "Ödenmesi gereken tutar",
-      "customers": "Müşteriler",
-      "invoices": "Faturalar",
-      "estimates": "Proformalar",
-      "payments": "Ödemeler"
+      "customers": "Müşteriler | Müşteriler",
+      "invoices": "Faturalar | Faturalar",
+      "estimates": "Proformalar | Proformalar",
+      "payments": "Ödemeler | Ödemeler"
     },
     "chart_info": {
       "total_sales": "Satışlar",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

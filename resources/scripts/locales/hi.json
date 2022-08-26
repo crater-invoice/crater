@@ -121,10 +121,10 @@
     "select_year": "वर्ष चुनें",
     "cards": {
       "due_amount": "देय राशि",
-      "customers": "ग्राहक",
-      "invoices": "चालान",
-      "estimates": "अनुमान",
-      "payments": "भुगतान"
+      "customers": "ग्राहक | ग्राहक",
+      "invoices": "चालान | चालान",
+      "estimates": "अनुमान | अनुमान",
+      "payments": "भुगतान | भुगतान"
     },
     "chart_info": {
       "total_sales": "बिक्री",
@@ -1558,5 +1558,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

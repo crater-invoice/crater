@@ -225,7 +225,7 @@
         <!-- Invoice status  -->
         <template #cell-status="{ row }">
           <BaseInvoiceStatusBadge :status="row.data.status" class="px-3 py-1">
-            {{ row.data.status }}
+            <BaseInvoiceStatusLabel :status="row.data.status" />
           </BaseInvoiceStatusBadge>
         </template>
 
@@ -249,7 +249,7 @@
               :status="row.data.paid_status"
               class="px-1 py-0.5 ml-2"
             >
-              {{ row.data.paid_status }}
+              <BaseInvoiceStatusLabel :status="row.data.paid_status" />
             </BasePaidStatusBadge>
           </div>
         </template>
@@ -291,12 +291,22 @@ const showFilters = ref(false)
 
 const status = ref([
   {
-    label: 'Status',
-    options: ['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'],
+    label: t('invoices.status'),
+    options: [
+      {label: t('general.draft'), value: 'DRAFT'}, 
+      {label: t('general.due'), value: 'DUE'}, 
+      {label: t('general.sent'), value: 'SENT'}, 
+      {label: t('invoices.viewed'), value: 'VIEWED'}, 
+      {label: t('invoices.completed'), value: 'COMPLETED'}
+      ],
   },
   {
-    label: 'Paid Status',
-    options: ['UNPAID', 'PAID', 'PARTIALLY_PAID'],
+    label: t('invoices.paid_status'),
+    options: [
+      {label: t('invoices.unpaid'), value: 'UNPAID'}, 
+      {label: t('invoices.paid'), value: 'PAID'}, 
+      {label: t('invoices.partially_paid'), value: 'PARTIALLY_PAID'}
+      ],
   },
   ,
 ])

@@ -104,7 +104,7 @@
           @click="cancelPreview"
         >
           <BaseIcon name="PencilIcon" class="h-5 mr-2" />
-          Edit
+          {{ $t('general.edit') }}
         </BaseButton>
 
         <iframe
@@ -181,7 +181,7 @@ const invoiceMailForm = reactive({
   id: null,
   from: null,
   to: null,
-  subject: 'New Invoice',
+  subject: t('invoices.new_invoice'),
   body: null,
 })
 

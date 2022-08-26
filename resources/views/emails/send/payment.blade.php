@@ -19,7 +19,7 @@
             {!! $data['body'] !!}
             @if(!$data['attach']['data'])
                 @component('mail::button', ['url' => $data['url']])
-                    View Payment
+                    @lang('mail_view_payment')
                 @endcomponent
             @endif
         @endcomponent

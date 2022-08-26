@@ -230,7 +230,7 @@
             :status="row.data.status"
             class="px-3 py-1"
           >
-            {{ row.data.status }}
+            <BaseRecurringInvoiceStatusLabel :status="row.data.status" />
           </BaseRecurringInvoiceStatusBadge>
         </template>
 
@@ -276,7 +276,11 @@ const userStore = useUserStore()
 const table = ref(null)
 const { t } = useI18n()
 const showFilters = ref(false)
-const statusList = ref(['ACTIVE', 'ON_HOLD', 'ALL'])
+const statusList = ref([
+  {label: t('recurring_invoices.working'), value: 'ACTIVE'}, 
+  {label: t('recurring_invoices.on_hold'), value: 'ON_HOLD'}, 
+  {label: t('recurring_invoices.all'), value: 'ALL'}
+  ])
 const isRequestOngoing = ref(true)
 const activeTab = ref('recurring-invoices.all')
 const router = useRouter()

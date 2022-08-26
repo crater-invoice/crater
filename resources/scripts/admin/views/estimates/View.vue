@@ -212,7 +212,7 @@
                 :status="estimate.status"
                 class="px-1 text-xs"
               >
-                {{ estimate.status }}
+                <BaseEstimateStatusLabel :status="estimate.status" />
               </BaseEstimateStatusBadge>
             </div>
 

@@ -12,7 +12,7 @@
     "settings": "Postavke",
     "logout": "Odjava",
     "users": "Korisnici",
-    "modules": "Modules"
+    "modules": "Moduli"
   },
   "general": {
     "add_company": "Dodaj tvrtku",
@@ -30,8 +30,8 @@
     "from": "Pošiljatelj",
     "to": "Primatelj",
     "ok": "Ok",
-    "yes": "Yes",
-    "no": "No",
+    "yes": "Da",
+    "no": "Ne",
     "sort_by": "Posloži Po",
     "ascending": "Rastuće",
     "descending": "Padajuće",
@@ -39,7 +39,7 @@
     "body": "Tijelo",
     "message": "Poruka",
     "send": "Pošalji",
-    "preview": "Preview",
+    "preview": "Pregled",
     "go_back": "Natrag",
     "back_to_login": "Natrag na prijavu?",
     "home": "Početna",
@@ -65,7 +65,7 @@
     "sent": "Poslano",
     "all": "Sve",
     "select_all": "Izaberi sve",
-    "select_template": "Select Template",
+    "select_template": "Odaberite predložak",
     "choose_file": "Klikni ovdje da izabereš fajl",
     "choose_template": "Izaberi predložak",
     "choose": "Izaberi",
@@ -93,11 +93,11 @@
     "no_note_found": "Ne postoje spremljene napomene",
     "insert_note": "Unesi bilješku",
     "copied_pdf_url_clipboard": "Link do PDF fajla kopiran!",
-    "copied_url_clipboard": "Copied url to clipboard!",
-    "docs": "Docs",
-    "do_you_wish_to_continue": "Do you wish to continue?",
-    "note": "Note",
-    "pay_invoice": "Pay Invoice",
+    "copied_url_clipboard": "URL je kopiran u međuspremnik!",
+    "docs": "Dokumenti",
+    "do_you_wish_to_continue": "Želite li nastaviti?",
+    "note": "Bilješka",
+    "pay_invoice": "Plati račun",
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
     "mark_as_default": "Postavi kao zadano"
@@ -109,7 +109,7 @@
       "customers": "Klijenti",
       "invoices": "Računi",
       "estimates": "Ponude",
-      "payments": "Payments"
+      "payments": "Plaćanja"
     },
     "chart_info": {
       "total_sales": "Prodaja",
@@ -151,7 +151,7 @@
     "no_results_found": "Nema rezultata"
   },
   "company_switcher": {
-    "label": "SWITCH COMPANY",
+    "label": "IZABERI TVRTKU",
     "no_results_found": "No Results Found",
     "add_new_company": "Add new company",
     "new_company": "New company",

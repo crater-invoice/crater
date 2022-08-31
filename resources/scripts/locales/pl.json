@@ -1485,7 +1485,7 @@
   "pdf_estimate_label": "Oferta",
   "pdf_estimate_number": "Numer oferty",
   "pdf_estimate_date": "Data oferty",
-  "pdf_estimate_expire_date": "Expiry Date",
+  "pdf_estimate_expire_date": "Data ważności",
   "pdf_invoice_label": "Faktura",
   "pdf_invoice_number": "Numer faktury",
   "pdf_invoice_date": "Data faktury",

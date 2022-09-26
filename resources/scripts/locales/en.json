@@ -206,6 +206,7 @@
     "update_customer": "Update Customer",
     "customer": "Customer | Customers",
     "new_customer": "New Customer",
+    "import_customers": "Import Customers from CSV",
     "edit_customer": "Edit Customer",
     "basic_info": "Basic Info",
     "portal_access": "Portal Access",
@@ -233,7 +234,8 @@
     "updated_message": "Customer updated successfully",
     "address_updated_message": "Address Information Updated succesfully",
     "deleted_message": "Customer deleted successfully | Customers deleted successfully",
-    "edit_currency_not_allowed": "Cannot change currency once transactions created."
+    "edit_currency_not_allowed": "Cannot change currency once transactions created.",
+    "imported_message": "Customers imported successfully"
   },
   "items": {
     "title": "Items",

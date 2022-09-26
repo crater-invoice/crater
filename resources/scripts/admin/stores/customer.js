@@ -174,6 +174,32 @@ export const useCustomerStore = (useWindow = false) => {
         })
       },
 
+      importCustomers(data) {
+        return new Promise((resolve, reject) => {
+          axios
+            .post('/api/v1/customers/import', data, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              }
+            })
+            .then((response) => {
+              this.fetchCustomers({})
+
+              const notificationStore = useNotificationStore()
+              notificationStore.showNotification({
+                type: 'success',
+                message: global.t('customers.imported_message'),
+              })
+              resolve(response)
+            })
+
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
+
       deleteCustomer(id) {
         const notificationStore = useNotificationStore()
         return new Promise((resolve, reject) => {

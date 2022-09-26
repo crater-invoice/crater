@@ -94,6 +94,7 @@ use Crater\Http\Controllers\V1\Customer\Expense\ExpensesController as CustomerEx
 use Crater\Http\Controllers\V1\Customer\General\BootstrapController as CustomerBootstrapController;
 use Crater\Http\Controllers\V1\Customer\General\DashboardController as CustomerDashboardController;
 use Crater\Http\Controllers\V1\Customer\General\ProfileController as CustomerProfileController;
+use Crater\Http\Controllers\V1\Customer\ImportController as CustomerImportController;
 use Crater\Http\Controllers\V1\Customer\Invoice\InvoicesController as CustomerInvoicesController;
 use Crater\Http\Controllers\V1\Customer\Payment\PaymentMethodController;
 use Crater\Http\Controllers\V1\Customer\Payment\PaymentsController as CustomerPaymentsController;
@@ -250,6 +251,8 @@ Route::prefix('/v1')->group(function () {
             Route::get('customers/{customer}/stats', CustomerStatsController::class);
 
             Route::resource('customers', CustomersController::class);
+
+            Route::post('/customers/import', [CustomerImportController::class, 'import']);
 
 
             // Items

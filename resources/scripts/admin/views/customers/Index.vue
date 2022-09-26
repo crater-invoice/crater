@@ -38,6 +38,11 @@
             </template>
             {{ $t('customers.new_customer') }}
           </BaseButton>
+          <template
+            v-if="userStore.hasAbilities(abilities.CREATE_CUSTOMER)"
+          >
+            <CustomerImport/>
+          </template>
         </div>
       </template>
     </BasePageHeader>
@@ -208,6 +213,7 @@ import abilities from '@/scripts/admin/stub/abilities'
 
 import CustomerDropdown from '@/scripts/admin/components/dropdowns/CustomerIndexDropdown.vue'
 import AstronautIcon from '@/scripts/components/icons/empty/AstronautIcon.vue'
+import CustomerImport from '@/scripts/admin/views/customers/partials/CustomerImport.vue'
 
 const companyStore = useCompanyStore()
 const dialogStore = useDialogStore()

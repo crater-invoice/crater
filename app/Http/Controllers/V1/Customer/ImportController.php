@@ -11,6 +11,8 @@ class ImportController extends Controller
 {
     public function import(Request $request)
     {
+        $this->authorize('create', Customer::class);
+
         Excel::import(new CustomerImport($request->user()->id, $request->header('company')), $request->file('import_upload'));
 
         return response()->json([

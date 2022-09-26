@@ -11,8 +11,6 @@ services:
     image: crater-php
     restart: unless-stopped
     working_dir: /var/www/
-    ports:
-      - 3000:3000
     volumes:
       - ./:/var/www
       - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated

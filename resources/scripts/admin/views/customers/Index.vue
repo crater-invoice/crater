@@ -38,11 +38,7 @@
             </template>
             {{ $t('customers.new_customer') }}
           </BaseButton>
-          <template
-            v-if="userStore.hasAbilities(abilities.CREATE_CUSTOMER)"
-          >
-            <CustomerImport/>
-          </template>
+          <CustomerImport v-if="userStore.hasAbilities(abilities.CREATE_CUSTOMER)"/>
         </div>
       </template>
     </BasePageHeader>

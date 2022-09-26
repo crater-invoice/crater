@@ -27,6 +27,7 @@
     "laravel/ui": "^3.0",
     "lavary/laravel-menu": "^1.8",
     "league/flysystem-aws-s3-v3": "^1.0",
+    "maatwebsite/excel": "^3.1",
     "predis/predis": "^1.1",
     "silber/bouncer": "v1.0.0-rc.10",
     "spatie/flysystem-dropbox": "^1.2",
@@ -81,7 +82,10 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   },
   "extra": {
     "laravel": {

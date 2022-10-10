@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - bahmni-master
+      - BAH-2427
     tags:
       - "*"
   pull_request:

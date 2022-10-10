@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/sh
 set -e
 
 envsubst < .env.template  > .env.example
@@ -11,7 +10,7 @@ php artisan storage:link || true
 
 if [ ${AUTO_INSTALL} == "true" ]
 then
-    wait-for-it --timeout=300 $DB_HOST:$DB_PORT
+    ./wait-for.sh --timeout=300 $DB_HOST:$DB_PORT
     php artisan migrate --force
     php artisan db:seed --force
     php artisan db:seed --class=DemoSeeder --force

@@ -91,3 +91,23 @@ jobs:
         file: docker/nginx.Dockerfile
         push: true
         tags: bahmni/crater-nginx:${{env.VERSION_TAG}},bahmni/crater-nginx:latest
+
+  trigger-dependent-repos:
+    name: Trigger Workflows
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create repository_dispatch
+        env:
+          REPOSITORY_NAME: crater-extensions
+          ORG_NAME: Bahmni
+          EVENT_TYPE: crater-php-trigger
+        run: |
+          trigger_result=$(curl -s -o trigger_response.txt -w "%{http_code}" -X POST -H "Accept: application/vnd.github.v3+json" -H 'authorization: Bearer ${{ secrets.BAHMNI_PAT }}' https://api.github.com/repos/${ORG_NAME}/${REPOSITORY_NAME}/dispatches -d '{"event_type":"'"${EVENT_TYPE}"'"}')
+          if [ $trigger_result == 204 ];then
+            echo "Trigger to $ORG_NAME/$REPOSITORY_NAME Success"
+          else
+            echo "Trigger to $ORG_NAME/$REPOSITORY_NAME Failed"
+            cat trigger_response.txt
+            exit 1
+          fi

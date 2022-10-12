@@ -33,7 +33,6 @@ RUN mkdir -p /home/$user/.composer
 RUN chown -R $user:$user /home/$user
 
 COPY . /var/www/
-RUN rm -rf /var/www/composer.lock
 COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 RUN chown -R $user:$user /var/www/
 RUN chmod -R 775 /var/www/storage

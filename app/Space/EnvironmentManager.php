@@ -518,7 +518,7 @@ class EnvironmentManager
                     'DO_SPACES_REGION='.$request->do_spaces_region."\n".
                     'DO_SPACES_BUCKET='.$request->do_spaces_bucket."\n".
                     'DO_SPACES_ENDPOINT='.$request->do_spaces_endpoint."\n";
-                    'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
+                'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
 
                 break;
 

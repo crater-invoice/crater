@@ -69,7 +69,7 @@ class DatabaseEnvironmentRequest extends FormRequest
                     ],
                 ];
 
-            break;
+                break;
 
         }
     }

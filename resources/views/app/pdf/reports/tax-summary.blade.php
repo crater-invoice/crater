@@ -134,11 +134,10 @@
             line-height: 21px;
             color: #5851D8;
         }
-
     </style>
 
     @if (App::isLocale('th'))
-        @include('app.pdf.locale.th')
+    @include('app.pdf.locale.th')
     @endif
 </head>
 
@@ -167,18 +166,18 @@
         <div class="tax-table-container">
             <table class="tax-table">
                 @foreach ($taxTypes as $tax)
-                    <tr>
-                        <td>
-                            <p class="tax-title">
-                                {{ $tax->taxType->name }}
-                            </p>
-                        </td>
-                        <td>
-                            <p class="tax-amount">
-                                {!! format_money_pdf($tax->total_tax_amount) !!}
-                            </p>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <p class="tax-title">
+                            {{ $tax->taxType->name }}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="tax-amount">
+                            {!! format_money_pdf($tax->total_tax_amount, $currency) !!}
+                        </p>
+                    </td>
+                </tr>
                 @endforeach
 
             </table>
@@ -189,7 +188,7 @@
         <tr>
             <td class="tax-total-cell">
                 <p class="tax-total">
-                    {!! format_money_pdf($totalTaxAmount) !!}
+                    {!! format_money_pdf($totalTaxAmount, $currency) !!}
                 </p>
             </td>
         </tr>
@@ -201,7 +200,7 @@
             </td>
             <td>
                 <p class="report-footer-value">
-                    {!! format_money_pdf($totalTaxAmount) !!}
+                    {!! format_money_pdf($totalTaxAmount, $currency) !!}
                 </p>
             </td>
         </tr>

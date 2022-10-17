@@ -143,7 +143,7 @@
           <template #activator>
             <img
               :src="previewAvatar"
-              class="block w-8 h-8 rounded md:h-9 md:w-9"
+              class="block w-8 h-8 rounded md:h-9 md:w-9 object-cover"
             />
           </template>
 

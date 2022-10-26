@@ -503,7 +503,7 @@
     "confirm_send_invoice": "Esta fatura recorrente será enviada por e-mail para o cliente",
     "invoice_mark_as_sent": "This recurring invoice will be marked as sent",
     "confirm_send": "This recurring invoice will be sent via email to the customer",
-    "starts_at": "Start Date",
+    "starts_at": "Data de início",
     "due_date": "Invoice Due Date",
     "record_payment": "Record Payment",
     "add_new_invoice": "Add New Recurring Invoice",

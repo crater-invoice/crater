@@ -137,11 +137,10 @@
         .text-center {
             text-align: center;
         }
-
     </style>
 
     @if (App::isLocale('th'))
-        @include('app.pdf.locale.th')
+    @include('app.pdf.locale.th')
     @endif
 </head>
 
@@ -165,29 +164,29 @@
 
         <p class="sales-items-title">@lang('pdf_items_label')</p>
         @foreach ($items as $item)
-            <div class="items-table-container">
-                <table class="items-table">
-                    <tr>
-                        <td>
-                            <p class="item-title">
-                                {{ $item->name }}
-                            </p>
-                        </td>
-                        <td>
-                            <p class="item-sales-amount">
-                                {!! format_money_pdf($item->total_amount) !!}
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="items-table-container">
+            <table class="items-table">
+                <tr>
+                    <td>
+                        <p class="item-title">
+                            {{ $item->name }}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="item-sales-amount">
+                            {!! format_money_pdf($item->total_amount, $currency) !!}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
         @endforeach
 
         <table class="sales-total-indicator-table">
             <tr>
                 <td class="sales-total-cell">
                     <p class="sales-total-amount">
-                        {!! format_money_pdf($totalAmount) !!}
+                        {!! format_money_pdf($totalAmount, $currency) !!}
                     </p>
                 </td>
             </tr>
@@ -202,7 +201,7 @@
             </td>
             <td>
                 <p class="report-footer-value">
-                    {!! format_money_pdf($totalAmount) !!}
+                    {!! format_money_pdf($totalAmount, $currency) !!}
                 </p>
             </td>
         </tr>

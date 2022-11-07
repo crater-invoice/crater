@@ -1495,7 +1495,7 @@
   "pdf_quantity_label": "Množství",
   "pdf_price_label": "Cena",
   "pdf_discount_label": "Sleva",
-  "pdf_amount_label": "Množství",
+  "pdf_amount_label": "Částka",
   "pdf_subtotal": "Mezisoučet",
   "pdf_total": "Celkem",
   "pdf_payment_label": "Platba",

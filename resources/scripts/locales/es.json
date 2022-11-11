@@ -9,7 +9,7 @@
     "estimates": "Presupuestos",
     "payments": "Pagos",
     "reports": "Informes",
-    "settings": "Ajustes",
+    "settings": "Configuración",
     "logout": "Cerrar sesión",
     "users": "Usuarios",
     "modules": "Módulos"
@@ -87,7 +87,7 @@
     "select_city": "Seleccionar ciudad",
     "street_1": "Calle 1",
     "street_2": "Calle 2",
-    "action_failed": "Accion Fallida",
+    "action_failed": "Acción Fallida",
     "retry": "Procesar de nuevo",
     "choose_note": "Elegir nota",
     "no_note_found": "No se encontró ninguna nota",
@@ -98,7 +98,7 @@
     "do_you_wish_to_continue": "¿Deseas continuar?",
     "note": "Nota",
     "pay_invoice": "Pagar factura",
-    "login_successfully": "Logeado Satisfactoriamente!",
+    "login_successfully": "¡Sesión inciada con éxito!",
     "logged_out_successfully": "Logeado Satisfactoriamente",
     "mark_as_default": "Marcar como predeterminado"
   },
@@ -113,7 +113,7 @@
     },
     "chart_info": {
       "total_sales": "Ventas",
-      "total_receipts": "Ingresos",
+      "total_receipts": "Recibos",
       "total_expense": "Gastos",
       "net_income": "Ingresos netos",
       "year": "Seleccione año"

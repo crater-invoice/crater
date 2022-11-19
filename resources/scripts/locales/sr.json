@@ -95,9 +95,9 @@
     "copied_pdf_url_clipboard": "Link do PDF fajla kopiran!",
     "copied_url_clipboard": "Copied url to clipboard!",
     "docs": "Docs",
-    "do_you_wish_to_continue": "Do you wish to continue?",
-    "note": "Note",
-    "pay_invoice": "Pay Invoice",
+    "do_you_wish_to_continue": "Da li želite nastaviti?",
+    "note": "Bilješka",
+    "pay_invoice": "Plati račun",
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
     "mark_as_default": "Mark as default"

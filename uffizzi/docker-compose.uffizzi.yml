@@ -1,0 +1,58 @@
+version: '3'
+
+x-uffizzi:
+  ingress:
+    service: nginx
+    port: 80
+
+services:
+  app:
+    image: "${APP_IMAGE}"
+    restart: unless-stopped
+    working_dir: /var/www/
+    command: ["-c","
+            composer config --no-plugins allow-plugins.pestphp/pest-plugin true && 
+            composer install --no-interaction --prefer-dist --optimize-autoloader && 
+            php artisan storage:link || true && 
+            php artisan key:generate --force && 
+            php-fpm",
+            ]
+    entrypoint: /bin/sh
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          memory: 1000m
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_USER: crater
+      MYSQL_PASSWORD: crater
+      MYSQL_DATABASE: crater
+      MYSQL_ROOT_PASSWORD: crater
+    ports:
+      - '33006:3306'
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+
+  nginx:
+    image: "${NGINX_IMAGE}"
+    restart: unless-stopped
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    resources:
+      limits:
+        memory: 500m
+
+  cron:
+    image: "${CROND_IMAGE}"
+    restart: always
+    
+

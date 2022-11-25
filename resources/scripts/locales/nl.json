@@ -1114,13 +1114,13 @@
       "exchange_help_text": "Voer de wisselkoers in om te converteren van {currency} naar {baseCurrency}",
       "currency_freak": "Valuta Freak",
       "currency_layer": "Valuta-laag",
-      "open_exchange_rate": "Open Exchange Rate",
+      "open_exchange_rate": "Open wisselkoers",
       "currency_converter": "Valuta omzetter",
       "server": "Server",
       "url": "URL",
       "active": "Actief",
-      "currency_help_text": "This provider will only be used on above selected currencies",
-      "currency_in_used": "The following currencies are already active on another provider. Please remove these currencies from selection to activate this provider again."
+      "currency_help_text": "Deze aanbieder wordt alleen gebruikt voor de hier boven geselecteerde valuta",
+      "currency_in_used": "De volgende valuta zijn al actief bij een andere aanbieder. Verwijder deze valuta uit de selectie om deze aanbieder opnieuw te activeren."
     },
     "tax_types": {
       "title": "Belastingtypen",
@@ -1143,10 +1143,10 @@
     },
     "payment_modes": {
       "title": "Betaalmethodes",
-      "description": "Modes of transaction for payments",
+      "description": "Modi van transacties voor betalingen",
       "add_payment_mode": "Voeg betaalwijze toe",
       "edit_payment_mode": "Wijzig betaalwijze",
-      "mode_name": "Mode Name",
+      "mode_name": "Modusnaam",
       "payment_mode_added": "Betaalwijze toegevoegd",
       "payment_mode_updated": "Betaalwijze bijgewerkt",
       "payment_mode_confirm_delete": "U kunt deze betalingsmodus niet herstellen",
@@ -1178,7 +1178,7 @@
       "discount_setting": "Kortingsinstelling",
       "discount_per_item": "Korting per item",
       "discount_setting_description": "Schakel dit in als u korting wilt toevoegen aan afzonderlijke factuuritems. Standaard wordt korting rechtstreeks aan de factuur toegevoegd.",
-      "expire_public_links": "Automatically Expire Public Links",
+      "expire_public_links": "Publieke links automatisch laten vervallen",
       "expire_setting_description": "Specify whether you would like to expire all the links sent by application to view invoices, estimates & payments, etc after a specified duration.",
       "save": "Opslaan",
       "preference": "Voorkeur | Voorkeuren",

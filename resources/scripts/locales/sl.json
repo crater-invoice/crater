@@ -12,7 +12,7 @@
     "settings": "Nastavitve",
     "logout": "Odjava",
     "users": "Uporabniki",
-    "modules": "Modules"
+    "modules": "Moduli"
   },
   "general": {
     "add_company": "Dodaj Podjetje",
@@ -52,7 +52,7 @@
     "showing": "Prikazujem",
     "of": "od",
     "actions": "Dejanja",
-    "subtotal": "SUBTOTAL",
+    "subtotal": "Skupno",
     "discount": "POPUST",
     "fixed": "Fixed",
     "percentage": "Procent",
@@ -92,80 +92,80 @@
     "choose_note": "Izberite Opombo",
     "no_note_found": "Opomba ni bila najdena",
     "insert_note": "Vstavi opombo",
-    "copied_pdf_url_clipboard": "Copied PDF url to clipboard!",
-    "copied_url_clipboard": "Copied url to clipboard!",
-    "docs": "Docs",
-    "do_you_wish_to_continue": "Do you wish to continue?",
-    "note": "Note",
-    "pay_invoice": "Pay Invoice",
-    "login_successfully": "Logged in successfully!",
-    "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "copied_pdf_url_clipboard": "PDF url kopiran v odložišče!",
+    "copied_url_clipboard": "Url kopiran v odložišče!",
+    "docs": "Dokumentacija",
+    "do_you_wish_to_continue": "Želite nadaljevati?",
+    "note": "Opomba",
+    "pay_invoice": "Plačilo računa",
+    "login_successfully": "Prijava uspešna!",
+    "logged_out_successfully": "Odjava uspešna",
+    "mark_as_default": "Označi kot privzeto"
   },
   "dashboard": {
     "select_year": "Izberite leto",
     "cards": {
-      "due_amount": "Amount Due",
+      "due_amount": "Zapadli znesek",
       "customers": "Stranke",
       "invoices": "Računi",
-      "estimates": "Estimates",
-      "payments": "Payments"
+      "estimates": "Predračuni",
+      "payments": "Plačila"
     },
     "chart_info": {
-      "total_sales": "Sales",
-      "total_receipts": "Receipts",
+      "total_sales": "Prodaja",
+      "total_receipts": "Računi",
       "total_expense": "Stroški",
       "net_income": "Neto prihodki",
       "year": "Izberite leto"
     },
     "monthly_chart": {
-      "title": "Sales & Expenses"
+      "title": "Prodaja & stroški"
     },
     "recent_invoices_card": {
       "title": "Due Invoices",
-      "due_on": "Due On",
+      "due_on": "Zapade",
       "customer": "Stranka",
-      "amount_due": "Amount Due",
+      "amount_due": "Zapadli znesek",
       "actions": "Dejanja",
       "view_all": "Prikaži vse"
     },
     "recent_estimate_card": {
-      "title": "Recent Estimates",
-      "date": "Date",
+      "title": "Nedavni Predračuni",
+      "date": "Datum",
       "customer": "Stranka",
-      "amount_due": "Amount Due",
-      "actions": "Actions",
+      "amount_due": "Zapadli znesek",
+      "actions": "Dejanja",
       "view_all": "Prikaži vse"
     }
   },
   "tax_types": {
-    "name": "Name",
-    "description": "Description",
-    "percent": "Percent",
+    "name": "Ime",
+    "description": "Opis",
+    "percent": "Odstotek",
     "compound_tax": "Compound Tax"
   },
   "global_search": {
-    "search": "Search...",
+    "search": "Išči...",
     "customers": "Stranke",
-    "users": "Users",
-    "no_results_found": "No Results Found"
+    "users": "Uporabniki",
+    "no_results_found": "Ni rezultatov"
   },
   "company_switcher": {
-    "label": "SWITCH COMPANY",
-    "no_results_found": "No Results Found",
-    "add_new_company": "Add new company",
-    "new_company": "New company",
-    "created_message": "Company created successfully"
+    "label": "Zamenjaj podjetje",
+    "no_results_found": "Ni rezultatov",
+    "add_new_company": "Dodaj podjetje",
+    "new_company": "Novo podjetje",
+    "created_message": "Podjetje je bilo uspešno ustvarjeno"
   },
   "dateRange": {
-    "today": "Today",
-    "this_week": "This Week",
-    "this_month": "This Month",
-    "this_quarter": "This Quarter",
-    "this_year": "This Year",
-    "previous_week": "Previous Week",
-    "previous_month": "Previous Month",
-    "previous_quarter": "Previous Quarter",
+    "today": "Danes",
+    "this_week": "Ta teden",
+    "this_month": "Ta mesec",
+    "this_quarter": "To četrtletje",
+    "this_year": "To leto",
+    "previous_week": "Prejšnji teden",
+    "previous_month": "Prejšnji mesec",
+    "previous_quarter": "Prejšnje četrtletje",
     "previous_year": "Predhodnje Leto",
     "custom": "Po meri"
   },
@@ -208,7 +208,7 @@
     "new_customer": "Nov uporabnik",
     "edit_customer": "Urejanje uporabnika",
     "basic_info": "Osnovne informacije",
-    "portal_access": "Portal Access",
+    "portal_access": "Dostop do portala",
     "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
     "portal_access_url": "Customer Portal Login URL",
     "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
@@ -272,10 +272,10 @@
     "days": "{days} Days",
     "months": "{months} Month",
     "years": "{years} Year",
-    "all": "All",
-    "paid": "Paid",
-    "unpaid": "Unpaid",
-    "customer": "CUSTOMER",
+    "all": "Vse",
+    "paid": "Plačano",
+    "unpaid": "Neplačano",
+    "customer": "Stranka",
     "ref_no": "REF NO.",
     "number": "NUMBER",
     "amount_due": "AMOUNT DUE",

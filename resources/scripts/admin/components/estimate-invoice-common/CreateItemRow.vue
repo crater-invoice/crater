@@ -17,18 +17,7 @@
             <td class="px-5 py-4 text-left align-top">
               <div class="flex justify-start">
                 <div
-                  class="
-                    flex
-                    items-center
-                    justify-center
-                    w-5
-                    h-5
-                    mt-2
-                    text-gray-300
-                    cursor-move
-                    handle
-                    mr-2
-                  "
+                  class="flex items-center justify-center w-5 h-5 mt-2 mr-2 text-gray-300 cursor-move  handle"
                 >
                   <DragIcon />
                 </div>
@@ -108,7 +97,7 @@
 
                           <BaseIcon
                             name="ChevronDownIcon"
-                            class="w-4 h-4 text-gray-500 ml-1"
+                            class="w-4 h-4 ml-1 text-gray-500"
                           />
                         </span>
                       </BaseButton>
@@ -155,7 +144,7 @@
               <BaseContentPlaceholders v-if="loading">
                 <BaseContentPlaceholdersText
                   :lines="1"
-                  class="w-24 h-8 rounded-md border"
+                  class="w-24 h-8 border rounded-md"
                 />
               </BaseContentPlaceholders>
 
@@ -175,6 +164,7 @@
                 :ability="abilities.CREATE_INVOICE"
                 :store="store"
                 :store-prop="storeProp"
+                :discount="discount"
                 @update="updateTax"
               />
             </td>

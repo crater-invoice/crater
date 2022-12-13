@@ -2,24 +2,25 @@
 
 namespace Crater\Http\Controllers\V1\Admin\Report;
 
+use PDF;
 use Carbon\Carbon;
-use Crater\Http\Controllers\Controller;
 use Crater\Models\Company;
-use Crater\Models\CompanySetting;
+use Crater\Models\Currency;
 use Crater\Models\Customer;
 use Illuminate\Http\Request;
+use Crater\Models\CompanySetting;
 use Illuminate\Support\Facades\App;
-use PDF;
+use Crater\Http\Controllers\Controller;
 
 class CustomerSalesReportController extends Controller
 {
     /**
-    * Handle the incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  string  $hash
-    * @return \Illuminate\Http\JsonResponse
-    */
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $hash
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function __invoke(Request $request, $hash)
     {
         $company = Company::where('unique_hash', $hash)->first();
@@ -56,6 +57,7 @@ class CustomerSalesReportController extends Controller
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $company->id);
         $from_date = Carbon::createFromFormat('Y-m-d', $request->from_date)->format($dateFormat);
         $to_date = Carbon::createFromFormat('Y-m-d', $request->to_date)->format($dateFormat);
+        $currency = Currency::findOrFail(CompanySetting::getSetting('currency', $company->id));
 
         $colors = [
             'primary_text_color',
@@ -80,6 +82,7 @@ class CustomerSalesReportController extends Controller
             'company' => $company,
             'from_date' => $from_date,
             'to_date' => $to_date,
+            'currency' => $currency,
         ]);
 
         $pdf = PDF::loadView('app.pdf.reports.sales-customers');

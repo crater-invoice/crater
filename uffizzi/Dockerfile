@@ -1,9 +1,5 @@
 FROM php:8.1-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -30,11 +26,23 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN useradd -G www-data,root -u 1000 -d /home/crater-user crater-user
+RUN mkdir -p /home/crater-user/.composer && \
+    chown -R crater-user:crater-user /home/crater-user
+
+# Mounted volumes
+COPY ./ /var/www
+COPY ./docker-compose/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+COPY ./uffizzi/.env.example /var/www/.env
 
 # Set working directory
 WORKDIR /var/www
 
-USER $user
+RUN chown -R crater-user:crater-user ./
+RUN chmod -R 775 composer.json composer.lock \ 
+        composer.lock storage/framework/ \
+        storage/logs/ bootstrap/cache/ /home/crater-user/.composer
+RUN chown -R $(whoami):$(whoami) /var/log/
+RUN chmod -R 775 /var/log
+
+USER crater-user

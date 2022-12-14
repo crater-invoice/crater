@@ -55,7 +55,7 @@ class CreateTemplateCommand extends Command
         copy(public_path("/build/img/PDF/{$type}1.png"), public_path("/build/img/PDF/{$templateName}.png"));
         copy(resource_path("/static/img/PDF/{$type}1.png"), resource_path("/static/img/PDF/{$templateName}.png"));
 
-        $path = resource_path("app/pdf/{$type}/{$templateName}.blade.php");
+        $path = resource_path("views/app/pdf/{$type}/{$templateName}.blade.php");
         $type = ucfirst($type);
         $this->info("{$type} Template created successfully at ".$path);
 

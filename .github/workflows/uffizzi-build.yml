@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2        
       - name: Generate UUID image name
         id: uuid
         run: echo "UUID_TAG_APP=$(uuidgen)" >> $GITHUB_ENV
@@ -33,11 +31,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ./uffizzi/Dockerfile
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
 
   build-nginx:
+    needs: 
+      - build-application
     name: Build and Push `nginx`
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
@@ -65,6 +62,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: ./uffizzi/nginx/Dockerfile
+          build-args: |
+            BASE_IMAGE=${{ needs.build-application.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

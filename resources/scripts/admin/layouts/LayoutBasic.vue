@@ -12,6 +12,8 @@
       class="h-screen h-screen-ios overflow-y-auto md:pl-56 xl:pl-64 min-h-0"
     >
       <div class="pt-16 pb-16">
+        <h1>Testing</h1>
+
         <router-view />
       </div>
     </main>

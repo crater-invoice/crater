@@ -48,6 +48,27 @@
         />
       </BaseInputGroup>
 
+      <div class="flex mt-7">
+        <div class="relative w-20 mt-8">
+          <BaseSwitch
+            v-model="invoiceStore.newInvoice.credit"
+            class="absolute -top-4"
+          />
+        </div>
+
+        <div class="ml-2">
+          <p class="p-0 mb-1 leading-snug text-left text-black">
+            {{ $t('invoices.is_credit') }}
+          </p>
+          <p
+            class="p-0 m-0 text-xs leading-tight text-left text-gray-500"
+            style="max-width: 480px"
+          >
+            {{ $t('invoices.is_credit_desc') }}
+          </p>
+        </div>
+      </div>
+
       <ExchangeRateConverter
         :store="invoiceStore"
         store-prop="newInvoice"

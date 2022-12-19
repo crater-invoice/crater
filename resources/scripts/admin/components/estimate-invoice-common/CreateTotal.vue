@@ -61,7 +61,7 @@
         v-else-if="store[storeProp].tax_per_item === 'YES'"
         class="flex items-center justify-center m-0 text-lg text-black uppercase "
       >
-        <BaseFormatMoney :amount="tax.amount" :currency="defaultCurrency" />
+        <BaseFormatMoney :amount="!!store[storeProp].credit ? 0 - tax.amount : tax.amount" :currency="defaultCurrency" />
       </label>
     </div>
 

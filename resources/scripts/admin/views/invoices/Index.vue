@@ -224,8 +224,8 @@
 
         <!-- Invoice status  -->
         <template #cell-status="{ row }">
-          <BaseInvoiceStatusBadge :status="row.data.status" class="px-3 py-1">
-            {{ row.data.status }}
+          <BaseInvoiceStatusBadge :status="row.data.credit != 0 ? 'CREDIT' : row.data.status" class="px-3 py-1">
+            {{ Boolean(row.data.credit) ? 'CREDIT' : (t('general.'+(row.data.status).toLowerCase()) === 'general.'+(row.data.status).toLowerCase() ? row.data.status : t('general.'+(row.data.status).toLowerCase())) }}
           </BaseInvoiceStatusBadge>
         </template>
 

@@ -45,9 +45,11 @@ export const useInvoiceStore = (useWindow = false) => {
       },
 
       getSubTotal() {
-        return this.newInvoice.items.reduce(function (a, b) {
+        let isCredit = !!this.newInvoice.credit;
+        let calc = this.newInvoice.items.reduce(function (a, b) {
           return a + b['total']
-        }, 0)
+        }, 0);
+        return isCredit ? (0 - calc) : calc;
       },
 
       getTotalSimpleTax() {
@@ -69,14 +71,15 @@ export const useInvoiceStore = (useWindow = false) => {
       },
 
       getTotalTax() {
+        let isCredit = !!this.newInvoice.credit;
         if (
           this.newInvoice.tax_per_item === 'NO' ||
           this.newInvoice.tax_per_item === null
         ) {
-          return this.getTotalSimpleTax + this.getTotalCompoundTax
+          return isCredit ? 0 - (this.getTotalSimpleTax + this.getTotalCompoundTax) : (this.getTotalSimpleTax + this.getTotalCompoundTax)
         }
         return _.sumBy(this.newInvoice.items, function (tax) {
-          return tax.tax
+          return isCredit ? 0 - tax.tax : tax.tax
         })
       },
 
@@ -119,6 +122,7 @@ export const useInvoiceStore = (useWindow = false) => {
             .then((response) => {
               this.invoices = response.data.data
               this.invoiceTotalCount = response.data.meta.invoice_total_count
+
               resolve(response)
             })
             .catch((err) => {

@@ -12,7 +12,7 @@
       v-if="userStore.hasAbilities(abilities.EDIT_INVOICE)"
       :to="`/admin/invoices/${row.id}/edit`"
     >
-      <BaseDropdownItem v-show="row.allow_edit">
+      <BaseDropdownItem v-show="(row.credit != 1 && row.allow_edit)">
         <BaseIcon
           name="PencilIcon"
           class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
@@ -57,7 +57,7 @@
     </BaseDropdownItem>
 
     <!-- Resend Invoice -->
-    <BaseDropdownItem v-if="canReSendInvoice(row)" @click="sendInvoice(row)">
+    <BaseDropdownItem v-if="canReSendInvoice(row)" @click="sendInvoice(row, 'resend')">
       <BaseIcon
         name="PaperAirplaneIcon"
         class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
@@ -238,13 +238,14 @@ async function onMarkAsSent(id) {
     })
 }
 
-async function sendInvoice(invoice) {
+async function sendInvoice(invoice, type = null) {
   modalStore.openModal({
     title: t('invoices.send_invoice'),
     componentName: 'SendInvoiceModal',
     id: invoice.id,
     data: invoice,
     variant: 'sm',
+    type: type,
   })
 }
 

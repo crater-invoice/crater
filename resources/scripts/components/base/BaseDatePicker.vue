@@ -121,6 +121,15 @@ const carbonFormat = computed(() => {
   return companyStore.selectedCompanySettings?.carbon_date_format
 })
 
+const carbonFormatWithTime = computed(() => {
+  let format = companyStore.selectedCompanySettings?.carbon_date_format
+  if (companyStore.selectedCompanySettings?.invoice_use_time === 'YES') {
+    format += ' ' + companyStore.selectedCompanySettings?.carbon_time_format
+  }
+
+  return format.replace("g", "h").replace("a", "K");
+})
+
 const hasIconSlot = computed(() => {
   return !!slots.icon
 })
@@ -168,7 +177,7 @@ watch(
       config.altFormat = carbonFormat.value ? carbonFormat.value : 'd M Y'
     } else {
       config.altFormat = carbonFormat.value
-        ? `${carbonFormat.value} H:i `
+        ? `${carbonFormatWithTime.value}`
         : 'd M Y H:i'
     }
   },

@@ -65,6 +65,25 @@
         </BaseInputGroup>
 
         <BaseInputGroup
+          :content-loading="isFetchingInitialData"
+          :error="v$.fiscal_year.$error && v$.fiscal_year.$errors[0].$message"
+          :label="$tc('settings.preferences.fiscal_year')"
+          required
+        >
+          <BaseMultiselect
+            v-model="settingsForm.fiscal_year"
+            :content-loading="isFetchingInitialData"
+            :options="globalStore.config.fiscal_years"
+            label="key"
+            value-prop="value"
+            :invalid="v$.fiscal_year.$error"
+            track-by="key"
+            :searchable="true"
+            class="w-full"
+          />
+        </BaseInputGroup>
+
+        <BaseInputGroup
           :label="$tc('settings.preferences.date_format')"
           :content-loading="isFetchingInitialData"
           :error="
@@ -87,24 +106,33 @@
         </BaseInputGroup>
 
         <BaseInputGroup
+          :label="$tc('settings.preferences.time_format')"
           :content-loading="isFetchingInitialData"
-          :error="v$.fiscal_year.$error && v$.fiscal_year.$errors[0].$message"
-          :label="$tc('settings.preferences.fiscal_year')"
+          :error="
+            v$.carbon_time_format.$error &&
+            v$.carbon_time_format.$errors[0].$message
+          "
           required
         >
           <BaseMultiselect
-            v-model="settingsForm.fiscal_year"
+            v-model="settingsForm.carbon_time_format"
             :content-loading="isFetchingInitialData"
-            :options="globalStore.config.fiscal_years"
-            label="key"
-            value-prop="value"
-            :invalid="v$.fiscal_year.$error"
-            track-by="key"
-            :searchable="true"
+            :options="globalStore.timeFormats"
+            label="display_time"
+            value-prop="carbon_format_value"
+            track-by="display_time"
+            searchable
+            :invalid="v$.carbon_time_format.$error"
             class="w-full"
           />
         </BaseInputGroup>
       </BaseInputGrid>
+
+       <BaseSwitchSection
+          v-model="invoiceUseTimeField"
+          :title="$t('settings.preferences.invoice_use_time')"
+          :description="$t('settings.preferences.invoice_use_time_description')"
+        />
 
       <BaseButton
         :content-loading="isFetchingInitialData"
@@ -209,6 +237,37 @@ watch(
     }
   }
 )
+/
+watch(
+  () => settingsForm.carbon_time_format,
+  (val) => {
+    if (val) {
+      const timeFormatObject = globalStore.timeFormats.find((d) => {
+        return d.carbon_format_value === val
+      })
+
+      settingsForm.moment_time_format = timeFormatObject.moment_format_value
+    }
+  }
+)
+
+const invoiceUseTimeField = computed({
+  get: () => {
+    return settingsForm.invoice_use_time === 'YES'
+  },
+  set: async (newValue) => {
+    const value = newValue ? 'YES' : 'NO'
+
+    let data = {
+      settings: {
+        invoice_use_time: value,
+      },
+    }
+
+    settingsForm.invoice_use_time = value
+  }
+})
+
 
 const discountPerItemField = computed({
   get: () => {
@@ -263,10 +322,19 @@ const rules = computed(() => {
     moment_date_format: {
       required: helpers.withMessage(t('validation.required'), required),
     },
+	carbon_time_format: {
+      required: helpers.withMessage(t('validation.required'), required),
+    },
+    moment_time_format: {
+      required: helpers.withMessage(t('validation.required'), required),
+    },
     time_zone: {
       required: helpers.withMessage(t('validation.required'), required),
     },
     fiscal_year: {
+      required: helpers.withMessage(t('validation.required'), required),
+    },
+    invoice_use_time: {
       required: helpers.withMessage(t('validation.required'), required),
     },
   }
@@ -284,6 +352,7 @@ async function setInitialData() {
   Promise.all([
     globalStore.fetchCurrencies(),
     globalStore.fetchDateFormats(),
+    globalStore.fetchTimeFormats(),
     globalStore.fetchTimeZones(),
   ]).then(([res1]) => {
     isFetchingInitialData.value = false

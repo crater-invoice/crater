@@ -32,6 +32,7 @@ use Crater\Http\Controllers\V1\Admin\General\ConfigController;
 use Crater\Http\Controllers\V1\Admin\General\CountriesController;
 use Crater\Http\Controllers\V1\Admin\General\CurrenciesController;
 use Crater\Http\Controllers\V1\Admin\General\DateFormatsController;
+use Crater\Http\Controllers\V1\Admin\General\TimeFormatsController;
 use Crater\Http\Controllers\V1\Admin\General\GetAllUsedCurrenciesController;
 use Crater\Http\Controllers\V1\Admin\General\NextNumberController;
 use Crater\Http\Controllers\V1\Admin\General\NotesController;
@@ -234,6 +235,8 @@ Route::prefix('/v1')->group(function () {
             Route::get('/timezones', TimezonesController::class);
 
             Route::get('/date/formats', DateFormatsController::class);
+
+            Route::get('/time/formats', TimeFormatsController::class);
 
             Route::get('/next-number', NextNumberController::class);
 

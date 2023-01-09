@@ -819,6 +819,7 @@
     "primary_currency": "Primary Currency",
     "timezone": "Time Zone",
     "date_format": "Date Format",
+    "time_format": "Time Format",
     "currencies": {
       "title": "Currencies",
       "currency": "Currency | Currencies",
@@ -1175,6 +1176,7 @@
       "time_zone": "Time Zone",
       "fiscal_year": "Financial Year",
       "date_format": "Date Format",
+      "time_format": "Time Format",
       "discount_setting": "Discount Setting",
       "discount_per_item": "Discount Per Item ",
       "discount_setting_description": "Enable this if you want to add Discount to individual invoice items. By default, Discount is added directly to the invoice.",
@@ -1187,6 +1189,7 @@
       "select_language": "Select Language",
       "select_time_zone": "Select Time Zone",
       "select_date_format": "Select Date Format",
+      "select_time_format": "Select Time Format",
       "select_financial_year": "Select Financial Year",
       "recurring_invoice_status": "Recurring Invoice Status",
       "create_status": "Create Status",
@@ -1194,7 +1197,9 @@
       "on_hold": "On Hold",
       "update_status": "Update Status",
       "completed": "Completed",
-      "company_currency_unchangeable": "Company currency cannot be changed"
+      "company_currency_unchangeable": "Company currency cannot be changed",
+      "invoice_use_time": "Use time in invoices",
+      "invoice_use_time_description": "Enable this if you want to select exact invoice time."
     },
     "update_app": {
       "title": "Update App",
@@ -1342,6 +1347,7 @@
     "time_zone": "Time Zone",
     "fiscal_year": "Financial Year",
     "date_format": "Date Format",
+    "time_format": "Time Format",
     "from_address": "From Address",
     "username": "Username",
     "next": "Next",

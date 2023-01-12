@@ -39,7 +39,7 @@ services:
     image: nginx:1.17-alpine
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
@@ -52,6 +52,12 @@ services:
       dockerfile: ./docker-compose/cron.dockerfile
     volumes:
       - ./:/var/www
+    networks:
+      - crater
+
+  pdf:
+    image: gotenberg/gotenberg:7
+    restart: unless-stopped
     networks:
       - crater
 

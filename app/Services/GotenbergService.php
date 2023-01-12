@@ -19,7 +19,7 @@ class GotenbergService
     public static function fromView(string $viewname): GotenbergService
     {
         $request = Gotenberg::chromium('http://pdf:3000')
-            ->margins(0,0,0,0)
+            ->margins(0, 0, 0, 0)
             ->paperSize(8.27, 11.7)
             ->html(
                 Stream::string(
@@ -39,5 +39,10 @@ class GotenbergService
             'Content-Type' => 'application/pdf',
             'Content-Disposition' =>  'inline; filename="' . $filename . '"',
         ]);
+    }
+
+    public function output(): string
+    {
+        return $this->response->getBody()->getContents();
     }
 }

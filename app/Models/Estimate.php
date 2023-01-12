@@ -234,7 +234,7 @@ class Estimate extends Model implements HasMedia
 
         self::createItems($estimate, $request, $estimate->exchange_rate);
 
-        if ($request->has('taxes') && (!empty($request->taxes))) {
+        if ($request->has('taxes') && (! empty($request->taxes))) {
             self::createTaxes($estimate, $request, $estimate->exchange_rate);
         }
 
@@ -281,7 +281,7 @@ class Estimate extends Model implements HasMedia
 
         self::createItems($this, $request, $this->exchange_rate);
 
-        if ($request->has('taxes') && (!empty($request->taxes))) {
+        if ($request->has('taxes') && (! empty($request->taxes))) {
             self::createTaxes($this, $request, $this->exchange_rate);
         }
 
@@ -290,12 +290,12 @@ class Estimate extends Model implements HasMedia
         }
 
         return Estimate::with([
-            'items.taxes',
-            'items.fields',
-            'items.fields.customField',
-            'customer',
-            'taxes'
-        ])
+                'items.taxes',
+                'items.fields',
+                'items.fields.customField',
+                'customer',
+                'taxes'
+            ])
             ->find($this->id);
     }
 

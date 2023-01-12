@@ -59,7 +59,7 @@ class Estimate extends Model implements HasMedia
 
     public function getEstimatePdfUrlAttribute()
     {
-        return url('/estimates/pdf/' . $this->unique_hash);
+        return url('/estimates/pdf/'.$this->unique_hash);
     }
 
     public function emailLogs()
@@ -126,7 +126,7 @@ class Estimate extends Model implements HasMedia
 
     public function scopeWhereEstimateNumber($query, $estimateNumber)
     {
-        return $query->where('estimates.estimate_number', 'LIKE', '%' . $estimateNumber . '%');
+        return $query->where('estimates.estimate_number', 'LIKE', '%'.$estimateNumber.'%');
     }
 
     public function scopeWhereEstimate($query, $estimate_id)
@@ -138,9 +138,9 @@ class Estimate extends Model implements HasMedia
     {
         foreach (explode(' ', $search) as $term) {
             $query->whereHas('customer', function ($query) use ($term) {
-                $query->where('name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('contact_name', 'LIKE', '%' . $term . '%')
-                    ->orWhere('company_name', 'LIKE', '%' . $term . '%');
+                $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
             });
         }
     }
@@ -414,16 +414,16 @@ class Estimate extends Model implements HasMedia
         ]);
 
         if (request()->has('preview')) {
-            return view('app.pdf.estimate.' . $estimateTemplate);
+            return view('app.pdf.estimate.'.$estimateTemplate);
         }
 
-        return GotenbergService::fromView('app.pdf.estimate.' . $estimateTemplate);
-        return PDF::loadView('app.pdf.estimate.' . $estimateTemplate);
+        return GotenbergService::fromView('app.pdf.estimate.'.$estimateTemplate);
+        return PDF::loadView('app.pdf.estimate.'.$estimateTemplate);
     }
 
     public function getCompanyAddress()
     {
-        if ($this->company && (!$this->company->address()->exists())) {
+        if ($this->company && (! $this->company->address()->exists())) {
             return false;
         }
 
@@ -434,7 +434,7 @@ class Estimate extends Model implements HasMedia
 
     public function getCustomerShippingAddress()
     {
-        if ($this->customer && (!$this->customer->shippingAddress()->exists())) {
+        if ($this->customer && (! $this->customer->shippingAddress()->exists())) {
             return false;
         }
 
@@ -445,7 +445,7 @@ class Estimate extends Model implements HasMedia
 
     public function getCustomerBillingAddress()
     {
-        if ($this->customer && (!$this->customer->billingAddress()->exists())) {
+        if ($this->customer && (! $this->customer->billingAddress()->exists())) {
             return false;
         }
 
@@ -497,7 +497,7 @@ class Estimate extends Model implements HasMedia
         foreach ($templates as $key => $template) {
             $templateName = Str::before(basename($template), '.blade.php');
             $estimateTemplates[$key]['name'] = $templateName;
-            $estimateTemplates[$key]['path'] = vite_asset('/img/PDF/' . $templateName . '.png');
+            $estimateTemplates[$key]['path'] = vite_asset('/img/PDF/'.$templateName.'.png');
         }
 
         return $estimateTemplates;

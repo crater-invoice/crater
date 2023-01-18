@@ -695,7 +695,7 @@
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
     "view_module": "Ver Módulo",
-    "update_available": "Update Available",
+    "update_available": "Atualização disponível",
     "purchased": "Comprado",
     "installed": "Instalado",
     "no_modules_installed": "Nenhum módulo instalado ainda!",

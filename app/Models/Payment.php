@@ -246,7 +246,7 @@ class Payment extends Model implements HasMedia
             if ($payment->invoice_id != null) {
                 $invoice = Invoice::find($payment->invoice_id);
                 $invoice->due_amount = ((int)$invoice->due_amount + (int)$payment->amount);
-
+                $invoice->base_due_amount = $invoice->due_amount;
                 if ($invoice->due_amount == $invoice->total) {
                     $invoice->paid_status = Invoice::STATUS_UNPAID;
                 } else {

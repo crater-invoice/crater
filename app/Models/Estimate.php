@@ -6,6 +6,7 @@ use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Crater\Mail\SendEstimateMail;
+use Crater\Services\GotenbergService;
 use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
@@ -416,6 +417,7 @@ class Estimate extends Model implements HasMedia
             return view('app.pdf.estimate.'.$estimateTemplate);
         }
 
+        return GotenbergService::fromView('app.pdf.estimate.'.$estimateTemplate);
         return PDF::loadView('app.pdf.estimate.'.$estimateTemplate);
     }
 

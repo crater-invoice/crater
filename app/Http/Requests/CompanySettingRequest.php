@@ -42,6 +42,15 @@ class CompanySettingRequest extends FormRequest
             'carbon_date_format' => [
                 'required',
             ],
+            'moment_time_format' => [
+                'required',
+            ],
+            'carbon_time_format' => [
+                'required',
+            ],
+            'invoice_use_time' => [
+                'required',
+            ],
         ];
     }
 }

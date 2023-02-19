@@ -19,6 +19,8 @@
           v-model="invoiceStore.newInvoice.invoice_date"
           :content-loading="isLoading"
           :calendar-button="true"
+          :enableTime="enableTime"
+          :time24hr="time24h"
           calendar-button-icon="calendar"
         />
       </BaseInputGroup>
@@ -61,8 +63,10 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import ExchangeRateConverter from '@/scripts/admin/components/estimate-invoice-common/ExchangeRateConverter.vue'
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
+import { useCompanyStore } from '@/scripts/admin/stores/company'
 
 const props = defineProps({
   v: {
@@ -80,4 +84,20 @@ const props = defineProps({
 })
 
 const invoiceStore = useInvoiceStore()
+const companyStore = useCompanyStore()
+
+const enableTime = computed(() => {
+  return (
+    companyStore.selectedCompanySettings.invoice_use_time === 'YES'
+  );
+})
+
+const time24h = computed(() => {
+  return (
+    companyStore.selectedCompanySettings.carbon_time_format.indexOf('H') > -1
+  );
+})
+
+
+
 </script>

@@ -21,6 +21,7 @@ export const useGlobalStore = (useWindow = false) => {
       // Global Lists
       timeZones: [],
       dateFormats: [],
+      timeFormats: [],
       currencies: [],
       countries: [],
       languages: [],
@@ -144,6 +145,25 @@ export const useGlobalStore = (useWindow = false) => {
               .get('/api/v1/date/formats')
               .then((response) => {
                 this.dateFormats = response.data.date_formats
+                resolve(response)
+              })
+              .catch((err) => {
+                handleError(err)
+                reject(err)
+              })
+          }
+        })
+      },
+
+      fetchTimeFormats() {
+        return new Promise((resolve, reject) => {
+          if (this.timeFormats.length) {
+            resolve(this.timeFormats)
+          } else {
+            axios
+              .get('/api/v1/time/formats')
+              .then((response) => {
+                this.timeFormats = response.data.time_formats
                 resolve(response)
               })
               .catch((err) => {

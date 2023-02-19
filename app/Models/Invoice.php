@@ -29,6 +29,7 @@ class Invoice extends Model implements HasMedia
     public const STATUS_SENT = 'SENT';
     public const STATUS_VIEWED = 'VIEWED';
     public const STATUS_COMPLETED = 'COMPLETED';
+    public const STATUS_CREDIT = 'CREDIT';
 
     public const STATUS_UNPAID = 'UNPAID';
     public const STATUS_PARTIALLY_PAID = 'PARTIALLY_PAID';
@@ -187,6 +188,46 @@ class Invoice extends Model implements HasMedia
         return Carbon::parse($this->invoice_date)->format($dateFormat);
     }
 
+    public function getTotalAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getSubTotalAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getTaxAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getBaseTotalAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getBaseSubTotalAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getBaseTaxAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getBaseDueAmountAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
+    public function getDueAmountAttribute($value)
+    {
+        return $this->credit ? 0 - $value : $value;
+    }
+
     public function scopeWhereStatus($query, $status)
     {
         return $query->where('invoices.status', $status);
@@ -224,7 +265,8 @@ class Invoice extends Model implements HasMedia
             $query->whereHas('customer', function ($query) use ($term) {
                 $query->where('name', 'LIKE', '%'.$term.'%')
                     ->orWhere('contact_name', 'LIKE', '%'.$term.'%')
-                    ->orWhere('company_name', 'LIKE', '%'.$term.'%');
+                    ->orWhere('company_name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('invoice_number', 'LIKE', '%'.$term.'%');
             });
         }
     }
@@ -249,6 +291,8 @@ class Invoice extends Model implements HasMedia
                 $filters->get('status') == self::STATUS_PAID
             ) {
                 $query->wherePaidStatus($filters->get('status'));
+            } elseif ($filters->get('status') == self::STATUS_CREDIT) {
+                $query->whereCredit(true);
             } elseif ($filters->get('status') == 'DUE') {
                 $query->whereDueStatus($filters->get('status'));
             } else {
@@ -314,6 +358,11 @@ class Invoice extends Model implements HasMedia
         return $query->paginate($limit);
     }
 
+    public function scopeWhereCredit($query, bool $isCredit)
+    {
+        $query->where('invoices.credit', $isCredit);
+    }
+
     public static function createInvoice($request)
     {
         $data = $request->getInvoicePayload();
@@ -322,8 +371,11 @@ class Invoice extends Model implements HasMedia
             $data['status'] = Invoice::STATUS_SENT;
         }
 
-        $invoice = Invoice::create($data);
+        if ($data['credit']) {
+            $data = self::getAbsoluteValues($data);
+        }
 
+        $invoice = Invoice::create($data);
         $serial = (new SerialNumberFormatter())
             ->setModel($invoice)
             ->setCompany($invoice->company_id)
@@ -382,7 +434,9 @@ class Invoice extends Model implements HasMedia
         }
 
         if ($request->total < $total_paid_amount) {
-            return 'total_invoice_amount_must_be_more_than_paid_amount';
+            if (! $request->credit) {
+                return 'total_invoice_amount_must_be_more_than_paid_amount';
+            }
         }
 
         if ($oldTotal != $request->total) {
@@ -396,6 +450,10 @@ class Invoice extends Model implements HasMedia
         $data['customer_sequence_number'] = $serial->nextCustomerSequenceNumber;
 
         $this->changeInvoiceStatus($data['due_amount']);
+
+        if ($request->credit) {
+            $data = self::getAbsoluteValues($data);
+        }
 
         $this->update($data);
 
@@ -462,6 +520,12 @@ class Invoice extends Model implements HasMedia
 
     public function send($data)
     {
+        if ($this->status == Invoice::STATUS_DRAFT) {
+            $this->invoice_date = Carbon::now();
+            $this->due_date = Carbon::now()->addDays(14);
+            $this->save();
+        }
+
         $data = $this->sendInvoiceData($data);
 
         \Mail::to($data['to'])->send(new SendInvoiceMail($data));
@@ -721,5 +785,31 @@ class Invoice extends Model implements HasMedia
         }
 
         return true;
+    }
+
+    private static function getAbsoluteValues($data)
+    {
+        foreach ($data as $field => &$value) {
+            if (in_array($field, [
+                'tax',
+                'sub_total',
+                'total',
+                'due_amount',
+                'base_total',
+                'base_sub_total',
+                'base_tax',
+                'base_due_amount'
+            ])) {
+                $value = abs($value);
+            }
+        }
+
+        $data['sent'] = 1;
+        $data['status'] = Invoice::STATUS_SENT;
+        $data['paid_status'] = Invoice::STATUS_PAID;
+        $data['due_amount'] = 0;
+        $data['base_due_amount'] = 0;
+
+        return $data;
     }
 }

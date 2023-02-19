@@ -26,6 +26,7 @@
               v-model="invoiceMailForm.from"
               type="text"
               :invalid="v$.from.$error"
+              :disabled="true"
               @input="v$.from.$touch()"
             />
           </BaseInputGroup>

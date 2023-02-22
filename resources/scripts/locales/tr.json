@@ -94,22 +94,37 @@
     "insert_note": "Not Ekle",
     "copied_pdf_url_clipboard": "PDF bağlantısı panoya kopyalandı!",
     "copied_url_clipboard": "URL panoya kopyalandı!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Belgeler",
     "do_you_wish_to_continue": "Devam etmek istiyor musunuz?",
     "note": "Not",
     "pay_invoice": "Fatura ödeme",
     "login_successfully": "Başarıyla giriş yapıldı!",
     "logged_out_successfully": "Başarıyla çıkış yapıldı",
-    "mark_as_default": "Varsayılan olarak işaretleyin"
+    "mark_as_default": "Varsayılan olarak işaretleyin",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Yılı seçin",
     "cards": {
       "due_amount": "Ödenmesi gereken tutar",
-      "customers": "Müşteriler",
-      "invoices": "Faturalar",
-      "estimates": "Proformalar",
-      "payments": "Ödemeler"
+      "customers": "Müşteriler | Müşteriler",
+      "invoices": "Faturalar | Faturalar",
+      "estimates": "Proformalar | Proformalar",
+      "payments": "Ödemeler | Ödemeler"
     },
     "chart_info": {
       "total_sales": "Satışlar",
@@ -548,7 +563,23 @@
       "hour": "Hour",
       "day_month": "Day of month",
       "month": "Month",
-      "day_week": "Day of week"
+      "day_week": "Day of week",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "You will not be able to recover this Invoice | You will not be able to recover these Invoices",
     "created_message": "Recurring Invoice created successfully",
@@ -658,6 +689,7 @@
     "retype_password": "Parolanızı Yeniden Girin"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Buy Now",
     "install": "Install",
     "price": "Price",
@@ -789,6 +821,10 @@
       "to_date": "Bitiş tarihi",
       "from_date": "Başlangıç tarihi",
       "date_range": "Tarih aralığı seç"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {
@@ -1522,5 +1558,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

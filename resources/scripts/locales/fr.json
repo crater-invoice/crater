@@ -94,22 +94,37 @@
     "insert_note": "Insérer une note",
     "copied_pdf_url_clipboard": "L'adresse du PDF a été copiée.",
     "copied_url_clipboard": "URL copiée vers le presse-papier!",
+    "copy_to_clipboard": "Copier dans le presse papier",
     "docs": "Documents",
     "do_you_wish_to_continue": "Voulez-vous continuer ?",
     "note": "Note de bas de page",
     "pay_invoice": "Payer facture",
     "login_successfully": "Identifié avec succès!",
     "logged_out_successfully": "Déconnecté avec succès",
-    "mark_as_default": "Marquer par défaut"
+    "mark_as_default": "Marquer par défaut",
+    "no_data_found" : "Aucune donnée disponible dans le tableau",
+    "previous": "Précédente",
+    "next": "Suivante",
+    "to_table": "à",
+    "results": "résultats",
+    "file_upload": {
+      "drag_a_file": "Déposez un fichier ici ou",
+      "browse": "parcourez",
+      "to_choose": "pour choisir un fichier"
+    },
+    "multiselect": {
+      "no_results_found": "Aucun résultat",
+      "the_list_is_empty": "La liste est vide"
+    }
   },
   "dashboard": {
     "select_year": "Sélectionnez l'année",
     "cards": {
       "due_amount": "Encours clients",
-      "customers": "Clients",
-      "invoices": "Factures",
-      "estimates": "Devis",
-      "payments": "Paiements"
+      "customers": "Client | Clients",
+      "invoices": "Facture | Factures",
+      "estimates": "Devis | Devis",
+      "payments": "Paiement | Paiements"
     },
     "chart_info": {
       "total_sales": "Ventes",
@@ -223,7 +238,7 @@
     "primary_display_name": "Nom d'affichage principal",
     "select_currency": "Sélectionnez la devise",
     "select_a_customer": "Sélectionnez un client",
-    "type_or_click": "Sélectionnez un article",
+    "type_or_click": "Sélectionnez un client",
     "new_transaction": "Ajouter une opération",
     "no_matching_customers": "Il n'y a aucun client correspondant !",
     "phone_number": "Numéro de téléphone",
@@ -321,7 +336,7 @@
     "expired": "Expiré",
     "sent": "Envoyé",
     "draft": "Brouillon",
-    "viewed": "Consultée",
+    "viewed": "Consulté",
     "declined": "Refusé",
     "new_estimate": "Nouveau devis",
     "add_new_estimate": "Nouveau devis",
@@ -548,7 +563,23 @@
       "hour": "Heure",
       "day_month": "Jour du mois",
       "month": "Mois",
-      "day_week": "Jour de la semaine"
+      "day_week": "Jour de la semaine",
+      "every_minute": "Toutes les minutes",
+      "every_30_minute": "Toutes les 30 minutes",
+      "every_hour": "Toutes les heures",
+      "every_2_hour": "Toutes les 2 heures",
+      "every_day_at_midnight": "Tous les jours à minuit",
+      "every_week": "Toutes les semaines",
+      "every_15_days_at_midnight": "Tous les 15 jours à minuit",
+      "on_the_first_day_of_every_month_at_midnight": "Au premier jour du mois à minuit",
+      "every_6_month": "Tous les 6 mois",
+      "every_year_on_the_first_day_of_january_at_midnight": "Tous les ans, au premier janvier à minuit",
+      "custom": "Personnalisée"
+    },
+    "limit": {
+      "none": "Aucun",
+      "date": "Date",
+      "count": "Nombre"
     },
     "confirm_delete": "Vous ne pourrez pas récupérer cette facture | Vous ne pourrez pas récupérer ces factures",
     "created_message": "Facture récurrente créée",
@@ -658,6 +689,7 @@
     "retype_password": "Retaper le mot de passe"
   },
   "modules": {
+    "sign_up": "Inscrivez-vous et obtenez votre Jeton",
     "buy_now": "Acheter maintenant",
     "install": "Installer",
     "price": "Prix",
@@ -789,6 +821,10 @@
       "to_date": "Au",
       "from_date": "Du",
       "date_range": "Période"
+    },
+    "sort": {
+      "by_customer": "Par Client",
+      "by_item": "Par Article"
     }
   },
   "settings": {
@@ -1522,5 +1558,13 @@
   "pdf_bill_to": "Facturer à",
   "pdf_ship_to": "Expédier à",
   "pdf_received_from": "Reçu de :",
-  "pdf_tax_label": "Taxe"
+  "pdf_tax_label": "Taxe",
+  "mail_thanks": "Merci,",
+  "mail_view_estimate":"Afficher le Devis",
+  "mail_viewed_estimate": "a consulté ce Devis.",
+  "mail_view_invoice": "Afficher la Facture",
+  "mail_viewed_invoice": "a consulté cette Facture.",
+  "mail_view_payment": "Afficher le Paiement",
+  "notification_view_estimate": "[Notification] Un Devis a été consulté",
+  "notification_view_invoice": "[Notification] Une Facture a été consultée"
 }

@@ -94,22 +94,37 @@
     "insert_note": "Adaugă o notă",
     "copied_pdf_url_clipboard": "URL-ul PDF copiat în clipboard!",
     "copied_url_clipboard": "Copied url to clipboard!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Documentație",
     "do_you_wish_to_continue": "Doriţi să continuaţi?",
     "note": "Note",
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "mark_as_default": "Mark as default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Selectați anul",
     "cards": {
       "due_amount": "Suma datorată",
-      "customers": "Clienţi",
-      "invoices": "Facturi",
-      "estimates": "Estimări",
-      "payments": "Payments"
+      "customers": "Clienţi | Clienţi",
+      "invoices": "Facturi | Facturi",
+      "estimates": "Estimări | Estimări",
+      "payments": "Payment | Payments"
     },
     "chart_info": {
       "total_sales": "Vânzări",
@@ -548,7 +563,23 @@
       "hour": "Hour",
       "day_month": "Day of month",
       "month": "Month",
-      "day_week": "Day of week"
+      "day_week": "Day of week",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "You will not be able to recover this Invoice | You will not be able to recover these Invoices",
     "created_message": "Recurring Invoice created successfully",
@@ -658,6 +689,7 @@
     "retype_password": "Retype Password"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Buy Now",
     "install": "Install",
     "price": "Price",
@@ -789,6 +821,10 @@
       "to_date": "To Date",
       "from_date": "From Date",
       "date_range": "Select Date Range"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {
@@ -1522,5 +1558,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

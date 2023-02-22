@@ -31,6 +31,10 @@
           :load-data="refreshTable"
         />
       </template>
+
+      <template #cell-type="{ row }">
+          {{ getLabelNote(row.data.type) }}
+        </template>
     </BaseTable>
   </BaseSettingCard>
 </template>
@@ -112,5 +116,18 @@ async function openNoteSelectModal() {
 
 async function refreshTable() {
   table.value && table.value.refresh()
+}
+
+function getLabelNote(type) {
+  switch (type) {
+    case 'Estimate':
+      return t('dashboard.cards.estimates', 1)
+    case 'Invoice':
+      return t('dashboard.cards.invoices', 1)
+    case 'Payment':
+      return t('dashboard.cards.payments', 1)
+    default:
+      return type
+  }
 }
 </script>

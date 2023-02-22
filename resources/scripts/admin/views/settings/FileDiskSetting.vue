@@ -31,7 +31,7 @@
               .color
           "
         >
-          {{ row.data.set_as_default ? 'Yes' : 'No'.replace('_', ' ') }}
+          {{ row.data.set_as_default ? $t('general.yes') : $t('general.no').replace('_', ' ') }}
         </BaseBadge>
       </template>
 

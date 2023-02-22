@@ -181,11 +181,11 @@
         </ul>
 
         <slot v-if="noOptions" name="nooptions">
-          <div :class="classList.noOptions" v-html="noOptionsText"></div>
+          <div :class="classList.noOptions" v-html="$t('general.multiselect.the_list_is_empty')"></div>
         </slot>
 
         <slot v-if="noResults" name="noresults">
-          <div :class="classList.noResults" v-html="noResultsText"></div>
+          <div :class="classList.noResults" v-html="$t('general.multiselect.no_results_found')"></div>
         </slot>
 
         <slot name="afterlist" :options="fo"> </slot>

@@ -43,7 +43,7 @@
               border-t border-b border-gray-200 border-solid
             "
           >
-            Component
+            {{ $t('settings.customization.component') }}
           </th>
           <th
             class="
@@ -57,7 +57,7 @@
               border-t border-b border-gray-200 border-solid
             "
           >
-            Parameter
+            {{ $t('settings.customization.Parameter') }}
           </th>
           <th
             class="
@@ -126,7 +126,7 @@
                 variant="white"
                 @click.prevent="removeComponent(element)"
               >
-                Remove
+                {{ $t('general.remove') }}
                 <template #left="slotProps">
                   <BaseIcon
                     name="XIcon"

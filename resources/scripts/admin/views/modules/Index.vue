@@ -101,7 +101,7 @@
               target="_blank"
             >
               <BaseButton variant="primary-outline" type="button">
-                Sign up & Get Token
+                {{ $t('modules.sign_up') }}
               </BaseButton>
             </a>
           </div>

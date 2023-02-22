@@ -1,10 +1,10 @@
 @component('mail::message')
-{{ $data['user']['name'] }} viewed this Estimate.
+{{ $data['user']['name'] }} @lang('mail_viewed_estimate')
 
 @component('mail::button', ['url' => url('/admin/estimates/'.$data['estimate']['id'].'/view')])
-View Estimate
+@lang('mail_view_estimate')
 @endcomponent
 
-Thanks,<br>
+@lang('mail_thanks')<br>
 {{ config('app.name') }}
 @endcomponent

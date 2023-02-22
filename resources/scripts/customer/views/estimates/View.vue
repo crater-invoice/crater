@@ -170,7 +170,7 @@
             </div>
 
             <BaseEstimateStatusBadge :status="estimate.status">
-              {{ estimate.status }}
+              <BaseEstimateStatusLabel :status="estimate.status" />
             </BaseEstimateStatusBadge>
           </div>
 

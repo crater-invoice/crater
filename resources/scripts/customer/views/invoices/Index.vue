@@ -110,7 +110,7 @@
 
         <template #cell-status="{ row }">
           <BaseInvoiceStatusBadge :status="row.data.status" class="px-3 py-1">
-            {{ row.data.status }}
+            <BaseInvoiceStatusLabel :status="row.data.status" />
           </BaseInvoiceStatusBadge>
         </template>
 
@@ -119,7 +119,7 @@
             :status="row.data.paid_status"
             class="px-3 py-1"
           >
-            {{ row.data.paid_status }}
+            <BaseInvoiceStatusLabel :status="row.data.paid_status" />
           </BaseInvoiceStatusBadge>
         </template>
 
@@ -160,7 +160,13 @@ const route = useRoute()
 const table = ref(null)
 let isFetchingInitialData = ref(true)
 let showFilters = ref(false)
-const status = ref(['DRAFT', 'DUE', 'SENT', 'VIEWED', 'COMPLETED'])
+const status = ref([
+  {label: t('general.draft'), value: 'DRAFT'}, 
+  {label: t('general.due'), value: 'DUE'}, 
+  {label: t('general.sent'), value: 'SENT'}, 
+  {label: t('invoices.viewed'), value: 'VIEWED'}, 
+  {label: t('invoices.completed'), value: 'COMPLETED'}
+  ])
 const filters = reactive({
   status: '',
   from_date: '',
@@ -247,7 +253,7 @@ function toggleFilter() {
 
 async function fetchData({ page, sort }) {
   let data = {
-    status: filters.status,
+    status: filters.status.value,
     invoice_number: filters.invoice_number,
     from_date: filters.from_date,
     to_date: filters.to_date,

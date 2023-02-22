@@ -3,7 +3,7 @@
     <div>
       <BaseInput
         v-model="name"
-        placeholder="Search..."
+        :placeholder="$t('global_search.search')"
         container-class="!rounded"
         class="h-8 md:h-9 !rounded"
         @input="onSearch"

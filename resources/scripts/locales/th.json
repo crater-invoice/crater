@@ -94,21 +94,37 @@
     "insert_note": "แทรกหมายเหตุ",
     "copied_pdf_url_clipboard": "คัดลอกไฟล์ PDF URL ไปยังคลิปบอร์ด!",
     "copied_url_clipboard": "คัดลอกURL ไปยังคลิปบอร์ด!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "เอกสาร",
     "do_you_wish_to_continue": "คุณต้องการที่จะดำเนินการต่อ?",
     "note": "หมายเหตุ",
     "pay_invoice": "ชำระใบวางบิล",
     "login_successfully": "เข้าสู่ระบบเรียบร้อยแล้ว!",
-    "logged_out_successfully": "ออกจากระบบเรียบร้อยแล้ว"
+    "logged_out_successfully": "ออกจากระบบเรียบร้อยแล้ว",
+    "mark_as_default": "Mark as default",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "เลือกปี",
     "cards": {
       "due_amount": "จำนวนเงินค้างชำระ",
-      "customers": "ลูกค้า",
-      "invoices": "ใบวางบิล",
-      "estimates": "ใบเสนอราคา",
-      "payments": "การชำระเงิน"
+      "customers": "ลูกค้า | ลูกค้า",
+      "invoices": "ใบวางบิล | ใบวางบิล",
+      "estimates": "ใบเสนอราคา | ใบเสนอราคา",
+      "payments": "การชำระเงิน | การชำระเงิน"
     },
     "chart_info": {
       "total_sales": "การขาย",
@@ -353,7 +369,8 @@
       "amount": "จำนวนเงิน (บาท)",
       "select_an_item": "พิมพ์หรือคลิกเพื่อเลือกรายการ",
       "type_item_description": "คำอธิบาย (ไม่จำเป็น)"
-    }
+    },
+    "mark_as_default_estimate_template_description": "If enabled, the selected template will be automatically selected for new estimates."
   },
   "invoices": {
     "title": "ใบวางบิล",
@@ -444,7 +461,8 @@
     "deleted_message": "ลบใบวางบิลเรียบร้อยแล้ว | ลบใบวางบิลเรียบร้อยแล้ว",
     "marked_as_sent_message": "ใบวางบิลที่ทำเครื่องหมายว่าส่งเรียบร้อยแล้ว",
     "something_went_wrong": "มีบางอย่างผิดพลาด",
-    "invalid_due_amount_message": "จำนวนใบวางบิลทั้งหมดต้องไม่น้อยกว่าจำนวนเงินที่ชำระทั้งหมดสำหรับใบวางบิลนี้โปรดอัปเดตใบวางบิลหรือลบการชำระเงินที่เกี่ยวข้องเพื่อดำเนินการต่อ"
+    "invalid_due_amount_message": "จำนวนใบวางบิลทั้งหมดต้องไม่น้อยกว่าจำนวนเงินที่ชำระทั้งหมดสำหรับใบวางบิลนี้โปรดอัปเดตใบวางบิลหรือลบการชำระเงินที่เกี่ยวข้องเพื่อดำเนินการต่อ",
+    "mark_as_default_invoice_template_description": "If enabled, the selected template will be automatically selected for new invoices."
   },
   "recurring_invoices": {
     "title": "ใบวางบิลประจำ",
@@ -523,6 +541,7 @@
     "cloned_successfully": "ทำสำเนาใบวางบิลประจำเสร็จเรียบร้อยแล้ว",
     "clone_invoice": "ทำสำเนาใบวางบิลประจำ",
     "confirm_clone": "ใบวางบิลประจำนี้จะถูกคัดลอกลงในใบวางบิลประจำใหม่",
+    "add_customer_email": "Please add an email address for this customer to send invoices automatically.",
     "item": {
       "title": "ชื่อรายการ",
       "description": "คำอธิบาย",
@@ -544,7 +563,23 @@
       "hour": "ชั่วโมง",
       "day_month": "วันของเดือน",
       "month": "เดือน",
-      "day_week": "วันในสัปดาห์"
+      "day_week": "วันในสัปดาห์",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "คุณจะไม่สามารถกู้คืนใบวางบิลนี้ได้ | คุณจะไม่สามารถกู้คืนใบวางบิลเหล่านี้ได้",
     "created_message": "สร้างใบวางบิลประจำเรียบร้อยแล้ว",
@@ -654,6 +689,7 @@
     "retype_password": "พิมพ์รหัสผ่านใหม่"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "ซื้อเดี๋ยวนี้",
     "install": "ติดตั้ง",
     "price": "ราคา",
@@ -785,6 +821,10 @@
       "to_date": "ถึงวันที่",
       "from_date": "จากวันที่",
       "date_range": "เลือกช่วงวันที่"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {
@@ -1519,7 +1559,12 @@
   "pdf_ship_to": "ที่อยู่สำหรับจัดส่ง,",
   "pdf_received_from": "ได้รับจาก:",
   "pdf_tax_label": "ภาษี",
-  "pdf_company_name": "ผู้เสนอราคา",
-  "pdf_customer": "ลูกค้า",
-  "pdf_address": "ที่อยู่"
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

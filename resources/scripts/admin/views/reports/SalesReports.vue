@@ -156,7 +156,7 @@ const dateRange = reactive([
 ])
 
 const selectedRange = ref(dateRange[2])
-const reportTypes = ref(['By Customer', 'By Item'])
+const reportTypes = ref([{label: t('reports.sort.by_customer'), value: 'By Customer'}, {label: t('reports.sort.by_item'), value: 'By Item'}])
 const selectedType = ref('By Customer')
 let range = ref(new Date())
 let url = ref(null)

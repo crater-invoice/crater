@@ -34,7 +34,7 @@
 
         <template #cell-paid_status="{ row }">
           <BasePaidStatusBadge :status="row.data.paid_status">
-            {{ row.data.paid_status }}
+            <BaseInvoiceStatusLabel :status="row.data.paid_status" />
           </BasePaidStatusBadge>
         </template>
 
@@ -80,7 +80,7 @@
         </template>
         <template #cell-status="{ row }">
           <BaseEstimateStatusBadge :status="row.data.status" class="px-3 py-1">
-            {{ row.data.status }}
+            <BaseEstimateStatusLabel :status="row.data.status" />
           </BaseEstimateStatusBadge>
         </template>
         <template #cell-total="{ row }">

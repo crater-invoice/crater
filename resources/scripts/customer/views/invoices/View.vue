@@ -175,7 +175,7 @@
               {{ invoice.invoice_number }}
             </div>
             <BaseInvoiceStatusBadge :status="invoice.status">
-              {{ invoice.status }}
+              <BaseInvoiceStatusLabel :status="invoice.status" />
             </BaseInvoiceStatusBadge>
           </div>
 

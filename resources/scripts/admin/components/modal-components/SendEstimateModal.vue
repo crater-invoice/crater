@@ -96,7 +96,7 @@
           @click="cancelPreview"
         >
           <BaseIcon name="PencilIcon" class="h-5 mr-2" />
-          Edit
+          {{ $t('general.edit') }}
         </BaseButton>
         <iframe
           :src="templateUrl"
@@ -166,7 +166,7 @@ let estimateMailForm = reactive({
   id: null,
   from: null,
   to: null,
-  subject: 'New Estimate',
+  subject: t('estimates.new_estimate'),
   body: null,
 })
 

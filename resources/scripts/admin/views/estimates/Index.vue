@@ -216,7 +216,7 @@
 
         <template #cell-status="{ row }">
           <BaseEstimateStatusBadge :status="row.data.status" class="px-3 py-1">
-            {{ row.data.status }}
+            <BaseEstimateStatusLabel :status="row.data.status" />
           </BaseEstimateStatusBadge>
         </template>
 
@@ -254,16 +254,18 @@ const estimateStore = useEstimateStore()
 const dialogStore = useDialogStore()
 const userStore = useUserStore()
 
+const utils = inject('utils')
+
 const tableComponent = ref(null)
 const { t } = useI18n()
 const showFilters = ref(false)
 const status = ref([
-  'DRAFT',
-  'SENT',
-  'VIEWED',
-  'EXPIRED',
-  'ACCEPTED',
-  'REJECTED',
+  {label: t('estimates.draft'), value: 'DRAFT'},
+  {label: t('estimates.sent'), value: 'SENT'},
+  {label: t('estimates.viewed'), value: 'VIEWED'},
+  {label: t('estimates.expired'), value: 'EXPIRED'},
+  {label: t('estimates.accepted'), value: 'ACCEPTED'},
+  {label: t('estimates.rejected'), value: 'REJECTED'},
 ])
 
 const isRequestOngoing = ref(true)

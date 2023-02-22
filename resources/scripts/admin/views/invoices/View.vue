@@ -454,7 +454,7 @@ onSearched = debounce(onSearched, 500)
                 :status="invoice.status"
                 class="px-1 text-xs"
               >
-                {{ invoice.status }}
+                <BaseInvoiceStatusLabel :status="invoice.status" />
               </BaseEstimateStatusBadge>
             </div>
 

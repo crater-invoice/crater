@@ -31,7 +31,7 @@
               .color
           "
         >
-          {{ row.data.compound_tax ? 'Yes' : 'No'.replace('_', ' ') }}
+          {{ row.data.compound_tax ? $t('general.yes') : $t('general.no').replace('_', ' ') }}
         </BaseBadge>
       </template>
 

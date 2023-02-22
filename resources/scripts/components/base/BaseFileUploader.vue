@@ -72,7 +72,7 @@
         class="h-6 mb-2 text-xl leading-6 text-gray-400"
       />
       <p class="text-xs leading-4 text-center text-gray-400">
-        Drag a file here or
+        {{ $t('general.file_upload.drag_a_file') }}
         <a
           class="
             cursor-pointer
@@ -84,9 +84,9 @@
           href="#"
           @click.prevent.stop="onBrowse"
         >
-          browse
+          {{ $t('general.file_upload.browse') }}
         </a>
-        to choose a file
+        {{ $t('general.file_upload.to_choose') }}
       </p>
       <p class="text-xs leading-4 text-center text-gray-400 mt-2">
         {{ recommendedText }}

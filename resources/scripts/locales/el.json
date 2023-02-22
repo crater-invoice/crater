@@ -94,22 +94,37 @@
     "insert_note": "Εισαγωγή Σημείωσης",
     "copied_pdf_url_clipboard": "Αντιγράφηκε το url του PDF στo πρόχειρο!",
     "copied_url_clipboard": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο!",
+    "copy_to_clipboard": "Copy to Clipboard",
     "docs": "Έγγραφα",
     "do_you_wish_to_continue": "Θέλετε να συνεχίσετε;",
     "note": "Σημείωση",
     "pay_invoice": "Πληρωμή τιμολογίου",
     "login_successfully": "Η είσοδος ήταν επιτυχής!",
     "logged_out_successfully": "Η έξοδος ήταν επιτυχής",
-    "mark_as_default": "Σημείωση ως προεπιλογή"
+    "mark_as_default": "Σημείωση ως προεπιλογή",
+    "no_data_found" : "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "to_table": "to",
+    "results": "results",
+    "file_upload": {
+      "drag_a_file": "Drag a file here or",
+      "browse": "browse",
+      "to_choose": "to choose a file"
+    },
+    "multiselect": {
+      "no_results_found": "No Results Found",
+      "the_list_is_empty": "The list is empty"
+    }
   },
   "dashboard": {
     "select_year": "Επιλογή έτους",
     "cards": {
       "due_amount": "Οφειλόμενο Ποσό",
-      "customers": "Πελάτες",
-      "invoices": "Τιμολόγια",
-      "estimates": "Προσφορές",
-      "payments": "Πληρωμές"
+      "customers": "Πελάτες | Πελάτες",
+      "invoices": "Τιμολόγια | Τιμολόγια",
+      "estimates": "Προσφορές | Προσφορές",
+      "payments": "Πληρωμές | Πληρωμές"
     },
     "chart_info": {
       "total_sales": "Πωλήσεις",
@@ -548,7 +563,23 @@
       "hour": "Ώρα",
       "day_month": "Ημέρα του μήνα",
       "month": "Μήνας",
-      "day_week": "Ημέρα της εβδομάδας"
+      "day_week": "Ημέρα της εβδομάδας",
+      "every_minute": "Every Minute",
+      "every_30_minute": "Every 30 Minute",
+      "every_hour": "Every Hour",
+      "every_2_hour": "Every 2 Hour",
+      "every_day_at_midnight": "Every day at midnight",
+      "every_week": "Every Week",
+      "every_15_days_at_midnight": "Every 15 days at midnight",
+      "on_the_first_day_of_every_month_at_midnight": "On the first day of every month at midnight",
+      "every_6_month": "Every 6 Month",
+      "every_year_on_the_first_day_of_january_at_midnight": "Every year on the first day of january at midnight",
+      "custom": "Custom"
+    },
+    "limit": {
+      "none": "None",
+      "date": "Date",
+      "count": "Count"
     },
     "confirm_delete": "Δεν θα είστε σε θέση να ανακτήσει αυτή την εκτίμηση ’, δεν θα είστε σε θέση να ανακτήσει αυτές τις εκτιμήσεις",
     "created_message": "Επαναλαμβανόμενο τιμολόγιο κλωνοποιήθηκε επιτυχής",
@@ -658,6 +689,7 @@
     "retype_password": "Πληκτρολόγησε και πάλι τον κωδικό"
   },
   "modules": {
+    "sign_up": "Sign up & Get Token",
     "buy_now": "Buy Now",
     "install": "Install",
     "price": "Price",
@@ -789,6 +821,10 @@
       "to_date": "Έως ημερομηνία",
       "from_date": "Από Ημερομηνία",
       "date_range": "Επιλέξτε εύρος ημερομηνίας"
+    },
+    "sort": {
+      "by_customer": "By Customer",
+      "by_item": "By Item"
     }
   },
   "settings": {
@@ -1522,5 +1558,13 @@
   "pdf_bill_to": "Χρέωση σε,",
   "pdf_ship_to": "Αποστολή σε,",
   "pdf_received_from": "Λήψη από",
-  "pdf_tax_label": "Φόρος"
+  "pdf_tax_label": "Φόρος",
+  "mail_thanks": "Thanks,",
+  "mail_view_estimate":"View Estimate",
+  "mail_viewed_estimate": "viewed this Estimate.",
+  "mail_view_invoice": "View Invoice",
+  "mail_viewed_invoice": "viewed this Invoice.",
+  "mail_view_payment": "View Payment",
+  "notification_view_estimate": "[Notification] Estimate viewed",
+  "notification_view_invoice": "[Notification] Invoice viewed"
 }

@@ -41,7 +41,7 @@
             <BaseMultiselect
               v-model="noteStore.currentNote.type"
               :options="types"
-              value-prop="type"
+              value-prop="value"
               class="mt-2"
             />
           </BaseInputGroup>
@@ -122,7 +122,11 @@ const route = useRoute()
 const { t } = useI18n()
 
 let isSaving = ref(false)
-const types = reactive(['Invoice', 'Estimate', 'Payment'])
+const types = reactive([
+  {label: t('dashboard.cards.invoices', 1), value: 'Invoice'}, 
+  {label: t('dashboard.cards.estimates', 1), value: 'Estimate'}, 
+  {label: t('dashboard.cards.payments', 1), value: 'Payment'}
+  ])
 let fields = ref(['customer', 'customerCustom'])
 
 const modalActive = computed(() => {
@@ -164,7 +168,7 @@ watch(
 onMounted(() => {
   if (route.name === 'estimates.create') {
     noteStore.currentNote.type = 'Estimate'
-  } else if (route.name === 'invoices.create') {
+  } else if (route.name === 'invoices.create' || route.name === 'recurring-invoices.create') {
     noteStore.currentNote.type = 'Invoice'
   } else {
     noteStore.currentNote.type = 'Payment'

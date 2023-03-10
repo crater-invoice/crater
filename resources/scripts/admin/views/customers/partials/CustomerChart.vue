@@ -35,16 +35,7 @@
       </div>
 
       <div
-        class="
-          grid
-          col-span-12
-          mt-6
-          text-center
-          xl:mt-0
-          sm:grid-cols-4
-          xl:text-right xl:col-span-3 xl:grid-cols-1
-          xxl:col-span-2
-        "
+        class="grid col-span-12 mt-6 text-center xl:mt-0 sm:grid-cols-4 xl:text-right xl:col-span-3 xl:grid-cols-1 xxl:col-span-2"
       >
         <div class="px-6 py-2">
           <span class="text-xs leading-5 lg:text-sm">
@@ -177,10 +168,12 @@ const getChartInvoices = computed(() => {
   return []
 })
 
+const customerId = computed(() => route.params.id)
+
 watch(
-  route,
-  () => {
-    if (route.params.id) {
+  () => customerId.value,
+  (id) => {
+    if (id && route.name === 'customers.view') {
       loadCustomer()
     }
     selectedYear.value = 'This year'

@@ -275,8 +275,8 @@ onMounted(() => {
   for (const key in mailDriverStore.sesConfig) {
     if (props.configData.hasOwnProperty(key)) {
       mailDriverStore.sesConfig[key] = props.configData[key]
-      if (mailDriverStore.smtpConfig.mail_encryption === '') {
-        mailDriverStore.smtpConfig.mail_encryption = 'none'
+      if (mailDriverStore.sesConfig.mail_encryption === '') {
+        mailDriverStore.sesConfig.mail_encryption = 'none'
       }
     }
   }

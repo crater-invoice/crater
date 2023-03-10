@@ -14,6 +14,7 @@ export const useMailDriverStore = (useWindow = false) => {
       mailConfigData: null,
       mail_driver: 'smtp',
       mail_drivers: [],
+      mail_encryptions: ['none', 'tls', 'ssl', 'starttls'],
 
       basicMailConfig: {
         mail_driver: '',

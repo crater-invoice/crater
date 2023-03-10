@@ -139,7 +139,7 @@
         :content-loading="isFetchingInitialData"
         :error="
           v$.sesConfig.mail_ses_secret.$error &&
-          v$.mail_ses_secret.$errors[0].$message
+          v$.sesConfig.mail_ses_secret.$errors[0].$message
         "
         required
       >
@@ -224,7 +224,7 @@ const mailDriverStore = useMailDriverStore()
 const { t } = useI18n()
 
 let isShowPassword = ref(false)
-const encryptions = reactive(['tls', 'ssl', 'starttls'])
+const encryptions = mailDriverStore.mail_encryptions
 
 const rules = computed(() => {
   return {
@@ -275,6 +275,9 @@ onMounted(() => {
   for (const key in mailDriverStore.sesConfig) {
     if (props.configData.hasOwnProperty(key)) {
       mailDriverStore.sesConfig[key] = props.configData[key]
+      if (mailDriverStore.smtpConfig.mail_encryption === '') {
+        mailDriverStore.smtpConfig.mail_encryption = 'none'
+      }
     }
   }
 })

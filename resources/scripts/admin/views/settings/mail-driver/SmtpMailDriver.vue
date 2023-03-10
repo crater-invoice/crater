@@ -211,7 +211,7 @@ const mailDriverStore = useMailDriverStore()
 const { t } = useI18n()
 
 let isShowPassword = ref(false)
-const encryptions = reactive(['tls', 'ssl', 'starttls'])
+const encryptions = mailDriverStore.mail_encryptions
 
 const getInputType = computed(() => {
   if (isShowPassword.value) {
@@ -256,6 +256,9 @@ onMounted(() => {
   for (const key in mailDriverStore.smtpConfig) {
     if (props.configData.hasOwnProperty(key)) {
       mailDriverStore.smtpConfig[key] = props.configData[key]
+      if (mailDriverStore.smtpConfig.mail_encryption === '') {
+        mailDriverStore.smtpConfig.mail_encryption = 'none'
+      }
     }
   }
 })

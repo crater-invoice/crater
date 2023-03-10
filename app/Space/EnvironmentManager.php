@@ -272,6 +272,8 @@ class EnvironmentManager
         $oldMailData = "";
         $newMailData = "";
 
+        $encryption = $request->mail_encryption === 'none' ? "" : $request->mail_encryption;
+
         if (env('MAIL_FROM_ADDRESS') !== null && env('MAIL_FROM_NAME') !== null) {
             $mailFromCredential =
                 'MAIL_FROM_ADDRESS='.config('mail.from.address')."\n".
@@ -296,7 +298,7 @@ class EnvironmentManager
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.$request->mail_username."\n".
                     'MAIL_PASSWORD='.$request->mail_password."\n".
-                    'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
+                    'MAIL_ENCRYPTION='.$encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 
@@ -352,7 +354,7 @@ class EnvironmentManager
                     'MAIL_PORT='.$request->mail_port."\n".
                     'MAIL_USERNAME='.config('mail.username')."\n".
                     'MAIL_PASSWORD='.config('mail.password')."\n".
-                    'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n".
+                    'MAIL_ENCRYPTION='.$encryption."\n\n".
                     'MAIL_FROM_ADDRESS='.$request->from_mail."\n".
                     'MAIL_FROM_NAME="'.$request->from_name."\"\n\n";
 

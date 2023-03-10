@@ -151,11 +151,14 @@ async function onTestMailSend() {
   if (v$.value.$invalid) {
     return true
   }
-
-  isSaving.value = true
-  let response = await mailDriverStore.sendTestMail(formData)
-  if (response.data) {
-    closeTestModal()
+  try {
+    isSaving.value = true
+    let response = await mailDriverStore.sendTestMail(formData)
+    if (response.data) {
+      closeTestModal()
+      isSaving.value = false
+    }
+  } catch (err) {
     isSaving.value = false
   }
 }

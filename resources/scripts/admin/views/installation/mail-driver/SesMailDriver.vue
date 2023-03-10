@@ -214,10 +214,10 @@ const props = defineProps({
 const emit = defineEmits(['submit-data', 'on-change-driver'])
 
 const { t } = useI18n()
-const encryptions = reactive(['tls', 'ssl', 'starttls'])
-let isShowPassword = ref(false)
-
 const mailDriverStore = useMailDriverStore()
+
+const encryptions = mailDriverStore.mail_encryptions
+let isShowPassword = ref(false)
 
 const sesConfig = computed(() => {
   return mailDriverStore.sesConfig

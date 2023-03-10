@@ -37,32 +37,10 @@
 
     <!-- Sidebar -->
     <div
-      class="
-        fixed
-        top-0
-        left-0
-        hidden
-        h-full
-        pt-16
-        pb-[6.4rem]
-        ml-56
-        bg-white
-        xl:ml-64
-        w-88
-        xl:block
-      "
+      class="fixed top-0 left-0 hidden h-full pt-16 pb-[6.4rem] ml-56 bg-white xl:ml-64 w-88 xl:block"
     >
       <div
-        class="
-          flex
-          items-center
-          justify-between
-          px-4
-          pt-8
-          pb-2
-          border border-gray-200 border-solid
-          height-full
-        "
+        class="flex items-center justify-between px-4 pt-8 pb-2 border border-gray-200 border-solid height-full"
       >
         <div class="mb-6">
           <BaseInput
@@ -92,14 +70,7 @@
             </template>
 
             <div
-              class="
-                px-4
-                py-1
-                pb-2
-                mb-1 mb-2
-                text-sm
-                border-b border-gray-200 border-solid
-              "
+              class="px-4 py-1 pb-2 mb-1 mb-2 text-sm border-b border-gray-200 border-solid"
             >
               {{ $t('general.sort_by') }}
             </div>
@@ -156,12 +127,7 @@
 
       <div
         ref="estimateListSection"
-        class="
-          h-full
-          overflow-y-scroll
-          border-l border-gray-200 border-solid
-          base-scroll
-        "
+        class="h-full overflow-y-scroll border-l border-gray-200 border-solid base-scroll"
       >
         <div v-for="(estimate, index) in estimateList" :key="index">
           <router-link
@@ -181,29 +147,11 @@
               <BaseText
                 :text="estimate.customer.name"
                 :length="30"
-                class="
-                  pr-2
-                  mb-2
-                  text-sm
-                  not-italic
-                  font-normal
-                  leading-5
-                  text-black
-                  capitalize
-                  truncate
-                "
+                class="pr-2 mb-2 text-sm not-italic font-normal leading-5 text-black capitalize truncate"
               />
 
               <div
-                class="
-                  mt-1
-                  mb-2
-                  text-xs
-                  not-italic
-                  font-medium
-                  leading-5
-                  text-gray-600
-                "
+                class="mt-1 mb-2 text-xs not-italic font-medium leading-5 text-gray-600"
               >
                 {{ estimate.estimate_number }}
               </div>
@@ -220,26 +168,11 @@
               <BaseFormatMoney
                 :amount="estimate.total"
                 :currency="estimate.customer.currency"
-                class="
-                  block
-                  mb-2
-                  text-xl
-                  not-italic
-                  font-semibold
-                  leading-8
-                  text-right text-gray-900
-                "
+                class="block mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
               />
 
               <div
-                class="
-                  text-sm
-                  not-italic
-                  font-normal
-                  leading-5
-                  text-right text-gray-600
-                  est-date
-                "
+                class="text-sm not-italic font-normal leading-5 text-right text-gray-600 est-date"
               >
                 {{ estimate.formatted_estimate_date }}
               </div>
@@ -264,13 +197,7 @@
     >
       <iframe
         :src="`${shareableLink}`"
-        class="
-          flex-1
-          border border-gray-400 border-solid
-          rounded-md
-          bg-white
-          frame-style
-        "
+        class="flex-1 border border-gray-400 border-solid rounded-md bg-white frame-style"
       />
     </div>
   </BasePage>
@@ -345,11 +272,14 @@ const getCurrentEstimateId = computed(() => {
   return null
 })
 
-watch(route, (to, from) => {
-  if (to.name === 'estimates.view') {
-    loadEstimate()
+const estimateId = computed(() => route.params.id)
+
+watch(
+  () => estimateId.value,
+  (id) => {
+    if (id && route.name === 'estimates.view') loadEstimate()
   }
-})
+)
 
 loadEstimates()
 loadEstimate()

@@ -22,31 +22,10 @@
 
     <!-- Sidebar -->
     <div
-      class="
-        fixed
-        top-0
-        left-0
-        hidden
-        h-full
-        pt-16
-        pb-[6rem]
-        ml-56
-        bg-white
-        xl:ml-64
-        w-88
-        xl:block
-      "
+      class="fixed top-0 left-0 hidden h-full pt-16 pb-[6rem] ml-56 bg-white xl:ml-64 w-88 xl:block"
     >
       <div
-        class="
-          flex
-          items-center
-          justify-between
-          px-4
-          pt-8
-          pb-6
-          border border-gray-200 border-solid
-        "
+        class="flex items-center justify-between px-4 pt-8 pb-6 border border-gray-200 border-solid"
       >
         <BaseInput
           v-model="searchData.searchText"
@@ -70,14 +49,7 @@
             </template>
 
             <div
-              class="
-                px-4
-                py-1
-                pb-2
-                mb-2
-                text-sm
-                border-b border-gray-200 border-solid
-              "
+              class="px-4 py-1 pb-2 mb-2 text-sm border-b border-gray-200 border-solid"
             >
               {{ $t('general.sort_by') }}
             </div>
@@ -159,43 +131,17 @@
               <BaseText
                 :text="payment?.customer?.name"
                 :length="30"
-                class="
-                  pr-2
-                  mb-2
-                  text-sm
-                  not-italic
-                  font-normal
-                  leading-5
-                  text-black
-                  capitalize
-                  truncate
-                "
+                class="pr-2 mb-2 text-sm not-italic font-normal leading-5 text-black capitalize truncate"
               />
 
               <div
-                class="
-                  mb-1
-                  text-xs
-                  not-italic
-                  font-medium
-                  leading-5
-                  text-gray-500
-                  capitalize
-                "
+                class="mb-1 text-xs not-italic font-medium leading-5 text-gray-500 capitalize"
               >
                 {{ payment?.payment_number }}
               </div>
 
               <div
-                class="
-                  mb-1
-                  text-xs
-                  not-italic
-                  font-medium
-                  leading-5
-                  text-gray-500
-                  capitalize
-                "
+                class="mb-1 text-xs not-italic font-medium leading-5 text-gray-500 capitalize"
               >
                 {{ payment?.invoice_number }}
               </div>
@@ -203,15 +149,7 @@
 
             <div class="flex-1 whitespace-nowrap right">
               <BaseFormatMoney
-                class="
-                  block
-                  mb-2
-                  text-xl
-                  not-italic
-                  font-semibold
-                  leading-8
-                  text-right text-gray-900
-                "
+                class="block mb-2 text-xl not-italic font-semibold leading-8 text-right text-gray-900"
                 :amount="payment?.amount"
                 :currency="payment.customer?.currency"
               />
@@ -313,9 +251,14 @@ const paymentDate = computed(() => {
   )
 })
 
-watch(route, () => {
-  loadPayment()
-})
+const paymentId = computed(() => route.params.id)
+
+watch(
+  () => paymentId.value,
+  (id) => {
+    if (id && route.name === 'payments.view') loadPayment()
+  }
+)
 
 loadPayments()
 loadPayment()

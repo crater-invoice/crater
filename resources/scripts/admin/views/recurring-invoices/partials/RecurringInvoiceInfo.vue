@@ -78,10 +78,12 @@ let isLoading = computed(() => {
   return recurringInvoiceStore.isFetchingViewData
 })
 
+const invoiceId = computed(() => route.params.id)
+
 watch(
-  route,
-  () => {
-    if (route.params.id && route.name === 'recurring-invoices.view') {
+  () => invoiceId.value,
+  (id) => {
+    if (id && route.name === 'recurring-invoices.view') {
       loadRecurringInvoice()
     }
   },

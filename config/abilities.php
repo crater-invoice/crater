@@ -7,6 +7,7 @@ use Crater\Models\ExchangeRateProvider;
 use Crater\Models\Expense;
 use Crater\Models\Invoice;
 use Crater\Models\Item;
+use Crater\Models\MailSender;
 use Crater\Models\Note;
 use Crater\Models\Payment;
 use Crater\Models\RecurringInvoice;
@@ -394,6 +395,41 @@ return [
             'owner_only' => false,
             "depends_on" => [
                 'view-exchange-rate-provider',
+            ]
+        ],
+
+        // Mail Sender
+        [
+            "name" => "view mail sender",
+            "ability" => "view-mail-sender",
+            "model" => MailSender::class,
+            'owner_only' => false,
+        ],
+        [
+            "name" => "create mail sender",
+            "ability" => "create-mail-sender",
+            "model" => MailSender::class,
+            'owner_only' => false,
+            "depends_on" => [
+                'view-mail-sender',
+            ]
+        ],
+        [
+            "name" => "edit mail sender",
+            "ability" => "edit-mail-sender",
+            "model" => MailSender::class,
+            'owner_only' => false,
+            "depends_on" => [
+                'view-mail-sender',
+            ]
+        ],
+        [
+            "name" => "delete mail sender",
+            "ability" => "delete-mail-sender",
+            "model" => MailSender::class,
+            'owner_only' => false,
+            "depends_on" => [
+                'view-mail-sender',
             ]
         ],
 

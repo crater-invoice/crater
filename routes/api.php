@@ -47,6 +47,8 @@ use Crater\Http\Controllers\V1\Admin\Invoice\SendInvoiceController;
 use Crater\Http\Controllers\V1\Admin\Invoice\SendInvoicePreviewController;
 use Crater\Http\Controllers\V1\Admin\Item\ItemsController;
 use Crater\Http\Controllers\V1\Admin\Item\UnitsController;
+use Crater\Http\Controllers\V1\Admin\MailSender\GetAllMailSendersController;
+use Crater\Http\Controllers\V1\Admin\MailSender\MailSenderController;
 use Crater\Http\Controllers\V1\Admin\Mobile\AuthController;
 use Crater\Http\Controllers\V1\Admin\Modules\ApiTokenController;
 use Crater\Http\Controllers\V1\Admin\Modules\CompleteModuleInstallationController;
@@ -403,11 +405,14 @@ Route::prefix('/v1')->group(function () {
 
             Route::get('/mail/drivers', [MailConfigurationController::class, 'getMailDrivers']);
 
-            Route::get('/mail/config', [MailConfigurationController::class, 'getMailEnvironment']);
-
-            Route::post('/mail/config', [MailConfigurationController::class, 'saveMailEnvironment']);
-
             Route::post('/mail/test', [MailConfigurationController::class, 'testEmailConfig']);
+            // Route::get('/mail/config', [MailConfigurationController::class, 'getMailEnvironment']);
+
+            // Route::post('/mail/config', [MailConfigurationController::class, 'saveMailEnvironment']);
+
+            Route::apiResource('mail-sender', MailSenderController::class);
+
+            Route::get('mail-senders', GetAllMailSendersController::class);
 
             Route::get('/company/mail/config', GetCompanyMailConfigurationController::class);
 

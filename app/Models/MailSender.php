@@ -5,6 +5,7 @@ namespace Crater\Models;
 use Crater\Http\Requests\MailSenderRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Config;
 
 class MailSender extends Model
 {
@@ -74,4 +75,25 @@ class MailSender extends Model
 
         return $this;
     }
+
+    public static function setMailConfiguration($id, $check = null)
+    {
+        $mailSender = MailSender::find($id);
+
+        $settings = $mailSender->settings;
+        $settings['driver'] = $mailSender->driver;
+        $settings['from'] = [
+            'address' => $mailSender->from_address,
+            'name' => $mailSender->from_name
+        ];
+
+        Config::set('mail', $settings);
+
+        if ($check) {
+            return $mailSender;
+        }
+
+        return true;
+    }
+
 }

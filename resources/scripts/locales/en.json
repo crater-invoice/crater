@@ -100,7 +100,8 @@
     "pay_invoice": "Pay Invoice",
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
-    "mark_as_default": "Mark as default"
+    "mark_as_default": "Mark as default",
+    "send_test_mail": "Send Test Mail"
   },
   "dashboard": {
     "select_year": "Select year",
@@ -233,7 +234,8 @@
     "updated_message": "Customer updated successfully",
     "address_updated_message": "Address Information Updated succesfully",
     "deleted_message": "Customer deleted successfully | Customers deleted successfully",
-    "edit_currency_not_allowed": "Cannot change currency once transactions created."
+    "edit_currency_not_allowed": "Cannot change currency once transactions created.",
+    "select_sender": "Select Sender"
   },
   "items": {
     "title": "Items",
@@ -728,7 +730,8 @@
     "updated_message": "User updated successfully",
     "deleted_message": "User deleted successfully | Users deleted successfully",
     "select_company_role": "Select Role for {company}",
-    "companies": "Companies"
+    "companies": "Companies",
+    "select_sender": "Select Sender"
   },
   "reports": {
     "title": "Report",
@@ -807,7 +810,8 @@
       "payment_modes": "Payment Modes",
       "notes": "Notes",
       "exchange_rate": "Exchange Rate",
-      "address_information": "Address Information"
+      "address_information": "Address Information",
+      "mail_sender": "Mail Senders"
     },
     "address_information": {
       "section_description": "  You can update Your Address information using form below."
@@ -1311,6 +1315,51 @@
       "state_placeholder": "Example: CA",
       "zip_placeholder": "Example: 90024",
       "invalid_address": "Please provide valid address details."
+    },
+    "mail_sender": {
+      "title": "Mail Sender | Mail Senders",
+      "description": "Configure & test your mail senders for the selected company.",
+      "add_new_mail_sender": "New Mail Sender",
+      "name": "Sender Name",
+      "name_help": "Type a name to identify the sender for users.",
+      "driver": "Mail Driver",
+      "is_default": "Set as default",
+      "is_default_description": "You can only set one sender as default at a given time.",
+      "cc": "CC",
+      "bcc": "BCC",
+      "from_address": "From Mail Address",
+      "from_name": "From Mail Name",
+      "edit_mail_sender": "Edit Mail Sender",
+      "delete_mail_sender": "Delete Mail Sender",
+      "confirm_delete": "You will not be able to recover this Mail Sender",
+      "created_message": "Mail Sender created successfully",
+      "updated_message": "Mail Sender updated successfully",
+      "deleted_message": "Mail Sender deleted successfully",
+      "default_record_exists": "Default mail sender already exist",
+      "email_list": "Supports a comma separated list of email addresses",
+      "select_mail_sender": "Select Mail Sender",
+      "manage_mail_sender": "Manage Mail Senders",
+      "no_mail_sender_found": "No mail senders found!",
+      "no_mail_sender_found_description": "You must configure at-least one mail sender for the selected company in order to continue.",
+      "smtp_config": {
+        "host": "Host",
+        "port": "Port",
+        "username": "Username",
+        "password": "Password",
+        "encryption": "Encryption"
+      },
+      "mailgun_config": {
+        "domain": "Domain",
+        "secret": "Maingun Secret",
+        "endpoint": "Mailgun Endpoint"
+      },
+      "ses_config": {
+        "host": "Host",
+        "port": "Port",
+        "encryption": "Encryption",
+        "ses_key": "SES Key",
+        "ses_secret": "SES Secret"
+      }
     }
   },
   "wizard": {

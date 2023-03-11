@@ -15,5 +15,6 @@ export default function () {
     customFields: [],
     fields: [],
     enable_portal: false,
+    mail_sender_id: null,
   }
 }

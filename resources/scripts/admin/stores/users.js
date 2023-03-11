@@ -25,6 +25,7 @@ export const useUsersStore = (useWindow = false) => {
         password: null,
         phone: null,
         companies: [],
+        sender_id: null,
       },
     }),
 

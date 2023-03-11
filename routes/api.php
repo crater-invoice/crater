@@ -403,14 +403,11 @@ Route::prefix('/v1')->group(function () {
             // Mails
             //----------------------------------
 
-            Route::get('/mail/drivers', [MailConfigurationController::class, 'getMailDrivers']);
-
-            Route::post('/mail/test', [MailConfigurationController::class, 'testEmailConfig']);
-            // Route::get('/mail/config', [MailConfigurationController::class, 'getMailEnvironment']);
-
-            // Route::post('/mail/config', [MailConfigurationController::class, 'saveMailEnvironment']);
-
             Route::apiResource('mail-sender', MailSenderController::class);
+
+            Route::get('/mail-drivers', [MailConfigurationController::class, 'getMailDrivers']);
+
+            Route::post('/mail-test', [MailConfigurationController::class, 'TestMailDriver']);
 
             Route::get('mail-senders', GetAllMailSendersController::class);
 

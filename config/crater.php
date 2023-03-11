@@ -7,6 +7,7 @@ use Crater\Models\ExchangeRateProvider;
 use Crater\Models\Expense;
 use Crater\Models\Invoice;
 use Crater\Models\Item;
+use Crater\Models\MailSender;
 use Crater\Models\Note;
 use Crater\Models\Payment;
 use Crater\Models\RecurringInvoice;
@@ -226,6 +227,17 @@ return [
             'model' => Note::class
         ],
         [
+            'title' => 'settings.menu_title.mail_sender',
+            'group' => '',
+            'name' => 'Mail Sender',
+            'link' => '/admin/settings/mail-sender',
+            'icon' => 'MailIcon',
+            'owner_only' => false,
+            'ability' => 'view-mail-sender',
+            'model' => MailSender::class
+        ],
+
+        [
             'title' => 'settings.menu_title.expense_category',
             'group' => '',
             'name' => 'Expense Category',
@@ -234,16 +246,6 @@ return [
             'owner_only' => false,
             'ability' => 'view-expense',
             'model' => Expense::class
-        ],
-        [
-            'title' => 'settings.mail.mail_config',
-            'group' => '',
-            'name' => 'Mail Configuration',
-            'link' => '/admin/settings/mail-configuration',
-            'icon' => 'MailIcon',
-            'owner_only' => true,
-            'ability' => '',
-            'model' => ''
         ],
         [
             'title' => 'settings.menu_title.file_disk',
@@ -275,6 +277,7 @@ return [
             'ability' => '',
             'model' => ''
         ],
+
     ],
 
     /*

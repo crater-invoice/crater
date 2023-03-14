@@ -25,11 +25,6 @@ class MailSender extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function setSettingsAttribute($value)
-    {
-        $this->attributes['settings'] = json_encode($value);
-    }
-
     public function scopeWhereOrder($query, $orderByField, $orderBy)
     {
         $query->orderBy($orderByField, $orderBy);

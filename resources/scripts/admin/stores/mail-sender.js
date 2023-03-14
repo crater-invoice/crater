@@ -68,7 +68,7 @@ export const useMailSenderStore = (useWindow = false) => {
       fetchMailSenders(params) {
         return new Promise((resolve, reject) => {
           axios
-            .get(`/api/v1/mail-sender`, { params })
+            .get(`/api/v1/mail-senders`, { params })
             .then((response) => {
               this.mailSenders = response.data.data
               resolve(response)
@@ -83,7 +83,7 @@ export const useMailSenderStore = (useWindow = false) => {
       fetchMailSender(id) {
         return new Promise((resolve, reject) => {
           axios
-            .get(`/api/v1/mail-sender/${id}`)
+            .get(`/api/v1/mail-senders/${id}`)
             .then((response) => {
               this.currentMailSender = response.data.data
               if (response.data.data.settings) {
@@ -116,7 +116,7 @@ export const useMailSenderStore = (useWindow = false) => {
         const notificationStore = useNotificationStore()
         return new Promise((resolve, reject) => {
           axios
-            .post('/api/v1/mail-sender', data)
+            .post('/api/v1/mail-senders', data)
             .then((response) => {
               this.mailSenders.push(response.data.data)
               notificationStore.showNotification({
@@ -136,7 +136,7 @@ export const useMailSenderStore = (useWindow = false) => {
         const notificationStore = useNotificationStore()
         return new Promise((resolve, reject) => {
           axios
-            .put(`/api/v1/mail-sender/${data.id}`, data)
+            .put(`/api/v1/mail-senders/${data.id}`, data)
             .then((response) => {
               if (response.data) {
                 let pos = this.mailSenders.findIndex(
@@ -160,7 +160,7 @@ export const useMailSenderStore = (useWindow = false) => {
       deleteMailSender(id) {
         return new Promise((resolve, reject) => {
           axios
-            .delete(`/api/v1/mail-sender/${id}`)
+            .delete(`/api/v1/mail-senders/${id}`)
             .then((response) => {
               if (response.data.success) {
                 let index = this.mailSenders.findIndex(

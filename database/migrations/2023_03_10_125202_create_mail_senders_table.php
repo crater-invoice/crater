@@ -32,62 +32,54 @@ class CreateMailSendersTable extends Migration
             $table->timestamps();
         });
 
-        $user = User::where('role', 'super admin')->first();
+        $users = User::where('role', 'super admin')->get();
 
-        if ($user) {
-            $users = User::where('role', 'super admin')->get();
+        foreach ($users as $user) {
+            BouncerFacade::allow($user)->toManage(MailSender::class);
+        }
 
-            foreach ($users as $user) {
-                $user->allow('view-mail-sender');
-                $user->allow('create-mail-sender');
-                $user->allow('edit-mail-sender');
-                $user->allow('delete-mail-sender');
-                BouncerFacade::allow($user)->toOwn(MailSender::class);
+        $companies = Company::all();
+
+        $companies->map(function ($company) {
+            if (env('MAIL_DRIVER') == 'smtp') {
+                $settings = [
+                    'MAIL_HOST' => env('MAIL_HOST'),
+                    'MAIL_PORT' => env('MAIL_PORT'),
+                    'MAIL_USERNAME' => env('MAIL_USERNAME'),
+                    'MAIL_PASSWORD' => env('MAIL_PASSWORD'),
+                    'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION')
+                ];
+                $this->createSender($settings, $company->id);
             }
 
-            $companies = Company::all();
+            if (env('MAIL_DRIVER') == 'mail' || env('MAIL_DRIVER') == 'sendmail') {
+                $this->createSender(null, $company->id);
+            }
 
-            $companies->map(function ($company) {
-                if (env('MAIL_DRIVER') == 'smtp') {
-                    $settings = [
-                        'MAIL_HOST' => env('MAIL_HOST'),
-                        'MAIL_PORT' => env('MAIL_PORT'),
-                        'MAIL_USERNAME' => env('MAIL_USERNAME'),
-                        'MAIL_PASSWORD' => env('MAIL_PASSWORD'),
-                        'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION')
-                    ];
-                    $this->insertData($settings, $company->id);
-                }
+            if (env('MAIL_DRIVER') == 'mailgun') {
+                $settings = [
+                    'MAILGUN_DOMAIN' => env('MAILGUN_DOMAIN'),
+                    'MAILGUN_SECRET' => env('MAILGUN_SECRET'),
+                    'MAILGUN_ENDPOINT' => env('MAILGUN_ENDPOINT'),
+                ];
+                $this->createSender($settings, $company->id);
+            }
 
-                if (env('MAIL_DRIVER') == 'mail' || env('MAIL_DRIVER') == 'sendmail') {
-                    $this->insertData(null, $company->id);
-                }
-
-                if (env('MAIL_DRIVER') == 'mailgun') {
-                    $settings = [
-                        'MAILGUN_DOMAIN' => env('MAILGUN_DOMAIN'),
-                        'MAILGUN_SECRET' => env('MAILGUN_SECRET'),
-                        'MAILGUN_ENDPOINT' => env('MAILGUN_ENDPOINT'),
-                    ];
-                    $this->insertData($settings, $company->id);
-                }
-
-                if (env('MAIL_DRIVER') == 'ses') {
-                    $settings = [
-                        'MAIL_HOST' => env('MAIL_HOST'),
-                        'MAIL_PORT' => env('MAIL_PORT'),
-                        'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION'),
-                        'MAILGUN_DOMAIN' => env('MAILGUN_DOMAIN'),
-                        'SES_KEY' => env('SES_KEY'),
-                        'SES_SECRET' => env('SES_SECRET'),
-                    ];
-                    $this->insertData($settings, $company->id);
-                }
-            });
-        }
+            if (env('MAIL_DRIVER') == 'ses') {
+                $settings = [
+                    'MAIL_HOST' => env('MAIL_HOST'),
+                    'MAIL_PORT' => env('MAIL_PORT'),
+                    'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION'),
+                    'MAILGUN_DOMAIN' => env('MAILGUN_DOMAIN'),
+                    'SES_KEY' => env('SES_KEY'),
+                    'SES_SECRET' => env('SES_SECRET'),
+                ];
+                $this->createSender($settings, $company->id);
+            }
+        });
     }
 
-    public function insertData($settings, $company_id)
+    public function createSender($settings, $company_id)
     {
         $data = [
             'name' => env('MAIL_DRIVER'),

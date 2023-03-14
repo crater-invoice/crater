@@ -101,6 +101,7 @@
     "login_successfully": "Logged in successfully!",
     "logged_out_successfully": "Logged out successfully",
     "mark_as_default": "Mark as default",
+    "select_option": "Select option",
     "send_test_mail": "Send Test Mail"
   },
   "dashboard": {

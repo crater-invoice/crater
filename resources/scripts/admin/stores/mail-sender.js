@@ -88,15 +88,18 @@ export const useMailSenderStore = (useWindow = false) => {
               this.currentMailSender = response.data.data
               if (response.data.data.settings) {
                 var settings = response.data.data.settings
+                const encryptionNone = settings.encryption == '' || settings.encryption == undefined
                 switch (response.data.data.driver) {
                   case 'smtp':
                     this.smtpConfig = settings
+                    encryptionNone ? this.smtpConfig.encryption = 'none' : ''
                     break
                   case 'mailgun':
                     this.mailgunConfig = settings
                     break
                   case 'ses':
                     this.sesConfig = settings
+                    encryptionNone ? this.sesConfig.encryption = 'none' : ''
                     break
                 }
               }

@@ -708,7 +708,10 @@ const rules = computed(() => {
         url: helpers.withMessage(t('validation.invalid_url'), url),
       },
       mail_sender_id: {
-        required: helpers.withMessage(t('validation.required'), required),
+        required: helpers.withMessage(
+          t('validation.required'),
+          requiredIf(customerStore.currentCustomer.enable_portal == true)
+        ),
       },
       billing: {
         address_street_1: {

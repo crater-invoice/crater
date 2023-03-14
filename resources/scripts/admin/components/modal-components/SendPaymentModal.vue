@@ -15,18 +15,28 @@
       </div>
     </template>
     <form v-if="!isPreview" action="">
-      <div class="px-8 py-8 sm:p-6">
+      <!-- v-if -->
+      <div v-if="isMailSenderExist" class="px-8 py-8 sm:p-6">
         <BaseInputGrid layout="one-column" class="col-span-7">
           <BaseInputGroup
-            :label="$t('general.from')"
+            :label="$tc('settings.mail_sender.title', 1)"
             required
-            :error="v$.from.$error && v$.from.$errors[0].$message"
+            :error="
+              v$.mail_sender_id.$error && v$.mail_sender_id.$errors[0].$message
+            "
           >
-            <BaseInput
-              v-model="paymentMailForm.from"
-              type="text"
-              :invalid="v$.from.$error"
-              @input="v$.from.$touch()"
+            <BaseMultiselect
+              v-model="paymentMailForm.mail_sender_id"
+              :invalid="v$.mail_sender_id.$error"
+              label="name"
+              :options="mailSenders"
+              value-prop="id"
+              :can-deselect="false"
+              :can-clear="false"
+              :placeholder="$t(`settings.mail_sender.select_mail_sender`)"
+              searchable
+              track-by="name"
+              :content-loading="isFetchingInitialData"
             />
           </BaseInputGroup>
           <BaseInputGroup
@@ -65,6 +75,45 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
+      <!-- v-else -->
+      <div v-else>
+        <FeedbackAlert
+          :title="$t('settings.mail_sender.no_mail_sender_found')"
+          :description="
+            $t('settings.mail_sender.no_mail_sender_found_description')
+          "
+          type="warning"
+        >
+          <template #action>
+            <div class="mt-4">
+              <div class="-mx-2 -my-1.5 flex">
+                <button
+                  type="button"
+                  class="
+                    bg-yellow-50
+                    px-2
+                    py-1.5
+                    rounded-md
+                    text-sm
+                    font-medium
+                    text-yellow-800
+                    hover:bg-yellow-100
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-offset-yellow-50
+                    focus:ring-yellow-600
+                  "
+                  @click="gotoMailSender"
+                >
+                  {{ $t('settings.mail_sender.manage_mail_sender') }}
+                </button>
+              </div>
+            </div>
+          </template>
+        </FeedbackAlert>
+      </div>
+      <!-- end v-if-else -->
       <div
         class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
       >
@@ -77,6 +126,7 @@
           {{ $t('general.cancel') }}
         </BaseButton>
         <BaseButton
+          v-if="isMailSenderExist"
           :loading="isLoading"
           :disabled="isLoading"
           variant="primary"
@@ -154,20 +204,26 @@ import { usePaymentStore } from '@/scripts/admin/stores/payment'
 import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { useNotificationStore } from '@/scripts/stores/notification'
 import { useModalStore } from '@/scripts/stores/modal'
-import { useMailDriverStore } from '@/scripts/admin/stores/mail-driver'
 import { useDialogStore } from '@/scripts/stores/dialog'
+import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
+import FeedbackAlert from '@/scripts/admin/components/FeedbackAlert.vue'
+import { useRouter } from 'vue-router'
 
 const paymentStore = usePaymentStore()
 const companyStore = useCompanyStore()
 const modalStore = useModalStore()
 const notificationStore = useNotificationStore()
-const mailDriversStore = useMailDriverStore()
 const dialogStore = useDialogStore()
+const mailSenderStore = useMailSenderStore()
+const router = useRouter()
 
 const { t } = useI18n()
 let isLoading = ref(false)
 const templateUrl = ref('')
 const isPreview = ref(false)
+const mailSenders = ref(null)
+const isFetchingInitialData = ref(false)
+const emailTemplates = ref(null)
 
 const paymentMailFields = ref([
   'customer',
@@ -179,7 +235,7 @@ const paymentMailFields = ref([
 
 const paymentMailForm = reactive({
   id: null,
-  from: null,
+  mail_sender_id: null,
   to: null,
   subject: 'New Payment',
   body: null,
@@ -198,9 +254,8 @@ const modalData = computed(() => {
 })
 
 const rules = {
-  from: {
+  mail_sender_id: {
     required: helpers.withMessage(t('validation.required'), required),
-    email: helpers.withMessage(t('validation.email_incorrect'), email),
   },
   to: {
     required: helpers.withMessage(t('validation.required'), required),
@@ -221,18 +276,25 @@ function cancelPreview() {
 }
 
 async function setInitialData() {
-  let admin = await companyStore.fetchBasicMailConfig()
   paymentMailForm.id = modalStore.id
-
-  if (admin.data) {
-    paymentMailForm.from = admin.data.from_mail
-  }
-
   if (modalData.value) {
     paymentMailForm.to = modalData.value.customer.email
   }
 
   paymentMailForm.body = companyStore.selectedCompanySettings.payment_mail_body
+
+  isFetchingInitialData.value = true
+  let mailSenderData = await mailSenderStore.fetchMailSenderList()
+  if (mailSenderData.data) {
+    mailSenders.value = mailSenderData.data.data
+    let defaultMailSender = mailSenderData.data.data.find(
+      (mailSender) => mailSender.is_default == true
+    )
+    paymentMailForm.mail_sender_id = defaultMailSender
+      ? defaultMailSender.id
+      : null
+    isFetchingInitialData.value = false
+  }
 }
 
 async function sendPaymentData() {
@@ -279,5 +341,19 @@ function closeSendPaymentModal() {
     templateUrl.value = null
     modalStore.resetModalData()
   }, 300)
+}
+
+function getTickImage() {
+  const imgUrl = new URL('/img/tick.png', import.meta.url)
+  return imgUrl
+}
+
+const isMailSenderExist = computed(() => {
+  return mailSenders.value && mailSenders.value.length
+})
+
+function gotoMailSender() {
+  closeSendPaymentModal()
+  router.push('/admin/settings/mail-sender')
 }
 </script>

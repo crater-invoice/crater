@@ -30,7 +30,7 @@ class SendInvoiceRequest extends FormRequest
             'subject' => [
                 'required',
             ],
-            'from' => [
+            'mail_sender_id' => [
                 'required',
             ],
             'to' => [

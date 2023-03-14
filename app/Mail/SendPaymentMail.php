@@ -34,7 +34,7 @@ class SendPaymentMail extends Mailable
     public function build()
     {
         $log = EmailLog::create([
-            'from' => $this->data['from'],
+            'from' => $this->data['from_address'],
             'to' => $this->data['to'],
             'subject' => $this->data['subject'],
             'body' => $this->data['body'],
@@ -47,9 +47,9 @@ class SendPaymentMail extends Mailable
 
         $this->data['url'] = route('payment', ['email_log' => $log->token]);
 
-        $mailContent = $this->from($this->data['from'], config('mail.from.name'))
-                    ->subject($this->data['subject'])
-                    ->markdown('emails.send.payment', ['data', $this->data]);
+        $mailContent = $this->from($this->data['from_address'], $this->data['from_name'])
+            ->subject($this->data['subject'])
+            ->markdown("emails.send.payment", ['data', $this->data]);
 
         if ($this->data['attach']['data']) {
             $mailContent->attachData(

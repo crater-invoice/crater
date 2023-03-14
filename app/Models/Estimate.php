@@ -5,10 +5,10 @@ namespace Crater\Models;
 use App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
-use Crater\Mail\SendEstimateMail;
 use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
+use Crater\Traits\MailTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +20,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Estimate extends Model implements HasMedia
 {
     use HasFactory;
+    use MailTrait;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
@@ -363,7 +364,7 @@ class Estimate extends Model implements HasMedia
             $this->save();
         }
 
-        \Mail::to($data['to'])->send(new SendEstimateMail($data));
+        $this->setMail('estimate', $data);
 
         return [
             'success' => true,

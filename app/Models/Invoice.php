@@ -9,6 +9,7 @@ use Crater\Mail\SendInvoiceMail;
 use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
+use Crater\Traits\MailTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Invoice extends Model implements HasMedia
 {
     use HasFactory;
+    use MailTrait;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
@@ -464,7 +466,7 @@ class Invoice extends Model implements HasMedia
     {
         $data = $this->sendInvoiceData($data);
 
-        \Mail::to($data['to'])->send(new SendInvoiceMail($data));
+        $this->setMail('invoice', $data);
 
         if ($this->status == Invoice::STATUS_DRAFT) {
             $this->status = Invoice::STATUS_SENT;

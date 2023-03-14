@@ -171,19 +171,14 @@ const loadMailDriver = computed(() => {
   switch (mailSenderStore.currentMailSender.driver) {
     case 'smtp':
       return SmtpDriver
-      break
     case 'mail':
       return false
-      break
     case 'sendmail':
       return false
-      break
     case 'mailgun':
       return MailgunDriver
-      break
     case 'ses':
       return SesDriver
-      break
     default:
       return false
   }

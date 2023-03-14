@@ -70,7 +70,13 @@ class MailSenderRequest extends FormRequest
 
     public function getMailSenderPayload()
     {
-        return collect($this->validated())
+        $data = $this->validated();
+
+        if ($data['settings']['encryption'] == 'none') {
+            $data['settings']['encryption'] = '';
+        }
+
+        return collect($data)
             ->merge([
                 'company_id' => $this->header('company'),
             ])

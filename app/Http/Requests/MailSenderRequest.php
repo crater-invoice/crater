@@ -72,7 +72,7 @@ class MailSenderRequest extends FormRequest
     {
         $data = $this->validated();
 
-        if ($data['settings']['encryption'] == 'none') {
+        if ($data['settings'] && $data['settings']['encryption'] == 'none') {
             $data['settings']['encryption'] = '';
         }
 

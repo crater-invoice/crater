@@ -43,10 +43,10 @@ class MailSenderController extends Controller
 
         $mailConfiguration = MailSender::where('company_id', $request->header('company'))
             ->where('is_default', true)
-            ->count();
+            ->first();
 
-        if ($mailConfiguration > 0 && $request['is_default'] == true) {
-            return respondJson('default_record_exists', 'Default mail sender already exist');
+        if ($mailConfiguration && $request['is_default'] == true) {
+            $mailConfiguration->update(['is_default' => false]);
         }
 
         $mailSender = MailSender::createFromRequest($request);
@@ -81,10 +81,10 @@ class MailSenderController extends Controller
         $mailConfiguration = MailSender::where('company_id', $request->header('company'))
             ->where('is_default', true)
             ->where('id', '<>', $mailSender->id)
-            ->count();
+            ->first();
 
-        if ($mailConfiguration > 0 && $request['is_default'] == true) {
-            return respondJson('default_record_exists', 'Default mail sender already exist');
+        if ($mailConfiguration && $request['is_default'] == true) {
+            $mailConfiguration->update(['is_default' => false]);
         }
 
         $mailSender->updateFromRequest($request);

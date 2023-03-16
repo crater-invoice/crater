@@ -257,30 +257,6 @@
               ></BaseInput>
             </BaseInputGroup>
             <!-- && setPasswordMethod !== 'manual' -->
-            <BaseInputGroup
-              v-show="customerStore.currentCustomer.enable_portal"
-              :label="$t('customers.select_sender')"
-              class="pt-5"
-              :error="
-                v$.currentCustomer.mail_sender_id.$error &&
-                v$.currentCustomer.mail_sender_id.$errors[0].$message
-              "
-              :content-loading="isFetchingInitialData"
-              required
-            >
-              <BaseMultiselect
-                v-model="customerStore.currentCustomer.mail_sender_id"
-                label="name"
-                value-prop="id"
-                :options="mailSenderStore.mailSenders"
-                :can-deselect="false"
-                :can-clear="false"
-                searchable
-                track-by="name"
-                :invalid="v$.currentCustomer.mail_sender_id.$error"
-                @input="v$.currentCustomer.mail_sender_id.$touch()"
-              />
-            </BaseInputGroup>
           </BaseInputGrid>
         </div>
 
@@ -626,13 +602,11 @@ import CustomerCustomFields from '@/scripts/admin/components/custom-fields/Creat
 import { useGlobalStore } from '@/scripts/admin/stores/global'
 import CopyInputField from '@/scripts/admin/components/CopyInputField.vue'
 import { useCompanyStore } from '@/scripts/admin/stores/company'
-import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
 
 const customerStore = useCustomerStore()
 const customFieldStore = useCustomFieldStore()
 const globalStore = useGlobalStore()
 const companyStore = useCompanyStore()
-const mailSenderStore = useMailSenderStore()
 
 const customFieldValidationScope = 'customFields'
 
@@ -644,7 +618,6 @@ const route = useRoute()
 let isFetchingInitialData = ref(false)
 let isShowPassword = ref(false)
 let isShowConfirmPassword = ref(false)
-const mailSenders = ref(null)
 
 let active = ref(false)
 const isSaving = ref(false)
@@ -678,10 +651,7 @@ const rules = computed(() => {
       },
 
       email: {
-        required: helpers.withMessage(
-          t('validation.required'),
-          requiredIf(customerStore.currentCustomer.enable_portal == true)
-        ),
+        required: helpers.withMessage(t('validation.required'), required),
         email: helpers.withMessage(t('validation.email_incorrect'), email),
       },
       password: {
@@ -706,12 +676,6 @@ const rules = computed(() => {
 
       website: {
         url: helpers.withMessage(t('validation.invalid_url'), url),
-      },
-      mail_sender_id: {
-        required: helpers.withMessage(
-          t('validation.required'),
-          requiredIf(customerStore.currentCustomer.enable_portal == true)
-        ),
       },
       billing: {
         address_street_1: {
@@ -754,20 +718,6 @@ const getCustomerPortalUrl = computed(() => {
 
 const v$ = useVuelidate(rules, customerStore, {
   $scope: customFieldValidationScope,
-})
-
-onMounted(async () => {
-  await mailSenderStore.fetchMailSenders()
-  let mailSenderData = await mailSenderStore.fetchMailSenderList()
-  if (mailSenderData.data) {
-    mailSenders.value = mailSenderData.data.data
-    let defaultMailSender = mailSenderData.data.data.find(
-      (mailSender) => mailSender.is_default == true
-    )
-    customerStore.currentCustomer.mail_sender_id = defaultMailSender
-      ? defaultMailSender.id
-      : null
-  }
 })
 
 customerStore.resetCurrentCustomer()

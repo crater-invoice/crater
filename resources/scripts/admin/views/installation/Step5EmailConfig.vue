@@ -98,13 +98,6 @@
             :mail-sender-store="mailSenderStore"
           />
         </BaseInputGrid>
-
-        <!-- Is Default? -->
-        <BaseSwitchSection
-          v-model="mailSenderStore.currentMailSender.is_default"
-          :title="$t(`${pre_t}.is_default`)"
-          :description="$t(`${pre_t}.is_default_description`)"
-        />
         <BaseDivider class="my-4" />
 
         <BaseButton
@@ -227,26 +220,12 @@ async function submitMailSenderData() {
     return true
   }
   try {
-    const action = mailSenderStore.isEdit
-      ? mailSenderStore.updateMailSender
-      : mailSenderStore.addMailSender
-    isSaving.value = true
-
-    var mailDriverConfig = null
-    switch (mailSenderStore.currentMailSender.driver) {
-      case 'smtp':
-        mailDriverConfig = mailSenderStore.smtpConfig
-        break
-      case 'mailgun':
-        mailDriverConfig = mailSenderStore.mailgunConfig
-        break
-      case 'ses':
-        mailDriverConfig = mailSenderStore.sesConfig
-        break
+    let data = {
+      ...mailSenderStore.currentMailSender,
+      is_default: true,
     }
-    mailSenderStore.currentMailSender.settings = mailDriverConfig
-
-    let res = await action(mailSenderStore.currentMailSender)
+    await mailSenderStore.addMailSender(data)
+    isSaving.value = true
     emit('next')
     isSaving.value = false
   } catch (err) {

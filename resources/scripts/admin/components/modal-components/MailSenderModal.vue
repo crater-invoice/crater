@@ -112,6 +112,7 @@
 
         <!-- Is Default? -->
         <BaseSwitchSection
+          v-if="!mailSenderStore.isDisable"
           v-model="mailSenderStore.currentMailSender.is_default"
           :title="$t(`${pre_t}.is_default`)"
           :description="$t(`${pre_t}.is_default_description`)"
@@ -167,6 +168,7 @@ const modalStore = useModalStore()
 const mailSenderStore = useMailSenderStore()
 const { t } = useI18n()
 let isSaving = ref(false)
+
 const loadMailDriver = computed(() => {
   switch (mailSenderStore.currentMailSender.driver) {
     case 'smtp':

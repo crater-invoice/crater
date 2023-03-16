@@ -453,7 +453,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -549,7 +549,6 @@ const rules = computed(() => {
     website: {
       url: helpers.withMessage(t('validation.invalid_url'), url),
     },
-
     billing: {
       address_street_1: {
         maxLength: helpers.withMessage(

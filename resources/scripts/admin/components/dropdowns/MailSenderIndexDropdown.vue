@@ -17,7 +17,7 @@
     </BaseDropdownItem>
 
     <!-- delete mail-sender  -->
-    <BaseDropdownItem @click="removeMailSender(row.id)">
+    <BaseDropdownItem v-if="!row.is_default" @click="removeMailSender(row.id)">
       <BaseIcon
         name="TrashIcon"
         class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"

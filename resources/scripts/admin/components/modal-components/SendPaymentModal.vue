@@ -76,7 +76,7 @@
         </BaseInputGrid>
       </div>
       <!-- v-else -->
-      <div v-else>
+      <div v-else-if="!isMailSenderExist && !isFetchingInitialData">
         <FeedbackAlert
           :title="$t('settings.mail_sender.no_mail_sender_found')"
           :description="
@@ -284,7 +284,7 @@ async function setInitialData() {
   paymentMailForm.body = companyStore.selectedCompanySettings.payment_mail_body
 
   isFetchingInitialData.value = true
-  let mailSenderData = await mailSenderStore.fetchMailSenderList()
+  let mailSenderData = await mailSenderStore.fetchMailSenders({ limit: 'all' })
   if (mailSenderData.data) {
     mailSenders.value = mailSenderData.data.data
     let defaultMailSender = mailSenderData.data.data.find(

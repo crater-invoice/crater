@@ -20,6 +20,7 @@ export const useMailSenderStore = (useWindow = false) => {
       mailgunConfig: { ...mailSenderStub.mailgunConfig },
       sesConfig: { ...mailSenderStub.sesConfig },
       mail_encryptions: ['none', 'tls', 'ssl', 'starttls'],
+      isDisable: false
     }),
 
     getters: {
@@ -32,6 +33,7 @@ export const useMailSenderStore = (useWindow = false) => {
         this.smtpConfig = { ...mailSenderStub.smtpConfig }
         this.mailgunConfig = { ...mailSenderStub.mailgunConfig }
         this.sesConfig = { ...mailSenderStub.sesConfig }
+        this.isDisable = false
       },
 
       fetchMailDrivers() {
@@ -51,19 +53,6 @@ export const useMailSenderStore = (useWindow = false) => {
         })
       },
 
-      fetchMailSenderList(params) {
-        return new Promise((resolve, reject) => {
-          axios
-            .get(`/api/v1/mail-senders`, { params })
-            .then((response) => {
-              resolve(response)
-            })
-            .catch((err) => {
-              handleError(err)
-              reject(err)
-            })
-        })
-      },
 
       fetchMailSenders(params) {
         return new Promise((resolve, reject) => {
@@ -86,6 +75,7 @@ export const useMailSenderStore = (useWindow = false) => {
             .get(`/api/v1/mail-senders/${id}`)
             .then((response) => {
               this.currentMailSender = response.data.data
+              this.isDisable = response.data.data.is_default
               if (response.data.data.settings) {
                 var settings = response.data.data.settings
                 const encryptionNone = settings.encryption == '' || settings.encryption == undefined

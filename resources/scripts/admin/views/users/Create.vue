@@ -129,29 +129,6 @@
             </BaseInputGroup>
 
             <BaseInputGroup
-              :label="$t('users.select_sender')"
-              :error="
-                v$.userData.mail_sender_id.$error &&
-                v$.userData.mail_sender_id.$errors[0].$message
-              "
-              :content-loading="isFetchingInitialData"
-              required
-            >
-              <BaseMultiselect
-                v-model="userStore.userData.mail_sender_id"
-                label="name"
-                value-prop="id"
-                :options="mailSenderStore.mailSenders"
-                :can-deselect="false"
-                :can-clear="false"
-                searchable
-                track-by="name"
-                :invalid="v$.userData.mail_sender_id.$error"
-                @input="v$.userData.mail_sender_id.$touch()"
-              />
-            </BaseInputGroup>
-
-            <BaseInputGroup
               :content-loading="isFetchingInitialData"
               :label="$t('users.phone')"
             >
@@ -199,7 +176,6 @@ import useVuelidate from '@vuelidate/core'
 import { ValidateEach } from '@vuelidate/components'
 import { useI18n } from 'vue-i18n'
 import { useUsersStore } from '@/scripts/admin/stores/users'
-import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
 
 const userStore = useUsersStore()
 
@@ -207,13 +183,11 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const companyStore = useCompanyStore()
-const mailSenderStore = useMailSenderStore()
 
 let isSaving = ref(false)
 let isFetchingInitialData = ref(false)
 let selectedCompanies = ref([])
 let companies = ref([])
-const mailSenders = ref(null)
 
 const isEdit = computed(() => route.name === 'users.edit')
 
@@ -248,9 +222,6 @@ const rules = computed(() => {
       companies: {
         required: helpers.withMessage(t('validation.required'), required),
       },
-      mail_sender_id: {
-        required: helpers.withMessage(t('validation.required'), required),
-      },
     },
   }
 })
@@ -263,20 +234,6 @@ const companyArrayRules = {
 
 const v$ = useVuelidate(rules, userStore, {
   $scope: true,
-})
-
-onMounted(async () => {
-  await mailSenderStore.fetchMailSenders()
-  let mailSenderData = await mailSenderStore.fetchMailSenderList()
-  if (mailSenderData.data) {
-    mailSenders.value = mailSenderData.data.data
-    let defaultMailSender = mailSenderData.data.data.find(
-      (mailSender) => mailSender.is_default == true
-    )
-    userStore.userData.mail_sender_id = defaultMailSender
-      ? defaultMailSender.id
-      : null
-  }
 })
 
 loadInitialData()

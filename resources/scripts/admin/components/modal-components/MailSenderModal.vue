@@ -1,8 +1,17 @@
 <template>
-  <BaseWizardStep
-    :title="$t('wizard.mail.mail_config')"
-    :description="$t('wizard.mail.mail_config_desc')"
+  <BaseModal
+    :show="modalStore.active && modalStore.componentName === 'MailSenderModal'"
   >
+    <template #header>
+      <div class="flex justify-between w-full">
+        {{ modalStore.title }}
+        <BaseIcon
+          name="XIcon"
+          class="h-6 w-6 text-gray-500 cursor-pointer"
+          @click="closeMailSenderModal"
+        />
+      </div>
+    </template>
     <form action="" @submit.prevent="submitMailSenderData">
       <div class="p-4 sm:p-6 my-2">
         <!-- Name -->
@@ -98,8 +107,29 @@
             :mail-sender-store="mailSenderStore"
           />
         </BaseInputGrid>
-        <BaseDivider class="my-4" />
 
+        <BaseDivider class="mt-4 mb-0" />
+
+        <!-- Is Default? -->
+        <BaseSwitchSection
+          v-if="!mailSenderStore.isDisable"
+          v-model="mailSenderStore.currentMailSender.is_default"
+          :title="$t(`${pre_t}.is_default`)"
+          :description="$t(`${pre_t}.is_default_description`)"
+        />
+      </div>
+
+      <div
+        class="z-0 flex justify-end p-4 border-t border-solid border--200 border-modal-bg"
+      >
+        <BaseButton
+          class="mr-3 text-sm"
+          variant="primary-outline"
+          type="button"
+          @click="closeMailSenderModal"
+        >
+          {{ $t('general.cancel') }}
+        </BaseButton>
         <BaseButton
           :loading="isSaving"
           :disabled="isSaving"
@@ -113,50 +143,44 @@
               :class="slotProps.class"
             />
           </template>
-          {{ $t('wizard.save_cont') }}
+          {{
+            mailSenderStore.isEdit ? $t('general.update') : $t('general.save')
+          }}
         </BaseButton>
       </div>
     </form>
-  </BaseWizardStep>
+  </BaseModal>
 </template>
 
 <script setup>
-import { computed, ref, inject, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
-import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
-import MailSenderDropdown from '@/scripts/admin/components/dropdowns/MailSenderIndexDropdown.vue'
-import MailSenderTestModal from '@/scripts/admin/components/modal-components/MailSenderTestModal.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { useModalStore } from '@/scripts/stores/modal'
+import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
 import SmtpDriver from '@/scripts/admin/views/settings/mail-sender/SmtpDriver.vue'
 import MailgunDriver from '@/scripts/admin/views/settings/mail-sender/MailgunDriver.vue'
 import SesDriver from '@/scripts/admin/views/settings/mail-sender/SesDriver.vue'
 
 const pre_t = 'settings.mail_sender'
+const modalStore = useModalStore()
 const mailSenderStore = useMailSenderStore()
 const { t } = useI18n()
-const table = ref(null)
-const utils = inject('utils')
 let isSaving = ref(false)
-const emit = defineEmits(['next'])
 
 const loadMailDriver = computed(() => {
   switch (mailSenderStore.currentMailSender.driver) {
     case 'smtp':
       return SmtpDriver
-      break
     case 'mail':
       return false
-      break
     case 'sendmail':
       return false
-      break
     case 'mailgun':
       return MailgunDriver
-      break
     case 'ses':
       return SesDriver
-      break
     default:
       return false
   }
@@ -220,18 +244,41 @@ async function submitMailSenderData() {
     return true
   }
   try {
-    let data = {
-      ...mailSenderStore.currentMailSender,
-      is_default: true,
-    }
-    await mailSenderStore.addMailSender(data)
+    const action = mailSenderStore.isEdit
+      ? mailSenderStore.updateMailSender
+      : mailSenderStore.addMailSender
     isSaving.value = true
-    emit('next')
+
+    var mailDriverConfig = null
+    switch (mailSenderStore.currentMailSender.driver) {
+      case 'smtp':
+        mailDriverConfig = mailSenderStore.smtpConfig
+        break
+      case 'mailgun':
+        mailDriverConfig = mailSenderStore.mailgunConfig
+        break
+      case 'ses':
+        mailDriverConfig = mailSenderStore.sesConfig
+        break
+    }
+    mailSenderStore.currentMailSender.settings = mailDriverConfig
+
+    let res = await action(mailSenderStore.currentMailSender)
     isSaving.value = false
+    modalStore.refreshData ? modalStore.refreshData(res.data.data) : ''
+    closeMailSenderModal()
   } catch (err) {
     isSaving.value = false
     return true
   }
+}
+
+function closeMailSenderModal() {
+  modalStore.closeModal()
+  setTimeout(() => {
+    mailSenderStore.resetCurrentMailSender()
+    v$.value.$reset()
+  }, 300)
 }
 
 onMounted(async () => {

@@ -64,6 +64,13 @@ export default {
   EDIT_ROLE: 'edit-role',
   VIEW_ROLE: 'view-role',
 
+  // Mail Sender
+  CREATE_MAIL_SENDER: 'view-mail-sender',
+  DELETE_MAIL_SENDER: 'delete-mail-sender',
+  EDIT_MAIL_SENDER: 'edit-mail-sender',
+  VIEW_MAIL_SENDER: 'view-mail-sender',
+
+
   // exchange rates
   VIEW_EXCHANGE_RATE: 'view-exchange-rate-provider',
   CREATE_EXCHANGE_RATE: 'create-exchange-rate-provider',

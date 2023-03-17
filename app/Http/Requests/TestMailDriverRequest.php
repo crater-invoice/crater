@@ -4,7 +4,7 @@ namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendEstimatesRequest extends FormRequest
+class TestMailDriverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,15 @@ class SendEstimatesRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject' => [
-                'required',
-            ],
-            'body' => [
-                'required',
-            ],
-            'mail_sender_id' => [
-                'required',
-            ],
             'to' => [
                 'required',
+                'email'
+            ],
+            'subject' => [
+                'required'
+            ],
+            'message' => [
+                'required'
             ],
         ];
     }

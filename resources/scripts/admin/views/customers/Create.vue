@@ -256,6 +256,7 @@
                   /> </template
               ></BaseInput>
             </BaseInputGroup>
+            <!-- && setPasswordMethod !== 'manual' -->
           </BaseInputGrid>
         </div>
 
@@ -650,10 +651,7 @@ const rules = computed(() => {
       },
 
       email: {
-        required: helpers.withMessage(
-          t('validation.required'),
-          requiredIf(customerStore.currentCustomer.enable_portal == true)
-        ),
+        required: helpers.withMessage(t('validation.required'), required),
         email: helpers.withMessage(t('validation.email_incorrect'), email),
       },
       password: {

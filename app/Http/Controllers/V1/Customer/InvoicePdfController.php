@@ -9,6 +9,7 @@ use Crater\Models\CompanySetting;
 use Crater\Models\Customer;
 use Crater\Models\EmailLog;
 use Crater\Models\Invoice;
+use Crater\Models\MailSender;
 use Illuminate\Http\Request;
 
 class InvoicePdfController extends Controller
@@ -28,14 +29,16 @@ class InvoicePdfController extends Controller
                 );
 
                 if ($notifyInvoiceViewed == 'YES') {
+                    $notificationEmail = CompanySetting::getSetting('notification_email', $invoice->company_id);
+                    $mailSender = MailSender::where('company_id', $invoice->company_id)->where('is_default', true)->first();
+                    MailSender::setMailConfiguration($mailSender->id);
+
+                    $data['from_address'] = $mailSender->from_address;
+                    $data['from_name'] = $mailSender->from_name;
                     $data['invoice'] = Invoice::findOrFail($invoice->id)->toArray();
                     $data['user'] = Customer::find($invoice->customer_id)->toArray();
-                    $notificationEmail = CompanySetting::getSetting(
-                        'notification_email',
-                        $invoice->company_id
-                    );
 
-                    \Mail::to($notificationEmail)->send(new InvoiceViewedMail($data));
+                    send_mail(new InvoiceViewedMail($data), $mailSender, $notificationEmail);
                 }
             }
 

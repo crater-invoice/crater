@@ -9,6 +9,7 @@ use Crater\Models\CompanySetting;
 use Crater\Models\Customer;
 use Crater\Models\EmailLog;
 use Crater\Models\Estimate;
+use Crater\Models\MailSender;
 use Illuminate\Http\Request;
 
 class EstimatePdfController extends Controller
@@ -27,14 +28,16 @@ class EstimatePdfController extends Controller
                 );
 
                 if ($notifyEstimateViewed == 'YES') {
-                    $data['estimate'] = Estimate::findOrFail($estimate->id)->toArray();
-                    $data['user'] = Customer::find($estimate->customer_id)->toArray();
-                    $notificationEmail = CompanySetting::getSetting(
-                        'notification_email',
-                        $estimate->company_id
-                    );
+                    $notificationEmail = CompanySetting::getSetting('notification_email', $estimate->company_id);
+                    $mailSender = MailSender::where('company_id', $estimate->company_id)->where('is_default', true)->first();
+                    MailSender::setMailConfiguration($mailSender->id);
 
-                    \Mail::to($notificationEmail)->send(new EstimateViewedMail($data));
+                    $data['from_address'] = $mailSender->from_address;
+                    $data['from_name'] = $mailSender->from_name;
+                    $data['user'] = Customer::find($estimate->customer_id)->toArray();
+                    $data['estimate'] = Estimate::findOrFail($estimate->id)->toArray();
+
+                    send_mail(new EstimateViewedMail($data), $mailSender, $notificationEmail);
                 }
             }
 

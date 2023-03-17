@@ -54,7 +54,6 @@
               bg-white
               rounded-lg
               text-left
-              overflow-hidden
               relative
               shadow-xl
               transition-all

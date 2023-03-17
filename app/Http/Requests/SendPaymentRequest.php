@@ -30,7 +30,7 @@ class SendPaymentRequest extends FormRequest
             'body' => [
                 'required',
             ],
-            'from' => [
+            'mail_sender_id' => [
                 'required',
             ],
             'to' => [

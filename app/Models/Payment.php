@@ -5,10 +5,10 @@ namespace Crater\Models;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Crater\Jobs\GeneratePaymentPdfJob;
-use Crater\Mail\SendPaymentMail;
 use Crater\Services\SerialNumberFormatter;
 use Crater\Traits\GeneratesPdfTrait;
 use Crater\Traits\HasCustomFieldsTrait;
+use Crater\Traits\MailTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -18,6 +18,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Payment extends Model implements HasMedia
 {
     use HasFactory;
+    use MailTrait;
     use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
@@ -135,7 +136,7 @@ class Payment extends Model implements HasMedia
     {
         $data = $this->sendPaymentData($data);
 
-        \Mail::to($data['to'])->send(new SendPaymentMail($data));
+        $this->setMail('payment', $data);
 
         return [
             'success' => true,

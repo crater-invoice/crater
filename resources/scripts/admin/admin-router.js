@@ -47,8 +47,6 @@ const ExpenseCategory = () =>
   import('@/scripts/admin/views/settings/ExpenseCategorySetting.vue')
 const ExchangeRateSetting = () =>
   import('@/scripts/admin/views/settings/ExchangeRateProviderSetting.vue')
-const MailConfig = () =>
-  import('@/scripts/admin/views/settings/MailConfigSetting.vue')
 const FileDisk = () =>
   import('@/scripts/admin/views/settings/FileDiskSetting.vue')
 const Backup = () => import('@/scripts/admin/views/settings/BackupSetting.vue')
@@ -56,6 +54,8 @@ const UpdateApp = () =>
   import('@/scripts/admin/views/settings/UpdateAppSetting.vue')
 const RolesSettings = () =>
   import('@/scripts/admin/views/settings/RolesSettings.vue')
+const MailSender = () =>
+  import('@/scripts/admin/views/settings/mail-sender/Index.vue')
 
 // Items
 const ItemsIndex = () => import('@/scripts/admin/views/items/Index.vue')
@@ -302,13 +302,6 @@ export default [
             meta: { ability: abilities.VIEW_EXPENSE },
             component: ExpenseCategory,
           },
-
-          {
-            path: 'mail-configuration',
-            name: 'mailconfig',
-            meta: { isOwner: true },
-            component: MailConfig,
-          },
           {
             path: 'file-disk',
             name: 'file-disk',
@@ -327,6 +320,13 @@ export default [
             meta: { isOwner: true },
             component: UpdateApp,
           },
+          {
+            path: 'mail-sender',
+            name: 'mailsender',
+            meta: { ability: abilities.VIEW_MAIL_SENDER },
+            component: MailSender,
+          },
+
         ],
       },
 

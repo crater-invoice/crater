@@ -5,6 +5,7 @@ use Crater\Models\Currency;
 use Crater\Models\CustomField;
 use Crater\Models\Setting;
 use Illuminate\Support\Str;
+use Illuminate\Mail\Mailable;
 
 /**
  * Get company setting
@@ -68,6 +69,42 @@ function get_page_title($company_id)
 function set_active($path, $active = 'active')
 {
     return call_user_func_array('Request::is', (array)$path) ? $active : '';
+}
+
+/**
+ * Send Mail
+ *
+ * @param Mailable $mailable
+ * @param object $mailSender
+ * @return string $to
+ */
+function send_mail(Mailable $mailable, object $mailSender = null, string $to)
+{
+    if ($mailSender->bcc && $mailSender->cc) {
+        \Mail::to($to)
+                ->bcc(explode(',', $mailSender->bcc))
+                ->cc(explode(',', $mailSender->cc))
+                ->send($mailable);
+    }
+
+    if ($mailSender->bcc && $mailSender->cc == null) {
+        \Mail::to($to)
+            ->bcc(explode(',', $mailSender->bcc))
+            ->send($mailable);
+    }
+
+    if ($mailSender->bcc == null && $mailSender->cc) {
+        \Mail::to($to)
+            ->cc(explode(',', $mailSender->cc))
+            ->send($mailable);
+    }
+
+    if ($mailSender->bcc == null && $mailSender->cc == null) {
+        \Mail::to($to)
+            ->send($mailable);
+    }
+
+    return true;
 }
 
 /**

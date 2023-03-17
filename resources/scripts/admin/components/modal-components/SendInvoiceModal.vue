@@ -15,18 +15,28 @@
       </div>
     </template>
     <form v-if="!isPreview" action="">
-      <div class="px-8 py-8 sm:p-6">
+      <!-- v-if -->
+      <div v-if="isMailSenderExist" class="px-8 py-8 sm:p-6">
         <BaseInputGrid layout="one-column" class="col-span-7">
           <BaseInputGroup
-            :label="$t('general.from')"
+            :label="$tc('settings.mail_sender.title', 1)"
             required
-            :error="v$.from.$error && v$.from.$errors[0].$message"
+            :error="
+              v$.mail_sender_id.$error && v$.mail_sender_id.$errors[0].$message
+            "
           >
-            <BaseInput
-              v-model="invoiceMailForm.from"
-              type="text"
-              :invalid="v$.from.$error"
-              @input="v$.from.$touch()"
+            <BaseMultiselect
+              v-model="invoiceMailForm.mail_sender_id"
+              :invalid="v$.mail_sender_id.$error"
+              label="name"
+              :options="mailSenders"
+              value-prop="id"
+              :can-deselect="false"
+              :can-clear="false"
+              :placeholder="$t(`settings.mail_sender.select_mail_sender`)"
+              searchable
+              track-by="name"
+              :content-loading="isFetchingInitialData"
             />
           </BaseInputGroup>
           <BaseInputGroup
@@ -65,6 +75,45 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
+      <!-- v-else -->
+      <div v-else-if="!isMailSenderExist && !isFetchingInitialData">
+        <FeedbackAlert
+          :title="$t('settings.mail_sender.no_mail_sender_found')"
+          :description="
+            $t('settings.mail_sender.no_mail_sender_found_description')
+          "
+          type="warning"
+        >
+          <template #action>
+            <div class="mt-4">
+              <div class="-mx-2 -my-1.5 flex">
+                <button
+                  type="button"
+                  class="
+                    bg-yellow-50
+                    px-2
+                    py-1.5
+                    rounded-md
+                    text-sm
+                    font-medium
+                    text-yellow-800
+                    hover:bg-yellow-100
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-offset-yellow-50
+                    focus:ring-yellow-600
+                  "
+                  @click="gotoMailSender"
+                >
+                  {{ $t('settings.mail_sender.manage_mail_sender') }}
+                </button>
+              </div>
+            </div>
+          </template>
+        </FeedbackAlert>
+      </div>
+      <!-- end v-if-else -->
       <div
         class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
       >
@@ -77,6 +126,7 @@
           {{ $t('general.cancel') }}
         </BaseButton>
         <BaseButton
+          v-if="isMailSenderExist"
           :loading="isLoading"
           :disabled="isLoading"
           variant="primary"
@@ -154,18 +204,24 @@ import { useI18n } from 'vue-i18n'
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
-import { useMailDriverStore } from '@/scripts/admin/stores/mail-driver'
+import { useMailSenderStore } from '@/scripts/admin/stores/mail-sender'
+import FeedbackAlert from '@/scripts/admin/components/FeedbackAlert.vue'
+import { useRouter } from 'vue-router'
 
 const modalStore = useModalStore()
 const companyStore = useCompanyStore()
 const notificationStore = useNotificationStore()
 const invoiceStore = useInvoiceStore()
-const mailDriverStore = useMailDriverStore()
+const mailSenderStore = useMailSenderStore()
+const router = useRouter()
 
 const { t } = useI18n()
 let isLoading = ref(false)
 const templateUrl = ref('')
 const isPreview = ref(false)
+const mailSenders = ref(null)
+const isFetchingInitialData = ref(false)
+const emailTemplates = ref(null)
 
 const emit = defineEmits(['update'])
 
@@ -179,7 +235,7 @@ const invoiceMailFields = ref([
 
 const invoiceMailForm = reactive({
   id: null,
-  from: null,
+  mail_sender_id: null,
   to: null,
   subject: 'New Invoice',
   body: null,
@@ -198,9 +254,8 @@ const modalData = computed(() => {
 })
 
 const rules = {
-  from: {
+  mail_sender_id: {
     required: helpers.withMessage(t('validation.required'), required),
-    email: helpers.withMessage(t('validation.email_incorrect'), email),
   },
   to: {
     required: helpers.withMessage(t('validation.required'), required),
@@ -224,19 +279,25 @@ function cancelPreview() {
 }
 
 async function setInitialData() {
-  let admin = await companyStore.fetchBasicMailConfig()
-
   invoiceMailForm.id = modalStore.id
-
-  if (admin.data) {
-    invoiceMailForm.from = admin.data.from_mail
-  }
-
   if (modalData.value) {
     invoiceMailForm.to = modalData.value.customer.email
   }
 
   invoiceMailForm.body = companyStore.selectedCompanySettings.invoice_mail_body
+
+  isFetchingInitialData.value = true
+  let mailSenderData = await mailSenderStore.fetchMailSenders({ limit: 'all' })
+  if (mailSenderData.data) {
+    mailSenders.value = mailSenderData.data.data
+    let defaultMailSender = mailSenderData.data.data.find(
+      (mailSender) => mailSender.is_default == true
+    )
+    invoiceMailForm.mail_sender_id = defaultMailSender
+      ? defaultMailSender.id
+      : null
+    isFetchingInitialData.value = false
+  }
 }
 
 async function submitForm() {
@@ -286,5 +347,19 @@ function closeSendInvoiceModal() {
     isPreview.value = false
     templateUrl.value = null
   }, 300)
+}
+
+function getTickImage() {
+  const imgUrl = new URL('/img/tick.png', import.meta.url)
+  return imgUrl
+}
+
+const isMailSenderExist = computed(() => {
+  return mailSenders.value && mailSenders.value.length
+})
+
+function gotoMailSender() {
+  closeSendInvoiceModal()
+  router.push('/admin/settings/mail-sender')
 }
 </script>

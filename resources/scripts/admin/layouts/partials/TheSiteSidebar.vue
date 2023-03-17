@@ -15,7 +15,9 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <DialogOverlay class="fixed inset-0 bg-gray-600 bg-opacity-75" />
+        <DialogOverlay
+          class="fixed inset-0 bg-gray-600 bg-opacity-75 dark:bg-gray-900/90"
+        />
       </TransitionChild>
 
       <TransitionChild
@@ -27,7 +29,9 @@
         leave-from="translate-x-0"
         leave-to="-translate-x-full"
       >
-        <div class="relative flex flex-col flex-1 w-full max-w-xs bg-white">
+        <div
+          class="relative flex flex-col flex-1 w-full max-w-xs bg-white dark:bg-gray-800"
+        >
           <TransitionChild
             as="template"
             enter="ease-in-out duration-300"
@@ -40,18 +44,17 @@
             <div class="absolute top-0 right-0 pt-2 -mr-12">
               <button
                 class="
-                  flex
-                  items-center
-                  justify-center
-                  w-10
-                  h-10
-                  ml-1
-                  rounded-full
-                  focus:outline-none
-                  focus:ring-2
-                  focus:ring-inset
-                  focus:ring-white
-                "
+                flex
+                items-center
+                justify-center
+                w-10
+                h-10
+                ml-1
+                rounded-full
+                focus:outline-none
+                focus:ring-2
+                focus:ring-inset
+                focus:ring-white"
                 @click="globalStore.setSidebarVisibility(false)"
               >
                 <span class="sr-only">Close sidebar</span>
@@ -82,8 +85,8 @@
                 :to="item.link"
                 :class="[
                   hasActiveUrl(item.link)
-                    ? 'text-primary-500 border-primary-500 bg-gray-100 '
-                    : 'text-black',
+                    ? 'text-primary-500 border-primary-500 bg-gray-100 dark:shadow-glass dark:backdrop-blur-xl dark:hover:bg-gray-700  dark:bg-gray-700/50 dark:text-primary-400 dark:font-medium'
+                    : 'text-black dark:text-gray-300',
                   'cursor-pointer px-0 pl-4 py-3 border-transparent flex items-center border-l-4 border-solid text-sm not-italic font-medium',
                 ]"
                 @click="globalStore.setSidebarVisibility(false)"
@@ -100,6 +103,10 @@
                 />
                 {{ $t(item.title) }}
               </router-link>
+              <LightDarkSwitch
+                :show-label="false"
+                class="absolute right-6 top-6 !w-auto"
+              />
             </nav>
           </div>
         </div>
@@ -113,17 +120,16 @@
   <!-- DESKTOP MENU -->
   <div
     class="
-      hidden
-      w-56
-      h-screen
-      pb-32
-      overflow-y-auto
-      bg-white
-      border-r border-gray-200 border-solid
-      xl:w-64
-      md:fixed md:flex md:flex-col md:inset-y-0
-      pt-16
-    "
+    hidden
+    w-56
+    h-screen
+    bg-white
+    border-r border-gray-200 border-solid
+    xl:w-64
+    md:fixed md:flex md:flex-col md:inset-y-0
+    pt-16
+    dark:border-gray-800
+    dark:bg-gray-800/80"
   >
     <div
       v-for="menu in globalStore.menuGroups"
@@ -136,8 +142,8 @@
         :to="item.link"
         :class="[
           hasActiveUrl(item.link)
-            ? 'text-primary-500 border-primary-500 bg-gray-100 '
-            : 'text-black',
+            ? 'text-primary-500 border-primary-500 bg-gray-100 dark:border-primary-400 dark:shadow-glass dark:backdrop-blur-xl dark:hover:bg-gray-700 dark:bg-gray-700/50 dark:text-primary-400 dark:font-medium'
+            : 'text-black dark:hover:bg-transparent dark:hover:text-white dark:text-gray-300',
           'cursor-pointer px-0 pl-6 hover:bg-gray-50 py-3 group flex items-center border-l-4 border-solid border-transparent text-sm not-italic font-medium',
         ]"
       >
@@ -145,8 +151,8 @@
           :name="item.icon"
           :class="[
             hasActiveUrl(item.link)
-              ? 'text-primary-500 group-hover:text-primary-500 '
-              : 'text-gray-400 group-hover:text-black',
+              ? 'text-primary-500 group-hover:text-primary-500 dark:text-primary-400 dark:group-hover:text-primary-500 '
+              : 'text-gray-400 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white',
             'mr-4 shrink-0 h-5 w-5 ',
           ]"
         />
@@ -154,6 +160,9 @@
         {{ $t(item.title) }}
       </router-link>
     </div>
+    <LightDarkSwitch
+      class="absolute bottom-0 py-4 border-t border-gray-200 dark:border-gray-700"
+    />
   </div>
 </template>
 
@@ -169,6 +178,7 @@ import {
 
 import { useRoute } from 'vue-router'
 import { useGlobalStore } from '@/scripts/admin/stores/global'
+import LightDarkSwitch from '@/scripts/components/LightDarkSwitcher.vue'
 
 const route = useRoute()
 const globalStore = useGlobalStore()

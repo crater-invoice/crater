@@ -30,7 +30,7 @@ class InvoiceViewedMail extends Mailable
      */
     public function build()
     {
-        return $this->from(config('mail.from.address'), config('mail.from.name'))
+        return $this->from($this->data['from_address'], $this->data['from_name'])
                     ->markdown('emails.viewed.invoice', ['data', $this->data]);
     }
 }

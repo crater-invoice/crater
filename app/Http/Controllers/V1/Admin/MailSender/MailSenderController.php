@@ -41,14 +41,6 @@ class MailSenderController extends Controller
     {
         $this->authorize('create', MailSender::class);
 
-        $mailConfiguration = MailSender::where('company_id', $request->header('company'))
-            ->where('is_default', true)
-            ->first();
-
-        if ($mailConfiguration && $request['is_default'] == true) {
-            $mailConfiguration->update(['is_default' => false]);
-        }
-
         $mailSender = MailSender::createFromRequest($request);
 
         return new MailSenderResource($mailSender);
@@ -78,15 +70,6 @@ class MailSenderController extends Controller
     {
         $this->authorize('update', $mailSender);
 
-        $mailConfiguration = MailSender::where('company_id', $request->header('company'))
-            ->where('is_default', true)
-            ->where('id', '<>', $mailSender->id)
-            ->first();
-
-        if ($mailConfiguration && $request['is_default'] == true) {
-            $mailConfiguration->update(['is_default' => false]);
-        }
-
         $mailSender->updateFromRequest($request);
 
         return new MailSenderResource($mailSender);
@@ -101,6 +84,10 @@ class MailSenderController extends Controller
     public function destroy(MailSender $mailSender)
     {
         $this->authorize('delete', $mailSender);
+
+        if ($mailSender->is_default) {
+           return respondJson('You can\'t remove default mail sender.', 'You can\'t remove default mail sender.');
+        }
 
         $mailSender->delete();
 

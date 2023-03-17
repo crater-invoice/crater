@@ -4,6 +4,7 @@ namespace Crater\Http\Middleware;
 
 use Closure;
 use Crater\Models\FileDisk;
+use Crater\Models\MailSender;
 
 class ConfigMiddleware
 {
@@ -26,6 +27,12 @@ class ConfigMiddleware
             if ($file_disk) {
                 $file_disk->setConfig();
             }
+        }
+
+        $default_mail_sender = MailSender::where('company_id', $request->header('company'))->where('is_default', true)->first();
+
+        if ($default_mail_sender) {
+            $default_mail_sender->setMailConfiguration($default_mail_sender->id);
         }
 
         return $next($request);

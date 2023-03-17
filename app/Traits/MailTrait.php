@@ -2,6 +2,8 @@
 
 namespace Crater\Traits;
 
+use Crater\Mail\EstimateViewedMail;
+use Crater\Mail\InvoiceViewedMail;
 use Crater\Mail\SendEstimateMail;
 use Crater\Mail\SendInvoiceMail;
 use Crater\Mail\SendPaymentMail;
@@ -18,43 +20,19 @@ trait MailTrait
 
         switch ($model) {
             case 'invoice':
-                $mail = new SendInvoiceMail($data);
+               send_mail(new SendInvoiceMail($data), $mailSender, $data['to']);
 
                 break;
 
             case 'estimate':
-                $mail = new SendEstimateMail($data);
+               send_mail(new SendEstimateMail($data), $mailSender, $data['to']);
 
                 break;
 
             case 'payment':
-                $mail = new SendPaymentMail($data);
+               send_mail(new SendPaymentMail($data), $mailSender, $data['to']);
 
                 break;
-        }
-
-        if ($mailSender->bcc && $mailSender->cc) {
-            \Mail::to($data['to'])
-                ->bcc(explode(',', $mailSender->bcc))
-                ->cc(explode(',', $mailSender->cc))
-                ->send($mail);
-        }
-
-        if ($mailSender->bcc && $mailSender->cc == null) {
-            \Mail::to($data['to'])
-                ->bcc(explode(',', $mailSender->bcc))
-                ->send($mail);
-        }
-
-        if ($mailSender->bcc == null && $mailSender->cc) {
-            \Mail::to($data['to'])
-                ->cc(explode(',', $mailSender->cc))
-                ->send($mail);
-        }
-
-        if ($mailSender->bcc == null && $mailSender->cc == null) {
-            \Mail::to($data['to'])
-                ->send($mail);
         }
 
         return true;

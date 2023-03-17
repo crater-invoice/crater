@@ -16,15 +16,6 @@
       {{ $t('general.edit') }}
     </BaseDropdownItem>
 
-    <!-- delete mail-sender  -->
-    <BaseDropdownItem v-if="!row.is_default" @click="removeMailSender(row.id)">
-      <BaseIcon
-        name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
-      />
-      {{ $t('general.delete') }}
-    </BaseDropdownItem>
-
     <!-- send test mail-sender  -->
     <BaseDropdownItem @click="openMailSenderTestModal(row.id)">
       <BaseIcon
@@ -32,6 +23,15 @@
         class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
       />
       {{ $t('general.send_test_mail') }}
+    </BaseDropdownItem>
+
+    <!-- delete mail-sender  -->
+    <BaseDropdownItem v-if="!row.is_default" @click="removeMailSender(row.id)">
+      <BaseIcon
+        name="TrashIcon"
+        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+      />
+      {{ $t('general.delete') }}
     </BaseDropdownItem>
   </BaseDropdown>
 </template>

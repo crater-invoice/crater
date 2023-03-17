@@ -59,6 +59,10 @@ class MailSender extends Model
     {
         $senderMail = self::create($request->getMailSenderPayload());
 
+        if ($request->is_default) {
+            $senderMail->removeOtherDefaultMailSenders($request);
+        }
+
         return $senderMail;
     }
 
@@ -67,6 +71,10 @@ class MailSender extends Model
         $data = $request->getMailSenderPayload();
 
         $this->update($data);
+
+        if ($request->is_default) {
+            $this->removeOtherDefaultMailSenders($request);
+        }
 
         return $this;
     }
@@ -81,6 +89,9 @@ class MailSender extends Model
             'address' => $mailSender->from_address,
             'name' => $mailSender->from_name
         ];
+        $settings['sendmail'] = config('mail.sendmail');
+        $settings['markdown'] = config('mail.markdown');
+        $settings['log_channel'] = config('mail.log_channel');
 
         Config::set('mail', $settings);
 
@@ -91,4 +102,10 @@ class MailSender extends Model
         return true;
     }
 
+    public function removeOtherDefaultMailSenders($request) {
+        MailSender::where('company_id', $request->header('company'))
+            ->where('is_default', true)
+            ->where('id', '<>', $this->id)
+            ->update(['is_default' => false]);
+    }
 }

@@ -9,7 +9,7 @@ const props = defineProps({
   defaultClass: {
     type: String,
     default:
-      'inline-flex whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2',
+      'inline-flex whitespace-nowrap items-center border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800',
   },
   tag: {
     type: String,
@@ -81,17 +81,17 @@ const placeHolderSize = computed(() => {
 
 const variantClass = computed(() => {
   return {
-    'border-transparent shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-500':
+    'border-transparent shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-500 dark:hover:bg-primary-600':
       props.variant === 'primary',
     'border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 focus:ring-primary-500':
       props.variant === 'secondary',
-    'border-transparent  border-solid border-primary-500 font-normal transition ease-in-out duration-150 text-primary-500 hover:bg-primary-200 shadow-inner focus:ring-primary-500':
+    'border-transparent  border-solid border-primary-500 font-normal transition ease-in-out duration-150 text-primary-500 hover:bg-primary-200 shadow-inner focus:ring-primary-500 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-transparent dark:hover:text-primary-500 dark:hover:border-primary-500':
       props.variant == 'primary-outline',
-    'border-gray-200 text-gray-700 bg-white hover:bg-gray-50 focus:ring-primary-500 focus:ring-offset-0':
+    'border-gray-200 text-gray-700 bg-white hover:bg-gray-50 focus:ring-primary-500 focus:ring-offset-0 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-transparent dark:hover:text-primary-500 dark:hover:border-primary-500':
       props.variant == 'white',
     'border-transparent shadow-sm text-white bg-red-600 hover:bg-red-700 focus:ring-red-500':
       props.variant === 'danger',
-    'border-transparent bg-gray-200 border hover:bg-opacity-60 focus:ring-gray-500 focus:ring-offset-0':
+    'border-transparent bg-gray-200 border hover:bg-opacity-60 focus:ring-gray-500 focus:ring-offset-0 dark:bg-gray-600 dark:text-white dark:hover:bg-opacity-60':
       props.variant === 'gray',
   }
 })

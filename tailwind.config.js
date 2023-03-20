@@ -19,6 +19,7 @@ module.exports = {
     './resources/scripts/**/*.js',
     './resources/scripts/**/*.vue',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

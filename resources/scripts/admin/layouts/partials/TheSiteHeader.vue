@@ -15,6 +15,13 @@
       bg-gradient-to-r
       from-primary-500
       to-primary-400
+      dark:from-gray-700/70 dark:to-gray-800/70
+      bg-primary-500
+      dark:bg-transparent
+      dark:backdrop-blur-xl
+      dark:shadow-glass
+      dark:border
+      dark:border-white/10
     "
   >
     <router-link
@@ -53,6 +60,7 @@
         cursor-pointer
         md:hidden md:ml-0
         hover:bg-gray-100
+        dark:bg-gray-800 dark:border-gray-500 dark:border
       "
       @click.prevent="onToggle"
     >

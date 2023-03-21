@@ -65,6 +65,7 @@
         rounded-l-md
         bg-gray-50
         sm:text-sm
+        dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
       "
     >
       {{ addon }}
@@ -82,7 +83,7 @@
         pointer-events-none
       "
     >
-      <span class="text-gray-500 sm:text-sm">
+      <span class="text-gray-500 dark:text-white sm:text-sm ">
         {{ inlineAddon }}
       </span>
     </div>
@@ -199,7 +200,7 @@ const props = defineProps({
   defaultInputClass: {
     type: String,
     default:
-      'font-base block w-full sm:text-sm border-gray-200 rounded-md text-black',
+      'font-base block w-full sm:text-sm border-gray-200 rounded-md text-black  dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-500',
   },
   iconLeftClass: {
     type: String,
@@ -250,7 +251,8 @@ const inputAddonClass = computed(() => {
 
 const inputInvalidClass = computed(() => {
   if (props.invalid) {
-    return 'border-red-500 ring-red-500 focus:ring-red-500 focus:border-red-500'
+    return 'border-red-500 dark:border-red-500 ring-red-500 dark:ring-red-500 focus:ring-red-500 dark:focus:ring-red-500  focus:border-red-500  dark:focus:border-red-500  '
+
   }
 
   return 'focus:ring-primary-400 focus:border-primary-400'
@@ -258,7 +260,7 @@ const inputInvalidClass = computed(() => {
 
 const inputDisabledClass = computed(() => {
   if (props.disabled) {
-    return `border-gray-100 bg-gray-100 !text-gray-400 ring-gray-200 focus:ring-gray-200 focus:border-gray-100`
+    return `border-gray-100 bg-gray-100 !text-gray-400 dark:!text-gray-200   ring-gray-200 focus:ring-gray-200 focus:border-gray-100 dark:opacity-25 `
   }
 
   return ''

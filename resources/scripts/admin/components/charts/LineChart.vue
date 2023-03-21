@@ -6,8 +6,17 @@
 
 <script setup>
 import Chart from 'chart.js'
-import { ref, reactive, computed, onMounted, watchEffect, inject } from 'vue'
+import {
+  ref,
+  reactive,
+  computed,
+  onMounted,
+  watchEffect,
+  inject,
+  watch,
+} from 'vue'
 import { useCompanyStore } from '@/scripts/admin/stores/company'
+import { useGlobalStore } from '@/scripts/admin/stores/global'
 
 const utils = inject('utils')
 
@@ -44,9 +53,11 @@ const props = defineProps({
   },
 })
 
+const isDarkModeOn = document.documentElement.classList.contains('dark')
 let myLineChart = null
 const graph = ref(null)
 const companyStore = useCompanyStore()
+const globalStore = useGlobalStore()
 const defaultCurrency = computed(() => {
   return companyStore.selectedCompanyCurrency
 })
@@ -59,6 +70,14 @@ watchEffect(() => {
     }
   }
 })
+
+watch(
+  () => globalStore.isDarkModeOn,
+  () => {
+    myLineChart.reset()
+    updateColors()
+  }
+)
 
 onMounted(() => {
   let context = graph.value.getContext('2d')
@@ -81,6 +100,8 @@ onMounted(() => {
     },
   })
 
+  const salesColor = globalStore.isDarkModeOn ? '#ffffff' : '#040405'
+
   let data = reactive({
     labels: props.labels,
     datasets: [
@@ -89,16 +110,16 @@ onMounted(() => {
         fill: false,
         lineTension: 0.3,
         backgroundColor: 'rgba(230, 254, 249)',
-        borderColor: '#040405',
+        borderColor: salesColor,
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'miter',
-        pointBorderColor: '#040405',
+        pointBorderColor: salesColor,
         pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: '#040405',
+        pointHoverBackgroundColor: salesColor,
         pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 4,
@@ -193,5 +214,13 @@ function update() {
   myLineChart.update({
     lazy: true,
   })
+}
+
+function updateColors() {
+  const newColor = globalStore.isDarkModeOn ? '#ffffff' : '#040405'
+
+  myLineChart.data.datasets[0].borderColor = newColor
+  myLineChart.data.datasets[0].pointBorderColor = newColor
+  myLineChart.data.datasets[0].pointHoverBackgroundColor = newColor
 }
 </script>

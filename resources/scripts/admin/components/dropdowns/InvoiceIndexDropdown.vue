@@ -12,20 +12,20 @@
       v-if="userStore.hasAbilities(abilities.EDIT_INVOICE)"
       :to="`/admin/invoices/${row.id}/edit`"
     >
-      <BaseDropdownItem v-show="row.allow_edit">
+      <BaseDropdownItem v-show="row.allow_edit" v-slot="slotProps">
         <BaseIcon
           name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
     </router-link>
 
     <!-- Copy PDF url  -->
-    <BaseDropdownItem v-if="route.name === 'invoices.view'" @click="copyPdfUrl">
+    <BaseDropdownItem v-if="route.name === 'invoices.view'" v-slot="slotProps" @click="copyPdfUrl">
       <BaseIcon
         name="LinkIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.copy_pdf_url') }}
     </BaseDropdownItem>
@@ -38,29 +38,29 @@
       "
       :to="`/admin/invoices/${row.id}/view`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="EyeIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.view') }}
       </BaseDropdownItem>
     </router-link>
 
     <!-- Send Invoice Mail  -->
-    <BaseDropdownItem v-if="canSendInvoice(row)" @click="sendInvoice(row)">
+    <BaseDropdownItem v-if="canSendInvoice(row)" v-slot="slotProps" @click="sendInvoice(row)">
       <BaseIcon
         name="PaperAirplaneIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('invoices.send_invoice') }}
     </BaseDropdownItem>
 
     <!-- Resend Invoice -->
-    <BaseDropdownItem v-if="canReSendInvoice(row)" @click="sendInvoice(row)">
+    <BaseDropdownItem v-if="canReSendInvoice(row)" v-slot="slotProps" @click="sendInvoice(row)">
       <BaseIcon
         name="PaperAirplaneIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('invoices.resend_invoice') }}
     </BaseDropdownItem>
@@ -72,17 +72,17 @@
       >
         <BaseIcon
           name="CreditCardIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('invoices.record_payment') }}
       </BaseDropdownItem>
     </router-link>
 
     <!-- Mark as sent Invoice -->
-    <BaseDropdownItem v-if="canSendInvoice(row)" @click="onMarkAsSent(row.id)">
+    <BaseDropdownItem v-if="canSendInvoice(row)" v-slot="slotProps" @click="onMarkAsSent(row.id)">
       <BaseIcon
         name="CheckCircleIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('invoices.mark_as_sent') }}
     </BaseDropdownItem>
@@ -90,11 +90,12 @@
     <!-- Clone Invoice into new invoice  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.CREATE_INVOICE)"
+      v-slot="slotProps"
       @click="cloneInvoiceData(row)"
     >
       <BaseIcon
         name="DocumentTextIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('invoices.clone_invoice') }}
     </BaseDropdownItem>
@@ -102,11 +103,12 @@
     <!--  Delete Invoice  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_INVOICE)"
+      v-slot="slotProps"
       @click="removeInvoice(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

@@ -12,11 +12,8 @@
       v-if="userStore.hasAbilities(abilities.EDIT_ITEM)"
       :to="`/admin/items/${row.id}/edit`"
     >
-      <BaseDropdownItem>
-        <BaseIcon
-          name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
-        />
+      <BaseDropdownItem v-slot="slotProps">
+        <BaseIcon name="PencilIcon" :class="slotProps.class" />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
     </router-link>
@@ -24,12 +21,10 @@
     <!-- delete item  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_ITEM)"
+      v-slot="slotProps"
       @click="removeItem(row.id)"
     >
-      <BaseIcon
-        name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
-      />
+      <BaseIcon name="TrashIcon" :class="slotProps.class" />
       {{ $t('general.delete') }}
     </BaseDropdownItem>
   </BaseDropdown>

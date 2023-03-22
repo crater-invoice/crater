@@ -7,11 +7,12 @@
     <!-- edit customField  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.EDIT_CUSTOM_FIELDS)"
+      v-slot="slotProps"
       @click="editCustomField(row.id)"
     >
       <BaseIcon
         name="PencilIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.edit') }}
     </BaseDropdownItem>
@@ -19,11 +20,12 @@
     <!-- delete customField  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_CUSTOM_FIELDS)"
+      v-slot="slotProps"
       @click="removeCustomField(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

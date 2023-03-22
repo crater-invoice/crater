@@ -1,22 +1,9 @@
 <template>
-  <div ref="companySwitchBar" class="relative rounded">
+  <div ref="companySwitchBar" class="relative rounded dark:text-white">
     <CompanyModal />
 
     <div
-      class="
-        flex
-        items-center
-        justify-center
-        px-3
-        h-8
-        md:h-9
-        ml-2
-        text-sm text-white
-        bg-white
-        rounded
-        cursor-pointer
-        bg-opacity-20
-      "
+      class="flex items-center justify-center px-3 h-8 md:h-9 ml-2 text-sm text-white bg-white rounded cursor-pointer bg-opacity-20 dark:bg-gray-700"
       @click="isShow = !isShow"
     >
       <span
@@ -38,44 +25,21 @@
     >
       <div
         v-if="isShow"
-        class="absolute right-0 mt-2 bg-white rounded-md shadow-lg"
+        class="absolute right-0 mt-2 bg-white rounded-md shadow-lg dark:border dark:border-white/10 dark:text-white dark:bg-gray-800/[.95] dark:shadow-glass dark:backdrop-blur-xl"
       >
+        <BaseDarkHighlight class="z-[-1] top-0 left-0" />
         <div
-          class="
-            overflow-y-auto
-            scrollbar-thin scrollbar-thumb-rounded-full
-            w-[250px]
-            max-h-[350px]
-            scrollbar-thumb-gray-300 scrollbar-track-gray-10
-            pb-4
-          "
+          class="overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full w-[250px] max-h-[350px] scrollbar-thumb-gray-300 scrollbar-track-gray-10 pb-4"
         >
           <label
-            class="
-              px-3
-              py-2
-              text-xs
-              font-semibold
-              text-gray-400
-              mb-0.5
-              block
-              uppercase
-            "
+            class="px-3 py-2 text-xs font-semibold text-gray-400 mb-0.5 block uppercase"
           >
             {{ $t('company_switcher.label') }}
           </label>
 
           <div
             v-if="companyStore.companies.length < 1"
-            class="
-              flex flex-col
-              items-center
-              justify-center
-              p-2
-              px-3
-              mt-4
-              text-base text-gray-400
-            "
+            class="flex flex-col items-center justify-center p-2 px-3 mt-4 text-base text-gray-400"
           >
             <BaseIcon name="ExclamationCircleIcon" class="h-5 text-gray-400" />
             {{ $t('company_switcher.no_results_found') }}
@@ -85,35 +49,16 @@
               <div
                 v-for="(company, index) in companyStore.companies"
                 :key="index"
-                class="
-                  p-2
-                  px-3
-                  rounded-md
-                  cursor-pointer
-                  hover:bg-gray-100 hover:text-primary-500
-                "
+                class="p-2 px-3 rounded-md cursor-pointer hover:bg-gray-100 hover:text-primary-500 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
                 :class="{
-                  'bg-gray-100 text-primary-500':
+                  'bg-gray-100 text-primary-500 dark:bg-gray-700':
                     companyStore.selectedCompany.id === company.id,
                 }"
                 @click="changeCompany(company)"
               >
                 <div class="flex items-center">
                   <span
-                    class="
-                      flex
-                      items-center
-                      justify-center
-                      mr-3
-                      overflow-hidden
-                      text-base
-                      font-semibold
-                      bg-gray-200
-                      rounded-md
-                      w-9
-                      h-9
-                      text-primary-500
-                    "
+                    class="flex items-center justify-center mr-3 overflow-hidden text-base font-semibold bg-gray-200 rounded-md w-9 h-9 text-primary-500 bg-gray-200 dark:bg-gray-900"
                   >
                     <span v-if="!company.logo">
                       {{ initGenerator(company.name) }}
@@ -135,17 +80,7 @@
         </div>
         <div
           v-if="userStore.currentUser.is_owner"
-          class="
-            flex
-            items-center
-            justify-center
-            p-4
-            pl-3
-            border-t-2 border-gray-100
-            cursor-pointer
-            text-primary-400
-            hover:text-primary-500
-          "
+          class="flex items-center justify-center p-4 pl-3 border-t-2 border-gray-100 cursor-pointer text-primary-400 hover:text-primary-500 dark:border-gray-600"
           @click="addNewCompany"
         >
           <BaseIcon name="PlusIcon" class="h-5 mr-2" />

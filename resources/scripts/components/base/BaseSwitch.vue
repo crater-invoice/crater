@@ -8,7 +8,16 @@
       <Switch
         v-model="enabled"
         :class="enabled ? 'bg-primary-500' : 'bg-gray-300 dark:bg-gray-900'"
-        class="relative inline-flex items-center h-6 transition-colors rounded-full w-11 focus:outline-none focus:ring-primary-500"
+        class="
+          relative
+          inline-flex
+          items-center
+          h-6
+          transition-colors
+          rounded-full
+          w-11
+          focus:outline-none focus:ring-primary-500
+        "
         v-bind="$attrs"
       >
         <span
@@ -17,7 +26,14 @@
               ? 'translate-x-6 dark:bg-white'
               : 'translate-x-1 dark:bg-gray-500'
           "
-          class="inline-block w-4 h-4 transition-transform bg-white rounded-full"
+          class="
+            inline-block
+            w-4
+            h-4
+            transition-transform
+            bg-white
+            rounded-full
+          "
         />
       </Switch>
 

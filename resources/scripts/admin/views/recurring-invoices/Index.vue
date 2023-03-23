@@ -121,6 +121,7 @@
           mt-5
           list-none
           border-b-2 border-gray-200 border-solid
+          dark:border-gray-600
         "
       >
         <!-- Tabs -->

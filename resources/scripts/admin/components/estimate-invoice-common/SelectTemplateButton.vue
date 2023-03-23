@@ -1,9 +1,9 @@
 <template>
   <div>
-    <label class="flex text-gray-800 font-medium text-sm mb-2">
+    <BaseLabel class="!flex !text-gray-800 !mb-2">
       {{ $t('general.select_template') }}
       <span class="text-sm text-red-500"> *</span>
-    </label>
+    </BaseLabel>
     <BaseButton
       type="button"
       class="flex justify-center w-full text-sm lg:w-auto hover:bg-gray-200"

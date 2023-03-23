@@ -62,9 +62,9 @@
         </div>
         <div v-else>
           <div v-if="usersStore.customerList.length > 0">
-            <label class="text-sm text-gray-400 mb-0.5 block px-2 uppercase">
+            <BaseLabel class="!text-gray-400 !mb-0.5 !block !px-2 !uppercase">
               {{ $t('global_search.customers') }}
-            </label>
+            </BaseLabel>
             <div
               v-for="(customer, index) in usersStore.customerList"
               :key="index"
@@ -108,11 +108,11 @@
           </div>
 
           <div v-if="usersStore.userList.length > 0" class="mt-2">
-            <label
-              class="text-sm text-gray-400 mb-2 block px-2 mb-0.5 uppercase"
+            <BaseLabel
+              class="!text-gray-400 !mb-2 !block !px-2 !uppercase"
             >
               {{ $t('global_search.users') }}
-            </label>
+            </BaseLabel>
             <div
               v-for="(user, index) in usersStore.userList"
               :key="index"

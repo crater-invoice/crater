@@ -5,9 +5,9 @@
     >
       <SelectNotePopup :type="type" @select="onSelectNote" />
     </div>
-    <label class="text-gray-800 font-medium mb-4 text-sm">
+    <BaseLabel class="!text-gray-800 !mb-4 ">
       {{ $t('invoices.notes') }}
-    </label>
+    </BaseLabel>
     <BaseCustomInput
       v-model="store[storeProp].notes"
       :content-loading="store.isFetchingInitialSettings"

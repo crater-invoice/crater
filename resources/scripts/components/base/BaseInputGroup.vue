@@ -3,19 +3,15 @@
     <BaseContentPlaceholders v-if="contentLoading">
       <BaseContentPlaceholdersText :lines="1" :class="contentLoadClass" />
     </BaseContentPlaceholders>
-    <label
+    <BaseLabel
       v-else-if="label"
       :class="labelClasses"
       class="
-        flex
-        text-sm
-        not-italic
-        items-center
-        font-medium
-        text-gray-800
-        whitespace-nowrap
-        justify-between
-        dark:text-gray-300
+        !flex
+        !items-center
+        !text-gray-800
+        !whitespace-nowrap
+        !justify-between
       "
     >
       <div>
@@ -29,7 +25,7 @@
         name="InformationCircleIcon"
         class="h-4 text-gray-400 cursor-pointer hover:text-gray-600"
       />
-    </label>
+    </BaseLabel>
     <div :class="inputContainerClasses">
       <slot></slot>
       <span v-if="helpText" class="text-gray-500 text-xs mt-1 font-light dark:text-gray-400">

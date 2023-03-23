@@ -4,9 +4,9 @@
     :description="$t('settings.update_app.description')"
   >
     <div class="pb-8 ml-0">
-      <label class="text-sm not-italic font-medium input-label">
+      <BaseLabel class="!input-label">
         {{ $t('settings.update_app.current_version') }}
-      </label>
+      </BaseLabel>
 
       <div
         class="
@@ -64,9 +64,9 @@
           </div>
         </div>
 
-        <label class="text-sm not-italic font-medium input-label">
+        <BaseLabel class="!input-label">
           {{ $t('settings.update_app.next_version') }}
-        </label>
+        </BaseLabel>
         <br />
         <div
           class="
@@ -99,9 +99,9 @@
           v-html="description"
         ></div>
 
-        <label class="text-sm not-italic font-medium input-label">
+        <BaseLabel class=" !input-label">
           {{ $t('settings.update_app.requirements') }}
-        </label>
+        </BaseLabel>
 
         <table class="w-1/2 mt-2 border-2 border-gray-200 BaseTable-fixed">
           <tr

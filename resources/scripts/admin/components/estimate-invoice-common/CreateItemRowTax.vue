@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center justify-between mb-3">
     <div class="flex items-center text-base" style="flex: 4">
-      <label class="pr-2 mb-0" align="right">
+      <BaseLabel class="!pr-2 !mb-0" align="right">
         {{ $t('invoices.item.tax') }}
-      </label>
+      </BaseLabel>
 
       <BaseMultiselect
         v-model="selectedTax"
@@ -35,9 +35,9 @@
           >
             <BaseIcon name="CheckCircleIcon" class="h-5 text-primary-400" />
 
-            <label
-              class="ml-2 text-sm leading-none cursor-pointer text-primary-400"
-              >{{ $t('invoices.add_new_tax') }}</label
+            <BaseLabel
+              class="!ml-2 !leading-none !cursor-pointer !text-primary-400"
+              >{{ $t('invoices.add_new_tax') }}</BaseLabel
             >
           </button>
         </template>

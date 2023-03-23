@@ -20,6 +20,7 @@
           hover:text-gray-700
           top-2.5
           right-3.5
+          dark:text-gray-300
         "
         @click="$emit('clear')"
       >

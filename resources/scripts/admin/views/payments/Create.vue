@@ -215,9 +215,9 @@
             <SelectNotePopup type="Payment" @select="onSelectNote" />
           </div>
 
-          <label class="mb-4 text-sm font-medium text-gray-800">
+          <BaseLabel class="!mb-4  !text-gray-800">
             {{ $t('estimates.notes') }}
-          </label>
+          </BaseLabel>
 
           <BaseCustomInput
             v-model="paymentStore.currentPayment.notes"

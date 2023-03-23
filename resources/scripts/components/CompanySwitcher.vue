@@ -50,20 +50,20 @@
             pb-4
           "
         >
-          <label
+          <BaseLabel
             class="
-              px-3
-              py-2
-              text-xs
-              font-semibold
-              text-gray-400
-              mb-0.5
-              block
-              uppercase
+              !px-3
+              !py-2
+              !text-xs
+              !font-semibold
+              !text-gray-400
+              !mb-0.5
+              !block
+              !uppercase
             "
           >
             {{ $t('company_switcher.label') }}
-          </label>
+          </BaseLabel>
 
           <div
             v-if="companyStore.companies.length < 1"

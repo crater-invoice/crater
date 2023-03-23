@@ -97,6 +97,7 @@
                   whitespace-nowrap
                   mr-2
                   min-w-[200px]
+                  dark:text-primary-400
                 "
               >
                 {{ element.label }}

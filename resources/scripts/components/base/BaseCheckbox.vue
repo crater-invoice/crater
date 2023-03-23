@@ -15,7 +15,7 @@
         v-if="label"
         :for="id"
         :class="`font-medium ${
-          disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600'
+          disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 dark:text-white'
         } cursor-pointer `"
       >
         {{ label }}

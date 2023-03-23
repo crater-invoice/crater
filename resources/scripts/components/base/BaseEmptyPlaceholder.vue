@@ -4,10 +4,10 @@
       <slot></slot>
     </div>
     <div class="mt-2">
-      <label class="font-medium">{{ title }}</label>
+      <BaseLabel >{{ title }}</BaseLabel>
     </div>
     <div class="mt-2">
-      <label class="text-gray-500">
+      <label class="text-gray-500 dark:text-gray-400">
         {{ description }}
       </label>
     </div>

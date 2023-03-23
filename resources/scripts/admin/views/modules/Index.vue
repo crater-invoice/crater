@@ -53,7 +53,7 @@
           </div>
         </div>
         <div v-else class="mt-24">
-          <label class="flex items-center justify-center text-gray-500">
+          <label class="flex items-center justify-center text-gray-500 dark:text-gray-300">
             {{ $t('modules.no_modules_installed') }}
           </label>
         </div>

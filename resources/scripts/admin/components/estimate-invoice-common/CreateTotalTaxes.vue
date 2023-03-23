@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center justify-between w-full mt-2 text-sm">
-    <label class="font-semibold leading-5 text-gray-500 uppercase">
+    <BaseLabel class="!font-semibold  !text-gray-500 !uppercase">
       {{ tax.name }} ({{ tax.percent }} %)
-    </label>
-    <label class="flex items-center justify-center text-lg text-black">
+    </BaseLabel>
+    <label class="flex items-center justify-center text-lg text-black dark:text-white">
       <BaseFormatMoney :amount="tax.amount" :currency="currency" />
 
       <BaseIcon

@@ -69,31 +69,29 @@
       </div>
       <div class="grid grid-cols-2 gap-8 mt-2">
         <div v-if="selectedCustomer.billing" class="flex flex-col">
-          <label
+          <BaseLabel
             class="
-              mb-1
-              text-sm
-              font-medium
-              text-left text-gray-400
-              uppercase
-              whitespace-nowrap
+              !mb-1
+              !text-left !text-gray-400
+              !uppercase
+              !whitespace-nowrap
             "
           >
             {{ $t('general.bill_to') }}
-          </label>
+          </BaseLabel>
 
           <div
             v-if="selectedCustomer.billing"
             class="flex flex-col flex-1 p-0 text-left"
           >
-            <label
+            <BaseLabel
               v-if="selectedCustomer.billing.name"
-              class="relative w-11/12 text-sm truncate"
+              class="!relative !w-11/12 !truncate"
             >
               {{ selectedCustomer.billing.name }}
-            </label>
+            </BaseLabel>
 
-            <label class="relative w-11/12 text-sm truncate">
+            <BaseLabel class="!relative !w-11/12  !truncate">
               <span v-if="selectedCustomer.billing.city">
                 {{ selectedCustomer.billing.city }}
               </span>
@@ -108,42 +106,40 @@
               <span v-if="selectedCustomer.billing.state">
                 {{ selectedCustomer.billing.state }}
               </span>
-            </label>
-            <label
+            </BaseLabel>
+            <BaseLabel
               v-if="selectedCustomer.billing.zip"
-              class="relative w-11/12 text-sm truncate"
+              class="!relative !w-11/12 !truncate"
             >
               {{ selectedCustomer.billing.zip }}
-            </label>
+            </BaseLabel>
           </div>
         </div>
 
         <div v-if="selectedCustomer.shipping" class="flex flex-col">
-          <label
+          <BaseLabel
             class="
-              mb-1
-              text-sm
-              font-medium
-              text-left text-gray-400
-              uppercase
-              whitespace-nowrap
+              !mb-1
+              !text-left !text-gray-400
+              !uppercase
+              !whitespace-nowrap
             "
           >
             {{ $t('general.ship_to') }}
-          </label>
+          </BaseLabel>
 
           <div
             v-if="selectedCustomer.shipping"
             class="flex flex-col flex-1 p-0 text-left"
           >
-            <label
+            <BaseLabel
               v-if="selectedCustomer.shipping.name"
-              class="relative w-11/12 text-sm truncate"
+              class="!relative !w-11/12 !truncate"
             >
               {{ selectedCustomer.shipping.name }}
-            </label>
+            </BaseLabel>
 
-            <label class="relative w-11/12 text-sm truncate">
+            <BaseLabel class="!relative !w-11/12 !truncate">
               <span v-if="selectedCustomer.shipping.city">
                 {{ selectedCustomer.shipping.city }}
               </span>
@@ -158,13 +154,13 @@
               <span v-if="selectedCustomer.shipping.state">
                 {{ selectedCustomer.shipping.state }}
               </span>
-            </label>
-            <label
+            </BaseLabel>
+            <BaseLabel
               v-if="selectedCustomer.shipping.zip"
-              class="relative w-11/12 text-sm truncate"
+              class="!relative !w-11/12 !text-sm !truncate"
             >
               {{ selectedCustomer.shipping.zip }}
-            </label>
+            </BaseLabel>
           </div>
         </div>
       </div>
@@ -211,7 +207,7 @@
           />
 
           <div class="mt-1">
-            <label class="text-lg font-medium text-gray-900">
+            <label class="text-lg font-medium text-gray-900 dark:text-white">
               {{ $t('customers.new_customer') }}
               <span class="text-red-500"> * </span>
             </label>
@@ -335,9 +331,9 @@
                   v-if="customerStore.customers.length === 0"
                   class="flex justify-center p-5 text-gray-400"
                 >
-                  <label class="text-base text-gray-500 cursor-pointer">
+                  <BaseLabel class="!text-base !text-gray-500 !cursor-pointer">
                     {{ $t('customers.no_customers_found') }}
-                  </label>
+                  </BaseLabel>
                 </div>
               </ul>
             </div>
@@ -362,19 +358,18 @@
             >
               <BaseIcon name="UserAddIcon" class="text-primary-400" />
 
-              <label
+              <BaseLabel
                 class="
-                  m-0
-                  ml-3
-                  text-sm
-                  leading-none
-                  cursor-pointer
-                  font-base
-                  text-primary-400
+                  !m-0
+                  !ml-3
+                  !leading-none
+                  !cursor-pointer
+                  !font-base
+                  !text-primary-400
                 "
               >
                 {{ $t('customers.add_new_customer') }}
-              </label>
+              </BaseLabel>
             </button>
           </PopoverPanel>
         </div>

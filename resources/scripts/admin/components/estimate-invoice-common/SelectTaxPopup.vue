@@ -88,38 +88,37 @@
                     @click="selectTaxType(taxType, close)"
                   >
                     <div class="flex justify-between px-2">
-                      <label
+                      <BaseLabel
                         class="
-                          m-0
-                          text-base
-                          font-semibold
-                          leading-tight
-                          text-gray-700
-                          cursor-pointer
+                          !m-0
+                          !text-base
+                          !font-semibold
+                          !leading-tight
+                          !cursor-pointer
                         "
                       >
                         {{ taxType.name }}
-                      </label>
+                      </BaseLabel>
 
-                      <label
+                      <BaseLabel
                         class="
-                          m-0
-                          text-base
-                          font-semibold
-                          text-gray-700
-                          cursor-pointer
+                          !m-0
+                          !text-base
+                          !font-semibold
+                          !text-gray-700
+                          !cursor-pointer
                         "
                       >
                         {{ taxType.percent }} %
-                      </label>
+                      </BaseLabel>
                     </div>
                   </div>
                 </div>
 
                 <div v-else class="flex justify-center p-5 text-gray-400">
-                  <label class="text-base text-gray-500 cursor-pointer">
+                  <BaseLabel class="!text-base !text-gray-500 !cursor-pointer">
                     {{ $t('general.no_tax_found') }}
-                  </label>
+                  </BaseLabel>
                 </div>
               </div>
 
@@ -142,19 +141,18 @@
                 @click="openTaxTypeModal"
               >
                 <BaseIcon name="CheckCircleIcon" class="text-primary-400" />
-                <label
+                <BaseLabel
                   class="
-                    m-0
-                    ml-3
-                    text-sm
-                    leading-none
-                    cursor-pointer
-                    font-base
-                    text-primary-400
+                    !m-0
+                    !ml-3
+                    !leading-none
+                    !cursor-pointer
+                    !font-base
+                    !text-primary-400
                   "
                 >
                   {{ $t('estimates.add_new_tax') }}
-                </label>
+                </BaseLabel>
               </button>
             </div>
           </PopoverPanel>

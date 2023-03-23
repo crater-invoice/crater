@@ -16,12 +16,12 @@
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
       </BaseContentPlaceholders>
-      <label
+      <BaseLabel
         v-else
-        class="text-sm font-semibold leading-5 text-gray-400 uppercase"
+        class="!font-semibold  !text-gray-400 !uppercase"
       >
         {{ $t('estimates.sub_total') }}
-      </label>
+      </BaseLabel>
 
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
@@ -29,7 +29,7 @@
 
       <label
         v-else
-        class="flex items-center justify-center m-0 text-lg text-black uppercase "
+        class="flex items-center justify-center m-0 text-lg text-black  dark:text-white uppercase "
       >
         <BaseFormatMoney
           :amount="store.getSubTotal"
@@ -48,7 +48,7 @@
       </BaseContentPlaceholders>
       <label
         v-else-if="store[storeProp].tax_per_item === 'YES'"
-        class="m-0 text-sm font-semibold leading-5 text-gray-500 uppercase"
+        class="m-0 text-sm font-semibold leading-5 text-gray-500 uppercase dark:text-gray-400"
       >
         {{ tax.name }} - {{ tax.percent }}%
       </label>
@@ -59,7 +59,7 @@
 
       <label
         v-else-if="store[storeProp].tax_per_item === 'YES'"
-        class="flex items-center justify-center m-0 text-lg text-black uppercase "
+        class="flex items-center justify-center m-0 text-lg text-black dark:text-white uppercase "
       >
         <BaseFormatMoney :amount="tax.amount" :currency="defaultCurrency" />
       </label>
@@ -75,12 +75,12 @@
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
       </BaseContentPlaceholders>
-      <label
+      <BaseLabel
         v-else
-        class="text-sm font-semibold leading-5 text-gray-400 uppercase"
+        class=" !font-semibold  !text-gray-400 !uppercase"
       >
         {{ $t('estimates.discount') }}
-      </label>
+      </BaseLabel>
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText
           :lines="1"
@@ -171,21 +171,21 @@
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
       </BaseContentPlaceholders>
-      <label
+      <BaseLabel
         v-else
-        class="m-0 text-sm font-semibold leading-5 text-gray-400 uppercase"
-        >{{ $t('estimates.total') }} {{ $t('estimates.amount') }}:</label
+        class="!m-0 !font-semibold  !text-gray-400 !uppercase"
+        >{{ $t('estimates.total') }} {{ $t('estimates.amount') }}:</BaseLabel
       >
 
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
       </BaseContentPlaceholders>
-      <label
+      <BaseLabel
         v-else
-        class="flex items-center justify-center text-lg uppercase  text-primary-400"
+        class="!flex !items-center !justify-center !text-lg !uppercase  !text-primary-400"
       >
         <BaseFormatMoney :amount="store.getTotal" :currency="defaultCurrency" />
-      </label>
+      </BaseLabel>
     </div>
   </div>
 </template>

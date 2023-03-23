@@ -83,25 +83,25 @@
                   @click="selectNote(index, close)"
                 >
                   <div class="flex justify-between px-2">
-                    <label
+                    <BaseLabel
                       class="
-                        m-0
-                        text-base
-                        font-semibold
-                        leading-tight
-                        text-gray-700
-                        cursor-pointer
+                        !m-0
+                        !text-base
+                        !font-semibold
+                        !leading-tight
+                        !text-gray-700
+                        !cursor-pointer
                       "
                     >
                       {{ note.name }}
-                    </label>
+                    </BaseLabel>
                   </div>
                 </div>
               </div>
               <div v-else class="flex justify-center p-5 text-gray-400">
-                <label class="text-base text-gray-500">
+                <BaseLabel class="!text-base !text-gray-500">
                   {{ $t('general.no_note_found') }}
-                </label>
+                </BaseLabel>
               </div>
             </div>
             <button
@@ -122,19 +122,18 @@
               @click="openNoteModal"
             >
               <BaseIcon name="CheckCircleIcon" class="text-primary-400" />
-              <label
+              <BaseLabel
                 class="
-                  m-0
-                  ml-3
-                  text-sm
-                  leading-none
-                  cursor-pointer
-                  font-base
-                  text-primary-400
+                  !m-0
+                  !ml-3
+                  !leading-none
+                  !cursor-pointer
+                  !font-base
+                  !text-primary-400
                 "
               >
                 {{ $t('settings.customization.notes.add_new_note') }}
-              </label>
+              </BaseLabel>
             </button>
           </div>
         </PopoverPanel>

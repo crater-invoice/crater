@@ -116,7 +116,7 @@
         </BaseInputGrid>
       </div>
 
-      <div class="z-0 flex justify-end p-4 bg-gray-50 border-modal-bg">
+      <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600">
         <BaseButton
           class="mr-3 text-sm"
           variant="primary-outline"

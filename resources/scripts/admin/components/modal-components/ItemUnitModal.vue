@@ -37,7 +37,7 @@
           flex
           justify-end
           p-4
-          border-t border-gray-200 border-solid border-modal-bg
+          border-t border-gray-200 border-solid dark:border-gray-600
         "
       >
         <BaseButton

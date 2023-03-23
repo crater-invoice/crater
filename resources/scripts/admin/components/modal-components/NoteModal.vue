@@ -70,7 +70,7 @@
           justify-end
           px-4
           py-4
-          border-t border-solid border-gray-light
+          border-t border-gray-200 border-solid dark:border-gray-600
         "
       >
         <BaseButton

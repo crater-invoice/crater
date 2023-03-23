@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid">
+    <div class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600">
       <BaseButton class="mr-3" variant="primary-outline" @click="closeModal">
         {{ $t('general.cancel') }}
       </BaseButton>

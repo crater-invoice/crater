@@ -16,13 +16,15 @@
       text-left
       bg-white
       border border-gray-200
+      dark:border-gray-600
       rounded-md
       min-h-[200px]
       overflow-hidden
+      dark:bg-gray-700 dark:text-white
     "
   >
     <div v-if="editor" class="editor-content">
-      <div class="flex justify-end p-2 border-b border-gray-200 md:hidden">
+      <div class="flex justify-end p-2 border-b border-gray-200 dark:border-gray-600 md:hidden">
         <BaseDropdown width-class="w-48">
           <template #activator>
             <div
@@ -42,7 +44,7 @@
               <dots-vertical-icon class="w-6 h-6 text-gray-600" />
             </div>
           </template>
-          <div class="flex flex-wrap space-x-1">
+          <div class="flex flex-wrap space-x-1 dark:text-white">
             <span
               class="
                 flex
@@ -53,8 +55,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('bold') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('bold') }"
               @click="editor.chain().focus().toggleBold().run()"
             >
               <bold-icon class="h-3 cursor-pointer fill-current" />
@@ -69,8 +72,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('italic') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('italic') }"
               @click="editor.chain().focus().toggleItalic().run()"
             >
               <italic-icon class="h-3 cursor-pointer fill-current" />
@@ -85,8 +89,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('strike') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('strike') }"
               @click="editor.chain().focus().toggleStrike().run()"
             >
               <strikethrough-icon class="h-3 cursor-pointer fill-current" />
@@ -101,8 +106,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('code') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('code') }"
               @click="editor.chain().focus().toggleCode().run()"
             >
               <coding-icon class="h-3 cursor-pointer fill-current" />
@@ -117,8 +123,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('paragraph') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('paragraph') }"
               @click="editor.chain().focus().setParagraph().run()"
             >
               <paragraph-icon class="h-3 cursor-pointer fill-current" />
@@ -133,9 +140,10 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
               :class="{
-                'bg-gray-200': editor.isActive('heading', { level: 1 }),
+                'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 1 }),
               }"
               @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
             >
@@ -151,9 +159,10 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
               :class="{
-                'bg-gray-200': editor.isActive('heading', { level: 2 }),
+                'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 2 }),
               }"
               @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
             >
@@ -169,9 +178,10 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
               :class="{
-                'bg-gray-200': editor.isActive('heading', { level: 3 }),
+                'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 3 }),
               }"
               @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
             >
@@ -188,8 +198,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('bulletList') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('bulletList') }"
               @click="editor.chain().focus().toggleBulletList().run()"
             >
               <list-ul-icon class="h-3 cursor-pointer fill-current" />
@@ -204,8 +215,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('orderedList') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('orderedList') }"
               @click="editor.chain().focus().toggleOrderedList().run()"
             >
               <list-icon class="h-3 cursor-pointer fill-current" />
@@ -220,8 +232,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('blockquote') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('blockquote') }"
               @click="editor.chain().focus().toggleBlockquote().run()"
             >
               <quote-icon class="h-3 cursor-pointer fill-current" />
@@ -236,8 +249,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('codeBlock') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('codeBlock') }"
               @click="editor.chain().focus().toggleCodeBlock().run()"
             >
               <code-block-icon class="h-3 cursor-pointer fill-current" />
@@ -252,8 +266,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('undo') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('undo') }"
               @click="editor.chain().focus().undo().run()"
             >
               <undo-icon class="h-3 cursor-pointer fill-current" />
@@ -268,8 +283,9 @@
                 rounded-sm
                 cursor-pointer
                 hover:bg-gray-100
+                dark:hover:bg-gray-800
               "
-              :class="{ 'bg-gray-200': editor.isActive('redo') }"
+              :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('redo') }"
               @click="editor.chain().focus().redo().run()"
             >
               <redo-icon class="h-3 cursor-pointer fill-current" />
@@ -277,7 +293,7 @@
           </div>
         </BaseDropdown>
       </div>
-      <div class="hidden p-2 border-b border-gray-200 md:flex">
+      <div class="hidden p-2 border-b border-gray-200 dark:border-gray-600 md:flex">
         <div class="flex flex-wrap space-x-1">
           <span
             class="
@@ -289,8 +305,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('bold') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('bold') }"
             @click="editor.chain().focus().toggleBold().run()"
           >
             <bold-icon class="h-3 cursor-pointer fill-current" />
@@ -305,8 +322,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('italic') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('italic') }"
             @click="editor.chain().focus().toggleItalic().run()"
           >
             <italic-icon class="h-3 cursor-pointer fill-current" />
@@ -321,8 +339,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('strike') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('strike') }"
             @click="editor.chain().focus().toggleStrike().run()"
           >
             <strikethrough-icon class="h-3 cursor-pointer fill-current" />
@@ -337,8 +356,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('code') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('code') }"
             @click="editor.chain().focus().toggleCode().run()"
           >
             <coding-icon class="h-3 cursor-pointer fill-current" />
@@ -353,8 +373,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('paragraph') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('paragraph') }"
             @click="editor.chain().focus().setParagraph().run()"
           >
             <paragraph-icon class="h-3 cursor-pointer fill-current" />
@@ -369,8 +390,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('heading', { level: 1 }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 1 }) }"
             @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
           >
             H1
@@ -385,8 +407,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('heading', { level: 2 }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 2 }) }"
             @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
           >
             H2
@@ -401,8 +424,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('heading', { level: 3 }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('heading', { level: 3 }) }"
             @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
           >
             H3
@@ -418,8 +442,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('bulletList') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('bulletList') }"
             @click="editor.chain().focus().toggleBulletList().run()"
           >
             <list-ul-icon class="h-3 cursor-pointer fill-current" />
@@ -434,8 +459,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('orderedList') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('orderedList') }"
             @click="editor.chain().focus().toggleOrderedList().run()"
           >
             <list-icon class="h-3 cursor-pointer fill-current" />
@@ -450,8 +476,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('blockquote') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('blockquote') }"
             @click="editor.chain().focus().toggleBlockquote().run()"
           >
             <quote-icon class="h-3 cursor-pointer fill-current" />
@@ -466,8 +493,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('codeBlock') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('codeBlock') }"
             @click="editor.chain().focus().toggleCodeBlock().run()"
           >
             <code-block-icon class="h-3 cursor-pointer fill-current" />
@@ -482,8 +510,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('undo') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('undo') }"
             @click="editor.chain().focus().undo().run()"
           >
             <undo-icon class="h-3 cursor-pointer fill-current" />
@@ -498,8 +527,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive('redo') }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive('redo') }"
             @click="editor.chain().focus().redo().run()"
           >
             <redo-icon class="h-3 cursor-pointer fill-current" />
@@ -514,8 +544,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'left' }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive({ textAlign: 'left' }) }"
             @click="editor.chain().focus().setTextAlign('left').run()"
           >
             <menu-alt2-icon class="h-5 cursor-pointer fill-current" />
@@ -530,8 +561,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'right' }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive({ textAlign: 'right' }) }"
             @click="editor.chain().focus().setTextAlign('right').run()"
           >
             <menu-alt3-icon class="h-5 cursor-pointer fill-current" />
@@ -546,9 +578,10 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
             :class="{
-              'bg-gray-200': editor.isActive({ textAlign: 'justify' }),
+              'bg-gray-200 dark:bg-gray-900': editor.isActive({ textAlign: 'justify' }),
             }"
             @click="editor.chain().focus().setTextAlign('justify').run()"
           >
@@ -564,8 +597,9 @@
               rounded-sm
               cursor-pointer
               hover:bg-gray-100
+              dark:hover:bg-gray-800
             "
-            :class="{ 'bg-gray-200': editor.isActive({ textAlign: 'center' }) }"
+            :class="{ 'bg-gray-200 dark:bg-gray-900': editor.isActive({ textAlign: 'center' }) }"
             @click="editor.chain().focus().setTextAlign('center').run()"
           >
             <menu-center-icon class="h-5 cursor-pointer fill-current" />

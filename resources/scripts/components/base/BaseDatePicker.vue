@@ -28,6 +28,7 @@
       :attributes="attrs"
       :model-config="config"
       :masks="masks"
+      :is-dark="isDarkModeOn"
       :locale="global.locale"
     >
       <template
@@ -72,7 +73,7 @@
 
       <template v-if="showExtraOptions" #footer>
         <div
-          class="bg-gray-100 grid grid-cols-3 gap-2 p-2 border-t rounded-b-lg"
+          class="bg-gray-800 grid grid-cols-3 gap-2 p-2 border-t rounded-b-lg"
         >
           <button type="button" class="extra-button" @click="moveToDate(sourceDate)">
             {{ global.t('date_picker.same_day') }}
@@ -146,7 +147,7 @@ const props = defineProps({
   defaultInputClass: {
     type: String,
     default:
-      'border-2 font-base pl-8 py-2 outline-none focus:ring-primary-400 focus:outline-none focus:border-primary-400 block w-full sm:text-sm border-gray-200 rounded-md text-black',
+      'border-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white font-base pl-8 py-2 outline-none focus:ring-primary-400 focus:outline-none focus:border-primary-400 block w-full sm:text-sm border-gray-200 rounded-md text-black',
   },
   time24hr: {
     type: Boolean,
@@ -171,7 +172,7 @@ const slots = useSlots()
 const companyStore = useCompanyStore()
 const { global } = window.i18n
 const vCalendar = ref(null)
-
+const isDarkModeOn = document.documentElement.classList.contains('dark')
 const hasIconSlot = computed(() => {
   return !!slots.icon
 })

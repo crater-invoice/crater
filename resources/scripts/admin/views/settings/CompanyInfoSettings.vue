@@ -113,10 +113,10 @@
 
       <div v-if="companyStore.companies.length !== 1" class="py-5">
         <BaseDivider class="my-4" />
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
           {{ $tc('settings.company_info.delete_company') }}
         </h3>
-        <div class="mt-2 max-w-xl text-sm text-gray-500">
+        <div class="mt-2 max-w-xl text-sm text-gray-500 dark:text-gray-400">
           <p>
             {{ $tc('settings.company_info.delete_company_description') }}
           </p>

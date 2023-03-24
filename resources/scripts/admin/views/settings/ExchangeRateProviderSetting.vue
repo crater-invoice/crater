@@ -7,7 +7,7 @@
           {{ $t('settings.menu_title.exchange_rate') }}
         </h6>
         <p
-          class="mt-2 text-sm leading-snug text-left text-gray-500"
+          class="mt-2 text-sm leading-snug text-left text-gray-500 dark:text-gray-400"
           style="max-width: 680px"
         >
           {{ $t('settings.exchange_rate.providers_description') }}

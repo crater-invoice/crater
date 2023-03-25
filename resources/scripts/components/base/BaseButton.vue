@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import SpinnerIcon from '@/scripts/components/icons/SpinnerIcon.vue'
+
 const props = defineProps({
   contentLoading: {
     type: Boolean,
@@ -24,6 +25,10 @@ const props = defineProps({
     default: false,
   },
   loading: {
+    type: Boolean,
+    default: false,
+  },
+  loadingRight: {
     type: Boolean,
     default: false,
   },
@@ -85,7 +90,7 @@ const variantClass = computed(() => {
       props.variant === 'primary',
     'border-transparent text-primary-700 bg-primary-100 hover:bg-primary-200 focus:ring-primary-500':
       props.variant === 'secondary',
-    'border-transparent  border-solid border-primary-500 font-normal transition ease-in-out duration-150 text-primary-500 hover:bg-primary-200 shadow-inner focus:ring-primary-500 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-transparent dark:hover:text-primary-500 dark:hover:border-primary-500':
+    'border-transparent border-solid border-primary-500 font-normal transition ease-in-out duration-150 text-primary-500 hover:bg-primary-100 shadow-inner focus:ring-primary-500 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-transparent dark:hover:text-primary-500 dark:hover:border-primary-500':
       props.variant == 'primary-outline',
     'border-gray-200 text-gray-700 bg-white hover:bg-gray-50 focus:ring-primary-500 focus:ring-offset-0 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-900':
       props.variant == 'white',
@@ -124,6 +129,13 @@ const iconRightClass = computed(() => {
     'ml-3 -mr-1 h-5 w-5': props.size === 'lg' || props.size === 'xl',
   }
 })
+
+const buttonDisabledClass = computed(() => {
+  if (props.disabled || props.loading)
+    return 'cursor-not-allowed bg-opacity-70 dark:!bg-opacity-40 hover:!bg-opacity-70 pointer-event-none'
+
+  return ''
+})
 </script>
 
 <template>
@@ -141,15 +153,17 @@ const iconRightClass = computed(() => {
   <BaseCustomTag
     v-else
     :tag="tag"
-    :disabled="disabled"
-    :class="[defaultClass, sizeClass, variantClass, roundedClass]"
+    :disabled="disabled || loading"
+    :class="[defaultClass, sizeClass, variantClass, roundedClass, buttonDisabledClass]"
   >
-    <SpinnerIcon v-if="loading" :class="[iconLeftClass, iconVariantClass]" />
+    <SpinnerIcon v-if="loading && !loadingRight" :class="[iconLeftClass, iconVariantClass]" />
 
-    <slot v-else name="left" :class="iconLeftClass"></slot>
+    <slot v-else name="left" :class="iconLeftClass" />
 
     <slot />
 
-    <slot name="right" :class="[iconRightClass, iconVariantClass]"></slot>
+    <SpinnerIcon v-if="loading && loadingRight" :class="[iconRightClass, iconVariantClass]" />
+
+    <slot v-else name="right" :class="[iconRightClass, iconVariantClass]" />
   </BaseCustomTag>
 </template>

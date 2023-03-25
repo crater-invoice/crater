@@ -301,6 +301,8 @@ function changeSorting(column) {
   }
 
   if (!usesLocalData.value) {
+    if (pagination.value)
+    pagination.value.currentPage = 1
     mapDataToRows()
   }
 }
@@ -318,7 +320,10 @@ async function pageChange(page) {
   await mapDataToRows()
 }
 
-async function refresh() {
+async function refresh(isPreservePage = false) {
+  if (pagination.value && !isPreservePage)
+    pagination.value.currentPage = 1
+
   await mapDataToRows()
 }
 

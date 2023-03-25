@@ -444,9 +444,9 @@ export default {
         containerOpenTop: '',
         containerActive: 'ring-1 ring-primary-400 border-primary-400',
         containerInvalid:
-          'border-red-400 ring-red-400 focus:ring-red-400 focus:border-red-400 dark:border-red-500 dark:ring-red-500 dark:focus:ring-red-500 dark:focus:border-red-500',
+          'border-red-500 ring-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500 dark:ring-red-500 dark:focus:ring-red-500 dark:focus:border-red-500',
         containerInvalidActive:
-          'ring-1 border-red-400 ring-red-400 dark:ring-1 dark:border-red-500 dark:ring-red-500',
+          'ring-1 border-red-500 ring-red-500 dark:ring-1 dark:border-red-500 dark:ring-red-500',
         singleLabel:
           'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 dark:text-white',
         multipleLabel:

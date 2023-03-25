@@ -36,6 +36,7 @@ module.exports = {
           900: withOpacityValue('--color-primary-900'),
         },
         black: '#040405',
+        highlight: 'rgb(56, 189, 248)',
         red: colors.red,
         teal: colors.teal,
         gray: colors.slate,

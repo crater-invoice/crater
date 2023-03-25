@@ -437,21 +437,22 @@ export default {
       required: false,
       default: () => ({
         container:
-          'p-0 relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-200 rounded-md bg-white text-sm leading-snug outline-none max-h-10',
+          'p-0 relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm leading-snug outline-none max-h-10',
         containerDisabled:
-          'cursor-default bg-gray-200 bg-opacity-50 !text-gray-400',
+          'bg-gray-200 bg-opacity-50 !text-gray-400 dark:!text-gray-800 !dark:text-gray-500 !cursor-default dark:opacity-25',
         containerOpen: '',
         containerOpenTop: '',
         containerActive: 'ring-1 ring-primary-400 border-primary-400',
         containerInvalid:
-          'border-red-400 ring-red-400 focus:ring-red-400 focus:border-red-400',
-        containerInvalidActive: 'ring-1 border-red-400 ring-red-400',
+          'border-red-500 ring-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-500 dark:ring-red-500 dark:focus:ring-red-500 dark:focus:border-red-500',
+        containerInvalidActive:
+          'ring-1 border-red-500 ring-red-500 dark:ring-1 dark:border-red-500 dark:ring-red-500',
         singleLabel:
-          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 dark:text-white',
         multipleLabel:
-          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5',
+          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 dark:text-white',
         search:
-          'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-sm font-sans bg-white rounded-md pl-3.5',
+          'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-sm font-sans bg-white rounded-md pl-3.5 border-transparent focus:border-transparent focus:ring-0 dark:bg-gray-700 dark:text-white',
         tags: 'grow shrink flex flex-wrap mt-1 pl-2',
         tag: 'bg-primary-500 text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap',
         tagDisabled: 'pr-2 !bg-gray-400 text-white',
@@ -461,12 +462,12 @@ export default {
           'bg-multiselect-remove text-white bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60',
         tagsSearchWrapper: 'inline-block relative mx-1 mb-1 grow shrink h-full',
         tagsSearch:
-          'absolute inset-0 border-0 focus:outline-none !shadow-none !focus:shadow-none appearance-none p-0 text-sm font-sans box-border w-full',
+          'absolute inset-0 border-0 focus:outline-none !shadow-none !focus:shadow-none appearance-none p-0 sm:text-sm font-sans box-border w-full dark:bg-gray-700',
         tagsSearchCopy: 'invisible whitespace-pre-wrap inline-block h-px',
         placeholder:
-          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400 text-sm',
+          'flex items-center h-full absolute left-0 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400 sm:text-sm dark:text-gray-500',
         caret:
-          'bg-multiselect-caret bg-center bg-no-repeat w-5 h-5 py-px box-content z-5 relative mr-1 opacity-40 shrink-0 grow-0 transition-transform',
+          'bg-multiselect-caret-black dark:bg-multiselect-caret-white bg-center bg-no-repeat w-5 h-5 py-px box-content z-5 relative mr-1 opacity-40 shrink-0 grow-0 transition-transform dark:text-white',
         caretOpen: 'rotate-180 pointer-events-auto',
         clear:
           'pr-3.5 relative z-10 opacity-40 transition duration-300 shrink-0 grow-0 flex hover:opacity-80',
@@ -475,7 +476,7 @@ export default {
         spinner:
           'bg-multiselect-spinner bg-center bg-no-repeat w-4 h-4 z-10 mr-3.5 animate-spin shrink-0 grow-0',
         dropdown:
-          'max-h-60 shadow-lg absolute -left-px -right-px -bottom-1 translate-y-full border border-gray-300 mt-1 overflow-y-auto z-50 bg-white flex flex-col rounded-md',
+          'max-h-60 shadow-lg absolute -left-px -right-px -bottom-1 translate-y-full border border-gray-300 mt-1 overflow-y-auto z-50 bg-white dark:border-gray-600 flex flex-col rounded-md dark:bg-gray-800 dark:shadow-glass',
         dropdownTop:
           '-translate-y-full -top-2 bottom-auto flex-col-reverse rounded-md',
         dropdownHidden: 'hidden',
@@ -483,7 +484,7 @@ export default {
         optionsTop: 'flex-col-reverse',
         group: 'p-0 m-0',
         groupLabel:
-          'flex text-sm box-border items-center justify-start text-left py-1 px-3 font-semibold bg-gray-200 cursor-default leading-normal',
+          'flex text-sm box-border items-center justify-start text-left py-1 px-3 font-semibold bg-gray-200 dark:bg-gray-700 dark:text-gray-400 cursor-default leading-normal',
         groupLabelPointable: 'cursor-pointer',
         groupLabelPointed: 'bg-gray-300 text-gray-700',
         groupLabelSelected: 'bg-primary-600 text-white',
@@ -493,15 +494,18 @@ export default {
           'text-primary-100 bg-primary-600 bg-opacity-50 cursor-not-allowed',
         groupOptions: 'p-0 m-0',
         option:
-          'flex items-center justify-start box-border text-left cursor-pointer text-sm leading-snug py-2 px-3',
-        optionPointed: 'text-gray-800 bg-gray-100',
+          'flex items-center justify-start box-border text-left cursor-pointer text-sm leading-snug py-2 px-3 dark:text-gray-200',
+        optionPointed:
+          'text-gray-800 bg-gray-100 dark:text-white dark:bg-gray-700/30',
         optionSelected: 'text-white bg-primary-500',
-        optionDisabled: 'text-gray-300 cursor-not-allowed',
+        optionDisabled: 'text-gray-300 cursor-not-allowed dark:text-gray-400',
         optionSelectedPointed: 'text-white bg-primary-500 opacity-90',
         optionSelectedDisabled:
           'text-primary-100 bg-primary-500 bg-opacity-50 cursor-not-allowed',
-        noOptions: 'py-2 px-3 text-gray-600 bg-white',
-        noResults: 'py-2 px-3 text-gray-600 bg-white',
+        noOptions:
+          'py-2 px-3 text-gray-600 bg-white dark:bg-gray-700 dark:text-gray-200',
+        noResults:
+          'py-2 px-3 text-gray-600 bg-white dark:bg-gray-700 dark:text-gray-200',
         fakeInput:
           'bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent',
         spacer: 'h-9 py-px box-content',

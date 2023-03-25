@@ -12,7 +12,7 @@
   >
     <ListboxLabel
       v-if="label"
-      class="block text-sm not-italic font-medium text-gray-800 mb-0.5"
+      class="block text-sm not-italic font-medium text-gray-800 mb-0.5 dark:text-white"
     >
       {{ label }}
     </ListboxLabel>
@@ -28,6 +28,7 @@
           pr-10
           text-left
           bg-white
+          dark:bg-gray-700
           border border-gray-200
           rounded-md
           shadow-sm
@@ -89,6 +90,7 @@
             ring-1 ring-black ring-opacity-5
             focus:outline-none
             sm:text-sm
+            dark:bg-gray-700
           "
         >
           <ListboxOption
@@ -100,7 +102,7 @@
           >
             <li
               :class="[
-                active ? 'text-white bg-primary-600' : 'text-gray-900',
+                active ? 'text-white bg-primary-600' : 'text-gray-900 dark:text-white',
                 'cursor-default select-none relative py-2 pl-3 pr-9',
               ]"
             >

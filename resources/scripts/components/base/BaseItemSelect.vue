@@ -12,6 +12,7 @@
         bg-gray-200
         border border-gray-200 border-solid
         rounded
+        dark:bg-gray-900/70 dark:border-gray-700
       "
     >
       {{ item.name }}

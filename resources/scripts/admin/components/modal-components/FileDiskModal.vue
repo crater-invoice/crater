@@ -20,15 +20,7 @@
         @submit="createNewDisk"
       >
         <template #default="slotProps">
-          <div
-            class="
-              z-0
-              flex
-              justify-end
-              p-4
-              border-t border-solid border-gray-light dark:border-gray-600
-            "
-          >
+          <BaseModalFooter>
             <BaseButton
               class="mr-3 text-sm"
               variant="primary-outline"
@@ -52,7 +44,7 @@
 
               {{ $t('general.save') }}
             </BaseButton>
-          </div>
+          </BaseModalFooter>
         </template>
       </component>
     </div>

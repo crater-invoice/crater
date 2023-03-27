@@ -62,9 +62,7 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600"
-      >
+     <BaseModalFooter>
         <BaseButton
           variant="primary-outline"
           type="button"
@@ -84,7 +82,7 @@
           </template>
           {{ $t('general.send') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

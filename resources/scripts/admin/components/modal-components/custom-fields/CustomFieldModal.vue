@@ -172,15 +172,7 @@
         </div>
       </div>
 
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          p-4
-          border-t border-gray-200 border-solid dark:border-gray-600
-        "
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3"
           type="button"
@@ -207,7 +199,7 @@
             !customFieldStore.isEdit ? $t('general.save') : $t('general.update')
           }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

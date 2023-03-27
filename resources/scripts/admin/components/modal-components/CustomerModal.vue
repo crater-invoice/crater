@@ -425,9 +425,7 @@
         </BaseTabGroup>
       </div>
 
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           type="button"
@@ -447,7 +445,7 @@
           </template>
           {{ $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

@@ -29,9 +29,7 @@
         </BaseInputGroup>
       </div>
 
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600"
-      >
+      <BaseModalFooter>
         <BaseButton
           variant="primary-outline"
           class="mr-3"
@@ -56,7 +54,7 @@
               : $t('general.save')
           }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

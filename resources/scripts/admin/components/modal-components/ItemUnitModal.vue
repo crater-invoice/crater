@@ -31,15 +31,7 @@
         </BaseInputGroup>
       </div>
 
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          p-4
-          border-t border-gray-200 border-solid dark:border-gray-600
-        "
-      >
+      <BaseModalFooter>
         <BaseButton
           type="button"
           variant="primary-outline"
@@ -66,7 +58,7 @@
             itemStore.isItemUnitEdit ? $t('general.update') : $t('general.save')
           }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

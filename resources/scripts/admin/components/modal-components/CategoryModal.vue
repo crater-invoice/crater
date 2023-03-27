@@ -47,15 +47,7 @@
         </BaseInputGrid>
       </div>
 
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          p-4
-          border-t border-gray-200 border-solid border-modal-bg dark:border-gray-600
-        "
-      >
+      <BaseModalFooter>
         <BaseButton
           type="button"
           variant="primary-outline"
@@ -80,7 +72,7 @@
           </template>
           {{ categoryStore.isEdit ? $t('general.update') : $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

@@ -65,9 +65,7 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid dark:border-gray-600"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3"
           variant="primary-outline"
@@ -93,7 +91,7 @@
           </template>
           {{ $t('general.preview') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
     <div v-else>
       <div class="my-6 mx-4 border border-gray-200 relative">

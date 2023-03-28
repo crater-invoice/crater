@@ -116,7 +116,7 @@
         </BaseInputGrid>
       </div>
 
-      <div class="z-0 flex justify-end p-4 bg-gray-50 border-modal-bg">
+       <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           variant="primary-outline"
@@ -141,7 +141,7 @@
           </template>
           {{ $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

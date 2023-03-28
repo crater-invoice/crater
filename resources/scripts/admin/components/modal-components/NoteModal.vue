@@ -63,16 +63,7 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          px-4
-          py-4
-          border-t border-solid border-gray-light
-        "
-      >
+     <BaseModalFooter>
         <BaseButton
           class="mr-2"
           variant="primary-outline"
@@ -93,7 +84,7 @@
           </template>
           {{ noteStore.isEdit ? $t('general.update') : $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

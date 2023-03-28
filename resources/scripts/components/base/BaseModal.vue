@@ -29,8 +29,21 @@
             leave-to="opacity-0"
           >
             <DialogOverlay
-              class="fixed inset-0 transition-opacity bg-gray-700 bg-opacity-25"
-            />
+              class="
+              fixed
+              inset-0
+              transition-opacity
+              bg-gray-700
+              bg-opacity-25
+              dark:backdrop-blur-sm
+              dark:bg-gray-900/80
+              "
+            >
+              <BaseDarkHighlight
+                class="!bg-highlight/[.17] !top-1/2 -translate-y-1/2 mt-5 h-96"
+                :class="modalSize"
+              />
+            </DialogOverlay>
           </TransitionChild>
 
           <!-- This element is to trick the browser into centering the modal contents. -->
@@ -61,7 +74,11 @@
               my-4
               ${modalSize}
               sm:w-full
-              border-t-8 border-solid rounded shadow-xl  border-primary-500`"
+              dark:shadow-glass
+              dark:border
+              dark:border-white/10
+              dark:bg-gray-800/90
+              border-t-8 border-solid rounded shadow-xl border-primary-500`"
             >
               <div
                 v-if="hasHeaderSlot"
@@ -74,6 +91,8 @@
                   text-lg
                   font-medium
                   text-black
+                  dark:text-white
+                  dark:border-gray-600
                   border-b border-gray-200 border-solid
                 "
               >

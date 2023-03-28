@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <div class="border-t border-gray-200 py-3">
+      <div class="border-t border-gray-200 dark:border-gray-600 py-3">
         <div
           class="
             grid grid-cols-1
@@ -89,7 +89,7 @@
             :key="gIndex"
             class="flex flex-col space-y-1"
           >
-            <p class="text-sm text-gray-500 border-b border-gray-200 pb-1 mb-2">
+            <p class="text-sm text-gray-500 dark:text-gray-200 border-b dark:border-gray-600 pb-1 mb-2">
               {{ gIndex }}
             </p>
             <div
@@ -116,15 +116,7 @@
           </span>
         </div>
       </div>
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          p-4
-          border-t border-solid border--200 border-modal-bg
-        "
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           variant="primary-outline"
@@ -144,7 +136,7 @@
           </template>
           {{ !roleStore.isEdit ? $t('general.save') : $t('general.update') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

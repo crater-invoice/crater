@@ -141,6 +141,7 @@
                     bg-gray-200
                     rounded-full
                     text-primary-500
+                    dark:bg-gray-600
                   "
                 >
                   {{ initGenerator(user.name) }}

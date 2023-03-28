@@ -41,6 +41,11 @@
           w-[300px]
           h-[200px]
           right-0
+          dark:border-white/10
+          dark:text-white
+          dark:bg-gray-800/[.95]
+          dark:shadow-glass
+          dark:backdrop-blur-xl
         "
       >
         <div
@@ -68,7 +73,7 @@
             <div
               v-for="(customer, index) in usersStore.customerList"
               :key="index"
-              class="p-2 hover:bg-gray-100 cursor-pointer rounded-md"
+              class="p-2 hover:bg-gray-100 cursor-pointer rounded-md dark:hover:bg-gray-700/40"
             >
               <router-link
                 :to="{ path: `/admin/customers/${customer.id}/view` }"
@@ -87,6 +92,7 @@
                     bg-gray-200
                     rounded-full
                     text-primary-500
+                    dark:bg-gray-600
                   "
                 >
                   {{ initGenerator(customer.name) }}
@@ -116,7 +122,7 @@
             <div
               v-for="(user, index) in usersStore.userList"
               :key="index"
-              class="p-2 hover:bg-gray-100 cursor-pointer rounded-md"
+              class="p-2 hover:bg-gray-100 cursor-pointer rounded-md dark:hover:bg-gray-700/40"
             >
               <router-link
                 :to="{ path: `/admin/users/${user.id}/edit` }"
@@ -135,6 +141,7 @@
                     bg-gray-200
                     rounded-full
                     text-primary-500
+                    dark:bg-gray-600
                   "
                 >
                   {{ initGenerator(user.name) }}

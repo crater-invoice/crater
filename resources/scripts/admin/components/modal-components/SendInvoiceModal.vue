@@ -112,9 +112,7 @@
           style="min-height: 500px"
         ></iframe>
       </div>
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3"
           variant="primary-outline"
@@ -138,7 +136,7 @@
           />
           {{ $t('general.send') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </div>
   </BaseModal>
 </template>

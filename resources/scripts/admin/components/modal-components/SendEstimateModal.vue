@@ -104,9 +104,7 @@
         ></iframe>
       </div>
 
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3"
           variant="primary-outline"
@@ -125,7 +123,7 @@
           <BaseIcon v-if="!isLoading" name="PaperAirplaneIcon" class="mr-2" />
           {{ $t('general.send') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </div>
   </BaseModal>
 </template>

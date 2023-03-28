@@ -24,6 +24,8 @@
       dark:border-white/10
     "
   >
+    <BaseDarkHighlight />
+
     <router-link
       to="/admin/dashboard"
       class="
@@ -72,7 +74,7 @@
         v-if="hasCreateAbilities"
         class="relative hidden float-left m-0 md:block"
       >
-        <BaseDropdown width-class="w-48">
+        <BaseDropdown width-class="w-48" >
           <template #activator>
             <div
               class="
@@ -86,19 +88,21 @@
                 bg-white
                 rounded
                 md:h-9 md:w-9
+                dark:bg-gray-700 dark:border-gray-500 dark:border
               "
             >
-              <BaseIcon name="PlusIcon" class="w-5 h-5 text-gray-600" />
+              <BaseIcon name="PlusIcon" class="w-5 h-5 text-gray-600 dark:text-white" />
             </div>
           </template>
 
           <router-link to="/admin/invoices/create">
             <BaseDropdownItem
               v-if="userStore.hasAbilities(abilities.CREATE_INVOICE)"
+              v-slot="slotProps"
             >
               <BaseIcon
                 name="DocumentTextIcon"
-                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                :class="slotProps.class"
                 aria-hidden="true"
               />
               {{ $t('invoices.new_invoice') }}
@@ -107,10 +111,11 @@
           <router-link to="/admin/estimates/create">
             <BaseDropdownItem
               v-if="userStore.hasAbilities(abilities.CREATE_ESTIMATE)"
+              v-slot="slotProps"
             >
               <BaseIcon
                 name="DocumentIcon"
-                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                :class="slotProps.class"
                 aria-hidden="true"
               />
               {{ $t('estimates.new_estimate') }}
@@ -120,10 +125,11 @@
           <router-link to="/admin/customers/create">
             <BaseDropdownItem
               v-if="userStore.hasAbilities(abilities.CREATE_CUSTOMER)"
+              v-slot="slotProps"
             >
               <BaseIcon
                 name="UserIcon"
-                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                :class="slotProps.class"
                 aria-hidden="true"
               />
               {{ $t('customers.new_customer') }}
@@ -156,20 +162,20 @@
           </template>
 
           <router-link to="/admin/settings/account-settings">
-            <BaseDropdownItem>
+            <BaseDropdownItem v-slot="slotProps">
               <BaseIcon
                 name="CogIcon"
-                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                :class="slotProps.class"
                 aria-hidden="true"
               />
               {{ $t('navigation.settings') }}
             </BaseDropdownItem>
           </router-link>
 
-          <BaseDropdownItem @click="logout">
+          <BaseDropdownItem v-slot="slotProps" @click="logout">
             <BaseIcon
               name="LogoutIcon"
-              class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+              :class="slotProps.class"
               aria-hidden="true"
             />
             {{ $t('navigation.logout') }}

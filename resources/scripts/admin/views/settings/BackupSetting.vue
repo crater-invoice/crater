@@ -51,14 +51,14 @@
             </div>
           </template>
 
-          <BaseDropdownItem @click="onDownloadBckup(row.data)">
-            <BaseIcon name="CloudDownloadIcon" class="mr-3 text-gray-600" />
+          <BaseDropdownItem v-slot="slotProps" @click="onDownloadBckup(row.data)">
+            <BaseIcon name="CloudDownloadIcon" :class="slotProps.class" />
 
             {{ $t('general.download') }}
           </BaseDropdownItem>
 
-          <BaseDropdownItem @click="onRemoveBackup(row.data)">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+          <BaseDropdownItem v-slot="slotProps" @click="onRemoveBackup(row.data)">
+            <BaseIcon name="TrashIcon" :class="slotProps.class" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>

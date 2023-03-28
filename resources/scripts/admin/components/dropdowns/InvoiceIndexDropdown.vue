@@ -69,6 +69,7 @@
     <router-link :to="`/admin/payments/${row.id}/create`">
       <BaseDropdownItem
         v-if="row.status == 'SENT' && route.name !== 'invoices.view'"
+        v-slot="slotProps"
       >
         <BaseIcon
           name="CreditCardIcon"

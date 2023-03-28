@@ -125,13 +125,13 @@
                     justify-center
                     mr-3
                     overflow-hidden
-                    text-base
+                    text-sm
                     font-semibold
                     bg-gray-200
                     rounded-md
                     w-9
                     h-9
-                    text-primary-50
+                    text-primary-500
                     dark:bg-gray-900
                     "
                   >

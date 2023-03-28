@@ -2,12 +2,34 @@
   <div>
     <div
       v-if="dashboardStore.isDashboardDataLoaded"
-      class="grid grid-cols-10 mt-8 bg-white rounded shadow dark:text-white dark:backdrop-blur-xl dark:shadow-glass dark:border dark:bg-opacity-70 dark:border-white/10 dark:bg-gray-800 relative"
+      class="
+        grid
+        grid-cols-10
+        mt-8
+        bg-white
+        rounded shadow
+        dark:text-white
+        dark:backdrop-blur-xl
+        dark:shadow-glass
+        dark:border
+        dark:bg-opacity-70
+        dark:border-white/10
+        dark:bg-gray-800
+        relative
+      "
     >
       <BaseDarkHighlight />
       <!-- Chart -->
       <div
-        class="grid grid-cols-1 col-span-10 px-4 py-5 lg:col-span-7 xl:col-span-8 sm:p-6"
+        class="
+          grid grid-cols-1
+          col-span-10
+          px-4
+          py-5
+          lg:col-span-7
+          xl:col-span-8
+          sm:p-6
+        "
       >
         <div class="flex justify-between mt-1 mb-4 flex-col md:flex-row">
           <h6 class="flex items-center sw-section-title h-10">
@@ -39,7 +61,16 @@
 
       <!-- Chart Labels -->
       <div
-        class="grid grid-cols-3 col-span-10 text-center border-t border-l border-gray-200 border-solid lg:border-t-0 lg:text-right lg:col-span-3 xl:col-span-2 lg:grid-cols-1 dark:border-white/10"
+        class="
+          grid grid-cols-3
+          col-span-10
+          text-center
+          border-t border-l border-gray-200 border-solid
+          lg:border-t-0 lg:text-right lg:col-span-3
+          xl:col-span-2
+          lg:grid-cols-1
+          dark:border-white/10
+        "
       >
         <div class="p-6">
           <span class="text-xs leading-5 lg:text-sm">
@@ -59,7 +90,15 @@
           </span>
           <br />
           <span
-            class="block mt-1 text-xl font-semibold leading-8 lg:text-2xl text-green-400"
+            class="
+              block
+              mt-1
+              text-xl
+              font-semibold
+              leading-8
+              lg:text-2xl
+              text-green-400
+            "
           >
             <BaseFormatMoney
               :amount="dashboardStore.totalReceipts"
@@ -82,14 +121,29 @@
           </span>
         </div>
         <div
-          class="col-span-3 p-6 border-t border-gray-200 border-solid lg:col-span-1 dark:border-white/10"
+          class="
+            col-span-3
+            p-6
+            border-t
+            border-gray-200 border-solid
+            lg:col-span-1
+            dark:border-white/10
+          "
         >
           <span class="text-xs leading-5 lg:text-sm">
             {{ $t('dashboard.chart_info.net_income') }}
           </span>
           <br />
           <span
-            class="block mt-1 text-xl font-semibold leading-8 lg:text-2xl text-primary-500 dark:text-primary-400"
+            class="
+              block
+              mt-1
+              text-xl
+              font-semibold
+              leading-8
+              lg:text-2xl
+              text-primary-500 dark:text-primary-400
+            "
           >
             <BaseFormatMoney
               :amount="dashboardStore.totalNetIncome"

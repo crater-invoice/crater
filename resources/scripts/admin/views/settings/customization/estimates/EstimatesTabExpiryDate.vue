@@ -1,11 +1,13 @@
 <template>
   <form @submit.prevent="submitForm">
-    <h6 class="text-gray-900 text-lg font-medium">
+    <BaseHeading
+      type="heading-title"
+      :subtitle="
+        $t('settings.customization.estimates.expiry_date_description')
+      "
+    >
       {{ $t('settings.customization.estimates.expiry_date') }}
-    </h6>
-    <p class="mt-1 text-sm text-gray-500 mb-2">
-      {{ $t('settings.customization.estimates.expiry_date_description') }}
-    </p>
+    </BaseHeading>
 
     <BaseSwitchSection
       v-model="expiryDateAutoField"

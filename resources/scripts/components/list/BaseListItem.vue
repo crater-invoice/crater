@@ -28,13 +28,13 @@ export default {
     },
   },
   setup(props, { slots }) {
-    const defaultClass = `cursor-pointer pb-2 pr-0 text-sm font-medium leading-5  flex items-center`
+    const defaultClass = `cursor-pointer pb-2 pr-0 text-sm font-medium leading-5 flex items-center`
     let hasIconSlot = computed(() => {
       return !!slots.icon
     })
     let containerClass = computed(() => {
-      if (props.active) return `${defaultClass} text-primary-500`
-      else return `${defaultClass} text-gray-500`
+      if (props.active) return `${defaultClass} text-primary-500 dark:text-primary-400`
+      else return `${defaultClass} text-gray-500 dark:text-gray-300`
     })
     return {
       hasIconSlot,

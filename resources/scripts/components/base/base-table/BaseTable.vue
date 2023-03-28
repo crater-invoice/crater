@@ -3,7 +3,19 @@
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 pb-4 lg:pb-0">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div
-          class="relative overflow-hidden bg-white border-b border-gray-200 shadow sm:rounded-lg dark:shadow-glass dark:border dark:border-white/10 dark:bg-gray-800/70"
+          class="
+            relative
+            overflow-hidden
+            bg-white
+            border-b
+            border-gray-200
+            shadow
+            sm:rounded-lg
+            dark:shadow-glass
+            dark:border
+            dark:border-white/10
+            dark:bg-gray-800/70
+            "
         >
           <BaseDarkHighlight v-if="darkHighlight" class="z-[-1]" />
 
@@ -96,7 +108,21 @@
 
           <div
             v-if="loadingType === 'spinner' && (loading || isLoading)"
-            class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-white bg-opacity-60 dark:bg-gray-700 dark:bg-opacity-60"
+            class="
+              absolute
+              top-0
+              left-0
+              z-10
+              flex
+              items-center
+              justify-center
+              w-full
+              h-full
+              bg-white
+              bg-opacity-60
+              dark:bg-gray-700
+              dark:bg-opacity-60
+            "
           >
             <SpinnerIcon class="w-10 h-10 text-primary-500" />
           </div>
@@ -105,7 +131,15 @@
             v-else-if="
               !loading && !isLoading && sortedRows && sortedRows.length === 0
             "
-            class="text-center text-gray-500 pb-2 flex h-[160px] justify-center items-center flex-col"
+            class="
+              text-center text-gray-500
+              pb-2
+              flex
+              h-[160px]
+              justify-center
+              items-center
+              flex-col
+            "
           >
             <BaseIcon
               name="ExclamationCircleIcon"
@@ -301,8 +335,7 @@ function changeSorting(column) {
   }
 
   if (!usesLocalData.value) {
-    if (pagination.value)
-    pagination.value.currentPage = 1
+    if (pagination.value) pagination.value.currentPage = 1
     mapDataToRows()
   }
 }
@@ -321,8 +354,7 @@ async function pageChange(page) {
 }
 
 async function refresh(isPreservePage = false) {
-  if (pagination.value && !isPreservePage)
-    pagination.value.currentPage = 1
+  if (pagination.value && !isPreservePage) pagination.value.currentPage = 1
 
   await mapDataToRows()
 }

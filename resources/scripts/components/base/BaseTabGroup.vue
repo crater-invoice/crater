@@ -7,7 +7,7 @@
     >
       <TabList
         :class="[
-          'flex',
+          'flex border-b border-grey-light dark:border-gray-600',
           'relative overflow-x-auto overflow-y-hidden',
           'lg:pb-0 lg:ml-0',
         ]"

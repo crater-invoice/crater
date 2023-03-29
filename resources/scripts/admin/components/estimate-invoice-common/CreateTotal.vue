@@ -6,6 +6,7 @@
       mt-6
       bg-white
       border border-gray-200 border-solid
+      dark:bg-gray-800/50 dark:border-white/10
       rounded
       md:min-w-[390px]
       min-w-[300px]
@@ -29,7 +30,7 @@
 
       <label
         v-else
-        class="flex items-center justify-center m-0 text-lg text-black uppercase "
+        class="flex items-center justify-center m-0 text-lg text-black uppercase dark:text-white"
       >
         <BaseFormatMoney
           :amount="store.getSubTotal"
@@ -166,14 +167,14 @@
     </div>
 
     <div
-      class="flex items-center justify-between w-full pt-2 mt-5 border-t border-gray-200 border-solid "
+      class="flex items-center justify-between w-full pt-2 mt-5 border-t border-gray-200 border-solid dark:border-gray-600"
     >
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
       </BaseContentPlaceholders>
       <label
         v-else
-        class="m-0 text-sm font-semibold leading-5 text-gray-400 uppercase"
+        class="m-0 text-sm font-semibold leading-5 text-gray-400 uppercase dark:text-gray-400"
         >{{ $t('estimates.total') }} {{ $t('estimates.amount') }}:</label
       >
 

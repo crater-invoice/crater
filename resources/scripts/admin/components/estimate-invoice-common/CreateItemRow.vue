@@ -1,5 +1,13 @@
 <template>
-  <tr class="box-border bg-white border border-gray-200 border-solid rounded-b">
+  <tr
+    class="
+      box-border
+      bg-white
+      border border-gray-200 border-solid
+      rounded-b
+      dark:shadow-glass dark:border dark:border-white/10 dark:bg-gray-800/70
+      "
+    >
     <td colspan="5" class="p-0 text-left align-top">
       <table class="w-full">
         <colgroup>
@@ -130,7 +138,7 @@
                 <div class="flex items-center justify-center w-6 h-10 mx-2">
                   <BaseIcon
                     v-if="showRemoveButton"
-                    class="h-5 text-gray-700 cursor-pointer"
+                    class="h-5 dark:text-red-400 text-red-400 cursor-pointer"
                     name="TrashIcon"
                     @click="store.removeItem(index)"
                   />

@@ -1,5 +1,5 @@
 <template>
-  <BaseCard>
+  <div class="bg-white shadow overflow-hidden rounded-lg mt-6 dark:bg-gray-800">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
         {{ $t('invoices.invoice_information') }}
@@ -70,7 +70,7 @@
     <div v-else class="w-full flex items-center justify-center p-5">
       <BaseSpinner class="text-primary-500 h-10 w-10" />
     </div>
-  </BaseCard>
+  </div>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-6 mt-5 border-t border-solid lg:pt-8 md:pt-4 border-gray-200">
+  <div class="pt-6 mt-5 border-t border-solid lg:pt-8 md:pt-4 border-gray-200 dark:border-gray-600">
     <!-- Basic Info -->
     <BaseHeading>
       {{ $t('customers.basic_info') }}

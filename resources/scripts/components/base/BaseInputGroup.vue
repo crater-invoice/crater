@@ -15,6 +15,7 @@
         text-gray-800
         whitespace-nowrap
         justify-between
+        dark:text-gray-300
       "
     >
       <div>

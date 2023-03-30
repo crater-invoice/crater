@@ -2,7 +2,6 @@
   <BaseWizardStep
     :title="$t('wizard.company_info')"
     :description="$t('wizard.company_info_desc')"
-    step-container="bg-white border border-gray-200 border-solid mb-8 md:w-full p-8 rounded w-full"
   >
     <form action="" @submit.prevent="next">
       <div class="grid grid-cols-1 mb-4 md:grid-cols-2 md:mb-6">

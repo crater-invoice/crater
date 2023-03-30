@@ -49,16 +49,16 @@ export default {
     },
     currentStepClass: {
       type: String,
-      default: 'bg-white border-primary-500 dark:bg-gray-600',
+      default: 'bg-white border-primary-500 dark:bg-gray-600 dark:border-gray-500 dark:border-primary-600',
     },
     nextStepClass: {
       type: String,
-      default: 'border-gray-200 bg-white dark:bg-gray-600',
+      default: 'border-gray-200 bg-white dark:bg-gray-600 dark:border-gray-500',
     },
     previousStepClass: {
       type: String,
       default:
-        'bg-primary-500 border-primary-500 flex justify-center items-center',
+        'bg-primary-500 dark:bg-primary-600 border-primary-500 flex justify-center items-center dark:border-primary-600',
     },
     iconClass: {
       type: String,

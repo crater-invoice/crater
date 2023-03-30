@@ -122,7 +122,7 @@
           <BaseTab :title="$t('customers.portal_access')">
             <BaseInputGrid class="col-span-5 lg:col-span-4">
               <div class="md:col-span-2">
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 dark:text-gray-300">
                   {{ $t('customers.portal_access_text') }}
                 </p>
 

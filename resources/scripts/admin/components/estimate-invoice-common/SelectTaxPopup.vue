@@ -96,6 +96,7 @@
                           leading-tight
                           text-gray-700
                           cursor-pointer
+                          dark:text-gray-300
                         "
                       >
                         {{ taxType.name }}
@@ -108,6 +109,7 @@
                           font-semibold
                           text-gray-700
                           cursor-pointer
+                          dark:text-gray-300
                         "
                       >
                         {{ taxType.percent }} %

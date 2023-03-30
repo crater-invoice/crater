@@ -91,6 +91,7 @@
                         leading-tight
                         text-gray-700
                         cursor-pointer
+                        dark:text-gray-400
                       "
                     >
                       {{ note.name }}

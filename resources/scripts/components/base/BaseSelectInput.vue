@@ -29,14 +29,12 @@
           text-left
           bg-white
           dark:bg-gray-700
-          border border-gray-200
           rounded-md
           shadow-sm
           cursor-default
           focus:outline-none
           focus:ring-1
-          focus:ring-primary-500
-          focus:border-primary-500
+          focus:ring-primary-400 focus:border-primary-400
           sm:text-sm
         "
       >

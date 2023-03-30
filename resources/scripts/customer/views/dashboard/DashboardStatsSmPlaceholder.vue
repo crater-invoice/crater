@@ -12,6 +12,7 @@
       shadow
       lg:col-span-2
       xl:p-4
+      dark:bg-gray-800
     "
   >
     <div>

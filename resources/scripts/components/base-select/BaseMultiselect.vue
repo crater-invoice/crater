@@ -439,7 +439,7 @@ export default {
         container:
           'p-0 relative mx-auto w-full flex items-center justify-end box-border cursor-pointer border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm leading-snug outline-none max-h-10',
         containerDisabled:
-          'bg-gray-200 bg-opacity-50 !text-gray-400 dark:!text-gray-800 !dark:text-gray-500 !cursor-default dark:opacity-25',
+          'bg-gray-200 !text-gray-800 dark:!text-gray-800 !dark:text-gray-500 !cursor-not-allowed dark:opacity-50',
         containerOpen: '',
         containerOpenTop: '',
         containerActive: 'ring-1 ring-primary-400 border-primary-400',

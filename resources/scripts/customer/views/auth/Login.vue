@@ -55,7 +55,7 @@
     <div class="flex items-center justify-between">
       <router-link
         :to="{ name: 'customer.forgot-password' }"
-        class="text-sm text-primary-600 hover:text-gray-500"
+        class="text-sm text-primary-400 hover:text-gray-500 dark:hover:text-primary-500"
       >
         {{ $t('login.forgot_password') }}
       </router-link>

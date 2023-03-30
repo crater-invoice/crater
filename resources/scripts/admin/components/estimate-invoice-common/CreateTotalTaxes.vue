@@ -3,7 +3,16 @@
     <label class="font-semibold leading-5 text-gray-500 uppercase dark:text-gray-300">
       {{ tax.name }} ({{ tax.percent }} %)
     </label>
-    <label class="flex items-center justify-center text-lg text-black dark:text-white">
+    <label
+      class="
+        flex
+        items-center
+        justify-center
+        text-lg
+        text-black
+        dark:text-white
+      "
+    >
       <BaseFormatMoney :amount="tax.amount" :currency="currency" />
 
       <BaseIcon

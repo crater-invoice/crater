@@ -30,7 +30,16 @@
 
       <label
         v-else
-        class="flex items-center justify-center m-0 text-lg text-black uppercase dark:text-white"
+        class="
+          flex
+          items-center
+          justify-center
+          m-0
+          text-lg
+          text-black
+          dark:text-white
+          uppercase
+        "
       >
         <BaseFormatMoney
           :amount="store.getSubTotal"
@@ -60,7 +69,16 @@
 
       <label
         v-else-if="store[storeProp].tax_per_item === 'YES'"
-        class="flex items-center justify-center m-0 text-lg text-black uppercase "
+        class="
+          flex
+          items-center
+          justify-center
+          m-0
+          text-lg
+          text-black
+          dark:text-white
+          uppercase
+        "
       >
         <BaseFormatMoney :amount="tax.amount" :currency="defaultCurrency" />
       </label>
@@ -167,7 +185,16 @@
     </div>
 
     <div
-      class="flex items-center justify-between w-full pt-2 mt-5 border-t border-gray-200 border-solid dark:border-gray-600"
+      class="
+        flex
+        items-center
+        justify-between
+        w-full
+        pt-2
+        mt-5
+        border-t border-gray-200 border-solid
+        dark:border-gray-600
+      "
     >
       <BaseContentPlaceholders v-if="isLoading">
         <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />

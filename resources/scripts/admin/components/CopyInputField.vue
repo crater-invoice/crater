@@ -7,6 +7,7 @@
       py-2
       rounded-lg
       bg-opacity-40 bg-gray-300
+      dark:bg-gray-700 dark:border-gray-600
       whitespace-nowrap
       flex-col
       mt-1
@@ -19,6 +20,7 @@
         text-sm
         font-medium
         text-black
+        dark:text-white
         truncate
         select-all select-color
       "

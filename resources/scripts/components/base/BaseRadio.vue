@@ -19,7 +19,7 @@
             ]"
             aria-hidden="true"
           >
-            <span class="rounded-full bg-white w-1.5 h-1.5"  :class="{ 'bg-white': checked }"/>
+            <span class="rounded-full w-1.5 h-1.5"  :class="{ 'bg-white': checked }"/>
           </span>
           <div class="flex flex-col ml-3">
             <RadioGroupLabel

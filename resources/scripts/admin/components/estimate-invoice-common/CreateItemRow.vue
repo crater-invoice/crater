@@ -138,7 +138,7 @@
                 <div class="flex items-center justify-center w-6 h-10 mx-2">
                   <BaseIcon
                     v-if="showRemoveButton"
-                    class="h-5 dark:text-red-400 text-red-400 cursor-pointer"
+                    class="h-5 dark:text-red-400 cursor-pointer"
                     name="TrashIcon"
                     @click="store.removeItem(index)"
                   />

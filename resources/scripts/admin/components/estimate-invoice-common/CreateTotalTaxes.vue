@@ -1,14 +1,14 @@
 <template>
   <div class="flex items-center justify-between w-full mt-2 text-sm">
-    <label class="font-semibold leading-5 text-gray-500 uppercase">
+    <label class="font-semibold leading-5 text-gray-500 uppercase dark:text-gray-300">
       {{ tax.name }} ({{ tax.percent }} %)
     </label>
-    <label class="flex items-center justify-center text-lg text-black">
+    <label class="flex items-center justify-center text-lg text-black dark:text-white">
       <BaseFormatMoney :amount="tax.amount" :currency="currency" />
 
       <BaseIcon
         name="TrashIcon"
-        class="h-5 ml-2 cursor-pointer"
+        class="h-5 ml-2 cursor-pointer dark:text-red-400"
         @click="$emit('remove', tax.id)"
       />
     </label>

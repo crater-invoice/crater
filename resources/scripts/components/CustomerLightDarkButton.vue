@@ -2,22 +2,20 @@
    <button
     type="button"
     class="
-      bg-white
-      p-1.5
-      rounded-full
-      text-gray-400
-      hover:text-gray-500
-      focus:outline-none
-      focus:ring-2
-      focus:ring-primary-500
-      dark:bg-transparent
-      dark:focus:ring-gray-500
+      flex
+      h-8
+      w-8
+      items-center
+      justify-center
+      rounded-md
+      transition
+      hover:bg-zinc-900/5
+      dark:hover:bg-white/5
     "
     @click="onChange"
   >
-
-    <BaseIcon v-if="!globalStore.isDarkModeOn" class="h-5 w-5 text-yellow-500" name="SunIcon" />
-    <BaseIcon v-else class="h-5 w-5 text-primary-400" name="MoonIcon" />
+    <BaseIcon v-if="!globalStore.isDarkModeOn" class="h-5 w-5 text-black" name="SunIcon" />
+    <BaseIcon v-else class="h-5 w-5 text-white" name="MoonIcon" />
   </button>
 </template>
 <script setup>

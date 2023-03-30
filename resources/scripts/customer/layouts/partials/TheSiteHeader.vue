@@ -44,6 +44,8 @@
           </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
+          <!-- Dark mode Toggle -->
+          <CustomerLightDarkButton/>
 
           <!-- Profile dropdown -->
 
@@ -134,18 +136,22 @@
         </router-link>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-500">
-        <div class="flex items-center px-4">
-          <div class="shrink-0">
-            <img class="h-10 w-10 rounded-full" :src="previewAvatar" alt="" />
-          </div>
-          <div class="ml-3">
-            <div class="text-base font-medium text-gray-800">
-              {{ globalStore.currentUser.title }}
+        <div class="flex items-center justify-between pr-5">
+          <div class="flex items-center px-4">
+            <div class="shrink-0">
+              <img class="h-10 w-10 rounded-full" :src="previewAvatar" alt="" />
             </div>
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-200">
-              {{ globalStore.currentUser.email }}
+            <div class="ml-3">
+              <div class="text-base font-medium text-gray-800">
+                {{ globalStore.currentUser.title }}
+              </div>
+              <div class="text-sm font-medium text-gray-500 dark:text-gray-200">
+                {{ globalStore.currentUser.email }}
+              </div>
             </div>
-          </div>
+        </div>
+          <!-- Dark mode Toggle -->
+          <CustomerLightDarkButton/>
         </div>
         <div class="mt-3 space-y-1">
           <router-link
@@ -172,6 +178,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, watch, computed } from 'vue'
 import { useGlobalStore } from '@/scripts/customer/stores/global'
 import MainLogo from '@/scripts/components/icons/MainLogo.vue'
+import CustomerLightDarkButton from '@/scripts/components/CustomerLightDarkButton.vue'
 import {
   Disclosure,
   DisclosureButton,

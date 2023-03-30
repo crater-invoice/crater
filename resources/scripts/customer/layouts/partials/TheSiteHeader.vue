@@ -110,9 +110,7 @@
             "
           >
             <span class="sr-only">Open main menu</span>
-            <!-- <BaseIcon v-if="!open" name="MenuIcon" class="!w-6 !h-6 text-gray-500" /> -->
             <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-            <!-- <BaseIcon v-else name="XIcon" class="!w-6 !h-6 text-gray-500" /> -->
             <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
         </div>

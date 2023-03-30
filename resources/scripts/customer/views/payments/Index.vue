@@ -111,11 +111,11 @@
         <template #cell-actions="{ row }">
           <BaseDropdown>
             <template #activator>
-              <BaseIcon name="DotsHorizontalIcon" class="w-5 text-gray-500" />
+              <BaseIcon name="DotsHorizontalIcon" class="w-5 text-gray-500  dark:text-gray-200" />
             </template>
             <router-link :to="`payments/${row.data.id}/view`">
               <BaseDropdownItem>
-                <BaseIcon name="EyeIcon" class="h-5 mr-3 text-gray-600" />
+                <BaseIcon name="EyeIcon" class="h-5 mr-3 text-gray-600  dark:text-gray-200" />
                 {{ $t('general.view') }}
               </BaseDropdownItem>
             </router-link>

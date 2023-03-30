@@ -2,8 +2,9 @@
   <Disclosure
     v-slot="{ open }"
     as="nav"
-    class="bg-white shadow-sm fixed top-0 left-0 z-20 w-full"
+    class="bg-white shadow-sm fixed top-0 left-0 z-20 w-full dark:bg-gray-800"
   >
+    <BaseDarkHighlight />
     <div class="mx-auto px-8">
       <div class="flex justify-between h-16 w-full">
         <div class="flex">
@@ -33,8 +34,8 @@
               :to="`/${globalStore.companySlug}${item.link}`"
               :class="[
                 hasActiveUrl(item.link)
-                  ? 'border-primary-500 text-primary-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                  ? 'border-primary-500 text-primary-600 dark:text-primary-400'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-200',
                 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium',
               ]"
             >
@@ -43,20 +44,6 @@
           </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
-          <button
-            type="button"
-            class="
-              bg-white
-              p-1
-              rounded-full
-              text-gray-400
-              hover:text-gray-500
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-primary-500
-            "
-          ></button>
 
           <!-- Profile dropdown -->
 
@@ -85,7 +72,7 @@
               <router-link :to="{ name: 'customer.profile' }">
                 <BaseDropdownItem>
                   <CogIcon
-                    class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                    class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-200"
                     aria-hidden="true"
                   />
                   {{ $t('navigation.settings') }}
@@ -94,7 +81,7 @@
 
               <BaseDropdownItem @click="logout">
                 <LogoutIcon
-                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+                  class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-200"
                   aria-hidden="true"
                 />
                 {{ $t('navigation.logout') }}
@@ -118,6 +105,8 @@
               focus:ring-2
               focus:ring-offset-2
               focus:ring-primary-500
+              dark:bg-gray-700
+              dark:focus:ring-offset-gray-900
             "
           >
             <span class="sr-only">Open main menu</span>
@@ -136,15 +125,15 @@
           :to="`/${globalStore.companySlug}${item.link}`"
           :class="[
             hasActiveUrl(item.link)
-              ? 'bg-primary-50 border-primary-500 text-primary-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800',
+              ? 'bg-primary-50 border-primary-500 text-primary-700 dark:bg-gray-700 dark:text-primary-400'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-gray-200 dark:hover:bg-gray-700',
             'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
           ]"
           :aria-current="item.current ? 'page' : undefined"
           >{{ item.title }}
         </router-link>
       </div>
-      <div class="pt-4 pb-3 border-t border-gray-200">
+      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-500">
         <div class="flex items-center px-4">
           <div class="shrink-0">
             <img class="h-10 w-10 rounded-full" :src="previewAvatar" alt="" />
@@ -153,26 +142,10 @@
             <div class="text-base font-medium text-gray-800">
               {{ globalStore.currentUser.title }}
             </div>
-            <div class="text-sm font-medium text-gray-500">
+            <div class="text-sm font-medium text-gray-500 dark:text-gray-200">
               {{ globalStore.currentUser.email }}
             </div>
           </div>
-          <button
-            type="button"
-            class="
-              ml-auto
-              bg-white
-              shrink-0
-              p-1
-              rounded-full
-              text-gray-400
-              hover:text-gray-500
-              focus:outline-none
-              focus:ring-2
-              focus:ring-offset-2
-              focus:ring-primary-500
-            "
-          ></button>
         </div>
         <div class="mt-3 space-y-1">
           <router-link
@@ -182,7 +155,7 @@
             :class="[
               hasActiveUrl(item.link)
                 ? 'bg-primary-50 border-primary-500 text-primary-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800',
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-gray-200 dark:hover:bg-gray-700',
               'block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
             ]"
             >{{ item.title }}</router-link

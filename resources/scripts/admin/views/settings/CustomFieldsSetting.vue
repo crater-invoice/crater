@@ -27,7 +27,7 @@
     >
       <template #cell-name="{ row }">
         {{ row.data.name }}
-        <span class="text-xs text-gray-500"> ({{ row.data.slug }})</span>
+        <span class="text-xs text-gray-500 dark:text-gray-400"> ({{ row.data.slug }})</span>
       </template>
 
       <template #cell-is_required="{ row }">
@@ -60,7 +60,7 @@
         <CustomFieldDropdown
           :row="row.data"
           :table="table"
-          :load-data="refreshTable"
+          :load-data="refreshTable" 
         />
       </template>
     </BaseTable>

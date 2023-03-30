@@ -43,6 +43,12 @@
             max-w-full
             left-0
             top-3
+            bg-white
+            dark:border
+            dark:border-white/10
+            dark:text-white
+            dark:bg-gray-800
+            dark:shadow-glass
           "
         >
           <div
@@ -53,7 +59,7 @@
               ring-1 ring-black ring-opacity-5
             "
           >
-            <div class="relative grid bg-white">
+            <div class="relative grid bg-white dark:bg-gray-800">
               <div class="relative p-4">
                 <BaseInput
                   v-model="textSearch"
@@ -66,7 +72,7 @@
 
               <div
                 v-if="filteredNotes.length > 0"
-                class="relative flex flex-col overflow-auto list max-h-36"
+                class="relative flex flex-col overflow-auto list max-h-36 dark:border-white/10"
               >
                 <div
                   v-for="(note, index) in filteredNotes"
@@ -79,6 +85,8 @@
                     cursor-pointer
                     hover:bg-gray-100 hover:cursor-pointer
                     last:border-b-0
+                    dark:border-gray-600
+                    dark:border-white/10 dark:hover:bg-gray-700/30
                   "
                   @click="selectNote(index, close)"
                 >
@@ -119,6 +127,10 @@
                 bg-gray-200
                 border-none
                 outline-none
+                dark:bg-gray-600/70
+                dark:backdrop-blur-xl
+                dark:shadow-glass
+                dark:hover:bg-gray-600/80
               "
               @click="openNoteModal"
             >

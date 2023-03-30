@@ -17,7 +17,7 @@
 
       <BaseIcon
         name="TrashIcon"
-        class="h-5 ml-2 cursor-pointer"
+        class="h-5 ml-2 cursor-pointer dark:text-red-400"
         @click="$emit('remove', tax.id)"
       />
     </label>

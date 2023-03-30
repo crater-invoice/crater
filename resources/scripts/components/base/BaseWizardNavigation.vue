@@ -1,16 +1,7 @@
 <template>
   <div
     :class="containerClass"
-    class="
-      relative
-      after:bg-gray-200
-      after:absolute
-      after:transform
-      after:top-1/2
-      after:-translate-y-1/2
-      after:h-2
-      after:w-full
-    "
+    class="relative after:bg-gray-200 dark:after:bg-gray-700 after:absolute after:transform after:top-1/2 after:-translate-y-1/2 after:h-2 after:w-full"
   >
     <a
       v-for="(number, index) in steps"
@@ -58,21 +49,21 @@ export default {
     },
     currentStepClass: {
       type: String,
-      default: 'bg-white border-primary-500',
+      default: 'bg-white border-primary-500 dark:bg-gray-600 dark:border-gray-500 dark:border-primary-600',
     },
     nextStepClass: {
       type: String,
-      default: 'border-gray-200 bg-white',
+      default: 'border-gray-200 bg-white dark:bg-gray-600 dark:border-gray-500',
     },
     previousStepClass: {
       type: String,
       default:
-        'bg-primary-500 border-primary-500 flex justify-center items-center',
+        'bg-primary-500 dark:bg-primary-600 border-primary-500 flex justify-center items-center dark:border-primary-600',
     },
     iconClass: {
       type: String,
       default:
-        'flex items-center justify-center w-full h-full text-sm font-black text-center text-white',
+        'flex items-center justify-center w-full h-full text-sm font-black text-center text-white dark:text-gray-400',
     },
   },
 

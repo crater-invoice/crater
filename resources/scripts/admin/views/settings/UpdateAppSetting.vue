@@ -4,23 +4,14 @@
     :description="$t('settings.update_app.description')"
   >
     <div class="pb-8 ml-0">
-      <label class="text-sm not-italic font-medium input-label">
+      <label
+        class="text-sm not-italic font-medium input-label dark:text-gray-300"
+      >
         {{ $t('settings.update_app.current_version') }}
       </label>
 
       <div
-        class="
-          box-border
-          flex
-          w-16
-          p-3
-          my-2
-          text-sm text-gray-600
-          bg-gray-200
-          border border-gray-200 border-solid
-          rounded-md
-          version
-        "
+        class="box-border flex w-16 p-3 my-2 text-sm text-gray-600 bg-gray-200 border border-gray-200 border-solid dark:bg-gray-600 dark:text-gray-200 dark:border-gray-500 rounded-md version"
       >
         {{ currentVersion }}
       </div>
@@ -42,20 +33,20 @@
           {{ $t('settings.update_app.avail_update') }}
         </BaseHeading>
 
-        <div class="rounded-md bg-primary-50 p-4 mb-3">
+        <div class="rounded-md bg-primary-50 p-4 mb-3 dark:bg-gray-600">
           <div class="flex">
             <div class="shrink-0">
               <BaseIcon
                 name="InformationCircleIcon"
-                class="h-5 w-5 text-primary-400"
+                class="h-5 w-5 text-primary-400 dark:text-primary-300"
                 aria-hidden="true"
               />
             </div>
             <div class="ml-3">
-              <h3 class="text-sm font-medium text-primary-800">
+              <h3 class="text-sm font-medium text-primary-800 dark:text-primary-300">
                 {{ $t('general.note') }}
               </h3>
-              <div class="mt-2 text-sm text-primary-700">
+              <div class="mt-2 text-sm text-primary-700 dark:text-primary-400">
                 <p>
                   {{ $t('settings.update_app.update_warning') }}
                 </p>
@@ -75,26 +66,20 @@
             w-16
             p-3
             my-2
-            text-sm text-gray-600
-            bg-gray-200
+            text-sm
+            text-gray-600 bg-gray-200
             border border-gray-200 border-solid
             rounded-md
             version
+            dark:bg-gray-600 dark:text-gray-200
+            dark:border-gray-500
           "
         >
           {{ updateData.version }}
         </div>
 
         <div
-          class="
-            pl-5
-            mt-4
-            mb-8
-            text-sm
-            leading-snug
-            text-gray-500
-            update-description
-          "
+          class="pl-5 mt-4 mb-8 text-sm leading-snug text-gray-500 update-description"
           style="white-space: pre-wrap; max-width: 480px"
           v-html="description"
         ></div>
@@ -150,14 +135,7 @@
         <li
           v-for="step in updateSteps"
           :key="step.stepUrl"
-          class="
-            flex
-            justify-between
-            w-full
-            py-3
-            border-b border-gray-200 border-solid
-            last:border-b-0
-          "
+          class="flex justify-between w-full py-3 border-b border-gray-200 border-solid last:border-b-0"
         >
           <p class="m-0 text-sm leading-8">{{ $t(step.translationKey) }}</p>
           <div class="flex flex-row items-center">

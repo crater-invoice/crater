@@ -19,7 +19,6 @@ const globalStore = useGlobalStore()
 const enabled = computed({
   get: () => globalStore.isDarkModeOn,
   set: (value) => {
-    console.log(value)
     if (value) {
       localStorage.theme = 'dark'
       document.documentElement.classList.add('dark')

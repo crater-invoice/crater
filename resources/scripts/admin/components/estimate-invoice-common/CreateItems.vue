@@ -175,6 +175,7 @@ import { useCompanyStore } from '@/scripts/admin/stores/company'
 import { computed } from 'vue'
 import draggable from 'vuedraggable'
 import Item from './CreateItemRow.vue'
+
 const props = defineProps({
   store: {
     type: Object,
@@ -197,7 +198,9 @@ const props = defineProps({
     default: '',
   },
 })
+
 const companyStore = useCompanyStore()
+
 const defaultCurrency = computed(() => {
   if (props.currency) {
     return props.currency

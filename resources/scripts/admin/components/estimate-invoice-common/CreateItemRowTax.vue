@@ -30,7 +30,22 @@
         <template v-if="userStore.hasAbilities(ability)" #action>
           <button
             type="button"
-            class="flex items-center justify-center w-full px-2 py-2 bg-gray-200 border-none outline-none cursor-pointer "
+            class="
+              flex
+              items-center
+              justify-center
+              w-full
+              px-2
+              py-2
+              bg-gray-200
+              border-none
+              outline-none
+              cursor-pointer
+            dark:bg-gray-600/70
+              dark:backdrop-blur-xl
+              dark:shadow-glass
+              dark:hover:bg-gray-600/80
+            "
             @click="openTaxModal"
           >
             <BaseIcon name="CheckCircleIcon" class="h-5 text-primary-400" />
@@ -53,7 +68,7 @@
       <BaseIcon
         v-if="taxes.length && index !== taxes.length - 1"
         name="TrashIcon"
-        class="h-5 text-gray-700 cursor-pointer"
+        class="h-5 text-gray-700 dark:text-red-400 cursor-pointer"
         @click="removeTax(index)"
       />
     </div>

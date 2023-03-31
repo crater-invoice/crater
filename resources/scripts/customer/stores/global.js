@@ -14,7 +14,7 @@ export const useGlobalStore = defineStore({
     companySlug: '',
     mainMenu: null,
     enabledModules: [],
-    isDarkModeOn: false
+    isDarkModeOn: localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark')
   }),
 
   actions: {

@@ -16,26 +16,21 @@ defineProps({
 
 const globalStore = useGlobalStore()
 
-const enabled = ref(
-  localStorage.getItem('theme') === 'dark' ||
-    document.documentElement.classList.contains('dark')
-)
-
-globalStore.isDarkModeOn = enabled
-
-function onChange(val) {
-  if (val) {
-    localStorage.theme = 'dark'
-    document.documentElement.classList.add('dark')
-    document.documentElement.style.setProperty('color-scheme', 'dark')
-    globalStore.isDarkModeOn = true
-  } else {
-    localStorage.theme = 'light'
-    document.documentElement.classList.remove('dark')
-    document.documentElement.style.setProperty('color-scheme', 'light')
-    globalStore.isDarkModeOn = false
-  }
-}
+const enabled = computed({
+  get: () => globalStore.isDarkModeOn,
+  set: (value) => {
+    if (value) {
+      localStorage.theme = 'dark'
+      document.documentElement.classList.add('dark')
+      document.documentElement.style.setProperty('color-scheme', 'dark')
+    } else {
+      localStorage.theme = 'light'
+      document.documentElement.classList.remove('dark')
+      document.documentElement.style.setProperty('color-scheme', 'light')
+    }
+    globalStore.isDarkModeOn = value
+  },
+})
 </script>
 
 <template>
@@ -49,7 +44,6 @@ function onChange(val) {
         v-model="enabled"
         class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:ring-offset-gray-700"
         :class="[enabled ? 'bg-primary-600' : 'bg-gray-200']"
-        @update:modelValue="onChange"
       >
         <span class="sr-only">Use setting</span>
         <span

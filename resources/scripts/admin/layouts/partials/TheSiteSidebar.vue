@@ -68,10 +68,8 @@
           </TransitionChild>
           <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
             <div class="flex items-center shrink-0 px-4 mb-10">
-              <MainLogo
-                class="block h-auto max-w-full w-36 text-primary-400"
-                alt="Crater Logo"
-              />
+              <img class="h-auto max-w-full w-36 hidden dark:block" :src="getDarkLogo"/>
+              <img class="h-auto max-w-full w-36 block dark:hidden" :src="getLightLogo"/>
             </div>
 
             <nav
@@ -167,8 +165,7 @@
 </template>
 
 <script setup>
-import MainLogo from '@/scripts/components/icons/MainLogo.vue'
-
+import { computed } from 'vue'
 import {
   Dialog,
   DialogOverlay,
@@ -182,6 +179,9 @@ import LightDarkSwitch from '@/scripts/components/LightDarkSwitcher.vue'
 
 const route = useRoute()
 const globalStore = useGlobalStore()
+
+const getDarkLogo = computed(() => new URL('/img/logo-white.png', import.meta.url))
+const getLightLogo = computed(() => new URL('/img/crater-logo.png', import.meta.url))
 
 function hasActiveUrl(url) {
   return route.path.indexOf(url) > -1

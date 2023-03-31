@@ -15,12 +15,26 @@
       <thead
         class="
           bg-white
-          border border-gray-200 border-solid
+          border
+          border-gray-200
+          border-solid
           dark:shadow-glass dark:border dark:border-white/10 dark:bg-gray-800/70
-          "
-        >
+        "
+      >
         <tr>
-          <th class="text-left" :class="theadClass">
+          <th
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-left text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
+          >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
             </BaseContentPlaceholders>
@@ -28,7 +42,19 @@
               {{ $tc('items.item', 2) }}
             </span>
           </th>
-          <th class="text-right" :class="theadClass">
+          <th
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-right text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
+          >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
             </BaseContentPlaceholders>
@@ -36,7 +62,19 @@
               {{ $t('invoices.item.quantity') }}
             </span>
           </th>
-          <th class="text-left" :class="theadClass">
+          <th
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-left text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
+          >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
             </BaseContentPlaceholders>
@@ -45,9 +83,18 @@
             </span>
           </th>
           <th
-            v-if="store[storeProp].discount_per_item_enabled"
-            class="text-left"
-            :class="theadClass"
+            v-if="store[storeProp].discount_per_item === 'YES'"
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-left text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
           >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
@@ -56,7 +103,19 @@
               {{ $t('invoices.item.discount') }}
             </span>
           </th>
-          <th class="text-right" :class="theadClass">
+          <th
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-right text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
+          >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
             </BaseContentPlaceholders>
@@ -137,11 +196,6 @@ const props = defineProps({
   itemValidationScope: {
     type: String,
     default: '',
-  },
-  theadClass: {
-    type: String,
-    default: `px-5 py-3 text-sm not-italic font-medium leading-5
-              text-gray-700 border-t border-b border-gray-200 border-solid dark:text-white dark:border-white/10`
   },
 })
 

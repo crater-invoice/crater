@@ -34,8 +34,7 @@ export const useGlobalStore = (useWindow = false) => {
       isAppLoaded: false,
       isSidebarOpen: false,
       areCurrenciesLoading: false,
-      isDarkModeOn: false,
-
+      isDarkModeOn: localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark'),
       downloadReport: null,
     }),
 

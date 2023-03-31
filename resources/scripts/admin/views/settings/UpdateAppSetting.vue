@@ -92,7 +92,7 @@
           <tr
             v-for="(ext, i) in requiredExtentions"
             :key="i"
-            class="p-2 border-2 border-gray-200"
+            class="p-2 border-2 border-gray-200 dark:border-gray-600"
           >
             <td width="70%" class="p-2 text-sm truncate">
               {{ i }}
@@ -121,7 +121,7 @@
             {{ $t('settings.update_app.update_progress') }}
           </h6>
           <p
-            class="mb-8 text-sm leading-snug text-gray-500"
+            class="mb-8 text-sm leading-snug text-gray-500 dark:text-gray-400"
             style="max-width: 480px"
           >
             {{ $t('settings.update_app.progress_text') }}
@@ -135,11 +135,11 @@
         <li
           v-for="step in updateSteps"
           :key="step.stepUrl"
-          class="flex justify-between w-full py-3 border-b border-gray-200 border-solid last:border-b-0"
+          class="flex justify-between w-full py-3 border-b border-gray-200 dark:border-gray-600 border-solid last:border-b-0"
         >
-          <p class="m-0 text-sm leading-8">{{ $t(step.translationKey) }}</p>
+          <p class="m-0 text-sm dark:text-gray-300 leading-8">{{ $t(step.translationKey) }}</p>
           <div class="flex flex-row items-center">
-            <span v-if="step.time" class="mr-3 text-xs text-gray-500">
+            <span v-if="step.time" class="mr-3 text-xs text-gray-500 dark:text-gray-300">
               {{ step.time }}
             </span>
             <span
@@ -275,7 +275,7 @@ function statusClass(step) {
     case 'running':
       return 'text-blue-400 bg-blue-100'
     case 'error':
-      return 'text-danger bg-red-200'
+      return 'text-red-400 bg-red-200'
     default:
       return ''
   }

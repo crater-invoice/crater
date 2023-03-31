@@ -22,7 +22,19 @@
         "
       >
         <tr>
-          <th class="text-left" :class="theadClass">
+          <th
+            class="
+              px-5
+              py-3
+              text-sm
+              not-italic
+              font-medium
+              leading-5
+              text-left text-gray-700
+              border-t border-b border-gray-200 border-solid
+              dark:text-white dark:border-white/10
+            "
+          >
             <BaseContentPlaceholders v-if="isLoading">
               <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
             </BaseContentPlaceholders>

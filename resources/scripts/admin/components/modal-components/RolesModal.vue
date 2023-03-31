@@ -40,6 +40,7 @@
             px-4
             md:px-8
             py-1.5
+            dark:text-gray-200
           "
         >
           {{ $tc('settings.roles.permission', 2) }}

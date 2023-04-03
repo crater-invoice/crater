@@ -600,6 +600,14 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
                 'swap_currency_symbol' => true,
             ],
+            [
+                'name' => 'Bosnia and Herzegovina Convertible Mark',
+                'code' => 'BAM',
+                'symbol' => 'KM',
+                'precision' => '2',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.',
+            ],
         ];
 
 

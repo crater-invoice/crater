@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port=3000",
     "build": "vite build",
     "serve": "vite preview",
     "test": "eslint ./resources/scripts --ext .js,.vue"
@@ -18,13 +18,12 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.0.0-beta.4",
-    "laravel-vite": "^0.0.7",
     "postcss": "^8.4.5",
     "prettier": "^2.3.0",
     "sass": "^1.32.12",
     "tailwind-scrollbar": "^1.3.1",
     "tailwindcss": "^3.0.6",
-    "vite": "^2.6.1"
+    "vite": "^4.0.0"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.0",
@@ -32,10 +31,11 @@
     "@popperjs/core": "^2.9.2",
     "@stripe/stripe-js": "^1.21.2",
     "@tailwindcss/line-clamp": "^0.3.0",
-    "@tiptap/core": "^2.0.0-beta.85",
-    "@tiptap/extension-text-align": "^2.0.0-beta.29",
-    "@tiptap/starter-kit": "^2.0.0-beta.81",
-    "@tiptap/vue-3": "^2.0.0-beta.38",
+    "@tiptap/core": "^2.0.3",
+    "@tiptap/extension-text-align": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
+    "@tiptap/starter-kit": "^2.0.3",
+    "@tiptap/vue-3": "^2.0.3",
     "@vuelidate/components": "^1.1.12",
     "@vuelidate/core": "^2.0.0-alpha.32",
     "@vuelidate/validators": "^2.0.0-alpha.25",
@@ -43,6 +43,7 @@
     "axios": "^0.19",
     "chart.js": "^2.7.3",
     "guid": "0.0.12",
+    "laravel-vite-plugin": "^0.7.4",
     "lodash": "^4.17.13",
     "maska": "^1.4.6",
     "mini-svg-data-uri": "^1.3.3",

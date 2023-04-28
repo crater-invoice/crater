@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="/modules/styles/{{ $name }}">
     @endforeach
 
-    @vite
+    @vite('resources/scripts/main.js')
 </head>
 
 <body
@@ -57,14 +57,14 @@
 
         window.login_page_description = "{{$login_page_description}}"
 
-        @endif     
+        @endif
         @if(isset($copyright_text))
 
         window.copyright_text = "{{$copyright_text}}"
 
-        @endif    
+        @endif
 
-        window.Crater.start()
+        // window.Crater.start()
     </script>
 </body>
 

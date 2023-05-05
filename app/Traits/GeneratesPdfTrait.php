@@ -175,10 +175,6 @@ trait GeneratesPdfTrait
 
         $str = preg_replace("/<[^\/>]*>([\s]?)*<\/[^>]*>/", '', $str);
 
-        $str = str_replace("<p>", "", $str);
-
-        $str = str_replace("</p>", "</br>", $str);
-
         return $str;
     }
 }

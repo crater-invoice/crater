@@ -31,15 +31,15 @@ RUN mkdir -p /home/crater-user/.composer && \
     chown -R crater-user:crater-user /home/crater-user
 
 # Mounted volumes
-COPY ./ /var/www
+COPY ./ /var/www/html
 COPY ./docker-compose/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
-COPY ./uffizzi/.env.example /var/www/.env
+COPY ./uffizzi/.env.example /var/www/html/.env
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 RUN chown -R crater-user:crater-user ./
-RUN chmod -R 775 composer.json composer.lock \ 
+RUN chmod -R 775 composer.json composer.lock \
         composer.lock storage/framework/ \
         storage/logs/ bootstrap/cache/ /home/crater-user/.composer
 
@@ -58,10 +58,10 @@ RUN docker-php-ext-install pdo pdo_mysql bcmath
 COPY docker-compose/crontab /etc/crontabs/root
 
 # Mounted volumes
-COPY --from=build /var/www /var/www
+COPY --from=build /var/www/html /var/www/html
 
-RUN chown -R $(whoami):$(whoami) /var/www/
-RUN chmod -R 775 /var/www/
+RUN chown -R $(whoami):$(whoami) /var/www/html/
+RUN chmod -R 775 /var/www/html/
 RUN chown -R $(whoami):$(whoami) /var/log/
 RUN chmod -R 775 /var/log/
 

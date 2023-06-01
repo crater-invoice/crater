@@ -32,33 +32,33 @@ RUN mkdir -p /home/crater-user/.composer && \
     chown -R crater-user:crater-user /home/crater-user
 
 # Mounted volumes
-COPY ./ /var/www
+COPY ./ /var/www/html/
 COPY ./docker-compose/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
-COPY ./uffizzi/.env.example /var/www/.env
+COPY ./uffizzi/.env.example /var/www/html/.env
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html/
 
 RUN chown -R crater-user:crater-user ./
-RUN chmod -R 775 composer.json composer.lock \ 
+RUN chmod -R 775 composer.json composer.lock \
         composer.lock storage/framework/ \
         storage/logs/ bootstrap/cache/ /home/crater-user/.composer
 RUN chown -R $(whoami):$(whoami) /var/log/
 RUN chmod -R 775 /var/log
 
 # Cleanup manually generated build files
-RUN rm -rf /var/www/public/build
+RUN rm -rf /var/www/html/public/build
 RUN npm config set user 0
 RUN npm config set unsafe-perm true
 # Frontend bulding
-RUN sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' /var/www/.env
-RUN sed -i 's/DB_DATABASE=crater/DB_DATABASE=\/tmp\/crater.sqlite/g' /var/www/.env
+RUN sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' /var/www/html/.env
+RUN sed -i 's/DB_DATABASE=crater/DB_DATABASE=\/tmp\/crater.sqlite/g' /var/www/html/.env
 RUN touch /tmp/crater.sqlite
 RUN composer install --no-interaction --prefer-dist
 RUN npm i -f
 RUN npm install --save-dev sass
 RUN export NODE_OPTIONS="--max-old-space-size=4096" && /usr/bin/npx vite build --target=es2020
-RUN sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g' /var/www/.env
-RUN sed -i 's/DB_DATABASE=\/tmp\/crater.sqlite/DB_DATABASE=crater/g' /var/www/.env
+RUN sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g' /var/www/html/.env
+RUN sed -i 's/DB_DATABASE=\/tmp\/crater.sqlite/DB_DATABASE=crater/g' /var/www/html/.env
 
 USER crater-user

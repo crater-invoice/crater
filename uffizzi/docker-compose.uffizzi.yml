@@ -9,12 +9,12 @@ services:
   app:
     image: "${APP_IMAGE}"
     restart: unless-stopped
-    working_dir: /var/www/
+    working_dir: /var/www/html/
     command: ["-c","
-            composer config --no-plugins allow-plugins.pestphp/pest-plugin true && 
-            composer install --no-interaction --prefer-dist --optimize-autoloader && 
-            php artisan storage:link || true && 
-            php artisan key:generate --force && 
+            composer config --no-plugins allow-plugins.pestphp/pest-plugin true &&
+            composer install --no-interaction --prefer-dist --optimize-autoloader &&
+            php artisan storage:link || true &&
+            php artisan key:generate --force &&
             php-fpm",
             ]
     entrypoint: /bin/sh
@@ -54,5 +54,5 @@ services:
   cron:
     image: "${CROND_IMAGE}"
     restart: always
-    
+
 

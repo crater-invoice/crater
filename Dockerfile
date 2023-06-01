@@ -35,6 +35,9 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
+RUN echo "${CRATER_DOCKER_TAG}" > /crater.docker.tag
+COPY --chmod=0755 docker-compose/entrypoint.sh /usr/local/
+ENTRYPOINT ["/usr/local/entrypoint.sh"]
 
 USER $user

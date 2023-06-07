@@ -1,0 +1,101 @@
+version: '3.3'
+
+services:
+  app:
+    image: guanana2/crater:latest
+    working_dir: /var/www
+    environment:
+      APP_ENV: production
+      APP_KEY: "base64:UGvXz/q5EwNVNVHBnDnEgaD0JFxlVnM0iha4KNexample:"
+      APP_DEBUG: "true"
+      APP_LOG_LEVEL: debug
+      APP_URL: "https://crater.example.com"
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: crater_db
+      DB_USERNAME: crater_username
+      DB_PASSWORD: crater_pass
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: file
+      QUEUE_DRIVER: sync
+      SESSION_DRIVER: cookie
+      SESSION_LIFETIME: 1440
+      REDIS_HOST: 127.0.0.1
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      MAIL_DRIVER: mail
+      MAIL_FROM_ADDRESS: crater@example.com
+      MAIL_FROM_NAME: "Crater Test"
+      SANCTUM_STATEFUL_DOMAINS: crater.example.com
+      SESSION_DOMAIN: crater.example.com
+      TRUSTED_PROXIES: "*"
+      CRON_JOB_AUTH_TOKEN: ""
+    user: "1000"
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000'"
+      interval: 10s
+      timeout: 10s
+      retries: 20
+    depends_on:
+      - db
+    volumes:
+      - crater_data:/var/www
+  db:
+    image: mariadb:10.9.6
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_USER: crater_username
+      MYSQL_PASSWORD: crater_pass
+      MYSQL_DATABASE: crater_db
+      MYSQL_ROOT_PASSWORD: crater_dev_root
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    ports:
+      - '33006:3306'
+
+  nginx:
+    image: nginx:1.25.0-alpine-slim
+    volumes:
+      - SSL:/etc/nginx/ssl/
+      - crater_data:/var/www
+    ports:
+      - '443:443'
+    depends_on:
+      - db
+      - app
+    configs:
+      - source: crater_nginx.conf
+        target: /etc/nginx/conf.d/nginx.conf
+
+
+  cron:
+    image: guanana2/crater-crond:latest
+    depends_on:
+      - db
+      - app
+    volumes:
+      - crater_data:/var/www
+
+volumes:
+  db:
+    driver_opts:
+      type: "nfs"
+      o: "addr=nfserver.example,nolock,soft,rw,sec=sys,rsize=131072,wsize=131072,vers=4.0"
+      device: ":/Swarm/crater_dev/data/db"
+  crater_data:
+    driver_opts:
+      type: "nfs"
+      o: "addr=nfserver.example,nolock,soft,rw,rsize=131072,wsize=131072,sec=sys,vers=4.0"
+      device: ":/Swarm/crater_dev/data/www"
+  SSL:
+    external: true
+
+configs:
+  crater_nginx.conf:
+    external: true
+  crater_uploads.ini:
+    external: true

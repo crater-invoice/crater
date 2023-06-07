@@ -1,63 +1,74 @@
-version: '3'
+version: '3.3'
 
 services:
   app:
-    build:
-      args:
-        user: crater-user
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: crater-php
-    restart: unless-stopped
-    working_dir: /var/www/
+    image: guanana2/crater:latest
+    working_dir: /var/www
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000'"
+      interval: 10s
+      timeout: 10s
+      retries: 20
     volumes:
-      - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
-    networks:
-      - crater
-
+      - crater_data:/var/www/
+      - ./.env:/var/www/.env
   db:
-    image: mariadb
-    restart: always
+    image: mariadb:10.9.6
     volumes:
       - db:/var/lib/mysql
       # If you want to persist data on the host, comment the line above this one...
       # and uncomment the line under this one.
       #- ./docker-compose/db/data:/var/lib/mysql:rw,delegated
     environment:
-      MYSQL_USER: crater
-      MYSQL_PASSWORD: crater
-      MYSQL_DATABASE: crater
-      MYSQL_ROOT_PASSWORD: crater
+      MYSQL_USER: crater_dev
+      MYSQL_PASSWORD: crater_dev
+      MYSQL_DATABASE: crater_dev
+      MYSQL_ROOT_PASSWORD: crater_dev_root
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
     ports:
       - '33006:3306'
-    networks:
-      - crater
 
   nginx:
-    image: nginx:1.17-alpine
-    restart: unless-stopped
+    image: nginx:1.25.0-alpine-slim
+    volumes:
+      #- SSL:/etc/nginx/ssl/
+      - crater_data:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
     ports:
-      - 80:80
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
-    networks:
-      - crater
-
+      - '443:443'
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_healthy
   cron:
-    build:
-      context: ./
-      dockerfile: ./docker-compose/cron.dockerfile
+    image: guanana2/crater-crond:latest
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_healthy
     volumes:
-      - ./:/var/www
-    networks:
-      - crater
+      - crater_data:/var/www
 
 volumes:
   db:
+  crater_data:
 
-networks:
-  crater:
-    driver: bridge
+# NFS Example
+#  db:
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=nfserver,nolock,soft,rw,sec=sys,vers=4.2"
+#      device: ":/crater_dev/data/db"
+#  crater_data:
+#    driver_opts:
+#      type: "nfs"
+#      o: "addr=nfserver,nolock,soft,rw,sec=sys,vers=4.2"
+#      device: ":/crater_dev/data/www"

@@ -70,7 +70,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: guanana/crater
+          repository: guanana2/crater
           readme-filepath: ./readme.md
 
       - name: Build and push
@@ -134,7 +134,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: guanana/crater
+          repository: guanana2/crater-crond
           readme-filepath: ./readme.md
 
       - name: Build and push

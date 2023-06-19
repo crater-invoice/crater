@@ -600,6 +600,15 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
                 'swap_currency_symbol' => true,
             ],
+             [
+                'name' => 'Uganda Shillings',
+                'code' => 'UGX',
+                'symbol' => 'Ugx',
+                'precision' => '0',
+                'thousand_separator' => '.',
+                'decimal_separator' => ',',
+                'swap_currency_symbol' => true,
+            ],
         ];
 
 

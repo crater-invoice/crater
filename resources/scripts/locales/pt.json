@@ -151,7 +151,7 @@
     "no_results_found": "Nenhum Resultado Encontrado"
   },
   "company_switcher": {
-    "label": "SWITCH COMPANY",
+    "label": "TROCAR EMPRESA",
     "no_results_found": "Nenhum Resultado Encontrado",
     "add_new_company": "Adicionar Nova Empresa",
     "new_company": "Nova Empresa",
@@ -209,8 +209,8 @@
     "edit_customer": "Editar Cliente",
     "basic_info": "Informação Básica",
     "portal_access": "Acesso ao Portal",
-    "portal_access_text": "Would you like to allow this customer to login to the Customer Portal?",
-    "portal_access_url": "Customer Portal Login URL",
+    "portal_access_text": "Gostaria de permitir que este cliente inicie sessão no Portal do Cliente?",
+    "portal_access_url": "URL de início de sessão do Portal do Cliente",
     "portal_access_url_help": "Please copy & forward the above given URL to your customer for providing access.",
     "billing_address": "Morada de Faturação",
     "shipping_address": "Morada de Envio",

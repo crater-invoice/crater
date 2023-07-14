@@ -152,32 +152,24 @@ export default {
     return statusColors[status];
   },
   getStatusTranslation(status) {
-    switch (status) {
-      case 'DRAFT':
-        return global.t('general.draft')
-      case 'PAID':
-        return global.t('invoices.paid')
-      case 'UNPAID':
-        return global.t('invoices.unpaid')
-      case 'SENT':
-        return global.t('general.sent')
-      case 'REJECTED':
-        return global.t('estimates.rejected')
-      case 'ACCEPTED':
-        return global.t('estimates.accepted')
-      case 'VIEWED':
-        return global.t('invoices.viewed')
-      case 'EXPIRED':
-        return global.t('estimates.expired')
-      case 'PARTIALLY PAID':
-        return global.t('estimates.partially_paid')
-      case 'COMPLETED':
-        return global.t('invoices.completed')
-      case 'DUE':
-        return global.t('general.due')
-      default:
-        return status
+    const statusMessages = {
+      DRAFT: 'general.draft',
+      PAID: 'invoices.paid',
+      UNPAID: 'invoices.unpaid',
+      SENT: 'general.sent',
+      REJECTED: 'estimates.rejected',
+      ACCEPTED: 'estimates.accepted',
+      VIEWED: 'invoices.viewed',
+      EXPIRED: 'estimates.expired',
+      'PARTIALLY PAID': 'estimates.partially_paid',
+      COMPLETED: 'invoices.completed',
+      DUE: 'general.due',
+    };
+    const messageKey = statusMessages[status];
+    if (messageKey) {
+      return global.t(messageKey);
     }
+    return status;
   },
   toFormData(object) {
     const formData = new FormData()

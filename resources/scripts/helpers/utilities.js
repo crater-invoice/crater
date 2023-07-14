@@ -84,12 +84,12 @@ export default {
     })
   },
 
-  checkValidUrl(url) {
+  isValidUrl(url) {
     const localhostRegex = /^https?:\/\/(localhost|127\.0\.0\.1)/;
     return localhostRegex.test(url) || !!new URL(url);
   },
 
-  checkValidDomainUrl(url) {
+  isValidDomainUrl(url) {
     const localhostRegex = /(localhost|127\.0\.0\.1)/;
     return localhostRegex.test(url) || !!new URL(url);
   },

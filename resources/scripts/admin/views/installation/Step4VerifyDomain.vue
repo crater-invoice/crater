@@ -60,7 +60,7 @@ const formData = reactive({
 const isSaving = ref(false)
 const { t } = useI18n()
 const utils = inject('utils')
-const isUrl = (value) => utils.checkValidDomainUrl(value)
+const isUrl = (value) => utils.isValidDomainUrl(value)
 
 const installationStore = useInstallationStore()
 const notificationStore = useNotificationStore()

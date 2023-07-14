@@ -110,7 +110,7 @@ onMounted(() => {
   }
 })
 
-const isUrl = (value) => utils.checkValidUrl(value)
+const isUrl = (value) => utils.isValidUrl(value)
 
 const rules = {
   database_connection: {

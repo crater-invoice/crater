@@ -85,43 +85,13 @@ export default {
   },
 
   checkValidUrl(url) {
-    if (
-      url.includes('http://localhost') ||
-      url.includes('http://127.0.0.1') ||
-      url.includes('https://localhost') ||
-      url.includes('https://127.0.0.1')
-    ) {
-      return true
-    }
-    let pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-      'i'
-    ) // fragment locator
-
-    return !!pattern.test(url)
+    const localhostRegex = /^https?:\/\/(localhost|127\.0\.0\.1)/;
+    return localhostRegex.test(url) || !!new URL(url);
   },
 
   checkValidDomainUrl(url) {
-    if (url.includes('localhost') || url.includes('127.0.0.1')) {
-      return true
-    }
-
-    let pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-      'i'
-    ) // fragment locator
-
-    return !!pattern.test(url)
+    const localhostRegex = /(localhost|127\.0\.0\.1)/;
+    return localhostRegex.test(url) || !!new URL(url);
   },
 
   fallbackCopyTextToClipboard(text) {

@@ -133,73 +133,23 @@ export default {
     })
   },
   getBadgeStatusColor(status) {
-    switch (status) {
-      case 'DRAFT':
-        return {
-          bgColor: '#F8EDCB',
-          color: '#744210',
-        }
-      case 'PAID':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'UNPAID':
-        return {
-          bgColor: '#F8EDC',
-          color: '#744210',
-        }
-      case 'SENT':
-        return {
-          bgColor: 'rgba(246, 208, 154, 0.4)',
-          color: '#975a16',
-        }
-      case 'REJECTED':
-        return {
-          bgColor: '#E1E0EA',
-          color: '#1A1841',
-        }
-      case 'ACCEPTED':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'VIEWED':
-        return {
-          bgColor: '#C9E3EC',
-          color: '#2c5282',
-        }
-      case 'EXPIRED':
-        return {
-          bgColor: '#FED7D7',
-          color: '#c53030',
-        }
-      case 'PARTIALLY PAID':
-        return {
-          bgColor: '#C9E3EC',
-          color: '#2c5282',
-        }
-      case 'COMPLETED':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'DUE':
-        return {
-          bgColor: '#F8EDCB',
-          color: '#744210',
-        }
-      case 'YES':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'NO':
-        return {
-          bgColor: '#FED7D7',
-          color: '#c53030',
-        }
-    }
+    const statusColors = {
+      DRAFT: { bgColor: '#F8EDCB', color: '#744210' },
+      PAID: { bgColor: '#D5EED0', color: '#276749' },
+      UNPAID: { bgColor: '#F8EDC', color: '#744210' },
+      SENT: { bgColor: 'rgba(246, 208, 154, 0.4)', color: '#975a16' },
+      REJECTED: { bgColor: '#E1E0EA', color: '#1A1841' },
+      ACCEPTED: { bgColor: '#D5EED0', color: '#276749' },
+      VIEWED: { bgColor: '#C9E3EC', color: '#2c5282' },
+      EXPIRED: { bgColor: '#FED7D7', color: '#c53030' },
+      'PARTIALLY PAID': { bgColor: '#C9E3EC', color: '#2c5282' },
+      COMPLETED: { bgColor: '#D5EED0', color: '#276749' },
+      DUE: { bgColor: '#F8EDCB', color: '#744210' },
+      YES: { bgColor: '#D5EED0', color: '#276749' },
+      NO: { bgColor: '#FED7D7', color: '#c53030' },
+    };
+
+    return statusColors[status];
   },
   getStatusTranslation(status) {
     switch (status) {

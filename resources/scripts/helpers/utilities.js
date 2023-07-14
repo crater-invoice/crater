@@ -84,44 +84,14 @@ export default {
     })
   },
 
-  checkValidUrl(url) {
-    if (
-      url.includes('http://localhost') ||
-      url.includes('http://127.0.0.1') ||
-      url.includes('https://localhost') ||
-      url.includes('https://127.0.0.1')
-    ) {
-      return true
-    }
-    let pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-      'i'
-    ) // fragment locator
-
-    return !!pattern.test(url)
+  isValidUrl(url) {
+    const localhostRegex = /^https?:\/\/(localhost|127\.0\.0\.1)/;
+    return localhostRegex.test(url) || !!new URL(url);
   },
 
-  checkValidDomainUrl(url) {
-    if (url.includes('localhost') || url.includes('127.0.0.1')) {
-      return true
-    }
-
-    let pattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-      'i'
-    ) // fragment locator
-
-    return !!pattern.test(url)
+  isValidDomainUrl(url) {
+    const localhostRegex = /(localhost|127\.0\.0\.1)/;
+    return localhostRegex.test(url) || !!new URL(url);
   },
 
   fallbackCopyTextToClipboard(text) {
@@ -163,101 +133,43 @@ export default {
     })
   },
   getBadgeStatusColor(status) {
-    switch (status) {
-      case 'DRAFT':
-        return {
-          bgColor: '#F8EDCB',
-          color: '#744210',
-        }
-      case 'PAID':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'UNPAID':
-        return {
-          bgColor: '#F8EDC',
-          color: '#744210',
-        }
-      case 'SENT':
-        return {
-          bgColor: 'rgba(246, 208, 154, 0.4)',
-          color: '#975a16',
-        }
-      case 'REJECTED':
-        return {
-          bgColor: '#E1E0EA',
-          color: '#1A1841',
-        }
-      case 'ACCEPTED':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'VIEWED':
-        return {
-          bgColor: '#C9E3EC',
-          color: '#2c5282',
-        }
-      case 'EXPIRED':
-        return {
-          bgColor: '#FED7D7',
-          color: '#c53030',
-        }
-      case 'PARTIALLY PAID':
-        return {
-          bgColor: '#C9E3EC',
-          color: '#2c5282',
-        }
-      case 'COMPLETED':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'DUE':
-        return {
-          bgColor: '#F8EDCB',
-          color: '#744210',
-        }
-      case 'YES':
-        return {
-          bgColor: '#D5EED0',
-          color: '#276749',
-        }
-      case 'NO':
-        return {
-          bgColor: '#FED7D7',
-          color: '#c53030',
-        }
-    }
+    const statusColors = {
+      DRAFT: { bgColor: '#F8EDCB', color: '#744210' },
+      PAID: { bgColor: '#D5EED0', color: '#276749' },
+      UNPAID: { bgColor: '#F8EDC', color: '#744210' },
+      SENT: { bgColor: 'rgba(246, 208, 154, 0.4)', color: '#975a16' },
+      REJECTED: { bgColor: '#E1E0EA', color: '#1A1841' },
+      ACCEPTED: { bgColor: '#D5EED0', color: '#276749' },
+      VIEWED: { bgColor: '#C9E3EC', color: '#2c5282' },
+      EXPIRED: { bgColor: '#FED7D7', color: '#c53030' },
+      'PARTIALLY PAID': { bgColor: '#C9E3EC', color: '#2c5282' },
+      COMPLETED: { bgColor: '#D5EED0', color: '#276749' },
+      DUE: { bgColor: '#F8EDCB', color: '#744210' },
+      YES: { bgColor: '#D5EED0', color: '#276749' },
+      NO: { bgColor: '#FED7D7', color: '#c53030' },
+    };
+
+    return statusColors[status];
   },
   getStatusTranslation(status) {
-    switch (status) {
-      case 'DRAFT':
-        return global.t('general.draft')
-      case 'PAID':
-        return global.t('invoices.paid')
-      case 'UNPAID':
-        return global.t('invoices.unpaid')
-      case 'SENT':
-        return global.t('general.sent')
-      case 'REJECTED':
-        return global.t('estimates.rejected')
-      case 'ACCEPTED':
-        return global.t('estimates.accepted')
-      case 'VIEWED':
-        return global.t('invoices.viewed')
-      case 'EXPIRED':
-        return global.t('estimates.expired')
-      case 'PARTIALLY PAID':
-        return global.t('estimates.partially_paid')
-      case 'COMPLETED':
-        return global.t('invoices.completed')
-      case 'DUE':
-        return global.t('general.due')
-      default:
-        return status
+    const statusMessages = {
+      DRAFT: 'general.draft',
+      PAID: 'invoices.paid',
+      UNPAID: 'invoices.unpaid',
+      SENT: 'general.sent',
+      REJECTED: 'estimates.rejected',
+      ACCEPTED: 'estimates.accepted',
+      VIEWED: 'invoices.viewed',
+      EXPIRED: 'estimates.expired',
+      'PARTIALLY PAID': 'estimates.partially_paid',
+      COMPLETED: 'invoices.completed',
+      DUE: 'general.due',
+    };
+    const messageKey = statusMessages[status];
+    if (messageKey) {
+      return global.t(messageKey);
     }
+    return status;
   },
   toFormData(object) {
     const formData = new FormData()

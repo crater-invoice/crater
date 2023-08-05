@@ -23,6 +23,16 @@ class CurrenciesTableSeeder extends Seeder
                 'thousand_separator' => ',',
                 'decimal_separator' => '.',
             ],
+
+            [
+                'name' => 'Kwanza-AO',
+                'code' => 'AKZ',
+                'symbol' => 'Kz',
+                'precision' => '2',
+                'thousand_separator' => '.',
+                'decimal_separator' => ',',
+            ],
+
             [
                 'name' => 'British Pound',
                 'code' => 'GBP',
@@ -600,6 +610,7 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
                 'swap_currency_symbol' => true,
             ],
+            
         ];
 
 

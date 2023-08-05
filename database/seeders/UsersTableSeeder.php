@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
     {
         $user = User::create([
             'email' => 'admin@craterapp.com',
-            'name' => 'Jane Doe',
+            'name' => 'Carlos Marques',
             'role' => 'super admin',
             'password' => 'crater@123',
         ]);

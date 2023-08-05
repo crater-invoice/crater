@@ -62,6 +62,7 @@ return [
         ["code" => "lv", "name" => "Latvian"],
         ["code" => "pl", "name" => "Polish"],
         ["code" => "pt_BR", "name" => "Portuguese (Brazilian)"],
+        ["code" => "pt", "name" => "Portuguese (Angola)"],
         ["code" => "sr", "name" => "Serbian Latin"],
         ["code" => "ko", "name" => "Korean"],
         ["code" => "es", "name" => "Spanish"],
@@ -78,19 +79,20 @@ return [
     * List of Fiscal Years
     */
     'fiscal_years' => [
-        ['key' => 'january-december' , 'value' => '1-12'],
-        ['key' => 'february-january' , 'value' => '2-1'],
-        ['key' => 'march-february'   , 'value' => '3-2'],
-        ['key' => 'april-march'      , 'value' => '4-3'],
-        ['key' => 'may-april'        , 'value' => '5-4'],
-        ['key' => 'june-may'         , 'value' => '6-5'],
-        ['key' => 'july-june'        , 'value' => '7-6'],
-        ['key' => 'august-july'      , 'value' => '8-7'],
-        ['key' => 'september-august' , 'value' => '9-8'],
-        ['key' => 'october-september', 'value' => '10-9'],
-        ['key' => 'november-october' , 'value' => '11-10'],
-        ['key' => 'december-november', 'value' => '12-11'],
+        ['key' => 'janeiro-dezembro' , 'value' => '1-12'],
+        ['key' => 'fevereiro-janeiro' , 'value' => '2-1'],
+        ['key' => 'março-fevereiro'   , 'value' => '3-2'],
+        ['key' => 'abril-março'      , 'value' => '4-3'],
+        ['key' => 'maio-abril'        , 'value' => '5-4'],
+        ['key' => 'junho-maio'         , 'value' => '6-5'],
+        ['key' => 'julho-junho'        , 'value' => '7-6'],
+        ['key' => 'agosto-julho'      , 'value' => '8-7'],
+        ['key' => 'setembro-agosto' , 'value' => '9-8'],
+        ['key' => 'outubro-setembro', 'value' => '10-9'],
+        ['key' => 'novembro-outubro' , 'value' => '11-10'],
+        ['key' => 'dezembro-novembro', 'value' => '12-11'],
     ],
+    
 
     /*
     * List of convert estimate options

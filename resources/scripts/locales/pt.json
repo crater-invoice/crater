@@ -12,7 +12,7 @@
     "settings": "Configurações",
     "logout": "Encerrar sessão",
     "users": "Usuários",
-    "modules": "Navegação → módulos"
+    "modules": "Módulos"
   },
   "general": {
     "add_company": "Adicionar Empresa",
@@ -29,13 +29,13 @@
     "to_date": "Até a Data",
     "from": "De",
     "to": "Para",
-    "ok": "Geral → Ok",
+    "ok": "Ok",
     "yes": "Sim",
     "no": "Não",
     "sort_by": "Ordenar por",
     "ascending": "Crescente",
     "descending": "Descendente",
-    "subject": "Sujeita",
+    "subject": "Assunto",
     "body": "Corpo",
     "message": "Mensagem",
     "send": "Enviar",

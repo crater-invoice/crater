@@ -78,7 +78,7 @@
             :to="{
               path: `payments/${row.data.id}/view`,
             }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.payment_number }}
           </router-link>

@@ -93,7 +93,7 @@
                   :name="item.icon"
                   :class="[
                     hasActiveUrl(item.link)
-                      ? 'text-primary-500 '
+                      ? 'text-primary-500 dark:text-primary-400'
                       : 'text-gray-400',
                     'mr-4 shrink-0 h-5 w-5',
                   ]"
@@ -149,7 +149,7 @@
           :name="item.icon"
           :class="[
             hasActiveUrl(item.link)
-              ? 'text-primary-500 group-hover:text-primary-500 dark:text-primary-400 dark:group-hover:text-primary-500 '
+              ? 'text-primary-500 dark:text-primary-400'
               : 'text-gray-400 group-hover:text-black dark:text-gray-400 dark:group-hover:text-white',
             'mr-4 shrink-0 h-5 w-5 ',
           ]"

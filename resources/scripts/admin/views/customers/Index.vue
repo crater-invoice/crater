@@ -154,7 +154,7 @@
               :text="row.data.name"
               :length="30"
               tag="span"
-              class="font-medium text-primary-500 flex flex-col"
+              class="font-medium text-primary-500 flex flex-col dark:text-primary-400"
             />
             <BaseText
               :text="row.data.contact_name ? row.data.contact_name : ''"

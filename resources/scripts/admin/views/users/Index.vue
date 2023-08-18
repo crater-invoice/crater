@@ -158,7 +158,7 @@
         <template #cell-name="{ row }">
           <router-link
             :to="{ path: `users/${row.data.id}/edit` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.name }}
           </router-link>

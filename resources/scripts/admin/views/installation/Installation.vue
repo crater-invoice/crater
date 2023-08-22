@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-between w-full pt-10">
-      <LightDarkButton class="absolute z-10 top-2 right-2"/>
+    <LightDarkButton class="absolute z-10 top-2 right-2"/>
     <img
       id="logo-crater"
       src="/img/crater-logo.png"

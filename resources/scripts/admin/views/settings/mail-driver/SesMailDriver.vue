@@ -146,27 +146,12 @@
         <BaseInput
           v-model.trim="mailDriverStore.sesConfig.mail_ses_secret"
           :content-loading="isFetchingInitialData"
-          :type="getInputType"
+          type="password"
           name="mail_ses_secret"
           autocomplete="off"
           :invalid="v$.sesConfig.mail_ses_secret.$error"
           @input="v$.sesConfig.mail_ses_secret.$touch()"
-        >
-          <template #right>
-            <BaseIcon
-              v-if="isShowPassword"
-              class="mr-1 text-gray-500 cursor-pointer"
-              name="EyeOffIcon"
-              @click="isShowPassword = !isShowPassword"
-            />
-            <BaseIcon
-              v-else
-              class="mr-1 text-gray-500 cursor-pointer"
-              name="EyeIcon"
-              @click="isShowPassword = !isShowPassword"
-            />
-          </template>
-        </BaseInput>
+        />
       </BaseInputGroup>
     </BaseInputGrid>
 
@@ -223,7 +208,6 @@ const emit = defineEmits(['submit-data', 'on-change-driver'])
 const mailDriverStore = useMailDriverStore()
 const { t } = useI18n()
 
-let isShowPassword = ref(false)
 const encryptions = reactive(['tls', 'ssl', 'starttls'])
 
 const rules = computed(() => {
@@ -263,13 +247,6 @@ const v$ = useVuelidate(
   rules,
   computed(() => mailDriverStore)
 )
-
-const getInputType = computed(() => {
-  if (isShowPassword.value) {
-    return 'text'
-  }
-  return 'password'
-})
 
 onMounted(() => {
   for (const key in mailDriverStore.sesConfig) {

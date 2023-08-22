@@ -93,6 +93,7 @@
                     rounded-full
                     text-primary-500
                     dark:bg-gray-600
+                    dark:text-primary-400
                   "
                 >
                   {{ initGenerator(customer.name) }}
@@ -141,6 +142,7 @@
                     bg-gray-200
                     rounded-full
                     text-primary-500
+                    dark:text-primary-400
                     dark:bg-gray-600
                   "
                 >

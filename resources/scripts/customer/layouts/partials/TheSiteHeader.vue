@@ -45,7 +45,7 @@
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
           <!-- Dark mode Toggle -->
-          <CustomerLightDarkButton/>
+          <LightDarkButton/>
 
           <!-- Profile dropdown -->
 
@@ -151,7 +151,7 @@
             </div>
         </div>
           <!-- Dark mode Toggle -->
-          <CustomerLightDarkButton/>
+          <LightDarkButton/>
         </div>
         <div class="mt-3 space-y-1">
           <router-link
@@ -178,7 +178,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, watch, computed } from 'vue'
 import { useGlobalStore } from '@/scripts/customer/stores/global'
 import MainLogo from '@/scripts/components/icons/MainLogo.vue'
-import CustomerLightDarkButton from '@/scripts/components/CustomerLightDarkButton.vue'
+import LightDarkButton from '@/scripts/components/LightDarkButton.vue'
 import {
   Disclosure,
   DisclosureButton,

@@ -178,7 +178,7 @@
           </template>
 
           <BaseDropdownItem @click="removeMultipleInvoices">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>

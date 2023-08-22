@@ -23,23 +23,11 @@
     >
       <BaseInput
         v-model="loginData.password"
-        :type="isShowPassword ? 'text' : 'password'"
+        type="password"
         name="password"
         :invalid="v$.password.$error"
         @input="v$.password.$touch()"
-      >
-        <template #right>
-          <EyeOffIcon
-            v-if="isShowPassword"
-            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-            @click="isShowPassword = !isShowPassword"
-          />
-          <EyeIcon
-            v-else
-            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-            @click="isShowPassword = !isShowPassword"
-          /> </template
-      ></BaseInput>
+      />
     </BaseInputGroup>
 
     <BaseInputGroup
@@ -93,7 +81,6 @@ const loginData = reactive({
 
 const globalStore = useGlobalStore()
 
-let isShowPassword = ref(false)
 let isLoading = ref(false)
 
 const rules = computed(() => {

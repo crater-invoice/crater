@@ -90,7 +90,7 @@
 
     <input
       v-bind="$attrs"
-      :type="type"
+      :type="getType"
       :value="modelValue"
       :disabled="disabled"
       :class="[
@@ -143,6 +143,44 @@
       class="absolute inset-y-0 right-0 flex items-center pr-3"
     >
       <slot name="right" :class="iconRightClass" />
+    </div>
+    <div
+      v-if="loading && loadingPosition === 'right'" class="
+        absolute
+        inset-y-0
+        right-0
+        flex
+        items-center
+        pr-3
+        pointer-events-none
+      "
+    >
+      <svg
+        class="animate-spin !text-primary-500" :class="[iconRightClass]" xmlns="http://www.w3.org/2000/svg"
+        fill="none" viewBox="0 0 24 24"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+        <path
+          class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        />
+      </svg>
+    </div>
+
+    <div v-if="hasRightIconSlot" class="absolute inset-y-0 right-0 flex items-center pr-3">
+      <slot name="right" :class="iconRightClass" />
+    </div>
+
+    <div v-if="type == 'password'" class="absolute inset-y-0 right-0 flex items-center pr-3">
+      <a
+        v-if="isShowPassword" href="#" class="block" data-cy="eye" tabindex="-1"
+        @click.prevent="isShowPassword = !isShowPassword"
+      >
+        <BaseIcon name="EyeOffIcon" class="w-5 h-5 mr-1 text-gray-500 cursor-pointer" />
+      </a>
+      <a v-else href="#" class="block" data-cy="eye" tabindex="-1" @click.prevent="isShowPassword = !isShowPassword">
+        <BaseIcon name="EyeIcon" class="w-5 h-5 mr-1 text-gray-500 cursor-pointer" />
+      </a>
     </div>
   </div>
 </template>
@@ -218,6 +256,15 @@ const props = defineProps({
 const slots = useSlots()
 
 const emit = defineEmits(['update:modelValue'])
+
+const isShowPassword = ref(false)
+
+const getType = computed(() => {
+  if (props.type === 'password')
+    return isShowPassword.value ? 'text' : 'password'
+
+  return props.type
+})
 
 const hasLeftIconSlot = computed(() => {
   return !!slots.left || (props.loading && props.loadingPosition === 'left')

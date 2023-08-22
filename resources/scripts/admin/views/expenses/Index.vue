@@ -135,7 +135,7 @@
             v-if="userStore.hasAbilities(abilities.DELETE_EXPENSE)"
             @click="removeMultipleExpenses"
           >
-            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>

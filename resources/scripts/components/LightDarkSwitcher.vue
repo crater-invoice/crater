@@ -16,6 +16,13 @@ defineProps({
 
 const globalStore = useGlobalStore()
 
+const isDark = ref(
+  localStorage.getItem('theme') === 'dark'
+    || document.documentElement.classList.contains('dark'),
+)
+
+globalStore.isDarkModeOn = isDark
+
 const enabled = computed({
   get: () => globalStore.isDarkModeOn,
   set: (value) => {

@@ -240,7 +240,7 @@ class Expense extends Model implements HasMedia
         }
 
         if ($request->hasFile('attachment_receipt')) {
-            $expense->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
+            $expense->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts', 'local');
         }
 
         if ($request->customFields) {
@@ -262,12 +262,12 @@ class Expense extends Model implements HasMedia
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
-        if (isset($request->is_attachment_receipt_removed) && (bool) $request->is_attachment_receipt_removed) {
+        if (isset($request->is_attachment_receipt_removed) && $request->is_attachment_receipt_removed == "true") {
             $this->clearMediaCollection('receipts');
         }
         if ($request->hasFile('attachment_receipt')) {
             $this->clearMediaCollection('receipts');
-            $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts');
+            $this->addMediaFromRequest('attachment_receipt')->toMediaCollection('receipts', 'local');
         }
 
         if ($request->customFields) {

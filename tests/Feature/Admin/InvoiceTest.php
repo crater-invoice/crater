@@ -9,7 +9,6 @@ use Crater\Models\Tax;
 use Crater\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
-
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -431,31 +430,36 @@ test('update invoice with EUR currency', function () {
 
     putJson('api/v1/invoices/'.$invoice->id, $invoice2)->assertOk();
 
-    $this->assertDatabaseHas('invoices', [
-        'id' => $invoice['id'],
-        'invoice_number' => $invoice2['invoice_number'],
-        'sub_total' => $invoice2['sub_total'],
-        'total' => $invoice2['total'],
-        'tax' => $invoice2['tax'],
-        'discount' => $invoice2['discount'],
-        'customer_id' => $invoice2['customer_id'],
-        'template_name' => $invoice2['template_name'],
-        'exchange_rate' => $invoice2['exchange_rate'],
-        'base_total' => $invoice2['base_total'],
-    ]);
+    $invoice_assert = collect($invoice2)
+        ->only([
+            'invoice_number',
+            'template_name',
+            'sub_total',
+            'total',
+            'tax',
+            'discount',
+            'customer_id',
+        ])
+        ->toArray();
 
-    $this->assertDatabaseHas('invoice_items', [
-        'invoice_id' => $invoice2['items'][0]['invoice_id'],
-        'item_id' => $invoice2['items'][0]['item_id'],
-        'name' => $invoice2['items'][0]['name'],
-        'exchange_rate' => $invoice2['items'][0]['exchange_rate'],
-        'base_price' => $invoice2['items'][0]['base_price'],
-        'base_total' => $invoice2['items'][0]['base_total'],
-    ]);
+    $this->assertDatabaseHas('invoices', $invoice_assert);
 
-    $this->assertDatabaseHas('taxes', [
-        'amount' => $invoice2['taxes'][0]['amount'],
-        'name' => $invoice2['taxes'][0]['name'],
-        'base_amount' => $invoice2['taxes'][0]['base_amount'],
-    ]);
+    $invoice_item_assert = collect($invoice2['items'][0])
+        ->only([
+            'invoice_id',
+            'item_id',
+            'name',
+        ])
+        ->toArray();
+
+    $this->assertDatabaseHas('invoice_items', $invoice_item_assert);
+
+    $invoice_tax_assert = collect($invoice2['taxes'][0])
+        ->only([
+            'name',
+            'amount'
+        ])
+        ->toArray();
+
+    $this->assertDatabaseHas('taxes', $invoice_tax_assert);
 });

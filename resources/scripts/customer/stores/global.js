@@ -13,7 +13,8 @@ export const useGlobalStore = defineStore({
     currentUser: null,
     companySlug: '',
     mainMenu: null,
-    enabledModules: []
+    enabledModules: [],
+    isDarkModeOn: localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark')
   }),
 
   actions: {

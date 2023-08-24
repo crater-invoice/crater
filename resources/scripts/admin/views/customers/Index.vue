@@ -113,7 +113,7 @@
             </span>
           </template>
           <BaseDropdownItem @click="removeMultipleCustomers">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -154,7 +154,7 @@
               :text="row.data.name"
               :length="30"
               tag="span"
-              class="font-medium text-primary-500 flex flex-col"
+              class="font-medium text-primary-500 flex flex-col dark:text-primary-400"
             />
             <BaseText
               :text="row.data.contact_name ? row.data.contact_name : ''"

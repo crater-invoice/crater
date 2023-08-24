@@ -11,6 +11,10 @@
       bg-gray-200
       cursor-pointer
       text-primary-400
+      dark:bg-gray-600/70
+      dark:backdrop-blur-xl
+      dark:shadow-glass
+      dark:hover:bg-gray-600/80
     "
   >
     <slot />

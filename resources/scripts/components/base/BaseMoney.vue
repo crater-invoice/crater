@@ -39,7 +39,7 @@ const props = defineProps({
   inputClass: {
     type: String,
     default:
-      'font-base block w-full sm:text-sm border-gray-200 rounded-md text-black',
+      'font-base block w-full sm:text-sm border-gray-200 rounded-md text-black  dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-500',
   },
   disabled: {
     type: Boolean,
@@ -86,7 +86,7 @@ const currencyBindings = computed(() => {
 
 const invalidClass = computed(() => {
   if (props.invalid) {
-    return 'border-red-500 ring-red-500 focus:ring-red-500 focus:border-red-500'
+    return 'border-red-500 dark:border-red-500 ring-red-500 dark:ring-red-500 focus:ring-red-500 dark:focus:ring-red-500 focus:border-red-500 dark:focus:border-red-500'
   }
   return 'focus:ring-primary-400 focus:border-primary-400'
 })

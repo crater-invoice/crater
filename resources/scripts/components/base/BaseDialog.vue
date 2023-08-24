@@ -30,8 +30,13 @@
           leave-to="opacity-0"
         >
           <DialogOverlay
-            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"
+            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 dark:backdrop-blur-xl dark:bg-gray-900/80"
+          >
+           <BaseDarkHighlight
+            class="!bg-highlight/[.17] !top-1/2 h-60 -translate-y-1/2 mt-5"
+            :class="dialogSizeClasses"
           />
+          </DialogOverlay>
         </TransitionChild>
 
         <!-- This element is to trick the browser into centering the modal contents. -->
@@ -64,6 +69,11 @@
               shadow-xl
               sm:my-8 sm:align-middle sm:w-full sm:p-6
               relative
+              dark:backdrop-blur-xl
+              dark:shadow-glass
+              dark:border
+              dark:border-white/10
+              dark:bg-gray-800
             "
             :class="dialogSizeClasses"
           >
@@ -80,31 +90,31 @@
                   rounded-full
                 "
                 :class="{
-                  'bg-green-100': dialogStore.variant === 'primary',
-                  'bg-red-100': dialogStore.variant === 'danger',
+                  'bg-green-100 dark:bg-primary-500': dialogStore.variant === 'primary',
+                  'bg-red-100 dark:bg-red-500': dialogStore.variant === 'danger',
                 }"
               >
                 <BaseIcon
                   v-if="dialogStore.variant === 'primary'"
                   name="CheckIcon"
-                  class="w-6 h-6 text-green-600"
+                  class="w-6 h-6 text-green-600 dark:text-white"
                 />
                 <BaseIcon
                   v-else
                   name="ExclamationIcon"
-                  class="w-6 h-6 text-red-600"
+                  class="w-6 h-6 text-red-600 dark:text-white"
                   aria-hidden="true"
                 />
               </div>
               <div class="mt-3 text-center sm:mt-5">
                 <DialogTitle
                   as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900"
+                  class="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                 >
                   {{ dialogStore.title }}
                 </DialogTitle>
                 <div class="mt-2">
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
                     {{ dialogStore.message }}
                   </p>
                 </div>

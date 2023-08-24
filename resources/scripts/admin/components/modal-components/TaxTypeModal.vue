@@ -90,15 +90,7 @@
           </BaseInputGroup>
         </BaseInputGrid>
       </div>
-      <div
-        class="
-          z-0
-          flex
-          justify-end
-          p-4
-          border-t border-solid border--200 border-modal-bg
-        "
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           variant="primary-outline"
@@ -122,7 +114,7 @@
           </template>
           {{ taxTypeStore.isEdit ? $t('general.update') : $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

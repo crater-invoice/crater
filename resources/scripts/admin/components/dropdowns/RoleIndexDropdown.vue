@@ -10,11 +10,12 @@
     <!-- edit role  -->
     <BaseDropdownItem
       v-if="userStore.currentUser.is_owner"
+      v-slot="slotProps"
       @click="editRole(row.id)"
     >
       <BaseIcon
         name="PencilIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.edit') }}
     </BaseDropdownItem>
@@ -22,11 +23,12 @@
     <!-- delete role  -->
     <BaseDropdownItem
       v-if="userStore.currentUser.is_owner"
+      v-slot="slotProps"
       @click="removeRole(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

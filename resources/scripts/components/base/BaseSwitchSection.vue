@@ -5,12 +5,12 @@
     <div class="flex flex-col">
       <SwitchLabel
         as="p"
-        class="p-0 mb-1 text-sm leading-snug text-black font-medium"
+        class="p-0 mb-1 text-sm leading-snug text-black font-medium dark:text-white"
         passive
       >
         {{ title }}
       </SwitchLabel>
-      <SwitchDescription class="text-sm text-gray-500">
+      <SwitchDescription class="text-sm text-gray-500 dark:text-gray-400">
         {{ description }}
       </SwitchDescription>
     </div>
@@ -18,7 +18,7 @@
       :disabled="disabled"
       :model-value="modelValue"
       :class="[
-        modelValue ? 'bg-primary-500' : 'bg-gray-200',
+        modelValue ? 'bg-primary-500' : 'bg-gray-200 dark:bg-gray-900',
         'ml-4 relative inline-flex shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
       ]"
       @update:modelValue="onUpdate"
@@ -26,7 +26,7 @@
       <span
         aria-hidden="true"
         :class="[
-          modelValue ? 'translate-x-5' : 'translate-x-0',
+          modelValue ? 'translate-x-5 dark:bg-white' : 'translate-x-0 dark:bg-gray-500',
           'inline-block h-5 w-5 rounded-full bg-white shadow ring-0 transition ease-in-out duration-200',
         ]"
       />

@@ -117,7 +117,7 @@
             </span>
           </template>
           <BaseDropdownItem @click="removeMultipleItems">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -153,7 +153,7 @@
         <template #cell-name="{ row }">
           <router-link
             :to="{ path: `items/${row.data.id}/edit` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.name }}
           </router-link>

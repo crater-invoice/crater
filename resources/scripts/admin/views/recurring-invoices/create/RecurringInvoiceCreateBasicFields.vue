@@ -16,11 +16,11 @@
       </div>
 
       <div class="ml-2">
-        <p class="p-0 mb-1 leading-snug text-left text-black">
+        <p class="p-0 mb-1 leading-snug text-left text-black dark:text-white">
           {{ $t('recurring_invoices.send_automatically') }}
         </p>
         <p
-          class="p-0 m-0 text-xs leading-tight text-left text-gray-500"
+          class="p-0 m-0 text-xs leading-tight text-left text-gray-500 dark:text-gray-400"
           style="max-width: 480px"
         >
           {{ $t('recurring_invoices.send_automatically_desc') }}

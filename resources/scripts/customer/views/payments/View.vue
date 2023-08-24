@@ -19,7 +19,7 @@
 
     <!-- Sidebar -->
     <div
-      class="fixed top-0 left-0 hidden h-full pt-16 pb-4 bg-white w-88 xl:block"
+      class="fixed top-0 left-0 hidden h-full pt-16 pb-4 bg-white w-88 xl:block dark:bg-gray-800"
     >
       <div
         class="
@@ -30,6 +30,7 @@
           pt-8
           pb-6
           border border-gray-200 border-solid
+          dark:border-gray-600
         "
       >
         <BaseInput
@@ -64,6 +65,7 @@
                 mb-2
                 text-sm
                 border-b border-gray-200 border-solid
+                dark:border-gray-600
               "
             >
               {{ $t('general.sort_by') }}
@@ -118,7 +120,7 @@
             </div>
           </BaseDropdown>
 
-          <BaseButton class="ml-1" variant="white" @click="sortData">
+          <BaseButton class="ml-1" variant="gray" @click="sortData">
             <BaseIcon v-if="getOrderBy" name="SortAscendingIcon" class="h-5" />
             <BaseIcon v-else name="SortDescendingIcon" class="h-5" />
           </BaseButton>
@@ -132,6 +134,7 @@
           overflow-y-scroll
           border-l border-gray-200 border-solid
           sw-scroll
+          dark:border-gray-600
         "
       >
         <router-link
@@ -140,9 +143,9 @@
           :key="index"
           :to="`/${globalStore.companySlug}/customer/payments/${payment.id}/view`"
           :class="[
-            'flex justify-between p-4 items-center cursor-pointer hover:bg-gray-100 border-l-4 border-transparent',
+            'flex justify-between p-4 items-center cursor-pointer hover:bg-gray-100 border-l-4 border-transparent dark:hover:bg-gray-700',
             {
-              'bg-gray-100 border-l-4 border-primary-500 border-solid':
+              'bg-gray-100 border-l-4 border-primary-500 border-solid dark:bg-gray-700':
                 hasActiveUrl(payment.id),
             },
           ]"
@@ -158,6 +161,7 @@
                 leading-5
                 text-gray-500
                 capitalize
+                dark:text-gray-400
               "
             >
               {{ payment.payment_number }}
@@ -174,12 +178,13 @@
                 leading-8
                 text-right text-gray-900
                 block
+                dark:text-white
               "
               :amount="payment.amount"
               :currency="payment.currency"
             />
 
-            <div class="text-sm text-right text-gray-500 non-italic">
+            <div class="text-sm text-right text-gray-500 dark:text-gray-400 non-italic">
               {{ payment.formatted_payment_date }}
             </div>
           </div>
@@ -187,7 +192,7 @@
 
         <p
           v-if="!paymentStore.payments.length"
-          class="flex justify-center px-4 mt-5 text-sm text-gray-600"
+          class="flex justify-center px-4 mt-5 text-sm text-gray-600 dark:text-gray-300"
         >
           {{ $t('payments.no_matching_payments') }}
         </p>

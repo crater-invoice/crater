@@ -1,10 +1,12 @@
 <template>
-  <h6 class="text-gray-900 text-lg font-medium">
+  <BaseHeading
+    type="heading-title"
+    :subtitle="
+      $t('settings.customization.invoices.retrospective_edits_description')
+    "
+  >
     {{ $tc('settings.customization.invoices.retrospective_edits') }}
-  </h6>
-  <p class="mt-1 text-sm text-gray-500">
-    {{ $t('settings.customization.invoices.retrospective_edits_description') }}
-  </p>
+  </BaseHeading>
 
   <BaseInputGroup required>
     <BaseRadio

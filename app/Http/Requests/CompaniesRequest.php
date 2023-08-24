@@ -3,7 +3,6 @@
 namespace Crater\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class CompaniesRequest extends FormRequest
@@ -33,6 +32,10 @@ class CompaniesRequest extends FormRequest
             ],
             'currency' => [
                 'required'
+            ],
+            'slug' => [
+                'required',
+                Rule::unique('companies')
             ],
             'address.name' => [
                 'nullable',
@@ -68,11 +71,11 @@ class CompaniesRequest extends FormRequest
     {
         return collect($this->validated())
             ->only([
-                'name'
+                'name',
+                'slug'
             ])
             ->merge([
-                'owner_id' => $this->user()->id,
-                'slug' => Str::slug($this->name)
+                'owner_id' => $this->user()->id
             ])
             ->toArray();
     }

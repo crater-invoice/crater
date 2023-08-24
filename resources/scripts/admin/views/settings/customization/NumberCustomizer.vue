@@ -1,12 +1,12 @@
 <template>
-  <h6 class="text-gray-900 text-lg font-medium">
-    {{ $t(`settings.customization.${type}s.${type}_number_format`) }}
-  </h6>
-  <p class="mt-1 text-sm text-gray-500">
-    {{
+  <BaseHeading
+    type="heading-title"
+    :subtitle="
       $t(`settings.customization.${type}s.${type}_number_format_description`)
-    }}
-  </p>
+    "
+  >
+    {{ $t(`settings.customization.${type}s.${type}_number_format`) }}
+  </BaseHeading>
 
   <div class="overflow-x-auto">
     <table class="w-full mt-6 table-fixed">
@@ -29,6 +29,7 @@
               leading-5
               text-left text-gray-700
               border-t border-b border-gray-200 border-solid
+              dark:border-gray-600
             "
           ></th>
           <th
@@ -41,6 +42,7 @@
               leading-5
               text-left text-gray-700
               border-t border-b border-gray-200 border-solid
+              dark:text-gray-300 dark:border-gray-600
             "
           >
             Component
@@ -55,6 +57,7 @@
               leading-5
               text-left text-gray-700
               border-t border-b border-gray-200 border-solid
+              dark:text-gray-300 dark:border-gray-600
             "
           >
             Parameter
@@ -69,13 +72,14 @@
               leading-5
               text-left text-gray-700
               border-t border-b border-gray-200 border-solid
+              dark:border-gray-600
             "
           ></th>
         </tr>
       </thead>
       <draggable
         v-model="selectedFields"
-        class="divide-y divide-gray-200"
+        class="divide-y divide-gray-200 dark:divide-gray-600"
         item-key="id"
         tag="tbody"
         handle=".handle"
@@ -97,12 +101,13 @@
                   whitespace-nowrap
                   mr-2
                   min-w-[200px]
+                  dark:text-primary-400
                 "
               >
                 {{ element.label }}
               </label>
 
-              <p class="text-xs text-gray-500 mt-1">
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 {{ element.description }}
               </p>
             </td>

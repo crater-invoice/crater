@@ -32,7 +32,7 @@
     <div class="mt-4 mb-4 text-sm">
       <router-link
         to="/login"
-        class="text-sm text-primary-400 hover:text-gray-700"
+        class="text-sm text-primary-400 hover:text-gray-700 dark:hover:text-primary-500"
       >
         {{ $t('general.back_to_login') }}
       </router-link>

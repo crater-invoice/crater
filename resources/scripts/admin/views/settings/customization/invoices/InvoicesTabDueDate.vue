@@ -1,11 +1,13 @@
 <template>
   <form @submit.prevent="submitForm">
-    <h6 class="text-gray-900 text-lg font-medium">
-      {{ $t('settings.customization.invoices.due_date') }}
-    </h6>
-    <p class="mt-1 text-sm text-gray-500 mb-2">
-      {{ $t('settings.customization.invoices.due_date_description') }}
-    </p>
+    <BaseHeading
+    type="heading-title"
+    :subtitle="
+      $t('settings.customization.invoices.due_date_description')
+    "
+  >
+    {{ $t('settings.customization.invoices.due_date') }}
+  </BaseHeading>
 
     <BaseSwitchSection
       v-model="dueDateAutoField"

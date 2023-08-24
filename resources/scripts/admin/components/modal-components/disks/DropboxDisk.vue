@@ -132,7 +132,7 @@
           <BaseSwitch v-model="set_as_default" class="flex" />
         </div>
         <div class="ml-4 right">
-          <p class="p-0 mb-1 text-base leading-snug text-black box-title">
+          <p class="p-0 mb-1 text-base leading-snug text-black dark:text-white box-title">
             {{ $t('settings.disk.is_default') }}
           </p>
         </div>

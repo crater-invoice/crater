@@ -21,6 +21,7 @@
       group
       min-h-[100px]
       bg-gray-50
+      dark:bg-gray-700 dark:border-gray-600
     "
     :class="avatar ? 'w-32 h-32' : 'w-full'"
   >
@@ -49,7 +50,7 @@
 
       <a
         href="#"
-        class="absolute z-30 bg-white rounded-full -bottom-3 -right-3 group"
+        class="absolute z-30 bg-white rounded-full -bottom-3 -right-3 group dark:bg-gray-900"
         @click.prevent.stop="onBrowse"
       >
         <BaseIcon
@@ -95,7 +96,7 @@
 
     <div
       v-else-if="localFiles.length && avatar && !multiple"
-      class="flex w-full h-full border border-gray-200 rounded"
+      class="flex w-full h-full border border-gray-200 rounded dark:border-gray-600"
     >
       <img
         v-if="localFiles[0].image"
@@ -169,10 +170,11 @@
           -right-3
           group
           hover:border-gray-300
+          dark:border-gray-600 dark:bg-gray-900 dark:hover:border-gray-700
         "
         @click.prevent.stop="onAvatarRemove(localFiles[0])"
       >
-        <BaseIcon name="XIcon" class="h-4 text-xl leading-6 text-black" />
+        <BaseIcon name="XIcon" class="h-4 text-xl leading-6 text-black dark:text-white" />
       </a>
     </div>
 
@@ -195,6 +197,7 @@
           hover:border-gray-500
           relative
           max-w-md
+          dark:border-gray-600 dark:bg-transparent dark:hover:border-gray-700
         "
         @click.prevent
       >
@@ -270,6 +273,7 @@
             -right-3
             group
             hover:border-gray-300
+            dark:border-gray-600 dark:bg-gray-900 dark:hover:border-gray-700
           "
           @click.prevent.stop="onFileRemove(index)"
         >
@@ -293,6 +297,7 @@
           hover:border-gray-500
           relative
           max-w-md
+          dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-700
         "
         @click.prevent
       >
@@ -368,10 +373,11 @@
             -right-3
             group
             hover:border-gray-300
+            dark:border-gray-600 dark:bg-gray-900 dark:hover:border-gray-700
           "
           @click.prevent.stop="onFileRemove(index)"
         >
-          <BaseIcon name="XIcon" class="h-4 text-xl leading-6 text-black" />
+          <BaseIcon name="XIcon" class="h-4 text-xl leading-6 text-black dark:text-white" />
         </a>
       </a>
     </div>

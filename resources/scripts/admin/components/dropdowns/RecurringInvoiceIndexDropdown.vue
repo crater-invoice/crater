@@ -15,10 +15,10 @@
       v-if="userStore.hasAbilities(abilities.EDIT_RECURRING_INVOICE)"
       :to="`/admin/recurring-invoices/${row.id}/edit`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
@@ -32,10 +32,10 @@
       "
       :to="`recurring-invoices/${row.id}/view`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="EyeIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.view') }}
       </BaseDropdownItem>
@@ -44,11 +44,12 @@
     <!-- Delete Recurring Invoice  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_RECURRING_INVOICE)"
+      v-slot="slotProps"
       @click="removeMultipleRecurringInvoices(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

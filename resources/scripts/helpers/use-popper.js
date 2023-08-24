@@ -7,12 +7,12 @@ export function usePopper(options) {
   let popper = ref(null)
 
   onMounted(() => {
-    watchEffect(onInvalidate => {
+    watchEffect((onInvalidate) => {
       if (!container.value) return
       if (!activator.value) return
 
       let containerEl = container.value.el || container.value
-      let activatorEl = activator.value.el || activator.value
+      let activatorEl = activator.value.$el || activator.value
 
       if (!(activatorEl instanceof HTMLElement)) return
       if (!(containerEl instanceof HTMLElement)) return

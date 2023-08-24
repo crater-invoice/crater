@@ -34,8 +34,8 @@
             v-if="userStore.hasAbilities(abilities.CREATE_ESTIMATE)"
             :to="`/admin/estimates/create?customer=${$route.params.id}`"
           >
-            <BaseDropdownItem class="">
-              <BaseIcon name="DocumentIcon" class="mr-3 text-gray-600" />
+            <BaseDropdownItem v-slot="slotProps">
+              <BaseIcon name="DocumentIcon" :class="slotProps.class" />
               {{ $t('estimates.new_estimate') }}
             </BaseDropdownItem>
           </router-link>
@@ -44,8 +44,8 @@
             v-if="userStore.hasAbilities(abilities.CREATE_INVOICE)"
             :to="`/admin/invoices/create?customer=${$route.params.id}`"
           >
-            <BaseDropdownItem>
-              <BaseIcon name="DocumentTextIcon" class="mr-3 text-gray-600" />
+            <BaseDropdownItem v-slot="slotProps">
+              <BaseIcon name="DocumentTextIcon" :class="slotProps.class" />
               {{ $t('invoices.new_invoice') }}
             </BaseDropdownItem>
           </router-link>
@@ -54,8 +54,8 @@
             v-if="userStore.hasAbilities(abilities.CREATE_PAYMENT)"
             :to="`/admin/payments/create?customer=${$route.params.id}`"
           >
-            <BaseDropdownItem>
-              <BaseIcon name="CreditCardIcon" class="mr-3 text-gray-600" />
+            <BaseDropdownItem v-slot="slotProps">
+              <BaseIcon name="CreditCardIcon" :class="slotProps.class" />
               {{ $t('payments.new_payment') }}
             </BaseDropdownItem>
           </router-link>
@@ -64,8 +64,8 @@
             v-if="userStore.hasAbilities(abilities.CREATE_EXPENSE)"
             :to="`/admin/expenses/create?customer=${$route.params.id}`"
           >
-            <BaseDropdownItem>
-              <BaseIcon name="CalculatorIcon" class="mr-3 text-gray-600" />
+            <BaseDropdownItem v-slot="slotProps">
+              <BaseIcon name="CalculatorIcon" :class="slotProps.class" />
               {{ $t('expenses.new_expense') }}
             </BaseDropdownItem>
           </router-link>

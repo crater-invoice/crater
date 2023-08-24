@@ -9,7 +9,7 @@ import { computed } from 'vue'
 const props = defineProps({
   modelValue: {
     type: String,
-    default: moment().format('YYYY-MM-DD hh:MM'),
+    default: moment().format('YYYY-MM-DD HH:mm'),
   },
 })
 

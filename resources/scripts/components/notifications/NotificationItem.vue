@@ -1,6 +1,8 @@
 <template>
   <div
-    :class="success || info ? 'bg-white' : 'bg-red-50'"
+    :class="success || info
+      ? 'bg-white dark:border dark:border-white/10 dark:text-white dark:bg-gray-800/[.80] dark:shadow-glass dark:backdrop-blur-sm'
+      : 'bg-red-50 dark:bg-red-400/[.70] dark:shadow-glass dark:backdrop-blur-sm'"
     class="
       max-w-sm
       mb-3
@@ -48,7 +50,7 @@
             </svg>
             <svg
               v-if="error"
-              class="w-6 h-6 text-red-400"
+              class="w-6 h-6 text-red-400 dark:text-white"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -62,7 +64,9 @@
           <div class="flex-1 w-0 ml-3 text-left">
             <p
               :class="`text-sm leading-5 font-medium ${
-                success || info ? 'text-gray-900' : 'text-red-800'
+                success || info
+                  ? 'text-gray-900 dark:text-white'
+                  : 'text-red-800 dark:text-white'
               }`"
             >
               {{
@@ -75,7 +79,9 @@
             </p>
             <p
               :class="`mt-1 text-sm leading-5 ${
-                success || info ? 'text-gray-500' : 'text-red-700'
+                success || info
+                  ? 'text-gray-500 dark:text-gray-400'
+                  : 'text-red-700 dark:text-red-200'
               }`"
             >
               {{
@@ -92,7 +98,7 @@
               :class="
                 success || info
                   ? ' text-gray-400 focus:text-gray-500'
-                  : 'text-red-400 focus:text-red-500'
+                  : 'text-red-400 focus:text-red-500 dark:text-red-100'
               "
               class="
                 inline-flex

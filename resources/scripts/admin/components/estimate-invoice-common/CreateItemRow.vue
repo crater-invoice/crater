@@ -274,7 +274,7 @@ const price = computed({
   },
 })
 
-const subtotal = computed(() => props.itemData.price * props.itemData.quantity)
+const subtotal = computed(() => Math.round(props.itemData.price * props.itemData.quantity))
 
 const discount = computed({
   get: () => {

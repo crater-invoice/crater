@@ -147,6 +147,7 @@ import {
   decimal,
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
+import { cloneDeep } from 'lodash'
 
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
 import { useModuleStore } from '@/scripts/admin/stores/module'
@@ -258,11 +259,23 @@ async function submitForm() {
 
   isSaving.value = true
 
-  let data = {
+  let data = cloneDeep({
     ...invoiceStore.newInvoice,
     sub_total: invoiceStore.getSubTotal,
     total: invoiceStore.getTotal,
     tax: invoiceStore.getTotalTax,
+  })
+  if (data.discount_per_item === 'NO') {
+    data.items.forEach((item, index) => {
+      if (item.discount_type === 'fixed'){
+        data.items[index].discount = item.discount * 100
+      }
+    })
+  }
+  else {
+    if (data.discount_type === 'fixed'){
+      data.discount = data.discount * 100
+    }
   }
 
   try {

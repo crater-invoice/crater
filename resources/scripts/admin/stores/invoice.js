@@ -135,6 +135,16 @@ export const useInvoiceStore = (useWindow = false) => {
             .then((response) => {
               Object.assign(this.newInvoice, response.data.data)
               this.newInvoice.customer = response.data.data.customer
+              if (this.newInvoice.discount_per_item === 'NO') {
+                this.newInvoice.items.forEach((_i, index) => {
+                  if (_i.discount_type === 'fixed')
+                    this.newInvoice.items[index].discount = _i.discount / 100
+                })
+              }
+              else {
+                if (this.newInvoice.discount_type === 'fixed')
+                  this.newInvoice.discount = this.newInvoice.discount / 100
+              }
               resolve(response)
             })
             .catch((err) => {

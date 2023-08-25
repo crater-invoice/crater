@@ -233,9 +233,7 @@ const totalDiscount = computed({
   },
   set: (newValue) => {
     if (props.store[props.storeProp].discount_type === 'percentage') {
-      props.store[props.storeProp].discount_val = Math.round(
-        (props.store.getSubTotal * newValue) / 100
-      )
+      props.store[props.storeProp].discount_val  = Math.round((props.store.getSubTotal * newValue.toFixed(2)) / 100)
     } else {
       props.store[props.storeProp].discount_val = Math.round(newValue * 100)
     }
@@ -265,7 +263,7 @@ const itemWiseTaxes = computed(() => {
         } else if (tax.tax_type_id) {
           taxes.push({
             tax_type_id: tax.tax_type_id,
-            amount: tax.amount,
+            amount: Math.round(tax.amount),
             percent: tax.percent,
             name: tax.name,
           })

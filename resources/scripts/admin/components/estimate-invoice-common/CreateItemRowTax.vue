@@ -147,10 +147,20 @@ const filteredTypes = computed(() => {
 
 const taxAmount = computed(() => {
   if (localTax.compound_tax && props.discountedTotal) {
+    const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
+    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'NO'
+    if (taxPerItemEnabled && !discountPerItemEnabled){
+      return getTaxAmount()
+    }
     return ((props.discountedTotal + props.totalTax) * localTax.percent) / 100
   }
 
-  if (props.discountedTotal && localTax.percent) {
+    if (props.discountedTotal && localTax.percent) {
+    const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
+    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'NO'
+    if (taxPerItemEnabled && !discountPerItemEnabled){
+      return getTaxAmount()
+    }
     return (props.discountedTotal * localTax.percent) / 100
   }
 
@@ -221,5 +231,24 @@ function removeTax(index) {
   props.store.$patch((state) => {
     state[props.storeProp].items[props.itemIndex].taxes.splice(index, 1)
   })
+}
+
+function getTaxAmount() {
+  let total = 0
+  let discount = 0
+  const itemTotal = props.discountedTotal
+  const modelDiscount = props.store[props.storeProp].discount ? props.store[props.storeProp].discount.toFixed(2) : 0
+  const type = props.store[props.storeProp].discount_type
+  if (modelDiscount > 0) {
+    props.store[props.storeProp].items.forEach((_i) => {
+      total += _i.total
+    })
+    const proportion = (itemTotal / total).toFixed(2)
+    discount = type === 'fixed' ? modelDiscount * 100 : (total * modelDiscount) / 100
+    const itemDiscount = Math.round(discount * proportion)
+    const discounted = itemTotal - itemDiscount
+    return Math.round((discounted * localTax.percent) / 100)
+  }
+  return Math.round((props.discountedTotal * localTax.percent) / 100)
 }
 </script>

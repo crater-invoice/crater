@@ -271,6 +271,7 @@ const price = computed({
     } else {
       updateItemAttribute('price', newValue)
     }
+    setDiscount()
   },
 })
 
@@ -281,13 +282,8 @@ const discount = computed({
     return props.itemData.discount
   },
   set: (newValue) => {
-    if (props.itemData.discount_type === 'percentage') {
-      updateItemAttribute('discount_val', (subtotal.value * newValue) / 100)
-    } else {
-      updateItemAttribute('discount_val', Math.round(newValue * 100))
-    }
-
     updateItemAttribute('discount', newValue)
+    setDiscount()
   },
 })
 
@@ -399,7 +395,7 @@ const v$ = useVuelidate(
 
 function updateTax(data) {
   props.store.$patch((state) => {
-    state[props.storeProp].items[props.index]['taxes'][data.index] = data.item
+    state[props.storeProp].items[props.index].taxes[data.index] = data.item
   })
 
   let lastTax = props.itemData.taxes[props.itemData.taxes.length - 1]
@@ -414,6 +410,16 @@ function updateTax(data) {
   }
 
   syncItemToStore()
+}
+
+function setDiscount() {
+  const newValue = props.store[props.storeProp].items[props.index].discount
+
+  if (props.itemData.discount_type === 'percentage'){
+    updateItemAttribute('discount_val', Math.round((subtotal.value * newValue) / 100))
+  }else{
+    updateItemAttribute('discount_val', Math.round(newValue * 100))
+  }
 }
 
 function searchVal(val) {
@@ -489,6 +495,9 @@ function syncItemToStore() {
     totalTax: totalTax.value,
     tax: totalTax.value,
     taxes: [...itemTaxes],
+    tax_type_ids: itemTaxes.flatMap(_t =>
+      _t.tax_type_id ? _t.tax_type_id : [],
+    ),
   }
 
   props.store.updateItem(data)

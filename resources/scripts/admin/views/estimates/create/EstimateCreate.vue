@@ -264,7 +264,7 @@ async function submitForm() {
     total: estimateStore.getTotal,
     tax: estimateStore.getTotalTax,
   })
-  if (data.discount_per_item === 'NO') {
+  if (data.discount_per_item === 'YES') {
     data.items.forEach((item, index) => {
       if (item.discount_type === 'fixed'){
         data.items[index].discount = Math.round(item.discount * 100)
@@ -275,6 +275,13 @@ async function submitForm() {
     if (data.discount_type === 'fixed'){
       data.discount = Math.round(data.discount * 100)
     }
+  }
+
+  if (
+    !estimateStore.newEstimate.tax_per_item === 'YES'
+    && data.taxes.length
+  ){
+    data.tax_type_ids = data.taxes.map(_t => _t.tax_type_id)
   }
 
   const action = isEdit.value

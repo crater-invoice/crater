@@ -148,7 +148,7 @@ const filteredTypes = computed(() => {
 const taxAmount = computed(() => {
   if (localTax.compound_tax && props.discountedTotal) {
     const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
-    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'NO'
+    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'YES'
     if (taxPerItemEnabled && !discountPerItemEnabled){
       return getTaxAmount()
     }
@@ -157,7 +157,7 @@ const taxAmount = computed(() => {
 
     if (props.discountedTotal && localTax.percent) {
     const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
-    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'NO'
+    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'YES'
     if (taxPerItemEnabled && !discountPerItemEnabled){
       return getTaxAmount()
     }
@@ -179,6 +179,13 @@ watch(
   () => {
     updateRowTax()
   }
+)
+
+watch(
+  () => taxAmount.value,
+  () => {
+    updateRowTax()
+  },
 )
 
 // Set SelectedTax
@@ -230,6 +237,8 @@ function openTaxModal() {
 function removeTax(index) {
   props.store.$patch((state) => {
     state[props.storeProp].items[props.itemIndex].taxes.splice(index, 1)
+    state[props.storeProp].items[props.itemIndex].tax = 0
+    state[props.storeProp].items[props.itemIndex].totalTax = 0
   })
 }
 
@@ -237,7 +246,7 @@ function getTaxAmount() {
   let total = 0
   let discount = 0
   const itemTotal = props.discountedTotal
-  const modelDiscount = props.store[props.storeProp].discount ? props.store[props.storeProp].discount.toFixed(2) : 0
+  const modelDiscount = props.store[props.storeProp].discount ? props.store[props.storeProp].discount : 0
   const type = props.store[props.storeProp].discount_type
   if (modelDiscount > 0) {
     props.store[props.storeProp].items.forEach((_i) => {

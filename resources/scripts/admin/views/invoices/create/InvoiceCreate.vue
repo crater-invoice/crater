@@ -265,7 +265,7 @@ async function submitForm() {
     total: invoiceStore.getTotal,
     tax: invoiceStore.getTotalTax,
   })
-  if (data.discount_per_item === 'NO') {
+  if (data.discount_per_item === 'YES') {
     data.items.forEach((item, index) => {
       if (item.discount_type === 'fixed'){
         data.items[index].discount = item.discount * 100
@@ -276,6 +276,12 @@ async function submitForm() {
     if (data.discount_type === 'fixed'){
       data.discount = data.discount * 100
     }
+  }
+    if (
+    !invoiceStore.newInvoice.tax_per_item === 'YES'
+    && data.taxes.length
+  ){
+    data.tax_type_ids = data.taxes.map(_t => _t.tax_type_id)
   }
 
   try {

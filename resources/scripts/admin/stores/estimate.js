@@ -144,16 +144,16 @@ export const useEstimateStore = (useWindow = false) => {
             .get(`/api/v1/estimates/${id}`)
             .then((response) => {
               Object.assign(this.newEstimate, response.data.data)
-              // if (this.newEstimate.discount_per_item === 'NO') {
-              //   this.newEstimate.items.forEach((_i, index) => {
-              //     if (_i.discount_type === 'fixed')
-              //       this.newEstimate.items[index].discount = _i.discount / 100
-              //   })
-              // }
-              // else {
-              //   if (this.newEstimate.discount_type === 'fixed')
-              //     this.newEstimate.discount = this.newEstimate.discount / 100
-              // }
+              if (this.newEstimate.discount_per_item === 'NO') {
+                this.newEstimate.items.forEach((_i, index) => {
+                  if (_i.discount_type === 'fixed')
+                    this.newEstimate.items[index].discount = _i.discount / 100
+                })
+              }
+              else {
+                if (this.newEstimate.discount_type === 'fixed')
+                  this.newEstimate.discount = this.newEstimate.discount / 100
+              }
               resolve(response)
             })
             .catch((err) => {

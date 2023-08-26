@@ -59,7 +59,6 @@ class EstimatesRequest extends FormRequest
             'total' => [
                 'integer',
                 'numeric',
-                'min:50',
                 'max:99999999',
                 'required',
             ],

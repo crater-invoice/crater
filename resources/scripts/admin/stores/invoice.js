@@ -128,14 +128,13 @@ export const useInvoiceStore = (useWindow = false) => {
         })
       },
 
-      fetchInvoice(id, expand = []) {
+      fetchInvoice(id) {
         return new Promise((resolve, reject) => {
           axios
-            .get(`/api/v1/invoices/${id}`, { params: { expand } })
+            .get(`/api/v1/invoices/${id}`)
             .then((response) => {
-                this.setInvoiceData(response.data.data)
-
-                this.setCustomerAddresses(this.newInvoice.customer)
+              this.setInvoiceData(response.data.data)
+              this.setCustomerAddresses(this.newInvoice.customer)
               resolve(response)
             })
             .catch((err) => {

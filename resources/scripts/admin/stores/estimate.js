@@ -138,10 +138,10 @@ export const useEstimateStore = (useWindow = false) => {
         })
       },
 
-      fetchEstimate(id, expand = []) {
+      fetchEstimate(id) {
         return new Promise((resolve, reject) => {
           axios
-            .get(`/api/v1/estimates/${id}`, { params: { expand } })
+            .get(`/api/v1/estimates/${id}`)
             .then((response) => {
               this.setEstimateData(response.data.data)
               this.setCustomerAddresses(this.newEstimate.customer)

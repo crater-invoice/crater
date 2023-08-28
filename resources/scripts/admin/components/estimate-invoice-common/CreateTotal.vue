@@ -323,14 +323,7 @@ function selectPercentage() {
 
 function onSelectTax(selectedTax) {
   let amount = 0
-
-  if (selectedTax.compound_tax && props.store.getSubtotalWithDiscount) {
-    amount = Math.round(
-      ((props.store.getSubtotalWithDiscount + props.store.getTotalSimpleTax) *
-        selectedTax.percent) /
-        100
-    )
-  } else if (props.store.getSubtotalWithDiscount && selectedTax.percent) {
+  if (props.store.getSubtotalWithDiscount && selectedTax.percent) {
     amount = Math.round(
       (props.store.getSubtotalWithDiscount * selectedTax.percent) / 100
     )
@@ -341,7 +334,6 @@ function onSelectTax(selectedTax) {
     id: Guid.raw(),
     name: selectedTax.name,
     percent: selectedTax.percent,
-    compound_tax: selectedTax.compound_tax,
     tax_type_id: selectedTax.id,
     amount,
   }

@@ -146,16 +146,7 @@ const filteredTypes = computed(() => {
 })
 
 const taxAmount = computed(() => {
-  if (localTax.compound_tax && props.discountedTotal) {
-    const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
-    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'YES'
-    if (taxPerItemEnabled && !discountPerItemEnabled){
-      return getTaxAmount()
-    }
-    return ((props.discountedTotal + props.totalTax) * localTax.percent) / 100
-  }
-
-    if (props.discountedTotal && localTax.percent) {
+  if (props.discountedTotal && localTax.percent) {
     const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
     const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'YES'
     if (taxPerItemEnabled && !discountPerItemEnabled){
@@ -163,7 +154,6 @@ const taxAmount = computed(() => {
     }
     return (props.discountedTotal * localTax.percent) / 100
   }
-
   return 0
 })
 
@@ -200,7 +190,6 @@ updateRowTax()
 function onSelectTax(val) {
   localTax.percent = val.percent
   localTax.tax_type_id = val.id
-  localTax.compound_tax = val.compound_tax
   localTax.name = val.name
 
   updateRowTax()

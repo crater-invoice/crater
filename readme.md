@@ -1,4 +1,8 @@
-# ⚠️ ATTENTION: This project no longer in active development! ⚠️⚠️
+# ⚠️⚠️ ATTENTION: This project is no longer in active development! ⚠️⚠️
+
+For transparency we kept on developing the business version of the Crater API (it’s literally become a different product and not at all same as the oss version) and as new changes and features got added to it we went deeper into compliance issues where almost everything we built on it can’t be made open source. We follow FTC mandates to heart and hence releasing anything new would have meant to dedicate a couple devs on making sure the oss version is compliant with the laws. We have been swamped by the enterprise version that is pretty much for large registered organizations in the US only as we aren’t big enough to acquire MTLs internationally yet and we are still bootstrapped which means dev resources are limited with us and the OSS plans didn’t go the way we wanted to and the market downturn has been one of the biggest factors to it as well. We can’t accept donations or outside help either. In an effort to not close the project we have decided to provide critical security updates and also made the modules free to download but as of now we can’t guarantee a specific time this year of the next big release that includes new features in the oss version as a lot of reworking needs to be done.
+
+We hope to reach our goal asap so we can start focusing on the OSS version again.
 
 <img src="https://res.cloudinary.com/bytefury/image/upload/v1574149856/Crater/craterframe.png">
 

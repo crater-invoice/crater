@@ -43,15 +43,21 @@ class RecurringInvoiceRequest extends FormRequest
                 'nullable'
             ],
             'discount' => [
+                'numeric',
                 'required',
             ],
             'discount_val' => [
+                'integer',
                 'required',
             ],
             'sub_total' => [
+                'integer',
                 'required',
             ],
             'total' => [
+                'integer',
+                'numeric',
+                'max:99999999',
                 'required',
             ],
             'tax' => [

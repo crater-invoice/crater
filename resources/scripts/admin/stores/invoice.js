@@ -133,8 +133,8 @@ export const useInvoiceStore = (useWindow = false) => {
           axios
             .get(`/api/v1/invoices/${id}`)
             .then((response) => {
-              Object.assign(this.newInvoice, response.data.data)
-              this.newInvoice.customer = response.data.data.customer
+              this.setInvoiceData(response.data.data)
+              this.setCustomerAddresses(this.newInvoice.customer)
               resolve(response)
             })
             .catch((err) => {
@@ -142,6 +142,38 @@ export const useInvoiceStore = (useWindow = false) => {
               reject(err)
             })
         })
+      },
+
+      setInvoiceData(invoice) {
+        Object.assign(this.newInvoice, invoice)
+
+        if (this.newInvoice.tax_per_item === 'YES') {
+          this.newInvoice.items.forEach((_i) => {
+            if (_i.taxes && !_i.taxes.length)
+              _i.taxes.push({ ...taxStub, id: Guid.raw() })
+          })
+        }
+
+        if (this.newInvoice.discount_per_item === 'YES') {
+          this.newInvoice.items.forEach((_i, index) => {
+            if (_i.discount_type === 'fixed')
+              this.newInvoice.items[index].discount = _i.discount / 100
+          })
+        }
+        else {
+          if (this.newInvoice.discount_type === 'fixed')
+            this.newInvoice.discount = this.newInvoice.discount / 100
+        }
+      },
+
+      setCustomerAddresses(customer) {
+        const customer_business = customer.customer_business
+
+        if (customer_business?.billing_address)
+          this.newInvoice.customer.billing_address = customer_business.billing_address
+
+        if (customer_business?.shipping_address)
+          this.newInvoice.customer.shipping_address = customer_business.shipping_address
       },
 
       addSalesTaxUs() {

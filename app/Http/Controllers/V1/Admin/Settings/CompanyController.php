@@ -56,40 +56,58 @@ class CompanyController extends Controller
 
         return new CompanyResource($company);
     }
+/**
+ * Upload the company logo to storage.
+ *
+ * @param  \Crater\Http\Requests\CompanyLogoRequest $request
+ * @return \Illuminate\Http\JsonResponse
+ */
+public function uploadCompanyLogo(CompanyLogoRequest $request)
+{
+    $company = Company::find($request->header('company'));
+    $this->authorize('manage company', $company);
 
-    /**
-     * Upload the company logo to storage.
-     *
-     * @param  \Crater\Http\Requests\CompanyLogoRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function uploadCompanyLogo(CompanyLogoRequest $request)
-    {
+    $data = json_decode($request->company_logo);
+
+    if (isset($request->is_company_logo_removed) && (bool) $request->is_company_logo_removed) {
+        $company->clearMediaCollection('logo');
+    }
+
+    if ($data) {
         $company = Company::find($request->header('company'));
 
-        $this->authorize('manage company', $company);
+        if ($company) {
+            // Extract the file extension from the filename
+            $fileExtension = pathinfo($data->name, PATHINFO_EXTENSION);
 
-        $data = json_decode($request->company_logo);
+            // Define an array of allowed extensions
+            $allowedExtensions = ['gif', 'png', 'jpeg'];
 
-        if (isset($request->is_company_logo_removed) && (bool) $request->is_company_logo_removed) {
-            $company->clearMediaCollection('logo');
-        }
-        if ($data) {
-            $company = Company::find($request->header('company'));
-
-            if ($company) {
+            // Check if the file extension is allowed
+            if (in_array($fileExtension, $allowedExtensions)) {
                 $company->clearMediaCollection('logo');
 
                 $company->addMediaFromBase64($data->data)
                     ->usingFileName($data->name)
                     ->toMediaCollection('logo');
+
+                return response()->json([
+                    'success' => true,
+                ]);
+            } else {
+                // File extension is not allowed
+                return response()->json([
+                    'error' => 'Only .gif, .png, and .jpeg file extensions are allowed.',
+                ], 400); // You can set an appropriate HTTP status code for this case
             }
         }
-
-        return response()->json([
-            'success' => true,
-        ]);
     }
+
+    return response()->json([
+        'success' => true,
+    ]);
+}
+
 
     /**
      * Upload the Admin Avatar to public storage.

@@ -98,7 +98,7 @@ public function uploadCompanyLogo(CompanyLogoRequest $request)
                 // File extension is not allowed
                 return response()->json([
                     'error' => 'Only .gif, .png, and .jpeg file extensions are allowed.',
-                ], 400); // You can set an appropriate HTTP status code for this case
+                ], 400); 
             }
         }
     }

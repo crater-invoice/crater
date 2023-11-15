@@ -838,9 +838,9 @@
       "add_currency": "Dodaj valuto"
     },
     "mail": {
-      "host": "Mail Host",
-      "port": "Mail Port",
-      "driver": "Mail Driver",
+      "host": "E-poštni strežnik",
+      "port": "Port e-pošte",
+      "driver": "E-poštni gonilnik",
       "secret": "Secret",
       "mailgun_secret": "Mailgun Secret",
       "mailgun_domain": "Domena",

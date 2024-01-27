@@ -690,7 +690,7 @@
     "no_reviews_found": "Tällä modulilla ei ole vielä arvosteluita!",
     "module_not_purchased": "Moduulia ei ostettu",
     "module_not_found": "Moduulia ei löydy",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Viimeksi päivitetty",
     "connect_installation": "Yhdistä asennuksesi",
     "api_token_description": "Kirjaudu sisään {url} ja yhdistä tämä asennus syöttämällä API tunnus. Ostetut moduulit näkyvät täällä kun yhteys on luotu.",
@@ -864,7 +864,7 @@
       "company_info": "Yritystiedot",
       "company_name": "Yrityksen nimi",
       "company_logo": "Yrityksen logo",
-      "section_description": "Yrityksesi tiedot jotka näytetään laskulla, tarjouksella ja muilla dokumenteilla luotuna Crater:in toimesta.",
+      "section_description": "Yrityksesi tiedot jotka näytetään laskulla, tarjouksella ja muilla dokumenteilla luotuna InvoiceShelf:in toimesta.",
       "phone": "Puhelin",
       "country": "Maa",
       "state": "Osavaltio",
@@ -1064,9 +1064,9 @@
       "email": "Lähetä ilmoitus vastaanottajalle",
       "description": "Mitkä sähköposti ilmoitukset haluat vastaanottaa jos joku muuttuu?",
       "invoice_viewed": "Lasku katsottu",
-      "invoice_viewed_desc": "Kun asiakas katsoo laskun, joka on lähetetty crater ohjauspanelin kautta.",
+      "invoice_viewed_desc": "Kun asiakas katsoo laskun, joka on lähetetty invoiceshelf ohjauspanelin kautta.",
       "estimate_viewed": "Tarjous katsottu",
-      "estimate_viewed_desc": "Kun asiakas katsoo tarjouksen, joka on lähetetty crater ohjauspanelin kautta.",
+      "estimate_viewed_desc": "Kun asiakas katsoo tarjouksen, joka on lähetetty invoiceshelf ohjauspanelin kautta.",
       "save": "Tallenna",
       "email_save_message": "Sähköposti tallennettu onnistuneesti",
       "please_enter_email": "Syötä sähköpostiosoite"
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "ALV Verokannat",
       "add_tax": "Lisää ALV verokanta",
       "edit_tax": "Muokkaa ALV verokantaa",
-      "description": "Voit luoda tai poistaa ALV verokantoja tarvittaessa. Crater tukee laskurivikohtaista ALV:n esittämistä yhtä hyvin kuin näyttämistä koko laskulle.",
+      "description": "Voit luoda tai poistaa ALV verokantoja tarvittaessa. InvoiceShelf tukee laskurivikohtaista ALV:n esittämistä yhtä hyvin kuin näyttämistä koko laskulle.",
       "add_new_tax": "Lisää uusi ALV verokanta",
       "tax_settings": "ALV Verokanta asetukset",
       "tax_per_item": "ALV per tuote",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Päivitä ohjelma",
-      "description": "Voit helposti päivittää Crater ohjelman uuteen versioon klikkaamalla allaolevaa painiketta",
+      "description": "Voit helposti päivittää InvoiceShelf ohjelman uuteen versioon klikkaamalla allaolevaa painiketta",
       "check_update": "Tarkista uudet päivitykset",
       "avail_update": "Uusi päivitys saatavilla",
       "next_version": "Seuraava versio",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Tiedostolevy | Tiedostolevyt",
-      "description": "Oletuksena, Crater käyttää paikallisia levyjä varmuuskopioiden, profiilikuvien ja muiden kuvien tallentamiseen. Voit määrittää useamman kuin yhden tallennus vaihtoehdoista, kuten DigitalOcean, S3 ja Dropbox mieltymystesi mukaan.",
+      "description": "Oletuksena, InvoiceShelf käyttää paikallisia levyjä varmuuskopioiden, profiilikuvien ja muiden kuvien tallentamiseen. Voit määrittää useamman kuin yhden tallennus vaihtoehdoista, kuten DigitalOcean, S3 ja Dropbox mieltymystesi mukaan.",
       "created_at": "luotu",
       "dropbox": "Dropbox",
       "name": "Nimi",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Aktivoi tämä, jos haluat tallentaa PDF kopiot laskuista, tarjouksista & maksukuiteista oletus leveylle automaattisesti. Käyttämällä tätä vaihtoehtoa tiedostojen latausaika nopeutuu kun esikatsellaan PDF tiedostoja.",
       "select_disk": "Valitse levy",
       "disk_settings": "Levyasetukset",
-      "confirm_delete": "Tämä ei vaikuta olemassaoleviin tiedostoihin & kansioihin valitulla levyllä, mutta leveymääritykset poistetaan Craterista",
+      "confirm_delete": "Tämä ei vaikuta olemassaoleviin tiedostoihin & kansioihin valitulla levyllä, mutta leveymääritykset poistetaan InvoiceShelfista",
       "action": "Toiminta",
       "edit_file_disk": "Muokkaa tiedostolevyä",
       "success_create": "Levy lisättiin onistuneesti",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "Systeemivaatimukset",
       "php_req_version": "Php (versio {version} vaaditaan)",
       "check_req": "Tarkista vaatimukset",
-      "system_req_desc": "Craterissa on muutamia palvelimen vaatimuksia. Varmista, että palvelimellasi on vaadittu php versio ja kaikki liitännäiset mainittuna alla."
+      "system_req_desc": "InvoiceShelfissa on muutamia palvelimen vaatimuksia. Varmista, että palvelimellasi on vaadittu php versio ja kaikki liitännäiset mainittuna alla."
     },
     "errors": {
       "migrate_failed": "Migraatio epäonnistui",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Puhelinnumeron muoto ei ole oikea",
-    "invalid_url": "Väärä www osoite (esim.: http://www.crater.com)",
-    "invalid_domain_url": "Väärä www osoite (ex: crater.com)",
+    "invalid_url": "Väärä www osoite (esim.: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Väärä www osoite (ex: invoiceshelf.com)",
     "required": "Kenttä on pakollinen",
     "email_incorrect": "Väärä sähköpostin muoto.",
     "email_already_taken": "Tämä sähköposti on jo käytössä.",

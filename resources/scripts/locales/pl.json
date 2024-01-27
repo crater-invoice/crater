@@ -864,7 +864,7 @@
       "company_info": "Dane firmy",
       "company_name": "Nazwa firmy",
       "company_logo": "Logo firmy",
-      "section_description": "Informacje o Twojej firmie, które będą wyświetlane na fakturach, ofertach i innych dokumentach stworzonych przez Crater.",
+      "section_description": "Informacje o Twojej firmie, które będą wyświetlane na fakturach, ofertach i innych dokumentach stworzonych przez InvoiceShelf.",
       "phone": "Telefon",
       "country": "Kraj",
       "state": "Województwo",
@@ -1064,9 +1064,9 @@
       "email": "Wyślij powiadomienie do",
       "description": "Które powiadomienia e-mail chcesz otrzymywać kiedy coś się zmieni?",
       "invoice_viewed": "Faktura wyświetlona",
-      "invoice_viewed_desc": "Kiedy klient wyświetli fakturę wysłaną za pośrednictwem kokpitu Cratera.",
+      "invoice_viewed_desc": "Kiedy klient wyświetli fakturę wysłaną za pośrednictwem kokpitu InvoiceShelfa.",
       "estimate_viewed": "Oferta wyświetlona",
-      "estimate_viewed_desc": "Kiedy klient wyświetli ofertę wysłaną za pośrednictwem kokpitu Cratera.",
+      "estimate_viewed_desc": "Kiedy klient wyświetli ofertę wysłaną za pośrednictwem kokpitu InvoiceShelfa.",
       "save": "Zapisz",
       "email_save_message": "Wiadomość zapisana pomyślnie",
       "please_enter_email": "Proszę wpisać adres e-mail"
@@ -1126,7 +1126,7 @@
       "title": "Rodzaje opodatkowania",
       "add_tax": "Dodaj podatek",
       "edit_tax": "Edytuj podatek",
-      "description": "Możesz dodawać lub usuwać podatki. Crater obsługuje podatki od poszczególnych produktów, jak również na fakturze.",
+      "description": "Możesz dodawać lub usuwać podatki. InvoiceShelf obsługuje podatki od poszczególnych produktów, jak również na fakturze.",
       "add_new_tax": "Dodaj nowy podatek",
       "tax_settings": "Ustawienia podatku",
       "tax_per_item": "Podatek na produkt",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Aktualizuj aplikację",
-      "description": "Możesz łatwo zaktualizować Cratera poprzez kliknięcie przycisku poniżej",
+      "description": "Możesz łatwo zaktualizować InvoiceShelfa poprzez kliknięcie przycisku poniżej",
       "check_update": "Sprawdź czy są dostępne nowe aktualizacje",
       "avail_update": "Dostępna nowa aktualizacja",
       "next_version": "Nowa wersja",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Dysk plików | Dyski plików",
-      "description": "Domyślnie Crater użyje twojego lokalnego dysku do zapisywania kopii zapasowych, awatara i innych plików obrazu. Możesz skonfigurować więcej niż jeden serwer dysku, taki jak DigitalOcean, S3 i Dropbox, zgodnie z Twoimi preferencjami.",
+      "description": "Domyślnie InvoiceShelf użyje twojego lokalnego dysku do zapisywania kopii zapasowych, awatara i innych plików obrazu. Możesz skonfigurować więcej niż jeden serwer dysku, taki jak DigitalOcean, S3 i Dropbox, zgodnie z Twoimi preferencjami.",
       "created_at": "utworzono w",
       "dropbox": "dropbox",
       "name": "Nazwa",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Włącz tę opcję, jeśli chcesz automatycznie zapisać kopię każdej faktury, oferty i potwierdzenia płatności PDF na swoim domyślnym dysku. Włączenie tej opcji spowoduje skrócenie czasu ładowania podczas przeglądania PDF.",
       "select_disk": "Wybierz dysk",
       "disk_settings": "Ustawienia dysku",
-      "confirm_delete": "Twoje istniejące pliki i foldery na określonym dysku nie zostaną zmienione, ale konfiguracja twojego dysku zostanie usunięta z Cratera",
+      "confirm_delete": "Twoje istniejące pliki i foldery na określonym dysku nie zostaną zmienione, ale konfiguracja twojego dysku zostanie usunięta z InvoiceShelfa",
       "action": "Akcja",
       "edit_file_disk": "Edytuj dysk plków",
       "success_create": "Dysk dodany pomyślnie",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Weryfikacja domeny",
-      "desc": "Crater używa uwierzytelniania opartego na sesji, które wymaga weryfikacji domeny dla celów bezpieczeństwa. Wprowadź domenę, na której będziesz mieć dostęp do swojej aplikacji internetowej.",
+      "desc": "InvoiceShelf używa uwierzytelniania opartego na sesji, które wymaga weryfikacji domeny dla celów bezpieczeństwa. Wprowadź domenę, na której będziesz mieć dostęp do swojej aplikacji internetowej.",
       "app_domain": "Domena aplikacji",
       "verify_now": "Potwierdź teraz",
       "success": "Pomyślnie zweryfikowano domenę.",
@@ -1397,7 +1397,7 @@
       "system_req": "Wymagania systemowe",
       "php_req_version": "Minimalna wersja Php (wymagana wersja {version})",
       "check_req": "Sprawdź wymagania",
-      "system_req_desc": "Crater posiada kilka wymagań serwera. Upewnij się, że Twój serwer ma wymaganą wersję php oraz wszystkie rozszerzenia wymienione poniżej."
+      "system_req_desc": "InvoiceShelf posiada kilka wymagań serwera. Upewnij się, że Twój serwer ma wymaganą wersję php oraz wszystkie rozszerzenia wymienione poniżej."
     },
     "errors": {
       "migrate_failed": "Migracja nie powiodła się",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Nieprawidłowy numer telefonu",
-    "invalid_url": "Nieprawidłowy adres url (np. http://www.crater.com)",
-    "invalid_domain_url": "Nieprawidłowy adres url (np. crater.com)",
+    "invalid_url": "Nieprawidłowy adres url (np. http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Nieprawidłowy adres url (np. invoiceshelf.com)",
     "required": "Pole jest wymagane",
     "email_incorrect": "Niepoprawny email.",
     "email_already_taken": "Ten adres e-mail jest już zajęty.",

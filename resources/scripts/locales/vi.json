@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -864,7 +864,7 @@
       "company_info": "Thông tin công ty",
       "company_name": "Tên công ty",
       "company_logo": "Logo công ty",
-      "section_description": "Thông tin về công ty của bạn sẽ được hiển thị trên hóa đơn, ước tính và các tài liệu khác do Crater tạo.",
+      "section_description": "Thông tin về công ty của bạn sẽ được hiển thị trên hóa đơn, ước tính và các tài liệu khác do InvoiceShelf tạo.",
       "phone": "Điện thoại",
       "country": "Quốc gia",
       "state": "Tiểu bang",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "Các loại thuế",
       "add_tax": "Thêm thuế",
       "edit_tax": "Chỉnh sửa thuế",
-      "description": "Bạn có thể thêm hoặc bớt thuế tùy ý. Crater hỗ trợ Thuế đối với các mặt hàng riêng lẻ cũng như trên hóa đơn.",
+      "description": "Bạn có thể thêm hoặc bớt thuế tùy ý. InvoiceShelf hỗ trợ Thuế đối với các mặt hàng riêng lẻ cũng như trên hóa đơn.",
       "add_new_tax": "Thêm thuế mới",
       "tax_settings": "Cài đặt thuế",
       "tax_per_item": "Thuế mỗi mặt hàng",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Cập nhật ứng dụng",
-      "description": "Bạn có thể dễ dàng cập nhật Crater bằng cách kiểm tra bản cập nhật mới bằng cách nhấp vào nút bên dưới",
+      "description": "Bạn có thể dễ dàng cập nhật InvoiceShelf bằng cách kiểm tra bản cập nhật mới bằng cách nhấp vào nút bên dưới",
       "check_update": "Kiểm tra cập nhật",
       "avail_update": "Cập nhật mới có sẵn",
       "next_version": "Phiên bản tiếp theo",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Đĩa tập tin | Đĩa Tệp",
-      "description": "Theo mặc định, Crater sẽ sử dụng đĩa cục bộ của bạn để lưu các bản sao lưu, ảnh đại diện và các tệp hình ảnh khác. Bạn có thể định cấu hình nhiều hơn một trình điều khiển đĩa như DigitalOcean, S3 và Dropbox theo sở thích của mình.",
+      "description": "Theo mặc định, InvoiceShelf sẽ sử dụng đĩa cục bộ của bạn để lưu các bản sao lưu, ảnh đại diện và các tệp hình ảnh khác. Bạn có thể định cấu hình nhiều hơn một trình điều khiển đĩa như DigitalOcean, S3 và Dropbox theo sở thích của mình.",
       "created_at": "được tạo ra tại",
       "dropbox": "dropbox",
       "name": "Tên",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "yêu cầu hệ thống",
       "php_req_version": "Php (bắt buộc phải có phiên bản {version})",
       "check_req": "Kiểm tra yêu cầu",
-      "system_req_desc": "Crater có một số yêu cầu máy chủ. Đảm bảo rằng máy chủ của bạn có phiên bản php bắt buộc và tất cả các phần mở rộng được đề cập bên dưới."
+      "system_req_desc": "InvoiceShelf có một số yêu cầu máy chủ. Đảm bảo rằng máy chủ của bạn có phiên bản php bắt buộc và tất cả các phần mở rộng được đề cập bên dưới."
     },
     "errors": {
       "migrate_failed": "Di chuyển không thành công",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Số điện thoại không hợp lệ",
-    "invalid_url": "Url không hợp lệ (ví dụ: http://www.crater.com)",
-    "invalid_domain_url": "Url không hợp lệ (ví dụ: crater.com)",
+    "invalid_url": "Url không hợp lệ (ví dụ: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Url không hợp lệ (ví dụ: invoiceshelf.com)",
     "required": "Lĩnh vực được yêu cầu",
     "email_incorrect": "Email không chính xác.",
     "email_already_taken": "Lá thư đã được lấy đi.",

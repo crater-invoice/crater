@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "稅收類型",
       "add_tax": "加入稅項",
       "edit_tax": "編輯稅項",
-      "description": "你可以新增或移除稅項. Crater支持獨立稅項.",
+      "description": "你可以新增或移除稅項. InvoiceShelf支持獨立稅項.",
       "add_new_tax": "新增稅項",
       "tax_settings": "稅項設定",
       "tax_per_item": "商品稅項",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "更新 App",
-      "description": "你可以點擊下方按鈕更新Crater",
+      "description": "你可以點擊下方按鈕更新InvoiceShelf",
       "check_update": "檢查更新",
       "avail_update": "有新更新可用",
       "next_version": "下一版本",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "檔案磁碟 | 檔案磁碟",
-      "description": "預設Crater會使用你本機作為資料備份. 你可設定多於一個磁碟如DigialOcean, S3 及 Dropbox.",
+      "description": "預設InvoiceShelf會使用你本機作為資料備份. 你可設定多於一個磁碟如DigialOcean, S3 及 Dropbox.",
       "created_at": "建立於",
       "dropbox": "Dropbox",
       "name": "名稱",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "域名驗證",
-      "desc": "Crater使用的會話驗證因安全考量需要域名\b核實. 請輸入你的域名以便你存取你應用.",
+      "desc": "InvoiceShelf使用的會話驗證因安全考量需要域名\b核實. 請輸入你的域名以便你存取你應用.",
       "app_domain": "App 網域名稱",
       "verify_now": "立即檢驗",
       "success": "成功驗證域名",
@@ -1397,7 +1397,7 @@
       "system_req": "系統需求",
       "php_req_version": "最小的php版本(需要{version})",
       "check_req": "檢查需求",
-      "system_req_desc": "Crater對伺服器有少許需求. 請檢查以下的php版本及\b擴展是否吻合."
+      "system_req_desc": "InvoiceShelf對伺服器有少許需求. 請檢查以下的php版本及\b擴展是否吻合."
     },
     "errors": {
       "migrate_failed": "遷移失敗",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "無效的電話號碼",
-    "invalid_url": "無較URL(ex: http://www.crater.com)",
-    "invalid_domain_url": "無較URL(ex: crater.com)",
+    "invalid_url": "無較URL(ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "無較URL(ex: invoiceshelf.com)",
     "required": "此欄位為必需",
     "email_incorrect": "電郵錯誤",
     "email_already_taken": "此電郵已被使用",

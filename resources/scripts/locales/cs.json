@@ -690,7 +690,7 @@
     "no_reviews_found": "Pro tento modul zatím neexistují žádné recenze!",
     "module_not_purchased": "Modul není zakoupený",
     "module_not_found": "Modul nebyl nalezen",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Naposledy aktualizováno",
     "connect_installation": "Připojte vaši instalaci",
     "api_token_description": "Přihlaste se k {url} a připojte tuto instalaci zadáním API tokenu. Vaše zakoupené moduly se zde zobrazí po navázání připojení.",
@@ -864,7 +864,7 @@
       "company_info": "Údaje o společnosti",
       "company_name": "Název společnosti",
       "company_logo": "Logo společnosti",
-      "section_description": "Informace o vaší společnosti, která bude zobrazena na fakturách, odhadech a dalších dokladech vytvořených v Crateru.",
+      "section_description": "Informace o vaší společnosti, která bude zobrazena na fakturách, odhadech a dalších dokladech vytvořených v InvoiceShelfu.",
       "phone": "Telefon",
       "country": "Země",
       "state": "Stát",
@@ -1064,9 +1064,9 @@
       "email": "Posílat oznámení na",
       "description": "Která e-mailová oznámení chcete dostávat, když se něco změní?",
       "invoice_viewed": "Faktura zobrazena",
-      "invoice_viewed_desc": "Když si váš zákazník zobrazí fakturu odeslánou přes hlavní panel Crateru.",
+      "invoice_viewed_desc": "Když si váš zákazník zobrazí fakturu odeslánou přes hlavní panel InvoiceShelfu.",
       "estimate_viewed": "Odhad zobrazen",
-      "estimate_viewed_desc": "Když si váš zákazník zobrazí odhad odeslaný přes hlavní panel Crateru.",
+      "estimate_viewed_desc": "Když si váš zákazník zobrazí odhad odeslaný přes hlavní panel InvoiceShelfu.",
       "save": "Uložit",
       "email_save_message": "E-mail úspěšně uložen",
       "please_enter_email": "Prosím, zadejte e-mail"
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Směnný kurz",
       "title": "Opravit problémy se směnným kurzem",
-      "description": "Zadejte prosím směnný kurz všech níže uvedených měn, abyste pomohli Crateru správně vypočítat částky v {currency}.",
+      "description": "Zadejte prosím směnný kurz všech níže uvedených měn, abyste pomohli InvoiceShelfu správně vypočítat částky v {currency}.",
       "drivers": "Ovladače",
       "new_driver": "Přidat nového poskytovatele",
       "edit_driver": "Upravit poskytovatele",
@@ -1126,7 +1126,7 @@
       "title": "Typy daní",
       "add_tax": "Přidat daň",
       "edit_tax": "Upravit daň",
-      "description": "Můžete přidat nebo odebrat daně, jak chcete. Crater podporuje daně z jednotlivých položek i z celé faktury.",
+      "description": "Můžete přidat nebo odebrat daně, jak chcete. InvoiceShelf podporuje daně z jednotlivých položek i z celé faktury.",
       "add_new_tax": "Přidat novou daň",
       "tax_settings": "Nastavení daně",
       "tax_per_item": "Daň za položku",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Aktualizace aplikace",
-      "description": "Kliknutím na tlačítko níže můžete jednoduše aktualizovat Crater",
+      "description": "Kliknutím na tlačítko níže můžete jednoduše aktualizovat InvoiceShelf",
       "check_update": "Zkontrolovat aktualizace",
       "avail_update": "K dispozici je nová aktualizace",
       "next_version": "Další verze",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Souborový disk | Souborové disky",
-      "description": "Ve výchozím nastavení bude Crater používat váš lokální disk pro ukládání záloh, avataru a dalších obrázků. Podle vašich preferencí můžete nakonfigurovat více než jeden ovladač disku, jako je DigitalOcean, S3 nebo Dropbox.",
+      "description": "Ve výchozím nastavení bude InvoiceShelf používat váš lokální disk pro ukládání záloh, avataru a dalších obrázků. Podle vašich preferencí můžete nakonfigurovat více než jeden ovladač disku, jako je DigitalOcean, S3 nebo Dropbox.",
       "created_at": "vytvořeno v",
       "dropbox": "dropbox",
       "name": "Název",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Povolte, pokud chcete automaticky uložit kopii PDF každé faktury, odhadu a potvrzení o platbě. Zapnutí této možnosti sníží dobu načítání při prohlížení PDF.",
       "select_disk": "Vyberte disk",
       "disk_settings": "Nastavení disku",
-      "confirm_delete": "Vaše existující soubory a složky na určeném disku nebudou ovlivněny, ale konfigurace disku bude odstraněna z Crateru",
+      "confirm_delete": "Vaše existující soubory a složky na určeném disku nebudou ovlivněny, ale konfigurace disku bude odstraněna z InvoiceShelfu",
       "action": "Akce",
       "edit_file_disk": "Upravit souborový disk",
       "success_create": "Disk byl úspěšně přidán",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Ověření domény",
-      "desc": "Crater používá ověření na základě relace, které vyžaduje ověření domény pro účely zabezpečení. Zadejte prosím doménu, na které budete přistupovat ke své webové aplikaci.",
+      "desc": "InvoiceShelf používá ověření na základě relace, které vyžaduje ověření domény pro účely zabezpečení. Zadejte prosím doménu, na které budete přistupovat ke své webové aplikaci.",
       "app_domain": "Doména aplikace",
       "verify_now": "Ověřit teď",
       "success": "Ověření domény bylo úspěšné.",
@@ -1397,7 +1397,7 @@
       "system_req": "Systémové požadavky",
       "php_req_version": "Php (požadovaná verze {version})",
       "check_req": "Zkontrolujte požadavky",
-      "system_req_desc": "Crater má několik požadavků na server. Ujistěte se, že váš server má požadovanou php verzi a všechna níže uvedená rozšíření."
+      "system_req_desc": "InvoiceShelf má několik požadavků na server. Ujistěte se, že váš server má požadovanou php verzi a všechna níže uvedená rozšíření."
     },
     "errors": {
       "migrate_failed": "Migrace se nezdařila",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Neplatné telefonní číslo",
-    "invalid_url": "Neplatná URL (např. http://www.craterapp.com)",
-    "invalid_domain_url": "Neplatná URL (např. craterapp.com)",
+    "invalid_url": "Neplatná URL (např. http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Neplatná URL (např. invoiceshelf.com)",
     "required": "Pole je povinné",
     "email_incorrect": "Nesprávný e-mail.",
     "email_already_taken": "Tento e-mail již byl použit.",

@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -853,7 +853,7 @@
       "from_name": "Meno odosielateľa",
       "from_mail": "E-mail odosielateľa",
       "encryption": "E-mailová Enkrypcia",
-      "mail_config_desc": "Nižšie nájdete konfiguráciu E-mailu použitého k odosielaniu E-mailov z aplikácie Crater. Môžete taktiež nastaviť spojenie so službami tretích strán ako napríklad Sendgrid, SES a pod."
+      "mail_config_desc": "Nižšie nájdete konfiguráciu E-mailu použitého k odosielaniu E-mailov z aplikácie InvoiceShelf. Môžete taktiež nastaviť spojenie so službami tretích strán ako napríklad Sendgrid, SES a pod."
     },
     "pdf": {
       "title": "Nastavenia PDF",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "Typ daní",
       "add_tax": "Pridať daň",
       "edit_tax": "Upraviť Daň",
-      "description": "Môžete pridať alebo odobrať dane. Crater podporuje dane jednotlivých položiek aj na faktúre.",
+      "description": "Môžete pridať alebo odobrať dane. InvoiceShelf podporuje dane jednotlivých položiek aj na faktúre.",
       "add_new_tax": "Pridať Novú Daň",
       "tax_settings": "Nastavenia daní",
       "tax_per_item": "Daň pre každú Položku zvlášť",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "File Disk | File Disks",
-      "description": "V predvolenom nastavení použije Crater váš lokálny disk na ukladanie záloh, avatarov a iných obrazových súborov. Môžete nakonfigurovať viac ako jeden disku ako napr. DigitalOcean, S3 a Dropbox podľa vašich preferencií.",
+      "description": "V predvolenom nastavení použije InvoiceShelf váš lokálny disk na ukladanie záloh, avatarov a iných obrazových súborov. Môžete nakonfigurovať viac ako jeden disku ako napr. DigitalOcean, S3 a Dropbox podľa vašich preferencií.",
       "created_at": "vytvorené",
       "dropbox": "Dropbox",
       "name": "Názov",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": "Túto možnosť povoľte ak si chcete automaticky uložiť kópiu každého súboru PDF s fakturami, odhadmi a príjmami na predvolený disk. Použitím tejto možnosti skrátite dobu načítania pri prezeraní súborov PDF.",
       "select_disk": "Vybrať Disk",
       "disk_settings": "Nastavenie Disku",
-      "confirm_delete": "Vaše existujúce súbory a priečinky na zadanom disku nebudú ovplyvnené ale konfigurácia vášho disku bude odstránená z Crateru",
+      "confirm_delete": "Vaše existujúce súbory a priečinky na zadanom disku nebudú ovplyvnené ale konfigurácia vášho disku bude odstránená z InvoiceShelfu",
       "action": "Akcia",
       "edit_file_disk": "Upravit Disk",
       "success_create": "Disk úspešne pridaný",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "Systémové požiadavky",
       "php_req_version": "Php (verzia {version} požadovaná)",
       "check_req": "Skontrolujte požiadavky",
-      "system_req_desc": "Crater má niekoľko požiadaviek na server. Skontrolujte či má váš server požadovanú verziu php a všetky moduly uvedené nižšie."
+      "system_req_desc": "InvoiceShelf má niekoľko požiadaviek na server. Skontrolujte či má váš server požadovanú verziu php a všetky moduly uvedené nižšie."
     },
     "errors": {
       "migrate_failed": "Migráci zlyhala",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Zlé telefónné číslo",
-    "invalid_url": "Nesprávna URL adresa (ex: http://www.crater.com)",
-    "invalid_domain_url": "Nesprávna URL (ex: crater.com)",
+    "invalid_url": "Nesprávna URL adresa (ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Nesprávna URL (ex: invoiceshelf.com)",
     "required": "Povinné pole",
     "email_incorrect": "Zlý email.",
     "email_already_taken": "Email sa uz používa.",

@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -864,7 +864,7 @@
       "company_info": "Informação da Empresa",
       "company_name": "Nome da Empresa",
       "company_logo": "Logotipo da Empresa",
-      "section_description": "Informações sobre sua empresa que serão exibidas em Faturas, Orçamentos e outros documentos criados pela Crater.",
+      "section_description": "Informações sobre sua empresa que serão exibidas em Faturas, Orçamentos e outros documentos criados pela InvoiceShelf.",
       "phone": "Telefone",
       "country": "Pais",
       "state": "Estado",
@@ -1064,9 +1064,9 @@
       "email": "Enviar Notificações para",
       "description": "Quais notificações por email você gostaria de receber quando algo mudar?",
       "invoice_viewed": "Fatura Visualizada",
-      "invoice_viewed_desc": "Quando o seu cliente visualiza uma Fatura enviada pelo painel do Crater.",
+      "invoice_viewed_desc": "Quando o seu cliente visualiza uma Fatura enviada pelo painel do InvoiceShelf.",
       "estimate_viewed": "Orçamento Visualizado",
-      "estimate_viewed_desc": "Quando o seu cliente visualiza um Orçamento enviada pelo painel do Crater.",
+      "estimate_viewed_desc": "Quando o seu cliente visualiza um Orçamento enviada pelo painel do InvoiceShelf.",
       "save": "Salvar",
       "email_save_message": "E-mail salvo com sucesso",
       "please_enter_email": "Por favor digite um E-mail"
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "Tipos de Impostos",
       "add_tax": "Adicionar Imposto",
       "edit_tax": "Editar imposto",
-      "description": "Você pode adicionar ou remover impostos conforme desejar. O Crater suporta impostos sobre itens individuais e também na Fatura.",
+      "description": "Você pode adicionar ou remover impostos conforme desejar. O InvoiceShelf suporta impostos sobre itens individuais e também na Fatura.",
       "add_new_tax": "Adicionar Novo Imposto",
       "tax_settings": "Configurações de Impostos",
       "tax_per_item": "Imposto por Item",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Atualizar Aplicativo",
-      "description": "Você pode atualizar facilmente o Crater, verifique se há novas atualizações, clicando no botão abaixo",
+      "description": "Você pode atualizar facilmente o InvoiceShelf, verifique se há novas atualizações, clicando no botão abaixo",
       "check_update": "Verifique se há atualizações",
       "avail_update": "Nova atualização disponível",
       "next_version": "Próxima versão",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Disco de Arquivo | Discos de Arquivo",
-      "description": "Por padrão, o Crater usará o seu disco local para salvar os backups, avatar e outros arquivos de imagem. Você pode configurar mais de um drivers de disco como DigitalOcean, S3 e Dropbox de acordo com sua preferência.",
+      "description": "Por padrão, o InvoiceShelf usará o seu disco local para salvar os backups, avatar e outros arquivos de imagem. Você pode configurar mais de um drivers de disco como DigitalOcean, S3 e Dropbox de acordo com sua preferência.",
       "created_at": "criado em",
       "dropbox": "dropbox",
       "name": "Nome",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Ative isso, se você deseja salvar uma cópia de cada PDF das Faturas, Orçamentos e Recibos de Pagamento em seu disco padrão, automaticamente. Habilitar esta opção diminuirá o tempo de carregamento ao visualizar os PDFs.",
       "select_disk": "Selecionar Disco",
       "disk_settings": "Configurações de Disco",
-      "confirm_delete": "Seus arquivos e pastas existentes no disco especificado não serão afetados, mas sua configuração de disco será excluída do Crater",
+      "confirm_delete": "Seus arquivos e pastas existentes no disco especificado não serão afetados, mas sua configuração de disco será excluída do InvoiceShelf",
       "action": "Ação",
       "edit_file_disk": "Editar Disco de Arquivos",
       "success_create": "Disco adicionado com sucesso",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Verificação de Domínio",
-      "desc": "O Cratera usa a autenticação baseada na sessão que requer verificação de domínio para fins de segurança. Por favor, insira o domínio no qual você vai acessar seu aplicativo web.",
+      "desc": "O InvoiceShelfa usa a autenticação baseada na sessão que requer verificação de domínio para fins de segurança. Por favor, insira o domínio no qual você vai acessar seu aplicativo web.",
       "app_domain": "Domínio do Aplicativo",
       "verify_now": "Verificar Agora",
       "success": "Domínio Verificado com Sucesso.",
@@ -1397,7 +1397,7 @@
       "system_req": "Requisitos de Sistema",
       "php_req_version": "PHP (versão {version} obrigatória)",
       "check_req": "Verificar Requisitos",
-      "system_req_desc": "O Crater tem alguns requisitos de servidor. Verifique se o seu servidor possui a versão do PHP necessária e todas as extensões mencionadas abaixo."
+      "system_req_desc": "O InvoiceShelf tem alguns requisitos de servidor. Verifique se o seu servidor possui a versão do PHP necessária e todas as extensões mencionadas abaixo."
     },
     "errors": {
       "migrate_failed": "Falha na migração",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Número de telefone inválido",
-    "invalid_url": "URL inválida (ex: http://www.crater.com)",
-    "invalid_domain_url": "URL inválida (ex: crater.com)",
+    "invalid_url": "URL inválida (ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "URL inválida (ex: invoiceshelf.com)",
     "required": "Campo obrigatório",
     "email_incorrect": "E-mail incorreto.",
     "email_already_taken": "O email já está em uso.",

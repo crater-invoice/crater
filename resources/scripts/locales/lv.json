@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -864,7 +864,7 @@
       "company_info": "Uzņēmuma informācija",
       "company_name": "Uzņēmuma nosaukums",
       "company_logo": "Uzņēmuma logo",
-      "section_description": "Informācija par uzņēmumu kura tiks uzrādīta rēķinos, aprēķinos un citos dokumentos kurus veidosiet Crater sistēmā.",
+      "section_description": "Informācija par uzņēmumu kura tiks uzrādīta rēķinos, aprēķinos un citos dokumentos kurus veidosiet InvoiceShelf sistēmā.",
       "phone": "Telefona numurs",
       "country": "Valsts",
       "state": "Reģions",
@@ -1064,9 +1064,9 @@
       "email": "Send Notifications to",
       "description": "Which email notifications would you like to receive when something changes?",
       "invoice_viewed": "Invoice viewed",
-      "invoice_viewed_desc": "When your customer views the invoice sent via crater dashboard.",
+      "invoice_viewed_desc": "When your customer views the invoice sent via invoiceshelf dashboard.",
       "estimate_viewed": "Estimate viewed",
-      "estimate_viewed_desc": "When your customer views the estimate sent via crater dashboard.",
+      "estimate_viewed_desc": "When your customer views the estimate sent via invoiceshelf dashboard.",
       "save": "Save",
       "email_save_message": "Email saved successfully",
       "please_enter_email": "Please Enter Email"
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "Tax Types",
       "add_tax": "Add Tax",
       "edit_tax": "Edit Tax",
-      "description": "You can add or Remove Taxes as you please. Crater supports Taxes on Individual Items as well as on the invoice.",
+      "description": "You can add or Remove Taxes as you please. InvoiceShelf supports Taxes on Individual Items as well as on the invoice.",
       "add_new_tax": "Add New Tax",
       "tax_settings": "Tax Settings",
       "tax_per_item": "Tax Per Item",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Atjaunināt App",
-      "description": "Jūs varat atjaunināt Crater sistēmas versiju pavisam vienkārši - spiežot uz pogas zemāk",
+      "description": "Jūs varat atjaunināt InvoiceShelf sistēmas versiju pavisam vienkārši - spiežot uz pogas zemāk",
       "check_update": "Meklēt atjauninājumus",
       "avail_update": "Pieejami jauni atjauninājumi",
       "next_version": "Nākamā versija",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "File Disk | File Disks",
-      "description": "By default, Crater will use your local disk for saving backups, avatar and other image files. You can configure more than one disk drivers like DigitalOcean, S3 and Dropbox according to your preference.",
+      "description": "By default, InvoiceShelf will use your local disk for saving backups, avatar and other image files. You can configure more than one disk drivers like DigitalOcean, S3 and Dropbox according to your preference.",
       "created_at": "created at",
       "dropbox": "dropbox",
       "name": "Name",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Iespējot šo, ja vēlaties lai katru rēķina, aprēķina un maksājuma izdrukas PDF kopiju saglabātu diskā. Šī opcija samazinās ielādēšanas laiku, kad apskatīsiet PDF.",
       "select_disk": "Izvēlieties disku",
       "disk_settings": "Diska uzstādījumi",
-      "confirm_delete": "Jūsu esošie faili un mapes norādītajā diskā netiks ietekmēti, bet diska konfigurācija tiks izdzēsta no Crater sistēmas",
+      "confirm_delete": "Jūsu esošie faili un mapes norādītajā diskā netiks ietekmēti, bet diska konfigurācija tiks izdzēsta no InvoiceShelf sistēmas",
       "action": "Darbība",
       "edit_file_disk": "Labot failu disku",
       "success_create": "Disks tika pievienots veiksmīgi",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "System Requirements",
       "php_req_version": "Php (version {version} required)",
       "check_req": "Pārbaudīt prasības",
-      "system_req_desc": "Crater sistēmai ir dažas servera prasības. Pārliecinieties, ka jūsu serverim ir vajadzīgā php versija un visi tālāk minētie paplašinājumi."
+      "system_req_desc": "InvoiceShelf sistēmai ir dažas servera prasības. Pārliecinieties, ka jūsu serverim ir vajadzīgā php versija un visi tālāk minētie paplašinājumi."
     },
     "errors": {
       "migrate_failed": "Migrācija neizdevās",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Invalid Phone Number",
-    "invalid_url": "Invalid url (ex: http://www.craterapp.com)",
-    "invalid_domain_url": "Invalid url (ex: craterapp.com)",
+    "invalid_url": "Invalid url (ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Invalid url (ex: invoiceshelf.com)",
     "required": "Field is required",
     "email_incorrect": "Incorrect Email.",
     "email_already_taken": "The email has already been taken.",

@@ -118,7 +118,7 @@ class Updater
 
     public static function copyFiles($temp_extract_dir)
     {
-        if (! File::copyDirectory($temp_extract_dir.'/Crater', base_path())) {
+        if (! File::copyDirectory($temp_extract_dir.'/InvoiceShelf', base_path())) {
             return false;
         }
 

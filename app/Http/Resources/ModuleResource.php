@@ -108,7 +108,7 @@ class ModuleResource extends JsonResource
             return false;
         }
 
-        if (version_compare(Setting::getSetting('version'), $this->latest_module_version->crater_version, '<')) {
+        if (version_compare(Setting::getSetting('version'), $this->latest_module_version->invoiceshelf_version, '<')) {
             return false;
         }
 

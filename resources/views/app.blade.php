@@ -26,7 +26,7 @@
 
 <body
     class="h-full overflow-hidden bg-gray-100 font-base
-    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'crater'}} @endif ">
+    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'invoiceshelf'}} @endif ">
 
     <!-- Module Scripts -->
     @foreach (\InvoiceShelf\Services\Module\ModuleFacade::allScripts() as $name => $path)

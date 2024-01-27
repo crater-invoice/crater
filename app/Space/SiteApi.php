@@ -16,8 +16,8 @@ trait SiteApi
         $headers['headers'] = [
             'Accept' => 'application/json',
             'Referer' => url('/'),
-            'crater' => Setting::getSetting('version'),
             'Authorization' => "Bearer {$token}",
+            'invoiceshelf' => Setting::getSetting('version'),
         ];
 
         $data['http_errors'] = false;

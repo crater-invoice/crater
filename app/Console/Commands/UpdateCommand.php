@@ -20,14 +20,14 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'crater:update';
+    protected $signature = 'core:update';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Automatically update your crater app';
+    protected $description = 'Automatically update your InvoiceShelf Core App';
 
     /**
      * Create a new command instance.

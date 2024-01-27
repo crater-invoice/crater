@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Modules;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Modules;
 
-use Crater\Events\ModuleEnabledEvent;
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Module as ModelsModule;
+use InvoiceShelf\Events\ModuleEnabledEvent;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Module as ModelsModule;
 use Illuminate\Http\Request;
 use Nwidart\Modules\Facades\Module;
 

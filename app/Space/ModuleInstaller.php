@@ -1,13 +1,13 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
 use Artisan;
-use Crater\Events\ModuleEnabledEvent;
-use Crater\Events\ModuleInstalledEvent;
-use Crater\Http\Resources\ModuleResource;
-use Crater\Models\Module as ModelsModule;
-use Crater\Models\Setting;
+use InvoiceShelf\Events\ModuleEnabledEvent;
+use InvoiceShelf\Events\ModuleInstalledEvent;
+use InvoiceShelf\Http\Resources\ModuleResource;
+use InvoiceShelf\Models\Module as ModelsModule;
+use InvoiceShelf\Models\Setting;
 use File;
 use GuzzleHttp\Exception\RequestException;
 use Nwidart\Modules\Facades\Module;

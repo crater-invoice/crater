@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\PDF;
+namespace InvoiceShelf\Http\Controllers\V1\PDF;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Expense;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Expense;
 
 class DownloadReceiptController extends Controller
 {

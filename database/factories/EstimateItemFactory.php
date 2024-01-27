@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Estimate;
-use Crater\Models\EstimateItem;
-use Crater\Models\Item;
-use Crater\Models\User;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\EstimateItem;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstimateItemFactory extends Factory

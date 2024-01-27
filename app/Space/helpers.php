@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
-use Crater\Models\CustomField;
-use Crater\Models\Setting;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\CustomField;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Support\Str;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Resources;
+namespace InvoiceShelf\Http\Resources;
 
-use Crater\Models\Module as ModelsModule;
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Module as ModelsModule;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Nwidart\Modules\Facades\Module;
 

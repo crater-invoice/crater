@@ -83,7 +83,7 @@ return [
     /*
      * The class that contains the strategy for determining a media file's path.
      */
-    'path_generator' => \Crater\Generators\CustomPathGenerator::class,
+    'path_generator' => \InvoiceShelf\Generators\CustomPathGenerator::class,
 
     /*
      * When urls to files get generated, this class will be called. Use the default

@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\UpdateSettingsRequest;
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\UpdateSettingsRequest;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Support\Arr;
 
 class UpdateCompanySettingsController extends Controller

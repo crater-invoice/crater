@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Requests;
+namespace InvoiceShelf\Http\Requests;
 
-use Crater\Models\CompanySetting;
+use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExpenseRequest extends FormRequest

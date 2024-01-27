@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Currency;
-use Crater\Models\Item;
-use Crater\Models\Unit;
-use Crater\Models\User;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\Unit;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ItemFactory extends Factory

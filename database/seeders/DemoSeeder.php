@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Crater\Models\Address;
-use Crater\Models\Setting;
-use Crater\Models\User;
+use InvoiceShelf\Models\Address;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder

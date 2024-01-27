@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Http\Requests\EstimatesRequest;
-use Crater\Models\Estimate;
-use Crater\Models\EstimateItem;
-use Crater\Models\Tax;
+use InvoiceShelf\Http\Requests\EstimatesRequest;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\EstimateItem;
+use InvoiceShelf\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 

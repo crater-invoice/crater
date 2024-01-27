@@ -1,12 +1,12 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Company;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Company;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\CompaniesRequest;
-use Crater\Http\Resources\CompanyResource;
-use Crater\Models\Company;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\CompaniesRequest;
+use InvoiceShelf\Http\Resources\CompanyResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 use Vinkla\Hashids\Facades\Hashids;

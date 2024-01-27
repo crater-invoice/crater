@@ -1,16 +1,16 @@
 <?php
 
-use Crater\Models\Customer;
-use Crater\Models\CustomField;
-use Crater\Models\Estimate;
-use Crater\Models\ExchangeRateProvider;
-use Crater\Models\Expense;
-use Crater\Models\Invoice;
-use Crater\Models\Item;
-use Crater\Models\Note;
-use Crater\Models\Payment;
-use Crater\Models\RecurringInvoice;
-use Crater\Models\TaxType;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\CustomField;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\ExchangeRateProvider;
+use InvoiceShelf\Models\Expense;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\Note;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\RecurringInvoice;
+use InvoiceShelf\Models\TaxType;
 
 return [
 

@@ -1,16 +1,16 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Report;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Report;
 
 use PDF;
 use Carbon\Carbon;
-use Crater\Models\Tax;
-use Crater\Models\Company;
-use Crater\Models\Currency;
+use InvoiceShelf\Models\Tax;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Currency;
 use Illuminate\Http\Request;
-use Crater\Models\CompanySetting;
+use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Support\Facades\App;
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 
 class TaxSummaryReportController extends Controller
 {

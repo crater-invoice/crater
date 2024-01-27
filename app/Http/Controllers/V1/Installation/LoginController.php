@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Installation;
+namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
 use Auth;
-use Crater\Http\Controllers\Controller;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller

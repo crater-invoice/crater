@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Http\Requests;
+namespace InvoiceShelf\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

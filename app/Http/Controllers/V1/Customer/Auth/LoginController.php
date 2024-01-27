@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\Auth;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\Auth;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\Customer\CustomerLoginRequest;
-use Crater\Models\Company;
-use Crater\Models\Customer;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\Customer\CustomerLoginRequest;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Customer;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -15,7 +15,7 @@ class LoginController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Crater\Http\Requests\Customer\CustomerLoginRequest  $request
+     * @param  \InvoiceShelf\Http\Requests\Customer\CustomerLoginRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(CustomerLoginRequest $request, Company $company)

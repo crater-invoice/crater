@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Providers;
+namespace InvoiceShelf\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;

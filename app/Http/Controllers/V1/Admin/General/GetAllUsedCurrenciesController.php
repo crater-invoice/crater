@@ -1,13 +1,13 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Currency;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Models\Payment;
-use Crater\Models\Tax;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\Tax;
 use Illuminate\Http\Request;
 
 class GetAllUsedCurrenciesController extends Controller

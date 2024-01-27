@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\TaxType;
+use InvoiceShelf\Models\TaxType;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

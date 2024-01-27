@@ -2,9 +2,9 @@
 
 // Implementation taken from nova-backup-tool - https://github.com/spatie/nova-backup-tool/
 
-namespace Crater\Http\Controllers\V1\Admin\Backup;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Backup;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
 class ApiController extends Controller

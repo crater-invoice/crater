@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Modules;
+namespace InvoiceShelf\Http\Controllers\V1\Modules;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Services\Module\ModuleFacade;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Services\Module\ModuleFacade;
 use DateTime;
 use Illuminate\Support\Arr;
 use Request;

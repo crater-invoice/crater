@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\SettingRequest;
-use Crater\Models\Setting;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\SettingRequest;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Http\Request;
 
 class UpdateSettingsController extends Controller

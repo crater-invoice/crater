@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 

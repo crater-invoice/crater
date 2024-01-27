@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DiskEnvironmentRequest;
-use Crater\Http\Resources\FileDiskResource;
-use Crater\Models\FileDisk;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DiskEnvironmentRequest;
+use InvoiceShelf\Http\Resources\FileDiskResource;
+use InvoiceShelf\Models\FileDisk;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -48,7 +48,7 @@ class DiskController extends Controller
     /**
      *
      * @param Request $request
-     * @param \Crater\Models\FileDisk $file_disk
+     * @param \InvoiceShelf\Models\FileDisk $file_disk
      * @return JsonResponse
      */
     public function update(FileDisk $disk, Request $request)
@@ -132,7 +132,7 @@ class DiskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\Models\FileDisk  $taxType
+     * @param  \InvoiceShelf\Models\FileDisk  $taxType
      * @return \Illuminate\Http\Response
      */
     public function destroy(FileDisk $disk)

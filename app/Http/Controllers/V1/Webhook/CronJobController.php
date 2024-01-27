@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Webhook;
+namespace InvoiceShelf\Http\Controllers\V1\Webhook;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 

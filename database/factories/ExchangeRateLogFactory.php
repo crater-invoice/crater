@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Currency;
-use Crater\Models\ExchangeRateLog;
-use Crater\Models\User;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\ExchangeRateLog;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExchangeRateLogFactory extends Factory

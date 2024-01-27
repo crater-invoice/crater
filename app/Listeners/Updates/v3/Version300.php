@@ -1,15 +1,15 @@
 <?php
 
-namespace Crater\Listeners\Updates\v3;
+namespace InvoiceShelf\Listeners\Updates\v3;
 
-use Crater\Listeners\Updates\Listener;
-use Crater\Models\Currency;
-use Crater\Models\Item;
-use Crater\Models\Payment;
-use Crater\Models\PaymentMethod;
-use Crater\Models\Setting;
-use Crater\Models\Unit;
-use Crater\Models\User;
+use InvoiceShelf\Listeners\Updates\Listener;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\PaymentMethod;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Models\Unit;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Schema\Blueprint;
 use Vinkla\Hashids\Facades\Hashids;
 

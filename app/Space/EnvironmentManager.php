@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
-use Crater\Http\Requests\DatabaseEnvironmentRequest;
-use Crater\Http\Requests\DiskEnvironmentRequest;
-use Crater\Http\Requests\DomainEnvironmentRequest;
-use Crater\Http\Requests\MailEnvironmentRequest;
+use InvoiceShelf\Http\Requests\DatabaseEnvironmentRequest;
+use InvoiceShelf\Http\Requests\DiskEnvironmentRequest;
+use InvoiceShelf\Http\Requests\DomainEnvironmentRequest;
+use InvoiceShelf\Http\Requests\MailEnvironmentRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

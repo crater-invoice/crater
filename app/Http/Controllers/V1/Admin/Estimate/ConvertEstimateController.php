@@ -1,14 +1,14 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Estimate;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Estimate;
 
 use Carbon\Carbon;
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\InvoiceResource;
-use Crater\Models\CompanySetting;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Services\SerialNumberFormatter;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\InvoiceResource;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Services\SerialNumberFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
@@ -19,7 +19,7 @@ class ConvertEstimateController extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Crater\Models\Estimate $estimate
+     * @param  \InvoiceShelf\Models\Estimate $estimate
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, Estimate $estimate, Invoice $invoice)

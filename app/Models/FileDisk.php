@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
-use Crater\Carbon;
+use InvoiceShelf\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -40,8 +40,8 @@ return [
     */
 
     'middleware' => [
-        'verify_csrf_token' => Crater\Http\Middleware\VerifyCsrfToken::class,
-        'encrypt_cookies' => Crater\Http\Middleware\EncryptCookies::class,
+        'verify_csrf_token' => InvoiceShelf\Http\Middleware\VerifyCsrfToken::class,
+        'encrypt_cookies' => InvoiceShelf\Http\Middleware\EncryptCookies::class,
     ],
 
 ];

@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Address;
-use Crater\Models\Customer;
-use Crater\Models\User;
+use InvoiceShelf\Models\Address;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AddressFactory extends Factory

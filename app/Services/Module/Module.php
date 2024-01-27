@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Services\Module;
+namespace InvoiceShelf\Services\Module;
 
 class Module
 {

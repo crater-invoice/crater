@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Customer;
-use Crater\Models\Item;
-use Crater\Models\User;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 
 class CalculateBaseValuesForExistingData extends Migration

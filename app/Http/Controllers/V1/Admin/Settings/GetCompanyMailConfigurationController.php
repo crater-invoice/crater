@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class GetCompanyMailConfigurationController extends Controller

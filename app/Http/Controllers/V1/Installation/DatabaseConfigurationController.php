@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Installation;
+namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DatabaseEnvironmentRequest;
-use Crater\Space\EnvironmentManager;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DatabaseEnvironmentRequest;
+use InvoiceShelf\Space\EnvironmentManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 

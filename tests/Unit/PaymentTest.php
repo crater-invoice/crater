@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Payment;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

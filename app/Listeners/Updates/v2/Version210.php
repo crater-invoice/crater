@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Listeners\Updates\v2;
+namespace InvoiceShelf\Listeners\Updates\v2;
 
-use Crater\Events\UpdateFinished;
-use Crater\Listeners\Updates\Listener;
-use Crater\Models\CompanySetting;
-use Crater\Models\Setting;
+use InvoiceShelf\Events\UpdateFinished;
+use InvoiceShelf\Listeners\Updates\Listener;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Setting;
 
 class Version210 extends Listener
 {

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Crater\Models\ExchangeRateProvider;
+use InvoiceShelf\Models\ExchangeRateProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExchangeRateProviderFactory extends Factory

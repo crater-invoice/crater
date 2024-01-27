@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\Note;
-use Crater\Models\User;
+use InvoiceShelf\Models\Note;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

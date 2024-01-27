@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Policies;
+namespace InvoiceShelf\Policies;
 
-use Crater\Models\Payment;
-use Crater\Models\User;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\BouncerFacade;
 
@@ -14,7 +14,7 @@ class PaymentPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -29,8 +29,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function view(User $user, Payment $payment)
@@ -45,7 +45,7 @@ class PaymentPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -60,8 +60,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function update(User $user, Payment $payment)
@@ -76,8 +76,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function delete(User $user, Payment $payment)
@@ -92,8 +92,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function restore(User $user, Payment $payment)
@@ -108,8 +108,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function forceDelete(User $user, Payment $payment)
@@ -124,8 +124,8 @@ class PaymentPolicy
     /**
      * Determine whether the user can send email of the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return mixed
      */
     public function send(User $user, Payment $payment)
@@ -140,7 +140,7 @@ class PaymentPolicy
     /**
      * Determine whether the user can delete models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function deleteMultiple(User $user)

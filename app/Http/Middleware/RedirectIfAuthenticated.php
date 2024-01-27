@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Middleware;
+namespace InvoiceShelf\Http\Middleware;
 
 use Closure;
-use Crater\Providers\RouteServiceProvider;
+use InvoiceShelf\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated

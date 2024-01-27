@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\Expense;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\Expense;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\Customer\ExpenseResource;
-use Crater\Models\Company;
-use Crater\Models\Expense;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\Customer\ExpenseResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +40,7 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\Expense  $expense
+     * @param  \InvoiceShelf\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function show(Company $company, $id)

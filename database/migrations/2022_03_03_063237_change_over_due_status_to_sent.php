@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Invoice;
+use InvoiceShelf\Models\Invoice;
 use Illuminate\Database\Migrations\Migration;
 
 class ChangeOverDueStatusToSent extends Migration

@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Policies;
+namespace InvoiceShelf\Policies;
 
-use Crater\Models\Company;
-use Crater\Models\User;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CompanyPolicy

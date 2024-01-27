@@ -1,16 +1,16 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\CompanyResource;
-use Crater\Http\Resources\UserResource;
-use Crater\Models\Company;
-use Crater\Models\CompanySetting;
-use Crater\Models\Currency;
-use Crater\Models\Module;
-use Crater\Models\Setting;
-use Crater\Traits\GeneratesMenuTrait;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\CompanyResource;
+use InvoiceShelf\Http\Resources\UserResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Module;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Traits\GeneratesMenuTrait;
 use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 

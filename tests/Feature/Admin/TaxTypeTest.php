@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Settings\TaxTypesController;
-use Crater\Http\Requests\TaxTypeRequest;
-use Crater\Models\TaxType;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Settings\TaxTypesController;
+use InvoiceShelf\Http\Requests\TaxTypeRequest;
+use InvoiceShelf\Models\TaxType;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 

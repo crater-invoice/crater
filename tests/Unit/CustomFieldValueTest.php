@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\CustomFieldValue;
+use InvoiceShelf\Models\CustomFieldValue;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

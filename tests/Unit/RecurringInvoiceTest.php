@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\RecurringInvoice;
+use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

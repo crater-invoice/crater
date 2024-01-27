@@ -162,13 +162,13 @@ return [
         /*
          * Application Service Providers...
          */
-        Crater\Providers\AppServiceProvider::class,
-        Crater\Providers\AuthServiceProvider::class,
-        Crater\Providers\BroadcastServiceProvider::class,
-        Crater\Providers\EventServiceProvider::class,
-        Crater\Providers\RouteServiceProvider::class,
-        Crater\Providers\DropboxServiceProvider::class,
-        Crater\Providers\ViewServiceProvider::class,
+        InvoiceShelf\Providers\AppServiceProvider::class,
+        InvoiceShelf\Providers\AuthServiceProvider::class,
+        InvoiceShelf\Providers\BroadcastServiceProvider::class,
+        InvoiceShelf\Providers\EventServiceProvider::class,
+        InvoiceShelf\Providers\RouteServiceProvider::class,
+        InvoiceShelf\Providers\DropboxServiceProvider::class,
+        InvoiceShelf\Providers\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 

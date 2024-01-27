@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Support\Facades\Artisan;
 use function Pest\Faker\faker;
 

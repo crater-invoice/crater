@@ -1,6 +1,6 @@
 {
-  "name": "crater-invoice/crater",
-  "description": "Free & Open Source Invoice App for Individuals & Small Businesses. https://craterapp.com",
+  "name": "InvoiceShelf/InvoiceShelf",
+  "description": "Free & Open Source Invoice App for Individuals & Small Businesses. https://invoiceshelf.com",
   "keywords": [
     "framework",
     "laravel"
@@ -50,7 +50,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Crater\\": "app/",
+      "InvoiceShelf\\": "app/",
       "Database\\Factories\\": "database/factories/",
       "Database\\Seeders\\": "database/seeders/",
       "Modules\\": "Modules/"

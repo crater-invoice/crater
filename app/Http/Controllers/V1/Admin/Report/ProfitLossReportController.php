@@ -1,17 +1,17 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Report;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Report;
 
 use PDF;
 use Carbon\Carbon;
-use Crater\Models\Company;
-use Crater\Models\Expense;
-use Crater\Models\Payment;
-use Crater\Models\Currency;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Expense;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\Currency;
 use Illuminate\Http\Request;
-use Crater\Models\CompanySetting;
+use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Support\Facades\App;
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 
 class ProfitLossReportController extends Controller
 {

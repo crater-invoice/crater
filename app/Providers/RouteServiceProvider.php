@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Providers;
+namespace InvoiceShelf\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'Crater\\Http\\Controllers';
+    // protected $namespace = 'InvoiceShelf\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

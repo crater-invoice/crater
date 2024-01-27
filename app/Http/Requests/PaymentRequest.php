@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Requests;
+namespace InvoiceShelf\Http\Requests;
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Customer;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

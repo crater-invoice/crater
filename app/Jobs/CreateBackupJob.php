@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Jobs;
+namespace InvoiceShelf\Jobs;
 
-use Crater\Models\FileDisk;
+use InvoiceShelf\Models\FileDisk;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

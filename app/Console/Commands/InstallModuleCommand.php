@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Console\Commands;
+namespace InvoiceShelf\Console\Commands;
 
-use Crater\Space\ModuleInstaller;
+use InvoiceShelf\Space\ModuleInstaller;
 use Illuminate\Console\Command;
 
 class InstallModuleCommand extends Command

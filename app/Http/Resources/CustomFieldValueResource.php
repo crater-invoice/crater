@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Resources;
+namespace InvoiceShelf\Http\Resources;
 
-use Crater\Models\CompanySetting;
+use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomFieldValueResource extends JsonResource

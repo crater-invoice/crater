@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Installation;
+namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Setting;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Http\Request;
 
 class OnboardingWizardController extends Controller

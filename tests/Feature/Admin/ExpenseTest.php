@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Expense\ExpensesController;
-use Crater\Http\Requests\ExpenseRequest;
-use Crater\Models\Expense;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Expense\ExpensesController;
+use InvoiceShelf\Http\Requests\ExpenseRequest;
+use InvoiceShelf\Models\Expense;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;

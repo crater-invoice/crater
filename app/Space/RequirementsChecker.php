@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
 use Illuminate\Support\Str;
 use PDO;

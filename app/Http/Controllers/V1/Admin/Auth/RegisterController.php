@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Auth;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Auth;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\User;
-use Crater\Providers\RouteServiceProvider;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\User;
+use InvoiceShelf\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 

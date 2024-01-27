@@ -9,12 +9,12 @@
  * @see https://github.com/vinkla/laravel-hashids
  */
 
-use Crater\Models\Company;
-use Crater\Models\EmailLog;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Models\Payment;
-use Crater\Models\Transaction;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\Transaction;
 
 return [
 

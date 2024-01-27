@@ -1,10 +1,10 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Customer\CustomersController;
-use Crater\Http\Requests\CustomerRequest;
-use Crater\Models\Customer;
-use Crater\Models\Invoice;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Customer\CustomersController;
+use InvoiceShelf\Http\Requests\CustomerRequest;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;

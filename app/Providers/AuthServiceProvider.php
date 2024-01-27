@@ -1,22 +1,22 @@
 <?php
 
-namespace Crater\Providers;
+namespace InvoiceShelf\Providers;
 
-use Crater\Policies\CompanyPolicy;
-use Crater\Policies\CustomerPolicy;
-use Crater\Policies\DashboardPolicy;
-use Crater\Policies\EstimatePolicy;
-use Crater\Policies\ExpensePolicy;
-use Crater\Policies\InvoicePolicy;
-use Crater\Policies\ItemPolicy;
-use Crater\Policies\ModulesPolicy;
-use Crater\Policies\NotePolicy;
-use Crater\Policies\OwnerPolicy;
-use Crater\Policies\PaymentPolicy;
-use Crater\Policies\RecurringInvoicePolicy;
-use Crater\Policies\ReportPolicy;
-use Crater\Policies\SettingsPolicy;
-use Crater\Policies\UserPolicy;
+use InvoiceShelf\Policies\CompanyPolicy;
+use InvoiceShelf\Policies\CustomerPolicy;
+use InvoiceShelf\Policies\DashboardPolicy;
+use InvoiceShelf\Policies\EstimatePolicy;
+use InvoiceShelf\Policies\ExpensePolicy;
+use InvoiceShelf\Policies\InvoicePolicy;
+use InvoiceShelf\Policies\ItemPolicy;
+use InvoiceShelf\Policies\ModulesPolicy;
+use InvoiceShelf\Policies\NotePolicy;
+use InvoiceShelf\Policies\OwnerPolicy;
+use InvoiceShelf\Policies\PaymentPolicy;
+use InvoiceShelf\Policies\RecurringInvoicePolicy;
+use InvoiceShelf\Policies\ReportPolicy;
+use InvoiceShelf\Policies\SettingsPolicy;
+use InvoiceShelf\Policies\UserPolicy;
 use Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -28,21 +28,21 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \Crater\Models\Customer::class => \Crater\Policies\CustomerPolicy::class,
-        \Crater\Models\Invoice::class => \Crater\Policies\InvoicePolicy::class,
-        \Crater\Models\Estimate::class => \Crater\Policies\EstimatePolicy::class,
-        \Crater\Models\Payment::class => \Crater\Policies\PaymentPolicy::class,
-        \Crater\Models\Expense::class => \Crater\Policies\ExpensePolicy::class,
-        \Crater\Models\ExpenseCategory::class => \Crater\Policies\ExpenseCategoryPolicy::class,
-        \Crater\Models\PaymentMethod::class => \Crater\Policies\PaymentMethodPolicy::class,
-        \Crater\Models\TaxType::class => \Crater\Policies\TaxTypePolicy::class,
-        \Crater\Models\CustomField::class => \Crater\Policies\CustomFieldPolicy::class,
-        \Crater\Models\User::class => \Crater\Policies\UserPolicy::class,
-        \Crater\Models\Item::class => \Crater\Policies\ItemPolicy::class,
-        \Silber\Bouncer\Database\Role::class => \Crater\Policies\RolePolicy::class,
-        \Crater\Models\Unit::class => \Crater\Policies\UnitPolicy::class,
-        \Crater\Models\RecurringInvoice::class => \Crater\Policies\RecurringInvoicePolicy::class,
-        \Crater\Models\ExchangeRateProvider::class => \Crater\Policies\ExchangeRateProviderPolicy::class,
+        \InvoiceShelf\Models\Customer::class => \InvoiceShelf\Policies\CustomerPolicy::class,
+        \InvoiceShelf\Models\Invoice::class => \InvoiceShelf\Policies\InvoicePolicy::class,
+        \InvoiceShelf\Models\Estimate::class => \InvoiceShelf\Policies\EstimatePolicy::class,
+        \InvoiceShelf\Models\Payment::class => \InvoiceShelf\Policies\PaymentPolicy::class,
+        \InvoiceShelf\Models\Expense::class => \InvoiceShelf\Policies\ExpensePolicy::class,
+        \InvoiceShelf\Models\ExpenseCategory::class => \InvoiceShelf\Policies\ExpenseCategoryPolicy::class,
+        \InvoiceShelf\Models\PaymentMethod::class => \InvoiceShelf\Policies\PaymentMethodPolicy::class,
+        \InvoiceShelf\Models\TaxType::class => \InvoiceShelf\Policies\TaxTypePolicy::class,
+        \InvoiceShelf\Models\CustomField::class => \InvoiceShelf\Policies\CustomFieldPolicy::class,
+        \InvoiceShelf\Models\User::class => \InvoiceShelf\Policies\UserPolicy::class,
+        \InvoiceShelf\Models\Item::class => \InvoiceShelf\Policies\ItemPolicy::class,
+        \Silber\Bouncer\Database\Role::class => \InvoiceShelf\Policies\RolePolicy::class,
+        \InvoiceShelf\Models\Unit::class => \InvoiceShelf\Policies\UnitPolicy::class,
+        \InvoiceShelf\Models\RecurringInvoice::class => \InvoiceShelf\Policies\RecurringInvoicePolicy::class,
+        \InvoiceShelf\Models\ExchangeRateProvider::class => \InvoiceShelf\Policies\ExchangeRateProviderPolicy::class,
     ];
 
     /**

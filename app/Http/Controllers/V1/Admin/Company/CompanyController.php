@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Company;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Company;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\CompanyResource;
-use Crater\Models\Company;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\CompanyResource;
+use InvoiceShelf\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Http\Middleware;
+namespace InvoiceShelf\Http\Middleware;
 
 use Auth;
 use Closure;

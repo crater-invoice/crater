@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Currency;
-use Crater\Models\Customer;
-use Crater\Models\Invoice;
-use Crater\Models\RecurringInvoice;
-use Crater\Models\User;
-use Crater\Services\SerialNumberFormatter;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\RecurringInvoice;
+use InvoiceShelf\Models\User;
+use InvoiceShelf\Services\SerialNumberFormatter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory

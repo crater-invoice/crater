@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Traits;
+namespace InvoiceShelf\Traits;
 
 use Carbon\Carbon;
-use Crater\Models\Address;
-use Crater\Models\CompanySetting;
-use Crater\Models\FileDisk;
+use InvoiceShelf\Models\Address;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\FileDisk;
 use Illuminate\Support\Facades\App;
 
 trait GeneratesPdfTrait

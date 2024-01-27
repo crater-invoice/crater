@@ -74,12 +74,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \Crater\Models\User::class,
+            'model' => \InvoiceShelf\Models\User::class,
         ],
 
         'customers' => [
             'driver' => 'eloquent',
-            'model' => \Crater\Models\Customer::class,
+            'model' => \InvoiceShelf\Models\Customer::class,
         ],
     ],
 

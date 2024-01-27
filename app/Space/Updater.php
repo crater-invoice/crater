@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
 use Artisan;
-use Crater\Events\UpdateFinished;
+use InvoiceShelf\Events\UpdateFinished;
 use File;
 use GuzzleHttp\Exception\RequestException;
 use ZipArchive;

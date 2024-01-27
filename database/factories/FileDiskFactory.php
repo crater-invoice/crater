@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Crater\Models\FileDisk;
+use InvoiceShelf\Models\FileDisk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FileDiskFactory extends Factory

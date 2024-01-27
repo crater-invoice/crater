@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Expense;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Expense;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\ExpenseCategoryRequest;
-use Crater\Http\Resources\ExpenseCategoryResource;
-use Crater\Models\ExpenseCategory;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\ExpenseCategoryRequest;
+use InvoiceShelf\Http\Resources\ExpenseCategoryResource;
+use InvoiceShelf\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 
 class ExpenseCategoriesController extends Controller
@@ -47,7 +47,7 @@ class ExpenseCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\ExpenseCategory $category
+     * @param  \InvoiceShelf\Models\ExpenseCategory $category
      * @return \Illuminate\Http\Response
      */
     public function show(ExpenseCategory $category)
@@ -61,7 +61,7 @@ class ExpenseCategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Crater\Models\ExpenseCategory $ExpenseCategory
+     * @param  \InvoiceShelf\Models\ExpenseCategory $ExpenseCategory
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseCategoryRequest $request, ExpenseCategory $category)
@@ -76,7 +76,7 @@ class ExpenseCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\ExpensesCategory $category
+     * @param  \InvoiceShelf\ExpensesCategory $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(ExpenseCategory $category)

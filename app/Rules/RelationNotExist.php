@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Rules;
+namespace InvoiceShelf\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 

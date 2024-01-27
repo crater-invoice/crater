@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Listeners\Updates\v2;
+namespace InvoiceShelf\Listeners\Updates\v2;
 
-use Crater\Events\UpdateFinished;
-use Crater\Listeners\Updates\Listener;
-use Crater\Models\Setting;
+use InvoiceShelf\Events\UpdateFinished;
+use InvoiceShelf\Listeners\Updates\Listener;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Database\Schema\Blueprint;
 
 class Version200 extends Listener
@@ -56,14 +56,14 @@ class Version200 extends Listener
             $table->string('city')->nullable();
         });
 
-        $addresses = \Crater\Models\Address::all();
+        $addresses = \InvoiceShelf\Models\Address::all();
         foreach ($addresses as $add) {
-            $city = \Crater\City::find($add->city_id);
+            $city = \InvoiceShelf\City::find($add->city_id);
             if ($city) {
                 $add->city = $city->name;
             }
 
-            $state = \Crater\State::find($add->state_id);
+            $state = \InvoiceShelf\State::find($add->state_id);
             if ($state) {
                 $add->state = $state->name;
             }

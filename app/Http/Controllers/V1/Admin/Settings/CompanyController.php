@@ -1,15 +1,15 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\AvatarRequest;
-use Crater\Http\Requests\CompanyLogoRequest;
-use Crater\Http\Requests\CompanyRequest;
-use Crater\Http\Requests\ProfileRequest;
-use Crater\Http\Resources\CompanyResource;
-use Crater\Http\Resources\UserResource;
-use Crater\Models\Company;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\AvatarRequest;
+use InvoiceShelf\Http\Requests\CompanyLogoRequest;
+use InvoiceShelf\Http\Requests\CompanyRequest;
+use InvoiceShelf\Http\Requests\ProfileRequest;
+use InvoiceShelf\Http\Resources\CompanyResource;
+use InvoiceShelf\Http\Resources\UserResource;
+use InvoiceShelf\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -27,7 +27,7 @@ class CompanyController extends Controller
      * Update the Admin profile.
      * Includes name, email and (or) password
      *
-     * @param  \Crater\Http\Requests\ProfileRequest $request
+     * @param  \InvoiceShelf\Http\Requests\ProfileRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateProfile(ProfileRequest $request)
@@ -41,7 +41,7 @@ class CompanyController extends Controller
 
     /**
      * Update Admin Company Details
-     * @param \Crater\Http\Requests\CompanyRequest $request
+     * @param \InvoiceShelf\Http\Requests\CompanyRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateCompany(CompanyRequest $request)
@@ -60,7 +60,7 @@ class CompanyController extends Controller
     /**
      * Upload the company logo to storage.
      *
-     * @param  \Crater\Http\Requests\CompanyLogoRequest $request
+     * @param  \InvoiceShelf\Http\Requests\CompanyLogoRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadCompanyLogo(CompanyLogoRequest $request)
@@ -94,7 +94,7 @@ class CompanyController extends Controller
     /**
      * Upload the Admin Avatar to public storage.
      *
-     * @param  \Crater\Http\Requests\AvatarRequest $request
+     * @param  \InvoiceShelf\Http\Requests\AvatarRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadAvatar(AvatarRequest $request)

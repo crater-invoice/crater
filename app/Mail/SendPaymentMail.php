@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Mail;
+namespace InvoiceShelf\Mail;
 
-use Crater\Models\EmailLog;
-use Crater\Models\Payment;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

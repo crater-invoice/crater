@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Providers;
+namespace InvoiceShelf\Providers;
 
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;

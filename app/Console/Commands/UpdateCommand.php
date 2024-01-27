@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Console\Commands;
+namespace InvoiceShelf\Console\Commands;
 
-use Crater\Models\Setting;
-use Crater\Space\Updater;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Space\Updater;
 use Illuminate\Console\Command;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting

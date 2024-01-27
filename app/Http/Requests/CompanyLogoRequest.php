@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Requests;
+namespace InvoiceShelf\Http\Requests;
 
-use Crater\Rules\Base64Mime;
+use InvoiceShelf\Rules\Base64Mime;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CompanyLogoRequest extends FormRequest

@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Payment;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Database\Migrations\Migration;
 
 class CalculateBaseAmountOfPaymentsTable extends Migration

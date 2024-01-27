@@ -1,11 +1,11 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Payment\PaymentsController;
-use Crater\Http\Requests\PaymentRequest;
-use Crater\Mail\SendPaymentMail;
-use Crater\Models\Invoice;
-use Crater\Models\Payment;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Payment\PaymentsController;
+use InvoiceShelf\Http\Requests\PaymentRequest;
+use InvoiceShelf\Mail\SendPaymentMail;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 

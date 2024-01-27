@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
-use Crater\Notifications\CustomerMailResetPasswordNotification;
-use Crater\Traits\HasCustomFieldsTrait;
+use InvoiceShelf\Notifications\CustomerMailResetPasswordNotification;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

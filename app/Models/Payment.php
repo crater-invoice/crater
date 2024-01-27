@@ -1,14 +1,14 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
-use Crater\Jobs\GeneratePaymentPdfJob;
-use Crater\Mail\SendPaymentMail;
-use Crater\Services\SerialNumberFormatter;
-use Crater\Traits\GeneratesPdfTrait;
-use Crater\Traits\HasCustomFieldsTrait;
+use InvoiceShelf\Jobs\GeneratePaymentPdfJob;
+use InvoiceShelf\Mail\SendPaymentMail;
+use InvoiceShelf\Services\SerialNumberFormatter;
+use InvoiceShelf\Traits\GeneratesPdfTrait;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -107,7 +107,7 @@ class Payment extends Model implements HasMedia
 
     public function creator()
     {
-        return $this->belongsTo('Crater\Models\User', 'creator_id');
+        return $this->belongsTo('InvoiceShelf\Models\User', 'creator_id');
     }
 
     public function currency()

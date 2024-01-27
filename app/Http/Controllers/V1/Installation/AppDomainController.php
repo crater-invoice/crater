@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Installation;
+namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DomainEnvironmentRequest;
-use Crater\Space\EnvironmentManager;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DomainEnvironmentRequest;
+use InvoiceShelf\Space\EnvironmentManager;
 use Illuminate\Support\Facades\Artisan;
 
 class AppDomainController extends Controller

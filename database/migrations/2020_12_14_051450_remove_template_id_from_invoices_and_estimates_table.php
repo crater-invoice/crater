@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Invoice;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Crater\Listeners\Updates\v3;
+namespace InvoiceShelf\Listeners\Updates\v3;
 
 use Artisan;
-use Crater\Events\UpdateFinished;
-use Crater\Listeners\Updates\Listener;
-use Crater\Models\Currency;
-use Crater\Models\Setting;
+use InvoiceShelf\Events\UpdateFinished;
+use InvoiceShelf\Listeners\Updates\Listener;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\Setting;
 
 class Version310 extends Listener
 {

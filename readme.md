@@ -19,20 +19,20 @@ Web Application is made using Laravel & VueJS while the Mobile Apps are built us
 
 ## Documentation
 
-- [Installation Steps](https://docs.craterapp.com/installation.html)
-- [User Guide](https://docs.craterapp.com/)
-- [Developer Guide](https://docs.craterapp.com/developer-guide.html)
-- [API Documentation](https://api-docs.craterapp.com)
+- [Installation Steps](https://docs.invoiceshelf.com/installation.html)
+- [User Guide](https://docs.invoiceshelf.com/)
+- [Developer Guide](https://docs.invoiceshelf.com/developer-guide.html)
+- [API Documentation](https://api-docs.invoiceshelf.com)
 
 ## Download
 
-- [Download Link](https://craterapp.com/downloads)
+- [Download Link](https://invoiceshelf.com/downloads)
 
 ## Mobile Apps
 
-- [Android](https://play.google.com/store/apps/details?id=com.craterapp.app)
-- [IOS](https://apps.apple.com/app/id1489169767)
-- [Source](https://github.com/bytefury/crater-mobile)
+- Andorid - Coming Soon
+- IOS - Coming Soon
+- [Source](https://github.com/InvoiceShelf/mobile)
 
 ## Discord
 

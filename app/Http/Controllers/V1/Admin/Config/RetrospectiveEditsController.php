@@ -16,7 +16,7 @@ class RetrospectiveEditsController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'retrospective_edits' => config('crater.retrospective_edits'),
+            'retrospective_edits' => config('invoiceshelf.retrospective_edits'),
         ]);
     }
 }

@@ -37,20 +37,20 @@ class AppServiceProvider extends ServiceProvider
     {
         //main menu
         \Menu::make('main_menu', function ($menu) {
-            foreach (config('crater.main_menu') as $data) {
+            foreach (config('invoiceshelf.main_menu') as $data) {
                 $this->generateMenu($menu, $data);
             }
         });
 
         //setting menu
         \Menu::make('setting_menu', function ($menu) {
-            foreach (config('crater.setting_menu') as $data) {
+            foreach (config('invoiceshelf.setting_menu') as $data) {
                 $this->generateMenu($menu, $data);
             }
         });
 
         \Menu::make('customer_portal_menu', function ($menu) {
-            foreach (config('crater.customer_menu') as $data) {
+            foreach (config('invoiceshelf.customer_menu') as $data) {
                 $this->generateMenu($menu, $data);
             }
         });

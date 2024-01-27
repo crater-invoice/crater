@@ -68,7 +68,7 @@ class BootstrapController extends Controller
             'current_company' => new CompanyResource($current_company),
             'current_company_settings' => $current_company_settings,
             'current_company_currency' => $current_company_currency,
-            'config' => config('crater'),
+            'config' => config('invoiceshelf'),
             'global_settings' => $global_settings,
             'main_menu' => $main_menu,
             'setting_menu' => $setting_menu,

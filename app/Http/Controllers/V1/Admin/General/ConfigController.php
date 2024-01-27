@@ -16,7 +16,7 @@ class ConfigController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            $request->key => config('crater.'.$request->key),
+            $request->key => config('invoiceshelf.'.$request->key),
         ]);
     }
 }

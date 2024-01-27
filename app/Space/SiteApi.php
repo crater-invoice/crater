@@ -11,7 +11,7 @@ trait SiteApi
 {
     protected static function getRemote($url, $data = [], $token = null)
     {
-        $client = new Client(['verify' => false, 'base_uri' => config('crater.base_url').'/']);
+        $client = new Client(['verify' => false, 'base_uri' => config('invoiceshelf.base_url').'/']);
 
         $headers['headers'] = [
             'Accept' => 'application/json',

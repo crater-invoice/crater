@@ -10,11 +10,12 @@
     <!-- edit note  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.MANAGE_NOTE)"
+      v-slot="slotProps"
       @click="editNote(row.id)"
     >
       <BaseIcon
         name="PencilIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.edit') }}
     </BaseDropdownItem>
@@ -22,11 +23,12 @@
     <!-- delete note  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.MANAGE_NOTE)"
+      v-slot="slotProps"
       @click="removeNote(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

@@ -184,6 +184,20 @@ export const useCompanyStore = (useWindow = false) => {
       setDefaultCurrency(data) {
         this.defaultCurrency = data.currency
       },
+
+      checkCompanyHasCurrencyTransactions() {
+        return new Promise((resolve, reject) => {
+          axios
+            .get(`/api/v1/company/has-transactions`)
+            .then((response) => {
+              resolve(response)
+            })
+            .catch((err) => {
+              handleError(err)
+              reject(err)
+            })
+        })
+      },
     },
   })()
 }

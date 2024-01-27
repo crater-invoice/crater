@@ -863,6 +863,8 @@
     "company_info": {
       "company_info": "Company info",
       "company_name": "Company Name",
+      "company_slug": "Company Slug",
+      "company_slug_help_text": "A unique URL friendly name for your company (It will appear on Customer Portal URL)",
       "company_logo": "Company Logo",
       "section_description": "Information about your company that will be displayed on invoices, estimates and other documents created by Crater.",
       "phone": "Phone",
@@ -1324,6 +1326,8 @@
     "company_info": "Company Information",
     "company_info_desc": "This information will be displayed on invoices. Note that you can edit this later on settings page.",
     "company_name": "Company Name",
+    "company_slug": "Company Slug",
+    "company_slug_help_text": "A unique URL friendly name for your company (It will appear on Customer Portal URL)",
     "company_logo": "Company Logo",
     "logo_preview": "Logo Preview",
     "preferences": "Company Preferences",
@@ -1454,7 +1458,8 @@
     "at_least_one_ability": "Please select atleast one Permission.",
     "valid_driver_key": "Please enter a valid {driver} key.",
     "valid_exchange_rate": "Please enter a valid exchange rate.",
-    "company_name_not_same": "Company name must match with given name."
+    "company_name_not_same": "Company name must match with given name.",
+    "invalid_slug": "Invalid Slug"
   },
   "errors": {
     "starter_plan": "This feature is available on Starter plan and onwards!",
@@ -1522,5 +1527,13 @@
   "pdf_bill_to": "Bill to,",
   "pdf_ship_to": "Ship to,",
   "pdf_received_from": "Received from:",
-  "pdf_tax_label": "Tax"
+  "pdf_tax_label": "Tax",
+  "date_picker": {
+    "same_day": "Same Day",
+    "within_7_days": "Within 7 Days",
+    "within_15_days": "Within 15 Days",
+    "within_30_days": "Within 30 Days",
+    "within_45_days": "Within 45 Days",
+    "within_60_days": "Within 60 Days"
+  }
 }

@@ -10,11 +10,12 @@
     <!-- Copy PDF url  -->
     <BaseDropdownItem
       v-if="route.name === 'estimates.view'"
+      v-slot="slotProps"
       @click="copyPdfUrl"
     >
       <BaseIcon
         name="LinkIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.copy_pdf_url') }}
     </BaseDropdownItem>
@@ -24,10 +25,10 @@
       v-if="userStore.hasAbilities(abilities.EDIT_ESTIMATE)"
       :to="`/admin/estimates/${row.id}/edit`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
@@ -36,11 +37,12 @@
     <!-- Delete Estimate  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_ESTIMATE)"
+      v-slot="slotProps"
       @click="removeEstimate(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>
@@ -53,10 +55,10 @@
       "
       :to="`estimates/${row.id}/view`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="EyeIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.view') }}
       </BaseDropdownItem>
@@ -65,11 +67,12 @@
     <!-- Convert into Invoice  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.CREATE_INVOICE)"
+      v-slot="slotProps"
       @click="convertInToinvoice(row.id)"
     >
       <BaseIcon
         name="DocumentTextIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.convert_to_invoice') }}
     </BaseDropdownItem>
@@ -81,11 +84,12 @@
         route.name !== 'estimates.view' &&
         userStore.hasAbilities(abilities.SEND_ESTIMATE)
       "
+      v-slot="slotProps"
       @click="onMarkAsSent(row.id)"
     >
       <BaseIcon
         name="CheckCircleIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.mark_as_sent') }}
     </BaseDropdownItem>
@@ -97,20 +101,21 @@
         route.name !== 'estimates.view' &&
         userStore.hasAbilities(abilities.SEND_ESTIMATE)
       "
+      v-slot="slotProps"
       @click="sendEstimate(row)"
     >
       <BaseIcon
         name="PaperAirplaneIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.send_estimate') }}
     </BaseDropdownItem>
 
     <!-- Resend Estimate -->
-    <BaseDropdownItem v-if="canResendEstimate(row)" @click="sendEstimate(row)">
+    <BaseDropdownItem v-if="canResendEstimate(row)" v-slot="slotProps"  @click="sendEstimate(row)">
       <BaseIcon
         name="PaperAirplaneIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.resend_estimate') }}
     </BaseDropdownItem>
@@ -121,11 +126,12 @@
         row.status !== 'ACCEPTED' &&
         userStore.hasAbilities(abilities.EDIT_ESTIMATE)
       "
+      v-slot="slotProps"
       @click="onMarkAsAccepted(row.id)"
     >
       <BaseIcon
         name="CheckCircleIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.mark_as_accepted') }}
     </BaseDropdownItem>
@@ -136,11 +142,12 @@
         row.status !== 'REJECTED' &&
         userStore.hasAbilities(abilities.EDIT_ESTIMATE)
       "
+      v-slot="slotProps"
       @click="onMarkAsRejected(row.id)"
     >
       <BaseIcon
         name="XCircleIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('estimates.mark_as_rejected') }}
     </BaseDropdownItem>

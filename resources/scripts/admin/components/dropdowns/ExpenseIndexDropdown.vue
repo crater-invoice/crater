@@ -12,10 +12,10 @@
       v-if="userStore.hasAbilities(abilities.EDIT_EXPENSE)"
       :to="`/admin/expenses/${row.id}/edit`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
@@ -24,11 +24,12 @@
     <!-- delete expense  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_EXPENSE)"
+      v-slot="slotProps"
       @click="removeExpense(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

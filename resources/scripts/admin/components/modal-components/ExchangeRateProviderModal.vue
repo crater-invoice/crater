@@ -150,9 +150,7 @@
           @Remove="removeUsedSelectedCurrencies"
         />
       </div>
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3"
           variant="primary-outline"
@@ -179,7 +177,7 @@
             exchangeRateStore.isEdit ? $t('general.update') : $t('general.save')
           }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

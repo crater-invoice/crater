@@ -20,6 +20,7 @@
         border border-gray-200 border-solid
         min-h-[170px]
         rounded-md
+        dark:border-white/10 dark:bg-gray-800/50
       "
       @click.stop
     >
@@ -27,7 +28,7 @@
         <BaseText
           :text="selectedCustomer.name"
           :length="30"
-          class="flex-1 text-base font-medium text-left text-gray-900"
+          class="flex-1 text-base font-medium text-left text-gray-900 dark:text-white"
         />
         <div class="flex">
           <a
@@ -192,6 +193,7 @@
             border border-gray-200 border-solid
             rounded-md
             min-h-[170px]
+            dark:border-white/10 dark:bg-gray-700/60 dark:text-white
           "
         >
           <BaseIcon
@@ -207,11 +209,12 @@
               bg-gray-200
               rounded-full
               font-base
+              dark:bg-gray-700
             "
           />
 
           <div class="mt-1">
-            <label class="text-lg font-medium text-gray-900">
+            <label class="text-lg font-medium text-gray-900 dark:text-white">
               {{ $t('customers.new_customer') }}
               <span class="text-red-500"> * </span>
             </label>
@@ -246,6 +249,11 @@
               shadow-lg
               ring-1 ring-black ring-opacity-5
               bg-white
+               dark:border
+              dark:border-white/10
+              dark:bg-gray-800
+              dark:text-white
+              dark:shadow-glass
             "
           >
             <div class="relative">
@@ -265,6 +273,7 @@
                   overflow-auto
                   list
                   border-t border-gray-200
+                  dark:border-white/10
                 "
               >
                 <li
@@ -280,6 +289,7 @@
                     hover:cursor-pointer hover:bg-gray-100
                     focus:outline-none focus:bg-gray-100
                     last:border-b-0
+                    dark:border-white/10 dark:hover:bg-gray-700/30
                   "
                   @click="selectNewCustomer(customer.id, close)"
                 >
@@ -299,6 +309,7 @@
                       bg-gray-300
                       rounded-full
                       avatar
+                      dark:bg-gray-600
                     "
                   >
                     {{ initGenerator(customer.name) }}
@@ -333,9 +344,9 @@
                 </li>
                 <div
                   v-if="customerStore.customers.length === 0"
-                  class="flex justify-center p-5 text-gray-400"
+                  class="flex justify-center p-5 text-gray-400 dark:text-gray-300"
                 >
-                  <label class="text-base text-gray-500 cursor-pointer">
+                  <label class="text-base text-gray-500 cursor-pointer dark:text-gray-300">
                     {{ $t('customers.no_customers_found') }}
                   </label>
                 </div>
@@ -357,6 +368,10 @@
                 border-none
                 outline-none
                 focus:bg-gray-300
+                dark:bg-gray-600/70
+                dark:shadow-glass
+                dark:backdrop-blur-xl
+                dark:hover:bg-gray-600/80
               "
               @click="openCustomerModal"
             >

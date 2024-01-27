@@ -10,7 +10,7 @@
         {{ label }}
       </BaseLabel>
 
-      <p class="text-sm font-bold leading-5 text-black non-italic">
+      <p class="text-sm font-bold leading-5 text-black non-italic dark:text-white">
         {{ value }}
 
         <slot />

@@ -135,7 +135,7 @@
             v-if="userStore.hasAbilities(abilities.DELETE_EXPENSE)"
             @click="removeMultipleExpenses"
           >
-            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -171,7 +171,7 @@
         <template #cell-name="{ row }">
           <router-link
             :to="{ path: `expenses/${row.data.id}/edit` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.expense_category.name }}
           </router-link>

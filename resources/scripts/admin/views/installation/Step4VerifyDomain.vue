@@ -18,18 +18,18 @@
       </BaseInputGroup>
     </div>
 
-    <p class="mt-4 mb-0 text-sm text-gray-600">Notes:</p>
-    <ul class="w-full text-gray-600 list-disc list-inside">
+    <p class="mt-4 mb-0 text-sm text-gray-600 dark:text-white">Notes:</p>
+    <ul class="w-full text-gray-600 list-disc list-inside dark:text-gray-300">
       <li class="text-sm leading-8">
         App domain should not contain
-        <b class="inline-block px-1 bg-gray-100 rounded-sm">https://</b> or
-        <b class="inline-block px-1 bg-gray-100 rounded-sm">http</b> in front of
+        <b class="inline-block px-1 bg-gray-100 rounded-md dark:bg-gray-400 dark:text-gray-600">https://</b> or
+        <b class="inline-block px-1 bg-gray-100 rounded-md dark:bg-gray-400 dark:text-gray-600">http</b> in front of
         the domain.
       </li>
       <li class="text-sm leading-8">
         If you're accessing the website on a different port, please mention the
         port. For example:
-        <b class="inline-block px-1 bg-gray-100">localhost:8080</b>
+        <b class="inline-block px-1 bg-gray-100 rounded-md dark:bg-gray-400 dark:text-gray-600">localhost:8080</b>
       </li>
     </ul>
 

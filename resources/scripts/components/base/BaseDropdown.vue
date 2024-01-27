@@ -69,7 +69,8 @@ const props = defineProps({
 })
 
 const containerClasses = computed(() => {
-  const baseClass = `origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none`
+  const baseClass = `dark:border dark:border-white/10 dark:text-white dark:bg-gray-800 dark:shadow-glass
+  origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none`
   return `${baseClass} ${props.containerClass}`
 })
 

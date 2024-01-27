@@ -95,7 +95,7 @@
         <template #cell-invoice_number="{ row }">
           <router-link
             :to="{ path: `invoices/${row.data.id}/view` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.invoice_number }}
           </router-link>
@@ -126,11 +126,11 @@
         <template #cell-actions="{ row }">
           <BaseDropdown>
             <template #activator>
-              <BaseIcon name="DotsHorizontalIcon" class="h-5 text-gray-500" />
+              <BaseIcon name="DotsHorizontalIcon" class="h-5 text-gray-500 dark:text-gray-200" />
             </template>
             <router-link :to="`invoices/${row.data.id}/view`">
               <BaseDropdownItem>
-                <BaseIcon name="EyeIcon" class="h-5 mr-3 text-gray-600" />
+                <BaseIcon name="EyeIcon" class="h-5 mr-3 text-gray-600  dark:text-gray-200" />
                 {{ $t('general.view') }}
               </BaseDropdownItem>
             </router-link>

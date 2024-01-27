@@ -7,7 +7,7 @@
       <div class="mb-6">
         <div
           v-if="phpSupportInfo"
-          class="grid grid-flow-row grid-cols-3 p-3 border border-gray-200  lg:gap-24 sm:gap-4"
+          class="grid grid-flow-row grid-cols-3 p-3 border border-gray-200 lg:gap-24 sm:gap-4 dark:border-white/10"
         >
           <div class="col-span-2 text-sm">
             {{
@@ -32,7 +32,7 @@
           <div
             v-for="(requirement, index) in requirements"
             :key="index"
-            class="grid grid-flow-row grid-cols-3 p-3 border border-gray-200  lg:gap-24 sm:gap-4"
+            class="grid grid-flow-row grid-cols-3 p-3 border border-gray-200 dark:border-gray-600 lg:gap-24 sm:gap-4"
           >
             <div class="col-span-2 text-sm">
               {{ index }}

@@ -2,6 +2,7 @@
   <div class="flex flex-col items-center justify-center h-screen">
     <div class="loader loader-white">
       <div class="loader-spined">
+        <!-- let\'s make this another svg -->
         <div class="loader--icon">
           <svg
             class="offset-45deg text-primary-500"

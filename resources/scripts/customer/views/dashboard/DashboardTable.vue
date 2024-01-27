@@ -26,7 +26,7 @@
             :to="{
               path: `/${globalStore.companySlug}/customer/invoices/${row.data.id}/view`,
             }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.invoice_number }}
           </router-link>
@@ -73,7 +73,7 @@
             :to="{
               path: `/${globalStore.companySlug}/customer/estimates/${row.data.id}/view`,
             }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.estimate_number }}
           </router-link>

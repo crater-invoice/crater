@@ -130,6 +130,7 @@
           mt-5
           list-none
           border-b-2 border-gray-200 border-solid
+          dark:border-gray-600
         "
       >
         <!-- Tabs -->
@@ -163,7 +164,7 @@
           </template>
 
           <BaseDropdownItem @click="removeMultipleEstimates">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -204,7 +205,7 @@
         <template #cell-estimate_number="{ row }">
           <router-link
             :to="{ path: `estimates/${row.data.id}/view` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.estimate_number }}
           </router-link>

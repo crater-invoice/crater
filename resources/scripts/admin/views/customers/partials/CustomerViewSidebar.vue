@@ -13,6 +13,7 @@
       xl:ml-64
       w-88
       xl:block
+      dark:bg-gray-800
     "
   >
     <div
@@ -25,6 +26,7 @@
         pb-2
         border border-gray-200 border-solid
         height-full
+        dark:border-gray-600
       "
     >
       <BaseInput
@@ -59,6 +61,7 @@
               mb-2
               text-sm
               border-b border-gray-200 border-solid
+              dark:border-gray-600
             "
           >
             {{ $t('general.sort_by') }}
@@ -114,6 +117,7 @@
         border-l border-gray-200 border-solid
         sidebar
         base-scroll
+        dark:border-gray-600
       "
     >
       <div v-for="(customer, index) in customerList" :key="index">
@@ -122,9 +126,9 @@
           :id="'customer-' + customer.id"
           :to="`/admin/customers/${customer.id}/view`"
           :class="[
-            'flex justify-between p-4 items-center cursor-pointer hover:bg-gray-100 border-l-4 border-transparent',
+            'flex justify-between p-4 items-center cursor-pointer hover:bg-gray-100 border-l-4 border-transparent dark:hover:bg-gray-700',
             {
-              'bg-gray-100 border-l-4 border-primary-500 border-solid':
+              'bg-gray-100 border-l-4 border-primary-500 border-solid dark:border-primary-400 dark:bg-gray-700':
                 hasActiveUrl(customer.id),
             },
           ]"
@@ -143,6 +147,7 @@
                 text-black
                 capitalize
                 truncate
+                dark:text-white
               "
             />
 
@@ -157,6 +162,7 @@
                 font-medium
                 leading-5
                 text-gray-600
+                dark:text-gray-400
               "
             />
           </div>
@@ -175,7 +181,7 @@
       </div>
       <p
         v-if="!customerList?.length && !isFetching"
-        class="flex justify-center px-4 mt-5 text-sm text-gray-600"
+        class="flex justify-center px-4 mt-5 text-sm text-gray-600 dark:text-gray-300"
       >
         {{ $t('customers.no_matching_customers') }}
       </p>

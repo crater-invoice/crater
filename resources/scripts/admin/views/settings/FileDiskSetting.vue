@@ -45,27 +45,30 @@
 
           <BaseDropdownItem
             v-if="!row.data.set_as_default"
+            v-slot="slotProps"
             @click="setDefaultDiskData(row.data.id)"
           >
-            <BaseIcon class="mr-3 tetx-gray-600" name="CheckCircleIcon" />
+            <BaseIcon :class="slotProps.class" name="CheckCircleIcon" />
 
             {{ $t('settings.disk.set_default_disk') }}
           </BaseDropdownItem>
 
           <BaseDropdownItem
             v-if="row.data.type !== 'SYSTEM'"
+            v-slot="slotProps"
             @click="openEditDiskModal(row.data)"
           >
-            <BaseIcon name="PencilIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="PencilIcon" :class="slotProps.class" />
 
             {{ $t('general.edit') }}
           </BaseDropdownItem>
 
           <BaseDropdownItem
             v-if="row.data.type !== 'SYSTEM' && !row.data.set_as_default"
+            v-slot="slotProps"
             @click="removeDisk(row.data.id)"
           >
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" :class="slotProps.class" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>

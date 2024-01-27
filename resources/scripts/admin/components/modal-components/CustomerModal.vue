@@ -122,7 +122,7 @@
           <BaseTab :title="$t('customers.portal_access')">
             <BaseInputGrid class="col-span-5 lg:col-span-4">
               <div class="md:col-span-2">
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 dark:text-gray-300">
                   {{ $t('customers.portal_access_text') }}
                 </p>
 
@@ -425,9 +425,7 @@
         </BaseTabGroup>
       </div>
 
-      <div
-        class="z-0 flex justify-end p-4 border-t border-gray-200 border-solid"
-      >
+      <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           type="button"
@@ -447,7 +445,7 @@
           </template>
           {{ $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>

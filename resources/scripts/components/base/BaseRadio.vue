@@ -19,7 +19,7 @@
             ]"
             aria-hidden="true"
           >
-            <span class="rounded-full bg-white w-1.5 h-1.5" />
+            <span class="rounded-full w-1.5 h-1.5"  :class="{ 'bg-white': checked }"/>
           </span>
           <div class="flex flex-col ml-3">
             <RadioGroupLabel
@@ -66,11 +66,11 @@ const props = defineProps({
   },
   checkedStateClass: {
     type: String,
-    default: 'bg-primary-600',
+    default: 'bg-primary-600 ',
   },
   unCheckedStateClass: {
     type: String,
-    default: 'bg-white ',
+    default: 'bg-white dark:bg-transparent',
   },
   optionGroupActiveStateClass: {
     type: String,
@@ -78,16 +78,16 @@ const props = defineProps({
   },
   checkedStateLabelClass: {
     type: String,
-    default: 'text-primary-900 ',
+    default: 'text-primary-900 dark:text-primary-400',
   },
   unCheckedStateLabelClass: {
     type: String,
-    default: 'text-gray-900',
+    default: 'text-gray-900 dark:text-white',
   },
   optionGroupClass: {
     type: String,
     default:
-      'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center',
+      'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center dark:border-gray-600',
   },
   optionGroupLabelClass: {
     type: String,

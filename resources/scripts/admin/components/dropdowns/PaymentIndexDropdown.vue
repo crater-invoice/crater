@@ -8,30 +8,31 @@
     </template>
 
     <!-- Copy pdf url  -->
-    <BaseDropdown-item
+    <BaseDropdownItem
       v-if="
         route.name === 'payments.view' &&
         userStore.hasAbilities(abilities.VIEW_PAYMENT)
       "
+      v-slot="slotProps"
       class="rounded-md"
       @click="copyPdfUrl"
     >
       <BaseIcon
         name="LinkIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.copy_pdf_url') }}
-    </BaseDropdown-item>
+    </BaseDropdownItem>
 
     <!-- edit payment  -->
     <router-link
       v-if="userStore.hasAbilities(abilities.EDIT_PAYMENT)"
       :to="`/admin/payments/${row.id}/edit`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="PencilIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.edit') }}
       </BaseDropdownItem>
@@ -45,10 +46,10 @@
       "
       :to="`/admin/payments/${row.id}/view`"
     >
-      <BaseDropdownItem>
+      <BaseDropdownItem v-slot="slotProps">
         <BaseIcon
           name="EyeIcon"
-          class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+          :class="slotProps.class"
         />
         {{ $t('general.view') }}
       </BaseDropdownItem>
@@ -61,11 +62,12 @@
         route.name !== 'payments.view' &&
         userStore.hasAbilities(abilities.SEND_PAYMENT)
       "
+      v-slot="slotProps"
       @click="sendPayment(row)"
     >
       <BaseIcon
         name="PaperAirplaneIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('payments.send_payment') }}
     </BaseDropdownItem>
@@ -73,11 +75,12 @@
     <!-- delete payment  -->
     <BaseDropdownItem
       v-if="userStore.hasAbilities(abilities.DELETE_PAYMENT)"
+      v-slot="slotProps"
       @click="removePayment(row.id)"
     >
       <BaseIcon
         name="TrashIcon"
-        class="w-5 h-5 mr-3 text-gray-400 group-hover:text-gray-500"
+        :class="slotProps.class"
       />
       {{ $t('general.delete') }}
     </BaseDropdownItem>

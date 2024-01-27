@@ -32,7 +32,8 @@
     "spatie/flysystem-dropbox": "^1.2",
     "spatie/laravel-backup": "^6.11",
     "spatie/laravel-medialibrary": "^8.7",
-    "vinkla/hashids": "^9.0"
+    "vinkla/hashids": "^9.0",
+    "ext-json": "*"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.6",

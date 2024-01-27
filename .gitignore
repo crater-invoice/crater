@@ -18,3 +18,5 @@ Homestead.yaml
 /.scribe
 !storage/fonts/.gitkeep
 .DS_Store
+.php-cs-fixer.cache
+/storage/fonts*

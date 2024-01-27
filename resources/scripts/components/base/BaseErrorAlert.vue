@@ -1,11 +1,18 @@
 <template>
-  <div class="rounded-md bg-red-50 p-4">
+  <div
+    class="
+      rounded-md
+      bg-red-50
+      p-4
+      dark:border dark:border-red-400 dark:bg-transparent
+    "
+  >
     <div class="flex">
       <div class="shrink-0">
-        <XCircleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
+        <XCircleIcon class="h-5 w-5 text-red-400 dark:text-red-500" aria-hidden="true" />
       </div>
       <div class="ml-3">
-        <h3 class="text-sm font-medium text-red-800">
+        <h3 class="text-sm font-medium text-red-800 dark:text-red-500">
           {{ errorTitle }}
         </h3>
         <div class="mt-2 text-sm text-red-700">

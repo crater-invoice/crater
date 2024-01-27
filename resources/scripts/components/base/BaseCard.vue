@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-white rounded-lg shadow">
+  <div
+    class="bg-white rounded-lg shadow dark:bg-gray-800 dark:text-white dark:shadow-glass dark:border dark:border-white/10 dark:bg-gray-800/70 relative"
+  >
+    <BaseDarkHighlight class="z-[-1] mt-10" />
+
     <div
       v-if="hasHeaderSlot"
       class="px-5 py-4 text-black border-b border-gray-100 border-solid"

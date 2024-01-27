@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col items-center justify-between w-full pt-10">
+    <LightDarkButton class="absolute z-10 top-2 right-2"/>
     <img
       id="logo-crater"
-      src="/img/crater-logo.png"
+      src="#"
       alt="Crater Logo"
       class="h-12 mb-5 md:mb-10"
     />
@@ -29,6 +30,7 @@ import Step7CompanyInfo from './Step7CompanyInfo.vue'
 import Step8CompanyPreferences from './Step8CompanyPreferences.vue'
 import { useInstallationStore } from '@/scripts/admin/stores/installation'
 import { useRouter } from 'vue-router'
+import LightDarkButton from '@/scripts/components/LightDarkButton.vue'
 
 export default {
   components: {
@@ -40,6 +42,7 @@ export default {
     step_6: Step6AccountSettings,
     step_7: Step7CompanyInfo,
     step_8: Step8CompanyPreferences,
+    LightDarkButton
   },
 
   setup() {

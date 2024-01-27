@@ -17,16 +17,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Module Styles -->
-    @foreach(\Crater\Services\Module\ModuleFacade::allStyles() as $name => $path)
+    @foreach (\Crater\Services\Module\ModuleFacade::allStyles() as $name => $path)
         <link rel="stylesheet" href="/modules/styles/{{ $name }}">
     @endforeach
 
-    @vite
+    @vite('resources/scripts/main.js')
 </head>
 
 <body
-    class="h-full overflow-hidden bg-gray-100 font-base
-    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'crater'}} @endif ">
+    class="h-full overflow-hidden bg-gray-100 dark:bg-gray-900 dark:text-white font-base
+    @if (isset($current_theme)) theme-{{ $current_theme }} @else theme-{{ get_app_setting('admin_portal_theme') ?? 'crater' }} @endif ">
 
     <!-- Module Scripts -->
     @foreach (\Crater\Services\Module\ModuleFacade::allScripts() as $name => $path)
@@ -38,6 +38,14 @@
     @endforeach
 
     <script type="module">
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+            document.documentElement.style.setProperty('color-scheme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+            document.documentElement.style.setProperty('color-scheme', 'light')
+        }
+
         @if(isset($customer_logo))
 
         window.customer_logo = "/storage/{{$customer_logo}}"
@@ -57,12 +65,12 @@
 
         window.login_page_description = "{{$login_page_description}}"
 
-        @endif     
+        @endif
         @if(isset($copyright_text))
 
         window.copyright_text = "{{$copyright_text}}"
 
-        @endif    
+        @endif
 
         window.Crater.start()
     </script>

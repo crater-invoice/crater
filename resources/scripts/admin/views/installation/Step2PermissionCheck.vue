@@ -8,12 +8,7 @@
       <div
         v-for="(permission, index) in 3"
         :key="index"
-        class="
-          grid grid-flow-row grid-cols-3
-          lg:gap-24
-          sm:gap-4
-          border border-gray-200
-        "
+        class="grid grid-flow-row grid-cols-3 border border-gray-200 lg:gap-24 sm:gap-4 dark:border-gray-600"
       >
         <BaseContentPlaceholdersText :lines="1" class="col-span-4 p-3" />
       </div>
@@ -29,7 +24,7 @@
       <div
         v-for="(permission, index) in permissions"
         :key="index"
-        class="border border-gray-200"
+        class="border border-gray-200 dark:border-gray-600"
       >
         <div class="grid grid-flow-row grid-cols-3 lg:gap-24 sm:gap-4">
           <div class="col-span-2 p-3">
@@ -38,11 +33,11 @@
           <div class="p-3 text-right">
             <span
               v-if="permission.isSet"
-              class="inline-block w-4 h-4 ml-3 mr-2 rounded-full bg-green-500"
+              class="inline-block w-4 h-4 ml-3 mr-2 bg-green-500 rounded-full"
             />
             <span
               v-else
-              class="inline-block w-4 h-4 ml-3 mr-2 rounded-full bg-red-500"
+              class="inline-block w-4 h-4 ml-3 mr-2 bg-red-500 rounded-full"
             />
             <span>{{ permission.permission }}</span>
           </div>

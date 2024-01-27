@@ -64,7 +64,7 @@ function mergeExistingValues() {
   if (props.isEdit) {
     props.store[props.storeProp].fields.forEach((field) => {
       const existingIndex = props.store[props.storeProp].customFields.findIndex(
-        (f) => f.id === field.custom_field_id
+        (f) => f.id == field.custom_field_id
       )
 
       if (existingIndex > -1) {

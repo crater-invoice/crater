@@ -1,9 +1,13 @@
 <template>
   <div>
-    <TabGroup :default-index="defaultIndex" @change="onChange">
+    <TabGroup
+      :selected-index="selectedIndex"
+      :default-index="defaultIndex"
+      @change="onChange"
+    >
       <TabList
         :class="[
-          'flex border-b border-grey-light',
+          'flex border-b border-grey-light dark:border-gray-600',
           'relative overflow-x-auto overflow-y-hidden',
           'lg:pb-0 lg:ml-0',
         ]"
@@ -18,8 +22,8 @@
             :class="[
               'px-8 py-2 text-sm leading-5 font-medium flex items-center relative border-b-2 mt-4 focus:outline-none whitespace-nowrap',
               selected
-                ? ' border-primary-400 text-black font-medium'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                ? 'border-primary-400 text-black font-medium dark:text-white'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:border-gray-500',
             ]"
           >
             {{ tab.title }}
@@ -54,6 +58,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  selectedIndex: {
+    type: Number,
+    default: 0,
+  },
   filter: {
     type: String,
     default: null,
@@ -67,6 +75,6 @@ const slots = useSlots()
 const tabs = computed(() => slots.default().map((tab) => tab.props))
 
 function onChange(d) {
-  emit('change', tabs.value[d])
+  emit('change', tabs.value[d], d)
 }
 </script>

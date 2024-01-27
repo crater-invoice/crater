@@ -7,7 +7,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-show="show" class="relative z-10 p-4 md:p-8 bg-gray-200 rounded">
+    <div v-show="show" class="relative z-10 p-4 md:p-8 bg-gray-200 rounded dark:bg-gray-800">
       <slot name="filter-header" />
 
       <label
@@ -20,6 +20,7 @@
           hover:text-gray-700
           top-2.5
           right-3.5
+          dark:text-gray-300
         "
         @click="$emit('clear')"
       >

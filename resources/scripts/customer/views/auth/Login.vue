@@ -32,30 +32,15 @@
     >
       <BaseInput
         v-model="authStore.loginData.password"
-        :type="getInputType"
         :invalid="v$.loginData.password.$error"
+        type="password"
         @input="v$.loginData.password.$touch()"
-      >
-        <template #right>
-          <BaseIcon
-            v-if="isShowPassword"
-            name="EyeOffIcon"
-            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-            @click="isShowPassword = !isShowPassword"
-          />
-          <BaseIcon
-            v-else
-            name="EyeIcon"
-            class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-            @click="isShowPassword = !isShowPassword"
-          />
-        </template>
-      </BaseInput>
+      />
     </BaseInputGroup>
     <div class="flex items-center justify-between">
       <router-link
         :to="{ name: 'customer.forgot-password' }"
-        class="text-sm text-primary-600 hover:text-gray-500"
+        class="text-sm text-primary-400 hover:text-gray-500 dark:hover:text-primary-500"
       >
         {{ $t('login.forgot_password') }}
       </router-link>
@@ -91,14 +76,6 @@ const authStore = useAuthStore()
 const { t } = useI18n()
 
 let isLoading = ref(false)
-const isShowPassword = ref(false)
-
-const getInputType = computed(() => {
-  if (isShowPassword.value) {
-    return 'text'
-  }
-  return 'password'
-})
 
 const rules = computed(() => {
   return {

@@ -121,6 +121,7 @@
           mt-5
           list-none
           border-b-2 border-gray-200 border-solid
+          dark:border-gray-600
         "
       >
         <!-- Tabs -->
@@ -150,12 +151,12 @@
               "
             >
               {{ $t('general.actions') }}
-              <BaseIcon name="ChevronDownIcon" class="h-5" />
+              <BaseIcon name="ChevronDownIcon"/>
             </span>
           </template>
 
           <BaseDropdownItem @click="removeMultipleRecurringInvoices()">
-            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -203,7 +204,7 @@
               :text="row.data.customer.name"
               :length="30"
               tag="span"
-              class="font-medium text-primary-500 flex flex-col"
+              class="font-medium text-primary-500 flex flex-col dark:text-primary-400"
             />
 
             <BaseText

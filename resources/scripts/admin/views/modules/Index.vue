@@ -53,7 +53,7 @@
           </div>
         </div>
         <div v-else class="mt-24">
-          <label class="flex items-center justify-center text-gray-500">
+          <label class="flex items-center justify-center text-gray-500 dark:text-gray-300">
             {{ $t('modules.no_modules_installed') }}
           </label>
         </div>
@@ -61,10 +61,10 @@
     </div>
 
     <BaseCard v-else class="mt-6">
-      <h6 class="text-gray-900 text-lg font-medium">
+      <h6 class="text-gray-900 text-lg font-medium dark:text-white">
         {{ $t('modules.connect_installation') }}
       </h6>
-      <p class="mt-1 text-sm text-gray-500">
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
         {{
           $t('modules.api_token_description', {
             url: globalStore.config.base_url.replace(/^http:\/\//, ''),

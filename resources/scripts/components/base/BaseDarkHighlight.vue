@@ -1,0 +1,21 @@
+<template>
+  <div
+    class="
+      hidden
+      top-0
+      w-full
+      absolute
+      ml-auto
+      mr-auto
+      left-0
+      right-0
+      text-center
+      h-full
+      rounded-full
+      bg-highlight/[.10]
+      blur-2xl
+      dark:block
+      z-[-1]
+    "
+  />
+</template>

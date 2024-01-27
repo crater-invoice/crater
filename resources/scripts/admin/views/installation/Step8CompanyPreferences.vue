@@ -2,7 +2,6 @@
   <BaseWizardStep
     :title="$t('wizard.preferences')"
     :description="$t('wizard.preferences_desc')"
-    step-container="bg-white border border-gray-200 border-solid mb-8 md:w-full p-8 rounded w-full"
   >
     <form action="" @submit.prevent="next">
       <div>

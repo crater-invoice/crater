@@ -118,11 +118,11 @@
               "
             >
               {{ $t('general.actions') }}
-              <BaseIcon name="ChevronDownIcon" class="h-5" />
+              <BaseIcon name="ChevronDownIcon"/>
             </span>
           </template>
           <BaseDropdownItem @click="removeMultipleUsers">
-            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600" />
+            <BaseIcon name="TrashIcon" class="h-5 mr-3 text-gray-600 dark:text-gray-400 dark:group-hover:text-white" />
             {{ $t('general.delete') }}
           </BaseDropdownItem>
         </BaseDropdown>
@@ -158,7 +158,7 @@
         <template #cell-name="{ row }">
           <router-link
             :to="{ path: `users/${row.data.id}/edit` }"
-            class="font-medium text-primary-500"
+            class="font-medium text-primary-500 dark:text-primary-400"
           >
             {{ row.data.name }}
           </router-link>

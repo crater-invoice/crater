@@ -8,7 +8,9 @@
         font-medium
         leading-5
         text-gray-900
+        dark:text-gray-400
         outline-none
+        dark:focus:ring-offset-gray-900
         focus:ring-2 focus:ring-offset-2 focus:ring-primary-400
       "
       :to="to"

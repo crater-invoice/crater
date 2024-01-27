@@ -1,10 +1,12 @@
 <template>
-  <h6 class="text-gray-900 text-lg font-medium">
+  <BaseHeading
+    type="heading-title"
+    :subtitle="
+      $t('settings.customization.estimates.convert_estimate_description')
+    "
+    >
     {{ $tc('settings.customization.estimates.convert_estimate_options') }}
-  </h6>
-  <p class="mt-1 text-sm text-gray-500">
-    {{ $t('settings.customization.estimates.convert_estimate_description') }}
-  </p>
+  </BaseHeading>
 
   <BaseInputGroup required>
     <BaseRadio

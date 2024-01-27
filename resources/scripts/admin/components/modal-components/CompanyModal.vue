@@ -49,6 +49,24 @@
           </BaseInputGroup>
 
           <BaseInputGroup
+            :label="$tc('settings.company_info.company_slug')"
+            :help-text="$t('settings.company_info.company_slug_help_text')"
+            :error="
+              v$.newCompanyForm.slug.$error &&
+              v$.newCompanyForm.slug.$errors[0].$message
+            "
+            :content-loading="isFetchingInitialData"
+            required
+          >
+            <BaseInput
+              v-model="newCompanyForm.slug"
+              :invalid="v$.newCompanyForm.slug.$error"
+              :content-loading="isFetchingInitialData"
+              @input="v$.newCompanyForm.slug.$touch()"
+            />
+          </BaseInputGroup>
+
+          <BaseInputGroup
             :content-loading="isFetchingInitialData"
             :label="$tc('settings.company_info.country')"
             :error="
@@ -98,7 +116,7 @@
         </BaseInputGrid>
       </div>
 
-      <div class="z-0 flex justify-end p-4 bg-gray-50 border-modal-bg">
+       <BaseModalFooter>
         <BaseButton
           class="mr-3 text-sm"
           variant="primary-outline"
@@ -123,14 +141,14 @@
           </template>
           {{ $t('general.save') }}
         </BaseButton>
-      </div>
+      </BaseModalFooter>
     </form>
   </BaseModal>
 </template>
 
 <script setup>
 import { useModalStore } from '@/scripts/stores/modal'
-import { computed, onMounted, ref, reactive } from 'vue'
+import { computed, onMounted, ref, reactive, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { required, minLength, helpers } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
@@ -152,6 +170,7 @@ let companyLogoName = ref(null)
 
 const newCompanyForm = reactive({
   name: null,
+  slug: null,
   currency: '',
   address: {
     country_id: null,
@@ -162,6 +181,9 @@ const modalActive = computed(() => {
   return modalStore.active && modalStore.componentName === 'CompanyModal'
 })
 
+const slugValidator = (value) => {
+  return value == slugify(value)
+}
 const rules = {
   newCompanyForm: {
     name: {
@@ -169,6 +191,17 @@ const rules = {
       minLength: helpers.withMessage(
         t('validation.name_min_length', { count: 3 }),
         minLength(3)
+      ),
+    },
+    slug: {
+      required: helpers.withMessage(t('validation.required'), required),
+      minLength: helpers.withMessage(
+        t('validation.name_min_length', { count: 3 }),
+        minLength(3)
+      ),
+      slugValidator: helpers.withMessage(
+        t('validation.invalid_slug'),
+        slugValidator
       ),
     },
     address: {
@@ -243,6 +276,7 @@ async function submitCompanyData() {
 
 function resetNewCompanyForm() {
   newCompanyForm.name = ''
+  newCompanyForm.slug = ''
   newCompanyForm.currency = ''
   newCompanyForm.address.country_id = ''
 
@@ -256,5 +290,25 @@ function closeCompanyModal() {
     resetNewCompanyForm()
     v$.value.$reset()
   }, 300)
+}
+
+// watcher for if change company name then auto fill company slug value
+watch(
+  () => newCompanyForm.name,
+  (currentValue) => {
+    newCompanyForm.slug = slugify(currentValue)
+  }
+)
+
+function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
 }
 </script>

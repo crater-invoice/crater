@@ -51,27 +51,12 @@
         <BaseInput
           v-model.trim="mailDriverStore.mailgunConfig.mail_mailgun_secret"
           :content-loading="isFetchingInitialData"
-          :type="getInputType"
+          type="password"
           name="mailgun_secret"
           autocomplete="off"
           :invalid="v$.mailgunConfig.mail_mailgun_secret.$error"
           @input="v$.mailgunConfig.mail_mailgun_secret.$touch()"
-        >
-          <template #right>
-            <BaseIcon
-              v-if="isShowPassword"
-              class="mr-1 text-gray-500 cursor-pointer"
-              name="EyeOffIcon"
-              @click="isShowPassword = !isShowPassword"
-            />
-            <BaseIcon
-              v-else
-              class="mr-1 text-gray-500 cursor-pointer"
-              name="EyeIcon"
-              @click="isShowPassword = !isShowPassword"
-            />
-          </template>
-        </BaseInput>
+        />
       </BaseInputGroup>
 
       <BaseInputGroup
@@ -183,15 +168,6 @@ const emit = defineEmits(['submit-data', 'on-change-driver'])
 
 const mailDriverStore = useMailDriverStore()
 const { t } = useI18n()
-
-let isShowPassword = ref(false)
-
-const getInputType = computed(() => {
-  if (isShowPassword.value) {
-    return 'text'
-  }
-  return 'password'
-})
 
 const rules = computed(() => {
   return {

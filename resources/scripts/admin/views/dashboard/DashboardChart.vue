@@ -2,8 +2,23 @@
   <div>
     <div
       v-if="dashboardStore.isDashboardDataLoaded"
-      class="grid grid-cols-10 mt-8 bg-white rounded shadow"
+      class="
+        grid
+        grid-cols-10
+        mt-8
+        bg-white
+        rounded shadow
+        dark:text-white
+        dark:backdrop-blur-xl
+        dark:shadow-glass
+        dark:border
+        dark:bg-opacity-70
+        dark:border-white/10
+        dark:bg-gray-800
+        relative
+      "
     >
+      <BaseDarkHighlight />
       <!-- Chart -->
       <div
         class="
@@ -54,6 +69,7 @@
           lg:border-t-0 lg:text-right lg:col-span-3
           xl:col-span-2
           lg:grid-cols-1
+          dark:border-white/10
         "
       >
         <div class="p-6">
@@ -96,15 +112,7 @@
           </span>
           <br />
           <span
-            class="
-              block
-              mt-1
-              text-xl
-              font-semibold
-              leading-8
-              lg:text-2xl
-              text-red-400
-            "
+            class="block mt-1 text-xl font-semibold leading-8 lg:text-2xl text-red-400"
           >
             <BaseFormatMoney
               :amount="dashboardStore.totalExpenses"
@@ -116,8 +124,10 @@
           class="
             col-span-3
             p-6
-            border-t border-gray-200 border-solid
+            border-t
+            border-gray-200 border-solid
             lg:col-span-1
+            dark:border-white/10
           "
         >
           <span class="text-xs leading-5 lg:text-sm">
@@ -132,7 +142,7 @@
               font-semibold
               leading-8
               lg:text-2xl
-              text-primary-500
+              text-primary-500 dark:text-primary-400
             "
           >
             <BaseFormatMoney

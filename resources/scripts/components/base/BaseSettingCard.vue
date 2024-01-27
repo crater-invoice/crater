@@ -11,7 +11,7 @@
             mt-2
             text-sm
             leading-snug
-            text-left text-gray-500
+            text-left text-gray-500 dark:text-gray-400
             max-w-[680px]
           "
         >

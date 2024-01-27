@@ -39,6 +39,8 @@ $base-content-placeholders-border-radius: 6px !default;
 $base-content-placeholders-line-height: 15px !default;
 $base-content-placeholders-spacing: 10px !default;
 
+$base-content-placeholders-primary-color-dark: rgb(71, 85, 105) !default;
+$base-content-placeholders-secondary-color-dark: rgb(71, 85, 105) !default;
 // Animations
 @keyframes vueContentPlaceholdersAnimation {
   0% {
@@ -56,6 +58,10 @@ $base-content-placeholders-spacing: 10px !default;
   overflow: hidden;
   min-height: $base-content-placeholders-line-height;
   background: $base-content-placeholders-secondary-color;
+
+  .dark & {
+    background: $base-content-placeholders-secondary-color-dark;
+  }
 
   .base-content-placeholders-is-rounded & {
     border-radius: $base-content-placeholders-border-radius;
@@ -85,6 +91,15 @@ $base-content-placeholders-spacing: 10px !default;
     animation-iteration-count: infinite;
     animation-name: vueContentPlaceholdersAnimation;
     animation-timing-function: linear;
+  }
+
+  .dark .base-content-placeholders-is-animated &::before {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      darken($base-content-placeholders-secondary-color-dark, 5%) 15%,
+      transparent 30%
+    );
   }
 }
 
@@ -156,6 +171,10 @@ $base-content-placeholders-spacing: 10px !default;
   min-height: $base-content-placeholders-line-height;
   background: $base-content-placeholders-secondary-color;
 
+  .dark & {
+    background: $base-content-placeholders-secondary-color-dark;
+  }
+  
   .base-content-placeholders-is-animated &::before {
     content: '';
     position: absolute;
@@ -177,6 +196,14 @@ $base-content-placeholders-spacing: 10px !default;
     animation-timing-function: linear;
   }
 
+    .dark .base-content-placeholders-is-animated &::before {
+      background: linear-gradient(
+      to right,
+      transparent 0%,
+      darken($base-content-placeholders-secondary-color-dark, 5%) 15%,
+      transparent 30%
+    );
+  }
   // @include base-content-placeholders-spacing;
 }
 

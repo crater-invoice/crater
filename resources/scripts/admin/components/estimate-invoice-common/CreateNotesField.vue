@@ -5,7 +5,7 @@
     >
       <SelectNotePopup :type="type" @select="onSelectNote" />
     </div>
-    <label class="text-gray-800 font-medium mb-4 text-sm">
+    <label class="text-gray-800 font-medium mb-4 text-sm dark:text-gray-300">
       {{ $t('invoices.notes') }}
     </label>
     <BaseCustomInput

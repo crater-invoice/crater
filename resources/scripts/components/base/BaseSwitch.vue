@@ -7,7 +7,7 @@
 
       <Switch
         v-model="enabled"
-        :class="enabled ? 'bg-primary-500' : 'bg-gray-300'"
+        :class="enabled ? 'bg-primary-500' : 'bg-gray-300 dark:bg-gray-900'"
         class="
           relative
           inline-flex
@@ -21,7 +21,11 @@
         v-bind="$attrs"
       >
         <span
-          :class="enabled ? 'translate-x-6' : 'translate-x-1'"
+          :class="
+            enabled
+              ? 'translate-x-6 dark:bg-white'
+              : 'translate-x-1 dark:bg-gray-500'
+          "
           class="
             inline-block
             w-4

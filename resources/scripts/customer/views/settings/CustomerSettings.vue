@@ -66,24 +66,10 @@
         >
           <BaseInput
             v-model="userStore.userForm.password"
-            :type="isShowPassword ? 'text' : 'password'"
+            type="password"
             :invalid="v$.userForm.password.$error"
             @input="v$.userForm.password.$touch()"
-          >
-            <template #right>
-              <BaseIcon
-                v-if="isShowPassword"
-                name="EyeOffIcon"
-                class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-                @click="isShowPassword = !isShowPassword"
-              />
-              <BaseIcon
-                v-else
-                name="EyeIcon"
-                class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-                @click="isShowPassword = !isShowPassword"
-              /> </template
-          ></BaseInput>
+          />
         </BaseInputGroup>
 
         <BaseInputGroup
@@ -95,24 +81,10 @@
         >
           <BaseInput
             v-model="userStore.userForm.confirm_password"
-            :type="isShowConfirmPassword ? 'text' : 'password'"
+            type="password"
             :invalid="v$.userForm.confirm_password.$error"
             @input="v$.userForm.confirm_password.$touch()"
-          >
-            <template #right>
-              <BaseIcon
-                v-if="isShowConfirmPassword"
-                name="EyeOffIcon"
-                class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-                @click="isShowConfirmPassword = !isShowConfirmPassword"
-              />
-              <BaseIcon
-                v-else
-                name="EyeIcon"
-                class="w-5 h-5 mr-1 text-gray-500 cursor-pointer"
-                @click="isShowConfirmPassword = !isShowConfirmPassword"
-              /> </template
-          ></BaseInput>
+          />
         </BaseInputGroup>
       </div>
 
@@ -151,8 +123,6 @@ const { t, tm } = useI18n()
 let imgFiles = ref([])
 let isSaving = ref(false)
 let avatarFileBlob = ref(null)
-let isShowPassword = ref(false)
-let isShowConfirmPassword = ref(false)
 const isCustomerAvatarRemoved = ref(false)
 
 if (userStore.userForm.avatar) {

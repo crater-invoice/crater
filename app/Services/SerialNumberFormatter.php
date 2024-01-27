@@ -90,7 +90,7 @@ class SerialNumberFormatter
         $companyId = $this->company;
 
         if (request()->has('format')) {
-            $format = request()->format;
+            $format = request()->get('format');
         } else {
             $format = CompanySetting::getSetting(
                 $settingKey,

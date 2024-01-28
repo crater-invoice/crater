@@ -18,7 +18,7 @@
     "ext-json": "*",
     "aws/aws-sdk-php": "^3.297",
     "barryvdh/laravel-dompdf": "^v2.0",
-    "crater-invoice/modules": "^1.0.0",
+    "invoiceshelf/modules": "^1.0.0",
     "dragonmantank/cron-expression": "^3.3",
     "jasonmccreary/laravel-test-assertions": "^2.3",
     "lavary/laravel-menu": "^1.8",

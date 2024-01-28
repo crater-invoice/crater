@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d03c5106153279d254a1b66842c2ae2",
+    "content-hash": "987235247a4d4939dc3d9e36f040665a",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -355,73 +355,6 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
-        },
-        {
-            "name": "crater-invoice/modules",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crater-invoice/modules.git",
-                "reference": "996f80cb279416ef7da5a32f6e119ff9ce703591"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crater-invoice/modules/zipball/996f80cb279416ef7da5a32f6e119ff9ce703591",
-                "reference": "996f80cb279416ef7da5a32f6e119ff9ce703591",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "laravel/framework": "^8.0",
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "^6.2",
-                "phpstan/phpstan": "^0.12.14",
-                "phpunit/phpunit": "^8.5",
-                "spatie/phpunit-snapshot-assertions": "^2.1.0|^4.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
-                    ],
-                    "aliases": {
-                        "Module": "Nwidart\\Modules\\Facades\\Module"
-                    }
-                },
-                "branch-alias": {
-                    "dev-master": "8.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Nwidart\\Modules\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Crater Module Management Package",
-            "keywords": [
-                "crater",
-                "laravel",
-                "module",
-                "modules",
-                "rad"
-            ],
-            "support": {
-                "issues": "https://github.com/crater-invoice/modules/issues",
-                "source": "https://github.com/crater-invoice/modules/tree/1.0.0"
-            },
-            "time": "2021-12-21T14:18:56+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1738,6 +1671,72 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "invoiceshelf/modules",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/InvoiceShelf/modules.git",
+                "reference": "996f80cb279416ef7da5a32f6e119ff9ce703591"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/InvoiceShelf/modules/zipball/996f80cb279416ef7da5a32f6e119ff9ce703591",
+                "reference": "996f80cb279416ef7da5a32f6e119ff9ce703591",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/framework": "^8.0",
+                "mockery/mockery": "~1.0",
+                "orchestra/testbench": "^6.2",
+                "phpstan/phpstan": "^0.12.14",
+                "phpunit/phpunit": "^8.5",
+                "spatie/phpunit-snapshot-assertions": "^2.1.0|^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
+                    ],
+                    "aliases": {
+                        "Module": "Nwidart\\Modules\\Facades\\Module"
+                    }
+                },
+                "branch-alias": {
+                    "dev-master": "8.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Nwidart\\Modules\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Crater Module Management Package",
+            "keywords": [
+                "crater",
+                "laravel",
+                "module",
+                "modules",
+                "rad"
+            ],
+            "support": {
+                "source": "https://github.com/InvoiceShelf/modules/tree/1.0.0"
+            },
+            "time": "2021-12-21T14:18:56+00:00"
         },
         {
             "name": "jasonmccreary/laravel-test-assertions",

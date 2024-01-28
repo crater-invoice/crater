@@ -26,7 +26,7 @@ class AddOverdueToInvoicesTable extends Migration
     public function down()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->dropForeign(['overdue']);
+            $table->dropColumn(['overdue']);
         });
     }
 }

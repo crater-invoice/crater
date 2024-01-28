@@ -1,10 +1,10 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.1-fpm-bookworm
 
-RUN apk add --no-cache \
-    php8-bcmath
+RUN apt update && apt install -y cron
 
 RUN docker-php-ext-install pdo pdo_mysql bcmath
 
 COPY docker-compose/crontab /etc/crontabs/root
+RUN crontab /etc/crontabs/root
 
-CMD ["crond", "-f"]
+CMD ["/usr/sbin/cron", "-f"]

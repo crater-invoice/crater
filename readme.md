@@ -73,7 +73,8 @@ Join the Crater discord server to discuss:
 
 ## Copyright
 
-© 2023 IDEOLOGIX MEDIA DOOEL.
+- © 2024 IDEOLOGIX MEDIA DOOEL.
+- © 2022 Crater Invoice, Inc
 
 **Special thanks to:**
 

@@ -129,7 +129,7 @@ test('delete multiple expenses', function () {
         ]);
 
     foreach ($expenses as $expense) {
-        $this->assertDeleted($expense);
+        $this->assertModelMissing($expense);
     }
 });
 

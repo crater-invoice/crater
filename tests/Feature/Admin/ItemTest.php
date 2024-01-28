@@ -121,7 +121,7 @@ test('delete multiple items', function () {
     postJson("/api/v1/items/delete", $data)->assertOk();
 
     foreach ($items as $item) {
-        $this->assertDeleted($item);
+        $this->assertModelMissing($item);
     }
 });
 

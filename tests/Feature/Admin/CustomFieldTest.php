@@ -92,5 +92,5 @@ test('delete custom field', function () {
             'success' => true,
         ]);
 
-    $this->assertDeleted($customField);
+    $this->assertModelMissing($customField);
 });

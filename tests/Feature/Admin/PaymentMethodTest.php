@@ -101,5 +101,5 @@ test('delete payment method', function () {
 
     $response->assertOk();
 
-    $this->assertDeleted($method);
+    $this->assertModelMissing($method);
 });

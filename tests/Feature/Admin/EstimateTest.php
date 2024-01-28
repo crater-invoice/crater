@@ -259,7 +259,7 @@ test('delete multiple estimates', function () {
         ]);
 
     foreach ($estimates as $estimate) {
-        $this->assertDeleted($estimate);
+        $this->assertModelMissing($estimate);
     }
 });
 

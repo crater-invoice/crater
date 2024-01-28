@@ -2,7 +2,7 @@
 
 namespace InvoiceShelf\Models;
 
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
 use InvoiceShelf\Jobs\GeneratePaymentPdfJob;
 use InvoiceShelf\Mail\SendPaymentMail;

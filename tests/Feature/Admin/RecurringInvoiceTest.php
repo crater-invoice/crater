@@ -111,7 +111,7 @@ test('delete multiple recurring invoice', function () {
         ]);
 
     foreach ($recurringInvoices as $recurringInvoice) {
-        $this->assertDeleted($recurringInvoice);
+        $this->assertModelMissing($recurringInvoice);
     }
 });
 

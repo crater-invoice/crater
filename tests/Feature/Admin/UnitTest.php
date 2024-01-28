@@ -97,5 +97,5 @@ test('delete unit', function () {
 
     $response->assertOk();
 
-    $this->assertDeleted($unit);
+    $this->assertModelMissing($unit);
 });

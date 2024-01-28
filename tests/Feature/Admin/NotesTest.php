@@ -62,5 +62,5 @@ test('delete note', function () {
             'success' => true,
         ]);
 
-    $this->assertDeleted($note);
+    $this->assertModelMissing($note);
 });

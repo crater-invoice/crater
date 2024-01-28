@@ -92,5 +92,5 @@ test('update user using a form request', function () {
 //     postJson("/api/v1/users/delete", $data)
 //         ->assertOk();
 
-//     $this->assertDeleted($user);
+//     $this->assertModelMissing($user);
 // });

@@ -242,7 +242,7 @@ test('delete multiple invoices', function () {
         ]);
 
     foreach ($invoices as $invoice) {
-        $this->assertDeleted($invoice);
+        $this->assertModelMissing($invoice);
     }
 });
 

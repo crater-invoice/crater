@@ -89,5 +89,5 @@ test('delete category', function () {
             'success' => true,
         ]);
 
-    $this->assertDeleted($category);
+    $this->assertModelMissing($category);
 });

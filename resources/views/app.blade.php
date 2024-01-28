@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="/modules/styles/{{ $name }}">
     @endforeach
 
-    @vite
+    @vite('resources/scripts/main.js')
 </head>
 
 <body

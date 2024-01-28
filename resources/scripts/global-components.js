@@ -1,7 +1,7 @@
 import { defineAsyncComponent } from 'vue'
 
 export const defineGlobalComponents = (app) => {
-  const components = import.meta.globEager('./components/base/*.vue')
+  const components = import.meta.glob('./components/base/*.vue', { eager: true })
 
   Object.entries(components).forEach(([path, definition]) => {
     // Get name of component, based on filename

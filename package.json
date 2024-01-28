@@ -57,7 +57,6 @@
     "vue-flatpickr-component": "^11.0.3",
     "vue-i18n": "^9.9.0",
     "vue-router": "^4.2.5",
-    "vue3-colorpicker": "^1.0.5",
     "vuedraggable": "^4.1.0"
   }
 }

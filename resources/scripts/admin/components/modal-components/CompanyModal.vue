@@ -16,7 +16,7 @@
         <BaseInputGrid layout="one-column">
           <BaseInputGroup
             :content-loading="isFetchingInitialData"
-            :label="$tc('settings.company_info.company_logo')"
+            :label="$t('settings.company_info.company_logo')"
           >
             <BaseContentPlaceholders v-if="isFetchingInitialData">
               <BaseContentPlaceholdersBox :rounded="true" class="w-full h-24" />
@@ -32,7 +32,7 @@
           </BaseInputGroup>
 
           <BaseInputGroup
-            :label="$tc('settings.company_info.company_name')"
+            :label="$t('settings.company_info.company_name')"
             :error="
               v$.newCompanyForm.name.$error &&
               v$.newCompanyForm.name.$errors[0].$message
@@ -50,7 +50,7 @@
 
           <BaseInputGroup
             :content-loading="isFetchingInitialData"
-            :label="$tc('settings.company_info.country')"
+            :label="$t('settings.company_info.country')"
             :error="
               v$.newCompanyForm.address.country_id.$error &&
               v$.newCompanyForm.address.country_id.$errors[0].$message
@@ -89,7 +89,7 @@
               value-prop="id"
               :searchable="true"
               track-by="name"
-              :placeholder="$tc('settings.currencies.select_currency')"
+              :placeholder="$t('settings.currencies.select_currency')"
               :invalid="v$.newCompanyForm.currency.$error"
               class="w-full"
             >

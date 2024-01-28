@@ -42,7 +42,7 @@
             py-1.5
           "
         >
-          {{ $tc('settings.roles.permission', 2) }}
+          {{ $t('settings.roles.permission', 2) }}
           <span class="text-sm text-red-500"> *</span>
         </h6>
         <div

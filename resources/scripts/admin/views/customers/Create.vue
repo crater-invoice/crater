@@ -6,7 +6,7 @@
           <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
 
           <BaseBreadcrumbItem
-            :title="$tc('customers.customer', 2)"
+            :title="$t('customers.customer', 2)"
             to="/admin/customers"
           />
 

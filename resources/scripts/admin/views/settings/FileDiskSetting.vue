@@ -2,7 +2,7 @@
   <FileDiskModal />
 
   <BaseSettingCard
-    :title="$tc('settings.disk.title', 1)"
+    :title="$t('settings.disk.title', 1)"
     :description="$t('settings.disk.description')"
   >
     <template #action>

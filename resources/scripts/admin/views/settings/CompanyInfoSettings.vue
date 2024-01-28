@@ -5,7 +5,7 @@
       :description="$t('settings.company_info.section_description')"
     >
       <BaseInputGrid class="mt-5">
-        <BaseInputGroup :label="$tc('settings.company_info.company_logo')">
+        <BaseInputGroup :label="$t('settings.company_info.company_logo')">
           <BaseFileUploader
             v-model="previewLogo"
             base64
@@ -17,7 +17,7 @@
 
       <BaseInputGrid class="mt-5">
         <BaseInputGroup
-          :label="$tc('settings.company_info.company_name')"
+          :label="$t('settings.company_info.company_name')"
           :error="v$.name.$error && v$.name.$errors[0].$message"
           required
         >
@@ -28,12 +28,12 @@
           />
         </BaseInputGroup>
 
-        <BaseInputGroup :label="$tc('settings.company_info.phone')">
+        <BaseInputGroup :label="$t('settings.company_info.phone')">
           <BaseInput v-model="companyForm.address.phone" />
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.company_info.country')"
+          :label="$t('settings.company_info.country')"
           :error="
             v$.address.country_id.$error &&
             v$.address.country_id.$errors[0].$message
@@ -53,7 +53,7 @@
           />
         </BaseInputGroup>
 
-        <BaseInputGroup :label="$tc('settings.company_info.state')">
+        <BaseInputGroup :label="$t('settings.company_info.state')">
           <BaseInput
             v-model="companyForm.address.state"
             name="state"
@@ -61,16 +61,16 @@
           />
         </BaseInputGroup>
 
-        <BaseInputGroup :label="$tc('settings.company_info.city')">
+        <BaseInputGroup :label="$t('settings.company_info.city')">
           <BaseInput v-model="companyForm.address.city" type="text" />
         </BaseInputGroup>
 
-        <BaseInputGroup :label="$tc('settings.company_info.zip')">
+        <BaseInputGroup :label="$t('settings.company_info.zip')">
           <BaseInput v-model="companyForm.address.zip" />
         </BaseInputGroup>
 
         <div>
-          <BaseInputGroup :label="$tc('settings.company_info.address')">
+          <BaseInputGroup :label="$t('settings.company_info.address')">
             <BaseTextarea
               v-model="companyForm.address.address_street_1"
               rows="2"
@@ -95,17 +95,17 @@
         <template #left="slotProps">
           <BaseIcon v-if="!isSaving" :class="slotProps.class" name="SaveIcon" />
         </template>
-        {{ $tc('settings.company_info.save') }}
+        {{ $t('settings.company_info.save') }}
       </BaseButton>
 
       <div v-if="companyStore.companies.length !== 1" class="py-5">
         <BaseDivider class="my-4" />
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-          {{ $tc('settings.company_info.delete_company') }}
+          {{ $t('settings.company_info.delete_company') }}
         </h3>
         <div class="mt-2 max-w-xl text-sm text-gray-500">
           <p>
-            {{ $tc('settings.company_info.delete_company_description') }}
+            {{ $t('settings.company_info.delete_company_description') }}
           </p>
         </div>
         <div class="mt-5">
@@ -131,7 +131,7 @@
             "
             @click="removeCompany"
           >
-            {{ $tc('general.delete') }}
+            {{ $t('general.delete') }}
           </button>
         </div>
       </div>

@@ -39,6 +39,7 @@ export default class InvoiceShelf {
     app.provide('$utils', utils)
 
     const i18n = createI18n({
+      legacy: false,
       locale: 'en',
       fallbackLocale: 'en',
       globalInjection: true,

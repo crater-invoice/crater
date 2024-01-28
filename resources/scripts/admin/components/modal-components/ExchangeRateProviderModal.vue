@@ -20,7 +20,7 @@
       <div class="px-4 md:px-8 py-8 overflow-y-auto sm:p-6">
         <BaseInputGrid layout="one-column">
           <BaseInputGroup
-            :label="$tc('settings.exchange_rate.driver')"
+            :label="$t('settings.exchange_rate.driver')"
             :content-loading="isFetchingInitialData"
             required
             :error="

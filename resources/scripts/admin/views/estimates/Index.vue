@@ -7,7 +7,7 @@
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
 
         <BaseBreadcrumbItem
-          :title="$tc('estimates.estimate', 2)"
+          :title="$t('estimates.estimate', 2)"
           to="#"
           active
         />
@@ -49,7 +49,7 @@
       :row-on-xl="true"
       @clear="clearFilter"
     >
-      <BaseInputGroup :label="$tc('customers.customer', 1)">
+      <BaseInputGroup :label="$t('customers.customer', 1)">
         <BaseCustomerSelectInput
           v-model="filters.customer_id"
           :placeholder="$t('customers.type_or_click')"

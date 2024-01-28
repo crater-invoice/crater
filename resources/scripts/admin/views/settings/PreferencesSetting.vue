@@ -7,7 +7,7 @@
       <BaseInputGrid class="mt-5">
         <BaseInputGroup
           :content-loading="isFetchingInitialData"
-          :label="$tc('settings.preferences.currency')"
+          :label="$t('settings.preferences.currency')"
           :help-text="$t('settings.preferences.company_currency_unchangeable')"
           :error="v$.currency.$error && v$.currency.$errors[0].$message"
           required
@@ -28,7 +28,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.preferences.default_language')"
+          :label="$t('settings.preferences.default_language')"
           :content-loading="isFetchingInitialData"
           :error="v$.language.$error && v$.language.$errors[0].$message"
           required
@@ -47,7 +47,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.preferences.time_zone')"
+          :label="$t('settings.preferences.time_zone')"
           :content-loading="isFetchingInitialData"
           :error="v$.time_zone.$error && v$.time_zone.$errors[0].$message"
           required
@@ -65,7 +65,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.preferences.date_format')"
+          :label="$t('settings.preferences.date_format')"
           :content-loading="isFetchingInitialData"
           :error="
             v$.carbon_date_format.$error &&
@@ -89,7 +89,7 @@
         <BaseInputGroup
           :content-loading="isFetchingInitialData"
           :error="v$.fiscal_year.$error && v$.fiscal_year.$errors[0].$message"
-          :label="$tc('settings.preferences.fiscal_year')"
+          :label="$t('settings.preferences.fiscal_year')"
           required
         >
           <BaseMultiselect
@@ -116,7 +116,7 @@
         <template #left="slotProps">
           <BaseIcon name="SaveIcon" :class="slotProps.class" />
         </template>
-        {{ $tc('settings.company_info.save') }}
+        {{ $t('settings.company_info.save') }}
       </BaseButton>
 
       <BaseDivider class="mt-6 mb-2" />
@@ -156,7 +156,7 @@
             <template #left="slotProps">
               <BaseIcon name="SaveIcon" :class="slotProps.class" />
             </template>
-            {{ $tc('general.save') }}
+            {{ $t('general.save') }}
           </BaseButton>
         </form>
 

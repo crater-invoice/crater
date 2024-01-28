@@ -20,7 +20,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.disk.driver')"
+          :label="$t('settings.disk.driver')"
           :error="
             v$.s3DiskConfigData.selected_driver.$error &&
             v$.s3DiskConfigData.selected_driver.$errors[0].$message

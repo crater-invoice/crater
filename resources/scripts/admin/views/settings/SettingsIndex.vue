@@ -1,10 +1,10 @@
 <template>
   <BasePage>
-    <BasePageHeader :title="$tc('settings.setting', 1)" class="mb-6">
+    <BasePageHeader :title="$t('settings.setting', 1)" class="mb-6">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="/admin/dashboard" />
         <BaseBreadcrumbItem
-          :title="$tc('settings.setting', 2)"
+          :title="$t('settings.setting', 2)"
           to="/admin/settings/account-settings"
           active
         />

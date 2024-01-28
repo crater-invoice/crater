@@ -7,7 +7,7 @@
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
 
         <BaseBreadcrumbItem
-          :title="$tc('recurring_invoices.invoice', 2)"
+          :title="$t('recurring_invoices.invoice', 2)"
           to="#"
           active
         />
@@ -45,7 +45,7 @@
     </BasePageHeader>
 
     <BaseFilterWrapper v-show="showFilters" @clear="clearFilter">
-      <BaseInputGroup :label="$tc('customers.customer', 1)">
+      <BaseInputGroup :label="$t('customers.customer', 1)">
         <BaseCustomerSelectInput
           v-model="filters.customer_id"
           :placeholder="$t('customers.type_or_click')"

@@ -28,7 +28,7 @@
             <BaseContentPlaceholdersText :lines="1" class="w-16 h-5" />
           </BaseContentPlaceholders>
           <span v-else class="pl-7">
-            {{ $tc('items.item', 2) }}
+            {{ $t('items.item', 2) }}
           </span>
         </th>
         <th

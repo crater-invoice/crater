@@ -7,7 +7,7 @@
           :title="$t('general.home')"
           :to="`/${globalStore.companySlug}/customer/dashboard`"
         />
-        <BaseBreadcrumbItem :title="$tc('invoices.invoice', 2)" to="#" active />
+        <BaseBreadcrumbItem :title="$t('invoices.invoice', 2)" to="#" active />
       </BaseBreadcrumb>
       <template #actions>
         <BaseButton

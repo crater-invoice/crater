@@ -4,7 +4,7 @@
     <BasePageHeader :title="$t('invoices.title')">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
-        <BaseBreadcrumbItem :title="$tc('invoices.invoice', 2)" to="#" active />
+        <BaseBreadcrumbItem :title="$t('invoices.invoice', 2)" to="#" active />
       </BaseBreadcrumb>
 
       <template #actions>
@@ -43,7 +43,7 @@
       :row-on-xl="true"
       @clear="clearFilter"
     >
-      <BaseInputGroup :label="$tc('customers.customer', 1)">
+      <BaseInputGroup :label="$t('customers.customer', 1)">
         <BaseCustomerSelectInput
           v-model="filters.customer_id"
           :placeholder="$t('customers.type_or_click')"

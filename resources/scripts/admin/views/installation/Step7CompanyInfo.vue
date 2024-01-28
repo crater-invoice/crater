@@ -6,7 +6,7 @@
   >
     <form action="" @submit.prevent="next">
       <div class="grid grid-cols-1 mb-4 md:grid-cols-2 md:mb-6">
-        <BaseInputGroup :label="$tc('settings.company_info.company_logo')">
+        <BaseInputGroup :label="$t('settings.company_info.company_logo')">
           <BaseFileUploader
             base64
             :preview-image="previewLogo"

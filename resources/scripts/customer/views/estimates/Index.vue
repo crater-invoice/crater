@@ -8,7 +8,7 @@
           :to="`/${globalStore.companySlug}/customer/dashboard`"
         />
         <BaseBreadcrumbItem
-          :title="$tc('estimates.estimate', 2)"
+          :title="$t('estimates.estimate', 2)"
           to="#"
           active
         />

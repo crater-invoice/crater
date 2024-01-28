@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col items-center justify-between w-full pt-10">
 
+    <img
+      id="logo-invoiceshelf"
+      :src="getTickImage()"
+      alt="InvoiceShelf Logo"
+      class="h-12 mb-5 md:mb-10"
+    />
 
     <BaseWizard
       :steps="7"
@@ -94,12 +100,18 @@ export default {
 
     function onNavClick(e) {}
 
+    function getTickImage() {
+      const imgUrl = new URL('$images/logo.png', import.meta.url)
+      return imgUrl
+    }
+
     return {
       stepComponent,
       currentStepNumber,
       onStepChange,
       saveStepProgress,
       onNavClick,
+      getTickImage
     }
   },
 }

@@ -124,7 +124,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('ping', function () {
     return response()->json([
-        'success' => 'crater-self-hosted',
+        'success' => 'invoiceshelf-self-hosted',
     ]);
 })->name('ping');
 

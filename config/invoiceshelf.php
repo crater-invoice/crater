@@ -46,7 +46,7 @@ return [
     /*
     * Marketplace url.
     */
-    'base_url' => 'https://craterapp.com',
+    'base_url' => 'https://invoiceshelf.com',
 
     /*
     * List of languages supported by Crater.

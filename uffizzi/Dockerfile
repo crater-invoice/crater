@@ -27,9 +27,9 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u 1000 -d /home/crater-user crater-user
-RUN mkdir -p /home/crater-user/.composer && \
-    chown -R crater-user:crater-user /home/crater-user
+RUN useradd -G www-data,root -u 1000 -d /home/invoiceshelf-user invoiceshelf-user
+RUN mkdir -p /home/invoiceshelf-user/.composer && \
+    chown -R invoiceshelf-user:invoiceshelf-user /home/invoiceshelf-user
 
 # Mounted volumes
 COPY ./ /var/www
@@ -39,10 +39,10 @@ COPY ./uffizzi/.env.example /var/www/.env
 # Set working directory
 WORKDIR /var/www
 
-RUN chown -R crater-user:crater-user ./
-RUN chmod -R 775 composer.json composer.lock \ 
+RUN chown -R invoiceshelf-user:invoiceshelf-user ./
+RUN chmod -R 775 composer.json composer.lock \
         composer.lock storage/framework/ \
-        storage/logs/ bootstrap/cache/ /home/crater-user/.composer
+        storage/logs/ bootstrap/cache/ /home/invoiceshelf-user/.composer
 RUN chown -R $(whoami):$(whoami) /var/log/
 RUN chmod -R 775 /var/log
 
@@ -52,13 +52,13 @@ RUN npm config set user 0
 RUN npm config set unsafe-perm true
 # Frontend bulding
 RUN sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' /var/www/.env
-RUN sed -i 's/DB_DATABASE=crater/DB_DATABASE=\/tmp\/crater.sqlite/g' /var/www/.env
-RUN touch /tmp/crater.sqlite
+RUN sed -i 's/DB_DATABASE=invoiceshelf/DB_DATABASE=\/tmp\/invoiceshelf.sqlite/g' /var/www/.env
+RUN touch /tmp/invoiceshelf.sqlite
 RUN composer install --no-interaction --prefer-dist
 RUN npm i -f
 RUN npm install --save-dev sass
 RUN export NODE_OPTIONS="--max-old-space-size=4096" && /usr/bin/npx vite build --target=es2020
 RUN sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g' /var/www/.env
-RUN sed -i 's/DB_DATABASE=\/tmp\/crater.sqlite/DB_DATABASE=crater/g' /var/www/.env
+RUN sed -i 's/DB_DATABASE=\/tmp\/invoiceshelf.sqlite/DB_DATABASE=invoiceshelf/g' /var/www/.env
 
-USER crater-user
+USER invoiceshelf-user

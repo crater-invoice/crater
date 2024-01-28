@@ -1727,7 +1727,7 @@
             ],
             "description": "Crater Module Management Package",
             "keywords": [
-                "crater",
+                "invoiceshelf",
                 "laravel",
                 "module",
                 "modules",

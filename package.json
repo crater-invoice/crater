@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.17",
-    "@heroicons/vue": "^2.1.1",
+    "@heroicons/vue": "^1.0.6",
     "@popperjs/core": "^2.11.8",
     "@stripe/stripe-js": "^2.4.0",
     "@tiptap/core": "^2.1.16",

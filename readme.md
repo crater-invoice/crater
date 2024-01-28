@@ -13,7 +13,7 @@ The Web Application is made using Laravel & VueJS while the Mobile Apps are buil
 1. [Documentation](#documentation)
 2. [Download](#download)
 3. [Mobile Apps](#mobile-apps)
-4. [Discord](#discord)
+4. [Discord - **NEW**](#discord) 🔥
 5. [Roadmap](#roadmap)
 6. [Credits](#credits)
 7. [Help us translate](#translate)

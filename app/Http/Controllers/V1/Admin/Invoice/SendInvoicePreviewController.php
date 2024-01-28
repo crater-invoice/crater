@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Invoice;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Invoice;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\SendInvoiceRequest;
-use Crater\Models\Invoice;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\SendInvoiceRequest;
+use InvoiceShelf\Models\Invoice;
 use Illuminate\Mail\Markdown;
 
 class SendInvoicePreviewController extends Controller

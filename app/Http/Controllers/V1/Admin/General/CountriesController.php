@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\CountryResource;
-use Crater\Models\Country;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\CountryResource;
+use InvoiceShelf\Models\Country;
 use Illuminate\Http\Request;
 
 class CountriesController extends Controller

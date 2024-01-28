@@ -3,7 +3,7 @@
     <BasePageHeader :title="$t('items.title')">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
-        <BaseBreadcrumbItem :title="$tc('items.item', 2)" to="#" active />
+        <BaseBreadcrumbItem :title="$t('items.item', 2)" to="#" active />
       </BaseBreadcrumb>
 
       <template #actions>
@@ -38,7 +38,7 @@
     </BasePageHeader>
 
     <BaseFilterWrapper :show="showFilters" class="mt-5" @clear="clearFilter">
-      <BaseInputGroup :label="$tc('items.name')" class="text-left">
+      <BaseInputGroup :label="$t('items.name')" class="text-left">
         <BaseInput
           v-model="filters.name"
           type="text"
@@ -47,7 +47,7 @@
         />
       </BaseInputGroup>
 
-      <BaseInputGroup :label="$tc('items.unit')" class="text-left">
+      <BaseInputGroup :label="$t('items.unit')" class="text-left">
         <BaseMultiselect
           v-model="filters.unit_id"
           :placeholder="$t('items.select_a_unit')"
@@ -63,7 +63,7 @@
         />
       </BaseInputGroup>
 
-      <BaseInputGroup class="text-left" :label="$tc('items.price')">
+      <BaseInputGroup class="text-left" :label="$t('items.price')">
         <BaseMoney v-model="filters.price" />
       </BaseInputGroup>
     </BaseFilterWrapper>

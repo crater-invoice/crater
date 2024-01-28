@@ -1,12 +1,12 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Expense;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Expense;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DeleteExpensesRequest;
-use Crater\Http\Requests\ExpenseRequest;
-use Crater\Http\Resources\ExpenseResource;
-use Crater\Models\Expense;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DeleteExpensesRequest;
+use InvoiceShelf\Http\Requests\ExpenseRequest;
+use InvoiceShelf\Http\Resources\ExpenseResource;
+use InvoiceShelf\Models\Expense;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -39,7 +39,7 @@ class ExpensesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Crater\Http\Requests\ExpenseRequest $request
+     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ExpenseRequest $request)
@@ -54,7 +54,7 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\Expense $expense
+     * @param  \InvoiceShelf\Models\Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Expense $expense)
@@ -67,8 +67,8 @@ class ExpensesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Crater\Http\Requests\ExpenseRequest $request
-     * @param  \Crater\Models\Expense $expense
+     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
+     * @param  \InvoiceShelf\Models\Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(ExpenseRequest $request, Expense $expense)

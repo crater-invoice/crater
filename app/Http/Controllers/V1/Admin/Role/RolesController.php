@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Role;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Role;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\RoleRequest;
-use Crater\Http\Resources\RoleResource;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\RoleRequest;
+use InvoiceShelf\Http\Resources\RoleResource;
+use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 use Silber\Bouncer\Database\Role;

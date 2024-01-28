@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\Payment;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\Payment;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\Customer\PaymentResource;
-use Crater\Models\Company;
-use Crater\Models\Payment;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\Customer\PaymentResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,7 +42,7 @@ class PaymentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\Payment  $payment
+     * @param  \InvoiceShelf\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
     public function show(Company $company, $id)

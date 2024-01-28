@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Rules\Backup;
+namespace InvoiceShelf\Rules\Backup;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;

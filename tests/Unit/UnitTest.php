@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\Unit;
-use Crater\Models\User;
+use InvoiceShelf\Models\Unit;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Crater\Traits;
+namespace InvoiceShelf\Traits;
 
-use Crater\Models\CustomField;
+use InvoiceShelf\Models\CustomField;
 
 trait HasCustomFieldsTrait
 {
     public function fields()
     {
-        return $this->morphMany('Crater\Models\CustomFieldValue', 'custom_field_valuable');
+        return $this->morphMany('InvoiceShelf\Models\CustomFieldValue', 'custom_field_valuable');
     }
 
     protected static function booted()

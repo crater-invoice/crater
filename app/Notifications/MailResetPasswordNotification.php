@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Notifications;
+namespace InvoiceShelf\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Bus\Queueable;

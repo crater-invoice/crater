@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Company;
+use InvoiceShelf\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Str;
 

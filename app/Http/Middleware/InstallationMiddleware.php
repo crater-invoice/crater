@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Middleware;
+namespace InvoiceShelf\Http\Middleware;
 
 use Closure;
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 
 class InstallationMiddleware
 {

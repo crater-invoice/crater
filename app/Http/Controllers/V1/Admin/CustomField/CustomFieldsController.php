@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\CustomField;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\CustomField;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\CustomFieldRequest;
-use Crater\Http\Resources\CustomFieldResource;
-use Crater\Models\CustomField;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\CustomFieldRequest;
+use InvoiceShelf\Http\Resources\CustomFieldResource;
+use InvoiceShelf\Models\CustomField;
 use Illuminate\Http\Request;
 
 class CustomFieldsController extends Controller

@@ -74,7 +74,7 @@
           :src="
             data.author_avatar
               ? data.author_avatar
-              : 'http://localhost:3000/img/default-avatar.jpg'
+              : 'http://localhost:3000$images/default-avatar.jpg'
           "
           alt=""
         />

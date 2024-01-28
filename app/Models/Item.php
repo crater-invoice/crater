@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,7 +33,7 @@ class Item extends Model
 
     public function creator()
     {
-        return $this->belongsTo('Crater\Models\User', 'creator_id');
+        return $this->belongsTo('InvoiceShelf\Models\User', 'creator_id');
     }
 
     public function currency()

@@ -15,7 +15,7 @@
 
       <div class="grid gap-6 sm:grid-col-1 md:grid-cols-2 mt-6">
         <BaseInputGroup
-          :label="$tc('settings.account_settings.profile_picture')"
+          :label="$t('settings.account_settings.profile_picture')"
         >
           <BaseFileUploader
             v-model="imgFiles"
@@ -30,7 +30,7 @@
         <span></span>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.name')"
+          :label="$t('settings.account_settings.name')"
           :error="
             v$.userForm.name.$error && v$.userForm.name.$errors[0].$message
           "
@@ -44,7 +44,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.email')"
+          :label="$t('settings.account_settings.email')"
           :error="
             v$.userForm.email.$error && v$.userForm.email.$errors[0].$message
           "
@@ -62,7 +62,7 @@
             v$.userForm.password.$error &&
             v$.userForm.password.$errors[0].$message
           "
-          :label="$tc('settings.account_settings.password')"
+          :label="$t('settings.account_settings.password')"
         >
           <BaseInput
             v-model="userStore.userForm.password"
@@ -87,7 +87,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.confirm_password')"
+          :label="$t('settings.account_settings.confirm_password')"
           :error="
             v$.userForm.confirm_password.$error &&
             v$.userForm.confirm_password.$errors[0].$message

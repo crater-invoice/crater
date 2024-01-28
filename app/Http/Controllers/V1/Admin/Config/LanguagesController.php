@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Config;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Config;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LanguagesController extends Controller
@@ -16,7 +16,7 @@ class LanguagesController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'languages' => config('crater.languages'),
+            'languages' => config('invoiceshelf.languages'),
         ]);
     }
 }

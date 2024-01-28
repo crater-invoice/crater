@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Resources;
+namespace InvoiceShelf\Http\Resources;
 
-use Crater\Models\Module as ModelsModule;
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Module as ModelsModule;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Nwidart\Modules\Facades\Module;
 
@@ -108,7 +108,7 @@ class ModuleResource extends JsonResource
             return false;
         }
 
-        if (version_compare(Setting::getSetting('version'), $this->latest_module_version->crater_version, '<')) {
+        if (version_compare(Setting::getSetting('version'), $this->latest_module_version->invoiceshelf_version, '<')) {
             return false;
         }
 

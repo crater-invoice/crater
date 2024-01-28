@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
 use Illuminate\Support\Str;
 use PDO;
@@ -129,7 +129,7 @@ class RequirementsChecker
 
         $isMariaDb = Str::contains($version_info, 'MariaDB');
 
-        $minVersionMysql = $isMariaDb ? config('crater.min_mariadb_version') : config('crater.min_mysql_version');
+        $minVersionMysql = $isMariaDb ? config('invoiceshelf.min_mariadb_version') : config('invoiceshelf.min_mysql_version');
 
         $currentMysqlVersion = $this->getMysqlVersionInfo($conn);
 

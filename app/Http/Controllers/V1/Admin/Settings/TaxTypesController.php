@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\TaxTypeRequest;
-use Crater\Http\Resources\TaxTypeResource;
-use Crater\Models\TaxType;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\TaxTypeRequest;
+use InvoiceShelf\Http\Resources\TaxTypeResource;
+use InvoiceShelf\Models\TaxType;
 use Illuminate\Http\Request;
 
 class TaxTypesController extends Controller
@@ -48,7 +48,7 @@ class TaxTypesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\TaxType  $taxType
+     * @param  \InvoiceShelf\Models\TaxType  $taxType
      * @return \Illuminate\Http\Response
      */
     public function show(TaxType $taxType)
@@ -62,7 +62,7 @@ class TaxTypesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Crater\Models\TaxType  $taxType
+     * @param  \InvoiceShelf\Models\TaxType  $taxType
      * @return \Illuminate\Http\Response
      */
     public function update(TaxTypeRequest $request, TaxType $taxType)
@@ -77,7 +77,7 @@ class TaxTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\Models\TaxType  $taxType
+     * @param  \InvoiceShelf\Models\TaxType  $taxType
      * @return \Illuminate\Http\Response
      */
     public function destroy(TaxType $taxType)

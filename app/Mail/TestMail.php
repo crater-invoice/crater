@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Mail;
+namespace InvoiceShelf\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

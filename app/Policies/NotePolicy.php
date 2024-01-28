@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Policies;
+namespace InvoiceShelf\Policies;
 
-use Crater\Models\Note;
-use Crater\Models\User;
+use InvoiceShelf\Models\Note;
+use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\BouncerFacade;
 

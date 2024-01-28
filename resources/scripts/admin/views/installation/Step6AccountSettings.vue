@@ -6,7 +6,7 @@
     <form action="" @submit.prevent="next">
       <div class="grid grid-cols-1 mb-4 md:grid-cols-2 md:mb-6">
         <BaseInputGroup
-          :label="$tc('settings.account_settings.profile_picture')"
+          :label="$t('settings.account_settings.profile_picture')"
         >
           <BaseFileUploader
             :avatar="true"

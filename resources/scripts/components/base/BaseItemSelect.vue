@@ -72,7 +72,7 @@
       />
       <div v-if="invalidDescription">
         <span class="text-red-600">
-          {{ $tc('validation.description_maxlength') }}
+          {{ $t('validation.description_maxlength') }}
         </span>
       </div>
     </div>

@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Policies;
+namespace InvoiceShelf\Policies;
 
-use Crater\Models\ExchangeRateProvider;
-use Crater\Models\User;
+use InvoiceShelf\Models\ExchangeRateProvider;
+use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\BouncerFacade;
 
@@ -14,7 +14,7 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
@@ -29,8 +29,8 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\ExchangeRateProvider  $exchangeRateProvider
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -45,7 +45,7 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
@@ -60,8 +60,8 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\ExchangeRateProvider  $exchangeRateProvider
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -76,8 +76,8 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\ExchangeRateProvider  $exchangeRateProvider
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -92,8 +92,8 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\ExchangeRateProvider  $exchangeRateProvider
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -104,8 +104,8 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Crater\Models\User  $user
-     * @param  \Crater\Models\ExchangeRateProvider  $exchangeRateProvider
+     * @param  \InvoiceShelf\Models\User  $user
+     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, ExchangeRateProvider $exchangeRateProvider)

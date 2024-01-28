@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Space\TimeZones;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Space\TimeZones;
 use Illuminate\Http\Request;
 
 class TimezonesController extends Controller

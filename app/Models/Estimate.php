@@ -1,14 +1,15 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use App;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
-use Crater\Mail\SendEstimateMail;
-use Crater\Services\SerialNumberFormatter;
-use Crater\Traits\GeneratesPdfTrait;
-use Crater\Traits\HasCustomFieldsTrait;
+use Illuminate\Support\Facades\Vite;
+use InvoiceShelf\Mail\SendEstimateMail;
+use InvoiceShelf\Services\SerialNumberFormatter;
+use InvoiceShelf\Traits\GeneratesPdfTrait;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -68,7 +69,7 @@ class Estimate extends Model implements HasMedia
 
     public function items()
     {
-        return $this->hasMany('Crater\Models\EstimateItem');
+        return $this->hasMany('InvoiceShelf\Models\EstimateItem');
     }
 
     public function customer()
@@ -78,12 +79,12 @@ class Estimate extends Model implements HasMedia
 
     public function creator()
     {
-        return $this->belongsTo('Crater\Models\User', 'creator_id');
+        return $this->belongsTo('InvoiceShelf\Models\User', 'creator_id');
     }
 
     public function company()
     {
-        return $this->belongsTo('Crater\Models\Company');
+        return $this->belongsTo('InvoiceShelf\Models\Company');
     }
 
     public function currency()
@@ -495,7 +496,7 @@ class Estimate extends Model implements HasMedia
         foreach ($templates as $key => $template) {
             $templateName = Str::before(basename($template), '.blade.php');
             $estimateTemplates[$key]['name'] = $templateName;
-            $estimateTemplates[$key]['path'] = vite_asset('/img/PDF/'.$templateName.'.png');
+            $estimateTemplates[$key]['path'] = Vite::asset('resources/static/img/PDF/'.$templateName.'.png');
         }
 
         return $estimateTemplates;

@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Crater\Models\EmailLog;
-use Crater\Models\Estimate;
-use Crater\Models\Invoice;
-use Crater\Models\Payment;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmailLogFactory extends Factory

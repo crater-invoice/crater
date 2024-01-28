@@ -690,7 +690,7 @@
     "no_reviews_found": "Il n'y a pas encore d'avis pour ce module !",
     "module_not_purchased": "Module non acheté",
     "module_not_found": "Module non trouvé",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Mis à jour le",
     "connect_installation": "Connectez votre installation",
     "api_token_description": "Rendez-vous à {url} et connectez votre application en entrant le jeton d'API. Vos modules achetés apparaîtront ici une fois la connexion établie.",
@@ -1182,7 +1182,7 @@
       "expire_setting_description": "Spécifiez si vous souhaitez faire expirer tous les liens publiques envoyés par l'application pour consulter les factures, devis, paiements,... après une durée spécifique.",
       "save": "Enregistrer",
       "preference": "Préférence | Préférences",
-      "general_settings": "Modifiez ici les paramètres globaux de Crater.",
+      "general_settings": "Modifiez ici les paramètres globaux de InvoiceShelf.",
       "updated_message": "Préférences mises à jour",
       "select_language": "Choisir la langue",
       "select_time_zone": "Sélectionnez le fuseau horaire",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Mise à jour",
-      "description": "Mettez simplement Crater à jour en cliquant sur le bouton ci-dessous.",
+      "description": "Mettez simplement InvoiceShelf à jour en cliquant sur le bouton ci-dessous.",
       "check_update": "Rechercher des mises à jour",
       "avail_update": "Nouvelle mise à jour disponible",
       "next_version": "Version suivante",
@@ -1221,7 +1221,7 @@
     },
     "backup": {
       "title": "Sauvegarde | Sauvegardes",
-      "description": "Gérez ici vos sauvegardes. Crater créée un fichiez ZIP contenant vos fichiers et un export de la base de données.",
+      "description": "Gérez ici vos sauvegardes. InvoiceShelf créée un fichiez ZIP contenant vos fichiers et un export de la base de données.",
       "new_backup": "Faire une sauvegarde",
       "create_backup": "Créer une sauvegarde",
       "select_backup_type": "Type de sauvegarde",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Stockage | Stockages",
-      "description": "Crater utilise par défaut votre disque local pour stocker les sauvegardes, les avatar et d'autres fichiers image. Vous pouvez configurer d'autres comptes de stockage, comme DigitalOcean, S3 et Dropbox.",
+      "description": "InvoiceShelf utilise par défaut votre disque local pour stocker les sauvegardes, les avatar et d'autres fichiers image. Vous pouvez configurer d'autres comptes de stockage, comme DigitalOcean, S3 et Dropbox.",
       "created_at": "créé à",
       "dropbox": "dropbox",
       "name": "Nom",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": "Activez cette option si vous souhaitez enregistrer automatiquement une copie de chaque facture, devis et reçu de paiement PDF sur votre disque par défaut. L'activation de cette option réduira le temps de chargement lors de l'affichage des PDF.",
       "select_disk": "Emplacement",
       "disk_settings": "Paramètres de stockage",
-      "confirm_delete": "Vos fichiers et dossiers existants sur le disque spécifié ne seront pas affectés, mais la configuration de votre disque sera supprimée de Crater",
+      "confirm_delete": "Vos fichiers et dossiers existants sur le disque spécifié ne seront pas affectés, mais la configuration de votre disque sera supprimée de InvoiceShelf",
       "action": "Action",
       "edit_file_disk": "Modifier cet espace de stockage",
       "success_create": "Stockage ajouté",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Vérification du domaine",
-      "desc": "Crater utilise l'authentification basée sur la session qui nécessite une vérification du domaine pour des raisons de sécurité. Veuillez saisir le domaine sur lequel vous allez accéder à votre application web.",
+      "desc": "InvoiceShelf utilise l'authentification basée sur la session qui nécessite une vérification du domaine pour des raisons de sécurité. Veuillez saisir le domaine sur lequel vous allez accéder à votre application web.",
       "app_domain": "Domaine de l'application",
       "verify_now": "Vérifier maintenant",
       "success": "Vérification du domaine réussie.",
@@ -1397,7 +1397,7 @@
       "system_req": "Configuration requise",
       "php_req_version": "Php (version {version} nécessaire)",
       "check_req": "Vérifier les prérequis",
-      "system_req_desc": "Crater a quelques prérequis. Assurez-vous que votre serveur dispose de la version Php requise et de toutes les extensions mentionnées ci-dessous."
+      "system_req_desc": "InvoiceShelf a quelques prérequis. Assurez-vous que votre serveur dispose de la version Php requise et de toutes les extensions mentionnées ci-dessous."
     },
     "errors": {
       "migrate_failed": "Échec de la migration",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Numéro de téléphone invalide",
-    "invalid_url": "URL invalide (ex: http://www.crater.com)",
-    "invalid_domain_url": "URL invalide (ex: crater.com)",
+    "invalid_url": "URL invalide (ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "URL invalide (ex: invoiceshelf.com)",
     "required": "Champ requis",
     "email_incorrect": "Adresse Email incorrecte.",
     "email_already_taken": "Un compte est déjà associé à cette adresse email.",

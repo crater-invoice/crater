@@ -20,7 +20,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.disk.driver')"
+          :label="$t('settings.disk.driver')"
           :error="
             v$.doSpaceDiskConfig.selected_driver.$error &&
             v$.doSpaceDiskConfig.selected_driver.$errors[0].$message

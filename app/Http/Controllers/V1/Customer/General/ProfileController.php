@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\General;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\Customer\CustomerProfileRequest;
-use Crater\Http\Resources\Customer\CustomerResource;
-use Crater\Models\Company;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\Customer\CustomerProfileRequest;
+use InvoiceShelf\Http\Resources\Customer\CustomerResource;
+use InvoiceShelf\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

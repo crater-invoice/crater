@@ -1,17 +1,17 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Modules;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Modules;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\UploadModuleRequest;
-use Crater\Space\ModuleInstaller;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\UploadModuleRequest;
+use InvoiceShelf\Space\ModuleInstaller;
 
 class UploadModuleController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Crater\Http\Requests\UploadModuleRequest  $request
+     * @param  \InvoiceShelf\Http\Requests\UploadModuleRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(UploadModuleRequest $request)

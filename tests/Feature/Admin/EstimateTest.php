@@ -1,15 +1,15 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Estimate\EstimatesController;
-use Crater\Http\Controllers\V1\Admin\Estimate\SendEstimateController;
-use Crater\Http\Requests\DeleteEstimatesRequest;
-use Crater\Http\Requests\EstimatesRequest;
-use Crater\Http\Requests\SendEstimatesRequest;
-use Crater\Mail\SendEstimateMail;
-use Crater\Models\Estimate;
-use Crater\Models\EstimateItem;
-use Crater\Models\Tax;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Estimate\EstimatesController;
+use InvoiceShelf\Http\Controllers\V1\Admin\Estimate\SendEstimateController;
+use InvoiceShelf\Http\Requests\DeleteEstimatesRequest;
+use InvoiceShelf\Http\Requests\EstimatesRequest;
+use InvoiceShelf\Http\Requests\SendEstimatesRequest;
+use InvoiceShelf\Mail\SendEstimateMail;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\EstimateItem;
+use InvoiceShelf\Models\Tax;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
@@ -259,7 +259,7 @@ test('delete multiple estimates', function () {
         ]);
 
     foreach ($estimates as $estimate) {
-        $this->assertDeleted($estimate);
+        $this->assertModelMissing($estimate);
     }
 });
 

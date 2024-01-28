@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Crater\Models\Unit;
-use Crater\Models\User;
+use InvoiceShelf\Models\Unit;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UnitFactory extends Factory

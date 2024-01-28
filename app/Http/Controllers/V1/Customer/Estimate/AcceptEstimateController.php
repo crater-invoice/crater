@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\Estimate;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\Estimate;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\Customer\EstimateResource;
-use Crater\Models\Company;
-use Crater\Models\Estimate;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\Customer\EstimateResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Estimate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

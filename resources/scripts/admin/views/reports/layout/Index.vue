@@ -1,10 +1,10 @@
 <template>
   <BasePage>
-    <BasePageHeader :title="$tc('reports.report', 2)">
+    <BasePageHeader :title="$t('reports.report', 2)">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="/admin/dashboard" />
         <BaseBreadcrumbItem
-          :title="$tc('reports.report', 2)"
+          :title="$t('reports.report', 2)"
           to="/admin/reports"
           active
         />

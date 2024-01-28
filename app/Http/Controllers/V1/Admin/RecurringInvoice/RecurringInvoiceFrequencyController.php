@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\RecurringInvoice;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\RecurringInvoice;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\RecurringInvoice;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Http\Request;
 
 class RecurringInvoiceFrequencyController extends Controller

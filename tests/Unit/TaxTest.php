@@ -1,10 +1,10 @@
 <?php
 
-use Crater\Models\Estimate;
-use Crater\Models\EstimateItem;
-use Crater\Models\Invoice;
-use Crater\Models\InvoiceItem;
-use Crater\Models\Tax;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\EstimateItem;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\InvoiceItem;
+use InvoiceShelf\Models\Tax;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

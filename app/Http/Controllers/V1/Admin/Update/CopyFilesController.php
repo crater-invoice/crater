@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Update;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Update;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Space\Updater;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Space\Updater;
 use Illuminate\Http\Request;
 
 class CopyFilesController extends Controller

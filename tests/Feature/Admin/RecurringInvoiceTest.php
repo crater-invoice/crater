@@ -1,11 +1,11 @@
 <?php
 
 use Carbon\Carbon;
-use Crater\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceController;
-use Crater\Http\Requests\RecurringInvoiceRequest;
-use Crater\Models\InvoiceItem;
-use Crater\Models\RecurringInvoice;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceController;
+use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
+use InvoiceShelf\Models\InvoiceItem;
+use InvoiceShelf\Models\RecurringInvoice;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;
@@ -111,7 +111,7 @@ test('delete multiple recurring invoice', function () {
         ]);
 
     foreach ($recurringInvoices as $recurringInvoice) {
-        $this->assertDeleted($recurringInvoice);
+        $this->assertModelMissing($recurringInvoice);
     }
 });
 

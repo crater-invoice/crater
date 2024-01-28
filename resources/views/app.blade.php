@@ -17,19 +17,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Module Styles -->
-    @foreach(\Crater\Services\Module\ModuleFacade::allStyles() as $name => $path)
+    @foreach(\InvoiceShelf\Services\Module\ModuleFacade::allStyles() as $name => $path)
         <link rel="stylesheet" href="/modules/styles/{{ $name }}">
     @endforeach
 
-    @vite
+    @vite('resources/scripts/main.js')
 </head>
 
 <body
     class="h-full overflow-hidden bg-gray-100 font-base
-    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'crater'}} @endif ">
+    @if(isset($current_theme)) theme-{{ $current_theme }} @else theme-{{get_app_setting('admin_portal_theme') ?? 'invoiceshelf'}} @endif ">
 
     <!-- Module Scripts -->
-    @foreach (\Crater\Services\Module\ModuleFacade::allScripts() as $name => $path)
+    @foreach (\InvoiceShelf\Services\Module\ModuleFacade::allScripts() as $name => $path)
         @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
             <script type="module" src="{!! $path !!}"></script>
         @else
@@ -57,14 +57,14 @@
 
         window.login_page_description = "{{$login_page_description}}"
 
-        @endif     
+        @endif
         @if(isset($copyright_text))
 
         window.copyright_text = "{{$copyright_text}}"
 
-        @endif    
+        @endif
 
-        window.Crater.start()
+        window.InvoiceShelf.start()
     </script>
 </body>
 

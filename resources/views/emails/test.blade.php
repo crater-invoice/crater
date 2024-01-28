@@ -1,5 +1,5 @@
 @component('mail::message')
-# Test Email from Crater
+# Test Email from InvoiceShelf
 
 {{ $my_message }}
 

@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateCraterVersion602 extends Migration

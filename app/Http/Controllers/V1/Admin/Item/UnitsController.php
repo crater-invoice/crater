@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Item;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Item;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\UnitRequest;
-use Crater\Http\Resources\UnitResource;
-use Crater\Models\Unit;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\UnitRequest;
+use InvoiceShelf\Http\Resources\UnitResource;
+use InvoiceShelf\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitsController extends Controller
@@ -47,7 +47,7 @@ class UnitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\Unit  $unit
+     * @param  \InvoiceShelf\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
     public function show(Unit $unit)
@@ -61,7 +61,7 @@ class UnitsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Crater\Models\Unit  $unit
+     * @param  \InvoiceShelf\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
     public function update(UnitRequest $request, Unit $unit)
@@ -76,7 +76,7 @@ class UnitsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\Models\Unit  $unit
+     * @param  \InvoiceShelf\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
     public function destroy(Unit $unit)

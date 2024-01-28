@@ -2,9 +2,9 @@
 
 // Implementation taken from nova-backup-tool - https://github.com/spatie/nova-backup-tool/
 
-namespace Crater\Http\Controllers\V1\Admin\Backup;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Backup;
 
-use Crater\Rules\Backup\PathToZip;
+use InvoiceShelf\Rules\Backup\PathToZip;
 use Illuminate\Http\Request;
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;

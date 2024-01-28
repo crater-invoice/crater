@@ -1,9 +1,9 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Expense\ExpenseCategoriesController;
-use Crater\Http\Requests\ExpenseCategoryRequest;
-use Crater\Models\ExpenseCategory;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Expense\ExpenseCategoriesController;
+use InvoiceShelf\Http\Requests\ExpenseCategoryRequest;
+use InvoiceShelf\Models\ExpenseCategory;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\deleteJson;
@@ -89,5 +89,5 @@ test('delete category', function () {
             'success' => true,
         ]);
 
-    $this->assertDeleted($category);
+    $this->assertModelMissing($category);
 });

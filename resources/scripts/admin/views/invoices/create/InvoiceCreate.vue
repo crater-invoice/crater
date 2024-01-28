@@ -19,7 +19,7 @@
             to="/admin/dashboard"
           />
           <BaseBreadcrumbItem
-            :title="$tc('invoices.invoice', 2)"
+            :title="$t('invoices.invoice', 2)"
             to="/admin/invoices"
           />
           <BaseBreadcrumbItem

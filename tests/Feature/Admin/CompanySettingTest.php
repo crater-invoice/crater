@@ -1,12 +1,12 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Settings\CompanyController;
-use Crater\Http\Requests\CompanyRequest;
-use Crater\Http\Requests\ProfileRequest;
-use Crater\Models\Invoice;
-use Crater\Models\InvoiceItem;
-use Crater\Models\Tax;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Settings\CompanyController;
+use InvoiceShelf\Http\Requests\CompanyRequest;
+use InvoiceShelf\Http\Requests\ProfileRequest;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\InvoiceItem;
+use InvoiceShelf\Models\Tax;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\getJson;

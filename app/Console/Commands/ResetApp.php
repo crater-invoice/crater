@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Console\Commands;
+namespace InvoiceShelf\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;

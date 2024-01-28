@@ -1,13 +1,13 @@
 <?php
 
-namespace Crater\Services;
+namespace InvoiceShelf\Services;
 
-use Crater\Models\CompanySetting;
-use Crater\Models\Customer;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Customer;
 
 /**
  * SerialNumberFormatter
- * @package Crater\Services;
+ * @package InvoiceShelf\Services;
  */
 
 class SerialNumberFormatter
@@ -90,7 +90,7 @@ class SerialNumberFormatter
         $companyId = $this->company;
 
         if (request()->has('format')) {
-            $format = request()->format;
+            $format = request()->get('format');
         } else {
             $format = CompanySetting::getSetting(
                 $settingKey,

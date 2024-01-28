@@ -1,13 +1,13 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Estimate;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Estimate;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DeleteEstimatesRequest;
-use Crater\Http\Requests\EstimatesRequest;
-use Crater\Http\Resources\EstimateResource;
-use Crater\Jobs\GenerateEstimatePdfJob;
-use Crater\Models\Estimate;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DeleteEstimatesRequest;
+use InvoiceShelf\Http\Requests\EstimatesRequest;
+use InvoiceShelf\Http\Resources\EstimateResource;
+use InvoiceShelf\Jobs\GenerateEstimatePdfJob;
+use InvoiceShelf\Models\Estimate;
 use Illuminate\Http\Request;
 
 class EstimatesController extends Controller

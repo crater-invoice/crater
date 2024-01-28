@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Auth;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Auth;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Providers\RouteServiceProvider;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

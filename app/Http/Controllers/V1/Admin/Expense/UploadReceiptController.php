@@ -1,17 +1,17 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Expense;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Expense;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\UploadExpenseReceiptRequest;
-use Crater\Models\Expense;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\UploadExpenseReceiptRequest;
+use InvoiceShelf\Models\Expense;
 
 class UploadReceiptController extends Controller
 {
     /**
      * Upload the expense receipts to storage.
      *
-     * @param  \Crater\Http\Requests\ExpenseRequest $request
+     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
      * @param  Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */

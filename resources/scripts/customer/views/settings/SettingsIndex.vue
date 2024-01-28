@@ -1,13 +1,13 @@
 <template>
   <BasePage>
-    <BasePageHeader :title="$tc('settings.setting', 2)" class="pb-6">
+    <BasePageHeader :title="$t('settings.setting', 2)" class="pb-6">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem
           :title="$t('general.home')"
           :to="`/${companySlug}/customer/dashboard`"
         />
         <BaseBreadcrumbItem
-          :title="$tc('settings.setting', 2)"
+          :title="$t('settings.setting', 2)"
           :to="`/${companySlug}/customer/settings/customer-profile`"
           active
         />

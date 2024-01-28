@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Policies;
+namespace InvoiceShelf\Policies;
 
-use Crater\Models\User;
+use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\Database\Role;
 
@@ -13,7 +13,7 @@ class RolePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -28,7 +28,7 @@ class RolePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @param  \Silber\Bouncer\Database\Role  $role
      * @return mixed
      */
@@ -44,7 +44,7 @@ class RolePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -59,7 +59,7 @@ class RolePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @param  \Silber\Bouncer\Database\Role  $role
      * @return mixed
      */
@@ -75,7 +75,7 @@ class RolePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @param  \Silber\Bouncer\Database\Role  $role
      * @return mixed
      */
@@ -91,7 +91,7 @@ class RolePolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @param  \Silber\Bouncer\Database\Role  $role
      * @return mixed
      */
@@ -107,7 +107,7 @@ class RolePolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @param  \Silber\Bouncer\Database\Role  $role
      * @return mixed
      */

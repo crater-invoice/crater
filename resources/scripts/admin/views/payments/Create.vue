@@ -10,7 +10,7 @@
             to="/admin/dashboard"
           />
           <BaseBreadcrumbItem
-            :title="$tc('payments.payment', 2)"
+            :title="$t('payments.payment', 2)"
             to="/admin/payments"
           />
           <BaseBreadcrumbItem :title="pageTitle" to="#" active />

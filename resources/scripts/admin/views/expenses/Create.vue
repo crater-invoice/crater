@@ -12,7 +12,7 @@
           />
 
           <BaseBreadcrumbItem
-            :title="$tc('expenses.expense', 2)"
+            :title="$t('expenses.expense', 2)"
             to="/admin/expenses"
           />
 

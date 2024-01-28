@@ -1,12 +1,12 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Users;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Users;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\DeleteUserRequest;
-use Crater\Http\Requests\UserRequest;
-use Crater\Http\Resources\UserResource;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\DeleteUserRequest;
+use InvoiceShelf\Http\Requests\UserRequest;
+use InvoiceShelf\Http\Resources\UserResource;
+use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -54,7 +54,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(User $user)
@@ -68,7 +68,7 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\UserRequest  $request
-     * @param  \Crater\Models\User  $user
+     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UserRequest $request, User $user)

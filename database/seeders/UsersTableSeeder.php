@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Crater\Models\Company;
-use Crater\Models\Setting;
-use Crater\Models\User;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade;
 use Vinkla\Hashids\Facades\Hashids;

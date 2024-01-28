@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -864,7 +864,7 @@
       "company_info": "Företagsinfo",
       "company_name": "Företagsnamn",
       "company_logo": "Företagslogga",
-      "section_description": "Information om ditt företags som kommer visas på fakturor, kostnadsförslag och andra dokument skapade av Crater.",
+      "section_description": "Information om ditt företags som kommer visas på fakturor, kostnadsförslag och andra dokument skapade av InvoiceShelf.",
       "phone": "Telefon",
       "country": "Land",
       "state": "Kommun",
@@ -1064,9 +1064,9 @@
       "email": "Skicka notifiering till",
       "description": "Vilka notifieringar vill du ha via epost när något ändras?",
       "invoice_viewed": "Faktura kollad",
-      "invoice_viewed_desc": "När din kund kollar fakturan via craters översikt.",
+      "invoice_viewed_desc": "När din kund kollar fakturan via invoiceshelfs översikt.",
       "estimate_viewed": "Betalförslag kollad",
-      "estimate_viewed_desc": "När din kund kollar betalförslag via craters översikt.",
+      "estimate_viewed_desc": "När din kund kollar betalförslag via invoiceshelfs översikt.",
       "save": "Spara",
       "email_save_message": "Epost sparades",
       "please_enter_email": "Skriv in epostadress"
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1126,7 +1126,7 @@
       "title": "Momssatser",
       "add_tax": "Lägg till moms",
       "edit_tax": "Ändra moms",
-      "description": "Du kan lägga till och ta bort momssatser som du vill. Crater har stöd för moms per artikel men även per faktura.",
+      "description": "Du kan lägga till och ta bort momssatser som du vill. InvoiceShelf har stöd för moms per artikel men även per faktura.",
       "add_new_tax": "Lägg till ny momssats",
       "tax_settings": "Momssattsinställningar",
       "tax_per_item": "Moms per artikel",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Uppdatera applikationen",
-      "description": "Du kan enkelt uppdatera Crater genom att söka efter uppdateringar via knappen nedan",
+      "description": "Du kan enkelt uppdatera InvoiceShelf genom att söka efter uppdateringar via knappen nedan",
       "check_update": "Sök efter uppdateringar",
       "avail_update": "Uppdatering är tillgänglig",
       "next_version": "Nästa version",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Lagring | Lagringar",
-      "description": "Crater använder din lokala disk som standard för att spara säkerhetskopior, avatarer och andra bildfiler. Du kan ställa in fler lagringsenheter såsom DigitalOcean, S3 och Dropbox beroende av ditt behov.",
+      "description": "InvoiceShelf använder din lokala disk som standard för att spara säkerhetskopior, avatarer och andra bildfiler. Du kan ställa in fler lagringsenheter såsom DigitalOcean, S3 och Dropbox beroende av ditt behov.",
       "created_at": "skapad den",
       "dropbox": "dropbox",
       "name": "Namn",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": "Aktivera detta om du vill ha en kopia av varje faktura, kostnadsförslag, och betalningskvitto som PDF på din standard disk automatiskt.Aktiverar du denna funktion så kommer laddtiderna för visning av PDFer minskas.",
       "select_disk": "Välj Disk",
       "disk_settings": "Diskinställningar",
-      "confirm_delete": "Dina existerande filer och kataloger på den valda disken kommer inte påverkas men inställningarna för disken raderas från Crater",
+      "confirm_delete": "Dina existerande filer och kataloger på den valda disken kommer inte påverkas men inställningarna för disken raderas från InvoiceShelf",
       "action": "Handling",
       "edit_file_disk": "Ändra disk",
       "success_create": "Disk skapades",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "Systemkrav",
       "php_req_version": "Php (version {version} krävs)",
       "check_req": "Kontrollera krav",
-      "system_req_desc": "Crater har några krav på din server. Kontrollera att din server har den nödvändiga versionen av PHP och alla tillägg som nämns nedan."
+      "system_req_desc": "InvoiceShelf har några krav på din server. Kontrollera att din server har den nödvändiga versionen av PHP och alla tillägg som nämns nedan."
     },
     "errors": {
       "migrate_failed": "Migration misslyckades",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Felaktigt telefonnummer",
-    "invalid_url": "Felaktig url (ex: http://www.crater.com)",
-    "invalid_domain_url": "Felaktig url (ex: crater.com)",
+    "invalid_url": "Felaktig url (ex: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Felaktig url (ex: invoiceshelf.com)",
     "required": "Fältet är tvingande",
     "email_incorrect": "Felaktig epostadress.",
     "email_already_taken": "Denna epostadress finns redan.",

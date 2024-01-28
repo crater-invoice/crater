@@ -1,14 +1,14 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer;
+namespace InvoiceShelf\Http\Controllers\V1\Customer;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\Customer\InvoiceResource as CustomerInvoiceResource;
-use Crater\Mail\InvoiceViewedMail;
-use Crater\Models\CompanySetting;
-use Crater\Models\Customer;
-use Crater\Models\EmailLog;
-use Crater\Models\Invoice;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\Customer\InvoiceResource as CustomerInvoiceResource;
+use InvoiceShelf\Mail\InvoiceViewedMail;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Invoice;
 use Illuminate\Http\Request;
 
 class InvoicePdfController extends Controller

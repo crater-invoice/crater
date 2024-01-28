@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Space;
+namespace InvoiceShelf\Space;
 
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
@@ -11,13 +11,13 @@ trait SiteApi
 {
     protected static function getRemote($url, $data = [], $token = null)
     {
-        $client = new Client(['verify' => false, 'base_uri' => config('crater.base_url').'/']);
+        $client = new Client(['verify' => false, 'base_uri' => config('invoiceshelf.base_url').'/']);
 
         $headers['headers'] = [
             'Accept' => 'application/json',
             'Referer' => url('/'),
-            'crater' => Setting::getSetting('version'),
             'Authorization' => "Bearer {$token}",
+            'invoiceshelf' => Setting::getSetting('version'),
         ];
 
         $data['http_errors'] = false;

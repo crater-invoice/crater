@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Services\Module;
+namespace InvoiceShelf\Services\Module;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 

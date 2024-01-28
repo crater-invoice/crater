@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Console;
+namespace InvoiceShelf\Console;
 
-use Crater\Models\CompanySetting;
-use Crater\Models\RecurringInvoice;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\RecurringInvoice;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\RecurringInvoice;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\RecurringInvoiceRequest;
-use Crater\Http\Resources\RecurringInvoiceResource;
-use Crater\Models\RecurringInvoice;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
+use InvoiceShelf\Http\Resources\RecurringInvoiceResource;
+use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Http\Request;
 
 class RecurringInvoiceController extends Controller
@@ -49,7 +49,7 @@ class RecurringInvoiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Crater\Models\RecurringInvoice  $recurringInvoice
+     * @param  \InvoiceShelf\Models\RecurringInvoice  $recurringInvoice
      * @return \Illuminate\Http\Response
      */
     public function show(RecurringInvoice $recurringInvoice)
@@ -63,7 +63,7 @@ class RecurringInvoiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Crater\Models\RecurringInvoice  $recurringInvoice
+     * @param  \InvoiceShelf\Models\RecurringInvoice  $recurringInvoice
      * @return \Illuminate\Http\Response
      */
     public function update(RecurringInvoiceRequest $request, RecurringInvoice $recurringInvoice)
@@ -78,7 +78,7 @@ class RecurringInvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Crater\Models\RecurringInvoice  $recurringInvoice
+     * @param  \InvoiceShelf\Models\RecurringInvoice  $recurringInvoice
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request)

@@ -2,7 +2,7 @@
   <BackupModal />
 
   <BaseSettingCard
-    :title="$tc('settings.backup.title', 1)"
+    :title="$t('settings.backup.title', 1)"
     :description="$t('settings.backup.description')"
   >
     <template #action>

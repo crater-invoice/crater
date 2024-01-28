@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Customer;
 
-use Crater\Models\Customer;
-use Crater\Models\Payment;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;

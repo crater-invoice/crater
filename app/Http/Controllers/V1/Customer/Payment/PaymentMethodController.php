@@ -1,11 +1,11 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Customer\Payment;
+namespace InvoiceShelf\Http\Controllers\V1\Customer\Payment;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\Customer\PaymentMethodResource;
-use Crater\Models\Company;
-use Crater\Models\PaymentMethod;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\Customer\PaymentMethodResource;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\PaymentMethod;
 use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller

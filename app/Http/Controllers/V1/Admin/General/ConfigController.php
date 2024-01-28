@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ConfigController extends Controller
@@ -16,7 +16,7 @@ class ConfigController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            $request->key => config('crater.'.$request->key),
+            $request->key => config('invoiceshelf.'.$request->key),
         ]);
     }
 }

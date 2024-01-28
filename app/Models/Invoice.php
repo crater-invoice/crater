@@ -1,14 +1,15 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use App;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
-use Crater\Mail\SendInvoiceMail;
-use Crater\Services\SerialNumberFormatter;
-use Crater\Traits\GeneratesPdfTrait;
-use Crater\Traits\HasCustomFieldsTrait;
+use Illuminate\Support\Facades\Vite;
+use InvoiceShelf\Mail\SendInvoiceMail;
+use InvoiceShelf\Services\SerialNumberFormatter;
+use InvoiceShelf\Traits\GeneratesPdfTrait;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -74,7 +75,7 @@ class Invoice extends Model implements HasMedia
 
     public function items()
     {
-        return $this->hasMany('Crater\Models\InvoiceItem');
+        return $this->hasMany('InvoiceShelf\Models\InvoiceItem');
     }
 
     public function taxes()
@@ -663,7 +664,7 @@ class Invoice extends Model implements HasMedia
         foreach ($templates as $key => $template) {
             $templateName = Str::before(basename($template), '.blade.php');
             $invoiceTemplates[$key]['name'] = $templateName;
-            $invoiceTemplates[$key]['path'] = vite_asset('img/PDF/'.$templateName.'.png');
+            $invoiceTemplates[$key]['path'] =  Vite::asset('resources/static/img/PDF/'.$templateName.'.png');
         }
 
         return $invoiceTemplates;

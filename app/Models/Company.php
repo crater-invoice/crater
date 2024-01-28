@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -223,7 +223,7 @@ class Company extends Model implements HasMedia
             'fiscal_year' => '1-12',
             'carbon_date_format' => 'Y/m/d',
             'moment_date_format' => 'YYYY/MM/DD',
-            'notification_email' => 'noreply@crater.in',
+            'notification_email' => 'noreply@invoiceshelf.com',
             'notify_invoice_viewed' => 'NO',
             'notify_estimate_viewed' => 'NO',
             'tax_per_item' => 'NO',

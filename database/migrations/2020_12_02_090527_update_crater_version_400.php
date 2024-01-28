@@ -1,15 +1,15 @@
 <?php
 
-use Crater\Models\Address;
-use Crater\Models\CompanySetting;
-use Crater\Models\Estimate;
-use Crater\Models\Expense;
-use Crater\Models\FileDisk;
-use Crater\Models\Invoice;
-use Crater\Models\Item;
-use Crater\Models\Payment;
-use Crater\Models\Setting;
-use Crater\Models\User;
+use InvoiceShelf\Models\Address;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Estimate;
+use InvoiceShelf\Models\Expense;
+use InvoiceShelf\Models\FileDisk;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Item;
+use InvoiceShelf\Models\Payment;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateCraterVersion400 extends Migration

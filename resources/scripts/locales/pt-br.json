@@ -585,7 +585,7 @@
       "company_info": "Informação da Empresa",
       "company_name": "Nome da Empresa",
       "company_logo": "Logotipo da Empresa",
-      "section_description": "Informações sobre sua empresa que serão exibidas em Faturas, Orçamentos e outros documentos criados pela Crater.",
+      "section_description": "Informações sobre sua empresa que serão exibidas em Faturas, Orçamentos e outros documentos criados pela InvoiceShelf.",
       "phone": "Telefone",
       "country": "Pais",
       "state": "Estado",
@@ -731,9 +731,9 @@
       "email": "Enviar Notificações para",
       "description": "Quais notificações por email você gostaria de receber quando algo mudar?",
       "invoice_viewed": "Fatura Visualizada",
-      "invoice_viewed_desc": "Quando o seu cliente visualiza uma Fatura enviada pelo painel do Crater.",
+      "invoice_viewed_desc": "Quando o seu cliente visualiza uma Fatura enviada pelo painel do InvoiceShelf.",
       "estimate_viewed": "Orçamento Visualizado",
-      "estimate_viewed_desc": "Quando o seu cliente visualiza um Orçamento enviada pelo painel do Crater.",
+      "estimate_viewed_desc": "Quando o seu cliente visualiza um Orçamento enviada pelo painel do InvoiceShelf.",
       "save": "Salvar",
       "email_save_message": "E-mail salvo com sucesso",
       "please_enter_email": "Por favor digite um E-mail"
@@ -742,7 +742,7 @@
       "title": "Tipos de Impostos",
       "add_tax": "Adicionar Imposto",
       "edit_tax": "Editar imposto",
-      "description": "Você pode adicionar ou remover impostos conforme desejar. O Crater suporta impostos sobre itens individuais e também na Fatura.",
+      "description": "Você pode adicionar ou remover impostos conforme desejar. O InvoiceShelf suporta impostos sobre itens individuais e também na Fatura.",
       "add_new_tax": "Adicionar Novo Imposto",
       "tax_settings": "Configurações de Impostos",
       "tax_per_item": "Imposto por Item",
@@ -792,7 +792,7 @@
     },
     "update_app": {
       "title": "Atualizar Aplicativo",
-      "description": "Você pode atualizar facilmente o Crater, verifique se hà novas atualizações, clicando no botão abaixo",
+      "description": "Você pode atualizar facilmente o InvoiceShelf, verifique se hà novas atualizações, clicando no botão abaixo",
       "check_update": "Verifique se há atualizações",
       "avail_update": "Nova atualização disponível",
       "next_version": "Próxima versão",
@@ -883,7 +883,7 @@
       "system_req": "Requisitos de Sistema",
       "php_req_version": "PHP (versão {version} obrigatória)",
       "check_req": "Verificar Requisitos",
-      "system_req_desc": "O Crater tem alguns requisitos de servidor. Verifique se o seu servidor possui a versão do PHP necessária e todas as extensões mencionadas abaixo."
+      "system_req_desc": "O InvoiceShelf tem alguns requisitos de servidor. Verifique se o seu servidor possui a versão do PHP necessária e todas as extensões mencionadas abaixo."
     },
     "errors": {
       "migrate_failed": "Falha na migração",
@@ -899,7 +899,7 @@
   },
   "validation": {
     "invalid_phone": "Número de telefone inválido",
-    "invalid_url": "url inválidas (ex: http://www.craterapp.com)",
+    "invalid_url": "url inválidas (ex: http://www.invoiceshelf.com)",
     "required": "Campo obrigatório",
     "email_incorrect": "E-mail incorreto",
     "email_already_taken": "O email já foi recebido.",

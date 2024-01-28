@@ -1,13 +1,13 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Invoice;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Invoice;
 
 use Carbon\Carbon;
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\InvoiceResource;
-use Crater\Models\CompanySetting;
-use Crater\Models\Invoice;
-use Crater\Services\SerialNumberFormatter;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\InvoiceResource;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Services\SerialNumberFormatter;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 

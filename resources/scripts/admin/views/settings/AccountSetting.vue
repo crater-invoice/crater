@@ -6,7 +6,7 @@
     >
       <BaseInputGrid>
         <BaseInputGroup
-          :label="$tc('settings.account_settings.profile_picture')"
+          :label="$t('settings.account_settings.profile_picture')"
         >
           <BaseFileUploader
             v-model="imgFiles"
@@ -21,7 +21,7 @@
         <span></span>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.name')"
+          :label="$t('settings.account_settings.name')"
           :error="v$.name.$error && v$.name.$errors[0].$message"
           required
         >
@@ -33,7 +33,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.email')"
+          :label="$t('settings.account_settings.email')"
           :error="v$.email.$error && v$.email.$errors[0].$message"
           required
         >
@@ -46,7 +46,7 @@
 
         <BaseInputGroup
           :error="v$.password.$error && v$.password.$errors[0].$message"
-          :label="$tc('settings.account_settings.password')"
+          :label="$t('settings.account_settings.password')"
         >
           <BaseInput
             v-model="userForm.password"
@@ -56,7 +56,7 @@
         </BaseInputGroup>
 
         <BaseInputGroup
-          :label="$tc('settings.account_settings.confirm_password')"
+          :label="$t('settings.account_settings.confirm_password')"
           :error="
             v$.confirm_password.$error &&
             v$.confirm_password.$errors[0].$message
@@ -69,7 +69,7 @@
           />
         </BaseInputGroup>
 
-        <BaseInputGroup :label="$tc('settings.language')">
+        <BaseInputGroup :label="$t('settings.language')">
           <BaseMultiselect
             v-model="userForm.language"
             :options="globalStore.config.languages"
@@ -89,7 +89,7 @@
             :class="slotProps.class"
           ></BaseIcon>
         </template>
-        {{ $tc('settings.company_info.save') }}
+        {{ $t('settings.company_info.save') }}
       </BaseButton>
     </BaseSettingCard>
   </form>

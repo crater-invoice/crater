@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Installation;
+namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class FinishController extends Controller

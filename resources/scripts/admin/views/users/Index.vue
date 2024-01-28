@@ -4,7 +4,7 @@
     <BasePageHeader :title="$t('users.title')">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
-        <BaseBreadcrumbItem :title="$tc('users.title', 2)" to="#" active />
+        <BaseBreadcrumbItem :title="$t('users.title', 2)" to="#" active />
       </BaseBreadcrumb>
 
       <template #actions>
@@ -43,7 +43,7 @@
     </BasePageHeader>
 
     <BaseFilterWrapper :show="showFilters" class="mt-3" @clear="clearFilter">
-      <BaseInputGroup :label="$tc('users.name')" class="flex-1 mt-2 mr-4">
+      <BaseInputGroup :label="$t('users.name')" class="flex-1 mt-2 mr-4">
         <BaseInput
           v-model="filters.name"
           type="text"
@@ -52,7 +52,7 @@
         />
       </BaseInputGroup>
 
-      <BaseInputGroup :label="$tc('users.email')" class="flex-1 mt-2 mr-4">
+      <BaseInputGroup :label="$t('users.email')" class="flex-1 mt-2 mr-4">
         <BaseInput
           v-model="filters.email"
           type="text"
@@ -61,7 +61,7 @@
         />
       </BaseInputGroup>
 
-      <BaseInputGroup class="flex-1 mt-2" :label="$tc('users.phone')">
+      <BaseInputGroup class="flex-1 mt-2" :label="$t('users.phone')">
         <BaseInput
           v-model="filters.phone"
           type="text"

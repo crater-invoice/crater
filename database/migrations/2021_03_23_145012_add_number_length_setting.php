@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\CompanySetting;
-use Crater\Models\User;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 
 class AddNumberLengthSetting extends Migration

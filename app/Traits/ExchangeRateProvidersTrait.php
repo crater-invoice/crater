@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Traits;
+namespace InvoiceShelf\Traits;
 
 use Illuminate\Support\Facades\Http;
 

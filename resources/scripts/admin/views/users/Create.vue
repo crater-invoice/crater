@@ -3,7 +3,7 @@
     <BasePageHeader :title="pageTitle">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
-        <BaseBreadcrumbItem :title="$tc('users.user', 2)" to="/admin/users" />
+        <BaseBreadcrumbItem :title="$t('users.user', 2)" to="/admin/users" />
         <BaseBreadcrumbItem :title="pageTitle" to="#" active />
       </BaseBreadcrumb>
     </BasePageHeader>
@@ -109,7 +109,7 @@
 
             <BaseInputGroup
               :content-loading="isFetchingInitialData"
-              :label="$tc('users.password')"
+              :label="$t('users.password')"
               :error="
                 v$.userData.password.$error &&
                 v$.userData.password.$errors[0].$message

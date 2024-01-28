@@ -37,7 +37,7 @@
             />
           </template>
 
-          {{ $tc('settings.notification.save') }}
+          {{ $t('settings.notification.save') }}
         </BaseButton>
       </div>
     </form>

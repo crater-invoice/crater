@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Crater\Models\PaymentMethod;
-use Crater\Models\User;
+use InvoiceShelf\Models\PaymentMethod;
+use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentMethodFactory extends Factory

@@ -1,8 +1,8 @@
 <?php
 
-use Crater\Http\Controllers\V1\Admin\Users\UsersController;
-use Crater\Http\Requests\UserRequest;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\V1\Admin\Users\UsersController;
+use InvoiceShelf\Http\Requests\UserRequest;
+use InvoiceShelf\Models\User;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Faker\faker;
 use function Pest\Laravel\getJson;
@@ -92,5 +92,5 @@ test('update user using a form request', function () {
 //     postJson("/api/v1/users/delete", $data)
 //         ->assertOk();
 
-//     $this->assertDeleted($user);
+//     $this->assertModelMissing($user);
 // });

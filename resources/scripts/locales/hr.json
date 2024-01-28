@@ -690,7 +690,7 @@
     "no_reviews_found": "There are no reviews for this module yet!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Module Not Found",
-    "version_not_supported": "The minimum required version for this module does not match. Please upgrade your crater app to version: {version} to proceed.",
+    "version_not_supported": "The minimum required version for this module does not match. Please upgrade your invoiceshelf app to version: {version} to proceed.",
     "last_updated": "Last Updated On",
     "connect_installation": "Connect your installation",
     "api_token_description": "Login to {url} and connect this installation by entering the API Token. Your purchased modules will show up here after the connection is established.",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Exchange Rate",
       "title": "Fix Currency Exchange issues",
-      "description": "Please enter exchange rate of all the currencies mentioned below to help Crater properly calculate the amounts in {currency}.",
+      "description": "Please enter exchange rate of all the currencies mentioned below to help InvoiceShelf properly calculate the amounts in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Add New Provider",
       "edit_driver": "Edit Provider",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Ažuriraj aplikaciju",
-      "description": "Lako možeš ažurirati Crater tako da napraviš provjeru novih verzija klikom na polje ispod",
+      "description": "Lako možeš ažurirati InvoiceShelf tako da napraviš provjeru novih verzija klikom na polje ispod",
       "check_update": "Provjeri ažuriranost",
       "avail_update": "Dostupna je nova verzija",
       "next_version": "Sljedeća verzija",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "File Disk | File Disks",
-      "description": "Zadano ponašanje je da Crater koristi lokalni disk za čuvanje backupa, avatara i ostalih slika. Možete podesiti više od jednog disk drajvera od provajdera poput DigitalOcean, S3 i Dropbox po vašoj želji.",
+      "description": "Zadano ponašanje je da InvoiceShelf koristi lokalni disk za čuvanje backupa, avatara i ostalih slika. Možete podesiti više od jednog disk drajvera od provajdera poput DigitalOcean, S3 i Dropbox po vašoj želji.",
       "created_at": "datum kreiranja",
       "dropbox": "dropbox",
       "name": "Naziv",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Uključite ovo ako želite da spremite kopiju PDF fajla svake Fakture, Ponude i Uplate na vaš zadani disk automatski. Uključivanjem ove opcije smanjujete vrijeme učitavanja pregleda PDF fajlova.",
       "select_disk": "Izaberi Disk",
       "disk_settings": "Disk Postavke",
-      "confirm_delete": "Ovo neće utjecati na vaše postojeće fajlove i foldere na navedenom disku, ali će se konfiguracija vašeg diska izbrisati iz Cratera.",
+      "confirm_delete": "Ovo neće utjecati na vaše postojeće fajlove i foldere na navedenom disku, ali će se konfiguracija vašeg diska izbrisati iz InvoiceShelfa.",
       "action": "Radnja",
       "edit_file_disk": "Izmjeni File Disk",
       "success_create": "Disk uspješno dodan",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain Verification",
-      "desc": "Crater uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
+      "desc": "InvoiceShelf uses Session based authentication which requires domain verification for security purposes. Please enter the domain on which you will be accessing your web application.",
       "app_domain": "App Domain",
       "verify_now": "Verify Now",
       "success": "Domain Verify Successfully.",
@@ -1397,7 +1397,7 @@
       "system_req": "Sistemski zahtjevi",
       "php_req_version": "Zahtjeva PHP verziju {version} ",
       "check_req": "Provjeri zahtjeve",
-      "system_req_desc": "Crater ima nekoliko zahtjeva za server. Provjeri da li tvoj server ima potrebnu verziju PHP-a i sva navedena proširenja navedena u nastavku"
+      "system_req_desc": "InvoiceShelf ima nekoliko zahtjeva za server. Provjeri da li tvoj server ima potrebnu verziju PHP-a i sva navedena proširenja navedena u nastavku"
     },
     "errors": {
       "migrate_failed": "Neuspješno migriranje",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Pogrešan Broj Telefona",
-    "invalid_url": "Nevažeći URL (primer: http://www.craterapp.com)",
-    "invalid_domain_url": "Pogrešan URL (primjer: craterapp.com)",
+    "invalid_url": "Nevažeći URL (primer: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Pogrešan URL (primjer: invoiceshelf.com)",
     "required": "Obavezno polje",
     "email_incorrect": "Pogrešan E-mail",
     "email_already_taken": "Navedeni E-mail je zauzet",

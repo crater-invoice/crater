@@ -690,7 +690,7 @@
     "no_reviews_found": "Non ci sono ancora recensioni per questo modulo!",
     "module_not_purchased": "Modulo non acquistato",
     "module_not_found": "Modulo non trovato",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Ultimo aggiornamento il",
     "connect_installation": "Collega la tua installazione",
     "api_token_description": "Accedi a {url} e collega questa installazione inserendo l'API Token. I moduli acquistati verranno visualizzati qui dopo aver stabilito la connessione.",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Tasso di cambio",
       "title": "Correggi i problemi di cambio valuta",
-      "description": "Inserisci il tasso di cambio di tutte le valute menzionate di seguito per aiutare il Cratere a calcolare correttamente gli importi in {currency}.",
+      "description": "Inserisci il tasso di cambio di tutte le valute menzionate di seguito per aiutare il InvoiceShelfe a calcolare correttamente gli importi in {currency}.",
       "drivers": "Drivers",
       "new_driver": "Aggiungi Nuovo Fornitore",
       "edit_driver": "Modifica Fornitore",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Disco File | Dischi File",
-      "description": "Per impostazione predefinita, Crater utilizzerà il disco locale per salvare backup, avatar e altri file di immagine. Puoi configurare più di un driver disco come DigitalOcean, S3 e Dropbox in base alle tue preferenze.",
+      "description": "Per impostazione predefinita, InvoiceShelf utilizzerà il disco locale per salvare backup, avatar e altri file di immagine. Puoi configurare più di un driver disco come DigitalOcean, S3 e Dropbox in base alle tue preferenze.",
       "created_at": "creato il",
       "dropbox": "dropbox",
       "name": "Nome",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Abilita questa opzione, se vuoi salvare automaticamente una copia di ogni PDF Fattura, Preventivo e Ricevuta di Pagamento sul tuo disco predefinito. Attivare questa opzione diminuirà il tempo di caricamento durante la visualizzazione dei PDF.",
       "select_disk": "Seleziona Disco",
       "disk_settings": "Impostazioni Disco",
-      "confirm_delete": "I file e le cartelle esistenti nel disco specificato non saranno toccati, ma la configurazione del disco sarà eliminata dal Crater",
+      "confirm_delete": "I file e le cartelle esistenti nel disco specificato non saranno toccati, ma la configurazione del disco sarà eliminata dal InvoiceShelf",
       "action": "Azione",
       "edit_file_disk": "Modifica Disco File",
       "success_create": "Disco aggiunto correttamente",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Verifica Dominio",
-      "desc": "Crater utilizza l'autenticazione basata su sessione, che richiede la verifica del dominio per scopi di sicurezza. Inserisci il dominio su cui accederai alla tua applicazione web.",
+      "desc": "InvoiceShelf utilizza l'autenticazione basata su sessione, che richiede la verifica del dominio per scopi di sicurezza. Inserisci il dominio su cui accederai alla tua applicazione web.",
       "app_domain": "Dominio App",
       "verify_now": "Verifica Ora",
       "success": "Dominio Verificato Con Successo.",
@@ -1397,7 +1397,7 @@
       "system_req": "Requisiti di Sistema",
       "php_req_version": "Php (versione {version} richiesta)",
       "check_req": "Controllo Requisiti",
-      "system_req_desc": "Crater ha alcuni requisiti di sistema. Assicurati che il server ha la versione di php richiesta e tutte le estensioni necessarie."
+      "system_req_desc": "InvoiceShelf ha alcuni requisiti di sistema. Assicurati che il server ha la versione di php richiesta e tutte le estensioni necessarie."
     },
     "errors": {
       "migrate_failed": "Migrazione Fallita",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Numero di telefono invalido",
-    "invalid_url": "URL non valido (es: http://www.crater.com)",
-    "invalid_domain_url": "URL non valido (es: crater.com)",
+    "invalid_url": "URL non valido (es: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "URL non valido (es: invoiceshelf.com)",
     "required": "Campo obbligatorio",
     "email_incorrect": "Email non corretta.",
     "email_already_taken": "Email già in uso.",

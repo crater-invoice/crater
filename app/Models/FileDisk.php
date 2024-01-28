@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Models;
+namespace InvoiceShelf\Models;
 
-use Crater\Carbon;
+use InvoiceShelf\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -119,11 +119,11 @@ class FileDisk extends Model
             if ($disk == 'dropbox') {
                 $root = $credentials['root'].'/';
             }
-            \Storage::disk($prefix.$disk)->put($root.'crater_temp.text', 'Check Credentials');
+            \Storage::disk($prefix.$disk)->put($root.'invoiceshelf_temp.text', 'Check Credentials');
 
-            if (\Storage::disk($prefix.$disk)->exists($root.'crater_temp.text')) {
+            if (\Storage::disk($prefix.$disk)->exists($root.'invoiceshelf_temp.text')) {
                 $exists = true;
-                \Storage::disk($prefix.$disk)->delete($root.'crater_temp.text');
+                \Storage::disk($prefix.$disk)->delete($root.'invoiceshelf_temp.text');
             }
         } catch (\Exception $e) {
             $exists = false;

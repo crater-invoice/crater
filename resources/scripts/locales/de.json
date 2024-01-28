@@ -690,7 +690,7 @@
     "no_reviews_found": "Für dieses Modul gibt es noch keine Bewertungen!",
     "module_not_purchased": "Module Not Purchased",
     "module_not_found": "Modul nicht gefunden",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Zuletzt aktualisiert am",
     "connect_installation": "Installation verbinden",
     "api_token_description": "Melden Sie sich bei {url} an und verbinden Sie diese Installation durch Eingabe des API-Token. Ihre gekauften Module werden hier angezeigt, nachdem die Verbindung hergestellt wurde.",
@@ -864,7 +864,7 @@
       "company_info": "Firmeninfo",
       "company_name": "Name des Unternehmens",
       "company_logo": "Firmenlogo",
-      "section_description": "Informationen zu Ihrem Unternehmen, die auf Rechnungen, Angeboten und anderen von Crater erstellten Dokumenten angezeigt werden.",
+      "section_description": "Informationen zu Ihrem Unternehmen, die auf Rechnungen, Angeboten und anderen von InvoiceShelf erstellten Dokumenten angezeigt werden.",
       "phone": "Telefon",
       "country": "Land",
       "state": "Bundesland",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Wechselkurs",
       "title": "Wechselkursprobleme korrigieren",
-      "description": "Bitte geben Sie den Wechselkurs aller unten genannten Währungen ein, um Crater bei der korrekten Berechnung der Beträge in {currency} zu unterstützen.",
+      "description": "Bitte geben Sie den Wechselkurs aller unten genannten Währungen ein, um InvoiceShelf bei der korrekten Berechnung der Beträge in {currency} zu unterstützen.",
       "drivers": "Treiber",
       "new_driver": "Neuen Anbieter hinzufügen",
       "edit_driver": "Anbieter bearbeiten",
@@ -1126,7 +1126,7 @@
       "title": "Steuersätze",
       "add_tax": "Steuersätze hinzufügen",
       "edit_tax": "Steuer bearbeiten",
-      "description": "Sie können Steuern nach Belieben hinzufügen oder entfernen. Crater unterstützt Steuern auf einzelne Artikel sowie auf die Rechnung.",
+      "description": "Sie können Steuern nach Belieben hinzufügen oder entfernen. InvoiceShelf unterstützt Steuern auf einzelne Artikel sowie auf die Rechnung.",
       "add_new_tax": "Neuen Steuersatz hinzufügen",
       "tax_settings": "Einstellungen Steuersatz",
       "tax_per_item": "Steuersatz pro Artikel",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "Applikation aktualisieren",
-      "description": "Sie können Crater ganz einfach aktualisieren, indem Sie auf die Schaltfläche unten klicken, um nach einem neuen Update zu suchen.",
+      "description": "Sie können InvoiceShelf ganz einfach aktualisieren, indem Sie auf die Schaltfläche unten klicken, um nach einem neuen Update zu suchen.",
       "check_update": "Nach Updates suchen",
       "avail_update": "Neues Update verfügbar",
       "next_version": "Nächste Version",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Dateispeicher | Dateispeicher",
-      "description": "Standardmäßig verwendet Crater Ihre lokale Festplatte zum Speichern von Sicherungen, Avatar und anderen Bilddateien. Sie können mehr als einen Speicherort wie DigitalOcean, S3 und Dropbox nach Ihren Wünschen konfigurieren.",
+      "description": "Standardmäßig verwendet InvoiceShelf Ihre lokale Festplatte zum Speichern von Sicherungen, Avatar und anderen Bilddateien. Sie können mehr als einen Speicherort wie DigitalOcean, S3 und Dropbox nach Ihren Wünschen konfigurieren.",
       "created_at": "erstellt am",
       "dropbox": "Dropbox",
       "name": "Name",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Aktivieren Sie dies, um eine Kopie von jeder Rechnung, jedem Angebot & jedem Zahlungsbeleg als PDF automatisch auf ihrem Standard-Speicher abzulegen. Wenn Sie diese Option aktivieren, verringert sich die Ladezeit beim Betrachten der PDFs.",
       "select_disk": "Speicherort auswählen",
       "disk_settings": "Speichermedienkonfiguration",
-      "confirm_delete": "Ihre existierenden Dateien und Ordner auf der angegebenen Festplatte werden nicht beeinflusst, aber Dieser Speicherort wird aus Crater gelöscht",
+      "confirm_delete": "Ihre existierenden Dateien und Ordner auf der angegebenen Festplatte werden nicht beeinflusst, aber Dieser Speicherort wird aus InvoiceShelf gelöscht",
       "action": "Aktion",
       "edit_file_disk": "Speicherort editieren",
       "success_create": "Speicher erfolgreich hinzugefügt",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Domain-Verifizierung",
-      "desc": "Crater verwendet Session-basierte Authentifizierung, die aus Sicherheitsgründen eine Domain-Verifizierung erfordert. Bitte geben Sie die Domain ein, auf der Sie auf Ihre Webanwendung zugreifen werden.",
+      "desc": "InvoiceShelf verwendet Session-basierte Authentifizierung, die aus Sicherheitsgründen eine Domain-Verifizierung erfordert. Bitte geben Sie die Domain ein, auf der Sie auf Ihre Webanwendung zugreifen werden.",
       "app_domain": "Domain der App",
       "verify_now": "Jetzt verifizieren",
       "success": "Domain erfolgreich verifiziert.",
@@ -1397,7 +1397,7 @@
       "system_req": "System Anforderungen",
       "php_req_version": "Php (version {version} erforderlich)",
       "check_req": "Anforderungen prüfen",
-      "system_req_desc": "Crater hat einige Serveranforderungen. Stellen Sie sicher, dass Ihr Server die erforderliche PHP-Version und alle unten genannten Erweiterungen hat."
+      "system_req_desc": "InvoiceShelf hat einige Serveranforderungen. Stellen Sie sicher, dass Ihr Server die erforderliche PHP-Version und alle unten genannten Erweiterungen hat."
     },
     "errors": {
       "migrate_failed": "Migration ist Fehlgeschlagen",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Ungültige Telefonnummer",
-    "invalid_url": "Ungültige URL (Bsp.: http://www.crater.com)",
-    "invalid_domain_url": "Ungültige URL (Bsp.: crater.com)",
+    "invalid_url": "Ungültige URL (Bsp.: http://www.invoiceshelf.com)",
+    "invalid_domain_url": "Ungültige URL (Bsp.: invoiceshelf.com)",
     "required": "Feld ist erforderlich",
     "email_incorrect": "Ungültige E-Mail.",
     "email_already_taken": "Die E-Mail ist bereits vergeben.",

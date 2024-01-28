@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Listeners\Updates;
+namespace InvoiceShelf\Listeners\Updates;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class Listener

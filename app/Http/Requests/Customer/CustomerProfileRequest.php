@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Requests\Customer;
+namespace InvoiceShelf\Http\Requests\Customer;
 
-use Crater\Models\Address;
+use InvoiceShelf\Models\Address;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;

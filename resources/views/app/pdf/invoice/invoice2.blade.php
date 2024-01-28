@@ -30,7 +30,7 @@
         /* -- Header -- */
 
         .header-container {
-            background: #817AE3;
+            background: #7675ff;
             position: absolute;
             width: 100%;
             height: 141px;

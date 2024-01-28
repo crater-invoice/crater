@@ -4,7 +4,7 @@
     <BasePageHeader :title="$t('expenses.title')">
       <BaseBreadcrumb>
         <BaseBreadcrumbItem :title="$t('general.home')" to="dashboard" />
-        <BaseBreadcrumbItem :title="$tc('expenses.expense', 2)" to="#" active />
+        <BaseBreadcrumbItem :title="$t('expenses.expense', 2)" to="#" active />
       </BaseBreadcrumb>
 
       <template #actions>

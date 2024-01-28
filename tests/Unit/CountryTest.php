@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\Address;
-use Crater\Models\Country;
+use InvoiceShelf\Models\Address;
+use InvoiceShelf\Models\Country;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

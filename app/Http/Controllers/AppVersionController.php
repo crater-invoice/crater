@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers;
+namespace InvoiceShelf\Http\Controllers;
 
-use Crater\Models\Setting;
+use InvoiceShelf\Models\Setting;
 use Illuminate\Http\Request;
 
 class AppVersionController extends Controller

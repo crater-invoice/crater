@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Console\Commands;
+namespace InvoiceShelf\Console\Commands;
 
-use Crater\Models\Setting;
-use Crater\Space\Updater;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Space\Updater;
 use Illuminate\Console\Command;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
@@ -20,14 +20,14 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'crater:update';
+    protected $signature = 'core:update';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Automatically update your crater app';
+    protected $description = 'Automatically update your InvoiceShelf Core App';
 
     /**
      * Create a new command instance.

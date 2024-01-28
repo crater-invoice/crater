@@ -1,10 +1,10 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Modules;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Modules;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\ModuleResource;
-use Crater\Space\ModuleInstaller;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\ModuleResource;
+use InvoiceShelf\Space\ModuleInstaller;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crater\Events;
+namespace InvoiceShelf\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

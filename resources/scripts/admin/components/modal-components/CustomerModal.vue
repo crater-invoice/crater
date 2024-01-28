@@ -36,7 +36,7 @@
               </BaseInputGroup>
 
               <BaseInputGroup
-                :label="$tc('settings.currencies.currency')"
+                :label="$t('settings.currencies.currency')"
                 required
                 :error="
                   v$.currency_id.$error && v$.currency_id.$errors[0].$message

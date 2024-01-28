@@ -1,8 +1,8 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Role;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Role;
 
-use Crater\Http\Controllers\Controller;
+use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AbilitiesController extends Controller

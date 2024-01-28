@@ -1,12 +1,12 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Requests\MailEnvironmentRequest;
-use Crater\Mail\TestMail;
-use Crater\Models\Setting;
-use Crater\Space\EnvironmentManager;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\MailEnvironmentRequest;
+use InvoiceShelf\Mail\TestMail;
+use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Space\EnvironmentManager;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mail;

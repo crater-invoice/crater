@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\General;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\User;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 
 class SearchUsersController extends Controller

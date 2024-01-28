@@ -1,9 +1,9 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Settings;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
-use Crater\Http\Controllers\Controller;
-use Crater\Models\Company;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyCurrencyCheckTransactionsController extends Controller

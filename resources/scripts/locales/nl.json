@@ -690,7 +690,7 @@
     "no_reviews_found": "Er zijn nog geen beoordelingen voor deze module!",
     "module_not_purchased": "Module niet gekocht",
     "module_not_found": "Module niet gevonden",
-    "version_not_supported": "This module version doesn't support the current version of Crater",
+    "version_not_supported": "This module version doesn't support the current version of InvoiceShelf",
     "last_updated": "Laatst bijgewerkt op",
     "connect_installation": "Verbind uw installatie",
     "api_token_description": "Log in op {url} en verbind deze installatie door het API Token in te voeren. Uw gekochte modules zullen hier verschijnen nadat de verbinding is gemaakt.",
@@ -864,7 +864,7 @@
       "company_info": "Bedrijfsinfo",
       "company_name": "Bedrijfsnaam",
       "company_logo": "Bedrijfslogo",
-      "section_description": "Informatie over uw bedrijf die wordt weergegeven op facturen, offertes en andere documenten die door Crater zijn gemaakt.",
+      "section_description": "Informatie over uw bedrijf die wordt weergegeven op facturen, offertes en andere documenten die door InvoiceShelf zijn gemaakt.",
       "phone": "Telefoon",
       "country": "Land",
       "state": "Provincie",
@@ -1093,7 +1093,7 @@
     "exchange_rate": {
       "exchange_rate": "Wisselkoers",
       "title": "Problemen met wisselkoersen oplossen",
-      "description": "Voer de wisselkoers in van alle onderstaande valuta's om Crater te helpen de bedragen in {currency} goed te berekenen.",
+      "description": "Voer de wisselkoers in van alle onderstaande valuta's om InvoiceShelf te helpen de bedragen in {currency} goed te berekenen.",
       "drivers": "Stuurprogramma 's",
       "new_driver": "Voeg nieuwe provider toe",
       "edit_driver": "Provider bewerken",
@@ -1126,7 +1126,7 @@
       "title": "Belastingtypen",
       "add_tax": "Belasting toevoegen",
       "edit_tax": "Belasting bewerken",
-      "description": "U kunt naar believen belastingen toevoegen of verwijderen. Crater ondersteunt belastingen op individuele items en op de factuur.",
+      "description": "U kunt naar believen belastingen toevoegen of verwijderen. InvoiceShelf ondersteunt belastingen op individuele items en op de factuur.",
       "add_new_tax": "Nieuwe belasting toevoegen",
       "tax_settings": "Belastinginstellingen",
       "tax_per_item": "Belasting per item",
@@ -1198,7 +1198,7 @@
     },
     "update_app": {
       "title": "App bijwerken",
-      "description": "U kunt Crater eenvoudig bijwerken door te controleren op een nieuwe update door op de onderstaande knop te klikken",
+      "description": "U kunt InvoiceShelf eenvoudig bijwerken door te controleren op een nieuwe update door op de onderstaande knop te klikken",
       "check_update": "Controleer op updates",
       "avail_update": "Nieuwe update beschikbaar",
       "next_version": "Volgende versie",
@@ -1244,7 +1244,7 @@
     },
     "disk": {
       "title": "Bestandsschijf | Bestandsschijven",
-      "description": "Standaard gebruikt Crater uw lokale schijf om back-ups, avatars en andere afbeeldingen op te slaan. U kunt indien gewenst meer dan één opslaglocatie configureren zoals DigitalOcean, S3 en Dropbox.",
+      "description": "Standaard gebruikt InvoiceShelf uw lokale schijf om back-ups, avatars en andere afbeeldingen op te slaan. U kunt indien gewenst meer dan één opslaglocatie configureren zoals DigitalOcean, S3 en Dropbox.",
       "created_at": "aangemaakt op",
       "dropbox": "dropbox",
       "name": "Naam",
@@ -1289,7 +1289,7 @@
       "disk_setting_description": " Schakel dit in als je een kopie van elke factuur, raming en betalingsbewijs automatisch op je standaard schijf wilt opslaan. Het inschakelen van deze optie zal de laadtijd verminderen wanneer de PDF's worden bekeken.",
       "select_disk": "Selecteer Schijf",
       "disk_settings": "Schijfinstellingen",
-      "confirm_delete": "Uw bestaande bestanden en mappen in de opgegeven schijf worden niet beïnvloed, maar uw schijfconfiguratie wordt uit Crater verwijderd",
+      "confirm_delete": "Uw bestaande bestanden en mappen in de opgegeven schijf worden niet beïnvloed, maar uw schijfconfiguratie wordt uit InvoiceShelf verwijderd",
       "action": "Actie",
       "edit_file_disk": "Bestandsschijf bewerken",
       "success_create": "Schijf toegevoegd",
@@ -1368,7 +1368,7 @@
     },
     "verify_domain": {
       "title": "Menselijke Verificatie",
-      "desc": "Crater maakt gebruik van sessie gebaseerde authenticatie die domeinverificatie vereist voor veiligheidsdoeleinden. Voer het domein in waarop u toegang zult krijgen tot uw webapplicatie.",
+      "desc": "InvoiceShelf maakt gebruik van sessie gebaseerde authenticatie die domeinverificatie vereist voor veiligheidsdoeleinden. Voer het domein in waarop u toegang zult krijgen tot uw webapplicatie.",
       "app_domain": "App Domein",
       "verify_now": "Nu verifiëren",
       "success": "E-mailadres succesvol geverifieerd.",
@@ -1397,7 +1397,7 @@
       "system_req": "systeem vereisten",
       "php_req_version": "PHP (versie {versie} vereist))",
       "check_req": "Controleer vereisten",
-      "system_req_desc": "Crater heeft een paar serververeisten. Zorg ervoor dat uw server de vereiste php-versie heeft en alle onderstaande extensies."
+      "system_req_desc": "InvoiceShelf heeft een paar serververeisten. Zorg ervoor dat uw server de vereiste php-versie heeft en alle onderstaande extensies."
     },
     "errors": {
       "migrate_failed": "Migreren mislukt",
@@ -1413,8 +1413,8 @@
   },
   "validation": {
     "invalid_phone": "Ongeldig Telefoonnummer",
-    "invalid_url": "Ongeldige URL (bijvoorbeeld: http://www.crater.com))",
-    "invalid_domain_url": "Ongeldige URL (bijvoorbeeld: crater.com))",
+    "invalid_url": "Ongeldige URL (bijvoorbeeld: http://www.invoiceshelf.com))",
+    "invalid_domain_url": "Ongeldige URL (bijvoorbeeld: invoiceshelf.com))",
     "required": "Veld is verplicht",
     "email_incorrect": "Incorrecte Email.",
     "email_already_taken": "De email is al in gebruik.",

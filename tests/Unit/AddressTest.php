@@ -1,6 +1,6 @@
 <?php
 
-use Crater\Models\Address;
+use InvoiceShelf\Models\Address;
 use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {

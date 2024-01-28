@@ -1,7 +1,7 @@
 <?php
 
-use Crater\Models\Note;
-use Crater\Models\User;
+use InvoiceShelf\Models\Note;
+use InvoiceShelf\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 use function Pest\Laravel\deleteJson;
@@ -62,5 +62,5 @@ test('delete note', function () {
             'success' => true,
         ]);
 
-    $this->assertDeleted($note);
+    $this->assertModelMissing($note);
 });

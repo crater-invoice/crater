@@ -1,15 +1,15 @@
 <?php
 
-namespace Crater\Http\Controllers\V1\Admin\Customer;
+namespace InvoiceShelf\Http\Controllers\V1\Admin\Customer;
 
 use Carbon\Carbon;
-use Crater\Http\Controllers\Controller;
-use Crater\Http\Resources\CustomerResource;
-use Crater\Models\CompanySetting;
-use Crater\Models\Customer;
-use Crater\Models\Expense;
-use Crater\Models\Invoice;
-use Crater\Models\Payment;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Resources\CustomerResource;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Expense;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Models\Payment;
 use Illuminate\Http\Request;
 
 class CustomerStatsController extends Controller

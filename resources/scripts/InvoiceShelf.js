@@ -11,7 +11,7 @@ import { VTooltip } from 'v-tooltip'
 
 const app = createApp(App)
 
-export default class Crater {
+export default class InvoiceShelf {
   constructor() {
     this.bootingCallbacks = []
     this.messages = messages

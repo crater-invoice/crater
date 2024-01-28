@@ -51,7 +51,7 @@
         .header-logo {
             /* position: absolute; */
             text-transform: capitalize;
-            color: #817AE3;
+            color: #7675ff;
             padding-top: 0px;
         }
 

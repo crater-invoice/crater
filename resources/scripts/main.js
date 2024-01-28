@@ -1,4 +1,4 @@
-import '../sass/crater.scss'
+import '../sass/invoiceshelf.scss'
 import 'v-tooltip/dist/v-tooltip.css'
 import '@/scripts/plugins/axios.js'
 import * as VueRouter from 'vue-router'
@@ -10,10 +10,10 @@ import * as Vuelidate from '@vuelidate/core'
 window.pinia = pinia
 window.Vuelidate = Vuelidate
 
-import Crater from './Crater'
+import InvoiceShelf from './InvoiceShelf'
 
 window.Vue = Vue
 window.router = router
 window.VueRouter = VueRouter
 
-window.Crater = new Crater()
+window.InvoiceShelf = new InvoiceShelf()

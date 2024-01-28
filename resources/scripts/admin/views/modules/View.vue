@@ -864,10 +864,10 @@ async function installModule() {
         let displayMsg = ref('')
 
         if (
-          requestResponse.data.message === 'crater_version_is_not_supported'
+          requestResponse.data.message === 'invoiceshelf_version_is_not_supported'
         ) {
           displayMsg.value = t('modules.version_not_supported', {
-            version: requestResponse.data.min_crater_version,
+            version: requestResponse.data.min_invoiceshelf_version,
           })
         } else {
           displayMsg.value = getErrorMessage(requestResponse.data.message)

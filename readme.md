@@ -4,7 +4,7 @@
 
 InvoiceShelf is an open-source web & mobile app that helps you track expenses, payments & create professional invoices & estimates.
 
-InvoiceShelf is a fork of [Crater](https://crater.finance) application that focuses in stability, updates and new features.
+InvoiceShelf is a fork of [Crater](https://crater.finance) that focuses in stability, updates and new features.
 
 The Web Application is made using Laravel & VueJS while the Mobile Apps are built using React Native.
 

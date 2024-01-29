@@ -380,6 +380,14 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => ',',
             ],
             [
+                'name' => 'Turkmenistani manat',
+                'code' => 'TMT',
+                'symbol' => 'M ',
+                'precision' => '2',
+                'thousand_separator' => '.',
+                'decimal_separator' => ',',
+            ],
+            [
                 'name' => 'Romanian New Leu',
                 'code' => 'RON',
                 'symbol' => 'RON',

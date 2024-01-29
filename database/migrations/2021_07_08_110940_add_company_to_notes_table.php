@@ -39,7 +39,9 @@ class AddCompanyToNotesTable extends Migration
     public function down()
     {
         Schema::table('notes', function (Blueprint $table) {
-            $table->dropForeign(['company_id']);
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'company_id' ] );
+            }
         });
     }
 }

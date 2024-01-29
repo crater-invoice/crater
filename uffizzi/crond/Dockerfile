@@ -26,9 +26,9 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u 1000 -d /home/crater-user crater-user
-RUN mkdir -p /home/crater-user/.composer && \
-    chown -R crater-user:crater-user /home/crater-user
+RUN useradd -G www-data,root -u 1000 -d /home/invoiceshelf-user invoiceshelf-user
+RUN mkdir -p /home/invoiceshelf-user/.composer && \
+    chown -R invoiceshelf-user:invoiceshelf-user /home/invoiceshelf-user
 
 # Mounted volumes
 COPY ./ /var/www
@@ -38,10 +38,10 @@ COPY ./uffizzi/.env.example /var/www/.env
 # Set working directory
 WORKDIR /var/www
 
-RUN chown -R crater-user:crater-user ./
-RUN chmod -R 775 composer.json composer.lock \ 
+RUN chown -R invoiceshelf-user:invoiceshelf-user ./
+RUN chmod -R 775 composer.json composer.lock \
         composer.lock storage/framework/ \
-        storage/logs/ bootstrap/cache/ /home/crater-user/.composer
+        storage/logs/ bootstrap/cache/ /home/invoiceshelf-user/.composer
 
 RUN composer config --no-plugins allow-plugins.pestphp/pest-plugin true && \
     composer install --no-interaction --prefer-dist --optimize-autoloader && \

@@ -19,10 +19,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'email' => 'admin@craterapp.com',
+            'email' => 'admin@invoiceshelf.com',
             'name' => 'Jane Doe',
             'role' => 'super admin',
-            'password' => 'crater@123',
+            'password' => 'invoiceshelf@123',
         ]);
 
         $company = Company::create([

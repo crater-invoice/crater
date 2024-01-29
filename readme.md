@@ -87,7 +87,7 @@ Join the Crater discord server to discuss:
 
 ## Translate
 
-Help us translate on https://crowdin.com/project/crater-invoice
+Help us translate on https://crowdin.com/project/invoiceshelf
 
 **Thanks to Translation Contributors:**
 

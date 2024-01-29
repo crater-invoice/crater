@@ -45,7 +45,7 @@ test('update profile', function () {
     $user = [
         'name' => 'John Doe',
         'password' => 'admin@123',
-        'email' => 'admin@crater.in',
+        'email' => 'admin@invoiceshelf.com',
     ];
 
     $response = putJson('api/v1/me', $user);
@@ -101,7 +101,7 @@ test('update settings', function () {
         'fiscal_year' => '1-12',
         'carbon_date_format' => 'Y/m/d',
         'moment_date_format' => 'YYYY/MM/DD',
-        'notification_email' => 'noreply@crater.in',
+        'notification_email' => 'noreply@invoiceshelf.com',
         'notify_invoice_viewed' => 'YES',
         'notify_estimate_viewed' => 'YES',
         'tax_per_item' => 'YES',

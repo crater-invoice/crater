@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.1-fpm-bookworm
 
 # Arguments defined in docker-compose.yml
 ARG user
@@ -8,6 +8,7 @@ ARG uid
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    nano \
     libpng-dev \
     libonig-dev \
     libxml2-dev \

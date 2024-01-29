@@ -52,7 +52,9 @@ class AddOwnerIdToCompaniesTable extends Migration
     {
         Schema::table('companies', function (Blueprint $table) {
             $table->dropColumn('slug');
-            $table->dropForeign(['owner_id']);
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'owner_id' ] );
+            }
         });
     }
 }

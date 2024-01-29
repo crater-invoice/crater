@@ -11,10 +11,10 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     command: ["-c","
-            composer config --no-plugins allow-plugins.pestphp/pest-plugin true && 
-            composer install --no-interaction --prefer-dist --optimize-autoloader && 
-            php artisan storage:link || true && 
-            php artisan key:generate --force && 
+            composer config --no-plugins allow-plugins.pestphp/pest-plugin true &&
+            composer install --no-interaction --prefer-dist --optimize-autoloader &&
+            php artisan storage:link || true &&
+            php artisan key:generate --force &&
             php-fpm",
             ]
     entrypoint: /bin/sh
@@ -29,10 +29,10 @@ services:
     image: mariadb
     restart: always
     environment:
-      MYSQL_USER: crater
-      MYSQL_PASSWORD: crater
-      MYSQL_DATABASE: crater
-      MYSQL_ROOT_PASSWORD: crater
+      MYSQL_USER: invoiceshelf
+      MYSQL_PASSWORD: invoiceshelf
+      MYSQL_DATABASE: invoiceshelf
+      MYSQL_ROOT_PASSWORD: invoiceshelf
     ports:
       - '33006:3306'
     deploy:
@@ -54,5 +54,5 @@ services:
   cron:
     image: "${CROND_IMAGE}"
     restart: always
-    
+
 

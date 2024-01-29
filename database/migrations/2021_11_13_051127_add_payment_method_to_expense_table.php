@@ -27,6 +27,9 @@ class AddPaymentMethodToExpenseTable extends Migration
     public function down()
     {
         Schema::table('expenses', function (Blueprint $table) {
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'payment_method_id' ] );
+            }
             $table->dropColumn('payment_method_id');
         });
     }

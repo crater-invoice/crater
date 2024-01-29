@@ -138,7 +138,7 @@
           hasActiveUrl(item.link)
             ? 'text-primary-500 border-primary-500 bg-gray-100 '
             : 'text-black',
-          'cursor-pointer px-0 pl-6 hover:bg-gray-50 py-3 group flex items-center border-l-4 border-solid border-transparent text-sm not-italic font-medium',
+          'cursor-pointer px-0 pl-6 hover:bg-gray-50 py-3 group flex items-center border-l-4 border-solid text-sm not-italic font-medium',
         ]"
       >
         <BaseIcon

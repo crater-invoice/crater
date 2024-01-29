@@ -27,6 +27,9 @@ class AddRecurringInvoiceIdToInvoicesTable extends Migration
     public function down()
     {
         Schema::table('invoices', function (Blueprint $table) {
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign( [ 'recurring_invoice_id' ] );
+            }
             $table->dropColumn('recurring_invoice_id');
         });
     }

@@ -18,7 +18,7 @@ services:
       - invoiceshelf
 
   db:
-    image: mariadb:10.11
+    image: mariadb:lts
     restart: always
     volumes:
       - db:/var/lib/mysql

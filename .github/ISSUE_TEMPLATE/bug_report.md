@@ -17,7 +17,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Please complete the following information:**
-- Crater version: 
+- InvoiceShelf version: 
 - PHP version: 
 - Database type and version: 
 

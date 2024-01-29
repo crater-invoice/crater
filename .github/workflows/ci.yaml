@@ -9,7 +9,7 @@ on:
     pull_request:
         branches: [ master ]
 env:
-    INVOICESHELF_VERSION: 1.0.0
+    INVOICESHELF_VERSION: 1.0.0-beta1
 jobs:
     build-test:
         runs-on: ubuntu-latest

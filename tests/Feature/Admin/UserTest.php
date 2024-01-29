@@ -4,7 +4,7 @@ use InvoiceShelf\Http\Controllers\V1\Admin\Users\UsersController;
 use InvoiceShelf\Http\Requests\UserRequest;
 use InvoiceShelf\Models\User;
 use Laravel\Sanctum\Sanctum;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -37,10 +37,10 @@ test('store user using a form request', function () {
 
 // test('store user', function () {
 //     $data = [
-//         'name' => faker()->name,
-//         'email' => faker()->unique()->safeEmail,
-//         'phone' => faker()->phoneNumber,
-//         'password' => faker()->password
+//         'name' => fake()->name,
+//         'email' => fake()->unique()->safeEmail,
+//         'phone' => fake()->phoneNumber,
+//         'password' => fake()->password
 //     ];
 
 //     postJson('/api/v1/users', $data)->assertOk();
@@ -70,10 +70,10 @@ test('update user using a form request', function () {
 //     $user = User::factory()->create();
 
 //     $data = [
-//         'name' => faker()->name,
-//         'email' => faker()->unique()->safeEmail,
-//         'phone' => faker()->phoneNumber,
-//         'password' => faker()->password
+//         'name' => fake()->name,
+//         'email' => fake()->unique()->safeEmail,
+//         'phone' => fake()->phoneNumber,
+//         'password' => fake()->password
 //     ];
 
 //     putJson("/api/v1/users/{$user->id}", $data)->assertOk();

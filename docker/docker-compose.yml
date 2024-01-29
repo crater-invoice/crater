@@ -2,18 +2,9 @@ version: '3'
 
 services:
   app:
-    build:
-      args:
-        user: invoiceshelf-user
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: invoiceshelf-php
+    image: invoiceshelf/invoiceshelf-php
     restart: unless-stopped
     working_dir: /var/www/
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
       - invoiceshelf
 
@@ -36,22 +27,20 @@ services:
       - invoiceshelf
 
   nginx:
-    image: nginx:1.17-alpine
+    image: invoiceshelf/invoiceshelf-nginx
     restart: unless-stopped
     ports:
       - 80:80
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - invoiceshelf
 
   cron:
     build:
-      context: ./
-      dockerfile: ./docker-compose/cron.dockerfile
+      context: ../
+      dockerfile: docker/cron.dockerfile
+    image: invoiceshelf-cron
     volumes:
-      - ./:/var/www
+      - ../:/var/www
     networks:
       - invoiceshelf
 

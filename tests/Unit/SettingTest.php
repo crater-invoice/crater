@@ -2,7 +2,7 @@
 
 use InvoiceShelf\Models\Setting;
 use Illuminate\Support\Facades\Artisan;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -10,9 +10,9 @@ beforeEach(function () {
 });
 
 test('set setting', function () {
-    $key = faker()->name;
+    $key = fake()->name;
 
-    $value = faker()->word;
+    $value = fake()->word;
 
     Setting::setSetting($key, $value);
 

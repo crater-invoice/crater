@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Customer;
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\V1\Customer\General\ProfileController;
 use InvoiceShelf\Http\Requests\Customer\CustomerProfileRequest;
 use InvoiceShelf\Models\Customer;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
@@ -38,19 +39,19 @@ test('update customer profile', function () {
     $newCustomer = Customer::factory()->raw([
         'shipping' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
+            'address_street_1' => 'address',
         ],
         'billing' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
-        ]
+            'address_street_1' => 'address',
+        ],
     ]);
 
     postJson("api/v1/{$customer->company->slug}/customer/profile", $newCustomer)->assertOk();
 
     $this->assertDatabaseHas('customers', [
         'name' => $customer['name'],
-        'email' => $customer['email']
+        'email' => $customer['email'],
     ]);
 });
 

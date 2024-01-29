@@ -46,7 +46,7 @@ class CreateTemplateCommand extends Command
         }
 
         if (Storage::disk('views')->exists("/app/pdf/{$type}/{$templateName}.blade.php")) {
-            $this->info("Template with given name already exists.");
+            $this->info('Template with given name already exists.');
 
             return 0;
         }

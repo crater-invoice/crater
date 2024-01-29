@@ -28,13 +28,13 @@ class UploadModuleRequest extends FormRequest
                 'required',
                 'file',
                 'mimes:zip',
-                'max:20000'
+                'max:20000',
             ],
             'module' => [
                 'required',
                 'string',
-                'max:100'
-            ]
+                'max:100',
+            ],
         ];
     }
 }

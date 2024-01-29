@@ -45,7 +45,7 @@ class CreateCustomFieldsTable extends Migration
     {
         Schema::table('custom_fields', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'company_id' ] );
+                $table->dropForeign(['company_id']);
             }
         });
         Schema::dropIfExists('custom_fields');

@@ -2,10 +2,11 @@
 
 namespace Tests\Feature\Customer;
 
-use InvoiceShelf\Models\Customer;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use InvoiceShelf\Models\Customer;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 
 beforeEach(function () {

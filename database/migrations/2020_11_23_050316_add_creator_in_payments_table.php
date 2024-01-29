@@ -28,7 +28,7 @@ class AddCreatorInPaymentsTable extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'creator_id' ] );
+                $table->dropForeign(['creator_id']);
             }
         });
     }

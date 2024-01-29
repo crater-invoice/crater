@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\SettingRequest;
 use InvoiceShelf\Models\Setting;
-use Illuminate\Http\Request;
 
 class UpdateSettingsController extends Controller
 {
@@ -23,7 +23,7 @@ class UpdateSettingsController extends Controller
 
         return response()->json([
             'success' => true,
-            $request->settings
+            $request->settings,
         ]);
     }
 }

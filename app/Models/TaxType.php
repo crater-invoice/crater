@@ -15,10 +15,11 @@ class TaxType extends Model
 
     protected $casts = [
         'percent' => 'float',
-        'compound_tax' => 'boolean'
+        'compound_tax' => 'boolean',
     ];
 
     public const TYPE_GENERAL = 'GENERAL';
+
     public const TYPE_MODULE = 'MODULE';
 
     public function taxes()

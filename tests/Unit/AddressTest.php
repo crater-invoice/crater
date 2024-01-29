@@ -1,7 +1,7 @@
 <?php
 
-use InvoiceShelf\Models\Address;
 use Illuminate\Support\Facades\Artisan;
+use InvoiceShelf\Models\Address;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);

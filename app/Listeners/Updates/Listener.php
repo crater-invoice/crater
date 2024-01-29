@@ -10,7 +10,6 @@ class Listener
     /**
      * Check if should listen.
      *
-     * @param  $event
      * @return bool
      */
     protected function isListenerFired($event)

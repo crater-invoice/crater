@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Expense;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\DeleteExpensesRequest;
 use InvoiceShelf\Http\Requests\ExpenseRequest;
 use InvoiceShelf\Http\Resources\ExpenseResource;
 use InvoiceShelf\Models\Expense;
-use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
 {
@@ -30,7 +30,7 @@ class ExpensesController extends Controller
             ->select('expenses.*', 'expense_categories.name', 'customers.name as user_name')
             ->paginateData($limit);
 
-        return (ExpenseResource::collection($expenses))
+        return ExpenseResource::collection($expenses)
             ->additional(['meta' => [
                 'expense_total_count' => Expense::whereCompany()->count(),
             ]]);
@@ -39,7 +39,6 @@ class ExpensesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ExpenseRequest $request)
@@ -54,7 +53,6 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Expense $expense)
@@ -67,8 +65,6 @@ class ExpensesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
-     * @param  \InvoiceShelf\Models\Expense $expense
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(ExpenseRequest $request, Expense $expense)

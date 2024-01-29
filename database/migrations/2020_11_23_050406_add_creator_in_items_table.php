@@ -28,7 +28,7 @@ class AddCreatorInItemsTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'creator_id' ] );
+                $table->dropForeign(['creator_id']);
             }
         });
     }

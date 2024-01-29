@@ -3,14 +3,14 @@
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Estimate;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\InvoiceResource;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Services\SerialNumberFormatter;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
 class ConvertEstimateController extends Controller
@@ -18,8 +18,6 @@ class ConvertEstimateController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \InvoiceShelf\Models\Estimate $estimate
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, Estimate $estimate, Invoice $invoice)

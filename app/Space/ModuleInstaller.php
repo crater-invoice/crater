@@ -3,13 +3,13 @@
 namespace InvoiceShelf\Space;
 
 use Artisan;
+use File;
+use GuzzleHttp\Exception\RequestException;
 use InvoiceShelf\Events\ModuleEnabledEvent;
 use InvoiceShelf\Events\ModuleInstalledEvent;
 use InvoiceShelf\Http\Resources\ModuleResource;
 use InvoiceShelf\Models\Module as ModelsModule;
 use InvoiceShelf\Models\Setting;
-use File;
-use GuzzleHttp\Exception\RequestException;
 use Nwidart\Modules\Facades\Module;
 use ZipArchive;
 
@@ -56,7 +56,7 @@ class ModuleInstaller
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true], $token);
 
         if ($response && ($response->getStatusCode() == 401)) {
-            return (object)['success' => false, 'error' => 'invalid_token'];
+            return (object) ['success' => false, 'error' => 'invalid_token'];
         }
 
         if ($response && ($response->getStatusCode() == 200)) {
@@ -137,7 +137,7 @@ class ModuleInstaller
 
         return [
             'success' => true,
-            'path' => $zip_file_path
+            'path' => $zip_file_path,
         ];
     }
 
@@ -215,7 +215,7 @@ class ModuleInstaller
         return true;
     }
 
-    public static function checkToken(String $token)
+    public static function checkToken(string $token)
     {
         $url = 'api/marketplace/ping';
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true], $token);

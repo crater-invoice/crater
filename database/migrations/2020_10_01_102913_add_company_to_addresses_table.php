@@ -29,7 +29,7 @@ class AddCompanyToAddressesTable extends Migration
     {
         Schema::table('addresses', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'company_id' ] );
+                $table->dropForeign(['company_id']);
             }
         });
     }

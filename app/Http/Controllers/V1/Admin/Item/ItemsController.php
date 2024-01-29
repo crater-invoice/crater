@@ -2,20 +2,19 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Item;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests;
 use InvoiceShelf\Http\Requests\DeleteItemsRequest;
 use InvoiceShelf\Http\Resources\ItemResource;
 use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\TaxType;
-use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
     /**
      * Retrieve a list of existing Items.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -31,7 +30,7 @@ class ItemsController extends Controller
             ->latest()
             ->paginateData($limit);
 
-        return (ItemResource::collection($items))
+        return ItemResource::collection($items)
             ->additional(['meta' => [
                 'tax_types' => TaxType::whereCompany()->latest()->get(),
                 'item_total_count' => Item::whereCompany()->count(),
@@ -41,7 +40,7 @@ class ItemsController extends Controller
     /**
      * Create Item.
      *
-     * @param  InvoiceShelf\Http\Requests\ItemsRequest $request
+     * @param  InvoiceShelf\Http\Requests\ItemsRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Requests\ItemsRequest $request)
@@ -56,7 +55,6 @@ class ItemsController extends Controller
     /**
      * get an existing Item.
      *
-     * @param  Item $item
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Item $item)
@@ -69,8 +67,7 @@ class ItemsController extends Controller
     /**
      * Update an existing Item.
      *
-     * @param  InvoiceShelf\Http\Requests\ItemsRequest $request
-     * @param  \InvoiceShelf\Models\Item $item
+     * @param  InvoiceShelf\Http\Requests\ItemsRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Requests\ItemsRequest $request, Item $item)
@@ -85,7 +82,7 @@ class ItemsController extends Controller
     /**
      * Delete a list of existing Items.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete(DeleteItemsRequest $request)

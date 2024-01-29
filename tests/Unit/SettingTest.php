@@ -1,7 +1,8 @@
 <?php
 
-use InvoiceShelf\Models\Setting;
 use Illuminate\Support\Facades\Artisan;
+use InvoiceShelf\Models\Setting;
+
 use function Pest\Faker\fake;
 
 beforeEach(function () {

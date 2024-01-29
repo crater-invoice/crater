@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Modules;
 
-use InvoiceShelf\Http\Controllers\Controller;
-use InvoiceShelf\Services\Module\ModuleFacade;
 use DateTime;
 use Illuminate\Support\Arr;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Services\Module\ModuleFacade;
 use Request;
 
 class StyleController extends Controller
@@ -13,7 +13,6 @@ class StyleController extends Controller
     /**
      * Serve the requested stylesheet.
      *
-     * @param  \Request  $request
      * @return \Illuminate\Http\Response
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException

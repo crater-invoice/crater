@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use InvoiceShelf\Models\Currency;
-use InvoiceShelf\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\User;
 
 class UserFactory extends Factory
 {

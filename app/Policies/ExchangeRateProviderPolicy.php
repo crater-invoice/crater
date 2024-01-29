@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use InvoiceShelf\Models\ExchangeRateProvider;
 use InvoiceShelf\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\BouncerFacade;
 
 class ExchangeRateProviderPolicy
@@ -14,7 +14,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
@@ -29,8 +28,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -45,7 +42,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
@@ -60,8 +56,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -76,8 +70,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -92,8 +84,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, ExchangeRateProvider $exchangeRateProvider)
@@ -104,8 +94,6 @@ class ExchangeRateProviderPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, ExchangeRateProvider $exchangeRateProvider)

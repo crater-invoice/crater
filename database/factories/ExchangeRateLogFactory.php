@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\ExchangeRateLog;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExchangeRateLogFactory extends Factory
 {
@@ -27,7 +27,7 @@ class ExchangeRateLogFactory extends Factory
             'company_id' => Currency::find(1)->id,
             'base_currency_id' => User::find(1)->companies()->first()->id,
             'currency_id' => Currency::find(4)->id,
-            'exchange_rate' => $this->faker->randomDigitNotNull
+            'exchange_rate' => $this->faker->randomDigitNotNull,
         ];
     }
 }

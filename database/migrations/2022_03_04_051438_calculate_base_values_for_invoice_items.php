@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\Tax;
-use Illuminate\Database\Migrations\Migration;
 
 class CalculateBaseValuesForInvoiceItems extends Migration
 {

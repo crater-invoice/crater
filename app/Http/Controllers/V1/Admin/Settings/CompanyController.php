@@ -2,6 +2,7 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\AvatarRequest;
 use InvoiceShelf\Http\Requests\CompanyLogoRequest;
@@ -10,12 +11,12 @@ use InvoiceShelf\Http\Requests\ProfileRequest;
 use InvoiceShelf\Http\Resources\CompanyResource;
 use InvoiceShelf\Http\Resources\UserResource;
 use InvoiceShelf\Models\Company;
-use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
     /**
      * Retrive the Admin account.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getUser(Request $request)
@@ -27,7 +28,6 @@ class CompanyController extends Controller
      * Update the Admin profile.
      * Includes name, email and (or) password
      *
-     * @param  \InvoiceShelf\Http\Requests\ProfileRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateProfile(ProfileRequest $request)
@@ -41,7 +41,7 @@ class CompanyController extends Controller
 
     /**
      * Update Admin Company Details
-     * @param \InvoiceShelf\Http\Requests\CompanyRequest $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateCompany(CompanyRequest $request)
@@ -60,7 +60,6 @@ class CompanyController extends Controller
     /**
      * Upload the company logo to storage.
      *
-     * @param  \InvoiceShelf\Http\Requests\CompanyLogoRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadCompanyLogo(CompanyLogoRequest $request)
@@ -94,7 +93,6 @@ class CompanyController extends Controller
     /**
      * Upload the Admin Avatar to public storage.
      *
-     * @param  \InvoiceShelf\Http\Requests\AvatarRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadAvatar(AvatarRequest $request)

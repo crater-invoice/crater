@@ -168,7 +168,7 @@ return [
         InvoiceShelf\Providers\EventServiceProvider::class,
         InvoiceShelf\Providers\RouteServiceProvider::class,
         InvoiceShelf\Providers\DropboxServiceProvider::class,
-        InvoiceShelf\Providers\ViewServiceProvider::class
+        InvoiceShelf\Providers\ViewServiceProvider::class,
     ],
 
     /*
@@ -220,6 +220,6 @@ return [
         'Flash' => Laracasts\Flash\Flash::class,
         // 'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'Pusher' => Pusher\Pusher::class,
-        'Menu' => Lavary\Menu\Facade::class
+        'Menu' => Lavary\Menu\Facade::class,
     ],
 ];

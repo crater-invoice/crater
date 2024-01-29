@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Note;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class NoteFactory extends Factory
 {

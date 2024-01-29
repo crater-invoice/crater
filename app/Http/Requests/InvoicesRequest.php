@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class InvoicesRequest extends FormRequest
 {
@@ -39,10 +39,10 @@ class InvoicesRequest extends FormRequest
             ],
             'invoice_number' => [
                 'required',
-                Rule::unique('invoices')->where('company_id', $this->header('company'))
+                Rule::unique('invoices')->where('company_id', $this->header('company')),
             ],
             'exchange_rate' => [
-                'nullable'
+                'nullable',
             ],
             'discount' => [
                 'required',
@@ -60,7 +60,7 @@ class InvoicesRequest extends FormRequest
                 'required',
             ],
             'template_name' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
@@ -89,11 +89,11 @@ class InvoicesRequest extends FormRequest
         $customer = Customer::find($this->customer_id);
 
         if ($customer && $companyCurrency) {
-            if ((string)$customer->currency_id !== $companyCurrency) {
+            if ((string) $customer->currency_id !== $companyCurrency) {
                 $rules['exchange_rate'] = [
                     'required',
                 ];
-            };
+            }
         }
 
         if ($this->isMethod('PUT')) {

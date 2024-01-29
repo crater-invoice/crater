@@ -4,11 +4,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Backup;
 
-use InvoiceShelf\Jobs\CreateBackupJob;
-use InvoiceShelf\Rules\Backup\PathToZip;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use InvoiceShelf\Jobs\CreateBackupJob;
+use InvoiceShelf\Rules\Backup\PathToZip;
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
 use Spatie\Backup\Helpers\Format;
@@ -59,7 +59,6 @@ class BackupsController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return JsonResponse
      */
     public function store(Request $request)
@@ -74,7 +73,6 @@ class BackupsController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return JsonResponse
      */
     public function destroy($disk, Request $request)

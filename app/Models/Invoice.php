@@ -5,15 +5,15 @@ namespace InvoiceShelf\Models;
 use App;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Str;
 use InvoiceShelf\Mail\SendInvoiceMail;
 use InvoiceShelf\Services\SerialNumberFormatter;
 use InvoiceShelf\Traits\GeneratesPdfTrait;
 use InvoiceShelf\Traits\HasCustomFieldsTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Nwidart\Modules\Facades\Module;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -21,18 +21,23 @@ use Vinkla\Hashids\Facades\Hashids;
 
 class Invoice extends Model implements HasMedia
 {
-    use HasFactory;
-    use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use HasFactory;
+    use InteractsWithMedia;
 
     public const STATUS_DRAFT = 'DRAFT';
+
     public const STATUS_SENT = 'SENT';
+
     public const STATUS_VIEWED = 'VIEWED';
+
     public const STATUS_COMPLETED = 'COMPLETED';
 
     public const STATUS_UNPAID = 'UNPAID';
+
     public const STATUS_PARTIALLY_PAID = 'PARTIALLY_PAID';
+
     public const STATUS_PAID = 'PAID';
 
     protected $dates = [
@@ -40,7 +45,7 @@ class Invoice extends Model implements HasMedia
         'updated_at',
         'deleted_at',
         'invoice_date',
-        'due_date'
+        'due_date',
     ];
 
     protected $casts = [
@@ -49,7 +54,7 @@ class Invoice extends Model implements HasMedia
         'sub_total' => 'integer',
         'discount' => 'float',
         'discount_val' => 'integer',
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
     ];
 
     protected $guarded = [
@@ -340,7 +345,7 @@ class Invoice extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($invoice);
         }
 
@@ -357,7 +362,7 @@ class Invoice extends Model implements HasMedia
             'items.fields',
             'items.fields.customField',
             'customer',
-            'taxes'
+            'taxes',
         ])
             ->find($invoice->id);
 
@@ -402,7 +407,7 @@ class Invoice extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
@@ -432,7 +437,7 @@ class Invoice extends Model implements HasMedia
             'items.fields',
             'items.fields.customField',
             'customer',
-            'taxes'
+            'taxes',
         ])
             ->find($this->id);
 
@@ -457,7 +462,7 @@ class Invoice extends Model implements HasMedia
 
         return [
             'type' => 'preview',
-            'view' => new SendInvoiceMail($data)
+            'view' => new SendInvoiceMail($data),
         ];
     }
 
@@ -504,7 +509,7 @@ class Invoice extends Model implements HasMedia
                     $tax['base_amount'] = $tax['amount'] * $exchange_rate;
                     $tax['currency_id'] = $invoice->currency_id;
 
-                    if (gettype($tax['amount']) !== "NULL") {
+                    if (gettype($tax['amount']) !== 'NULL') {
                         if (array_key_exists('recurring_invoice_id', $invoiceItem)) {
                             unset($invoiceItem['recurring_invoice_id']);
                         }
@@ -530,7 +535,7 @@ class Invoice extends Model implements HasMedia
             $tax['base_amount'] = $tax['amount'] * $exchange_rate;
             $tax['currency_id'] = $invoice->currency_id;
 
-            if (gettype($tax['amount']) !== "NULL") {
+            if (gettype($tax['amount']) !== 'NULL') {
                 if (array_key_exists('recurring_invoice_id', $tax)) {
                     unset($tax['recurring_invoice_id']);
                 }
@@ -664,7 +669,7 @@ class Invoice extends Model implements HasMedia
         foreach ($templates as $key => $template) {
             $templateName = Str::before(basename($template), '.blade.php');
             $invoiceTemplates[$key]['name'] = $templateName;
-            $invoiceTemplates[$key]['path'] =  Vite::asset('resources/static/img/PDF/'.$templateName.'.png');
+            $invoiceTemplates[$key]['path'] = Vite::asset('resources/static/img/PDF/'.$templateName.'.png');
         }
 
         return $invoiceTemplates;

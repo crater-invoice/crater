@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\RecurringInvoice;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
 use InvoiceShelf\Http\Resources\RecurringInvoiceResource;
 use InvoiceShelf\Models\RecurringInvoice;
-use Illuminate\Http\Request;
 
 class RecurringInvoiceController extends Controller
 {
@@ -25,7 +25,7 @@ class RecurringInvoiceController extends Controller
             ->applyFilters($request->all())
             ->paginateData($limit);
 
-        return (RecurringInvoiceResource::collection($recurringInvoices))
+        return RecurringInvoiceResource::collection($recurringInvoices)
             ->additional(['meta' => [
                 'recurring_invoice_total_count' => RecurringInvoice::whereCompany()->count(),
             ]]);
@@ -49,7 +49,6 @@ class RecurringInvoiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\RecurringInvoice  $recurringInvoice
      * @return \Illuminate\Http\Response
      */
     public function show(RecurringInvoice $recurringInvoice)
@@ -63,7 +62,6 @@ class RecurringInvoiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \InvoiceShelf\Models\RecurringInvoice  $recurringInvoice
      * @return \Illuminate\Http\Response
      */
     public function update(RecurringInvoiceRequest $request, RecurringInvoice $recurringInvoice)

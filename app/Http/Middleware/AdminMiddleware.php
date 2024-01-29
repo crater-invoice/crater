@@ -10,9 +10,8 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @param null $guard
+     * @param  \Illuminate\Http\Request  $request
+     * @param  null  $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)

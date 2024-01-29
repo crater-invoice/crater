@@ -52,43 +52,43 @@ return [
     * List of languages supported by Crater.
     */
     'languages' => [
-        ["code" => "ar", "name" => "Arabic"],
-        ["code" => "nl", "name" => "Dutch"],
-        ["code" => "en", "name" => "English"],
-        ["code" => "fr", "name" => "French"],
-        ["code" => "de", "name" => "German"],
-        ["code" => "ja", "name" => "Japanese"],
-        ["code" => "it", "name" => "Italian"],
-        ["code" => "lv", "name" => "Latvian"],
-        ["code" => "pl", "name" => "Polish"],
-        ["code" => "pt_BR", "name" => "Portuguese (Brazilian)"],
-        ["code" => "sr", "name" => "Serbian Latin"],
-        ["code" => "ko", "name" => "Korean"],
-        ["code" => "es", "name" => "Spanish"],
-        ["code" => "sv", "name" => "Svenska"],
-        ["code" => "sk", "name" => "Slovak"],
-        ["code" => "vi", "name" => "Tiếng Việt"],
-        ["code" => "cs", "name" => "Czech"],
-        ["code" => "el", "name" => "Greek"],
-        ["code" => "hr", "name" => "Crotian"],
-        ["code" => "th", "name" => "ไทย"],
+        ['code' => 'ar', 'name' => 'Arabic'],
+        ['code' => 'nl', 'name' => 'Dutch'],
+        ['code' => 'en', 'name' => 'English'],
+        ['code' => 'fr', 'name' => 'French'],
+        ['code' => 'de', 'name' => 'German'],
+        ['code' => 'ja', 'name' => 'Japanese'],
+        ['code' => 'it', 'name' => 'Italian'],
+        ['code' => 'lv', 'name' => 'Latvian'],
+        ['code' => 'pl', 'name' => 'Polish'],
+        ['code' => 'pt_BR', 'name' => 'Portuguese (Brazilian)'],
+        ['code' => 'sr', 'name' => 'Serbian Latin'],
+        ['code' => 'ko', 'name' => 'Korean'],
+        ['code' => 'es', 'name' => 'Spanish'],
+        ['code' => 'sv', 'name' => 'Svenska'],
+        ['code' => 'sk', 'name' => 'Slovak'],
+        ['code' => 'vi', 'name' => 'Tiếng Việt'],
+        ['code' => 'cs', 'name' => 'Czech'],
+        ['code' => 'el', 'name' => 'Greek'],
+        ['code' => 'hr', 'name' => 'Crotian'],
+        ['code' => 'th', 'name' => 'ไทย'],
     ],
 
     /*
     * List of Fiscal Years
     */
     'fiscal_years' => [
-        ['key' => 'january-december' , 'value' => '1-12'],
-        ['key' => 'february-january' , 'value' => '2-1'],
-        ['key' => 'march-february'   , 'value' => '3-2'],
-        ['key' => 'april-march'      , 'value' => '4-3'],
-        ['key' => 'may-april'        , 'value' => '5-4'],
-        ['key' => 'june-may'         , 'value' => '6-5'],
-        ['key' => 'july-june'        , 'value' => '7-6'],
-        ['key' => 'august-july'      , 'value' => '8-7'],
-        ['key' => 'september-august' , 'value' => '9-8'],
+        ['key' => 'january-december', 'value' => '1-12'],
+        ['key' => 'february-january', 'value' => '2-1'],
+        ['key' => 'march-february', 'value' => '3-2'],
+        ['key' => 'april-march', 'value' => '4-3'],
+        ['key' => 'may-april', 'value' => '5-4'],
+        ['key' => 'june-may', 'value' => '6-5'],
+        ['key' => 'july-june', 'value' => '7-6'],
+        ['key' => 'august-july', 'value' => '8-7'],
+        ['key' => 'september-august', 'value' => '9-8'],
         ['key' => 'october-september', 'value' => '10-9'],
-        ['key' => 'november-october' , 'value' => '11-10'],
+        ['key' => 'november-october', 'value' => '11-10'],
         ['key' => 'december-november', 'value' => '12-11'],
     ],
 
@@ -123,7 +123,7 @@ return [
             'icon' => 'UserIcon',
             'owner_only' => false,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.company_information',
@@ -133,7 +133,7 @@ return [
             'icon' => 'OfficeBuildingIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.preferences',
@@ -143,7 +143,7 @@ return [
             'icon' => 'CogIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.customization',
@@ -153,7 +153,7 @@ return [
             'icon' => 'PencilAltIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.roles.title',
@@ -163,7 +163,7 @@ return [
             'icon' => 'UserGroupIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.exchange_rate',
@@ -173,7 +173,7 @@ return [
             'icon' => 'CashIcon',
             'owner_only' => false,
             'ability' => 'view-exchange-rate-provider',
-            'model' => ExchangeRateProvider::class
+            'model' => ExchangeRateProvider::class,
         ],
         [
             'title' => 'settings.menu_title.notifications',
@@ -183,7 +183,7 @@ return [
             'icon' => 'BellIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.tax_types',
@@ -193,7 +193,7 @@ return [
             'icon' => 'CheckCircleIcon',
             'owner_only' => false,
             'ability' => 'view-tax-type',
-            'model' => TaxType::class
+            'model' => TaxType::class,
         ],
         [
             'title' => 'settings.menu_title.payment_modes',
@@ -203,7 +203,7 @@ return [
             'icon' => 'CreditCardIcon',
             'owner_only' => false,
             'ability' => 'view-payment',
-            'model' => Payment::class
+            'model' => Payment::class,
         ],
         [
             'title' => 'settings.menu_title.custom_fields',
@@ -213,7 +213,7 @@ return [
             'icon' => 'CubeIcon',
             'owner_only' => false,
             'ability' => 'view-custom-field',
-            'model' => CustomField::class
+            'model' => CustomField::class,
         ],
         [
             'title' => 'settings.menu_title.notes',
@@ -223,7 +223,7 @@ return [
             'icon' => 'ClipboardCheckIcon',
             'owner_only' => false,
             'ability' => 'view-all-notes',
-            'model' => Note::class
+            'model' => Note::class,
         ],
         [
             'title' => 'settings.menu_title.expense_category',
@@ -233,7 +233,7 @@ return [
             'icon' => 'ClipboardListIcon',
             'owner_only' => false,
             'ability' => 'view-expense',
-            'model' => Expense::class
+            'model' => Expense::class,
         ],
         [
             'title' => 'settings.mail.mail_config',
@@ -243,7 +243,7 @@ return [
             'icon' => 'MailIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.file_disk',
@@ -253,7 +253,7 @@ return [
             'icon' => 'FolderIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.backup',
@@ -263,7 +263,7 @@ return [
             'icon' => 'DatabaseIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'settings.menu_title.update_app',
@@ -273,7 +273,7 @@ return [
             'icon' => 'RefreshIcon',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
     ],
 
@@ -289,7 +289,7 @@ return [
             'name' => 'Dashboard',
             'owner_only' => false,
             'ability' => 'dashboard',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'navigation.customers',
@@ -299,7 +299,7 @@ return [
             'name' => 'Customers',
             'owner_only' => false,
             'ability' => 'view-customer',
-            'model' => Customer::class
+            'model' => Customer::class,
         ],
         [
             'title' => 'navigation.items',
@@ -309,7 +309,7 @@ return [
             'name' => 'Items',
             'owner_only' => false,
             'ability' => 'view-item',
-            'model' => Item::class
+            'model' => Item::class,
         ],
         [
             'title' => 'navigation.estimates',
@@ -319,7 +319,7 @@ return [
             'name' => 'Estimates',
             'owner_only' => false,
             'ability' => 'view-estimate',
-            'model' => Estimate::class
+            'model' => Estimate::class,
         ],
         [
             'title' => 'navigation.invoices',
@@ -329,7 +329,7 @@ return [
             'name' => 'Invoices',
             'owner_only' => false,
             'ability' => 'view-invoice',
-            'model' => Invoice::class
+            'model' => Invoice::class,
         ],
         [
             'title' => 'navigation.recurring-invoices',
@@ -339,7 +339,7 @@ return [
             'name' => 'Recurring Invoices',
             'owner_only' => false,
             'ability' => 'view-recurring-invoice',
-            'model' => RecurringInvoice::class
+            'model' => RecurringInvoice::class,
         ],
         [
             'title' => 'navigation.payments',
@@ -349,7 +349,7 @@ return [
             'name' => 'Payments',
             'owner_only' => false,
             'ability' => 'view-payment',
-            'model' => Payment::class
+            'model' => Payment::class,
         ],
         [
             'title' => 'navigation.expenses',
@@ -359,7 +359,7 @@ return [
             'name' => 'Expenses',
             'owner_only' => false,
             'ability' => 'view-expense',
-            'model' => Expense::class
+            'model' => Expense::class,
         ],
         [
             'title' => 'navigation.modules',
@@ -369,7 +369,7 @@ return [
             'name' => 'Modules',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'navigation.users',
@@ -379,7 +379,7 @@ return [
             'name' => 'Users',
             'owner_only' => true,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'navigation.reports',
@@ -389,7 +389,7 @@ return [
             'name' => 'Reports',
             'owner_only' => false,
             'ability' => 'view-financial-reports',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'navigation.settings',
@@ -399,7 +399,7 @@ return [
             'name' => 'Settings',
             'owner_only' => false,
             'ability' => '',
-            'model' => ''
+            'model' => '',
         ],
     ],
 
@@ -415,7 +415,7 @@ return [
             'ability' => '',
             'owner_only' => false,
             'group' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'Invoices',
@@ -425,7 +425,7 @@ return [
             'ability' => '',
             'owner_only' => false,
             'group' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'Estimates',
@@ -435,7 +435,7 @@ return [
             'owner_only' => false,
             'ability' => '',
             'group' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'Payments',
@@ -445,7 +445,7 @@ return [
             'owner_only' => false,
             'ability' => '',
             'group' => '',
-            'model' => ''
+            'model' => '',
         ],
         [
             'title' => 'Settings',
@@ -455,7 +455,7 @@ return [
             'owner_only' => false,
             'ability' => '',
             'group' => '',
-            'model' => ''
+            'model' => '',
         ],
     ],
 
@@ -463,15 +463,15 @@ return [
     * List of recurring invoice status
     */
     'recurring_invoice_status' => [
-       'create_status' => [
+        'create_status' => [
             ['key' => 'settings.preferences.active', 'value' => 'ACTIVE'],
-            ['key' => 'settings.preferences.on_hold', 'value' => 'ON_HOLD']
-       ],
-       'update_status' => [
+            ['key' => 'settings.preferences.on_hold', 'value' => 'ON_HOLD'],
+        ],
+        'update_status' => [
             ['key' => 'settings.preferences.active', 'value' => 'ACTIVE'],
             ['key' => 'settings.preferences.on_hold', 'value' => 'ON_HOLD'],
             ['key' => 'settings.preferences.completed', 'value' => 'COMPLETED'],
-       ]
+        ],
     ],
 
     /*
@@ -503,5 +503,5 @@ return [
         'Invoice',
         'Payment',
         'Expense',
-    ]
+    ],
 ];

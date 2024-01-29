@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Space;
 
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use InvoiceShelf\Http\Requests\DatabaseEnvironmentRequest;
 use InvoiceShelf\Http\Requests\DiskEnvironmentRequest;
 use InvoiceShelf\Http\Requests\DomainEnvironmentRequest;
 use InvoiceShelf\Http\Requests\MailEnvironmentRequest;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EnvironmentManager
 {
@@ -28,7 +28,6 @@ class EnvironmentManager
     /**
      * Save the database content to the .env file.
      *
-     * @param DatabaseEnvironmentRequest $request
      * @return array
      */
     public function saveDatabaseVariables(DatabaseEnvironmentRequest $request)
@@ -117,7 +116,6 @@ class EnvironmentManager
                 file_get_contents($this->envPath)
             ));
 
-
             file_put_contents($this->envPath, str_replace(
                 'SESSION_DOMAIN='.config('session.domain'),
                 'SESSION_DOMAIN='.explode(':', $request->app_domain)[0],
@@ -135,8 +133,6 @@ class EnvironmentManager
     }
 
     /**
-     *
-     * @param DatabaseEnvironmentRequest $request
      * @return bool
      */
     private function checkDatabaseConnection(DatabaseEnvironmentRequest $request)
@@ -172,8 +168,6 @@ class EnvironmentManager
     }
 
     /**
-     *
-     * @param DatabaseEnvironmentRequest $request
      * @return bool
      */
     private function checkVersionRequirements(DatabaseEnvironmentRequest $request, $conn)
@@ -224,11 +218,11 @@ class EnvironmentManager
     }
 
     /**
-    * Save the mail content to the .env file.
-    *
-    * @param Request $request
-    * @return array
-    */
+     * Save the mail content to the .env file.
+     *
+     * @param  Request  $request
+     * @return array
+     */
     public function saveMailVariables(MailEnvironmentRequest $request)
     {
         $mailData = $this->getMailData($request);
@@ -266,11 +260,11 @@ class EnvironmentManager
 
     private function getMailData($request)
     {
-        $mailFromCredential = "";
-        $extraMailData = "";
-        $extraOldMailData = "";
-        $oldMailData = "";
-        $newMailData = "";
+        $mailFromCredential = '';
+        $extraMailData = '';
+        $extraOldMailData = '';
+        $oldMailData = '';
+        $newMailData = '';
 
         if (env('MAIL_FROM_ADDRESS') !== null && env('MAIL_FROM_NAME') !== null) {
             $mailFromCredential =
@@ -424,7 +418,7 @@ class EnvironmentManager
     /**
      * Save the disk content to the .env file.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return array
      */
     public function saveDiskVariables(DiskEnvironmentRequest $request)
@@ -464,10 +458,10 @@ class EnvironmentManager
 
     private function getDiskData($request)
     {
-        $oldDefaultDriver = "";
-        $defaultDriver = "";
-        $oldDiskData = "";
-        $newDiskData = "";
+        $oldDefaultDriver = '';
+        $defaultDriver = '';
+        $oldDiskData = '';
+        $newDiskData = '';
 
         if ($request->default_driver) {
             if (env('FILESYSTEM_DRIVER') !== null) {
@@ -518,7 +512,7 @@ class EnvironmentManager
                     'DO_SPACES_REGION='.$request->do_spaces_region."\n".
                     'DO_SPACES_BUCKET='.$request->do_spaces_bucket."\n".
                     'DO_SPACES_ENDPOINT='.$request->do_spaces_endpoint."\n";
-                    'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
+                'DO_SPACES_ROOT='.$request->do_spaces_root."\n\n";
 
                 break;
 
@@ -553,7 +547,6 @@ class EnvironmentManager
     /**
      * Save sanctum statful domain to the .env file.
      *
-     * @param DomainEnvironmentRequest $request
      * @return array
      */
     public function saveDomainVariables(DomainEnvironmentRequest $request)
@@ -572,12 +565,12 @@ class EnvironmentManager
             ));
         } catch (Exception $e) {
             return [
-                'error' => 'domain_verification_failed'
+                'error' => 'domain_verification_failed',
             ];
         }
 
         return [
-            'success' => 'domain_variable_save_successfully'
+            'success' => 'domain_variable_save_successfully',
         ];
     }
 }

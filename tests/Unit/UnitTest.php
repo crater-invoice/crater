@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Models\Unit;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
 beforeEach(function () {

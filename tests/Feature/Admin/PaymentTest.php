@@ -1,12 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Payment\PaymentsController;
 use InvoiceShelf\Http\Requests\PaymentRequest;
 use InvoiceShelf\Mail\SendPaymentMail;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\getJson;
@@ -44,14 +44,14 @@ test('get payment', function () {
 test('create payment', function () {
     $invoice = Invoice::factory()->create([
         'due_amount' => 100,
-        'exchange_rate' => 1
+        'exchange_rate' => 1,
     ]);
 
     $payment = Payment::factory()->raw([
         'invoice_id' => $invoice->id,
-        'payment_number' => "PAY-000001",
+        'payment_number' => 'PAY-000001',
         'amount' => $invoice->due_amount,
-        'exchange_rate' => 1
+        'exchange_rate' => 1,
     ]);
 
     $response = postJson('api/v1/payments', $payment);
@@ -80,12 +80,12 @@ test('update payment', function () {
     $payment = Payment::factory()->create([
         'payment_date' => '1988-08-18',
         'invoice_id' => $invoice->id,
-        'exchange_rate' => 1
+        'exchange_rate' => 1,
     ]);
 
     $payment2 = Payment::factory()->raw([
         'invoice_id' => $invoice->id,
-        'exchange_rate' => 1
+        'exchange_rate' => 1,
     ]);
 
     putJson("api/v1/payments/{$payment->id}", $payment2)
@@ -162,8 +162,8 @@ test('delete payment', function () {
 
 test('create payment without invoice', function () {
     $payment = Payment::factory()->raw([
-        'payment_number' => "PAY-000001",
-        'exchange_rate' => 1
+        'payment_number' => 'PAY-000001',
+        'exchange_rate' => 1,
     ]);
 
     postJson('api/v1/payments', $payment)->assertOk();
@@ -178,7 +178,7 @@ test('create payment without invoice', function () {
 
 test('create payment with invoice', function () {
     $payment = Payment::factory()->raw([
-        'payment_number' => "PAY-000001",
+        'payment_number' => 'PAY-000001',
     ]);
 
     $invoice = Invoice::factory()->create();
@@ -186,7 +186,7 @@ test('create payment with invoice', function () {
     $payment = Payment::factory()->raw([
         'invoice_id' => $invoice->id,
         'amount' => $invoice->due_amount,
-        'exchange_rate' => 1
+        'exchange_rate' => 1,
     ]);
 
     postJson('api/v1/payments', $payment)->assertOk();
@@ -218,15 +218,15 @@ test('create payment with partially paid', function () {
         'customer_id' => $invoice->customer_id,
         'exchange_rate' => $invoice->exchange_rate,
         'amount' => 100,
-        'currency_id' => $invoice->currency_id
+        'currency_id' => $invoice->currency_id,
     ]);
 
-    $response = postJson("api/v1/payments", $payment)->assertOk();
+    $response = postJson('api/v1/payments', $payment)->assertOk();
 
     $this->assertDatabaseHas('payments', [
         'payment_number' => $payment['payment_number'],
-        'customer_id' => (string)$payment['customer_id'],
-        'amount' => (string)$payment['amount'],
+        'customer_id' => (string) $payment['customer_id'],
+        'amount' => (string) $payment['amount'],
     ]);
 
     $this->assertDatabaseHas('invoices', [

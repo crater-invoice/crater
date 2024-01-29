@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
+use Illuminate\Support\Arr;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\UpdateSettingsRequest;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\CompanySetting;
-use Illuminate\Support\Arr;
 
 class UpdateCompanySettingsController extends Controller
 {
@@ -30,7 +30,7 @@ class UpdateCompanySettingsController extends Controller
         ) {
             return response()->json([
                 'success' => false,
-                'message' => 'Cannot update company currency after transactions are created.'
+                'message' => 'Cannot update company currency after transactions are created.',
             ]);
         }
 

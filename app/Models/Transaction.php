@@ -12,15 +12,17 @@ class Transaction extends Model
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $dates = [
-        'transaction_date'
+        'transaction_date',
     ];
 
     public const PENDING = 'PENDING';
+
     public const FAILED = 'FAILED';
+
     public const SUCCESS = 'SUCCESS';
 
     public function payments()

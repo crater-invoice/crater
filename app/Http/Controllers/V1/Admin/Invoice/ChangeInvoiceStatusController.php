@@ -2,18 +2,17 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Invoice;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Http\Request;
 
 class ChangeInvoiceStatusController extends Controller
 {
     /**
-    * Handle the incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\JsonResponse
-    */
+     * Handle the incoming request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function __invoke(Request $request, Invoice $invoice)
     {
         $this->authorize('send invoice', $invoice);

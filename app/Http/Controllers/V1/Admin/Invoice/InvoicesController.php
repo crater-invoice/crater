@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Invoice;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests;
 use InvoiceShelf\Http\Requests\DeleteInvoiceRequest;
 use InvoiceShelf\Http\Resources\InvoiceResource;
 use InvoiceShelf\Jobs\GenerateInvoicePdfJob;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
@@ -30,7 +30,7 @@ class InvoicesController extends Controller
             ->latest()
             ->paginateData($limit);
 
-        return (InvoiceResource::collection($invoices))
+        return InvoiceResource::collection($invoices)
             ->additional(['meta' => [
                 'invoice_total_count' => Invoice::whereCompany()->count(),
             ]]);
@@ -39,7 +39,7 @@ class InvoicesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Requests\InvoicesRequest $request)
@@ -60,7 +60,6 @@ class InvoicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\Invoice $invoice
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, Invoice $invoice)
@@ -73,8 +72,7 @@ class InvoicesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Invoice $invoice
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Requests\InvoicesRequest $request, Invoice $invoice)
@@ -95,7 +93,7 @@ class InvoicesController extends Controller
     /**
      * delete the specified resources in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete(DeleteInvoiceRequest $request)

@@ -10,15 +10,16 @@ class PaymentMethod extends Model
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     public const TYPE_GENERAL = 'GENERAL';
+
     public const TYPE_MODULE = 'MODULE';
 
     protected $casts = [
         'settings' => 'array',
-        'use_test_env' => 'boolean'
+        'use_test_env' => 'boolean',
     ];
 
     public function setSettingsAttribute($value)

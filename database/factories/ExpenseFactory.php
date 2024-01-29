@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Expense;
 use InvoiceShelf\Models\ExpenseCategory;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExpenseFactory extends Factory
 {

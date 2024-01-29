@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Update;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Space\Updater;
-use Illuminate\Http\Request;
 
 class UpdateController extends Controller
 {

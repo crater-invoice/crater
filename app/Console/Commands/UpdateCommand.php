@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Console\Commands;
 
+use Illuminate\Console\Command;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Space\Updater;
-use Illuminate\Console\Command;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 class UpdateCommand extends Command

@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\Invoice;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\Customer\InvoiceResource;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class InvoicesController extends Controller
 {
@@ -27,7 +27,7 @@ class InvoicesController extends Controller
             ->latest()
             ->paginateData($limit);
 
-        return (InvoiceResource::collection($invoices))
+        return InvoiceResource::collection($invoices)
             ->additional(['meta' => [
                 'invoiceTotalCount' => Invoice::where('status', '<>', 'DRAFT')->whereCustomer(Auth::guard('customer')->id())->count(),
             ]]);

@@ -37,7 +37,7 @@ class AddBaseColumnsIntoInvoicesTable extends Migration
                 'base_sub_total',
                 'base_total',
                 'base_tax',
-                'base_due_amount'
+                'base_due_amount',
             ]);
         });
     }

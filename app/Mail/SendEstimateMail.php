@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Mail;
 
-use InvoiceShelf\Models\EmailLog;
-use InvoiceShelf\Models\Estimate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Estimate;
 use Vinkla\Hashids\Facades\Hashids;
 
 class SendEstimateMail extends Mailable
@@ -48,8 +48,8 @@ class SendEstimateMail extends Mailable
         $this->data['url'] = route('estimate', ['email_log' => $log->token]);
 
         $mailContent = $this->from($this->data['from'], config('mail.from.name'))
-                    ->subject($this->data['subject'])
-                    ->markdown('emails.send.estimate', ['data', $this->data]);
+            ->subject($this->data['subject'])
+            ->markdown('emails.send.estimate', ['data', $this->data]);
 
         if ($this->data['attach']['data']) {
             $mailContent->attachData(

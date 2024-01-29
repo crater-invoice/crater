@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Item\ItemsController;
 use InvoiceShelf\Http\Requests\ItemsRequest;
 use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\Tax;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -118,7 +119,7 @@ test('delete multiple items', function () {
         'ids' => $items->pluck('id'),
     ];
 
-    postJson("/api/v1/items/delete", $data)->assertOk();
+    postJson('/api/v1/items/delete', $data)->assertOk();
 
     foreach ($items as $item) {
         $this->assertModelMissing($item);

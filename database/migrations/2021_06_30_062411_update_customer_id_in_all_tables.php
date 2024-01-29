@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\CustomField;
@@ -9,10 +13,6 @@ use InvoiceShelf\Models\Expense;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 class UpdateCustomerIdInAllTables extends Migration
 {
@@ -34,34 +34,34 @@ class UpdateCustomerIdInAllTables extends Migration
 
                 Address::where('user_id', $user->id)->update([
                     'customer_id' => $newCustomer->id,
-                    'user_id' => null
+                    'user_id' => null,
                 ]);
 
                 Expense::where('user_id', $user->id)->update([
                     'customer_id' => $newCustomer->id,
-                    'user_id' => null
+                    'user_id' => null,
                 ]);
 
                 Estimate::where('user_id', $user->id)->update([
                     'customer_id' => $newCustomer->id,
-                    'user_id' => null
+                    'user_id' => null,
                 ]);
 
                 Invoice::where('user_id', $user->id)->update([
                     'customer_id' => $newCustomer->id,
-                    'user_id' => null
+                    'user_id' => null,
                 ]);
 
                 Payment::where('user_id', $user->id)->update([
                     'customer_id' => $newCustomer->id,
-                    'user_id' => null
+                    'user_id' => null,
                 ]);
 
                 CustomFieldValue::where('custom_field_valuable_id', $user->id)
                     ->where('custom_field_valuable_type', 'InvoiceShelf\Models\User')
                     ->update([
                         'custom_field_valuable_type' => 'InvoiceShelf\Models\Customer',
-                        'custom_field_valuable_id' => $newCustomer->id
+                        'custom_field_valuable_id' => $newCustomer->id,
                     ]);
             }
 
@@ -69,7 +69,7 @@ class UpdateCustomerIdInAllTables extends Migration
 
             if ($customFields) {
                 foreach ($customFields as $customField) {
-                    $customField->model_type = "Customer";
+                    $customField->model_type = 'Customer';
                     $customField->slug = Str::upper('CUSTOM_'.$customField->model_type.'_'.Str::slug($customField->label, '_'));
                     $customField->save();
                 }

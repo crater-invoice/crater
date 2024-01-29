@@ -35,7 +35,7 @@ class AddBaseColumnsIntoInvoiceItemsTable extends Migration
                 'exchange_rate',
                 'base_discount_val',
                 'base_tax',
-                'base_total'
+                'base_total',
             ]);
         });
     }

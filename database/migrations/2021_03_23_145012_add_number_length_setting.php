@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Migrations\Migration;
 
 class AddNumberLengthSetting extends Migration
 {

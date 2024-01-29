@@ -3,8 +3,8 @@
 namespace InvoiceShelf\Http\Middleware;
 
 use Closure;
-use InvoiceShelf\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use InvoiceShelf\Providers\RouteServiceProvider;
 
 class RedirectIfAuthenticated
 {
@@ -12,7 +12,6 @@ class RedirectIfAuthenticated
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @param  string|null  $guard
      * @return mixed
      */

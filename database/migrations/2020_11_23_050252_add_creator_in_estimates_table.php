@@ -28,7 +28,7 @@ class AddCreatorInEstimatesTable extends Migration
     {
         Schema::table('estimates', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'creator_id' ] );
+                $table->dropForeign(['creator_id']);
             }
         });
     }

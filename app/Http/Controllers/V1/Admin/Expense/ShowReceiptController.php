@@ -10,8 +10,7 @@ class ShowReceiptController extends Controller
     /**
      * Retrieve details of an expense receipt from storage.
      *
-     * @param   \InvoiceShelf\Models\Expense $expense
-     * @return  \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Expense $expense)
     {

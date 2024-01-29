@@ -3,45 +3,49 @@
 namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
-use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
-use InvoiceShelf\Services\SerialNumberFormatter;
-use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Cron;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
+use InvoiceShelf\Services\SerialNumberFormatter;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Vinkla\Hashids\Facades\Hashids;
 
 class RecurringInvoice extends Model
 {
-    use HasFactory;
     use HasCustomFieldsTrait;
+    use HasFactory;
 
     protected $guarded = [
         'id',
     ];
 
     protected $dates = [
-        'starts_at'
+        'starts_at',
     ];
 
     public const NONE = 'NONE';
+
     public const COUNT = 'COUNT';
+
     public const DATE = 'DATE';
 
     public const COMPLETED = 'COMPLETED';
+
     public const ON_HOLD = 'ON_HOLD';
+
     public const ACTIVE = 'ACTIVE';
 
     protected $appends = [
         'formattedCreatedAt',
         'formattedStartsAt',
         'formattedNextInvoiceAt',
-        'formattedLimitDate'
+        'formattedLimitDate',
     ];
 
     protected $casts = [
         'exchange_rate' => 'float',
-        'send_automatically' => 'boolean'
+        'send_automatically' => 'boolean',
     ];
 
     public function getFormattedStartsAtAttribute()
@@ -190,7 +194,7 @@ class RecurringInvoice extends Model
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$recurringInvoice['currency_id'] !== $company_currency) {
+        if ((string) $recurringInvoice['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($recurringInvoice);
         }
 
@@ -215,7 +219,7 @@ class RecurringInvoice extends Model
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
@@ -242,7 +246,7 @@ class RecurringInvoice extends Model
             if (array_key_exists('taxes', $invoiceItem) && $invoiceItem['taxes']) {
                 foreach ($invoiceItem['taxes'] as $tax) {
                     $tax['company_id'] = $recurringInvoice->company_id;
-                    if (gettype($tax['amount']) !== "NULL") {
+                    if (gettype($tax['amount']) !== 'NULL') {
                         $item->taxes()->create($tax);
                     }
                 }
@@ -255,7 +259,7 @@ class RecurringInvoice extends Model
         foreach ($taxes as $tax) {
             $tax['company_id'] = $recurringInvoice->company_id;
 
-            if (gettype($tax['amount']) !== "NULL") {
+            if (gettype($tax['amount']) !== 'NULL') {
                 $recurringInvoice->taxes()->create($tax);
             }
         }
@@ -307,7 +311,7 @@ class RecurringInvoice extends Model
 
         $days = CompanySetting::getSetting('invoice_due_date_days', $this->company_id);
 
-        if (! $days || $days == "null") {
+        if (! $days || $days == 'null') {
             $days = 7;
         }
 
@@ -359,7 +363,7 @@ class RecurringInvoice extends Model
             foreach ($this->fields as $data) {
                 $customField[] = [
                     'id' => $data->custom_field_id,
-                    'value' => $data->defaultAnswer
+                    'value' => $data->defaultAnswer,
                 ];
             }
 
@@ -375,7 +379,7 @@ class RecurringInvoice extends Model
                 'subject' => 'New Invoice',
                 'invoice' => $invoice->toArray(),
                 'customer' => $invoice->customer->toArray(),
-                'company' => Company::find($invoice->company_id)
+                'company' => Company::find($invoice->company_id),
             ];
 
             $invoice->send($data);

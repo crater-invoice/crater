@@ -1,7 +1,7 @@
 <?php
 
-use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Support\Facades\Artisan;
+use InvoiceShelf\Models\RecurringInvoice;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);

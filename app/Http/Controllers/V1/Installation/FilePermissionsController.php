@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
+use Illuminate\Http\JsonResponse;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Space\FilePermissionChecker;
-use Illuminate\Http\JsonResponse;
 
 class FilePermissionsController extends Controller
 {
@@ -14,7 +14,7 @@ class FilePermissionsController extends Controller
     protected $permissions;
 
     /**
-     * @param PermissionsChecker $checker
+     * @param  PermissionsChecker  $checker
      */
     public function __construct(FilePermissionChecker $checker)
     {

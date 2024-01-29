@@ -1,11 +1,11 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Requests\EstimatesRequest;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\EstimateItem;
 use InvoiceShelf\Models\Tax;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -95,7 +95,7 @@ test('update estimate', function () {
 
     $request->replace($newEstimate);
 
-    $estimate_number = explode("-", $newEstimate['estimate_number']);
+    $estimate_number = explode('-', $newEstimate['estimate_number']);
 
     $number_attributes['estimate_number'] = $estimate_number[0].'-'.sprintf('%06d', intval($estimate_number[1]));
 
@@ -137,7 +137,7 @@ test('create items', function () {
 
     $request = new Request();
 
-    $request->replace(['items' => $items ]);
+    $request->replace(['items' => $items]);
 
     Estimate::createItems($estimate, $request, $estimate->exchange_rate);
 
@@ -170,7 +170,7 @@ test('create taxes', function () {
 
     $request = new Request();
 
-    $request->replace(['taxes' => $taxes ]);
+    $request->replace(['taxes' => $taxes]);
 
     Estimate::createTaxes($estimate, $request, $estimate->exchange_rate);
 

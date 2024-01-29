@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\Expense;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\Customer\ExpenseResource;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\Expense;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ExpensesController extends Controller
 {
@@ -31,7 +31,7 @@ class ExpensesController extends Controller
             ]))
             ->paginateData($limit);
 
-        return (ExpenseResource::collection($expenses))
+        return ExpenseResource::collection($expenses)
             ->additional(['meta' => [
                 'expenseTotalCount' => Expense::whereCustomer(Auth::guard('customer')->id())->count(),
             ]]);

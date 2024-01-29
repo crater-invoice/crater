@@ -28,7 +28,7 @@ class AddCreatorInInvoicesTable extends Migration
     {
         Schema::table('invoices', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'creator_id' ] );
+                $table->dropForeign(['creator_id']);
             }
         });
     }

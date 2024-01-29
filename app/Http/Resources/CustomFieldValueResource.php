@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Http\Resources;
 
-use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Http\Resources\Json\JsonResource;
+use InvoiceShelf\Models\CompanySetting;
 
 class CustomFieldValueResource extends JsonResource
 {

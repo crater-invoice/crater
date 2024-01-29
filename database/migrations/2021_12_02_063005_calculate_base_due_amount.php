@@ -1,7 +1,7 @@
 <?php
 
-use InvoiceShelf\Models\Invoice;
 use Illuminate\Database\Migrations\Migration;
+use InvoiceShelf\Models\Invoice;
 
 class CalculateBaseDueAmount extends Migration
 {

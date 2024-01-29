@@ -2,17 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\DomainEnvironmentRequest;
 use InvoiceShelf\Space\EnvironmentManager;
-use Illuminate\Support\Facades\Artisan;
 
 class AppDomainController extends Controller
 {
-    /**
-     *
-     * @param DomainEnvironmentRequest $request
-     */
     public function __invoke(DomainEnvironmentRequest $request)
     {
         Artisan::call('optimize:clear');

@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Customer\CustomersController;
 use InvoiceShelf\Http\Requests\CustomerRequest;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -47,12 +48,12 @@ test('create customer', function () {
     $customer = Customer::factory()->raw([
         'shipping' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
+            'address_street_1' => 'address',
         ],
         'billing' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
-        ]
+            'address_street_1' => 'address',
+        ],
     ]);
 
     postJson('api/v1/customers', $customer)
@@ -60,7 +61,7 @@ test('create customer', function () {
 
     $this->assertDatabaseHas('customers', [
         'name' => $customer['name'],
-        'email' => $customer['email']
+        'email' => $customer['email'],
     ]);
 });
 
@@ -80,7 +81,7 @@ test('get customer', function () {
     $this->assertDatabaseHas('customers', [
         'id' => $customer->id,
         'name' => $customer['name'],
-        'email' => $customer['email']
+        'email' => $customer['email'],
     ]);
 
     $response->assertOk();
@@ -92,22 +93,22 @@ test('update customer', function () {
     $customer1 = Customer::factory()->raw([
         'shipping' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
+            'address_street_1' => 'address',
         ],
         'billing' => [
             'name' => 'newName',
-            'address_street_1' => 'address'
-        ]
+            'address_street_1' => 'address',
+        ],
     ]);
 
     $response = putJson('api/v1/customers/'.$customer->id, $customer1);
 
     $customer1 = collect($customer1)
         ->only([
-            'email'
+            'email',
         ])
         ->merge([
-            'creator_id' => Auth::id()
+            'creator_id' => Auth::id(),
         ])
         ->toArray();
 

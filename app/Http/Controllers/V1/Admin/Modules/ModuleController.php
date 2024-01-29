@@ -2,17 +2,16 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Modules;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\ModuleResource;
 use InvoiceShelf\Space\ModuleInstaller;
-use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, string $module)
@@ -27,7 +26,7 @@ class ModuleController extends Controller
 
         return (new ModuleResource($response->module))
             ->additional(['meta' => [
-                'modules' => ModuleResource::collection(collect($response->modules))
+                'modules' => ModuleResource::collection(collect($response->modules)),
             ]]);
     }
 }

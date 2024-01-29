@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Expense;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Migrations\Migration;
 
 class CalculateBaseValuesForExpenses extends Migration
 {

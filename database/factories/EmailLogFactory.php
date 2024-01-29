@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\EmailLog;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmailLogFactory extends Factory
 {

@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Customer;
 
-use InvoiceShelf\Models\Customer;
-use InvoiceShelf\Models\Estimate;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Estimate;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
@@ -33,7 +34,7 @@ test('get customer estimate', function () {
     $customer = Auth::guard('customer')->user();
 
     $estimate = Estimate::factory()->create([
-        'customer_id' => $customer->id
+        'customer_id' => $customer->id,
     ]);
 
     getJson("/api/v1/{$customer->company->slug}/customer/estimates/{$estimate->id}")
@@ -46,11 +47,11 @@ test('customer estimate mark as accepted', function () {
     $estimate = Estimate::factory()->create([
         'estimate_date' => '1988-07-18',
         'expiry_date' => '1988-08-18',
-        'customer_id' => $customer->id
+        'customer_id' => $customer->id,
     ]);
 
     $status = [
-        'status' => Estimate::STATUS_ACCEPTED
+        'status' => Estimate::STATUS_ACCEPTED,
     ];
 
     $response = postJson("api/v1/{$customer->company->slug}/customer/estimate/{$estimate->id}/status", $status)
@@ -65,11 +66,11 @@ test('customer estimate mark as rejected', function () {
     $estimate = Estimate::factory()->create([
         'estimate_date' => '1988-07-18',
         'expiry_date' => '1988-08-18',
-        'customer_id' => $customer->id
+        'customer_id' => $customer->id,
     ]);
 
     $status = [
-        'status' => Estimate::STATUS_REJECTED
+        'status' => Estimate::STATUS_REJECTED,
     ];
 
     $response = postJson("api/v1/{$customer->company->slug}/customer/estimate/{$estimate->id}/status", $status)

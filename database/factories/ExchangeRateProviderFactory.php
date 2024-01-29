@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use InvoiceShelf\Models\ExchangeRateProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use InvoiceShelf\Models\ExchangeRateProvider;
 
 class ExchangeRateProviderFactory extends Factory
 {

@@ -12,7 +12,7 @@ class Tax extends Model
     use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $casts = [

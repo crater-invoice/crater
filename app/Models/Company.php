@@ -11,15 +11,15 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Company extends Model implements HasMedia
 {
+    use HasFactory;
     use InteractsWithMedia;
 
-    use HasFactory;
-
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     public const COMPANY_LEVEL = 'company_level';
+
     public const CUSTOMER_LEVEL = 'customer_level';
 
     protected $appends = ['logo', 'logo_path'];
@@ -160,7 +160,7 @@ class Company extends Model implements HasMedia
         $super_admin = BouncerFacade::role()->firstOrCreate([
             'name' => 'super admin',
             'title' => 'Super Admin',
-            'scope' => $this->id
+            'scope' => $this->id,
         ]);
 
         foreach (config('abilities.abilities') as $ability) {
@@ -291,7 +291,6 @@ class Company extends Model implements HasMedia
         if ($this->customFieldValues()->exists()) {
             $this->customFieldValues()->delete();
         }
-
 
         if ($this->customFields()->exists()) {
             $this->customFields()->delete();

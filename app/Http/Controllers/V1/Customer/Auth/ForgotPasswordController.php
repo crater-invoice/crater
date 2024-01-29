@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\Auth;
 
-use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use InvoiceShelf\Http\Controllers\Controller;
 use Password;
 
 class ForgotPasswordController extends Controller
@@ -30,7 +30,6 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a successful password reset link.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -45,7 +44,6 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a failed password reset link.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */

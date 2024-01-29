@@ -29,10 +29,10 @@ class CompaniesRequest extends FormRequest
             'name' => [
                 'required',
                 Rule::unique('companies'),
-                'string'
+                'string',
             ],
             'currency' => [
-                'required'
+                'required',
             ],
             'address.name' => [
                 'nullable',
@@ -68,11 +68,11 @@ class CompaniesRequest extends FormRequest
     {
         return collect($this->validated())
             ->only([
-                'name'
+                'name',
             ])
             ->merge([
                 'owner_id' => $this->user()->id,
-                'slug' => Str::slug($this->name)
+                'slug' => Str::slug($this->name),
             ])
             ->toArray();
     }

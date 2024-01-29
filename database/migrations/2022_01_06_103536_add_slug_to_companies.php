@@ -1,8 +1,8 @@
 <?php
 
-use InvoiceShelf\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Str;
+use InvoiceShelf\Models\Company;
 
 class AddSlugToCompanies extends Migration
 {

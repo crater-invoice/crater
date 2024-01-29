@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SettingsPolicy
 {

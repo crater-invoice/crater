@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\DatabaseEnvironmentRequest;
 use InvoiceShelf\Space\EnvironmentManager;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
 class DatabaseConfigurationController extends Controller
 {
@@ -15,18 +15,11 @@ class DatabaseConfigurationController extends Controller
      */
     protected $EnvironmentManager;
 
-    /**
-     * @param EnvironmentManager $environmentManager
-     */
     public function __construct(EnvironmentManager $environmentManager)
     {
         $this->environmentManager = $environmentManager;
     }
 
-    /**
-     *
-     * @param DatabaseEnvironmentRequest $request
-     */
     public function saveDatabaseEnvironment(DatabaseEnvironmentRequest $request)
     {
         Artisan::call('config:clear');
@@ -34,7 +27,7 @@ class DatabaseConfigurationController extends Controller
 
         $results = $this->environmentManager->saveDatabaseVariables($request);
 
-        if (array_key_exists("success", $results)) {
+        if (array_key_exists('success', $results)) {
             Artisan::call('key:generate --force');
             Artisan::call('optimize:clear');
             Artisan::call('config:clear');
@@ -78,7 +71,6 @@ class DatabaseConfigurationController extends Controller
                 break;
 
         }
-
 
         return response()->json([
             'config' => $databaseData,

@@ -4,6 +4,7 @@ use InvoiceShelf\Http\Controllers\V1\Admin\Users\UsersController;
 use InvoiceShelf\Http\Requests\UserRequest;
 use InvoiceShelf\Models\User;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Faker\fake;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;

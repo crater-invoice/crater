@@ -3,18 +3,18 @@
 namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
-use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Expense extends Model implements HasMedia
 {
+    use HasCustomFieldsTrait;
     use HasFactory;
     use InteractsWithMedia;
-    use HasCustomFieldsTrait;
 
     protected $dates = [
         'expense_date',
@@ -26,12 +26,12 @@ class Expense extends Model implements HasMedia
         'formattedExpenseDate',
         'formattedCreatedAt',
         'receipt',
-        'receiptMeta'
+        'receiptMeta',
     ];
 
     protected $casts = [
         'notes' => 'string',
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
     ];
 
     public function category()
@@ -85,7 +85,7 @@ class Expense extends Model implements HasMedia
         if ($media) {
             return [
                 'url' => $media->getFullUrl(),
-                'type' => $media->type
+                'type' => $media->type,
             ];
         }
 
@@ -235,7 +235,7 @@ class Expense extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$expense['currency_id'] !== $company_currency) {
+        if ((string) $expense['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($expense);
         }
 
@@ -258,7 +258,7 @@ class Expense extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($this);
         }
 

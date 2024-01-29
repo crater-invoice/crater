@@ -2,17 +2,17 @@
 
 namespace InvoiceShelf\Models;
 
-use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 
 class EstimateItem extends Model
 {
-    use HasFactory;
     use HasCustomFieldsTrait;
+    use HasFactory;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $casts = [

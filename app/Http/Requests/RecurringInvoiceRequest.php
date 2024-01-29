@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\RecurringInvoice;
-use Illuminate\Foundation\Http\FormRequest;
 
 class RecurringInvoiceRequest extends FormRequest
 {
@@ -30,17 +30,17 @@ class RecurringInvoiceRequest extends FormRequest
 
         $rules = [
             'starts_at' => [
-                'required'
+                'required',
             ],
             'send_automatically' => [
                 'required',
-                'boolean'
+                'boolean',
             ],
             'customer_id' => [
-                'required'
+                'required',
             ],
             'exchange_rate' => [
-                'nullable'
+                'nullable',
             ],
             'discount' => [
                 'required',
@@ -58,16 +58,16 @@ class RecurringInvoiceRequest extends FormRequest
                 'required',
             ],
             'status' => [
-                'required'
+                'required',
             ],
             'exchange_rate' => [
-                'nullable'
+                'nullable',
             ],
             'frequency' => [
-                'required'
+                'required',
             ],
             'limit_by' => [
-                'required'
+                'required',
             ],
             'limit_count' => [
                 'required_if:limit_by,COUNT',
@@ -76,24 +76,24 @@ class RecurringInvoiceRequest extends FormRequest
                 'required_if:limit_by,DATE',
             ],
             'items' => [
-                'required'
+                'required',
             ],
             'items.*' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
 
         $customer = Customer::find($this->customer_id);
 
         if ($customer && $companyCurrency) {
-            if ((string)$customer->currency_id !== $companyCurrency) {
+            if ((string) $customer->currency_id !== $companyCurrency) {
                 $rules['exchange_rate'] = [
                     'required',
                 ];
-            };
+            }
         }
 
-        return  $rules;
+        return $rules;
     }
 
     public function getRecurringInvoicePayload()
@@ -114,7 +114,7 @@ class RecurringInvoiceRequest extends FormRequest
                 'discount_per_item' => CompanySetting::getSetting('discount_per_item', $this->header('company')) ?? 'NO',
                 'due_amount' => $this->total,
                 'exchange_rate' => $exchange_rate,
-                'currency_id' => $currency
+                'currency_id' => $currency,
             ])
             ->toArray();
     }

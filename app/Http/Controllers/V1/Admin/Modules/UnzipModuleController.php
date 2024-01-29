@@ -11,7 +11,6 @@ class UnzipModuleController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \InvoiceShelf\Http\Requests\UnzipUpdateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(UnzipUpdateRequest $request)
@@ -22,7 +21,7 @@ class UnzipModuleController extends Controller
 
         return response()->json([
             'success' => true,
-            'path' => $path
+            'path' => $path,
         ]);
     }
 }

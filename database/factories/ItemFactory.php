@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\Unit;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ItemFactory extends Factory
 {
@@ -32,7 +32,7 @@ class ItemFactory extends Factory
             'unit_id' => Unit::factory(),
             'creator_id' => User::where('role', 'super admin')->first()->company_id,
             'currency_id' => Currency::find(1)->id,
-            'tax_per_item' => $this->faker->randomElement([true, false])
+            'tax_per_item' => $this->faker->randomElement([true, false]),
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Settings\CompanyController;
 use InvoiceShelf\Http\Requests\CompanyRequest;
 use InvoiceShelf\Http\Requests\ProfileRequest;
@@ -7,8 +8,8 @@ use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\Tax;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -31,7 +32,6 @@ test('get profile', function () {
     getJson('api/v1/me')
         ->assertOk();
 });
-
 
 test('update profile using a form request', function () {
     $this->assertActionUsesFormRequest(
@@ -77,8 +77,8 @@ test('update company', function () {
         'phone' => '1234567890',
         'zip' => '112233',
         'address' => [
-            'country_id' => 2
-        ]
+            'country_id' => 2,
+        ],
     ];
 
     putJson('api/v1/company', $company)
@@ -125,7 +125,7 @@ test('update settings', function () {
 
 test('update settings without currency setting', function () {
     $settings = [
-        'notification_email' => 'noreply@crater.in',
+        'notification_email' => 'noreply@invoiceshelf.com',
     ];
 
     $response = postJson('/api/v1/company/settings', ['settings' => $settings]);
@@ -170,9 +170,8 @@ test('update currency settings after company has currency and transactions is no
     $response->assertOK()
         ->assertJson([
             'success' => false,
-            'message' => 'Cannot update company currency after transactions are created.'
+            'message' => 'Cannot update company currency after transactions are created.',
         ]);
-
 
     $this->assertDatabaseHas('company_settings', [
         'option' => 'currency',

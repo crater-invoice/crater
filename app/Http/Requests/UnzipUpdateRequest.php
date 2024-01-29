@@ -26,12 +26,12 @@ class UnzipUpdateRequest extends FormRequest
         return [
             'path' => [
                 'required',
-                'regex:/^[\.\/\w\-]+$/'
+                'regex:/^[\.\/\w\-]+$/',
             ],
             'module' => [
                 'required',
-                'string'
-            ]
+                'string',
+            ],
         ];
     }
 }

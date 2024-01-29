@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Estimate;
@@ -10,7 +11,6 @@ use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Migrations\Migration;
 
 class UpdateCraterVersion400 extends Migration
 {
@@ -38,7 +38,7 @@ class UpdateCraterVersion400 extends Migration
 
             Address::where('user_id', $user->id)->update([
                 'company_id' => $user->company_id,
-                'user_id' => null
+                'user_id' => null,
             ]);
 
             // Update company settings

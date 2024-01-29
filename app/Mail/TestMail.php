@@ -17,9 +17,6 @@ class TestMail extends Mailable
 
     /**
      * Create a new message instance.
-     *
-     * @param $subject
-     * @param $message
      */
     public function __construct($subject, $message)
     {

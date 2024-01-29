@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use InvoiceShelf\Models\FileDisk;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use InvoiceShelf\Models\FileDisk;
 
 class FileDiskFactory extends Factory
 {

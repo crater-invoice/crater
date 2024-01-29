@@ -2,6 +2,7 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\Customer\InvoiceResource as CustomerInvoiceResource;
 use InvoiceShelf\Mail\InvoiceViewedMail;
@@ -9,7 +10,6 @@ use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\EmailLog;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Http\Request;
 
 class InvoicePdfController extends Controller
 {
@@ -45,7 +45,7 @@ class InvoicePdfController extends Controller
 
             return view('app')->with([
                 'customer_logo' => get_company_setting('customer_portal_logo', $invoice->company_id),
-                'current_theme' => get_company_setting('customer_portal_theme', $invoice->company_id)
+                'current_theme' => get_company_setting('customer_portal_theme', $invoice->company_id),
             ]);
         }
 

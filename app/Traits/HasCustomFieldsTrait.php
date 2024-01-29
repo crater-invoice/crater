@@ -24,7 +24,7 @@ trait HasCustomFieldsTrait
     {
         foreach ($customFields as $field) {
             if (! is_array($field)) {
-                $field = (array)$field;
+                $field = (array) $field;
             }
             $customField = CustomField::find($field['id']);
 
@@ -43,7 +43,7 @@ trait HasCustomFieldsTrait
     {
         foreach ($customFields as $field) {
             if (! is_array($field)) {
-                $field = (array)$field;
+                $field = (array) $field;
             }
 
             $customField = CustomField::find($field['id']);

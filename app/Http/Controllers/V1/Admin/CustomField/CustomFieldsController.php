@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\CustomField;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\CustomFieldRequest;
 use InvoiceShelf\Http\Resources\CustomFieldResource;
 use InvoiceShelf\Models\CustomField;
-use Illuminate\Http\Request;
 
 class CustomFieldsController extends Controller
 {

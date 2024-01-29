@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Requests\Customer;
 
-use InvoiceShelf\Models\Address;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use InvoiceShelf\Models\Address;
 
 class CustomerProfileRequest extends FormRequest
 {
@@ -97,8 +97,8 @@ class CustomerProfileRequest extends FormRequest
                 'nullable',
                 'file',
                 'mimes:gif,jpg,png',
-                'max:20000'
-            ]
+                'max:20000',
+            ],
         ];
     }
 
@@ -106,7 +106,7 @@ class CustomerProfileRequest extends FormRequest
     {
         return collect($this->shipping)
             ->merge([
-                'type' => Address::SHIPPING_TYPE
+                'type' => Address::SHIPPING_TYPE,
             ])
             ->toArray();
     }
@@ -115,7 +115,7 @@ class CustomerProfileRequest extends FormRequest
     {
         return collect($this->billing)
             ->merge([
-                'type' => Address::BILLING_TYPE
+                'type' => Address::BILLING_TYPE,
             ])
             ->toArray();
     }

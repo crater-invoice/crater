@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\TaxType;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxTypeFactory extends Factory
 {

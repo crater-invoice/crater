@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\Payment;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\Customer\PaymentResource;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\Payment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentsController extends Controller
 {
@@ -33,7 +33,7 @@ class PaymentsController extends Controller
             ->latest()
             ->paginateData($limit);
 
-        return (PaymentResource::collection($payments))
+        return PaymentResource::collection($payments)
             ->additional(['meta' => [
                 'paymentTotalCount' => Payment::whereCustomer(Auth::guard('customer')->id())->count(),
             ]]);

@@ -18,7 +18,6 @@ class RequirementsChecker
     /**
      * Check for the server requirements.
      *
-     * @param array $requirements
      * @return array
      */
     public function check(array $requirements)
@@ -40,7 +39,7 @@ class RequirementsChecker
                     }
 
                     break;
-                // check apache requirements
+                    // check apache requirements
                 case 'apache':
                     foreach ($requirements[$type] as $requirement) {
                         // if function doesn't exist we can't check apache modules
@@ -67,7 +66,7 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkPHPVersion(string $minPhpVersion = null)
+    public function checkPHPVersion(?string $minPhpVersion = null)
     {
         $minVersionPhp = $minPhpVersion;
         $currentPhpVersion = $this->getPhpVersionInfo();
@@ -167,7 +166,7 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkSqliteVersion(string $minSqliteVersion = null)
+    public function checkSqliteVersion(?string $minSqliteVersion = null)
     {
         $minVersionSqlite = $minSqliteVersion;
         $currentSqliteVersion = $this->getSqliteVersionInfo();
@@ -203,7 +202,7 @@ class RequirementsChecker
      *
      * @return array
      */
-    public function checkPgsqlVersion($conn, string $minPgsqlVersion = null)
+    public function checkPgsqlVersion($conn, ?string $minPgsqlVersion = null)
     {
         $minVersionPgsql = $minPgsqlVersion;
         $currentPgsqlVersion = $this->getPgsqlVersionInfo($conn);

@@ -3,10 +3,10 @@
 namespace InvoiceShelf\Traits;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\FileDisk;
-use Illuminate\Support\Facades\App;
 
 trait GeneratesPdfTrait
 {
@@ -20,7 +20,7 @@ trait GeneratesPdfTrait
             ]);
         }
 
-        $locale = CompanySetting::getSetting('language',  $this->company_id);
+        $locale = CompanySetting::getSetting('language', $this->company_id);
 
         App::setLocale($locale);
 
@@ -68,13 +68,13 @@ trait GeneratesPdfTrait
 
     public function generatePDF($collection_name, $file_name, $deleteExistingFile = false)
     {
-        $save_pdf_to_disk = CompanySetting::getSetting('save_pdf_to_disk',  $this->company_id);
+        $save_pdf_to_disk = CompanySetting::getSetting('save_pdf_to_disk', $this->company_id);
 
         if ($save_pdf_to_disk == 'NO') {
             return 0;
         }
 
-        $locale = CompanySetting::getSetting('language',  $this->company_id);
+        $locale = CompanySetting::getSetting('language', $this->company_id);
 
         App::setLocale($locale);
 
@@ -175,9 +175,9 @@ trait GeneratesPdfTrait
 
         $str = preg_replace("/<[^\/>]*>([\s]?)*<\/[^>]*>/", '', $str);
 
-        $str = str_replace("<p>", "", $str);
+        $str = str_replace('<p>', '', $str);
 
-        $str = str_replace("</p>", "</br>", $str);
+        $str = str_replace('</p>', '</br>', $str);
 
         return $str;
     }

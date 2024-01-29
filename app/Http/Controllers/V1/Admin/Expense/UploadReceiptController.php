@@ -11,8 +11,7 @@ class UploadReceiptController extends Controller
     /**
      * Upload the expense receipts to storage.
      *
-     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest $request
-     * @param  Expense $expense
+     * @param  \InvoiceShelf\Http\Requests\ExpenseRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(UploadExpenseReceiptRequest $request, Expense $expense)

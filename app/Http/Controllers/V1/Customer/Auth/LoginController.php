@@ -2,20 +2,19 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\Auth;
 
+use Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\Customer\CustomerLoginRequest;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\Customer;
-use Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \InvoiceShelf\Http\Requests\Customer\CustomerLoginRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(CustomerLoginRequest $request, Company $company)
@@ -39,7 +38,7 @@ class LoginController extends Controller
         Auth::guard('customer')->login($user);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Invoice\InvoicesController;
 use InvoiceShelf\Http\Requests\InvoicesRequest;
 use InvoiceShelf\Mail\SendInvoiceMail;
@@ -7,7 +8,6 @@ use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\Tax;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\getJson;
@@ -57,7 +57,7 @@ test('create invoice', function () {
 
     $this->assertDatabaseHas('invoice_items', [
         'item_id' => $invoice['items'][0]['item_id'],
-        'name' => $invoice['items'][0]['name']
+        'name' => $invoice['items'][0]['name'],
     ]);
 });
 
@@ -84,7 +84,7 @@ test('create invoice as sent', function () {
 
     $this->assertDatabaseHas('invoice_items', [
         'item_id' => $invoice['items'][0]['item_id'],
-        'name' => $invoice['items'][0]['name']
+        'name' => $invoice['items'][0]['name'],
     ]);
 });
 
@@ -122,7 +122,7 @@ test('update invoice', function () {
 
     $this->assertDatabaseHas('invoice_items', [
         'item_id' => $invoice2['items'][0]['item_id'],
-        'name' => $invoice2['items'][0]['name']
+        'name' => $invoice2['items'][0]['name'],
     ]);
 });
 
@@ -260,7 +260,7 @@ test('create invoice with negative tax', function () {
     $invoice = Invoice::factory()
         ->raw([
             'taxes' => [Tax::factory()->raw([
-                'percent' => -9.99
+                'percent' => -9.99,
             ])],
             'items' => [InvoiceItem::factory()->raw()],
         ]);
@@ -283,23 +283,23 @@ test('create invoice with negative tax', function () {
     ]);
 
     $this->assertDatabaseHas('taxes', [
-        'tax_type_id' => $invoice['taxes'][0]['tax_type_id']
+        'tax_type_id' => $invoice['taxes'][0]['tax_type_id'],
     ]);
 });
 
 test('create invoice with tax per item', function () {
     $invoice = Invoice::factory()
         ->raw([
-                'tax_per_item' => 'YES',
-                'items' => [
-                    InvoiceItem::factory()->raw([
-                        'taxes' => [Tax::factory()->raw()],
-                    ]),
-                    InvoiceItem::factory()->raw([
-                        'taxes' => [Tax::factory()->raw()],
-                    ]),
-                ],
-            ]);
+            'tax_per_item' => 'YES',
+            'items' => [
+                InvoiceItem::factory()->raw([
+                    'taxes' => [Tax::factory()->raw()],
+                ]),
+                InvoiceItem::factory()->raw([
+                    'taxes' => [Tax::factory()->raw()],
+                ]),
+            ],
+        ]);
 
     $response = postJson('api/v1/invoices', $invoice);
 
@@ -319,7 +319,7 @@ test('create invoice with tax per item', function () {
     ]);
 
     $this->assertDatabaseHas('taxes', [
-        'tax_type_id' => $invoice['items'][0]['taxes'][0]['tax_type_id']
+        'tax_type_id' => $invoice['items'][0]['taxes'][0]['tax_type_id'],
     ]);
 });
 
@@ -373,12 +373,12 @@ test('create invoice with EUR currency', function () {
 
     $this->assertDatabaseHas('taxes', [
         'tax_type_id' => $invoice['taxes'][0]['tax_type_id'],
-        'amount' => $invoice['tax']
+        'amount' => $invoice['tax'],
     ]);
 
     $this->assertDatabaseHas('invoice_items', [
         'item_id' => $invoice['items'][0]['item_id'],
-        'name' => $invoice['items'][0]['name']
+        'name' => $invoice['items'][0]['name'],
     ]);
 });
 
@@ -387,9 +387,9 @@ test('update invoice with EUR currency', function () {
         ->hasItems(1)
         ->hasTaxes(1)
         ->create([
-        'invoice_date' => '1988-07-18',
-        'due_date' => '1988-08-18',
-    ]);
+            'invoice_date' => '1988-07-18',
+            'due_date' => '1988-08-18',
+        ]);
 
     $invoice2 = Invoice::factory()
         ->raw([

@@ -14,7 +14,7 @@ class ExchangeRateLog extends Model
     ];
 
     protected $casts = [
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
     ];
 
     public function currency()

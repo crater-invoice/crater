@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Seeder;
 
 class DemoSeeder extends Seeder
 {

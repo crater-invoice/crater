@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\EstimateItem;
 use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstimateItemFactory extends Factory
 {
@@ -40,7 +40,7 @@ class EstimateItemFactory extends Factory
             'company_id' => User::find(1)->companies()->first()->id,
             'tax' => $this->faker->randomDigitNotNull,
             'total' => function (array $item) {
-                return ($item['price'] * $item['quantity']);
+                return $item['price'] * $item['quantity'];
             },
             'discount_type' => $this->faker->randomElement(['percentage', 'fixed']),
             'discount_val' => function (array $estimate) {

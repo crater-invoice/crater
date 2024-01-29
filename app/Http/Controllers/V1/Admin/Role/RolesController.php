@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Role;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\RoleRequest;
 use InvoiceShelf\Http\Resources\RoleResource;
 use InvoiceShelf\Models\User;
-use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 use Silber\Bouncer\Database\Role;
 
@@ -52,7 +52,7 @@ class RolesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Spatie\Permission\Models\Role $role
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -66,7 +66,7 @@ class RolesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Spatie\Permission\Models\Role $role
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function update(RoleRequest $request, Role $role)
@@ -83,7 +83,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Spatie\Permission\Models\Role $role
+     * @param  \Spatie\Permission\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
@@ -99,7 +99,7 @@ class RolesController extends Controller
         $role->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 

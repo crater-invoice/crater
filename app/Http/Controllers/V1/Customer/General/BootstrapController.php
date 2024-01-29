@@ -2,19 +2,18 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\General;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\Customer\CustomerResource;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\Module;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class BootstrapController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)

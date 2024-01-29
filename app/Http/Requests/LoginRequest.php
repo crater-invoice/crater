@@ -31,7 +31,7 @@ class LoginRequest extends FormRequest
                 'required',
             ],
             'device_name' => [
-                'required'
+                'required',
             ],
         ];
     }

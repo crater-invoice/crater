@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Customer;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests;
 use InvoiceShelf\Http\Requests\DeleteCustomersRequest;
 use InvoiceShelf\Http\Resources\CustomerResource;
 use InvoiceShelf\Models\Customer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller
 {
@@ -35,7 +35,7 @@ class CustomersController extends Controller
             ->leftJoin('invoices', 'customers.id', '=', 'invoices.customer_id')
             ->paginateData($limit);
 
-        return (CustomerResource::collection($customers))
+        return CustomerResource::collection($customers)
             ->additional(['meta' => [
                 'customer_total_count' => Customer::whereCompany()->count(),
             ]]);
@@ -59,7 +59,6 @@ class CustomersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Customer $customer
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Customer $customer)
@@ -72,8 +71,7 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \InvoiceShelf\Models\Customer $customer
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Requests\CustomerRequest $request, Customer $customer)
@@ -92,7 +90,7 @@ class CustomersController extends Controller
     /**
      * Remove a list of Customers along side all their resources (ie. Estimates, Invoices, Payments and Addresses)
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete(DeleteCustomersRequest $request)

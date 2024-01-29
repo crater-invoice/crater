@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Mail;
 
-use InvoiceShelf\Models\EmailLog;
-use InvoiceShelf\Models\Invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use InvoiceShelf\Models\EmailLog;
+use InvoiceShelf\Models\Invoice;
 use Vinkla\Hashids\Facades\Hashids;
 
 class SendInvoiceMail extends Mailable

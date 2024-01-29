@@ -48,7 +48,7 @@ class UnitRequest extends FormRequest
     {
         return collect($this->validated())
             ->merge([
-                'company_id' => $this->header('company')
+                'company_id' => $this->header('company'),
             ])
             ->toArray();
     }

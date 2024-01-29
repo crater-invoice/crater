@@ -35,7 +35,7 @@ class AddBaseColumnsIntoEstimateItemsTable extends Migration
                 'base_discount_val',
                 'base_price',
                 'base_tax',
-                'base_total'
+                'base_total',
             ]);
         });
     }

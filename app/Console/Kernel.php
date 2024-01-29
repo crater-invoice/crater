@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Console;
 
-use InvoiceShelf\Models\CompanySetting;
-use InvoiceShelf\Models\RecurringInvoice;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\RecurringInvoice;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,17 +24,16 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         if (\Storage::disk('local')->has('database_created')) {
             $schedule->command('check:invoices:status')
-            ->daily();
+                ->daily();
 
             $schedule->command('check:estimates:status')
-            ->daily();
+                ->daily();
 
             $recurringInvoices = RecurringInvoice::where('status', 'ACTIVE')->get();
             foreach ($recurringInvoices as $recurringInvoice) {

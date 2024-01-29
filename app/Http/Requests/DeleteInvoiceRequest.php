@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Models\Invoice;
-use InvoiceShelf\Rules\RelationNotExist;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use InvoiceShelf\Models\Invoice;
+use InvoiceShelf\Rules\RelationNotExist;
 
 class DeleteInvoiceRequest extends FormRequest
 {

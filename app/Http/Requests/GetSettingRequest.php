@@ -26,8 +26,8 @@ class GetSettingRequest extends FormRequest
         return [
             'key' => [
                 'required',
-                'string'
-            ]
+                'string',
+            ],
         ];
     }
 }

@@ -3,8 +3,8 @@
 namespace InvoiceShelf\Http\Resources;
 
 use Carbon\Carbon;
-use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Http\Resources\Json\JsonResource;
+use InvoiceShelf\Models\CompanySetting;
 
 class RoleResource extends JsonResource
 {
@@ -22,7 +22,7 @@ class RoleResource extends JsonResource
             'title' => $this->title,
             'level' => $this->level,
             'formatted_created_at' => $this->getFormattedAt(),
-            'abilities' => $this->getAbilities()
+            'abilities' => $this->getAbilities(),
         ];
     }
 

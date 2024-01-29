@@ -1,13 +1,14 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\RecurringInvoice\RecurringInvoiceController;
 use InvoiceShelf\Http\Requests\RecurringInvoiceRequest;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\RecurringInvoice;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -44,7 +45,7 @@ test('store user using a form request', function () {
 test('store recurring invoice', function () {
     $recurringInvoice = RecurringInvoice::factory()->raw();
     $recurringInvoice['items'] = [
-        InvoiceItem::factory()->raw()
+        InvoiceItem::factory()->raw(),
     ];
 
     postJson('api/v1/recurring-invoices', $recurringInvoice)
@@ -77,12 +78,12 @@ test('update user using a form request', function () {
 test('update recurring invoice', function () {
     $recurringInvoice = RecurringInvoice::factory()->create();
     $recurringInvoice['items'] = [
-        InvoiceItem::factory()->raw()
+        InvoiceItem::factory()->raw(),
     ];
 
     $new_recurringInvoice = RecurringInvoice::factory()->raw();
     $new_recurringInvoice['items'] = [
-        InvoiceItem::factory()->raw()
+        InvoiceItem::factory()->raw(),
     ];
 
     putJson("api/v1/recurring-invoices/{$recurringInvoice->id}", $new_recurringInvoice)
@@ -118,11 +119,11 @@ test('delete multiple recurring invoice', function () {
 test('calculate frequency for recurring invoice', function () {
     $data = [
         'frequency' => '* * 2 * *',
-        'starts_at' => Carbon::now()->format('Y-m-d')
+        'starts_at' => Carbon::now()->format('Y-m-d'),
     ];
 
     $queryString = http_build_query($data, '', '&');
 
-    getJson("api/v1/recurring-invoice-frequency?".$queryString)
+    getJson('api/v1/recurring-invoice-frequency?'.$queryString)
         ->assertOk();
 });

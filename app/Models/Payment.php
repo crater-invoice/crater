@@ -4,28 +4,32 @@ namespace InvoiceShelf\Models;
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use InvoiceShelf\Jobs\GeneratePaymentPdfJob;
 use InvoiceShelf\Mail\SendPaymentMail;
 use InvoiceShelf\Services\SerialNumberFormatter;
 use InvoiceShelf\Traits\GeneratesPdfTrait;
 use InvoiceShelf\Traits\HasCustomFieldsTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Payment extends Model implements HasMedia
 {
-    use HasFactory;
-    use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use HasFactory;
+    use InteractsWithMedia;
 
     public const PAYMENT_MODE_CHECK = 'CHECK';
+
     public const PAYMENT_MODE_OTHER = 'OTHER';
+
     public const PAYMENT_MODE_CASH = 'CASH';
+
     public const PAYMENT_MODE_CREDIT_CARD = 'CREDIT_CARD';
+
     public const PAYMENT_MODE_BANK_TRANSFER = 'BANK_TRANSFER';
 
     protected $dates = ['created_at', 'updated_at', 'payment_date'];
@@ -40,7 +44,7 @@ class Payment extends Model implements HasMedia
 
     protected $casts = [
         'notes' => 'string',
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
     ];
 
     protected static function booted()
@@ -166,7 +170,7 @@ class Payment extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$payment['currency_id'] !== $company_currency) {
+        if ((string) $payment['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($payment);
         }
 
@@ -180,7 +184,7 @@ class Payment extends Model implements HasMedia
             'customer',
             'invoice',
             'paymentMethod',
-            'fields'
+            'fields',
         ])->find($payment->id);
 
         return $payment;
@@ -218,7 +222,7 @@ class Payment extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
@@ -245,7 +249,7 @@ class Payment extends Model implements HasMedia
 
             if ($payment->invoice_id != null) {
                 $invoice = Invoice::find($payment->invoice_id);
-                $invoice->due_amount = ((int)$invoice->due_amount + (int)$payment->amount);
+                $invoice->due_amount = ((int) $invoice->due_amount + (int) $payment->amount);
 
                 if ($invoice->due_amount == $invoice->total) {
                     $invoice->paid_status = Invoice::STATUS_UNPAID;

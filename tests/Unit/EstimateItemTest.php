@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\EstimateItem;
 use InvoiceShelf\Models\Item;
-use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -24,7 +24,6 @@ test('estimate item belongs to item', function () {
 
     $this->assertTrue($estimateItem->item()->exists());
 });
-
 
 test('estimate item has many taxes', function () {
     $estimateItem = EstimateItem::factory()->hasTaxes(5)->create([

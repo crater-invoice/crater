@@ -3,13 +3,13 @@
 namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
-use InvoiceShelf\Http\Requests\UserRequest;
-use InvoiceShelf\Notifications\MailResetPasswordNotification;
-use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Schema;
+use InvoiceShelf\Http\Requests\UserRequest;
+use InvoiceShelf\Notifications\MailResetPasswordNotification;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\BouncerFacade;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
@@ -19,11 +19,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
-    use Notifiable;
-    use InteractsWithMedia;
     use HasCustomFieldsTrait;
     use HasFactory;
     use HasRolesAndAbilities;
+    use InteractsWithMedia;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +31,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     /**
@@ -82,7 +82,7 @@ class User extends Authenticatable implements HasMedia
         $email = $request->email;
         $password = $request->password;
 
-        return (\Auth::attempt(['email' => $email, 'password' => $password], $remember));
+        return \Auth::attempt(['email' => $email, 'password' => $password], $remember);
     }
 
     public function getFormattedCreatedAtAttribute($value)
@@ -273,7 +273,7 @@ class User extends Authenticatable implements HasMedia
         $avatar = $this->getMedia('admin_avatar')->first();
 
         if ($avatar) {
-            return  asset($avatar->getUrl());
+            return asset($avatar->getUrl());
         }
 
         return 0;

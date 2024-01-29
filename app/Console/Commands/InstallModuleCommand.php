@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Console\Commands;
 
-use InvoiceShelf\Space\ModuleInstaller;
 use Illuminate\Console\Command;
+use InvoiceShelf\Space\ModuleInstaller;
 
 class InstallModuleCommand extends Command
 {

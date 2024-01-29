@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\Item;
-use Illuminate\Support\Facades\Artisan;
 
 beforeEach(function () {
     Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]);
@@ -24,7 +24,6 @@ test('invoice item belongs to item', function () {
 
     $this->assertTrue($invoiceItem->item()->exists());
 });
-
 
 test('invoice item has many taxes', function () {
     $invoiceItem = InvoiceItem::factory()->hasTaxes(5)->create([

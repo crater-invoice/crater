@@ -11,7 +11,7 @@ class CustomFieldValue extends Model
 
     protected $dates = [
         'date_answer',
-        'date_time_answer'
+        'date_time_answer',
     ];
 
     protected $guarded = [
@@ -25,7 +25,7 @@ class CustomFieldValue extends Model
     public function setTimeAnswerAttribute($value)
     {
         if ($value && $value != null) {
-            $this->attributes['time_answer'] = date("H:i:s", strtotime($value));
+            $this->attributes['time_answer'] = date('H:i:s', strtotime($value));
         } else {
             $this->attributes['time_answer'] = null;
         }

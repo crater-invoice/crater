@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Customer;
 
-use InvoiceShelf\Models\Customer;
-use InvoiceShelf\Models\Invoice;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Invoice;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 
 beforeEach(function () {
@@ -32,7 +33,7 @@ test('get customer invoice', function () {
     $customer = Auth::guard('customer')->user();
 
     $invoice = Invoice::factory()->create([
-        'customer_id' => $customer->id
+        'customer_id' => $customer->id,
     ]);
 
     getJson("/api/v1/{$customer->company->slug}/customer/invoices/{$invoice->id}")->assertOk();

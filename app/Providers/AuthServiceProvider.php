@@ -2,6 +2,8 @@
 
 namespace InvoiceShelf\Providers;
 
+use Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use InvoiceShelf\Policies\CompanyPolicy;
 use InvoiceShelf\Policies\CustomerPolicy;
 use InvoiceShelf\Policies\DashboardPolicy;
@@ -17,8 +19,6 @@ use InvoiceShelf\Policies\RecurringInvoicePolicy;
 use InvoiceShelf\Policies\ReportPolicy;
 use InvoiceShelf\Policies\SettingsPolicy;
 use InvoiceShelf\Policies\UserPolicy;
-use Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {

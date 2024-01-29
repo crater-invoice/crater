@@ -1,7 +1,7 @@
 <?php
 
-use InvoiceShelf\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
+use InvoiceShelf\Models\Setting;
 
 class UpdateCraterVersion402 extends Migration
 {

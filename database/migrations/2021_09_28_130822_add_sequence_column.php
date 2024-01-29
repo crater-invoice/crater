@@ -1,10 +1,10 @@
 <?php
 
-use InvoiceShelf\Models\Customer;
-use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\User;
 
 class AddSequenceColumn extends Migration
 {
@@ -43,7 +43,7 @@ class AddSequenceColumn extends Migration
                 if ($invoices) {
                     $customerSequence = 1;
                     $invoices->map(function ($invoice) use ($customerSequence) {
-                        $invoiceNumber = explode("-", $invoice->invoice_number);
+                        $invoiceNumber = explode('-', $invoice->invoice_number);
                         $invoice->sequence_number = intval(end($invoiceNumber));
                         $invoice->customer_sequence_number = $customerSequence;
                         $invoice->save();
@@ -55,7 +55,7 @@ class AddSequenceColumn extends Migration
                 if ($estimates) {
                     $customerSequence = 1;
                     $estimates->map(function ($estimate) use ($customerSequence) {
-                        $estimateNumber = explode("-", $estimate->estimate_number);
+                        $estimateNumber = explode('-', $estimate->estimate_number);
                         $estimate->sequence_number = intval(end($estimateNumber));
                         $estimate->customer_sequence_number = $customerSequence;
                         $estimate->save();
@@ -67,7 +67,7 @@ class AddSequenceColumn extends Migration
                 if ($estimates) {
                     $customerSequence = 1;
                     $payments->map(function ($payment) use ($customerSequence) {
-                        $paymentNumber = explode("-", $payment->payment_number);
+                        $paymentNumber = explode('-', $payment->payment_number);
                         $payment->sequence_number = intval(end($paymentNumber));
                         $payment->customer_sequence_number = $customerSequence;
                         $payment->save();

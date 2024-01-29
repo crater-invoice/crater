@@ -3,8 +3,8 @@
 namespace InvoiceShelf\Console\Commands;
 
 use Carbon\Carbon;
-use InvoiceShelf\Models\Invoice;
 use Illuminate\Console\Command;
+use InvoiceShelf\Models\Invoice;
 
 class CheckInvoiceStatus extends Command
 {

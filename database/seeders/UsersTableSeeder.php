@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         $company = Company::create([
             'name' => 'xyz',
             'owner_id' => $user->id,
-            'slug' => 'xyz'
+            'slug' => 'xyz',
         ]);
 
         $company->unique_hash = Hashids::connection(Company::class)->encode($company->id);

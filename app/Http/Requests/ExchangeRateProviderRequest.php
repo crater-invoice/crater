@@ -25,7 +25,7 @@ class ExchangeRateProviderRequest extends FormRequest
     {
         $rules = [
             'driver' => [
-                'required'
+                'required',
             ],
             'key' => [
                 'required',
@@ -37,11 +37,11 @@ class ExchangeRateProviderRequest extends FormRequest
                 'nullable',
             ],
             'driver_config' => [
-                'nullable'
+                'nullable',
             ],
             'active' => [
                 'nullable',
-                'boolean'
+                'boolean',
             ],
         ];
 
@@ -52,7 +52,7 @@ class ExchangeRateProviderRequest extends FormRequest
     {
         return collect($this->validated())
             ->merge([
-                'company_id' => $this->header('company')
+                'company_id' => $this->header('company'),
             ])
             ->toArray();
     }

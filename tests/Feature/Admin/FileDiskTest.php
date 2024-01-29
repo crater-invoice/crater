@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Models\FileDisk;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
@@ -37,7 +38,6 @@ test('create file disk', function () {
     $this->assertDatabaseHas('file_disks', $disk);
 });
 
-
 test('update file disk', function () {
     $disk = FileDisk::factory()->create();
 
@@ -50,7 +50,6 @@ test('update file disk', function () {
     $this->assertDatabaseHas('file_disks', $disk2);
 });
 
-
 test('get disk', function () {
     $disk = FileDisk::factory()->create();
 
@@ -60,7 +59,7 @@ test('get disk', function () {
 });
 
 test('get drivers', function () {
-    $response = getJson("/api/v1/disk/drivers");
+    $response = getJson('/api/v1/disk/drivers');
 
     $response->assertStatus(200);
 });

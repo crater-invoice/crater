@@ -2,14 +2,16 @@
 
 namespace InvoiceShelf\Models;
 
-use InvoiceShelf\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use InvoiceShelf\Carbon;
 
 class FileDisk extends Model
 {
     use HasFactory;
+
     public const DISK_TYPE_SYSTEM = 'SYSTEM';
+
     public const DISK_TYPE_REMOTE = 'REMOTE';
 
     protected $guarded = [

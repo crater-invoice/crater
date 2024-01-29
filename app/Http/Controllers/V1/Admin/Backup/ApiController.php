@@ -4,15 +4,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Backup;
 
-use InvoiceShelf\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use InvoiceShelf\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
-    /**
-     *
-     * @return JsonResponse
-     */
     public function respondSuccess(): JsonResponse
     {
         return response()->json([

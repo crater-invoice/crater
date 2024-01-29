@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Foundation\Http\FormRequest;
+use InvoiceShelf\Models\CompanySetting;
 
 class ExchangeRateLogRequest extends FormRequest
 {
@@ -29,8 +29,8 @@ class ExchangeRateLogRequest extends FormRequest
                 'required',
             ],
             'currency_id' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 

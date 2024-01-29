@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Space;
 
-use InvoiceShelf\Models\Setting;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use InvoiceShelf\Models\Setting;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
 trait SiteApi

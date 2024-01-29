@@ -26,16 +26,16 @@ class NotesRequest extends FormRequest
     {
         $rules = [
             'type' => [
-                'required'
+                'required',
             ],
             'name' => [
                 'required',
                 Rule::unique('notes')
                     ->where('company_id', $this->header('company'))
-                    ->where('type', $this->type)
+                    ->where('type', $this->type),
             ],
             'notes' => [
-                'required'
+                'required',
             ],
         ];
 
@@ -45,7 +45,7 @@ class NotesRequest extends FormRequest
                 Rule::unique('notes')
                     ->ignore($this->route('note')->id)
                     ->where('type', $this->type)
-                    ->where('company_id', $this->header('company'))
+                    ->where('company_id', $this->header('company')),
             ];
         }
 
@@ -56,7 +56,7 @@ class NotesRequest extends FormRequest
     {
         return collect($this->validated())
             ->merge([
-                'company_id' => $this->header('company')
+                'company_id' => $this->header('company'),
             ])
             ->toArray();
     }

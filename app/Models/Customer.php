@@ -3,11 +3,11 @@
 namespace InvoiceShelf\Models;
 
 use Carbon\Carbon;
-use InvoiceShelf\Notifications\CustomerMailResetPasswordNotification;
-use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use InvoiceShelf\Notifications\CustomerMailResetPasswordNotification;
+use InvoiceShelf\Traits\HasCustomFieldsTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 use Spatie\MediaLibrary\HasMedia;
@@ -16,14 +16,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Customer extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
-    use Notifiable;
-    use InteractsWithMedia;
     use HasCustomFieldsTrait;
     use HasFactory;
     use HasRolesAndAbilities;
+    use InteractsWithMedia;
+    use Notifiable;
 
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     protected $hidden = [
@@ -37,7 +37,7 @@ class Customer extends Authenticatable implements HasMedia
 
     protected $appends = [
         'formattedCreatedAt',
-        'avatar'
+        'avatar',
     ];
 
     protected $casts = [
@@ -123,7 +123,7 @@ class Customer extends Authenticatable implements HasMedia
         $avatar = $this->getMedia('customer_avatar')->first();
 
         if ($avatar) {
-            return  asset($avatar->getUrl());
+            return asset($avatar->getUrl());
         }
 
         return 0;

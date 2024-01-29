@@ -28,7 +28,7 @@ class AddCurrencyIdIntoPaymentsTable extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'currency_id' ] );
+                $table->dropForeign(['currency_id']);
             }
             $table->dropColumn('currency_id');
         });

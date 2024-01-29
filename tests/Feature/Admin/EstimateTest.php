@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Estimate\EstimatesController;
 use InvoiceShelf\Http\Controllers\V1\Admin\Estimate\SendEstimateController;
 use InvoiceShelf\Http\Requests\DeleteEstimatesRequest;
@@ -10,7 +11,6 @@ use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\EstimateItem;
 use InvoiceShelf\Models\Tax;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\getJson;
@@ -85,7 +85,7 @@ test('update estimate', function () {
     $estimate2 = Estimate::factory()->raw([
         'items' => [
             EstimateItem::factory()->raw([
-                'estimate_id' => $estimate->id
+                'estimate_id' => $estimate->id,
             ]),
         ],
         'taxes' => [
@@ -302,7 +302,7 @@ test('create estimate with tax per item', function () {
     ]);
 
     $this->assertDatabaseHas('taxes', [
-        'tax_type_id' => $estimate['items'][0]['taxes'][0]['tax_type_id']
+        'tax_type_id' => $estimate['items'][0]['taxes'][0]['tax_type_id'],
     ]);
 });
 
@@ -358,12 +358,12 @@ test('create estimate with EUR currency', function () {
 
     $this->assertDatabaseHas('taxes', [
         'tax_type_id' => $estimate['taxes'][0]['tax_type_id'],
-        'amount' => $estimate['tax']
+        'amount' => $estimate['tax'],
     ]);
 
     $this->assertDatabaseHas('estimate_items', [
         'item_id' => $estimate['items'][0]['item_id'],
-        'name' => $estimate['items'][0]['name']
+        'name' => $estimate['items'][0]['name'],
     ]);
 });
 

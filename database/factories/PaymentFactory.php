@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Models\PaymentMethod;
 use InvoiceShelf\Models\User;
 use InvoiceShelf\Services\SerialNumberFormatter;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentFactory extends Factory
 {

@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Models\PaymentMethod;
 use InvoiceShelf\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Silber\Bouncer\BouncerFacade;
 
 class PaymentMethodPolicy
@@ -15,7 +15,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -30,8 +29,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\PaymentMethod  $paymentMethod
      * @return mixed
      */
     public function view(User $user, PaymentMethod $paymentMethod)
@@ -46,7 +43,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \InvoiceShelf\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -61,8 +57,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\PaymentMethod  $paymentMethod
      * @return mixed
      */
     public function update(User $user, PaymentMethod $paymentMethod)
@@ -77,8 +71,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\PaymentMethod  $paymentMethod
      * @return mixed
      */
     public function delete(User $user, PaymentMethod $paymentMethod)
@@ -93,8 +85,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\PaymentMethod  $paymentMethod
      * @return mixed
      */
     public function restore(User $user, PaymentMethod $paymentMethod)
@@ -109,8 +99,6 @@ class PaymentMethodPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \InvoiceShelf\Models\User  $user
-     * @param  \InvoiceShelf\Models\PaymentMethod  $paymentMethod
      * @return mixed
      */
     public function forceDelete(User $user, PaymentMethod $paymentMethod)

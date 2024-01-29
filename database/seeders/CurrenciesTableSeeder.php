@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use InvoiceShelf\Models\Currency;
 use Illuminate\Database\Seeder;
+use InvoiceShelf\Models\Currency;
 
 class CurrenciesTableSeeder extends Seeder
 {
@@ -617,7 +617,6 @@ class CurrenciesTableSeeder extends Seeder
                 'swap_currency_symbol' => true,
             ],
         ];
-
 
         foreach ($currencies as $currency) {
             Currency::create($currency);

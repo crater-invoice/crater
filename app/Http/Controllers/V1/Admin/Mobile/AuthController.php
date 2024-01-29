@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Mobile;
 
-use InvoiceShelf\Http\Controllers\Controller;
-use InvoiceShelf\Http\Requests\LoginRequest;
-use InvoiceShelf\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Http\Requests\LoginRequest;
+use InvoiceShelf\Models\User;
 
 class AuthController extends Controller
 {

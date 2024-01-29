@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\CustomField;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomFieldFactory extends Factory
 {
@@ -31,7 +31,7 @@ class CustomFieldFactory extends Factory
             'slug' => function (array $item) {
                 return clean_slug($item['model_type'], $item['label']);
             },
-            'type' => $this->faker->randomElement(['Text', 'Textarea', 'Phone', 'URL', 'Number','Dropdown' , 'Switch', 'Date', 'DateTime', 'Time']),
+            'type' => $this->faker->randomElement(['Text', 'Textarea', 'Phone', 'URL', 'Number', 'Dropdown', 'Switch', 'Date', 'DateTime', 'Time']),
             'company_id' => User::find(1)->companies()->first()->id,
         ];
     }

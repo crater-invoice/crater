@@ -3,8 +3,8 @@
 namespace InvoiceShelf\Console\Commands;
 
 use Carbon\Carbon;
-use InvoiceShelf\Models\Estimate;
 use Illuminate\Console\Command;
+use InvoiceShelf\Models\Estimate;
 
 class CheckEstimateStatus extends Command
 {

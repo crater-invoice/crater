@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Rules\Base64Mime;
 use Illuminate\Foundation\Http\FormRequest;
+use InvoiceShelf\Rules\Base64Mime;
 
 class CompanyLogoRequest extends FormRequest
 {
@@ -27,8 +27,8 @@ class CompanyLogoRequest extends FormRequest
         return [
             'company_logo' => [
                 'nullable',
-                new Base64Mime(['gif', 'jpg', 'png'])
-            ]
+                new Base64Mime(['gif', 'jpg', 'png']),
+            ],
         ];
     }
 }

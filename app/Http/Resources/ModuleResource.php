@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Resources;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use InvoiceShelf\Models\Module as ModelsModule;
 use InvoiceShelf\Models\Setting;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Nwidart\Modules\Facades\Module;
 
 class ModuleResource extends JsonResource
@@ -50,7 +50,7 @@ class ModuleResource extends JsonResource
             'update_available' => $this->updateAvailable(),
             'video_link' => $this->video_link,
             'video_thumbnail' => $this->video_thumbnail,
-            'links' => $this->links
+            'links' => $this->links,
         ];
     }
 

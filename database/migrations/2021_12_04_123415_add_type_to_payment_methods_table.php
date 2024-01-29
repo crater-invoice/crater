@@ -1,9 +1,9 @@
 <?php
 
-use InvoiceShelf\Models\PaymentMethod;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use InvoiceShelf\Models\PaymentMethod;
 
 class AddTypeToPaymentMethodsTable extends Migration
 {
@@ -44,7 +44,7 @@ class AddTypeToPaymentMethodsTable extends Migration
                 'driver',
                 'type',
                 'settings',
-                'active'
+                'active',
             ]);
         });
     }

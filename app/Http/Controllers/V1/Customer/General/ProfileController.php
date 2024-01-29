@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer\General;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\Customer\CustomerProfileRequest;
 use InvoiceShelf\Http\Resources\Customer\CustomerResource;
 use InvoiceShelf\Models\Company;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -24,7 +24,7 @@ class ProfileController extends Controller
             $customer->clearMediaCollection('customer_avatar');
 
             $customer->addMediaFromRequest('customer_avatar')
-            ->toMediaCollection('customer_avatar');
+                ->toMediaCollection('customer_avatar');
         }
 
         if ($request->billing !== null) {

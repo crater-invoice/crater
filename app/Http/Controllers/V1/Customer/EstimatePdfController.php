@@ -2,6 +2,7 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\EstimateResource;
 use InvoiceShelf\Mail\EstimateViewedMail;
@@ -9,7 +10,6 @@ use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\EmailLog;
 use InvoiceShelf\Models\Estimate;
-use Illuminate\Http\Request;
 
 class EstimatePdfController extends Controller
 {

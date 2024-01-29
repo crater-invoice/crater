@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Settings\TaxTypesController;
 use InvoiceShelf\Http\Requests\TaxTypeRequest;
 use InvoiceShelf\Models\TaxType;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
 
 use function Pest\Laravel\deleteJson;
@@ -87,10 +87,9 @@ test('delete tax type', function () {
     $this->assertModelMissing($taxType);
 });
 
-
 test('create negative tax type', function () {
     $taxType = TaxType::factory()->raw([
-        'percent' => -9.99
+        'percent' => -9.99,
     ]);
 
     postJson('api/v1/tax-types', $taxType)

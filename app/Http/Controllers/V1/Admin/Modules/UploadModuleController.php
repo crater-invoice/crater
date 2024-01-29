@@ -11,7 +11,6 @@ class UploadModuleController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \InvoiceShelf\Http\Requests\UploadModuleRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(UploadModuleRequest $request)

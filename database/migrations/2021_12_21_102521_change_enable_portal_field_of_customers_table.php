@@ -1,9 +1,9 @@
 <?php
 
-use InvoiceShelf\Models\Customer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use InvoiceShelf\Models\Customer;
 
 class ChangeEnablePortalFieldOfCustomersTable extends Migration
 {

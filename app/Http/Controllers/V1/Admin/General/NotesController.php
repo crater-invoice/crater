@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\NotesRequest;
 use InvoiceShelf\Http\Resources\NoteResource;
 use InvoiceShelf\Models\Note;
-use Illuminate\Http\Request;
 
 class NotesController extends Controller
 {
@@ -47,7 +47,6 @@ class NotesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function show(Note $note)
@@ -61,7 +60,6 @@ class NotesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \InvoiceShelf\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function update(NotesRequest $request, Note $note)
@@ -76,7 +74,6 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \InvoiceShelf\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
     public function destroy(Note $note)

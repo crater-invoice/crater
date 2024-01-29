@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Payment\PaymentMethodsController;
 use InvoiceShelf\Http\Requests\PaymentMethodRequest;
 use InvoiceShelf\Models\PaymentMethod;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;

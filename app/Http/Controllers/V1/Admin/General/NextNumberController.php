@@ -2,19 +2,18 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
 use InvoiceShelf\Services\SerialNumberFormatter;
-use Illuminate\Http\Request;
 
 class NextNumberController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, Invoice $invoice, Estimate $estimate, Payment $payment)
@@ -54,7 +53,7 @@ class NextNumberController extends Controller
         } catch (\Exception $exception) {
             return response()->json([
                 'success' => false,
-                'message' => $exception->getMessage()
+                'message' => $exception->getMessage(),
             ]);
         }
 

@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Estimate;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\DeleteEstimatesRequest;
 use InvoiceShelf\Http\Requests\EstimatesRequest;
 use InvoiceShelf\Http\Resources\EstimateResource;
 use InvoiceShelf\Jobs\GenerateEstimatePdfJob;
 use InvoiceShelf\Models\Estimate;
-use Illuminate\Http\Request;
 
 class EstimatesController extends Controller
 {
@@ -25,7 +25,7 @@ class EstimatesController extends Controller
             ->latest()
             ->paginateData($limit);
 
-        return (EstimateResource::collection($estimates))
+        return EstimateResource::collection($estimates)
             ->additional(['meta' => [
                 'estimate_total_count' => Estimate::whereCompany()->count(),
             ]]);

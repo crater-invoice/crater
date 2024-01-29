@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\CustomField\CustomFieldsController;
 use InvoiceShelf\Http\Requests\CustomFieldRequest;
 use InvoiceShelf\Models\CustomField;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;

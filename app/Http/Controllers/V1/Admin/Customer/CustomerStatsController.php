@@ -3,6 +3,7 @@
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Customer;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\CustomerResource;
 use InvoiceShelf\Models\CompanySetting;
@@ -10,14 +11,12 @@ use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Expense;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
-use Illuminate\Http\Request;
 
 class CustomerStatsController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, Customer $customer)
@@ -136,7 +135,7 @@ class CustomerStatsController extends Controller
 
         return (new CustomerResource($customer))
             ->additional(['meta' => [
-                'chartData' => $chartData
+                'chartData' => $chartData,
             ]]);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Models\TaxType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use InvoiceShelf\Models\TaxType;
 
 class TaxTypeRequest extends FormRequest
 {
@@ -29,8 +29,8 @@ class TaxTypeRequest extends FormRequest
             'name' => [
                 'required',
                 Rule::unique('tax_types')
-                ->where('type', TaxType::TYPE_GENERAL)
-                ->where('company_id', $this->header('company'))
+                    ->where('type', TaxType::TYPE_GENERAL)
+                    ->where('company_id', $this->header('company')),
             ],
             'percent' => [
                 'required',
@@ -52,7 +52,7 @@ class TaxTypeRequest extends FormRequest
                 Rule::unique('tax_types')
                     ->ignore($this->route('tax_type')->id)
                     ->where('type', TaxType::TYPE_GENERAL)
-                    ->where('company_id', $this->header('company'))
+                    ->where('company_id', $this->header('company')),
             ];
         }
 
@@ -64,7 +64,7 @@ class TaxTypeRequest extends FormRequest
         return collect($this->validated())
             ->merge([
                 'company_id' => $this->header('company'),
-                'type' => TaxType::TYPE_GENERAL
+                'type' => TaxType::TYPE_GENERAL,
             ])
             ->toArray();
     }

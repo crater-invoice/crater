@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AddressFactory extends Factory
 {
@@ -36,7 +36,7 @@ class AddressFactory extends Factory
             'fax' => $this->faker->phoneNumber,
             'type' => $this->faker->randomElement([Address::BILLING_TYPE, Address::SHIPPING_TYPE]),
             'user_id' => User::factory(),
-            'customer_id' => Customer::factory()
+            'customer_id' => Customer::factory(),
         ];
     }
 }

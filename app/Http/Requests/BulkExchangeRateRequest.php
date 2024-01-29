@@ -25,15 +25,15 @@ class BulkExchangeRateRequest extends FormRequest
     {
         return [
             'currencies' => [
-                'required'
+                'required',
             ],
             'currencies.*.id' => [
                 'required',
-                'numeric'
+                'numeric',
             ],
             'currencies.*.exchange_rate' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

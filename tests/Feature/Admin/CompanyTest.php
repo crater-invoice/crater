@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use InvoiceShelf\Http\Controllers\V1\Admin\Company\CompaniesController;
 use InvoiceShelf\Http\Requests\CompaniesRequest;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\User;
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
@@ -35,8 +36,8 @@ test('store company', function () {
     $company = Company::factory()->raw([
         'currency' => 12,
         'address' => [
-            'country_id' => 12
-        ]
+            'country_id' => 12,
+        ],
     ]);
 
     postJson('/api/v1/companies', $company)
@@ -44,7 +45,7 @@ test('store company', function () {
 
     $company = collect($company)
         ->only([
-            'name'
+            'name',
         ])
         ->toArray();
 
@@ -52,7 +53,7 @@ test('store company', function () {
 });
 
 test('delete company', function () {
-    postJson('/api/v1/companies/delete', ["xyz"])
+    postJson('/api/v1/companies/delete', ['xyz'])
         ->assertStatus(422);
 });
 

@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\CompanySetting;
-use Illuminate\Database\Migrations\Migration;
 
 class AddNewCompanySettings extends Migration
 {
@@ -35,7 +35,7 @@ class AddNewCompanySettings extends Migration
                     'estimate_set_expiry_date_automatically' => 'YES',
                     'estimate_expiry_date_days' => 7,
                     'estimate_convert_action' => 'no_action',
-                    'bulk_exchange_rate_configured' => "NO",
+                    'bulk_exchange_rate_configured' => 'NO',
                     'invoice_number_format' => "{{SERIES:{$oldSettings['invoice_prefix']}}}{{DELIMITER:-}}{{SEQUENCE:{$oldSettings['invoice_number_length']}}}",
                     'estimate_number_format' => "{{SERIES:{$oldSettings['estimate_prefix']}}}{{DELIMITER:-}}{{SEQUENCE:{$oldSettings['estimate_number_length']}}}",
                     'payment_number_format' => "{{SERIES:{$oldSettings['payment_prefix']}}}{{DELIMITER:-}}{{SEQUENCE:{$oldSettings['payment_number_length']}}}",

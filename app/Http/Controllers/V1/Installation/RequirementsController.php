@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
+use Illuminate\Http\JsonResponse;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Space\RequirementsChecker;
-use Illuminate\Http\JsonResponse;
 
 class RequirementsController extends Controller
 {
@@ -13,9 +13,6 @@ class RequirementsController extends Controller
      */
     protected $requirements;
 
-    /**
-     * @param RequirementsChecker $checker
-     */
     public function __construct(RequirementsChecker $checker)
     {
         $this->requirements = $checker;

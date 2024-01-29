@@ -3,9 +3,9 @@
 namespace InvoiceShelf\Space;
 
 use Artisan;
-use InvoiceShelf\Events\UpdateFinished;
 use File;
 use GuzzleHttp\Exception\RequestException;
+use InvoiceShelf\Events\UpdateFinished;
 use ZipArchive;
 
 // Implementation taken from Akaunting - https://github.com/akaunting/akaunting
@@ -36,7 +36,7 @@ class Updater
             foreach (json_decode($extensions) as $extension) {
                 $extensionData[$extension] = phpversion($extension) ? true : false;
             }
-            $extensionData['php'.'('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, ">=");
+            $extensionData['php'.'('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, '>=');
             $data->version->extensions = $extensionData;
         }
 

@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\CustomField;
 use InvoiceShelf\Models\CustomFieldValue;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CustomFieldValueFactory extends Factory
 {
@@ -24,7 +24,7 @@ class CustomFieldValueFactory extends Factory
     public function definition()
     {
         return [
-            'custom_field_valuable_type' => $this->faker->name ,
+            'custom_field_valuable_type' => $this->faker->name,
             'custom_field_valuable_id' => 1,
             'type' => $this->faker->name,
             'custom_field_id' => CustomField::factory(),

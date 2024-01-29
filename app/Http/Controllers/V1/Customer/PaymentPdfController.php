@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Customer;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\PaymentResource;
 use InvoiceShelf\Models\EmailLog;
 use InvoiceShelf\Models\Payment;
-use Illuminate\Http\Request;
 
 class PaymentPdfController extends Controller
 {

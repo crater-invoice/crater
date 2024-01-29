@@ -2,13 +2,13 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Settings;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\MailEnvironmentRequest;
 use InvoiceShelf\Mail\TestMail;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Space\EnvironmentManager;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Mail;
 
 class MailConfigurationController extends Controller
@@ -18,17 +18,12 @@ class MailConfigurationController extends Controller
      */
     protected $environmentManager;
 
-    /**
-     * @param EnvironmentManager $environmentManager
-     */
     public function __construct(EnvironmentManager $environmentManager)
     {
         $this->environmentManager = $environmentManager;
     }
 
     /**
-     *
-     * @param MailEnvironmentRequest $request
      * @return JsonResponse
      */
     public function saveMailEnvironment(MailEnvironmentRequest $request)
@@ -65,12 +60,10 @@ class MailConfigurationController extends Controller
             'mail_ses_secret' => config('services.ses.secret'),
         ];
 
-
         return response()->json($MailData);
     }
 
     /**
-     *
      * @return JsonResponse
      */
     public function getMailDrivers()

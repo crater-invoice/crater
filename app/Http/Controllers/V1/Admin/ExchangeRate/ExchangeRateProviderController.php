@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\ExchangeRate;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\ExchangeRateProviderRequest;
 use InvoiceShelf\Http\Resources\ExchangeRateProviderResource;
 use InvoiceShelf\Models\ExchangeRateProvider;
-use Illuminate\Http\Request;
 
 class ExchangeRateProviderController extends Controller
 {
@@ -56,7 +56,6 @@ class ExchangeRateProviderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Http\Response
      */
     public function show(ExchangeRateProvider $exchangeRateProvider)
@@ -70,7 +69,6 @@ class ExchangeRateProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Http\Response
      */
     public function update(ExchangeRateProviderRequest $request, ExchangeRateProvider $exchangeRateProvider)
@@ -97,7 +95,6 @@ class ExchangeRateProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \InvoiceShelf\Models\ExchangeRateProvider  $exchangeRateProvider
      * @return \Illuminate\Http\Response
      */
     public function destroy(ExchangeRateProvider $exchangeRateProvider)

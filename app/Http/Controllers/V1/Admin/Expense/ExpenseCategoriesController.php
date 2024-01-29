@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Expense;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\ExpenseCategoryRequest;
 use InvoiceShelf\Http\Resources\ExpenseCategoryResource;
 use InvoiceShelf\Models\ExpenseCategory;
-use Illuminate\Http\Request;
 
 class ExpenseCategoriesController extends Controller
 {
@@ -32,7 +32,7 @@ class ExpenseCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ExpenseCategoryRequest $request)
@@ -47,7 +47,6 @@ class ExpenseCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\ExpenseCategory $category
      * @return \Illuminate\Http\Response
      */
     public function show(ExpenseCategory $category)
@@ -60,8 +59,8 @@ class ExpenseCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \InvoiceShelf\Models\ExpenseCategory $ExpenseCategory
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \InvoiceShelf\Models\ExpenseCategory  $ExpenseCategory
      * @return \Illuminate\Http\Response
      */
     public function update(ExpenseCategoryRequest $request, ExpenseCategory $category)
@@ -76,7 +75,7 @@ class ExpenseCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \InvoiceShelf\ExpensesCategory $category
+     * @param  \InvoiceShelf\ExpensesCategory  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(ExpenseCategory $category)

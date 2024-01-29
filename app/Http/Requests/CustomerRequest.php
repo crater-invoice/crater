@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Models\Address;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use InvoiceShelf\Models\Address;
 
 class CustomerRequest extends FormRequest
 {
@@ -33,7 +33,7 @@ class CustomerRequest extends FormRequest
             'email' => [
                 'email',
                 'nullable',
-                Rule::unique('customers')->where('company_id', $this->header('company'))
+                Rule::unique('customers')->where('company_id', $this->header('company')),
             ],
             'password' => [
                 'nullable',
@@ -55,7 +55,7 @@ class CustomerRequest extends FormRequest
             ],
             'enable_portal' => [
 
-                'boolean'
+                'boolean',
             ],
             'currency_id' => [
                 'nullable',
@@ -113,7 +113,7 @@ class CustomerRequest extends FormRequest
             ],
             'shipping.fax' => [
                 'nullable',
-            ]
+            ],
         ];
 
         if ($this->isMethod('PUT') && $this->email != null) {
@@ -122,7 +122,7 @@ class CustomerRequest extends FormRequest
                 'nullable',
                 Rule::unique('customers')->where('company_id', $this->header('company'))->ignore($this->route('customer')->id),
             ];
-        };
+        }
 
         return $rules;
     }
@@ -156,7 +156,7 @@ class CustomerRequest extends FormRequest
     {
         return collect($this->shipping)
             ->merge([
-                'type' => Address::SHIPPING_TYPE
+                'type' => Address::SHIPPING_TYPE,
             ])
             ->toArray();
     }
@@ -165,7 +165,7 @@ class CustomerRequest extends FormRequest
     {
         return collect($this->billing)
             ->merge([
-                'type' => Address::BILLING_TYPE
+                'type' => Address::BILLING_TYPE,
             ])
             ->toArray();
     }

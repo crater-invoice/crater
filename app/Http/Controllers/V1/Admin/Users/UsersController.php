@@ -2,19 +2,18 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Users;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\DeleteUserRequest;
 use InvoiceShelf\Http\Requests\UserRequest;
 use InvoiceShelf\Http\Resources\UserResource;
 use InvoiceShelf\Models\User;
-use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
@@ -54,7 +53,6 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(User $user)
@@ -68,7 +66,6 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\UserRequest  $request
-     * @param  \InvoiceShelf\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UserRequest $request, User $user)

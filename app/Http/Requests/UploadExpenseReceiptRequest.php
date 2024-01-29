@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Rules\Base64Mime;
 use Illuminate\Foundation\Http\FormRequest;
+use InvoiceShelf\Rules\Base64Mime;
 
 class UploadExpenseReceiptRequest extends FormRequest
 {
@@ -27,8 +27,8 @@ class UploadExpenseReceiptRequest extends FormRequest
         return [
             'attachment_receipt' => [
                 'nullable',
-                new Base64Mime(['gif', 'jpg', 'png'])
-            ]
+                new Base64Mime(['gif', 'jpg', 'png']),
+            ],
         ];
     }
 }

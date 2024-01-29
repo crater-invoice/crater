@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\InvoiceItem;
 use InvoiceShelf\Models\Item;
 use InvoiceShelf\Models\RecurringInvoice;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceItemFactory extends Factory
 {
@@ -38,7 +38,7 @@ class InvoiceItemFactory extends Factory
             'company_id' => User::find(1)->companies()->first()->id,
             'quantity' => $this->faker->randomDigitNotNull,
             'total' => function (array $item) {
-                return ($item['price'] * $item['quantity']);
+                return $item['price'] * $item['quantity'];
             },
             'discount_type' => $this->faker->randomElement(['percentage', 'fixed']),
             'discount_val' => function (array $invoice) {

@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\RecurringInvoice;
 use InvoiceShelf\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RecurringInvoiceFactory extends Factory
 {
@@ -41,7 +41,7 @@ class RecurringInvoiceFactory extends Factory
             'limit_by' => $this->faker->randomElement(['NONE', 'COUNT', 'DATE']),
             'limit_count' => $this->faker->randomDigit,
             'limit_date' => $this->faker->date(),
-            'exchange_rate' => $this->faker->randomDigitNotNull
+            'exchange_rate' => $this->faker->randomDigitNotNull,
         ];
     }
 }

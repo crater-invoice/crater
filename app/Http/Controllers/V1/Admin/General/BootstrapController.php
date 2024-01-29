@@ -2,6 +2,7 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\General;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Resources\CompanyResource;
 use InvoiceShelf\Http\Resources\UserResource;
@@ -11,7 +12,6 @@ use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\Module;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Traits\GeneratesMenuTrait;
-use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 
 class BootstrapController extends Controller
@@ -21,7 +21,6 @@ class BootstrapController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
@@ -57,7 +56,7 @@ class BootstrapController extends Controller
             'login_page_heading',
             'login_page_description',
             'admin_page_title',
-            'copyright_text'
+            'copyright_text',
         ]);
 
         return response()->json([

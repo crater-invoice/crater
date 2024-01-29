@@ -2,17 +2,17 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Invoice;
 
+use Illuminate\Mail\Markdown;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\SendInvoiceRequest;
 use InvoiceShelf\Models\Invoice;
-use Illuminate\Mail\Markdown;
 
 class SendInvoicePreviewController extends Controller
 {
     /**
      * Mail a specific invoice to the corresponding customer's email address.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(SendInvoiceRequest $request, Invoice $invoice)

@@ -1,11 +1,11 @@
 <?php
 
-use InvoiceShelf\Models\Company;
-use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\User;
 
 class AddOwnerIdToCompaniesTable extends Migration
 {
@@ -53,7 +53,7 @@ class AddOwnerIdToCompaniesTable extends Migration
         Schema::table('companies', function (Blueprint $table) {
             $table->dropColumn('slug');
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'owner_id' ] );
+                $table->dropForeign(['owner_id']);
             }
         });
     }

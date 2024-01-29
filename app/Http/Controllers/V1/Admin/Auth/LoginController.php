@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Auth;
 
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {

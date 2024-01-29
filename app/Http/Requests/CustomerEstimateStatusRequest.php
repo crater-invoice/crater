@@ -27,7 +27,7 @@ class CustomerEstimateStatusRequest extends FormRequest
             'status' => [
                 'required',
                 'in:ACCEPTED,REJECTED',
-            ]
+            ],
         ];
     }
 }

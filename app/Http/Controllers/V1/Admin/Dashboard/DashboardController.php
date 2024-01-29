@@ -3,6 +3,7 @@
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Dashboard;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\CompanySetting;
@@ -11,7 +12,6 @@ use InvoiceShelf\Models\Estimate;
 use InvoiceShelf\Models\Expense;
 use InvoiceShelf\Models\Invoice;
 use InvoiceShelf\Models\Payment;
-use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 
 class DashboardController extends Controller
@@ -19,7 +19,6 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
@@ -65,8 +64,8 @@ class DashboardController extends Controller
                     'invoice_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
                 )
-                ->whereCompany()
-                ->sum('base_total')
+                    ->whereCompany()
+                    ->sum('base_total')
             );
             array_push(
                 $expense_totals,
@@ -74,8 +73,8 @@ class DashboardController extends Controller
                     'expense_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
                 )
-                ->whereCompany()
-                ->sum('base_amount')
+                    ->whereCompany()
+                    ->sum('base_amount')
             );
             array_push(
                 $receipt_totals,
@@ -83,8 +82,8 @@ class DashboardController extends Controller
                     'payment_date',
                     [$start->format('Y-m-d'), $end->format('Y-m-d')]
                 )
-                ->whereCompany()
-                ->sum('base_amount')
+                    ->whereCompany()
+                    ->sum('base_amount')
             );
             array_push(
                 $net_income_totals,
@@ -121,7 +120,7 @@ class DashboardController extends Controller
             ->whereCompany()
             ->sum('base_amount');
 
-        $total_net_income = (int)$total_receipts - (int)$total_expenses;
+        $total_net_income = (int) $total_receipts - (int) $total_expenses;
 
         $chart_data = [
             'months' => $months,

@@ -5,31 +5,36 @@ namespace InvoiceShelf\Models;
 use App;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Str;
 use InvoiceShelf\Mail\SendEstimateMail;
 use InvoiceShelf\Services\SerialNumberFormatter;
 use InvoiceShelf\Traits\GeneratesPdfTrait;
 use InvoiceShelf\Traits\HasCustomFieldsTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Vinkla\Hashids\Facades\Hashids;
 
 class Estimate extends Model implements HasMedia
 {
-    use HasFactory;
-    use InteractsWithMedia;
     use GeneratesPdfTrait;
     use HasCustomFieldsTrait;
+    use HasFactory;
+    use InteractsWithMedia;
 
     public const STATUS_DRAFT = 'DRAFT';
+
     public const STATUS_SENT = 'SENT';
+
     public const STATUS_VIEWED = 'VIEWED';
+
     public const STATUS_EXPIRED = 'EXPIRED';
+
     public const STATUS_ACCEPTED = 'ACCEPTED';
+
     public const STATUS_REJECTED = 'REJECTED';
 
     protected $dates = [
@@ -37,7 +42,7 @@ class Estimate extends Model implements HasMedia
         'updated_at',
         'deleted_at',
         'estimate_date',
-        'expiry_date'
+        'expiry_date',
     ];
 
     protected $appends = [
@@ -54,7 +59,7 @@ class Estimate extends Model implements HasMedia
         'sub_total' => 'integer',
         'discount' => 'float',
         'discount_val' => 'integer',
-        'exchange_rate' => 'float'
+        'exchange_rate' => 'float',
     ];
 
     public function getEstimatePdfUrlAttribute()
@@ -228,7 +233,7 @@ class Estimate extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($estimate);
         }
 
@@ -264,7 +269,7 @@ class Estimate extends Model implements HasMedia
 
         $company_currency = CompanySetting::getSetting('currency', $request->header('company'));
 
-        if ((string)$data['currency_id'] !== $company_currency) {
+        if ((string) $data['currency_id'] !== $company_currency) {
             ExchangeRateLog::addExchangeRateLog($this);
         }
 
@@ -290,12 +295,12 @@ class Estimate extends Model implements HasMedia
         }
 
         return Estimate::with([
-                'items.taxes',
-                'items.fields',
-                'items.fields.customField',
-                'customer',
-                'taxes'
-            ])
+            'items.taxes',
+            'items.fields',
+            'items.fields.customField',
+            'customer',
+            'taxes',
+        ])
             ->find($this->id);
     }
 
@@ -315,7 +320,7 @@ class Estimate extends Model implements HasMedia
 
             if (array_key_exists('taxes', $estimateItem) && $estimateItem['taxes']) {
                 foreach ($estimateItem['taxes'] as $tax) {
-                    if (gettype($tax['amount']) !== "NULL") {
+                    if (gettype($tax['amount']) !== 'NULL') {
                         $tax['company_id'] = $request->header('company');
                         $item->taxes()->create($tax);
                     }
@@ -333,7 +338,7 @@ class Estimate extends Model implements HasMedia
         $estimateTaxes = $request->taxes;
 
         foreach ($estimateTaxes as $tax) {
-            if (gettype($tax['amount']) !== "NULL") {
+            if (gettype($tax['amount']) !== 'NULL') {
                 $tax['company_id'] = $request->header('company');
                 $tax['exchange_rate'] = $exchange_rate;
                 $tax['base_amount'] = $tax['amount'] * $exchange_rate;

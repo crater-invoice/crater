@@ -28,7 +28,7 @@ class AddRecurringInvoiceIdToTaxesTable extends Migration
     {
         Schema::table('taxes', function (Blueprint $table) {
             if (config('database.default') !== 'sqlite') {
-                $table->dropForeign( [ 'recurring_invoice_id' ] );
+                $table->dropForeign(['recurring_invoice_id']);
             }
             $table->dropColumn('recurring_invoice_id');
         });

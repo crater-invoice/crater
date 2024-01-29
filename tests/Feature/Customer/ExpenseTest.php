@@ -2,11 +2,12 @@
 
 namespace Tests\Feature\Customer;
 
-use InvoiceShelf\Models\Customer;
-use InvoiceShelf\Models\Expense;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use InvoiceShelf\Models\Customer;
+use InvoiceShelf\Models\Expense;
 use Laravel\Sanctum\Sanctum;
+
 use function Pest\Laravel\getJson;
 
 beforeEach(function () {
@@ -33,7 +34,7 @@ test('get customer expense', function () {
 
     $expense = Expense::factory()->create([
         'customer_id' => $customer->id,
-        'company_id' => $customer->company->id
+        'company_id' => $customer->company->id,
     ]);
 
     getJson("/api/v1/{$customer->company->slug}/customer/expenses/{$expense->id}")

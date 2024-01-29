@@ -1,15 +1,14 @@
 <?php
 
+use Illuminate\Support\Str;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\CustomField;
 use InvoiceShelf\Models\Setting;
-use Illuminate\Support\Str;
 
 /**
  * Get company setting
  *
- * @param $company_id
  * @return string
  */
 function get_company_setting($key, $company_id)
@@ -22,7 +21,7 @@ function get_company_setting($key, $company_id)
 /**
  * Get app setting
  *
- * @param $company_id
+ * @param  $company_id
  * @return string
  */
 function get_app_setting($key)
@@ -35,7 +34,6 @@ function get_app_setting($key)
 /**
  * Get page title
  *
- * @param $company_id
  * @return string
  */
 function get_page_title($company_id)
@@ -61,26 +59,23 @@ function get_page_title($company_id)
 /**
  * Set Active Path
  *
- * @param $path
- * @param string $active
+ * @param  string  $active
  * @return string
  */
 function set_active($path, $active = 'active')
 {
-    return call_user_func_array('Request::is', (array)$path) ? $active : '';
+    return call_user_func_array('Request::is', (array) $path) ? $active : '';
 }
 
 /**
- * @param $path
  * @return mixed
  */
 function is_url($path)
 {
-    return call_user_func_array('Request::is', (array)$path);
+    return call_user_func_array('Request::is', (array) $path);
 }
 
 /**
- * @param string $type
  * @return string
  */
 function getCustomFieldValueKey(string $type)
@@ -122,7 +117,6 @@ function getCustomFieldValueKey(string $type)
 }
 
 /**
- * @param $money
  * @return formated_money
  */
 function format_money_pdf($money, $currency = null)
@@ -151,7 +145,7 @@ function format_money_pdf($money, $currency = null)
 }
 
 /**
- * @param $string
+ * @param  $string
  * @return string
  */
 function clean_slug($model, $title, $id = 0)
@@ -191,6 +185,6 @@ function respondJson($error, $message)
 {
     return response()->json([
         'error' => $error,
-        'message' => $message
+        'message' => $message,
     ], 422);
 }

@@ -11,8 +11,7 @@ class DownloadReceiptController extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Expense $expense
-     * @param   string $hash
+     * @param  string  $hash
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Expense $expense)

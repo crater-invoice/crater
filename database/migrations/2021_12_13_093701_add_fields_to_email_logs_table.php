@@ -1,11 +1,11 @@
 <?php
 
-use InvoiceShelf\Models\Company;
-use InvoiceShelf\Models\CompanySetting;
-use InvoiceShelf\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\User;
 
 class AddFieldsToEmailLogsTable extends Migration
 {
@@ -25,7 +25,7 @@ class AddFieldsToEmailLogsTable extends Migration
         if ($user) {
             $settings = [
                 'automatically_expire_public_links' => 'Yes',
-                'link_expiry_days' => 7
+                'link_expiry_days' => 7,
             ];
 
             $companies = Company::all();

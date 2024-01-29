@@ -2,8 +2,8 @@
 
 namespace InvoiceShelf\Policies;
 
-use InvoiceShelf\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use InvoiceShelf\Models\User;
 
 class ModulesPolicy
 {

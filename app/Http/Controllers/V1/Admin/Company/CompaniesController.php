@@ -2,12 +2,12 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Company;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Http\Requests\CompaniesRequest;
 use InvoiceShelf\Http\Resources\CompanyResource;
 use InvoiceShelf\Models\Company;
 use InvoiceShelf\Models\User;
-use Illuminate\Http\Request;
 use Silber\Bouncer\BouncerFacade;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -52,7 +52,7 @@ class CompaniesController extends Controller
         $company->deleteCompany($user);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -64,7 +64,7 @@ class CompaniesController extends Controller
         if ($user->hasCompany($company->id)) {
             return response()->json([
                 'success' => false,
-                'message' => 'User does not belongs to this company.'
+                'message' => 'User does not belongs to this company.',
             ]);
         }
 
@@ -72,7 +72,7 @@ class CompaniesController extends Controller
         BouncerFacade::sync($user)->roles(['super admin']);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 

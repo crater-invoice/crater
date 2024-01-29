@@ -2,10 +2,10 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Modules;
 
+use Illuminate\Http\Request;
 use InvoiceShelf\Events\ModuleDisabledEvent;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Module as ModelsModule;
-use Illuminate\Http\Request;
 use Nwidart\Modules\Facades\Module;
 
 class DisableModuleController extends Controller
@@ -13,7 +13,6 @@ class DisableModuleController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request, string $module)

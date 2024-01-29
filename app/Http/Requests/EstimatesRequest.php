@@ -2,11 +2,11 @@
 
 namespace InvoiceShelf\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Customer;
 use InvoiceShelf\Models\Estimate;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class EstimatesRequest extends FormRequest
 {
@@ -39,10 +39,10 @@ class EstimatesRequest extends FormRequest
             ],
             'estimate_number' => [
                 'required',
-                Rule::unique('estimates')->where('company_id', $this->header('company'))
+                Rule::unique('estimates')->where('company_id', $this->header('company')),
             ],
             'exchange_rate' => [
-                'nullable'
+                'nullable',
             ],
             'discount' => [
                 'required',
@@ -60,7 +60,7 @@ class EstimatesRequest extends FormRequest
                 'required',
             ],
             'template_name' => [
-                'required'
+                'required',
             ],
             'items' => [
                 'required',
@@ -89,11 +89,11 @@ class EstimatesRequest extends FormRequest
         $customer = Customer::find($this->customer_id);
 
         if ($companyCurrency && $customer) {
-            if ((string)$customer->currency_id !== $companyCurrency) {
+            if ((string) $customer->currency_id !== $companyCurrency) {
                 $rules['exchange_rate'] = [
                     'required',
                 ];
-            };
+            }
         }
 
         if ($this->isMethod('PUT')) {

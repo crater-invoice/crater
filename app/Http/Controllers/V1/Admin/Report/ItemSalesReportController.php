@@ -2,22 +2,21 @@
 
 namespace InvoiceShelf\Http\Controllers\V1\Admin\Report;
 
-use PDF;
 use Carbon\Carbon;
-use InvoiceShelf\Models\Company;
-use InvoiceShelf\Models\Currency;
 use Illuminate\Http\Request;
-use InvoiceShelf\Models\InvoiceItem;
-use InvoiceShelf\Models\CompanySetting;
 use Illuminate\Support\Facades\App;
 use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Models\Company;
+use InvoiceShelf\Models\CompanySetting;
+use InvoiceShelf\Models\Currency;
+use InvoiceShelf\Models\InvoiceItem;
+use PDF;
 
 class ItemSalesReportController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $hash
      * @return \Illuminate\Http\JsonResponse
      */
@@ -27,7 +26,7 @@ class ItemSalesReportController extends Controller
 
         $this->authorize('view report', $company);
 
-        $locale = CompanySetting::getSetting('language',  $company->id);
+        $locale = CompanySetting::getSetting('language', $company->id);
 
         App::setLocale($locale);
 

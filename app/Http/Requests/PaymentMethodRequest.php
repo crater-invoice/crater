@@ -2,9 +2,9 @@
 
 namespace InvoiceShelf\Http\Requests;
 
-use InvoiceShelf\Models\PaymentMethod;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use InvoiceShelf\Models\PaymentMethod;
 
 class PaymentMethodRequest extends FormRequest
 {

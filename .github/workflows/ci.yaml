@@ -34,7 +34,7 @@ jobs:
               run: composer update --ignore-platform-req=php --no-interaction --no-progress
 
             - name: Check coding style
-              run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --config=.php-cs-fixer.dist.php
+              run: ./vendor/bin/pint --test
 
             - name: Unit Tests
               run: php ./vendor/bin/pest

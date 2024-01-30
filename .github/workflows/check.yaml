@@ -1,0 +1,128 @@
+name: Check
+
+# Run this workflow every time a new commit pushed to your repository
+on:
+    push:
+        paths-ignore:
+            - '**/*.md'
+            - 'public/build/*.js'
+            - 'public/build/**/*.js'
+    pull_request:
+        paths-ignore:
+            - '**/*.md'
+            - 'public/build/*.js'
+            - 'public/build/**/*.js'
+    # Allow manually triggering the workflow.
+    workflow_dispatch:
+
+jobs:
+    kill_previous:
+        name: 0️⃣ Kill previous runs
+        runs-on: ubuntu-latest
+        # We want to run on external PRs, but not on our own internal PRs as they'll be run by the push to the branch.
+        if: (github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository)
+        steps:
+            - name: Cancel Previous Runs
+              uses: styfle/cancel-workflow-action@0.12.1
+              with:
+                  access_token: ${{ github.token }}
+
+    php_syntax_errors:
+        name: 1️⃣ PHP Code Style errors
+        runs-on: ubuntu-latest
+        needs:
+            - kill_previous
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 8.2
+
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              uses: ramsey/composer-install@v2
+
+            - name: Check source code for syntax errors
+              run: ./vendor/bin/pint --test
+
+    tests:
+        name: 2️⃣ PHP ${{ matrix.php-version }} Tests
+        needs:
+            - php_syntax_errors
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php-version:
+                    - 8.2
+                    - 8.3
+        env:
+            extensions: bcmath, curl, dom, gd, imagick, json, libxml, mbstring, pcntl, pdo, pdo_mysql, zip
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup PHP Action
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+                  extensions: ${{ env.extensions }}
+                  coverage: xdebug
+                  tools: pecl, composer
+
+            - name: Install Composer dependencies
+              uses: ramsey/composer-install@v2
+
+            - name: Apply tests ${{ matrix.php-version }}
+              run: php artisan test
+
+    createReleaseFile:
+        name: 3️⃣ Build / Upload - Release File
+        if: github.ref_type == 'tag'
+        needs:
+            - tests
+        runs-on: ubuntu-latest
+        env:
+            extensions: bcmath, curl, dom, gd, imagick, json, libxml, mbstring, pcntl, pdo, pdo_mysql, zip
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 8.2
+                  extensions: ${{ env.extensions }}
+                  coverage: none
+
+            - name: Install Composer dependencies
+              uses: ramsey/composer-install@v2
+              with:
+                  composer-options: --no-dev
+
+            - name: Use Node.js 20
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+
+            - name: Install
+              run: npm install
+
+            - name: Compile Front-end
+              run: npm run build
+
+            - name: Build Dist
+              run: |
+                  make clean dist
+
+            - name: Upload package
+              uses: svenstaro/upload-release-action@v2
+              with:
+                  repo_token: ${{ github.token }}
+                  file: InvoiceShelf.zip
+                  asset_name: InvoiceShelf.zip
+                  tag: ${{ github.ref }}
+                  overwrite: true

@@ -16,7 +16,6 @@
       duration-300
       ease-in-out
       isolate
-      w-full
       hover:border-gray-300
       group
       min-h-[100px]
@@ -45,7 +44,7 @@
 
     <!-- Avatar Not Selected -->
     <div v-if="!localFiles.length && avatar" class="">
-      <img :src="getDefaultAvatar()" class="rounded w-16" alt="Default Avatar" />
+      <img :src="getDefaultAvatar()" class="rounded" alt="Default Avatar" />
 
       <a
         href="#"
@@ -95,7 +94,7 @@
 
     <div
       v-else-if="localFiles.length && avatar && !multiple"
-      class="flex w-full h-full border border-gray-200 rounded"
+      class="flex w-full h-full border border-gray-200 rounded justify-center items-center"
     >
       <img
         v-if="localFiles[0].image"

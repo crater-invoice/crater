@@ -40,7 +40,7 @@ The Web Application is made using Laravel & VueJS while the Mobile Apps are buil
 
 ## Discord
 
-Join the Crater discord server to discuss:
+Join the InvoiceShelf discord server to discuss:
 [Invite Link](https://discord.gg/KMpTGTpk)
 
 ## Roadmap

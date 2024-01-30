@@ -12,7 +12,6 @@ Homestead.yaml
 .rnd
 /.expo
 /.vscode
-/docker-compose/db/data/
 .gitkeep
 /public/docs
 /.scribe

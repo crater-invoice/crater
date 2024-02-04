@@ -49,7 +49,7 @@ return [
     'base_url' => 'https://invoiceshelf.com',
 
     /*
-    * List of languages supported by Crater.
+    * List of languages supported by InvoiceShelf.
     */
     'languages' => [
         ['code' => 'ar', 'name' => 'Arabic'],

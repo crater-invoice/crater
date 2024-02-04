@@ -308,23 +308,22 @@ async function checkUpdate() {
     isCheckingforUpdate.value = true
     let response = await axios.get('/api/v1/check/update')
     isCheckingforUpdate.value = false
-    if (!response.data.version) {
+    if (!response.data.release) {
       notificationStore.showNotification({
         title: 'Info!',
         type: 'info',
         message: t('settings.update_app.latest_message'),
       })
-      return
+      return;
     }
 
     if (response.data) {
       updateData.isMinor = response.data.is_minor
-      updateData.version = response.data.version.version
-      description.value = response.data.version.description
-      requiredExtentions.value = response.data.version.extensions
+      updateData.version = response.data.release.version
+      description.value = response.data.release.description
+      requiredExtentions.value = response.data.release.extensions
       isUpdateAvailable.value = true
-      minPhpVesrion.value = response.data.version.minimum_php_version
-      deletedFiles.value = response.data.version.deleted_files
+      minPhpVesrion.value = response.data.release.min_php_version
     }
   } catch (e) {
     isUpdateAvailable.value = false
@@ -363,7 +362,6 @@ function onUpdateApp() {
             let updateParams = {
               version: updateData.version,
               installed: currentVersion.value,
-              deleted_files: deletedFiles.value,
               path: path || null,
             }
 
@@ -377,10 +375,7 @@ function onUpdateApp() {
             }
             // on finish
 
-            if (
-              currentStep.translationKey ==
-              'settings.update_app.finishing_update'
-            ) {
+            if (currentStep.translationKey == 'settings.update_app.finishing_update') {
               isUpdating.value = false
               notificationStore.showNotification({
                 type: 'success',

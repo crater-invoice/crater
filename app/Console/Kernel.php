@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\RecurringInvoice;
+use InvoiceShelf\Space\InstallUtils;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        if (\Storage::disk('local')->has('database_created')) {
+        if (InstallUtils::isDbCreated()) {
             $schedule->command('check:invoices:status')
                 ->daily();
 

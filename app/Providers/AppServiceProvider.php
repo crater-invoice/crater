@@ -3,8 +3,8 @@
 namespace InvoiceShelf\Providers;
 
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use InvoiceShelf\Space\InstallUtils;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapThree();
         $this->loadJsonTranslationsFrom(resource_path('scripts/locales'));
 
-        if (\Storage::disk('local')->has('database_created') && Schema::hasTable('abilities')) {
+        if (InstallUtils::isDbCreated()) {
             $this->addMenus();
         }
     }

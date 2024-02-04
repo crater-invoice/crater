@@ -75,6 +75,17 @@ jobs:
             - name: Install Composer dependencies
               uses: ramsey/composer-install@v2
 
+            - name: Use Node.js 20
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+
+            - name: Install
+              run: npm install
+
+            - name: Compile Front-end
+              run: npm run build
+
             - name: Apply tests ${{ matrix.php-version }}
               run: php artisan test
 

@@ -89,14 +89,30 @@
           class="
             pl-5
             mt-4
-            mb-8
+            mb-2
             text-sm
             leading-snug
             text-gray-500
             update-description
           "
           style="white-space: pre-wrap; max-width: 480px"
+          v-if="description"
           v-html="description"
+        ></div>
+
+        <div
+          class="
+            pl-5
+            mt-2
+            mb-8
+            text-sm
+            leading-snug
+            text-gray-500
+            update-changelog
+          "
+          style="white-space: pre-wrap; max-width: 480px"
+          v-if="changelog"
+          v-html="changelog"
         ></div>
 
         <label class="text-sm not-italic font-medium input-label">
@@ -198,6 +214,7 @@ const exchangeRateStore = useExchangeRateStore()
 let isUpdateAvailable = ref(false)
 let isCheckingforUpdate = ref(false)
 let description = ref('')
+let changelog = ref('');
 let currentVersion = ref('')
 let requiredExtentions = ref(null)
 let deletedFiles = ref(null)
@@ -321,6 +338,7 @@ async function checkUpdate() {
       updateData.isMinor = response.data.is_minor
       updateData.version = response.data.release.version
       description.value = response.data.release.description
+      changelog.value = response.data.release.changelog
       requiredExtentions.value = response.data.release.extensions
       isUpdateAvailable.value = true
       minPhpVesrion.value = response.data.release.min_php_version
@@ -421,11 +439,12 @@ function getStatus(step) {
 </script>
 
 <style>
-.update-description ul {
-  list-style: disc !important;
+.update-changelog ul {
+  list-style: disc!important;
+  margin-left: 30px;
 }
-
-.update-description li {
+.update-changelog li {
   margin-bottom: 4px;
 }
+
 </style>

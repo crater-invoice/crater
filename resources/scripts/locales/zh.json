@@ -12,7 +12,7 @@
     "settings": "設定",
     "logout": "登出",
     "users": "使用者",
-    "modules": "Modules"
+    "modules": "功能模組"
   },
   "general": {
     "add_company": "新增公司",
@@ -469,7 +469,7 @@
     "amount_due": "到期金額",
     "partially_paid": "部分支付",
     "total": "總計",
-    "discount": "Discount",
+    "discount": "折扣",
     "sub_total": "Sub Total",
     "invoice": "Recurring Invoice | Recurring Invoices",
     "invoice_number": "Recurring Invoice Number",

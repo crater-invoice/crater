@@ -5,6 +5,7 @@ use InvoiceShelf\Models\CompanySetting;
 use InvoiceShelf\Models\Currency;
 use InvoiceShelf\Models\CustomField;
 use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Space\InstallUtils;
 
 /**
  * Get company setting
@@ -13,9 +14,11 @@ use InvoiceShelf\Models\Setting;
  */
 function get_company_setting($key, $company_id)
 {
-    if (\Storage::disk('local')->has('database_created')) {
-        return CompanySetting::getSetting($key, $company_id);
+    if (! InstallUtils::isDbCreated()) {
+        return null;
     }
+
+    return CompanySetting::getSetting($key, $company_id);
 }
 
 /**
@@ -26,9 +29,11 @@ function get_company_setting($key, $company_id)
  */
 function get_app_setting($key)
 {
-    if (\Storage::disk('local')->has('database_created')) {
-        return Setting::getSetting($key);
+    if (! InstallUtils::isDbCreated()) {
+        return null;
     }
+
+    return Setting::getSetting($key);
 }
 
 /**
@@ -38,22 +43,23 @@ function get_app_setting($key)
  */
 function get_page_title($company_id)
 {
+    if (! InstallUtils::isDbCreated()) {
+        return null;
+    }
+
     $routeName = Route::currentRouteName();
 
-    $pageTitle = null;
     $defaultPageTitle = 'InvoiceShelf - Self Hosted Invoicing Platform';
 
-    if (\Storage::disk('local')->has('database_created')) {
-        if ($routeName === 'customer.dashboard') {
-            $pageTitle = CompanySetting::getSetting('customer_portal_page_title', $company_id);
-
-            return $pageTitle ? $pageTitle : $defaultPageTitle;
-        }
-
-        $pageTitle = Setting::getSetting('admin_page_title');
+    if ($routeName === 'customer.dashboard') {
+        $pageTitle = CompanySetting::getSetting('customer_portal_page_title', $company_id);
 
         return $pageTitle ? $pageTitle : $defaultPageTitle;
     }
+
+    $pageTitle = Setting::getSetting('admin_page_title');
+
+    return $pageTitle ? $pageTitle : $defaultPageTitle;
 }
 
 /**

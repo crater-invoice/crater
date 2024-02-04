@@ -8,6 +8,8 @@ InvoiceShelf is a fork of [Crater](https://crater.finance) that focuses in stabi
 
 The Web Application is made using Laravel & VueJS while the Mobile Apps are built using React Native.
 
+**NOTE:** The docker image files are moved into a separate repository [InvoiceShelf/docker](https://github.com/InvoiceShelf/docker).
+
 # Table of Contents
 
 1. [Documentation](#documentation)
@@ -38,7 +40,7 @@ The Web Application is made using Laravel & VueJS while the Mobile Apps are buil
 
 ## Discord
 
-Join the Crater discord server to discuss:
+Join the InvoiceShelf discord server to discuss:
 [Invite Link](https://discord.gg/KMpTGTpk)
 
 ## Roadmap

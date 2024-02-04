@@ -16,11 +16,7 @@ class Updater
     public static function checkForUpdate($installed_version)
     {
         $data = null;
-        if (env('APP_ENV') === 'development' || env('APP_ENV') === 'local') {
-            $url = 'downloads/check/latest/'.$installed_version.'?type=update&is_dev=1';
-        } else {
-            $url = 'downloads/check/latest/'.$installed_version.'?type=update';
-        }
+        $url = 'releases/update-check/'.$installed_version;
 
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
@@ -30,14 +26,13 @@ class Updater
 
         $data = json_decode($data);
 
-        if ($data->success && $data->version && property_exists($data->version, 'extensions')) {
-            $extensions = $data->version->extensions;
-            $extensionData = [];
-            foreach (json_decode($extensions) as $extension) {
-                $extensionData[$extension] = phpversion($extension) ? true : false;
+        if ($data->success && $data->release && property_exists($data->release, 'extensions')) {
+            $extensions = [];
+            foreach ($data->release->extensions as $extension) {
+                $extensions[$extension] = phpversion($extension) !== false;
             }
-            $extensionData['php'.'('.$data->version->minimum_php_version.')'] = version_compare(phpversion(), $data->version->minimum_php_version, '>=');
-            $data->version->extensions = $extensionData;
+            $extensions['php'.'('.$data->release->min_php_version.')'] = version_compare(phpversion(), $data->release->min_php_version, '>=');
+            $data->release->extensions = $extensions;
         }
 
         return $data;
@@ -48,12 +43,7 @@ class Updater
         $data = null;
         $path = null;
 
-        if (env('APP_ENV') === 'development') {
-            $url = 'downloads/file/'.$new_version.'?type=update&is_dev=1&is_cmd='.$is_cmd;
-        } else {
-            $url = 'downloads/file/'.$new_version.'?type=update&is_cmd='.$is_cmd;
-        }
-
+        $url = 'releases/download/'.$new_version.'.zip';
         $response = static::getRemote($url, ['timeout' => 100, 'track_redirects' => true]);
 
         // Exception

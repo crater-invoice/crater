@@ -5,17 +5,18 @@ namespace InvoiceShelf\Http\Controllers\V1\Installation;
 use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
 use InvoiceShelf\Models\Setting;
+use InvoiceShelf\Space\InstallUtils;
 
 class OnboardingWizardController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getStep(Request $request)
     {
-        if (! \Storage::disk('local')->has('database_created')) {
+        if (! InstallUtils::dbMarkerExists()) {
             return response()->json([
                 'profile_complete' => 0,
             ]);

@@ -4,6 +4,7 @@ namespace InvoiceShelf\Http\Middleware;
 
 use Closure;
 use InvoiceShelf\Models\FileDisk;
+use InvoiceShelf\Space\InstallUtils;
 
 class ConfigMiddleware
 {
@@ -15,7 +16,7 @@ class ConfigMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (\Storage::disk('local')->has('database_created')) {
+        if (InstallUtils::isDbCreated()) {
             if ($request->has('file_disk_id')) {
                 $file_disk = FileDisk::find($request->file_disk_id);
             } else {

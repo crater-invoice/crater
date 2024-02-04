@@ -4,6 +4,7 @@ namespace InvoiceShelf\Http\Controllers\V1\Installation;
 
 use Illuminate\Http\Request;
 use InvoiceShelf\Http\Controllers\Controller;
+use InvoiceShelf\Space\InstallUtils;
 
 class FinishController extends Controller
 {
@@ -14,7 +15,7 @@ class FinishController extends Controller
      */
     public function __invoke(Request $request)
     {
-        \Storage::disk('local')->put('database_created', 'database_created');
+        InstallUtils::createDbMarker();
 
         return response()->json(['success' => true]);
     }

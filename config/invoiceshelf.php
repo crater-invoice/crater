@@ -17,7 +17,7 @@ return [
     /*
     * Minimum php version.
     */
-    'min_php_version' => '7.4.0',
+    'min_php_version' => '8.1.0',
 
     /*
     * Minimum mysql version.
@@ -49,7 +49,7 @@ return [
     'base_url' => 'https://invoiceshelf.com',
 
     /*
-    * List of languages supported by Crater.
+    * List of languages supported by InvoiceShelf.
     */
     'languages' => [
         ['code' => 'ar', 'name' => 'Arabic'],

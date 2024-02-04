@@ -2,6 +2,7 @@
 /node_modules
 /public/storage
 /public/hot
+/public/build
 /storage/*.key
 /vendor
 /.idea
@@ -12,7 +13,6 @@ Homestead.yaml
 .rnd
 /.expo
 /.vscode
-/docker-compose/db/data/
 .gitkeep
 /public/docs
 /.scribe

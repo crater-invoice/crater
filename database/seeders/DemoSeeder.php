@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use InvoiceShelf\Models\Address;
 use InvoiceShelf\Models\Setting;
 use InvoiceShelf\Models\User;
+use InvoiceShelf\Space\InstallUtils;
 
 class DemoSeeder extends Seeder
 {
@@ -24,6 +25,6 @@ class DemoSeeder extends Seeder
 
         Setting::setSetting('profile_complete', 'COMPLETED');
 
-        \Storage::disk('local')->put('database_created', 'database_created');
+        InstallUtils::createDbMarker();
     }
 }

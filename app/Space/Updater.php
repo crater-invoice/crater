@@ -28,7 +28,7 @@ class Updater
 
         if ($data->success && $data->release && property_exists($data->release, 'extensions')) {
             $extensions = [];
-            foreach($data->release->extensions as $extension) {
+            foreach ($data->release->extensions as $extension) {
                 $extensions[$extension] = phpversion($extension) !== false;
             }
             $extensions['php'.'('.$data->release->min_php_version.')'] = version_compare(phpversion(), $data->release->min_php_version, '>=');

@@ -2,6 +2,7 @@
 
 namespace InvoiceShelf\Space;
 
+use Illuminate\Database\QueryException;
 use League\Flysystem\FilesystemException;
 
 class InstallUtils
@@ -13,7 +14,7 @@ class InstallUtils
      */
     public static function isDbCreated()
     {
-        return self::tableExists('users');
+        return self::dbMarkerExists() && self::tableExists('users');
     }
 
     /**
@@ -30,19 +31,14 @@ class InstallUtils
         }
 
         try {
-            $flag = self::dbMarkerExists();
-            if ($flag) {
-                $flag &= \Schema::hasTable($table);
-            }
-        } catch (\Illuminate\Database\QueryException $e) {
-            $flag = false;
-        } catch (\Exception $e) {
+            $flag = \Schema::hasTable($table);
+        } catch (QueryException|\Exception $e) {
             $flag = false;
         }
 
         $cache[$table] = $flag;
 
-        return $flag;
+        return $cache[$table];
     }
 
     /**
@@ -68,7 +64,7 @@ class InstallUtils
      */
     public static function createDbMarker()
     {
-        \Storage::disk('local')->put('database_created', 'database_created');
+        \Storage::disk('local')->put('database_created', time());
     }
 
     /**

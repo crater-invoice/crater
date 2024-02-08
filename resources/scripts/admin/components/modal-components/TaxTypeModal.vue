@@ -169,7 +169,7 @@ const rules = computed(() => {
         required: helpers.withMessage(t('validation.required'), required),
         between: helpers.withMessage(
           t('validation.enter_valid_tax_rate'),
-          between(0, 100)
+          between(-100, 100)
         ),
       },
       description: {

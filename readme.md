@@ -41,7 +41,7 @@ The Web Application is made using Laravel & VueJS while the Mobile Apps are buil
 ## Discord
 
 Join the InvoiceShelf discord server to discuss:
-[Invite Link](https://discord.gg/KMpTGTpk)
+[Invite Link](https://discord.gg/eHXf4zWhsR)
 
 ## Roadmap
 

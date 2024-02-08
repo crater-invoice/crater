@@ -401,7 +401,10 @@ class Invoice extends Model implements HasMedia
         $data['base_due_amount'] = $data['due_amount'] * $data['exchange_rate'];
         $data['customer_sequence_number'] = $serial->nextCustomerSequenceNumber;
 
-        $this->changeInvoiceStatus($data['due_amount']);
+        $statusData = $this->getInvoiceStatusByAmount($data['due_amount']);
+        if(!empty($statusData)) {
+            $data = array_merge($data, $statusData);
+        }
 
         $this->update($data);
 
@@ -691,27 +694,54 @@ class Invoice extends Model implements HasMedia
         $this->changeInvoiceStatus($this->due_amount);
     }
 
-    public function changeInvoiceStatus($amount)
+    /**
+     * Set the invoice status from amount.
+     * @param $amount
+     *
+     * @return array
+     */
+    public function getInvoiceStatusByAmount($amount)
     {
         if ($amount < 0) {
-            return [
-                'error' => 'invalid_amount',
-            ];
+            return [];
         }
 
         if ($amount == 0) {
-            $this->status = Invoice::STATUS_COMPLETED;
-            $this->paid_status = Invoice::STATUS_PAID;
-            $this->overdue = false;
+            $data = [
+                'status' => Invoice::STATUS_COMPLETED,
+                'paid_status' => Invoice::STATUS_PAID,
+                'overdue' => false,
+            ];
         } elseif ($amount == $this->total) {
-            $this->status = $this->getPreviousStatus();
-            $this->paid_status = Invoice::STATUS_UNPAID;
+            $data = [
+                'status' => $this->getPreviousStatus(),
+                'paid_status' => Invoice::STATUS_UNPAID,
+            ];
         } else {
-            $this->status = $this->getPreviousStatus();
-            $this->paid_status = Invoice::STATUS_PARTIALLY_PAID;
+            $data = [
+                'status' => $this->getPreviousStatus(),
+                'paid_status' => Invoice::STATUS_PARTIALLY_PAID,
+            ];
         }
 
-        $this->save();
+        return $data;
+    }
+
+    /**
+     * Changes the invoice status right away
+     * @param $amount
+     *
+     * @return string[]|void
+     */
+    public function changeInvoiceStatus($amount)
+    {
+        $status = $this->getInvoiceStatusByAmount($amount);
+        if(!empty($status)) {
+            foreach($status as $key => $value) {
+                $this->setAttribute($key, $value);
+            }
+            $this->save();
+        }
     }
 
     public static function deleteInvoices($ids)

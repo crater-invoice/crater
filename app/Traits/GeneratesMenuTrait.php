@@ -8,7 +8,7 @@ trait GeneratesMenuTrait
     {
         $new_items = [];
 
-        $menu =  \Menu::get($key);
+        $menu = \Menu::get($key);
         $items = $menu ? $menu->items->toArray() : [];
 
         foreach ($items as $data) {

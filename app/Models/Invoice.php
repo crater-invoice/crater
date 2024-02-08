@@ -402,7 +402,7 @@ class Invoice extends Model implements HasMedia
         $data['customer_sequence_number'] = $serial->nextCustomerSequenceNumber;
 
         $statusData = $this->getInvoiceStatusByAmount($data['due_amount']);
-        if(!empty($statusData)) {
+        if (! empty($statusData)) {
             $data = array_merge($data, $statusData);
         }
 
@@ -696,7 +696,6 @@ class Invoice extends Model implements HasMedia
 
     /**
      * Set the invoice status from amount.
-     * @param $amount
      *
      * @return array
      */
@@ -729,15 +728,14 @@ class Invoice extends Model implements HasMedia
 
     /**
      * Changes the invoice status right away
-     * @param $amount
      *
      * @return string[]|void
      */
     public function changeInvoiceStatus($amount)
     {
         $status = $this->getInvoiceStatusByAmount($amount);
-        if(!empty($status)) {
-            foreach($status as $key => $value) {
+        if (! empty($status)) {
+            foreach ($status as $key => $value) {
                 $this->setAttribute($key, $value);
             }
             $this->save();

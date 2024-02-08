@@ -6,11 +6,14 @@ trait GeneratesMenuTrait
 {
     public function generateMenu($key, $user)
     {
-        $menu = [];
+        $new_items = [];
 
-        foreach (\Menu::get($key)->items->toArray() as $data) {
+        $menu =  \Menu::get($key);
+        $items = $menu ? $menu->items->toArray() : [];
+
+        foreach ($items as $data) {
             if ($user->checkAccess($data)) {
-                $menu[] = [
+                $new_items[] = [
                     'title' => $data->title,
                     'link' => $data->link->path['url'],
                     'icon' => $data->data['icon'],
@@ -20,6 +23,6 @@ trait GeneratesMenuTrait
             }
         }
 
-        return $menu;
+        return $new_items;
     }
 }

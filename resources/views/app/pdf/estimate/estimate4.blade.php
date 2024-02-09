@@ -425,7 +425,7 @@
                 {!! $notes !!}
             @endif
             <br/>
-            <a href="http://crm.lowieant.be/algemene-voorwaarden.pdf" target="_blank">Klik hier om de algemene voorwaarden te lezen.</a>
+            Bij ondertekening van deze offerte bevestigd u dat u akkoord gaat met de <a href="http://crm.lowieant.be/algemene-voorwaarden.pdf" target="_blank">algemene voorwaarden</a>.
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 @component('mail::message')
-{{ $data['user']['name'] }} viewed this Invoice.
+{{ $data['user']['name'] }} heeft deze factuur bekeken.
 
 @component('mail::button', ['url' => url('/admin/invoices/'.$data['invoice']['id'].'/view')])
-View Invoice
+Bekijk factuur
 @endcomponent
 
 Thanks,<br>

@@ -1,8 +1,8 @@
 @component('mail::message')
-{{ $data['user']['name'] }} viewed this Estimate.
+{{ $data['user']['name'] }} heeft deze offerte bekeken.
 
 @component('mail::button', ['url' => url('/admin/estimates/'.$data['estimate']['id'].'/view')])
-View Estimate
+Bekijk offerte
 @endcomponent
 
 Thanks,<br>

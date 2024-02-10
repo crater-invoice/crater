@@ -33,14 +33,14 @@ class Base64Mime implements Rule
 
         try {
             $decoded = json_decode(trim($value));
-            $name = !empty($decoded->name) ? $decoded->name : '';
-            $data = !empty($decoded->data) ? $decoded->data : '';
+            $name = ! empty($decoded->name) ? $decoded->name : '';
+            $data = ! empty($decoded->data) ? $decoded->data : '';
         } catch (\Exception $e) {
             return false;
         }
 
         $extension = pathinfo($name, PATHINFO_EXTENSION);
-        if(!in_array($extension, $this->extensions)) {
+        if (! in_array($extension, $this->extensions)) {
             return false;
         }
 

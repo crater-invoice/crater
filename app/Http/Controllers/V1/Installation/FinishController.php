@@ -15,7 +15,7 @@ class FinishController extends Controller
      */
     public function __invoke(Request $request)
     {
-        if(!InstallUtils::createDbMarker()) {
+        if (! InstallUtils::createDbMarker()) {
             \Log::error('Install: Unable to create db marker.');
         }
 

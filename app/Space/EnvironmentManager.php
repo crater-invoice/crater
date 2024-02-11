@@ -31,6 +31,7 @@ class EnvironmentManager
 
     /**
      * Returns the .env contents
+     *
      * @return false|string
      */
     private function getEnvContents()
@@ -61,16 +62,16 @@ class EnvironmentManager
 
                 // Check if new or old key
                 if ($entry[0] == $data_key) {
-                    $env[$env_key] = $data_key.'='.$data_value;
+                    $env[$env_key] = $data_key.'='.$this->encode($data_value);
                     $updated = true;
                 } else {
-                    $env[$env_key] = $env_value;
+                    $env[$env_key] = $this->encode($env_value);
                 }
             }
 
             // Lets create if not available
             if (! $updated) {
-                $env[] = $data_key.'='.$data_value;
+                $env[] = $data_key.'='.$this->encode($data_value);
             }
         }
 
@@ -79,6 +80,22 @@ class EnvironmentManager
         file_put_contents(base_path('.env'), $env);
 
         return true;
+    }
+
+    /**
+     * Encodes value for .env
+     *
+     * @return mixed|string
+     */
+    private function encode($str)
+    {
+
+        if (strpos($str, ' ') !== false || preg_match('/'.preg_quote('^\'£$%^&*()}{@#~?><,@|-=-_+-¬', '/').'/', $str)) {
+            $str = '"'.$str.'"';
+        }
+
+        return $str;
+
     }
 
     /**
@@ -384,20 +401,24 @@ class EnvironmentManager
 
     /**
      * Order the env contents
+     *
      * @return void
      */
     public function reoderEnv()
     {
         $contents = $this->getEnvContents();
         $contents = explode($this->delimiter, $contents);
+        if (empty($contents)) {
+            return;
+        }
         natsort($contents);
 
         $formatted = '';
         $previous = '';
-        foreach($contents as $current) {
+        foreach ($contents as $current) {
             $parts_line = explode('_', $current);
             $parts_last = explode('_', $previous);
-            if($parts_line[0] != $parts_last[0]) {
+            if ($parts_line[0] != $parts_last[0]) {
                 $formatted .= $this->delimiter;
             }
             $formatted .= $current.$this->delimiter;

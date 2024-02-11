@@ -17,10 +17,6 @@ class InstallationMiddleware
     public function handle($request, Closure $next)
     {
         if (! InstallUtils::isDbCreated() || Setting::getSetting('profile_complete') !== 'COMPLETED') {
-            if (InstallUtils::dbMarkerExists()) {
-                InstallUtils::deleteDbMarker();
-            }
-
             return redirect('/installation');
         }
 

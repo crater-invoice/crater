@@ -11,11 +11,13 @@ class FinishController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
     {
-        InstallUtils::createDbMarker();
+        if (! InstallUtils::createDbMarker()) {
+            \Log::error('Install: Unable to create db marker.');
+        }
 
         return response()->json(['success' => true]);
     }

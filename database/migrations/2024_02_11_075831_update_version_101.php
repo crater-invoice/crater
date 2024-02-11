@@ -15,7 +15,8 @@ return new class extends Migration
         try {
             DB::update("UPDATE abilities SET entity_type = REPLACE(entity_type, 'Crater', 'InvoiceShelf')");
             DB::update("UPDATE assigned_roles SET entity_type = REPLACE(entity_type, 'Crater', 'InvoiceShelf')");
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         Setting::setSetting('version', '1.1.0');
     }

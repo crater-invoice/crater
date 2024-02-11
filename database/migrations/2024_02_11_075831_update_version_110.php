@@ -32,5 +32,8 @@ return new class extends Migration
         } catch (\Exception $e) {
 
         }
+
+        Setting::setSetting('version', '1.0.0');
+
     }
 };

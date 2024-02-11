@@ -3,6 +3,7 @@
 namespace InvoiceShelf\Space;
 
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 use League\Flysystem\FilesystemException;
 
 class InstallUtils
@@ -10,7 +11,7 @@ class InstallUtils
     /**
      * Check if database is created
      *
-     * @return bool|int|string
+     * @return bool
      */
     public static function isDbCreated()
     {
@@ -49,34 +50,43 @@ class InstallUtils
     public static function dbMarkerExists()
     {
         try {
-            $flag = \Storage::disk('local')->has('database_created');
+            return \Storage::disk('local')->has('database_created');
         } catch (FilesystemException $e) {
-            $flag = false;
+            Log::error('Unable to verify db marker: '.$e->getMessage());
         }
 
-        return $flag;
+        return false;
     }
 
     /**
      * Creates the database marker
      *
-     * @return void
+     * @return bool
      */
     public static function createDbMarker()
     {
-        \Storage::disk('local')->put('database_created', time());
+        try {
+            return \Storage::disk('local')->put('database_created', time());
+        } catch (\Exception $e) {
+            Log::error('Unable to create db marker: '.$e->getMessage());
+        }
+
+        return false;
     }
 
     /**
      * Deletes the database marker
      *
-     * @return void
+     * @return bool
      */
     public static function deleteDbMarker()
     {
         try {
-            \Storage::disk('local')->delete('database_created');
+            return \Storage::disk('local')->delete('database_created');
         } catch (\Exception $e) {
+            Log::error('Unable to delete db marker: '.$e->getMessage());
         }
+
+        return false;
     }
 }

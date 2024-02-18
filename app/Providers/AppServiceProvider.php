@@ -4,7 +4,9 @@ namespace InvoiceShelf\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use InvoiceShelf\Bouncer\Scopes\DefaultScope;
 use InvoiceShelf\Space\InstallUtils;
+use Silber\Bouncer\Database\Models as BouncerModels;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        BouncerModels::scope(new DefaultScope);
     }
 
     public function addMenus()

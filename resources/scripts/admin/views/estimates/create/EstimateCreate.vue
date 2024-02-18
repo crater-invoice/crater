@@ -138,6 +138,7 @@
 
 <script setup>
 import { computed, ref, watch, onMounted } from 'vue'
+import { cloneDeep } from 'lodash'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
@@ -257,11 +258,30 @@ async function submitForm() {
 
   isSaving.value = true
 
-  let data = {
+  let data = cloneDeep({
     ...estimateStore.newEstimate,
     sub_total: estimateStore.getSubTotal,
     total: estimateStore.getTotal,
     tax: estimateStore.getTotalTax,
+  })
+  if (data.discount_per_item === 'YES') {
+    data.items.forEach((item, index) => {
+      if (item.discount_type === 'fixed'){
+        data.items[index].discount = Math.round(item.discount * 100)
+      }
+    })
+  }
+  else {
+    if (data.discount_type === 'fixed'){
+      data.discount = Math.round(data.discount * 100)
+    }
+  }
+
+  if (
+    !estimateStore.newEstimate.tax_per_item === 'YES'
+    && data.taxes.length
+  ){
+    data.tax_type_ids = data.taxes.map(_t => _t.tax_type_id)
   }
 
   const action = isEdit.value

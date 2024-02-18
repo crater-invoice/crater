@@ -191,7 +191,7 @@
 </template>
 
 <script setup>
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import Guid from 'guid'
 import Tax from './CreateTotalTaxes.vue'
 import TaxStub from '@/scripts/admin/stub/abilities'
@@ -227,19 +227,20 @@ const utils = inject('$utils')
 
 const companyStore = useCompanyStore()
 
+watch(
+  () => props.store[props.storeProp].items,
+  (val) => {
+    setDiscount()
+  }, { deep: true },
+)
+
 const totalDiscount = computed({
   get: () => {
     return props.store[props.storeProp].discount
   },
   set: (newValue) => {
-    if (props.store[props.storeProp].discount_type === 'percentage') {
-      props.store[props.storeProp].discount_val = Math.round(
-        (props.store.getSubTotal * newValue) / 100
-      )
-    } else {
-      props.store[props.storeProp].discount_val = Math.round(newValue * 100)
-    }
     props.store[props.storeProp].discount = newValue
+    setDiscount()
   },
 })
 
@@ -265,7 +266,7 @@ const itemWiseTaxes = computed(() => {
         } else if (tax.tax_type_id) {
           taxes.push({
             tax_type_id: tax.tax_type_id,
-            amount: tax.amount,
+            amount: Math.round(tax.amount),
             percent: tax.percent,
             name: tax.name,
           })
@@ -284,6 +285,19 @@ const defaultCurrency = computed(() => {
   }
 })
 
+function setDiscount() {
+  const newValue = props.store[props.storeProp].discount
+
+  if (props.store[props.storeProp].discount_type === 'percentage') {
+    props.store[props.storeProp].discount_val
+      = Math.round((props.store.getSubTotal * newValue) / 100)
+
+    return
+  }
+
+  props.store[props.storeProp].discount_val = Math.round(newValue * 100)
+}
+
 function selectFixed() {
   if (props.store[props.storeProp].discount_type === 'fixed') {
     return
@@ -295,24 +309,21 @@ function selectFixed() {
 }
 
 function selectPercentage() {
-  if (props.store[props.storeProp].discount_type === 'percentage') {
+  if (props.store[props.storeProp].discount_type === 'percentage'){
     return
   }
-  props.store[props.storeProp].discount_val =
-    (props.store.getSubTotal * props.store[props.storeProp].discount) / 100
+
+  const val = Math.round(props.store[props.storeProp].discount * 100) / 100
+
+  props.store[props.storeProp].discount_val
+    = Math.round((props.store.getSubTotal * val) / 100)
+
   props.store[props.storeProp].discount_type = 'percentage'
 }
 
 function onSelectTax(selectedTax) {
   let amount = 0
-
-  if (selectedTax.compound_tax && props.store.getSubtotalWithDiscount) {
-    amount = Math.round(
-      ((props.store.getSubtotalWithDiscount + props.store.getTotalSimpleTax) *
-        selectedTax.percent) /
-        100
-    )
-  } else if (props.store.getSubtotalWithDiscount && selectedTax.percent) {
+  if (props.store.getSubtotalWithDiscount && selectedTax.percent) {
     amount = Math.round(
       (props.store.getSubtotalWithDiscount * selectedTax.percent) / 100
     )
@@ -323,7 +334,6 @@ function onSelectTax(selectedTax) {
     id: Guid.raw(),
     name: selectedTax.name,
     percent: selectedTax.percent,
-    compound_tax: selectedTax.compound_tax,
     tax_type_id: selectedTax.id,
     amount,
   }

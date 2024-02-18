@@ -271,23 +271,19 @@ const price = computed({
     } else {
       updateItemAttribute('price', newValue)
     }
+    setDiscount()
   },
 })
 
-const subtotal = computed(() => props.itemData.price * props.itemData.quantity)
+const subtotal = computed(() => Math.round(props.itemData.price * props.itemData.quantity))
 
 const discount = computed({
   get: () => {
     return props.itemData.discount
   },
   set: (newValue) => {
-    if (props.itemData.discount_type === 'percentage') {
-      updateItemAttribute('discount_val', (subtotal.value * newValue) / 100)
-    } else {
-      updateItemAttribute('discount_val', Math.round(newValue * 100))
-    }
-
     updateItemAttribute('discount', newValue)
+    setDiscount()
   },
 })
 
@@ -313,7 +309,7 @@ const showRemoveButton = computed(() => {
 const totalSimpleTax = computed(() => {
   return Math.round(
     sumBy(props.itemData.taxes, function (tax) {
-      if (!tax.compound_tax) {
+      if (tax.amount) {
         return tax.amount
       }
       return 0
@@ -321,18 +317,7 @@ const totalSimpleTax = computed(() => {
   )
 })
 
-const totalCompoundTax = computed(() => {
-  return Math.round(
-    sumBy(props.itemData.taxes, function (tax) {
-      if (tax.compound_tax) {
-        return tax.amount
-      }
-      return 0
-    })
-  )
-})
-
-const totalTax = computed(() => totalSimpleTax.value + totalCompoundTax.value)
+const totalTax = computed(() => totalSimpleTax.value)
 
 const rules = {
   name: {
@@ -399,7 +384,7 @@ const v$ = useVuelidate(
 
 function updateTax(data) {
   props.store.$patch((state) => {
-    state[props.storeProp].items[props.index]['taxes'][data.index] = data.item
+     state[props.storeProp].items[props.index]['taxes'][data.index] = data.item
   })
 
   let lastTax = props.itemData.taxes[props.itemData.taxes.length - 1]
@@ -414,6 +399,16 @@ function updateTax(data) {
   }
 
   syncItemToStore()
+}
+
+function setDiscount() {
+  const newValue = props.store[props.storeProp].items[props.index].discount
+
+  if (props.itemData.discount_type === 'percentage'){
+    updateItemAttribute('discount_val', Math.round((subtotal.value * newValue) / 100))
+  }else{
+    updateItemAttribute('discount_val', Math.round(newValue * 100))
+  }
 }
 
 function searchVal(val) {
@@ -485,10 +480,12 @@ function syncItemToStore() {
     total: total.value,
     sub_total: subtotal.value,
     totalSimpleTax: totalSimpleTax.value,
-    totalCompoundTax: totalCompoundTax.value,
     totalTax: totalTax.value,
     tax: totalTax.value,
     taxes: [...itemTaxes],
+    tax_type_ids: itemTaxes.flatMap(_t =>
+      _t.tax_type_id ? _t.tax_type_id : [],
+    ),
   }
 
   props.store.updateItem(data)

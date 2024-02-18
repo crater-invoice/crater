@@ -20,21 +20,6 @@
       :data="fetchData"
       :columns="taxTypeColumns"
     >
-      <template #cell-compound_tax="{ row }">
-        <BaseBadge
-          :bg-color="
-            utils.getBadgeStatusColor(row.data.compound_tax ? 'YES' : 'NO')
-              .bgColor
-          "
-          :color="
-            utils.getBadgeStatusColor(row.data.compound_tax ? 'YES' : 'NO')
-              .color
-          "
-        >
-          {{ row.data.compound_tax ? 'Yes' : 'No'.replace('_', ' ') }}
-        </BaseBadge>
-      </template>
-
       <template #cell-percent="{ row }"> {{ row.data.percent }} % </template>
 
       <template v-if="hasAtleastOneAbility()" #cell-actions="{ row }">
@@ -89,11 +74,6 @@ const taxTypeColumns = computed(() => {
       key: 'name',
       label: t('settings.tax_types.tax_name'),
       thClass: 'extra',
-      tdClass: 'font-medium text-gray-900',
-    },
-    {
-      key: 'compound_tax',
-      label: t('settings.tax_types.compound_tax'),
       tdClass: 'font-medium text-gray-900',
     },
     {

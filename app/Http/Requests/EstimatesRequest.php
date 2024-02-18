@@ -45,15 +45,21 @@ class EstimatesRequest extends FormRequest
                 'nullable',
             ],
             'discount' => [
+                'numeric',
                 'required',
             ],
             'discount_val' => [
+                'integer',
                 'required',
             ],
             'sub_total' => [
+                'integer',
                 'required',
             ],
             'total' => [
+                'integer',
+                'numeric',
+                'max:99999999',
                 'required',
             ],
             'tax' => [
@@ -77,9 +83,11 @@ class EstimatesRequest extends FormRequest
                 'required',
             ],
             'items.*.quantity' => [
+                'integer',
                 'required',
             ],
             'items.*.price' => [
+                'integer',
                 'required',
             ],
         ];

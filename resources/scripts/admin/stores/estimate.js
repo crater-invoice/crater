@@ -143,7 +143,8 @@ export const useEstimateStore = (useWindow = false) => {
           axios
             .get(`/api/v1/estimates/${id}`)
             .then((response) => {
-              Object.assign(this.newEstimate, response.data.data)
+              this.setEstimateData(response.data.data)
+              this.setCustomerAddresses(this.newEstimate.customer)
               resolve(response)
             })
             .catch((err) => {
@@ -152,6 +153,41 @@ export const useEstimateStore = (useWindow = false) => {
               reject(err)
             })
         })
+      },
+
+      setEstimateData(estimate) {
+        Object.assign(this.newEstimate, estimate)
+        if (this.newEstimate.tax_per_item === 'YES') {
+          this.newEstimate.items.forEach((_i) => {
+            if (_i.taxes && !_i.taxes.length){
+              _i.taxes.push({ ...taxStub, id: Guid.raw() })
+            }
+          })
+        }
+        if (this.newEstimate.discount_per_item === 'YES') {
+          this.newEstimate.items.forEach((_i, index) => {
+            if (_i.discount_type === 'fixed'){
+              this.newEstimate.items[index].discount = _i.discount / 100
+            }
+          })
+        }
+        else {
+          if (this.newEstimate.discount_type === 'fixed'){
+            this.newEstimate.discount = this.newEstimate.discount / 100
+          }
+        }
+      },
+
+      setCustomerAddresses(customer) {
+        const customer_business = customer.customer_business
+
+        if (customer_business?.billing_address){
+          this.newEstimate.customer.billing_address = customer_business.billing_address
+        }
+
+        if (customer_business?.shipping_address){
+          this.newEstimate.customer.shipping_address = customer_business.shipping_address
+        }
       },
 
       addSalesTaxUs() {

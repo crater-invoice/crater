@@ -146,14 +146,14 @@ const filteredTypes = computed(() => {
 })
 
 const taxAmount = computed(() => {
-  if (localTax.compound_tax && props.discountedTotal) {
-    return ((props.discountedTotal + props.totalTax) * localTax.percent) / 100
-  }
-
   if (props.discountedTotal && localTax.percent) {
+    const taxPerItemEnabled = props.store[props.storeProp].tax_per_item === 'YES'
+    const discountPerItemEnabled = props.store[props.storeProp].discount_per_item === 'YES'
+    if (taxPerItemEnabled && !discountPerItemEnabled){
+      return getTaxAmount()
+    }
     return (props.discountedTotal * localTax.percent) / 100
   }
-
   return 0
 })
 
@@ -171,6 +171,13 @@ watch(
   }
 )
 
+watch(
+  () => taxAmount.value,
+  () => {
+    updateRowTax()
+  },
+)
+
 // Set SelectedTax
 if (props.taxData.tax_type_id > 0) {
   selectedTax.value = taxTypeStore.taxTypes.find(
@@ -183,7 +190,6 @@ updateRowTax()
 function onSelectTax(val) {
   localTax.percent = val.percent
   localTax.tax_type_id = val.id
-  localTax.compound_tax = val.compound_tax
   localTax.name = val.name
 
   updateRowTax()
@@ -220,6 +226,27 @@ function openTaxModal() {
 function removeTax(index) {
   props.store.$patch((state) => {
     state[props.storeProp].items[props.itemIndex].taxes.splice(index, 1)
+    state[props.storeProp].items[props.itemIndex].tax = 0
+    state[props.storeProp].items[props.itemIndex].totalTax = 0
   })
+}
+
+function getTaxAmount() {
+  let total = 0
+  let discount = 0
+  const itemTotal = props.discountedTotal
+  const modelDiscount = props.store[props.storeProp].discount ? props.store[props.storeProp].discount : 0
+  const type = props.store[props.storeProp].discount_type
+  if (modelDiscount > 0) {
+    props.store[props.storeProp].items.forEach((_i) => {
+      total += _i.total
+    })
+    const proportion = (itemTotal / total).toFixed(2)
+    discount = type === 'fixed' ? modelDiscount * 100 : (total * modelDiscount) / 100
+    const itemDiscount = Math.round(discount * proportion)
+    const discounted = itemTotal - itemDiscount
+    return Math.round((discounted * localTax.percent) / 100)
+  }
+  return Math.round((props.discountedTotal * localTax.percent) / 100)
 }
 </script>

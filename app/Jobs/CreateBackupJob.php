@@ -44,6 +44,7 @@ class CreateBackupJob implements ShouldQueue
         config(['backup.backup.destination.disks' => [$prefix.$fileDisk->driver]]);
 
         $backupJob = BackupJobFactory::createFromArray(config('backup'));
+        $backupJob->disableSignals();
 
         if ($this->data['option'] === 'only-db') {
             $backupJob->dontBackupFilesystem();

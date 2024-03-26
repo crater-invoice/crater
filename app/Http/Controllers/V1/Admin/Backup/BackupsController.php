@@ -36,7 +36,7 @@ class BackupsController extends ApiController
                         return [
                             'path' => $backup->path(),
                             'created_at' => $backup->date()->format('Y-m-d H:i:s'),
-                            'size' => Format::humanReadableSize($backup->size()),
+                            'size' => Format::humanReadableSize($backup->sizeInBytes()),
                         ];
                     })
                     ->toArray();

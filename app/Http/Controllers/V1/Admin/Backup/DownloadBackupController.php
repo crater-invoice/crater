@@ -41,7 +41,7 @@ class DownloadBackupController extends ApiController
         $downloadHeaders = [
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Content-Type' => 'application/zip',
-            'Content-Length' => $backup->size(),
+            'Content-Length' => $backup->sizeInBytes(),
             'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
             'Pragma' => 'public',
         ];
